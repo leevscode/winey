@@ -1,7 +1,77 @@
+import { Route, Routes } from "react-router-dom";
 import "./App.css";
+// 관리자
+import Admin from "./Admin";
+import AdminHome from "./pages/admin/AdminHome";
+// 사용자
+import User from "./User";
+import Intro from "./pages/Intro";
+import AdultChk from "./pages/AdultChk";
+import Main from "./pages/Main";
+import ProductList from "./pages/product/ProductList";
+import ProductDetail from "./pages/product/ProductDetail";
+import ProductSell from "./pages/product/ProductSell";
+import ProductComplete from "./pages/product/ProductComplete";
+import Login from "./pages/login/Login";
+import Join from "./pages/login/Join";
+import KeywordSelect from "./pages/login/KeywordSelect";
+import KeywordSelectEdit from "./pages/login/KeywordSelectEdit";
+import MypageList from "./pages/MypageList";
+import ProductCart from "./pages/product/ProductCart";
+import WineGuide from "./pages/WineGuide";
+import JoinEdit from "./pages/login/JoinEdit";
+import About from "./pages/About";
+import OpenSource from "./pages/OpenSource";
+import SellList from "./pages/product/SellList";
 
 function App() {
-  return <></>;
+  return (
+    <Routes>
+      {/* 관리자 페이지 */}
+      <Route element={<Admin />}>
+        <Route path="/admin" element={<AdminHome />} />
+      </Route>
+      {/* 사용자 페이지 */}
+      <Route element={<User />}>
+        {/* 인트로 */}
+        <Route path="/intro" element={<Intro />} />
+        {/* 성인인증 */}
+        <Route path="/adultchk" element={<AdultChk />} />
+        {/* 메인 */}
+        <Route path="/" element={<Main />} />
+        {/* 상품리스트 */}
+        <Route path="/productlist/:ilist" element={<ProductList />} />
+        {/* 상품상세페이지 */}
+        <Route path="/productdetail" element={<ProductDetail />} />
+        {/* 구매하기 */}
+        <Route path="/productsell" element={<ProductSell />} />
+        {/* 구매완료 */}
+        <Route path="/productcomplete" element={<ProductComplete />} />
+        {/* 로그인 */}
+        <Route path="/login" element={<Login />} />
+        {/* 회원가입 */}
+        <Route path="/join" element={<Join />} />
+        {/* 키워드선택 */}
+        <Route path="/keywordselect" element={<KeywordSelect />} />
+        {/* 마이페이지 */}
+        <Route path="/mypageList" element={<MypageList />} />
+        {/* 장바구니 */}
+        <Route path="/cart" element={<ProductCart />} />
+        {/* 주문내역 */}
+        <Route path="/selllist" element={<SellList />} />
+        {/* 선호키워드변경 */}
+        <Route path="/keywordselectedit" element={<KeywordSelectEdit />} />
+        {/* 와인가이드 */}
+        <Route path="/windeguide" element={<WineGuide />} />
+        {/* 정보수정 */}
+        <Route path="/joinedit" element={<JoinEdit />} />
+        {/* 만든사람들 */}
+        <Route path="/about" element={<About />} />
+        {/* 오픈소스 */}
+        <Route path="/opensource" element={<OpenSource />} />
+      </Route>
+    </Routes>
+  );
 }
 
 export default App;
