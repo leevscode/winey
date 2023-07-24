@@ -1,5 +1,5 @@
 import React from "react";
-import { Visual } from "../style/MainStyle";
+import Visual from "../components/main/Visual";
 
 const Main = () => {
   return <Visual>Main</Visual>;
