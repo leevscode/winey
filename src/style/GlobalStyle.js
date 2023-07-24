@@ -1,5 +1,8 @@
 import styled from "@emotion/styled";
 
+export const WidthPd = {
+  padding: "0 2%",
+};
 // 컬러 ================
 // 메인색상
 export const Maincolor = {
