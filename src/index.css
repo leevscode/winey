@@ -5,6 +5,7 @@
 
 * {
   outline: none;
+  box-sizing: border-box;
 }
 
 html,
@@ -33,7 +34,7 @@ body {
 }
 
 a {
-  color: #253528;
+  color: #3c2323;
   text-decoration: none;
 }
 button {

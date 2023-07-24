@@ -1,5 +1,10 @@
 import styled from "@emotion/styled";
 
+// 가로폭
+export const WidthPd = {
+  padding: "0 2%",
+};
+
 // 컬러 ================
 // 메인색상
 export const Maincolor = {
@@ -25,6 +30,7 @@ export const opacity = {
   wine: "rgba(124, 29, 52, 0.65)",
   gray: "rgba(60, 35, 35, 0.3)",
   white: "rgba(60, 35, 35, 0.07)",
+  whiteB: "rgba(255, 255, 255, 0.3)",
 };
 // 뱃지
 export const badge = {

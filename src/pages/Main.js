@@ -1,7 +1,8 @@
 import React from "react";
+import { Visual } from "../style/MainStyle";
 
 const Main = () => {
-  return <div>Main</div>;
+  return <Visual>Main</Visual>;
 };
 
 export default Main;
