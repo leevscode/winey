@@ -1,7 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { HeaderWrap } from "../style/GlobalComponents";
-import NavList from "../pages/NavList";
 
 const Header = () => {
   return (
@@ -49,8 +48,6 @@ const Header = () => {
           </li>
         </ul>
       </HeaderWrap>
-      {/* 네비게이션 메뉴 */}
-      <NavList />
     </>
   );
 };

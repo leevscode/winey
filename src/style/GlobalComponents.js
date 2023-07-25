@@ -1,8 +1,13 @@
+/*
+    작업자 : 김아영
+    노션 : https://www.notion.so/kimaydev
+    깃허브 : https://github.com/kimaydev
+*/
 import styled from "@emotion/styled";
 import { Maincolor, WidthPd, opacity } from "./GlobalStyle";
 
 // 헤더
-export const HeaderWrap = styled.div`
+export const HeaderWrap = styled.header`
   position: fixed;
   top: 0;
   left: 50%;
@@ -148,6 +153,75 @@ export const NavWrap = styled.div`
     }
   }
 `;
+// 푸터
+export const FooterWrap = styled.footer`
+  background: linear-gradient(
+    0deg,
+    rgba(252, 248, 241, 1) 66%,
+    rgba(255, 255, 255, 1) 100%
+  );
+  padding: 70px 0 100px;
+  ul {
+    padding: ${WidthPd.padding};
+    text-align: center;
+    & > li {
+      color: ${opacity.grayDeep};
+      img {
+        width: 80px;
+      }
+      ol {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 15px 0 20px;
+        & > li {
+          width: 0.4rem;
+          height: 0.4rem;
+          margin: 0 3px;
+          background: ${opacity.grayDeep};
+          transform: rotate(45deg);
+          &:nth-of-type(1) {
+          }
+          &:nth-of-type(2) {
+            width: 0.6rem;
+            height: 0.6rem;
+          }
+          &:nth-of-type(3) {
+          }
+        }
+      }
+      a {
+        display: inline-block;
+        position: relative;
+        font-size: 1.4rem;
+        &::after {
+          content: "";
+          display: none;
+          position: absolute;
+          bottom: -2px;
+          left: 50%;
+          transform: translateX(-50%);
+          width: 100%;
+          height: 0.1rem;
+          background: ${opacity.grayDeep};
+        }
+        &:hover::after {
+          display: block;
+        }
+      }
+      p {
+        margin-top: 10px;
+        font-size: 1.2rem;
+        font-weight: 500;
+        span {
+          font-weight: 700;
+          font-size: 1.3em;
+          margin-left: 2px;
+        }
+      }
+    }
+  }
+`;
 
 // 퀵메뉴
 export const QuickWrap = styled.nav`
@@ -216,5 +290,13 @@ export const ScrollTopBtn = styled.div`
     float: right;
     margin-right: 15px;
     border: 0.05rem solid ${opacity.white};
+    i {
+      color: ${Maincolor.black};
+    }
   }
+`;
+
+// 컨텐츠
+export const ContentsWrap = styled.div`
+  padding-top: 80px;
 `;

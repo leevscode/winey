@@ -1,3 +1,8 @@
+/*
+    작업자 : 김아영
+    노션 : https://www.notion.so/kimaydev
+    깃허브 : https://github.com/kimaydev
+*/
 import styled from "@emotion/styled";
 
 // 가로폭
@@ -28,6 +33,7 @@ export const Gradation = {
 // 투명도
 export const opacity = {
   wine: "rgba(124, 29, 52, 0.65)",
+  grayDeep: "rgba(60, 35, 35, 0.5)",
   gray: "rgba(60, 35, 35, 0.3)",
   white: "rgba(60, 35, 35, 0.07)",
   whiteB: "rgba(255, 255, 255, 0.3)",
@@ -95,3 +101,9 @@ export const ellipsis = {
     overflow: "hidden",
   },
 };
+
+// 페이지 내 구분선 ================
+export const SectionLine = styled.div`
+  height: 10px;
+  background: ${Maincolor.beige};
+`;
