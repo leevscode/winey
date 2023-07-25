@@ -1,6 +1,12 @@
 import React, { useState } from "react";
 import { ButtonOk, ButtonCancel } from "../../style/GlobalStyle";
-import { SellListButton, SellListInfo } from "../../style/SellListStyle";
+import {
+  SellListButton,
+  SellListInfo,
+  SellListModal,
+  ModalBackdrop,
+  ModalText,
+} from "../../style/SellListStyle";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFaceGrinSquint } from "@fortawesome/free-regular-svg-icons";
 
@@ -31,10 +37,10 @@ const SellList = () => {
           <ButtonCancel onClick={showModal}>평점등록</ButtonCancel>
         </SellListButton>
       </div>
-      <sellListModal>
+      <SellListModal modalVisible={modalVisible}>
         {modalVisible && (
-          <div className="modal">
-            <div className="modal-content">
+          <ModalBackdrop>
+            <ModalText>
               <h1>픽업하신 와인은 어떠쎴나요?</h1>
               <h2>지금 바로 평점을 남겨보세요.</h2>
               <FontAwesomeIcon icon={faFaceGrinSquint} />
@@ -42,10 +48,10 @@ const SellList = () => {
                 <ButtonOk>평점등록</ButtonOk>{" "}
                 <ButtonCancel onClick={hideModal}>취소</ButtonCancel>
               </SellListButton>
-            </div>
-          </div>
+            </ModalText>
+          </ModalBackdrop>
         )}
-      </sellListModal>
+      </SellListModal>
       <div>
         <h1>2023.07.23</h1>
         <SellListInfo>

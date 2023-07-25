@@ -6,3 +6,7 @@ export const ProductCartNone = styled.div`
   text-align: center;
   color: #e7e4e4;
 `;
+
+export const ProductCartIn = styled.div`
+  margin: 100px;
+`;
