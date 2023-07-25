@@ -5,6 +5,18 @@
 
 * {
   outline: none;
+  box-sizing: border-box;
+}
+
+/* 스크롤바 전체 */
+::-webkit-scrollbar {
+  display: none;
+}
+/* 스크롤바 막대 */
+::-webkit-scrollbar-thumb {
+}
+/* 스크롤바 막대 외부 */
+::-webkit-scrollbar-track {
 }
 
 html,
@@ -31,9 +43,12 @@ body {
   color: #3c2323;
   letter-spacing: -0.2px;
 }
+body {
+  overflow: hidden;
+}
 
 a {
-  color: #253528;
+  color: #3c2323;
   text-decoration: none;
 }
 button {
