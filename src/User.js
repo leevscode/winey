@@ -8,7 +8,9 @@ const User = () => {
   return (
     <LayoutWrap>
       <Header />
-      <Outlet />
+      <div className="test">
+        <Outlet />
+      </div>
       <QuickMenu />
     </LayoutWrap>
   );
