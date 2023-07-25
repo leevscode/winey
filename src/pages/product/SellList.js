@@ -1,14 +1,21 @@
 import React, { useState } from "react";
 import { ButtonOk, ButtonCancel } from "../../style/GlobalStyle";
 import {
+  ModalColse,
   SellListButton,
   SellListInfo,
   SellListModal,
-  ModalBackdrop,
   ModalText,
+  ReviewIcon,
+  ReviewModal,
 } from "../../style/SellListStyle";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faFaceGrinSquint } from "@fortawesome/free-regular-svg-icons";
+import {
+  faFaceGrinSquint,
+  faFaceSmile,
+  faFaceRollingEyes,
+} from "@fortawesome/free-regular-svg-icons";
+import { faXmark } from "@fortawesome/free-solid-svg-icons";
 
 const SellList = () => {
   const [modalVisible, setModalVisible] = useState(false);
@@ -39,17 +46,47 @@ const SellList = () => {
       </div>
       <SellListModal modalVisible={modalVisible}>
         {modalVisible && (
-          <ModalBackdrop>
+          <div>
             <ModalText>
-              <h1>픽업하신 와인은 어떠쎴나요?</h1>
-              <h2>지금 바로 평점을 남겨보세요.</h2>
-              <FontAwesomeIcon icon={faFaceGrinSquint} />
+              <button onClick={hideModal}>
+                <ModalColse>
+                  <FontAwesomeIcon icon={faXmark} />
+                </ModalColse>
+              </button>
+              <h1>픽업하신 와인은 어떠셨나요?</h1>
+              <h2>지금 바로 평점을 남겨보세요!</h2>
+              <ReviewModal>
+                <button>
+                  <li>
+                    <ReviewIcon>
+                      <FontAwesomeIcon icon={faFaceGrinSquint} />
+                    </ReviewIcon>
+                    좋아요
+                  </li>
+                </button>
+                <button>
+                  <li>
+                    <ReviewIcon>
+                      <FontAwesomeIcon icon={faFaceSmile} />
+                    </ReviewIcon>
+                    보통이에요
+                  </li>
+                </button>
+                <button>
+                  <li>
+                    <ReviewIcon>
+                      <FontAwesomeIcon icon={faFaceRollingEyes} />
+                    </ReviewIcon>
+                    취향이아니에요
+                  </li>
+                </button>
+              </ReviewModal>
               <SellListButton>
                 <ButtonOk>평점등록</ButtonOk>{" "}
                 <ButtonCancel onClick={hideModal}>취소</ButtonCancel>
               </SellListButton>
             </ModalText>
-          </ModalBackdrop>
+          </div>
         )}
       </SellListModal>
       <div>
