@@ -1,5 +1,10 @@
 import styled from "@emotion/styled";
 
+// 가로폭
+export const WidthPd = {
+  padding: "0 2%",
+};
+
 // 컬러 ================
 // 메인색상
 export const Maincolor = {
