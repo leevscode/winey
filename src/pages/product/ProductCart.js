@@ -10,32 +10,62 @@ import {
   ProductCartNone,
   ProductCartIn,
   ProductCartInfo,
+  GoodsEa,
+  CartTotalPrice,
+  CartTotalPriceOne,
 } from "../../style/ProductCartStyle";
 import { useNavigate } from "react-router";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faExclamation } from "@fortawesome/free-solid-svg-icons";
+
 const ProductCart = () => {
-  // 장바구니에 담긴 상품의 수를 추적하는 상태
-  const [cartItemCount, setCartItemCount] = useState(0);
+  // 장바구니에 담긴 상품 리스트를 추적하는 상태
+  const [cartItems, setCartItems] = useState([]);
 
   // 상품을 장바구니에 추가하는 함수
   const addItemToCart = () => {
-    // 상품 추가
-    setCartItemCount(cartItemCount + 1);
+    const newItem = {
+      id: cartItems.length + 1,
+      name: "제프 까렐, 울띰 헤꼴뜨",
+      description: "Ultime Recolte By Jeff Carrel",
+      price: "32,900원",
+      quantity: 1,
+      image: "상품 이미지",
+    };
+    setCartItems([...cartItems, newItem]);
   };
 
   // 상품을 장바구니에서 제거하는 함수
-  const removeItemFromCart = () => {
-    // 상품 제거
-    setCartItemCount(cartItemCount - 1);
+  const removeItemFromCart = id => {
+    setCartItems(cartItems.filter(item => item.id !== id));
+  };
+
+  // 상품의 수량을 증가시키는 함수
+  const increaseQuantity = id => {
+    setCartItems(prevItems =>
+      prevItems.map(item =>
+        item.id === id ? { ...item, quantity: item.quantity + 1 } : item,
+      ),
+    );
+  };
+
+  // 상품의 수량을 감소시키는 함수
+  const decreaseQuantity = id => {
+    setCartItems(prevItems =>
+      prevItems.map(item =>
+        item.id === id && item.quantity > 1
+          ? { ...item, quantity: item.quantity - 1 }
+          : item,
+      ),
+    );
   };
 
   const navigate = useNavigate();
+
   return (
     <>
       {/* 상품이 장바구니에 담겨있지 않을 때 */}
-
-      {cartItemCount === 0 ? (
+      {cartItems.length === 0 ? (
         <ProductCartNone>
           {" "}
           <div>
@@ -48,32 +78,49 @@ const ProductCart = () => {
       ) : (
         // 상품이 장바구니에 담겨있을 때
         <ProductCartIn>
-          <div>장바구니에 총 {cartItemCount}개의 상품이 있습니다.</div>
+          <div>장바구니에 총 {cartItems.length}개의 상품이 있습니다.</div>
           <ul>
-            <ProductCartInfo>
-              {/* 데이터 넣을 곳 */}
-              <div>이미지</div>
-              <span>
-                  <p>제프 까렐, 울띰 헤꼴뜨</p>
-                  <p>Ultime Recolite By Jeff Carrel</p>
-                <span>32,900원</span>
-                <div>
-                  <span>+</span>
-                  <span>2</span>
-                  <span>-</span>
-                </div>
+            {cartItems.map(item => (
+              <ProductCartInfo key={item.id}>
+                {/* 상품 정보를 표시하는 JSX */}
+                <div>{item.image}</div>
+                <span>
+                  <p>{item.name}</p>
+                  <p>{item.description}</p>
+                  <span>{item.price}</span>
+                  <GoodsEa>
+                    <button onClick={() => decreaseQuantity(item.id)}>-</button>
+                    <span>{item.quantity}</span>
+                    <button onClick={() => increaseQuantity(item.id)}>+</button>
+                  </GoodsEa>
                 </span>
-                <p>x</p>
-              <div>
-              </div>
-            </ProductCartInfo>
+                <button onClick={() => removeItemFromCart(item.id)}>X</button>
+              </ProductCartInfo>
+            ))}
           </ul>
-          <ButtonOk>구매하기</ButtonOk>
+          <CartTotalPrice>
+            <li>최종결제금액</li>
+            <CartTotalPriceOne>
+              0000000<span>원</span>
+            </CartTotalPriceOne>
+          </CartTotalPrice>
+          <ButtonOk
+            onClick={() => {
+              navigate("/productsell");
+            }}
+          >
+            구매하기
+          </ButtonOk>
         </ProductCartIn>
       )}
       <button onClick={addItemToCart}>상품 추가 되면 보여요</button>
-      <button onClick={removeItemFromCart}>상품 제거</button>
-      <ButtonCancel>메인으로 돌아가기</ButtonCancel>
+      <ButtonCancel
+        onClick={() => {
+          navigate("/");
+        }}
+      >
+        메인으로 돌아가기
+      </ButtonCancel>
     </>
   );
 };
