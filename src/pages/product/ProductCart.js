@@ -1,43 +1,81 @@
-/*
-    작업자 : 이동은
-    노션 : https://www.notion.so/leevscode
-    깃허브 : https://github.com/leevscode
-*/
-
 import React, { useState } from "react";
 import { ButtonCancel, ButtonOk } from "../../style/GlobalStyle";
 import {
+  ProudctTotalItem,
   ProductCartNone,
   ProductCartIn,
   ProductCartInfo,
+  CartDetail,
+  CartInfoDes,
+  GoodsEa,
+  CartTotalPrice,
+  CartTotalPriceOne,
 } from "../../style/ProductCartStyle";
 import { useNavigate } from "react-router";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faExclamation } from "@fortawesome/free-solid-svg-icons";
+
 const ProductCart = () => {
-  // 장바구니에 담긴 상품의 수를 추적하는 상태
-  const [cartItemCount, setCartItemCount] = useState(0);
+  // 장바구니에 담긴 상품 리스트를 추적하는 상태
+  const [cartItems, setCartItems] = useState([]);
 
   // 상품을 장바구니에 추가하는 함수
   const addItemToCart = () => {
-    // 상품 추가
-    setCartItemCount(cartItemCount + 1);
+    const newItem = {
+      id: cartItems.length + 1,
+      name: "제프 까렐, 울띰 헤꼴뜨",
+      description: "Ultime Recolte By Jeff Carrel",
+      price: "32,900원",
+      quantity: 1,
+      image: "상품 이미지",
+    };
+    setCartItems([...cartItems, newItem]);
   };
 
   // 상품을 장바구니에서 제거하는 함수
-  const removeItemFromCart = () => {
-    // 상품 제거
-    setCartItemCount(cartItemCount - 1);
+  const removeItemFromCart = id => {
+    setCartItems(cartItems.filter(item => item.id !== id));
+  };
+
+  // 상품의 수량을 증가시키는 함수
+  const increaseQuantity = id => {
+    setCartItems(prevItems =>
+      prevItems.map(item =>
+        item.id === id ? { ...item, quantity: item.quantity + 1 } : item,
+      ),
+    );
+  };
+
+  // 상품의 수량을 감소시키는 함수
+  const decreaseQuantity = id => {
+    setCartItems(prevItems =>
+      prevItems.map(item =>
+        item.id === id && item.quantity > 1
+          ? { ...item, quantity: item.quantity - 1 }
+          : item,
+      ),
+    );
+  };
+  // 상품의 총 금액을 계산하는 함수
+  const calculateTotalPrice = () => {
+    let totalPrice = 0;
+    cartItems.forEach(item => {
+      const priceWithoutWon = Number(
+        item.price.replace("원", "").replace(",", ""),
+      );
+      totalPrice += priceWithoutWon * item.quantity;
+    });
+    return totalPrice;
   };
 
   const navigate = useNavigate();
+
   return (
     <>
+      <button onClick={addItemToCart}>상품 추가 테스트 버튼</button>
       {/* 상품이 장바구니에 담겨있지 않을 때 */}
-
-      {cartItemCount === 0 ? (
+      {cartItems.length === 0 ? (
         <ProductCartNone>
-          {" "}
           <div>
             <i>
               <FontAwesomeIcon icon={faExclamation} />
@@ -48,32 +86,52 @@ const ProductCart = () => {
       ) : (
         // 상품이 장바구니에 담겨있을 때
         <ProductCartIn>
-          <div>장바구니에 총 {cartItemCount}개의 상품이 있습니다.</div>
+          <ProudctTotalItem>
+            장바구니에 총 {cartItems.length}개의 상품이 있습니다.
+          </ProudctTotalItem>
           <ul>
-            <ProductCartInfo>
-              {/* 데이터 넣을 곳 */}
-              <div>이미지</div>
-              <span>
-                  <p>제프 까렐, 울띰 헤꼴뜨</p>
-                  <p>Ultime Recolite By Jeff Carrel</p>
-                <span>32,900원</span>
-                <div>
-                  <span>+</span>
-                  <span>2</span>
-                  <span>-</span>
-                </div>
-                </span>
-                <p>x</p>
-              <div>
-              </div>
-            </ProductCartInfo>
+            {cartItems.map(item => (
+              <ProductCartInfo key={item.id}>
+                {/* 상품 정보를 표시하는 JSX */}
+                <div>{item.image}</div>
+                <CartDetail>
+                  <p>{item.name}</p>
+                  <CartInfoDes>{item.description}</CartInfoDes>
+                  <span>{item.price}</span>
+                  <GoodsEa>
+                    <button onClick={() => decreaseQuantity(item.id)}>-</button>
+                    <span>{item.quantity}</span>
+                    <button onClick={() => increaseQuantity(item.id)}>+</button>
+                  </GoodsEa>
+                </CartDetail>
+                <button onClick={() => removeItemFromCart(item.id)}>X</button>
+              </ProductCartInfo>
+            ))}
           </ul>
-          <ButtonOk>구매하기</ButtonOk>
+          <CartTotalPrice>
+            <li>최종결제금액</li>
+            <CartTotalPriceOne>
+              {/* calculateTotalPrice 로 총 금액 표시 */}
+              {calculateTotalPrice().toLocaleString()}
+              <span>원</span>
+            </CartTotalPriceOne>
+          </CartTotalPrice>
+          <ButtonOk
+            onClick={() => {
+              navigate("/productsell");
+            }}
+          >
+            구매하기
+          </ButtonOk>
         </ProductCartIn>
       )}
-      <button onClick={addItemToCart}>상품 추가 되면 보여요</button>
-      <button onClick={removeItemFromCart}>상품 제거</button>
-      <ButtonCancel>메인으로 돌아가기</ButtonCancel>
+      <ButtonCancel
+        onClick={() => {
+          navigate("/");
+        }}
+      >
+        메인으로 돌아가기
+      </ButtonCancel>
     </>
   );
 };
