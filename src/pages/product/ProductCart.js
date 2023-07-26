@@ -1,12 +1,7 @@
-/*
-    작업자 : 이동은
-    노션 : https://www.notion.so/leevscode
-    깃허브 : https://github.com/leevscode
-*/
-
 import React, { useState } from "react";
 import { ButtonCancel, ButtonOk } from "../../style/GlobalStyle";
 import {
+  ProudctTotalItem,
   ProductCartNone,
   ProductCartIn,
   ProductCartInfo,
@@ -59,15 +54,25 @@ const ProductCart = () => {
       ),
     );
   };
+  const calculateTotalPrice = () => {
+    let totalPrice = 0;
+    cartItems.forEach(item => {
+      const priceWithoutWon = Number(
+        item.price.replace("원", "").replace(",", ""),
+      );
+      totalPrice += priceWithoutWon * item.quantity;
+    });
+    return totalPrice;
+  };
 
   const navigate = useNavigate();
 
   return (
     <>
+      <button onClick={addItemToCart}>상품 추가 테스트 버튼</button>
       {/* 상품이 장바구니에 담겨있지 않을 때 */}
       {cartItems.length === 0 ? (
         <ProductCartNone>
-          {" "}
           <div>
             <i>
               <FontAwesomeIcon icon={faExclamation} />
@@ -78,7 +83,9 @@ const ProductCart = () => {
       ) : (
         // 상품이 장바구니에 담겨있을 때
         <ProductCartIn>
-          <div>장바구니에 총 {cartItems.length}개의 상품이 있습니다.</div>
+          <ProudctTotalItem>
+            장바구니에 총 {cartItems.length}개의 상품이 있습니다.
+          </ProudctTotalItem>
           <ul>
             {cartItems.map(item => (
               <ProductCartInfo key={item.id}>
@@ -101,7 +108,9 @@ const ProductCart = () => {
           <CartTotalPrice>
             <li>최종결제금액</li>
             <CartTotalPriceOne>
-              0000000<span>원</span>
+              {/* calculateTotalPrice 로 총 금액 표시 */}
+              {calculateTotalPrice().toLocaleString()}
+              <span>원</span>
             </CartTotalPriceOne>
           </CartTotalPrice>
           <ButtonOk
@@ -113,7 +122,6 @@ const ProductCart = () => {
           </ButtonOk>
         </ProductCartIn>
       )}
-      <button onClick={addItemToCart}>상품 추가 되면 보여요</button>
       <ButtonCancel
         onClick={() => {
           navigate("/");
