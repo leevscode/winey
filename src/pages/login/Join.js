@@ -1,44 +1,46 @@
+/*
+    작업자 : 최혜미
+    노션 : https://www.notion.so/hyemdev
+    깃허브 : https://github.com/hyemdev
+*/
+
+
 import React, { useState } from "react";
-import { Radio, Form, Input, ConfigProvider, Modal } from "antd";
+import {
+  Radio,
+  Form,
+  Input,
+  ConfigProvider,
+} from "antd";
 
 import {
   ButtonConfirm,
   ConfirmArray,
   JoinWrap,
   RegionSelectWrap,
-  TermsWarp,
 } from "../../style/JoinStyle";
 import { ButtonOk } from "../../style/GlobalStyle";
-import { faChevronRight } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import TermsInfo from "../../components/join/TermsInfo";
-import PrivateInfo from "../../components/join/PrivateInfo";
+import { Terms } from "../../components/join/Terms";
 
 const Join = () => {
-  const [value, setValue] = useState(0);
-  // 약관보기 모달창 관련
-  const checkTerms = () => {
-    Modal.info({
-      title: "WINEY 이용약관",
-      content: (
-        <div>
-          <TermsInfo />
-        </div>
-      ),
-      onOk() {},
-    });
-  };
-  const checkedPrivate = () => {
-    Modal.info({
-      title: "WINEY 개인정보 처리방침",
-      content: (
-        <div>
-          <PrivateInfo />
-        </div>
-      ),
-      onOk() {},
-    });
-  };
+  const regionOptions = [
+    "서울",
+    "경기",
+    "인천",
+    "강원",
+    "충남",
+    "대전",
+    "충북",
+    "경북",
+    "대구",
+    "전북",
+    "광주",
+    "전남",
+    "경남",
+    "울산",
+    "부산",
+    "제주",
+  ];
 
   const onFinish = values => {
     console.log("Success:", values);
@@ -46,10 +48,7 @@ const Join = () => {
   const onFinishFailed = errorInfo => {
     console.log("Failed:", errorInfo);
   };
-  const onChange = e => {
-    console.log("radio checked", e.target.value);
-    setValue(e.target.value);
-  };
+
   return (
     <JoinWrap>
       <ConfigProvider
@@ -181,48 +180,21 @@ const Join = () => {
             <p>거주지역을 선택해 주세요</p>
             <Form.Item>
               <Radio.Group defaultValue="a" size="large">
-                <Radio.Button value="서울">서울</Radio.Button>
-                <Radio.Button value="경기">경기</Radio.Button>
-                <Radio.Button value="인천">인천</Radio.Button>
-                <Radio.Button value="강원">강원</Radio.Button>
-                <Radio.Button value="충남">충남</Radio.Button>
-                <Radio.Button value="대전">대전</Radio.Button>
-                <Radio.Button value="충북">충북</Radio.Button>
-                <Radio.Button value="경북">경북</Radio.Button>
-                <Radio.Button value="대구">대구</Radio.Button>
-                <Radio.Button value="전북">전북</Radio.Button>
-                <Radio.Button value="광주">광주</Radio.Button>
-                <Radio.Button value="전남">전남</Radio.Button>
-                <Radio.Button value="경남">경남</Radio.Button>
-                <Radio.Button value="울산">울산</Radio.Button>
-                <Radio.Button value="부산">부산</Radio.Button>
-                <Radio.Button value="제주">제주</Radio.Button>
+                {regionOptions.map(option => (
+                  <Radio.Button key={option} value={option}>
+                    {option}
+                  </Radio.Button>
+                ))}
               </Radio.Group>
             </Form.Item>
           </RegionSelectWrap>
+          {/* 이용약관 컴포넌트 */}
+          <Terms />
           <Form.Item>
             <ButtonOk>회원가입</ButtonOk>
           </Form.Item>
         </Form>
       </ConfigProvider>
-      <TermsWarp>
-        <span>
-          이용약관동의 <b>*</b>
-        </span>
-        <Radio.Group onChange={onChange} value={value}>
-          <Radio value={"all"}>전체 동의합니다.</Radio>
-          <Radio value={1}>이용약관 동의 (필수)</Radio>
-          <span onClick={checkTerms}>
-            약관보기
-            <FontAwesomeIcon icon={faChevronRight} />
-          </span>
-          <Radio value={2}>개인정보 수집·이용 동의 (필수)</Radio>
-          <span onClick={checkedPrivate}>
-            약관보기
-            <FontAwesomeIcon icon={faChevronRight} />
-          </span>
-        </Radio.Group>
-      </TermsWarp>
     </JoinWrap>
   );
 };

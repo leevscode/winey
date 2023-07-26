@@ -1,5 +1,12 @@
+/*
+    작업자 : 최혜미
+    노션 : https://www.notion.so/hyemdev
+    깃허브 : https://github.com/hyemdev
+*/
+
 import styled from "@emotion/styled";
-import { Maincolor, WidthPd } from "./GlobalStyle";
+import { Maincolor, WidthPd, opacity } from "./GlobalStyle";
+import { css } from "@emotion/react";
 
 export const JoinWrap = styled.div`
   margin-top: 3rem;
@@ -73,15 +80,12 @@ export const RegionSelectWrap = styled.div`
     justify-content: flex-start;
     flex-wrap: wrap;
     padding: 1px;
-    & label {
+    & > label {
       width: 7rem;
       padding: 1rem;
       margin: 0.85rem;
       border: 0.1rem solid ${Maincolor.grayMedium};
       border-radius: 0.5rem;
-      &::before {
-        display: none;
-      }
       & span {
         position: absolute;
         top: 1rem;
@@ -94,6 +98,9 @@ export const RegionSelectWrap = styled.div`
         font-weight: 400;
       }
     }
+    .ant-radio-button-wrapper::before {
+      width: 0px;
+    }
   }
 `;
 
@@ -101,11 +108,18 @@ export const TermsWarp = styled.div`
   display: flex;
   align-content: space-between;
   flex-direction: column;
-  & span {
+  margin-bottom: 7rem;
+  & label > span {
+    font-size: 1.4rem;
+    font-weight: 600;
+    line-height: 1.7rem;
+  }
+  & > span {
     position: relative;
     font-size: 1.8rem;
     font-weight: 700;
     line-height: 1.7rem;
+    margin-bottom: 1rem;
     & b {
       position: absolute;
       top: -0.2rem;
@@ -114,31 +128,40 @@ export const TermsWarp = styled.div`
       color: red;
     }
   }
+`;
+
+export const TermsFlex = styled.div`
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  padding: 0.3rem 1rem 0.3rem 1rem;
+  & label span {
+    font-size: 1.4rem;
+    font-weight: 500;
+    line-height: 1.7rem;
+    & strong {
+      color: ${opacity.gray};
+    }
+  }
+  // 약관보기
   & div {
     display: flex;
-    justify-content: flex-start;
-    flex-direction: column;
-    flex-wrap: wrap;
-    & span {
+    justify-content: space-between;
+    & > span {
       position: relative;
-      font-size: 1.4rem;
+      display: inline-block;
+      font-size: 1.3rem;
+      font-weight: 700;
       color: ${Maincolor.redDeep};
       line-height: 1.7rem;
       cursor: pointer;
+      margin-right: 1rem;
+
       & svg {
         position: absolute;
         top: 0.5rem;
         font-weight: 700;
         font-size: 0.8rem;
-      }
-    }
-    & label {
-      font-size: 1rem;
-      & span {
-        font-size: 1.4rem;
-        color: #000000;
-        font-weight: 500;
-        line-height: 1.7rem;
       }
     }
   }
