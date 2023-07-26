@@ -5,6 +5,8 @@ import {
   ProductCartNone,
   ProductCartIn,
   ProductCartInfo,
+  CartDetail,
+  CartInfoDes,
   GoodsEa,
   CartTotalPrice,
   CartTotalPriceOne,
@@ -54,6 +56,7 @@ const ProductCart = () => {
       ),
     );
   };
+  // 상품의 총 금액을 계산하는 함수
   const calculateTotalPrice = () => {
     let totalPrice = 0;
     cartItems.forEach(item => {
@@ -91,16 +94,16 @@ const ProductCart = () => {
               <ProductCartInfo key={item.id}>
                 {/* 상품 정보를 표시하는 JSX */}
                 <div>{item.image}</div>
-                <span>
+                <CartDetail>
                   <p>{item.name}</p>
-                  <p>{item.description}</p>
+                  <CartInfoDes>{item.description}</CartInfoDes>
                   <span>{item.price}</span>
                   <GoodsEa>
                     <button onClick={() => decreaseQuantity(item.id)}>-</button>
                     <span>{item.quantity}</span>
                     <button onClick={() => increaseQuantity(item.id)}>+</button>
                   </GoodsEa>
-                </span>
+                </CartDetail>
                 <button onClick={() => removeItemFromCart(item.id)}>X</button>
               </ProductCartInfo>
             ))}
