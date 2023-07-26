@@ -45,20 +45,6 @@ const Visual = () => {
             </div>
           </VisualText>
         </SwiperSlide>
-        <SwiperSlide>
-          <VisualText>
-            <div>
-              <span>와인이 처음인 당신을 위한</span>
-              <p>와인 가이드</p>
-              <Link to="/windeguide">
-                자세히 보기
-                <i>
-                  <FontAwesomeIcon icon={faArrowRight} />
-                </i>
-              </Link>
-            </div>
-          </VisualText>
-        </SwiperSlide>
       </Swiper>
     </VisualWrap>
   );

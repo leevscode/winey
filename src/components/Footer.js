@@ -12,7 +12,10 @@ const Footer = () => {
     <FooterWrap>
       <ul>
         <li>
-          <img src={`${process.env.PUBLIC_URL}/images/logo_1.svg`} alt="로고" />
+          <img
+            src={`${process.env.PUBLIC_URL}/images/logo_footer.svg`}
+            alt="로고"
+          />
           <ol>
             <li></li>
             <li></li>

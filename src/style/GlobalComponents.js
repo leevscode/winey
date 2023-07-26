@@ -16,10 +16,44 @@ export const HeaderWrap = styled.header`
   max-width: 560px;
   width: 100%;
   height: 6rem;
-  border-bottom: 0.05rem solid ${opacity.whiteB};
+  /* background: ${Maincolor.white}; */
+  background: ${props => (props.mainBgc ? "transparent" : Maincolor.white)};
+  border-bottom: 0.05rem solid
+    ${props => (props.mainBgc ? opacity.whiteB : opacity.white)};
+  &.active {
+    transition: 0.2s ease-in-out;
+    background: ${Maincolor.white};
+    border-color: ${opacity.white};
+    button {
+      & > img {
+        &:first-of-type {
+          display: block;
+        }
+        &:last-of-type {
+          display: none;
+        }
+      }
+    }
+    a {
+      img {
+        &:first-of-type {
+          display: block;
+        }
+        &:last-of-type {
+          display: none;
+        }
+      }
+    }
+  }
   button {
     & > img {
       width: 19px;
+      &:first-of-type {
+        display: ${props => (props.mainBgc ? "none" : "block")};
+      }
+      &:last-of-type {
+        display: ${props => (props.mainBgc ? "block" : "none")};
+      }
     }
   }
   ul {
@@ -29,12 +63,16 @@ export const HeaderWrap = styled.header`
     padding: ${WidthPd.padding};
     height: 100%;
     & > li {
-      h1 {
-        a {
-          display: block;
-          img {
-            max-width: 90px;
-            width: 100%;
+      a {
+        display: block;
+        img {
+          max-width: 90px;
+          width: 100%;
+          &:first-of-type {
+            display: ${props => (props.mainBgc ? "none" : "block")};
+          }
+          &:last-of-type {
+            display: ${props => (props.mainBgc ? "block" : "none")};
           }
         }
       }
@@ -299,4 +337,5 @@ export const ScrollTopBtn = styled.div`
 // 컨텐츠
 export const ContentsWrap = styled.div`
   padding-top: 80px;
+  min-height: calc(100vh - 350px);
 `;

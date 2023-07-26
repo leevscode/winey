@@ -12,6 +12,7 @@ export const VisualWrap = styled.div`
   background: pink;
   height: 60vh;
   border-radius: 0 0 0 100px;
+  margin-top: -8rem;
   overflow: hidden;
   isolation: isolate;
   .swiper {
