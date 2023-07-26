@@ -1,3 +1,9 @@
+/*
+    작업자 : 이동은
+    노션 : https://www.notion.so/leevscode
+    깃허브 : https://github.com/leevscode
+*/
+
 import React, { useState } from "react";
 import { ButtonCancel, ButtonOk } from "../../style/GlobalStyle";
 import {
@@ -45,6 +51,7 @@ const ProductCart = () => {
           <div>장바구니에 총 {cartItemCount}개의 상품이 있습니다.</div>
           <ul>
             <ProductCartInfo>
+              {/* 데이터 넣을 곳 */}
               <div>이미지</div>
               <span>
                   <p>제프 까렐, 울띰 헤꼴뜨</p>
@@ -58,10 +65,6 @@ const ProductCart = () => {
                 </span>
                 <p>x</p>
               <div>
-             
-                
-               
-                
               </div>
             </ProductCartInfo>
           </ul>
