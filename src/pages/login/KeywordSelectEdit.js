@@ -68,7 +68,7 @@ const KeywordSelectEdit = () => {
   const isTypeCheckAll = wineTypeCheckedList.length === wineOptions.type.length;
   const handleTypeCheckAllChange = e => {
     setWineTypeCheckedList(e.target.checked ? wineOptions.type : []);
-    console.log("e.target.checked", e.target.checked);
+    setEditFavoriteKeyword(prev => ({ ...prev, wineType: wineOptions.type }));
   };
   const handleTypeOnChange = list => {
     setWineTypeCheckedList(list);
@@ -84,6 +84,7 @@ const KeywordSelectEdit = () => {
     winePriceCheckedList.length === wineOptions.price.length;
   const handlePriceCheckAllChange = e => {
     setWinePriceCheckedList(e.target.checked ? wineOptions.price : []);
+    setEditFavoriteKeyword(prev => ({ ...prev, winePrice: wineOptions.price }));
   };
   const handlePriceOnChange = list => {
     setWinePriceCheckedList(list);
@@ -100,6 +101,10 @@ const KeywordSelectEdit = () => {
     wineWithFoodCheckedList.length === wineOptions.withFood.length;
   const handleWithFoodCheckAllChange = e => {
     setWineWithFoodCheckedList(e.target.checked ? wineOptions.withFood : []);
+    setEditFavoriteKeyword(prev => ({
+      ...prev,
+      wineFood: wineOptions.withFood,
+    }));
   };
   const handleWithFoodOnChange = list => {
     setWineWithFoodCheckedList(list);
@@ -115,6 +120,10 @@ const KeywordSelectEdit = () => {
     wineFlavorCheckedList.length === wineOptions.flavor.length;
   const handleFlavorCheckAllChange = e => {
     setWineFlavorCheckedList(e.target.checked ? wineOptions.flavor : []);
+    setEditFavoriteKeyword(prev => ({
+      ...prev,
+      wineFlavor: wineOptions.flavor,
+    }));
   };
   const handleFlavorOnChange = list => {
     setWineFlavorCheckedList(list);
@@ -128,6 +137,10 @@ const KeywordSelectEdit = () => {
     wineCountryCheckedList.length === wineOptions.country.length;
   const handleCountryCheckAllChange = e => {
     setWineCountryCheckedList(e.target.checked ? wineOptions.country : []);
+    setEditFavoriteKeyword(prev => ({
+      ...prev,
+      wineCountry: wineOptions.country,
+    }));
   };
   const handleCountryOnChange = list => {
     setWineCountryCheckedList(list);
@@ -142,7 +155,8 @@ const KeywordSelectEdit = () => {
   };
   const handleEditKeywordAll = () => {
     // editFavoriteKeyword("all");
-    console.log("확인중", wineOptions);
+    console.log("확인중", editFavoriteKeyword);
+    setEditFavoriteKeyword({ ...wineOptions });
 
     // navigator("/");
   };
