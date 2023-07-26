@@ -1,3 +1,9 @@
+/*
+    작업자 : 이동은
+    노션 : https://www.notion.so/leevscode
+    깃허브 : https://github.com/leevscode
+*/
+
 import styled from "@emotion/styled";
 
 export const ModalColse = styled.i`

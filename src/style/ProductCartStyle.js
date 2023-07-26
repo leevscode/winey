@@ -1,12 +1,24 @@
+/*
+    작업자 : 이동은
+    노션 : https://www.notion.so/leevscode
+    깃허브 : https://github.com/leevscode
+*/
+
 import styled from "@emotion/styled";
 
 export const ProductCartNone = styled.div`
-  font-size: 1.4rem;
+  font-size: 2rem;
   padding: 80px;
   text-align: center;
   color: #e7e4e4;
 `;
 
-export const ProductCartIn = styled.div`
-  margin: 100px;
+export const ProductCartIn = styled.div``;
+
+export const ProductCartInfo = styled.div`
+  font-size: 2rem;
+  display: grid;
+  text-align: center;
+  grid-template-columns: 1fr 2.5fr 30px;
+  border: 1px solid;
 `;
