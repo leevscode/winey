@@ -4,13 +4,16 @@
   깃허브 : https://github.com/kimaydev
 */
 import React, { useEffect, useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { BackBtn, HeaderTitle, HeaderWrap } from "../style/GlobalComponents";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 
 const Header = () => {
   const location = useLocation();
+  const navigate = useNavigate();
+  // 뒤로가기 버튼
+  const handleBack = () => navigate(-1);
   // 스크롤 감지 state
   const [scrollPosition, setScrollPosition] = useState(0);
   // 헤더 클래스 토글 설정 state
@@ -123,7 +126,7 @@ const Header = () => {
               </button>
             ) : (
               // 서브페이지 헤더 뒤로가기 버튼
-              <BackBtn>
+              <BackBtn onClick={handleBack}>
                 <i>
                   <FontAwesomeIcon icon={faArrowLeft} />
                 </i>

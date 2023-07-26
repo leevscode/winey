@@ -10,6 +10,7 @@ export const LayoutWrap = styled.div`
   position: relative;
   background: ${Maincolor.white};
   max-width: 560px;
+  min-height: 100vh;
   margin: 0 auto;
   border-left: 0.05rem solid ${opacity.white};
   border-right: 0.05rem solid ${opacity.white};

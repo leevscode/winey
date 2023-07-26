@@ -4,7 +4,7 @@
   깃허브 : https://github.com/kimaydev
 */
 import React from "react";
-import { Outlet } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
 import { LayoutWrap } from "./style/LayoutStyle";
 import { ContentsWrap } from "./style/GlobalComponents";
 import Header from "./components/Header";
@@ -13,13 +13,14 @@ import Footer from "./components/Footer";
 import NavList from "./pages/NavList";
 
 const User = () => {
+  const location = useLocation();
   return (
     <LayoutWrap>
       <Header />
       <ContentsWrap>
         <Outlet />
       </ContentsWrap>
-      <Footer />
+      {location.pathname !== "/mypageList" ? <Footer /> : null}
       <QuickMenu />
       {/* 네비게이션 메뉴 */}
       <NavList />

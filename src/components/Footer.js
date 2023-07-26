@@ -23,7 +23,7 @@ const Footer = () => {
           </ol>
         </li>
         <li>
-          <Link to="">만든 사람들</Link>
+          <Link to="/about">만든 사람들</Link>
         </li>
         <li>
           <p>
