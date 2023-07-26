@@ -65,13 +65,13 @@ export const KeywordWrap = styled.div`
   flex-direction: column;
   width: 100%;
   background: ${Maincolor.beige};
-  padding: 3.1rem;
+  padding: 2rem;
   & > ul {
     & li {
       margin-bottom: 2rem;
       & h3 {
         text-align: center;
-        font-size: 1.2rem;
+        font-size: 1.5rem;
         font-weight: 700;
         line-height: 1.4rem;
         margin: 1rem 0;
