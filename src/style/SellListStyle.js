@@ -6,6 +6,12 @@
 
 import styled from "@emotion/styled";
 
+export const SellListDay = styled.h2`
+  display: flex;
+  margin: 0 6px;
+  justify-content: space-between;
+`;
+
 export const ModalColse = styled.i`
   display: flex;
   justify-content: flex-end;
@@ -61,6 +67,11 @@ export const ReviewModal = styled.ul`
     padding: 30px;
     background: #fcf8f1;
     border-radius: 20px;
+    &:hover {
+      color: #7c1d34;
+      transform: scale(1.3);
+      cursor: pointer;
+    }
     &:first-of-type {
       padding: 30px 40px;
     }

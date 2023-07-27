@@ -10,6 +10,8 @@ import {
   GoodsEa,
   CartTotalPrice,
   CartTotalPriceOne,
+  CartDetailImg,
+  CartDetaiClose,
 } from "../../style/ProductCartStyle";
 import { useNavigate } from "react-router";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -27,7 +29,7 @@ const ProductCart = () => {
       description: "Ultime Recolte By Jeff Carrel",
       price: "32,900원",
       quantity: 1,
-      image: "상품 이미지",
+      image: <img src="https://via.placeholder.com/200x200" alt="" />,
     };
     setCartItems([...cartItems, newItem]);
   };
@@ -93,7 +95,7 @@ const ProductCart = () => {
             {cartItems.map(item => (
               <ProductCartInfo key={item.id}>
                 {/* 상품 정보를 표시하는 JSX */}
-                <div>{item.image}</div>
+                <CartDetailImg>{item.image}</CartDetailImg>
                 <CartDetail>
                   <p>{item.name}</p>
                   <CartInfoDes>{item.description}</CartInfoDes>
@@ -104,7 +106,9 @@ const ProductCart = () => {
                     <button onClick={() => increaseQuantity(item.id)}>+</button>
                   </GoodsEa>
                 </CartDetail>
-                <button onClick={() => removeItemFromCart(item.id)}>X</button>
+                <CartDetaiClose onClick={() => removeItemFromCart(item.id)}>
+                  X
+                </CartDetaiClose>
               </ProductCartInfo>
             ))}
           </ul>
