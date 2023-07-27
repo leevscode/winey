@@ -85,9 +85,9 @@ const SellList = () => {
           <SellListDay>
             {item.date}
             <button onClick={showCancelModal}>
-            {cancelModalVisible && <SellListCancel onClose={hideCancelModal} />}
               주문취소 <FontAwesomeIcon icon={faChevronRight} />
             </button>
+            {cancelModalVisible && <SellListCancel onClose={hideCancelModal} />}
           </SellListDay>
           <SellListInfo>
             <li>상품명: {item.product}</li>

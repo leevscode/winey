@@ -64,7 +64,9 @@ export const ReviewModal = styled.ul`
   align-items: center;
   justify-content: space-around;
   button {
-    padding: 30px;
+    /* padding: 30px; */
+    width: 27%;
+    height: 120px;
     background: #fcf8f1;
     border-radius: 20px;
     &:hover {
@@ -72,12 +74,12 @@ export const ReviewModal = styled.ul`
       transform: scale(1.3);
       cursor: pointer;
     }
-    &:first-of-type {
+    /* &:first-of-type {
       padding: 30px 40px;
     }
     &:last-of-type {
       padding: 30px 30px;
-    }
+    } */
   }
 `;
 
