@@ -3,7 +3,7 @@ import { ButtonOk, Maincolor } from "./GlobalStyle";
 
 // 회원가입완료 component
 export const WelcomeWrap = styled.div`
-  height: 40rem;
+  height: 30rem;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -17,7 +17,7 @@ export const WelcomeWrap = styled.div`
   }
   & h3 {
     text-align: center;
-    font-size: 1.6rem;
+    font-size: 1.8rem;
     font-weight: 700;
     line-height: 2rem;
     margin-bottom: 2rem;
@@ -43,14 +43,15 @@ export const LetsChoice = styled.div`
     }
   }
   & h4 {
-    font-size: 1.2rem;
+    font-size: 1.4rem;
+    font-weight: 500;
     text-align: center;
     line-height: 1.5rem;
     margin-bottom: 1rem;
   }
 
   & h5 {
-    font-size: 0.9rem;
+    font-size: 1.2rem;
     text-align: center;
   }
 `;
@@ -64,23 +65,24 @@ export const KeywordWrap = styled.div`
   flex-direction: column;
   width: 100%;
   background: ${Maincolor.beige};
-  padding: 3.1rem;
+  padding: 2rem;
   & > ul {
     & li {
       margin-bottom: 2rem;
       & h3 {
         text-align: center;
-        font-size: 1.2rem;
+        font-size: 1.5rem;
         font-weight: 700;
         line-height: 1.4rem;
         margin: 1rem 0;
       }
       div {
         display: flex;
-        justify-content: flex-start;
+        justify-content: center;
         align-items: center;
         flex-direction: row;
         flex-wrap: wrap;
+        gap: 0.5rem;
         label {
           background: ${Maincolor.white};
           color: ${Maincolor.black};
@@ -88,7 +90,7 @@ export const KeywordWrap = styled.div`
           width: 8rem;
           height: 4rem;
           border-radius: 0.7rem;
-          margin: 0.4rem 1rem;
+          margin: 0.4rem;
           display: flex;
           justify-content: center;
           align-items: center;
