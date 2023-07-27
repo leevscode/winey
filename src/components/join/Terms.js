@@ -58,7 +58,7 @@ export const Terms = () => {
     setCheckAll(e.target.checked);
   };
   // 약관보기 모달창 관련
-  const checkTerms = () => {
+  const handleCheckTerms = () => {
     Modal.info({
       title: "WINEY 이용약관",
       content: (
@@ -69,7 +69,7 @@ export const Terms = () => {
       onOk() {},
     });
   };
-  const checkedPrivate = () => {
+  const handleCheckedPrivate = () => {
     Modal.info({
       title: "WINEY 개인정보 처리방침",
       content: (
@@ -98,14 +98,14 @@ export const Terms = () => {
           <Checkbox value="1">
             이용약관 동의 <strong>(필수)</strong>
           </Checkbox>{" "}
-          <span onClick={checkTerms}>
+          <span onClick={handleCheckTerms}>
             약관보기
             <FontAwesomeIcon icon={faChevronRight} />
           </span>
           <Checkbox value="2">
             개인정보 수집·이용 동의 <strong>(필수)</strong>
           </Checkbox>
-          <span onClick={checkedPrivate}>
+          <span onClick={handleCheckedPrivate}>
             약관보기
             <FontAwesomeIcon icon={faChevronRight} />
           </span>

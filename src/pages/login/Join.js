@@ -4,14 +4,8 @@
     깃허브 : https://github.com/hyemdev
 */
 
-
 import React, { useState } from "react";
-import {
-  Radio,
-  Form,
-  Input,
-  ConfigProvider,
-} from "antd";
+import { Radio, Form, Input, ConfigProvider, Modal } from "antd";
 
 import {
   ButtonConfirm,
@@ -42,6 +36,24 @@ const Join = () => {
     "제주",
   ];
 
+  // 아이디 중복 확인 핸들러
+  const handleCertifyID = () => {
+    Modal.info({
+      title: "아이디 중복확인",
+      content: <div>기능 추가 필요</div>,
+      onOk() {},
+    });
+  };
+  // 본인 인증 핸들러
+  const handleCertifyPhone = () => {
+    Modal.success({
+      title: "본인 인증",
+      content: <div>본인인증이 완료되었습니다.</div>,
+      onOk() {},
+    });
+  };
+
+  // 회원 가입 핸들러
   const onFinish = values => {
     console.log("Success:", values);
   };
@@ -69,7 +81,7 @@ const Join = () => {
           <span>
             아이디(E-mail)<b>*</b>
           </span>
-          <p>사용하실 아이디를 이메일 형식으로 입력해 주세요</p>
+          <p>사용하실 아이디를 이메일 형식으로 입력해 주세요.</p>
           <ConfirmArray>
             <Form.Item
               name="userEmail"
@@ -82,21 +94,22 @@ const Join = () => {
                   required: true,
                   message: "Please input your E-mail!",
                 },
-                {
-                  pattern: /^[\s]/,
-                  message: "Please do not use space",
-                },
               ]}
             >
-              <Input size="large" />
+              <Input
+                size="large"
+                // 글자수 제한
+                maxLength={25}
+                placeholder="아이디를 입력해 주세요."
+              />
             </Form.Item>
-            <ButtonConfirm>중복확인</ButtonConfirm>
+            <ButtonConfirm onClick={handleCertifyID}>중복확인</ButtonConfirm>
           </ConfirmArray>
 
           <span>
             비밀번호<b>*</b>
           </span>
-          <p>비밀번호를 입력해 주세요</p>
+          <p>비밀번호를 입력해 주세요.</p>
           <Form.Item
             name="password"
             rules={[
@@ -106,13 +119,18 @@ const Join = () => {
               },
             ]}
           >
-            <Input.Password size="large" />
+            <Input.Password
+              size="large"
+              // 글자수 제한
+              maxLength={25}
+              placeholder="비밀번호를 입력해 주세요."
+            />
           </Form.Item>
 
           <span>
             비밀번호 확인<b>*</b>
           </span>
-          <p>비밀번호를 다시 한번 입력해 주세요</p>
+          <p>비밀번호를 다시 한번 입력해 주세요.</p>
           <Form.Item
             name="passwordConfirm"
             dependencies={["password"]}
@@ -124,7 +142,12 @@ const Join = () => {
               },
             ]}
           >
-            <Input.Password size="large" />
+            <Input.Password
+              size="large"
+              // 글자수 제한
+              maxLength={25}
+              placeholder="비밀번호를 다시 한번 입력해 주세요"
+            />
           </Form.Item>
 
           <span>
@@ -132,7 +155,7 @@ const Join = () => {
           </span>
           <p>이름을 입력해 주세요</p>
           <Form.Item
-            name="username"
+            name="userName"
             rules={[
               {
                 required: true,
@@ -140,34 +163,48 @@ const Join = () => {
               },
             ]}
           >
-            <Input size="large" />
+            <Input
+              size="large"
+              // 글자수 제한
+              maxLength={10}
+              placeholder="이름을 입력해 주세요."
+            />
           </Form.Item>
 
           <span>
             연락처<b>*</b>
           </span>
-          <p>연락처를 숫자 형식으로 입력해 주세요</p>
+          <p>연락처를 숫자 형식으로 입력해 주세요.</p>
           <ConfirmArray>
             <Form.Item
               name="phoneNumber"
               rules={[
+                {
+                  type: "tel",
+                  message: "The input is not valid phone number!",
+                },
                 {
                   required: true,
                   message: "Please input your phone number!",
                 },
               ]}
             >
-              <Input size="large" />
+              <Input
+                size="large"
+                // 글자수 제한
+                maxLength={15}
+                placeholder="연락처를 입력해 주세요."
+              />
             </Form.Item>
-            <ButtonConfirm>본인인증</ButtonConfirm>
+            <ButtonConfirm onClick={handleCertifyPhone}>본인인증</ButtonConfirm>
           </ConfirmArray>
           <RegionSelectWrap>
             <span>
               거주지역<b>*</b>
             </span>
-            <p>거주지역을 선택해 주세요</p>
-            <Form.Item>
-              <Radio.Group defaultValue="a" size="large">
+            <p>거주지역을 선택해 주세요.</p>
+            <Form.Item name="userCity">
+              <Radio.Group value="서울" size="large">
                 {regionOptions.map(option => (
                   <Radio.Button key={option} value={option}>
                     {option}

@@ -6,7 +6,6 @@
 
 import styled from "@emotion/styled";
 import { Maincolor, WidthPd, opacity } from "./GlobalStyle";
-import { css } from "@emotion/react";
 
 export const JoinWrap = styled.div`
   margin-top: 3rem;
@@ -16,9 +15,10 @@ export const JoinWrap = styled.div`
   flex-direction: column;
   & form span {
     position: relative;
-    font-size: 1.8rem;
+    font-size: 1.7rem;
     font-weight: 700;
-    line-height: 1.7rem;
+    line-height: 1.8rem;
+    color: ${Maincolor.black};
     & b {
       position: absolute;
       top: -0.2rem;
@@ -28,11 +28,20 @@ export const JoinWrap = styled.div`
     }
   }
   & p {
-    font-size: 1.2rem;
+    color: ${Maincolor.black};
+    font-size: 1.1rem;
     font-weight: 500;
-    line-height: 1.5rem;
-    margin-left: 0.5rem;
+    line-height: 2rem;
+    margin-left: 0.2rem;
     padding-bottom: 0.5rem;
+  }
+  div > .ant-input-lg {
+    font-size: 1.4rem;
+    padding: 1rem;
+  }
+  .ant-input-password {
+    font-size: 1.4rem;
+    padding: 1rem;
   }
 `;
 export const ButtonConfirm = styled.button`
@@ -52,20 +61,12 @@ export const ButtonConfirm = styled.button`
 `;
 
 export const ConfirmArray = styled.div`
-  width: 100%;
   display: flex;
   justify-content: center;
   flex-wrap: nowrap;
   & div {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: nowrap;
-
     & input {
-      margin: 0 auto;
-      width: 41rem;
+      width: 40rem;
     }
   }
   & button {
@@ -79,27 +80,29 @@ export const RegionSelectWrap = styled.div`
     display: flex;
     justify-content: flex-start;
     flex-wrap: wrap;
-    padding: 1px;
+    gap: 0.3rem;
     & > label {
-      width: 7rem;
-      padding: 1rem;
-      margin: 0.85rem;
+      width: 6.5rem;
+      padding: 1.3rem;
+      margin: 0.4rem;
       border: 0.1rem solid ${Maincolor.grayMedium};
       border-radius: 0.5rem;
       & span {
         position: absolute;
-        top: 1rem;
-        left: 1.8rem;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        text-align: center;
+        top: 1.1rem;
+        left: 1.7rem;
         font-size: 1.4rem;
         font-weight: 400;
       }
     }
     .ant-radio-button-wrapper::before {
       width: 0px;
+    }
+    .ant-radio-button-wrapper-checked {
+      background: ${Maincolor.redDeep};
+      & > span {
+        color: ${Maincolor.white};
+      }
     }
   }
 `;
@@ -108,7 +111,7 @@ export const TermsWarp = styled.div`
   display: flex;
   align-content: space-between;
   flex-direction: column;
-  margin-bottom: 7rem;
+  margin-bottom: 5rem;
   & label > span {
     font-size: 1.4rem;
     font-weight: 600;
@@ -131,9 +134,6 @@ export const TermsWarp = styled.div`
 `;
 
 export const TermsFlex = styled.div`
-  display: flex;
-  justify-content: space-between;
-  flex-direction: column;
   padding: 0.3rem 1rem 0.3rem 1rem;
   & label span {
     font-size: 1.4rem;
@@ -145,17 +145,20 @@ export const TermsFlex = styled.div`
   }
   // 약관보기
   & div {
+    display: block;
     display: flex;
     justify-content: space-between;
     & > span {
       position: relative;
       display: inline-block;
+
       font-size: 1.3rem;
       font-weight: 700;
       color: ${Maincolor.redDeep};
       line-height: 1.7rem;
       cursor: pointer;
       margin-right: 1rem;
+      margin-left: 20rem;
 
       & svg {
         position: absolute;
