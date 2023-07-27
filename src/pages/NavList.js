@@ -4,25 +4,25 @@
   깃허브 : https://github.com/kimaydev
 */
 import React from "react";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { NavWrap } from "../style/GlobalComponents";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 
-const NavList = () => {
+const NavList = ({ handlerOpenNav }) => {
   return (
-    <NavWrap>
+    <>
       <ul className="top">
         <li>
-          <Link to="/">
+          <NavLink to="/">
             <img
               src={`${process.env.PUBLIC_URL}/images/logo_1.svg`}
               alt="로고"
             />
-          </Link>
+          </NavLink>
         </li>
         <li>
-          <button>
+          <button onClick={handlerOpenNav}>
             <i>
               <FontAwesomeIcon icon={faXmark} />
             </i>
@@ -32,29 +32,29 @@ const NavList = () => {
       <div className="middle">
         <ul>
           <li>
-            <Link to="/">레드 와인</Link>
+            <NavLink to="/">레드 와인</NavLink>
           </li>
           <li>
-            <Link to="/">화이트 와인</Link>
+            <NavLink to="/">화이트 와인</NavLink>
           </li>
           <li>
-            <Link to="/">스파클링 와인</Link>
+            <NavLink to="/">스파클링 와인</NavLink>
           </li>
           <li>
-            <Link to="/">기타</Link>
+            <NavLink to="/">기타</NavLink>
           </li>
         </ul>
       </div>
 
       <ul className="bottom">
         <li>
-          <Link to="/login">로그인</Link>
+          <NavLink to="/login">로그인</NavLink>
         </li>
         <li>
-          <Link to="/join">회원가입</Link>
+          <NavLink to="/join">회원가입</NavLink>
         </li>
       </ul>
-    </NavWrap>
+    </>
   );
 };
 

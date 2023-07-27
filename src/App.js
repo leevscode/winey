@@ -23,11 +23,14 @@ import JoinEdit from "./pages/login/JoinEdit";
 import About from "./pages/About";
 import OpenSource from "./pages/OpenSource";
 import SellList from "./pages/product/SellList";
+import NavList from "./pages/NavList";
+import NotFound from "./pages/NotFound";
 
 function App() {
   return (
     <Routes>
       {/* 관리자 페이지 */}
+      {/* -> 관리자 페이지 추후 별도 프로젝트 생성해서 작업 할 것 */}
       <Route element={<Admin />}>
         <Route path="/admin" element={<AdminHome />} />
       </Route>
@@ -69,6 +72,8 @@ function App() {
         <Route path="/about" element={<About />} />
         {/* 오픈소스 */}
         <Route path="/opensource" element={<OpenSource />} />
+        {/* 잘못된 경로 페이지 처리 */}
+        <Route path="/*" element={<NotFound />} />
       </Route>
     </Routes>
   );

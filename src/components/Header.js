@@ -4,16 +4,16 @@
   깃허브 : https://github.com/kimaydev
 */
 import React, { useEffect, useState } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
 import { BackBtn, HeaderTitle, HeaderWrap } from "../style/GlobalComponents";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 
-const Header = () => {
+const Header = ({ handlerOpenNav }) => {
   const location = useLocation();
   const navigate = useNavigate();
-  // 뒤로가기 버튼
-  const handleBack = () => navigate(-1);
+  // 뒤로가기 버튼 핸들러
+  const handlerBack = () => navigate(-1);
   // 스크롤 감지 state
   const [scrollPosition, setScrollPosition] = useState(0);
   // 헤더 클래스 토글 설정 state
@@ -114,7 +114,7 @@ const Header = () => {
           <li>
             {location.pathname === "/" ? (
               // 네비게이션 메뉴 보기 버튼
-              <button>
+              <button onClick={handlerOpenNav}>
                 <img
                   src={`${process.env.PUBLIC_URL}/images/icon_navbtn_1.svg`}
                   alt="메뉴보기"
@@ -126,7 +126,7 @@ const Header = () => {
               </button>
             ) : (
               // 서브페이지 헤더 뒤로가기 버튼
-              <BackBtn onClick={handleBack}>
+              <BackBtn onClick={handlerBack}>
                 <i>
                   <FontAwesomeIcon icon={faArrowLeft} />
                 </i>
@@ -137,7 +137,7 @@ const Header = () => {
             <h1>
               {location.pathname === "/" ? (
                 // 헤더 로고
-                <Link to="/">
+                <NavLink to="/">
                   <img
                     src={`${process.env.PUBLIC_URL}/images/logo_1.svg`}
                     alt="로고"
@@ -146,7 +146,7 @@ const Header = () => {
                     src={`${process.env.PUBLIC_URL}/images/logo_2.svg`}
                     alt="로고"
                   />
-                </Link>
+                </NavLink>
               ) : (
                 // 서브페이지 헤더 페이지 이름 출력
                 <HeaderTitle>
@@ -170,7 +170,7 @@ const Header = () => {
                 </button>
               </li>
               <li>
-                <button className="cart">
+                <NavLink to="/cart" className="cart">
                   <img
                     src={`${process.env.PUBLIC_URL}/images/icon_cart_1.svg`}
                     alt="장바구니"
@@ -180,7 +180,7 @@ const Header = () => {
                     alt="장바구니"
                   />
                   <span>0</span>
-                </button>
+                </NavLink>
               </li>
             </ol>
           </li>

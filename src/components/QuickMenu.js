@@ -4,7 +4,7 @@
   깃허브 : https://github.com/kimaydev
 */
 import React from "react";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { QuickWrap, ScrollTopBtn } from "../style/GlobalComponents";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -15,7 +15,7 @@ import {
   faWineGlass,
 } from "@fortawesome/free-solid-svg-icons";
 
-const QuickMenu = () => {
+const QuickMenu = ({ handlerOpenNav }) => {
   return (
     <>
       <ScrollTopBtn>
@@ -28,44 +28,64 @@ const QuickMenu = () => {
       <QuickWrap>
         <ul>
           <li>
-            <Link to="/">
+            <NavLink
+              to="/"
+              className={({ isActive }) => {
+                return isActive && "active";
+              }}
+            >
               <i>
                 <FontAwesomeIcon icon={faHouseChimney} />
               </i>
-            </Link>
+            </NavLink>
           </li>
           <li>
-            <Link to="/keywordselectedit">
+            <NavLink
+              to="/keywordselectedit"
+              className={({ isActive }) => {
+                return isActive && "active";
+              }}
+            >
               <i>
                 <FontAwesomeIcon icon={faHashtag} />
               </i>
-            </Link>
+            </NavLink>
           </li>
           <li>
-            <Link to="/">
-              <img
-                src={`${process.env.PUBLIC_URL}/images/icon_navbtn_3.svg`}
-                alt="메뉴보기"
-              />
+            <button onClick={handlerOpenNav}>
               <img
                 src={`${process.env.PUBLIC_URL}/images/icon_navbtn_1.svg`}
                 alt="메뉴보기"
               />
-            </Link>
+              <img
+                src={`${process.env.PUBLIC_URL}/images/icon_navbtn_3.svg`}
+                alt="메뉴보기"
+              />
+            </button>
           </li>
           <li>
-            <Link to="/windeguide">
+            <NavLink
+              to="/windeguide"
+              className={({ isActive }) => {
+                return isActive && "active";
+              }}
+            >
               <i>
                 <FontAwesomeIcon icon={faWineGlass} />
               </i>
-            </Link>
+            </NavLink>
           </li>
           <li>
-            <Link to="/mypageList">
+            <NavLink
+              to="/mypageList"
+              className={({ isActive }) => {
+                return isActive && "active";
+              }}
+            >
               <i>
                 <FontAwesomeIcon icon={faUser} />
               </i>
-            </Link>
+            </NavLink>
           </li>
         </ul>
       </QuickWrap>

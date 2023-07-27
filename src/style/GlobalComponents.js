@@ -4,6 +4,7 @@
   깃허브 : https://github.com/kimaydev
 */
 import styled from "@emotion/styled";
+import { motion } from "framer-motion";
 import { Maincolor, WidthPd, opacity } from "./GlobalStyle";
 
 // 헤더
@@ -82,6 +83,8 @@ export const HeaderWrap = styled.header`
         li {
           .cart {
             position: relative;
+            display: block;
+            width: 19px;
             span {
               display: inline-block;
               position: absolute;
@@ -93,6 +96,7 @@ export const HeaderWrap = styled.header`
               background: ${Maincolor.redBold};
               color: ${Maincolor.white};
               border-radius: 100%;
+              text-align: center;
             }
           }
         }
@@ -114,8 +118,7 @@ export const HeaderTitle = styled.span`
 `;
 
 // 네비게이션 메뉴
-export const NavWrap = styled.div`
-  display: none;
+export const NavWrap = styled(motion.div)`
   position: fixed;
   top: 0;
   left: 50%;
@@ -295,7 +298,6 @@ export const QuickWrap = styled.nav`
         display: block;
         font-size: 2.2rem;
         color: ${Maincolor.black};
-        transition: 0.2s ease-in-out;
         img {
           display: block;
           width: 17px;
@@ -303,8 +305,29 @@ export const QuickWrap = styled.nav`
             display: none;
           }
         }
+        &.active {
+          i {
+            color: ${Maincolor.redBold};
+          }
+        }
         &:hover {
           color: ${Maincolor.redBold};
+          img:first-of-type {
+            display: none;
+          }
+          img:last-of-type {
+            display: block;
+          }
+        }
+      }
+      button {
+        img:first-of-type {
+          display: block;
+        }
+        img:last-of-type {
+          display: none;
+        }
+        &:hover {
           img:first-of-type {
             display: none;
           }
