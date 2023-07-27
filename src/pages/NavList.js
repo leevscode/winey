@@ -5,11 +5,10 @@
 */
 import React from "react";
 import { NavLink } from "react-router-dom";
-import { NavWrap } from "../style/GlobalComponents";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 
-const NavList = ({ handlerOpenNav }) => {
+const NavList = ({ handlerOpenNav, closeNav }) => {
   return (
     <>
       <ul className="top">
@@ -32,26 +31,68 @@ const NavList = ({ handlerOpenNav }) => {
       <div className="middle">
         <ul>
           <li>
-            <NavLink to="/">레드 와인</NavLink>
+            <NavLink
+              to="/"
+              onClick={() => {
+                closeNav("/");
+              }}
+            >
+              레드 와인
+            </NavLink>
           </li>
           <li>
-            <NavLink to="/">화이트 와인</NavLink>
+            <NavLink
+              to="/"
+              onClick={() => {
+                closeNav("/");
+              }}
+            >
+              화이트 와인
+            </NavLink>
           </li>
           <li>
-            <NavLink to="/">스파클링 와인</NavLink>
+            <NavLink
+              to="/"
+              onClick={() => {
+                closeNav("/");
+              }}
+            >
+              스파클링 와인
+            </NavLink>
           </li>
           <li>
-            <NavLink to="/">기타</NavLink>
+            <NavLink
+              to="/"
+              onClick={() => {
+                closeNav("/");
+              }}
+            >
+              기타
+            </NavLink>
           </li>
         </ul>
       </div>
 
       <ul className="bottom">
         <li>
-          <NavLink to="/login">로그인</NavLink>
+          <NavLink
+            to="/login"
+            onClick={() => {
+              closeNav("/login");
+            }}
+          >
+            로그인
+          </NavLink>
         </li>
         <li>
-          <NavLink to="/join">회원가입</NavLink>
+          <NavLink
+            to="/join"
+            onClick={() => {
+              closeNav("/join");
+            }}
+          >
+            회원가입
+          </NavLink>
         </li>
       </ul>
     </>

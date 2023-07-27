@@ -135,7 +135,7 @@ export const NavWrap = styled(motion.div)`
     background: ${Maincolor.white};
     padding: ${WidthPd.padding};
     height: 6rem;
-    border-bottom: 0.05rem solid ${opacity.whiteB};
+    border-bottom: 0.05rem solid ${opacity.white};
     & > li {
       a {
         display: block;
@@ -180,7 +180,7 @@ export const NavWrap = styled(motion.div)`
     width: 100%;
     background: ${Maincolor.white};
     height: 6rem;
-    border-top: 0.05rem solid ${opacity.whiteB};
+    border-top: 0.05rem solid ${opacity.white};
     & > li {
       position: relative;
       &::after {
@@ -284,7 +284,7 @@ export const QuickWrap = styled.nav`
   width: 100%;
   height: 6rem;
   background: ${Maincolor.white};
-  box-shadow: 0px 3px 20px -7px ${opacity.gray};
+  border-top: 0.05rem solid ${opacity.white};
   ul {
     display: flex;
     justify-content: space-between;
@@ -352,13 +352,12 @@ export const ScrollTopBtn = styled.div`
   height: 0;
   button {
     background: ${Maincolor.white};
-    font-size: 1.8rem;
-    width: 4.5rem;
-    height: 4.5rem;
+    font-size: 1.5rem;
+    width: 4.3rem;
+    height: 4.3rem;
     border-radius: 100%;
-    box-shadow: 0px 0px 15px -7px ${opacity.gray};
     float: right;
-    margin-right: 15px;
+    margin-right: 2%;
     border: 0.05rem solid ${opacity.white};
     i {
       color: ${Maincolor.black};

@@ -4,7 +4,7 @@
   깃허브 : https://github.com/kimaydev
 */
 import React, { useState } from "react";
-import { Outlet, useLocation } from "react-router-dom";
+import { Navigate, Outlet, useLocation, useNavigate } from "react-router-dom";
 import { LayoutWrap } from "./style/LayoutStyle";
 import { AnimatePresence, motion } from "framer-motion";
 
@@ -15,6 +15,7 @@ import Footer from "./components/Footer";
 import NavList from "./pages/NavList";
 
 const User = () => {
+  const navigate = useNavigate();
   const location = useLocation();
   const [isNavActive, setIsNavActive] = useState(false);
   // 네비게이션 메뉴 버튼 핸들러
@@ -22,13 +23,22 @@ const User = () => {
     e.preventDefault();
     setIsNavActive(!isNavActive);
   };
+  const closeNav = path => {
+    setIsNavActive(false);
+    navigate(path);
+  };
+
   return (
     <LayoutWrap>
       <Header handlerOpenNav={handlerOpenNav} />
       <ContentsWrap>
         <Outlet />
       </ContentsWrap>
-      {location.pathname !== "/mypageList" ? <Footer /> : null}
+      {location.pathname === "/" ||
+      location.pathname === "/productdetail" ||
+      location.pathname === "/windeguide" ? (
+        <Footer />
+      ) : null}
       <QuickMenu handlerOpenNav={handlerOpenNav} />
       {/* 네비게이션 메뉴 */}
       <AnimatePresence>
@@ -38,7 +48,7 @@ const User = () => {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
           >
-            <NavList handlerOpenNav={handlerOpenNav} />
+            <NavList handlerOpenNav={handlerOpenNav} closeNav={closeNav} />
           </NavWrap>
         )}
       </AnimatePresence>

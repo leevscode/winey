@@ -31,7 +31,7 @@ const QuickMenu = ({ handlerOpenNav }) => {
             <NavLink
               to="/"
               className={({ isActive }) => {
-                return isActive && "active";
+                return isActive ? "active" : "";
               }}
             >
               <i>
@@ -43,7 +43,7 @@ const QuickMenu = ({ handlerOpenNav }) => {
             <NavLink
               to="/keywordselectedit"
               className={({ isActive }) => {
-                return isActive && "active";
+                return isActive ? "active" : "";
               }}
             >
               <i>
@@ -67,7 +67,7 @@ const QuickMenu = ({ handlerOpenNav }) => {
             <NavLink
               to="/windeguide"
               className={({ isActive }) => {
-                return isActive && "active";
+                return isActive ? "active" : "";
               }}
             >
               <i>
@@ -79,7 +79,7 @@ const QuickMenu = ({ handlerOpenNav }) => {
             <NavLink
               to="/mypageList"
               className={({ isActive }) => {
-                return isActive && "active";
+                return isActive ? "active" : "";
               }}
             >
               <i>
