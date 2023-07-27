@@ -124,8 +124,8 @@ const KeywordChooseCp = () => {
     navigator("/");
   };
   const handleKeywordAll = () => {
-    console.log("확인중", favoriteKeyword);
     setFavoriteKeyword({ ...wineOptions });
+    console.log("확인중", favoriteKeyword);
     // navigator("/");
   };
   return (

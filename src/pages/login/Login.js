@@ -9,19 +9,24 @@ import { Form, Input } from "antd";
 import { LockOutlined, UserOutlined } from "@ant-design/icons";
 
 import { FormWrap, LoginWrap, LogoDiv } from "../../style/LoginStyle";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { ButtonCancel, ButtonOk } from "../../style/GlobalStyle";
 
 const Login = () => {
+  const navigate = useNavigate();
+
   const onFinish = values => {
     console.log("Success:", values);
+    navigate("/");
   };
   const onFinishFailed = errorInfo => {
     console.log("Failed:", errorInfo);
   };
   return (
     <LoginWrap>
-      <LogoDiv> 로고 </LogoDiv>
+      <LogoDiv>
+        <img src={`${process.env.PUBLIC_URL}/images/logo_1.svg`} alt="로고" />
+      </LogoDiv>
       <FormWrap>
         <Form
           name="login"
@@ -46,6 +51,8 @@ const Login = () => {
           >
             <Input
               prefix={<UserOutlined className="site-form-item-icon" />}
+              // 글자수 제한
+              maxLength={25}
               size="large"
               placeholder="아이디를 입력해 주세요. (example@winey.com)"
             />
@@ -62,6 +69,8 @@ const Login = () => {
           >
             <Input.Password
               prefix={<LockOutlined className="site-form-item-icon" />}
+              // 글자수 제한
+              maxLength={25}
               size="large"
               placeholder="비밀번호를 입력해 주세요"
             />

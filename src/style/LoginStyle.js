@@ -15,22 +15,27 @@ export const LoginWrap = styled.div`
 `;
 
 export const LogoDiv = styled.div`
-  background: ${Maincolor.grayMedium};
-  width: 200px;
-  height: 70px;
-  margin: auto;
-  margin-top: 120px;
+  width: 15rem;
+  margin: 0 auto;
+  padding: 5rem 0;
 `;
 
 export const FormWrap = styled.div`
   display: flex;
   justify-content: center;
   flex-direction: column;
-  margin-top: 70px;
-  form > div {
-    margin-bottom: 14px;
+  margin-top: 1rem;
+  & form > div {
+    margin-bottom: 1rem;
+    .ant-input-affix-wrapper-lg {
+      font-size: 1.4rem;
+      padding: 1.3rem;
+      & svg {
+        margin: 0 0.6rem;
+      }
+    }
   }
   & div > button {
-    margin-top: 30px;
+    margin-top: 2rem;
   }
 `;

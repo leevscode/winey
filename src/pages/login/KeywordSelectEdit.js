@@ -4,7 +4,7 @@
     깃허브 : https://github.com/hyemdev
 */
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { KeywordWrap } from "../../style/KeywordStyle";
 import { Checkbox, ConfigProvider } from "antd";
 import { ButtonCancel, ButtonOk } from "../../style/GlobalStyle";
@@ -155,10 +155,11 @@ const KeywordSelectEdit = () => {
   };
   const handleEditKeywordAll = () => {
     // editFavoriteKeyword("all");
-    console.log("확인중", editFavoriteKeyword);
     setEditFavoriteKeyword({ ...wineOptions });
+    console.log("확인중", editFavoriteKeyword);
 
     // navigator("/");
+
   };
   return (
     <KeywordWrap>
