@@ -15,8 +15,15 @@ import {
 } from "../../style/JoinStyle";
 import { ButtonOk } from "../../style/GlobalStyle";
 import { Terms } from "../../components/join/Terms";
+import { useNavigate } from "react-router-dom";
 
 const Join = () => {
+  const navigate = useNavigate();
+  //password 유효성 검증 state
+  const [password, setPassword] = useState("");
+  const [passwordConfirm, setPasswordConfirm] = useState("");
+  const [passwordError, setPasswordError] = useState(false);
+
   const regionOptions = [
     "서울",
     "경기",
@@ -53,9 +60,24 @@ const Join = () => {
     });
   };
 
+  // password 유효성 관련 핸들러
+  const changePassword = e => {
+    setPassword(e.target.value);
+    setPasswordError(e.target.value !== passwordConfirm);
+  };
+  const changePasswordConfirm = e => {
+    setPasswordConfirm(e.target.value);
+    setPasswordError(e.target.value !== password);
+  };
+
   // 회원 가입 핸들러
   const onFinish = values => {
-    console.log("Success:", values);
+    if (password === passwordConfirm) {
+      console.log("Success:", values);
+      navigate("/");
+    } else {
+      console.log("Failed");
+    }
   };
   const onFinishFailed = errorInfo => {
     console.log("Failed:", errorInfo);
@@ -118,12 +140,16 @@ const Join = () => {
                 message: "Please input your password!",
               },
             ]}
+            validateStatus={passwordError ? "error" : ""}
+            help={passwordError && "비밀번호가 일치하지 않습니다."}
           >
             <Input.Password
               size="large"
               // 글자수 제한
               maxLength={25}
               placeholder="비밀번호를 입력해 주세요."
+              value={password}
+              onChange={changePassword}
             />
           </Form.Item>
 
@@ -140,12 +166,16 @@ const Join = () => {
                 message: "Please input your password!",
               },
             ]}
+            validateStatus={passwordError ? "error" : ""}
+            help={passwordError && "비밀번호가 일치하지 않습니다."}
           >
             <Input.Password
               size="large"
               // 글자수 제한
               maxLength={25}
               placeholder="비밀번호를 다시 한번 입력해 주세요"
+              value={passwordConfirm}
+              onChange={changePasswordConfirm}
             />
           </Form.Item>
 
