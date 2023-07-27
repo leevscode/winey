@@ -32,16 +32,24 @@ export const ProductCartInfo = styled.div`
   }
 `;
 
+export const CartDetailImg = styled.div`
+  padding:  0 20px;
+`;
+
 export const CartDetail = styled.span`
   display: flex;
   flex-direction: column;
-  align-items: flex-start; 
+  align-items: flex-start;
   justify-content: flex-start;
 `;
 
+export const CartDetaiClose = styled.div`
+`
+
+
 export const CartInfoDes = styled.p`
   font-size: 1.2rem;
-  margin-bottom: 30px;
+  margin-bottom: 90px;
 `;
 
 export const GoodsEa = styled.div``;

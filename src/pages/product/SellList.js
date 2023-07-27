@@ -1,12 +1,7 @@
-/*
-    작업자 : 이동은
-    노션 : https://www.notion.so/leevscode
-    깃허브 : https://github.com/leevscode
-*/
-
 import React, { useState } from "react";
 import { ButtonOk, ButtonCancel } from "../../style/GlobalStyle";
 import {
+  SellListDay,
   ModalColse,
   SellListButton,
   SellListInfo,
@@ -21,10 +16,45 @@ import {
   faFaceSmile,
   faFaceRollingEyes,
 } from "@fortawesome/free-regular-svg-icons";
-import { faXmark } from "@fortawesome/free-solid-svg-icons";
+import { faXmark, faChevronRight } from "@fortawesome/free-solid-svg-icons";
+import SellListCancel from "../../components/selllist/SellListCancel";
 
 const SellList = () => {
   const [modalVisible, setModalVisible] = useState(false);
+  const [cancelModalVisible, setCancelModalVisible] = useState(false);
+  const [orderItems, setOrderItems] = useState([
+    {
+      date: "2023.07.23",
+      product: "제프 까렐, 울띰 헤꼴뜨",
+      orderNumber: "2316514564613",
+      paymentMethod: "신용카드",
+      amount: "38,700",
+      status: "배송완료",
+    },
+    {
+      date: "2023.07.25",
+      product: "몰루와인",
+      orderNumber: "982737465858",
+      paymentMethod: "신용카드",
+      amount: "52,000",
+      status: "픽업대기",
+    },
+    {
+      date: "2023.07.27",
+      product: "레드와인",
+      orderNumber: "974151621",
+      paymentMethod: "신용카드",
+      amount: "32,000",
+      status: "미결제",
+    },
+  ]);
+  const showCancelModal = () => {
+    setCancelModalVisible(true); // 주문취소 모달
+  };
+
+  const hideCancelModal = () => {
+    setCancelModalVisible(false); //
+  };
 
   const showModal = () => {
     setModalVisible(true);
@@ -34,22 +64,48 @@ const SellList = () => {
     setModalVisible(false);
   };
 
+  const handlePickup = index => {
+    // 주어진 인덱스에 해당하는 주문 항목의 상태를 픽업완료로 변경합니다.
+    const updatedItems = orderItems.map((item, i) =>
+      i === index ? { ...item, status: "배송완료" } : item,
+    );
+    setOrderItems(updatedItems);
+  };
+
+  const handleCancel = index => {
+    // 주어진 인덱스에 해당하는 주문 항목을 상태에서 제거합니다.
+    const updatedItems = orderItems.filter((_, i) => i !== index);
+    setOrderItems(updatedItems);
+  };
+
   return (
     <>
-      <div>
-        <h1>2023.07.23</h1>
-        <SellListInfo>
-          <li>상품명: 제프 까렐, 울띰 헤꼴뜨 </li>
-          <li>주문번호: 2316514564613</li>
-          <li>결제 방법: 신용카드</li>
-          <li>결제 금액: 98,700</li>
-          <li>주문 상태: 픽업완료</li>
-        </SellListInfo>
-        <SellListButton>
-          <ButtonOk>픽업완료</ButtonOk>{" "}
-          <ButtonCancel onClick={showModal}>평점등록</ButtonCancel>
-        </SellListButton>
-      </div>
+      {orderItems.map((item, index) => (
+        <div key={index}>
+          <SellListDay>
+            {item.date}
+            <button onClick={showCancelModal}>
+            {cancelModalVisible && <SellListCancel onClose={hideCancelModal} />}
+              주문취소 <FontAwesomeIcon icon={faChevronRight} />
+            </button>
+          </SellListDay>
+          <SellListInfo>
+            <li>상품명: {item.product}</li>
+            <li>주문번호: {item.orderNumber}</li>
+            <li>결제 방법: {item.paymentMethod}</li>
+            <li>결제 금액: {item.amount}</li>
+            <li>주문 상태: {item.status}</li>
+          </SellListInfo>
+          <SellListButton>
+            <>
+              <ButtonOk onClick={() => handlePickup(index)}>픽업완료</ButtonOk>
+              <ButtonCancel onClick={showModal}>평점등록</ButtonCancel>
+            </>
+          </SellListButton>
+        </div>
+      ))}
+
+      {/* 모달과 그 내용 */}
       <SellListModal modalVisible={modalVisible}>
         {modalVisible && (
           <div>
@@ -95,19 +151,6 @@ const SellList = () => {
           </div>
         )}
       </SellListModal>
-      <div>
-        <h1>2023.07.23</h1>
-        <SellListInfo>
-          <li>상품명: 제프 까렐, 울띰 헤꼴뜨 </li>
-          <li>주문번호: 2316514564613</li>
-          <li>결제 방법: 신용카드</li>
-          <li>결제 금액: 98,700</li>
-          <li>주문 상태: 픽업완료</li>
-        </SellListInfo>
-        <SellListButton>
-          <ButtonOk>픽업완료</ButtonOk> <ButtonCancel>주문취소</ButtonCancel>
-        </SellListButton>
-      </div>
     </>
   );
 };
