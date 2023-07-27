@@ -134,7 +134,6 @@ const Join = () => {
           <Form.Item
             name="passwordConfirm"
             dependencies={["password"]}
-            hasFeedback
             rules={[
               {
                 required: true,
