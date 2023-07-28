@@ -16,6 +16,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 
 const Visual = () => {
+  // slide pagination 숫자 01, 02 처리
   const pagination = {
     renderBullet: function (index, className) {
       return (
@@ -28,23 +29,37 @@ const Visual = () => {
       );
     },
   };
+  //
+  const visualSlide = [
+    {
+      subtitle: "와인이 처음인 당신을 위한",
+      title: "와인 가이드",
+      link: "/windeguide",
+      image: "/images/visual_img_1.jpg",
+    },
+  ];
   return (
     <VisualWrap>
       <Swiper pagination={pagination} modules={[Pagination]}>
-        <SwiperSlide>
-          <VisualText>
-            <div>
-              <span>와인이 처음인 당신을 위한</span>
-              <p>와인 가이드</p>
-              <Link to="/windeguide">
-                자세히 보기
-                <i>
-                  <FontAwesomeIcon icon={faArrowRight} />
-                </i>
-              </Link>
-            </div>
-          </VisualText>
-        </SwiperSlide>
+        {visualSlide.map((item, index) => (
+          <SwiperSlide
+            key={index}
+            style={{ backgroundImage: `url(${item.image})` }}
+          >
+            <VisualText>
+              <div>
+                <span>{item.subtitle}</span>
+                <p>{item.title}</p>
+                <Link to={item.link}>
+                  자세히 보기
+                  <i>
+                    <FontAwesomeIcon icon={faArrowRight} />
+                  </i>
+                </Link>
+              </div>
+            </VisualText>
+          </SwiperSlide>
+        ))}
       </Swiper>
     </VisualWrap>
   );
