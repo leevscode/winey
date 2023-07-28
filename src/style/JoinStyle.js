@@ -9,6 +9,7 @@ import { Maincolor, WidthPd, opacity } from "./GlobalStyle";
 
 export const JoinWrap = styled.div`
   margin-top: 3rem;
+  margin-bottom: 6rem;
   padding: ${WidthPd.padding};
   display: flex;
   justify-content: center;
@@ -111,7 +112,7 @@ export const TermsWarp = styled.div`
   display: flex;
   align-content: space-between;
   flex-direction: column;
-  margin-bottom: 5rem;
+  margin-bottom: 3rem;
   & label > span {
     font-size: 1.4rem;
     font-weight: 600;
@@ -151,7 +152,6 @@ export const TermsFlex = styled.div`
     & > span {
       position: relative;
       display: inline-block;
-
       font-size: 1.3rem;
       font-weight: 700;
       color: ${Maincolor.redDeep};
@@ -167,5 +167,11 @@ export const TermsFlex = styled.div`
         font-size: 0.8rem;
       }
     }
+  }
+`;
+
+export const JoinEditBtn = styled.div`
+  & button {
+    margin: 0.8rem 0;
   }
 `;

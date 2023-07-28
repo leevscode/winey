@@ -5,7 +5,7 @@
 */
 
 import React, { useEffect, useState } from "react";
-import { KeywordWrap } from "../../style/KeywordStyle";
+import { EditKeywordConfirmBtn, KeywordConfirmBtn, KeywordWrap } from "../../style/KeywordStyle";
 import { Checkbox, ConfigProvider } from "antd";
 import { ButtonCancel, ButtonOk } from "../../style/GlobalStyle";
 import { useNavigate } from "react-router-dom";
@@ -159,7 +159,6 @@ const KeywordSelectEdit = () => {
     console.log("확인중", editFavoriteKeyword);
 
     // navigator("/");
-
   };
   return (
     <KeywordWrap>
@@ -167,6 +166,8 @@ const KeywordSelectEdit = () => {
         theme={{
           token: {
             colorPrimary: "#79213d",
+            fontFamily:
+              '"Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif',
           },
         }}
       >
@@ -291,10 +292,12 @@ const KeywordSelectEdit = () => {
           </li>
         </ul>
       </ConfigProvider>
-      <ButtonOk onClick={handleEditKeywordChoice}>선택 변경완료</ButtonOk>
-      <ButtonCancel onClick={handleEditKeywordAll}>
-        아무거나 상관없어요
-      </ButtonCancel>
+      <EditKeywordConfirmBtn>
+        <ButtonOk onClick={handleEditKeywordChoice}>선택 변경완료</ButtonOk>
+        <ButtonCancel onClick={handleEditKeywordAll}>
+          아무거나 상관없어요
+        </ButtonCancel>
+      </EditKeywordConfirmBtn>
     </KeywordWrap>
   );
 };

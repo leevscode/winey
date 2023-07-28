@@ -5,7 +5,7 @@
 */
 
 import React, { useState } from "react";
-import { KeywordWrap } from "../../style/KeywordStyle";
+import { KeywordConfirmBtn, KeywordWrap } from "../../style/KeywordStyle";
 import { Checkbox, ConfigProvider } from "antd";
 import { ButtonCancel, ButtonOk } from "../../style/GlobalStyle";
 import { useNavigate } from "react-router-dom";
@@ -134,6 +134,8 @@ const KeywordChooseCp = () => {
         theme={{
           token: {
             colorPrimary: "#79213d",
+            fontFamily:
+              '"Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif',
           },
         }}
       >
@@ -253,10 +255,12 @@ const KeywordChooseCp = () => {
           </li>
         </ul>
       </ConfigProvider>
-      <ButtonOk onClick={handleKeywordChoice}>선택완료</ButtonOk>
-      <ButtonCancel onClick={handleKeywordAll}>
-        아무거나 상관없어요
-      </ButtonCancel>
+      <KeywordConfirmBtn>
+        <ButtonOk onClick={handleKeywordChoice}>선택완료</ButtonOk>
+        <ButtonCancel onClick={handleKeywordAll}>
+          아무거나 상관없어요
+        </ButtonCancel>
+      </KeywordConfirmBtn>
     </KeywordWrap>
   );
 };
