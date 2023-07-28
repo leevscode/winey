@@ -26,6 +26,7 @@ import SellListCancel from "../../components/selllist/SellListCancel";
 import { ProductCartNone } from "../../style/ProductCartStyle";
 
 const SellList = () => {
+  const [selectedOrderIndices, setSelectedOrderIndices] = useState([]);
   const [modalVisible, setModalVisible] = useState(false);
   const [orderItems, setOrderItems] = useState([
     {
@@ -58,6 +59,15 @@ const SellList = () => {
     Array(orderItems.length).fill(false),
   );
 
+  const orderStatusValues = {
+    주문취소: 0,
+    결제완료: 1,
+    배송중: 2,
+    배송완료: 3,
+    픽업대기: 4,
+    픽업완료: 5,
+  };
+
   const showCancelModal = index => {
     const updatedCancelModalVisible = [...cancelModalVisible];
     updatedCancelModalVisible[index] = true;
@@ -82,6 +92,18 @@ const SellList = () => {
     const updatedItems = orderItems.filter((_, i) => i !== index);
     setOrderItems(updatedItems);
     hideCancelModal(index);
+  };
+
+  const handlePickUpComplete = index => {
+    setSelectedOrderIndices(prevSelectedOrderIndices => {
+      if (prevSelectedOrderIndices.includes(index)) {
+        return prevSelectedOrderIndices.filter(
+          itemIndex => itemIndex !== index,
+        );
+      } else {
+        return [...prevSelectedOrderIndices, index];
+      }
+    });
   };
 
   if (orderItems.length === 0) {
@@ -116,8 +138,20 @@ const SellList = () => {
           </SellListInfo>
           <SellListButton>
             <>
-              <PickUpButton>픽업완료</PickUpButton>
-              <ButtonCancel onClick={() => showModal()}>평점등록</ButtonCancel>
+              {/* 주문 상태가 "픽업대기" 또는 "픽업완료"일 때 "픽업완료" 버튼을 클릭 가능 */}
+              {["픽업대기", "픽업완료"].includes(item.status) ? (
+                selectedOrderIndices.includes(index) ? (
+                  <ButtonCancel onClick={() => showModal()}>
+                    평점등록
+                  </ButtonCancel>
+                ) : (
+                  <PickUpButton onClick={() => handlePickUpComplete(index)}>
+                    픽업완료
+                  </PickUpButton>
+                )
+              ) : (
+                <PickUpButton disabled>픽업완료</PickUpButton>
+              )}
             </>
           </SellListButton>
           {cancelModalVisible[index] && (
@@ -139,7 +173,7 @@ const SellList = () => {
                   <FontAwesomeIcon icon={faXmark} />
                 </ModalColse>
               </button>
-              <h1>픽업하신 와인은 어떠셨나요?</h1>
+              <h1>드신 와인은 어떠셨나요?</h1>
               <h2>지금 바로 평점을 남겨보세요!</h2>
               <ReviewModal>
                 <button>

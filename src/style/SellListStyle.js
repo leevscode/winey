@@ -59,6 +59,12 @@ export const PickUpButton = styled.button`
   &:hover {
     background: ${Maincolor.redDeep};
   }
+  &:disabled {
+    background-color: #bdc3c7;
+    color: #7f8c8d;
+    border: #bdc3c7;
+    cursor: not-allowed;
+  }
 `;
 
 export const SellListInfo = styled.ul`
