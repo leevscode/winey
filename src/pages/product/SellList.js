@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { ButtonOk, ButtonCancel } from "../../style/GlobalStyle";
 import {
-  NotOrder,
   OrdercancelBtn,
   ModalColse,
   SellListButton,
@@ -17,8 +16,13 @@ import {
   faFaceSmile,
   faFaceRollingEyes,
 } from "@fortawesome/free-regular-svg-icons";
-import { faXmark, faChevronRight } from "@fortawesome/free-solid-svg-icons";
+import {
+  faXmark,
+  faChevronRight,
+  faExclamation,
+} from "@fortawesome/free-solid-svg-icons";
 import SellListCancel from "../../components/selllist/SellListCancel";
+import { ProductCartNone } from "../../style/ProductCartStyle";
 
 const SellList = () => {
   const [modalVisible, setModalVisible] = useState(false);
@@ -50,16 +54,16 @@ const SellList = () => {
   ]);
 
   const [cancelModalVisible, setCancelModalVisible] = useState(
-    Array(orderItems.length).fill(false)
+    Array(orderItems.length).fill(false),
   );
 
-  const showCancelModal = (index) => {
+  const showCancelModal = index => {
     const updatedCancelModalVisible = [...cancelModalVisible];
     updatedCancelModalVisible[index] = true;
     setCancelModalVisible(updatedCancelModalVisible);
   };
 
-  const hideCancelModal = (index) => {
+  const hideCancelModal = index => {
     const updatedCancelModalVisible = [...cancelModalVisible];
     updatedCancelModalVisible[index] = false;
     setCancelModalVisible(updatedCancelModalVisible);
@@ -73,21 +77,30 @@ const SellList = () => {
     setModalVisible(false);
   };
 
-  const handlePickup = (index) => {
+  const handlePickup = index => {
     const updatedItems = orderItems.map((item, i) =>
-      i === index ? { ...item, status: "픽업완료" } : item
+      i === index ? { ...item, status: "픽업완료" } : item,
     );
     setOrderItems(updatedItems);
   };
 
-  const handleCancel = (index) => {
+  const handleCancel = index => {
     const updatedItems = orderItems.filter((_, i) => i !== index);
     setOrderItems(updatedItems);
     hideCancelModal(index);
   };
 
   if (orderItems.length === 0) {
-    return <NotOrder>주문 내역이 없습니다</NotOrder>;
+    return (
+      <ProductCartNone>
+        {" "}
+        <i>
+          <FontAwesomeIcon icon={faExclamation} />
+          <br />
+          주문 내역이 없습니다{" "}
+        </i>
+      </ProductCartNone>
+    );
   }
 
   return (
@@ -114,12 +127,15 @@ const SellList = () => {
             </>
           </SellListButton>
           {cancelModalVisible[index] && (
-            <SellListCancel onCancel={() => handleCancel(index)} onClose={() => hideCancelModal(index)} />
+            <SellListCancel
+              onCancel={() => handleCancel(index)}
+              onClose={() => hideCancelModal(index)}
+            />
           )}
         </div>
       ))}
 
-      {/* 모달과 그 내용 */}
+      {/* 모달 내용 */}
       <SellListModal modalVisible={modalVisible}>
         {modalVisible && (
           <div>
