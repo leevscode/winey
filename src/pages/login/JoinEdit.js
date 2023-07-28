@@ -98,6 +98,7 @@ const JoinEdit = () => {
     console.log("Failed:", errorInfo);
   };
 
+  // 회원탈퇴 핸들러
   const UserDropOut = () => {
     console.log("회원탈퇴");
     navigate("/");
@@ -109,6 +110,8 @@ const JoinEdit = () => {
         theme={{
           token: {
             colorPrimary: "#79213d",
+            fontFamily:
+              '"Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif',
           },
         }}
       >
