@@ -6,6 +6,17 @@
 
 import styled from "@emotion/styled";
 
+export const Maincolor = {
+  beige: "#fcf8f1",
+  white: "#fff",
+  black: "#3c2323",
+  redDeep: "#690a21",
+  redBold: "#7c1d34",
+  redMedium: "#9a6a6a",
+  grayBold: "#837575",
+  grayMedium: "#e7e4e4",
+};
+
 export const OrdercancelBtn = styled.div`
   display: flex;
   margin: 0 6px;
@@ -32,6 +43,22 @@ export const SellListButton = styled.div`
   justify-content: space-around;
   gap: 10px;
   padding: 20px;
+`;
+
+export const PickUpButton = styled.button`
+  display: block;
+  background: ${Maincolor.redBold};
+  color: ${Maincolor.white};
+  border: 0.05rem solid ${Maincolor.redBold};
+  font-size: 1.6rem;
+  font-weight: 500;
+  width: 100%;
+  height: 5rem;
+  border-radius: 0.5rem;
+  transition: 0.2s ease-in-out;
+  &:hover {
+    background: ${Maincolor.redDeep};
+  }
 `;
 
 export const SellListInfo = styled.ul`

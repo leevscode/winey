@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { ButtonOk, ButtonCancel } from "../../style/GlobalStyle";
 import {
+  PickUpButton,
   OrdercancelBtn,
   ModalColse,
   SellListButton,
@@ -77,13 +78,6 @@ const SellList = () => {
     setModalVisible(false);
   };
 
-  const handlePickup = index => {
-    const updatedItems = orderItems.map((item, i) =>
-      i === index ? { ...item, status: "픽업완료" } : item,
-    );
-    setOrderItems(updatedItems);
-  };
-
   const handleCancel = index => {
     const updatedItems = orderItems.filter((_, i) => i !== index);
     setOrderItems(updatedItems);
@@ -122,7 +116,7 @@ const SellList = () => {
           </SellListInfo>
           <SellListButton>
             <>
-              <ButtonOk onClick={() => handlePickup(index)}>픽업완료</ButtonOk>
+              <PickUpButton>픽업완료</PickUpButton>
               <ButtonCancel onClick={() => showModal()}>평점등록</ButtonCancel>
             </>
           </SellListButton>
