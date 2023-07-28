@@ -6,15 +6,15 @@ import {
 } from "../../style/SellListCancelStyle";
 import { ButtonOk, ButtonCancel } from "../../style/GlobalStyle";
 
-const SellListCancel = () => {
+const SellListCancel = ({ onCancel, onClose  }) => {
   return (
     <>
       <OrderCancelModal>
         <OrderCancelContent>
-          <OrderCancelText>정말로 주문 취소를 하시겠습니까?</OrderCancelText>
-          <ButtonOk>네</ButtonOk>
+          <OrderCancelText>정말로 취소 하시겠습니까?</OrderCancelText>
+          <ButtonOk onClick={onCancel}>네</ButtonOk>
           <br />
-          <ButtonCancel>아니요</ButtonCancel>
+          <ButtonCancel onClick={onClose}>아니요</ButtonCancel>
         </OrderCancelContent>
       </OrderCancelModal>
     </>

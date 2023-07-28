@@ -6,10 +6,18 @@
 
 import styled from "@emotion/styled";
 
-export const SellListDay = styled.h2`
+export const OrdercancelBtn = styled.div`
   display: flex;
   margin: 0 6px;
-  justify-content: space-between;
+  justify-content: flex-end;
+  button {
+    font-size: 1.5rem;
+  }
+`;
+
+export const NotOrder = styled.div`
+  text-align: center;
+  font-size: 2rem;
 `;
 
 export const ModalColse = styled.i`
@@ -29,6 +37,7 @@ export const SellListButton = styled.div`
 export const SellListInfo = styled.ul`
   display: flex;
   flex-direction: column;
+  font-size: 1.5rem;
   gap: 10px;
   margin: 6px;
 `;

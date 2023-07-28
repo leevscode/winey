@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { ButtonOk, ButtonCancel } from "../../style/GlobalStyle";
 import {
-  SellListDay,
+  NotOrder,
+  OrdercancelBtn,
   ModalColse,
   SellListButton,
   SellListInfo,
@@ -21,7 +22,6 @@ import SellListCancel from "../../components/selllist/SellListCancel";
 
 const SellList = () => {
   const [modalVisible, setModalVisible] = useState(false);
-  const [cancelModalVisible, setCancelModalVisible] = useState(false);
   const [orderItems, setOrderItems] = useState([
     {
       date: "2023.07.23",
@@ -45,15 +45,24 @@ const SellList = () => {
       orderNumber: "974151621",
       paymentMethod: "신용카드",
       amount: "32,000",
-      status: "미결제",
+      status: "픽업완료",
     },
   ]);
-  const showCancelModal = () => {
-    setCancelModalVisible(true); // 주문취소 모달
+
+  const [cancelModalVisible, setCancelModalVisible] = useState(
+    Array(orderItems.length).fill(false)
+  );
+
+  const showCancelModal = (index) => {
+    const updatedCancelModalVisible = [...cancelModalVisible];
+    updatedCancelModalVisible[index] = true;
+    setCancelModalVisible(updatedCancelModalVisible);
   };
 
-  const hideCancelModal = () => {
-    setCancelModalVisible(false); //
+  const hideCancelModal = (index) => {
+    const updatedCancelModalVisible = [...cancelModalVisible];
+    updatedCancelModalVisible[index] = false;
+    setCancelModalVisible(updatedCancelModalVisible);
   };
 
   const showModal = () => {
@@ -64,32 +73,34 @@ const SellList = () => {
     setModalVisible(false);
   };
 
-  const handlePickup = index => {
-    // 주어진 인덱스에 해당하는 주문 항목의 상태를 픽업완료로 변경합니다.
+  const handlePickup = (index) => {
     const updatedItems = orderItems.map((item, i) =>
-      i === index ? { ...item, status: "배송완료" } : item,
+      i === index ? { ...item, status: "픽업완료" } : item
     );
     setOrderItems(updatedItems);
   };
 
-  const handleCancel = index => {
-    // 주어진 인덱스에 해당하는 주문 항목을 상태에서 제거합니다.
+  const handleCancel = (index) => {
     const updatedItems = orderItems.filter((_, i) => i !== index);
     setOrderItems(updatedItems);
+    hideCancelModal(index);
   };
+
+  if (orderItems.length === 0) {
+    return <NotOrder>주문 내역이 없습니다</NotOrder>;
+  }
 
   return (
     <>
       {orderItems.map((item, index) => (
         <div key={index}>
-          <SellListDay>
-            {item.date}
-            <button onClick={showCancelModal}>
+          <OrdercancelBtn>
+            <button onClick={() => showCancelModal(index)}>
               주문취소 <FontAwesomeIcon icon={faChevronRight} />
             </button>
-            {cancelModalVisible && <SellListCancel onClose={hideCancelModal} />}
-          </SellListDay>
+          </OrdercancelBtn>
           <SellListInfo>
+            {item.date}
             <li>상품명: {item.product}</li>
             <li>주문번호: {item.orderNumber}</li>
             <li>결제 방법: {item.paymentMethod}</li>
@@ -99,9 +110,12 @@ const SellList = () => {
           <SellListButton>
             <>
               <ButtonOk onClick={() => handlePickup(index)}>픽업완료</ButtonOk>
-              <ButtonCancel onClick={showModal}>평점등록</ButtonCancel>
+              <ButtonCancel onClick={() => showModal()}>평점등록</ButtonCancel>
             </>
           </SellListButton>
+          {cancelModalVisible[index] && (
+            <SellListCancel onCancel={() => handleCancel(index)} onClose={() => hideCancelModal(index)} />
+          )}
         </div>
       ))}
 
@@ -110,7 +124,7 @@ const SellList = () => {
         {modalVisible && (
           <div>
             <ModalText>
-              <button onClick={hideModal}>
+              <button onClick={() => hideModal()}>
                 <ModalColse>
                   <FontAwesomeIcon icon={faXmark} />
                 </ModalColse>
@@ -145,7 +159,7 @@ const SellList = () => {
               </ReviewModal>
               <SellListButton>
                 <ButtonOk>평점등록</ButtonOk>{" "}
-                <ButtonCancel onClick={hideModal}>취소</ButtonCancel>
+                <ButtonCancel onClick={() => hideModal()}>취소</ButtonCancel>
               </SellListButton>
             </ModalText>
           </div>
