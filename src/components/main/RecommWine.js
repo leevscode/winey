@@ -1,12 +1,12 @@
 import React from "react";
-import { MainTitle, RecommWineWrap } from "../../style/MainStyle";
+import { RecommWineTitle, RecommWineWrap } from "../../style/MainStyle";
 import RecommWineSlide from "./RecommWineSlide";
 
 const RecommWine = () => {
   return (
     <RecommWineWrap>
       {/* 맞춤 와인 타이틀 */}
-      <MainTitle>
+      <RecommWineTitle>
         <h2>
           <span>당신을 위한</span>
           <p>
@@ -18,7 +18,7 @@ const RecommWine = () => {
             </span>
           </p>
         </h2>
-      </MainTitle>
+      </RecommWineTitle>
       {/* 맞춤 와인 내용 */}
       <RecommWineSlide />
     </RecommWineWrap>

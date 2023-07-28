@@ -5,7 +5,14 @@
 */
 import styled from "@emotion/styled";
 import { Maincolor, WidthPd, opacity } from "./GlobalStyle";
+import { Link } from "react-router-dom";
 
+// 메인 컨텐츠 감싸는 div
+export const MainWrap = styled.div`
+  section {
+    padding-bottom: 60px;
+  }
+`;
 // 비주얼 슬라이드
 export const VisualWrap = styled.div`
   position: relative;
@@ -115,9 +122,10 @@ export const NavListWrap = styled.div`
 export const MainTitle = styled.div`
   padding: ${WidthPd.padding};
   margin-bottom: 20px;
+  text-align: center;
   h2 {
     font-family: "GyeonggiBatang";
-    font-size: 2.5rem;
+    font-size: 2.3rem;
     font-weight: 700;
     & > span {
       display: block;
@@ -127,13 +135,124 @@ export const MainTitle = styled.div`
     }
     p {
       position: relative;
+      display: flex;
+      align-items: center;
+      &::before,
       &::after {
         content: "";
+        width: calc(100% - 23rem);
         height: 0.1rem;
         background: ${Maincolor.black};
       }
       span {
         display: block;
+        min-width: 23rem;
+        i {
+          display: inline-block;
+          width: 7px;
+          height: 7px;
+          background: ${Maincolor.redBold};
+          transform: rotate(45deg);
+          margin-top: 0.8rem;
+          &:first-of-type {
+            float: left;
+            margin-left: 0.6rem;
+          }
+          &:last-of-type {
+            float: right;
+            margin-right: 0.6rem;
+          }
+        }
+      }
+    }
+  }
+`;
+// 메인페이지 탭메뉴 버튼 기본 스타일링
+export const MainTabBtn = styled.div`
+  margin-bottom: 20px;
+  ul {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    & > li {
+      margin: 3px 5px;
+      button {
+        background: ${Maincolor.beige};
+        font-size: 1.4rem;
+        color: ${Maincolor.black};
+        min-width: 8rem;
+        padding: 9px 3px;
+        border-radius: 5px;
+        transition: 0.2s ease-in-out;
+        i {
+          margin-right: 3px;
+        }
+        &:hover {
+          background: ${Maincolor.redBold};
+          color: ${Maincolor.white};
+        }
+      }
+    }
+  }
+`;
+// 메인페이지 탭메뉴 상품 리스트 기본 스타일링
+export const MainTabContents = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  margin-left: -7px;
+  margin-right: -7px;
+  & > div {
+    width: calc(100% / 3 - 14px);
+    margin: 0 7px 30px;
+  }
+`;
+// 메인페이지 탭메뉴 전체보기 버튼 스타일링
+export const MainTabLink = styled(Link)`
+  display: block;
+  background: ${Maincolor.beige};
+  color: ${Maincolor.black};
+  border: 0.05rem solid ${Maincolor.beige};
+  font-size: 1.6rem;
+  font-weight: 500;
+  text-align: center;
+  width: 100%;
+  height: 5rem;
+  line-height: 5rem;
+  border-radius: 0.5rem;
+  /* transition: 0.2s ease-in-out;
+  &:hover {
+    background: ${Maincolor.redDeep};
+  } */
+`;
+
+// 맞춤 와인 타이틀
+export const RecommWineTitle = styled.div`
+  padding: ${WidthPd.padding};
+  margin-bottom: 20px;
+  h2 {
+    font-family: "GyeonggiBatang";
+    font-size: 2.3rem;
+    font-weight: 700;
+    & > span {
+      display: block;
+      font-size: 0.7em;
+      color: ${Maincolor.redMedium};
+      margin-bottom: 5px;
+    }
+    p {
+      position: relative;
+      display: flex;
+      align-items: center;
+      &::after {
+        content: "";
+        width: calc(100% - 18rem);
+        height: 0.1rem;
+        background: ${Maincolor.black};
+      }
+      span {
+        display: block;
+        width: 18rem;
         i {
           display: inline-block;
           vertical-align: -1px;
@@ -149,16 +268,6 @@ export const RecommWineWrap = styled.section`
   padding-top: 5px;
   & > div:first-of-type {
     margin-bottom: 40px;
-    p {
-      display: flex;
-      align-items: center;
-      &::after {
-        width: calc(100% - 18rem);
-      }
-      span {
-        width: 18rem;
-      }
-    }
   }
 `;
 export const RecommWineContents = styled.div`
@@ -186,6 +295,9 @@ export const RecommWineContents = styled.div`
     }
   }
 `;
-// 음식별 추천 와인
+// 추천 와인
+export const FoodWineWrap = styled.div`
+  padding: ${WidthPd.padding};
+`;
 // 국가별 추천 와인
 // 가격별 추천 와인

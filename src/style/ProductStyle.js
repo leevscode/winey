@@ -4,11 +4,10 @@
   깃허브 : https://github.com/kimaydev
 */
 import styled from "@emotion/styled";
-import { Maincolor, opacity } from "./GlobalStyle";
+import { Maincolor, ellipsis, opacity } from "./GlobalStyle";
 
 // 상품 리스트 아이템 스타일링
 export const ProductListItem = styled.div`
-  /* width: calc(100% / 4); */
   .img {
     position: relative;
     background: ${Maincolor.white};
@@ -16,6 +15,7 @@ export const ProductListItem = styled.div`
     padding-top: 135%;
     overflow: hidden;
     isolation: isolate;
+    box-shadow: 0px 9px 8px -6px ${opacity.white};
     & > img {
       position: absolute;
       top: 50%;
@@ -47,6 +47,8 @@ export const ProductListItem = styled.div`
       font-size: 1.6rem;
       font-weight: 600;
       margin-bottom: 10px;
+      min-height: 3.22rem;
+      ${ellipsis.two}
     }
     .price {
       li {
