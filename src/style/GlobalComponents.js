@@ -61,9 +61,16 @@ export const HeaderWrap = styled.header`
     display: flex;
     justify-content: space-between;
     align-items: center;
+    position: relative;
     padding: ${WidthPd.padding};
     height: 100%;
     & > li {
+      &:nth-of-type(2) {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
       a {
         display: block;
         img {
