@@ -29,7 +29,7 @@ const ProductCart = () => {
       description: "Ultime Recolte By Jeff Carrel",
       price: "32,900원",
       quantity: 1,
-      image: <img src="https://via.placeholder.com/200x200" alt="" />,
+      image: <img src="https://via.placeholder.com/200x200" alt="샘플이미지" />,
     };
     setCartItems([...cartItems, newItem]);
   };
@@ -58,6 +58,7 @@ const ProductCart = () => {
       ),
     );
   };
+  
   // 상품의 총 금액을 계산하는 함수
   const calculateTotalPrice = () => {
     let totalPrice = 0;
