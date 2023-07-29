@@ -45,6 +45,8 @@ export const JoinWrap = styled.div`
     padding: 1rem;
   }
 `;
+
+// 중복확인 , 본인인증 btn
 export const ButtonConfirm = styled.button`
   display: block;
   background: ${Maincolor.grayBold};
@@ -76,6 +78,8 @@ export const ConfirmArray = styled.div`
     margin-left: 1rem;
   }
 `;
+
+// 지역선택
 export const RegionSelectWrap = styled.div`
   & div {
     display: flex;
@@ -96,18 +100,10 @@ export const RegionSelectWrap = styled.div`
         font-weight: 400;
       }
     }
-    .ant-radio-button-wrapper::before {
-      width: 0px;
-    }
-    .ant-radio-button-wrapper-checked {
-      background: ${Maincolor.redDeep};
-      & > span {
-        color: ${Maincolor.white};
-      }
-    }
   }
 `;
 
+// 이용약관
 export const TermsWarp = styled.div`
   display: flex;
   align-content: space-between;
