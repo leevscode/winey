@@ -4,7 +4,7 @@
   깃허브 : https://github.com/kimaydev
 */
 import React from "react";
-import { MainWrap } from "../style/MainStyle";
+import { MainProductWrap, MainWrap } from "../style/MainStyle";
 import Visual from "../components/main/Visual";
 import NavList from "../components/main/NavList";
 import RecommWine from "../components/main/RecommWine";
@@ -19,14 +19,16 @@ const Main = () => {
       <Visual></Visual>
       {/* 네비게이션 메뉴 리스트 */}
       <NavList></NavList>
-      {/* 맞춤 와인 추천 */}
-      <RecommWine></RecommWine>
-      {/* 음식별 추천 와인 */}
-      <FoodWine></FoodWine>
-      {/* 국가별 추천 와인 */}
-      <CountryWine></CountryWine>
-      {/* 가격별 추천 와인 */}
-      <PriceWine></PriceWine>
+      <div className="main-product-wrap">
+        {/* 맞춤 와인 추천 */}
+        <RecommWine></RecommWine>
+        {/* 음식별 추천 와인 */}
+        <FoodWine></FoodWine>
+        {/* 국가별 추천 와인 */}
+        <CountryWine></CountryWine>
+        {/* 가격별 추천 와인 */}
+        <PriceWine></PriceWine>
+      </div>
     </MainWrap>
   );
 };

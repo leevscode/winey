@@ -37,6 +37,7 @@ export const opacity = {
   gray: "rgba(60, 35, 35, 0.3)",
   white: "rgba(60, 35, 35, 0.07)",
   whiteB: "rgba(255, 255, 255, 0.3)",
+  whiteC: "rgba(60, 35, 35, 0.02)",
 };
 // 뱃지
 export const badge = {

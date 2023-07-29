@@ -48,11 +48,13 @@ body {
   background: rgba(60, 35, 35, 0.02);
   color: #3c2323;
   letter-spacing: -0.2px;
+  font-weight: 500;
 }
 
 a {
   color: #3c2323;
   text-decoration: none;
+  font-weight: 500;
 }
 button {
   font-family:
@@ -73,6 +75,7 @@ button {
     sans-serif;
   font-size: 1rem;
   letter-spacing: -0.2px;
+  font-weight: 500;
   line-height: 1;
   padding: 0;
   border: 0;

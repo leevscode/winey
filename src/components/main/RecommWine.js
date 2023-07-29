@@ -1,3 +1,8 @@
+/*
+  작업자 : 김아영
+  노션 : https://www.notion.so/kimaydev
+  깃허브 : https://github.com/kimaydev
+*/
 import React from "react";
 import { RecommWineTitle, RecommWineWrap } from "../../style/MainStyle";
 import RecommWineSlide from "./RecommWineSlide";
@@ -14,7 +19,7 @@ const RecommWine = () => {
               <i>
                 <img src="https://via.placeholder.com/7x17" alt="와인아이콘" />
               </i>
-              맞춤 와인 추천
+              입문용 와인 추천
             </span>
           </p>
         </h2>

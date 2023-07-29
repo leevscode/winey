@@ -12,6 +12,21 @@ export const MainWrap = styled.div`
   section {
     padding-bottom: 60px;
   }
+  .main-product-wrap {
+    position: relative;
+    z-index: 1;
+    &::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: -1;
+      width: 100%;
+      height: 100%;
+      background: url(/images/bgc_main.png) no-repeat;
+      background-position-y: 50px;
+    }
+  }
 `;
 // 비주얼 슬라이드
 export const VisualWrap = styled.div`
@@ -181,6 +196,7 @@ export const MainTabBtn = styled.div`
         background: ${Maincolor.beige};
         font-size: 1.4rem;
         color: ${Maincolor.black};
+        border: 0.05rem solid ${opacity.whiteC};
         min-width: 8rem;
         padding: 9px 3px;
         border-radius: 5px;
@@ -196,6 +212,10 @@ export const MainTabBtn = styled.div`
     }
   }
 `;
+// 메인페이지 추천 와인 전체 section 감싸는 영역 스타일링
+export const MainProductSecton = styled.section`
+  padding: ${WidthPd.padding};
+`;
 // 메인페이지 탭메뉴 상품 리스트 기본 스타일링
 export const MainTabContents = styled.div`
   display: flex;
@@ -204,7 +224,7 @@ export const MainTabContents = styled.div`
   margin-right: -7px;
   & > div {
     width: calc(100% / 3 - 14px);
-    margin: 0 7px 30px;
+    margin: 0 7px 40px;
   }
 `;
 // 메인페이지 탭메뉴 전체보기 버튼 스타일링
@@ -217,13 +237,13 @@ export const MainTabLink = styled(Link)`
   font-weight: 500;
   text-align: center;
   width: 100%;
-  height: 5rem;
-  line-height: 5rem;
+  height: 6rem;
+  line-height: 6rem;
   border-radius: 0.5rem;
-  /* transition: 0.2s ease-in-out;
-  &:hover {
-    background: ${Maincolor.redDeep};
-  } */
+  i {
+    font-size: 0.75em;
+    margin-left: 8px;
+  }
 `;
 
 // 맞춤 와인 타이틀
@@ -272,32 +292,52 @@ export const RecommWineWrap = styled.section`
 `;
 export const RecommWineContents = styled.div`
   position: relative;
-  &::before {
-    content: "";
-    position: absolute;
-    top: -20px;
-    left: 0;
-    z-index: 2;
-    display: block;
-    width: 20%;
-    height: calc(100% + 20px);
-    background: ${Maincolor.white};
-  }
   .swiper {
     overflow: inherit;
-    width: 80%;
+    width: 91%;
     float: right;
-  }
-  .swiper-slide-next {
-    & > div {
-      margin-top: -20px;
-      transition: margin 0.3s ease-in-out;
+    overflow-x: clip;
+    .swiper-slide {
+      width: calc(100% / 3);
+    }
+    .swiper-slide-next {
+      & > div {
+        margin-top: -20px;
+        transition: margin 0.3s ease-in-out;
+      }
     }
   }
 `;
-// 추천 와인
-export const FoodWineWrap = styled.div`
-  padding: ${WidthPd.padding};
+export const RecommWineLogout = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: ${opacity.whiteB};
+  border: 0.05rem solid ${opacity.white};
+  border-radius: 10px;
+  min-height: 28rem;
+  margin: ${WidthPd.padding};
+  ul {
+    & > li {
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: ${Maincolor.grayBold};
+      text-align: center;
+      &:nth-of-type(2) {
+        margin: 15px 0 20px;
+      }
+      i {
+        font-size: 2rem;
+      }
+      a {
+        display: block;
+        width: 12rem;
+        background: ${Maincolor.grayBold};
+        border-radius: 5px;
+        color: ${Maincolor.white};
+        padding: 10px 0;
+        margin: 0 auto;
+      }
+    }
+  }
 `;
-// 국가별 추천 와인
-// 가격별 추천 와인

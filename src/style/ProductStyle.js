@@ -4,7 +4,7 @@
   깃허브 : https://github.com/kimaydev
 */
 import styled from "@emotion/styled";
-import { Maincolor, ellipsis, opacity } from "./GlobalStyle";
+import { Maincolor, badge, ellipsis, opacity } from "./GlobalStyle";
 
 // 상품 리스트 아이템 스타일링
 export const ProductListItem = styled.div`
@@ -42,7 +42,29 @@ export const ProductListItem = styled.div`
     }
   }
   .txt {
-    margin-top: 20px;
+    margin-top: 15px;
+    .badge {
+      display: flex;
+      flex-wrap: wrap;
+      min-height: 2.3rem;
+      margin-left: -2px;
+      margin-bottom: 5px;
+      span {
+        display: inline-block;
+        font-size: 1.1rem;
+        color: ${Maincolor.white};
+        font-weight: 400;
+        padding: 4px 5px 3.5px;
+        margin: 2px;
+        border-radius: 3px;
+        &.recommend {
+          background: ${badge.pink};
+        }
+        &.beginner {
+          background: ${badge.green};
+        }
+      }
+    }
     .title {
       font-size: 1.6rem;
       font-weight: 600;
