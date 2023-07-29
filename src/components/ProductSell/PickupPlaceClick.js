@@ -47,15 +47,7 @@ const PickupPlaceClick = () => {
         <span>픽업지점 선택</span>
         <p>원하시는 픽업지점을 선택해 주세요</p>
         <div className="store">
-          <Swiper
-            spaceBetween={7}
-            slidesPerView={3}
-            loop={true}
-            // navigation={true}
-            // modules={[Navigation]}
-            // FreeMode={true}
-            modules={[FreeMode]}
-          >
+          <Swiper spaceBetween={7} slidesPerView={3} loop={true}>
             {임시데이터.store.map(option => (
               <SwiperSlide key={option.pk}>
                 <div onClick={() => handleChangePickSpot(option)}>
@@ -81,8 +73,8 @@ const PickupPlaceClick = () => {
         <p>원하시는 픽업예정일 선택해 주세요</p>
 
         <div className="date">
-          {임시데이터.date.map(option => (
-            <div key={option.pk} onClick={() => handleChangePickDate(option)}>
+          {임시데이터.date.map((option, index) => (
+            <div key={index} onClick={() => handleChangePickDate(option)}>
               <button
                 type="button"
                 value={pickUpDate}
@@ -100,17 +92,9 @@ const PickupPlaceClick = () => {
         <p>픽업시간을 선택해 주세요</p>
 
         <div className="time">
-          <Swiper
-            spaceBetween={5}
-            slidesPerView={6}
-            loop={true}
-            FreeMode={true}
-            modules={[FreeMode]}
-            // navigation={true}
-            // modules={[Navigation]}
-          >
-            {임시데이터.time.map(option => (
-              <SwiperSlide key={option.pk}>
+          <Swiper spaceBetween={5} slidesPerView={6} loop={true}>
+            {임시데이터.time.map((option, index) => (
+              <SwiperSlide key={index}>
                 <div onClick={() => handleChangePickTime(option)}>
                   <button
                     type="button"
