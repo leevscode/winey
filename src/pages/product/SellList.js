@@ -13,7 +13,7 @@ import {
 import SellListCancel from "../../components/selllist/SellListCancel";
 import ReviewModal from "../../components/selllist/ReviewModal";
 import { ProductCartNone } from "../../style/ProductCartStyle";
-import { SellListButton } from "../../style/SellListReviewModalStyle";
+import { SellListButton } from "../../style/SellListReviewStyle";
 
 const SellList = () => {
   const [selectedOrderIndices, setSelectedOrderIndices] = useState([]);

@@ -7,7 +7,14 @@ import {
 } from "@fortawesome/free-regular-svg-icons";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import { ButtonOk, ButtonCancel } from "../../style/GlobalStyle";
-import { ModalColse, ModalText, ReviewIcon, ReviewModalbox, SellListButton, SellListModal } from "../../style/SellListReviewModalStyle";
+import {
+  ModalColse,
+  ModalText,
+  ReviewIcon,
+  ReviewModalbox,
+  SellListButton,
+  SellListModal,
+} from "../../style/SellListReviewStyle";
 
 const ReviewModal = ({ modalVisible, hideModal }) => {
   const [selectedReview, setSelectedReview] = useState(null);
