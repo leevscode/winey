@@ -8,77 +8,79 @@ const PurchaseList = () => {
     TempList: [
       {
         productPK: "22",
-        ProductImg: "https://via.placeholder.com/150x140/ffffff",
+        ProductImg: "https://via.placeholder.com/150x150/ffffff",
         productKorName: "프란시스 포드 코폴라, 엘레노어",
         productEngName: "Francis Ford Coppola, Eleanor",
-        sellPrice: "32,600",
-        number: "1",
+        sellPrice: 32600,
+        number: 1,
       },
       {
         productPK: "23",
-        ProductImg: "https://via.placeholder.com/150x140/ffffff",
+        ProductImg: "https://via.placeholder.com/150x150/ffffff",
         productKorName: "비냐 콘차이토로 푸두 카베르네 소비뇽 쉬라즈",
         productEngName: "VINA CONCHA Y TORO PUDU CABERNET SAUVIGNON SHIRAZ",
-        sellPrice: "72,000",
-        number: "3",
+        sellPrice: 72000,
+        number: 3,
       },
     ],
   };
 
   // 아이템 갯수 state
-  const parseIntNum = parseInt(임시데이터.TempList[0].number);
-  console.log("parseIntNum", parseIntNum);
-  const [itemCount, setItemCount] = useState(parseIntNum);
-  const [calcTotalPrice, setCalcTotalPrice] = useState();
+  const numberArray = 임시데이터.TempList.map(item => item.number);
+  const [itemCount, setItemCount] = useState(numberArray);
 
-  // 수량 이벤트 핸들러
-  const [purchaseItem, setPurchaseItem] = useState(
-    임시데이터.TempList.map(item => ({ ...item })),
-  );
 
+  // 수량 변경 핸들러
   const handleCountMinus = productPK => {
-    setPurchaseItem(prev => {
-      return prev.map(item => {
-        if (item.productPK === productPK) {
-          const newCount = parseInt(item.number) - 1;
-          return { ...item, number: newCount };
+    setItemCount(prevCounts => {
+      return prevCounts.map((count, index) => {
+        if (임시데이터.TempList[index].productPK === productPK) {
+          return parseInt(count) - 1;
+        } else {
+          return count;
         }
-        return item;
+      });
+    });
+  };
+  const handleCountPlus = productPK => {
+    setItemCount(prevCounts => {
+      return prevCounts.map((count, index) => {
+        if (임시데이터.TempList[index].productPK === productPK) {
+          return parseInt(count) + 1;
+        } else {
+          return count;
+        }
       });
     });
   };
 
-  const handleCountPlus = productPK => {
-    setPurchaseItem(prev => {
-      return prev.map(item => {
-        if (item.productPK === productPK) {
-          const newCount = parseInt(item.number) + 1;
-          return { ...item, number: String(newCount) };
-        }
-        return item;
-      });
+  // 합계 계산
+  const calcTotalSum = () => {
+    let itemtotal = 0;
+    임시데이터.TempList.forEach((option, index) => {
+      itemtotal += parseInt(option.sellPrice) * parseInt(itemCount[index]);
     });
+    return itemtotal;
   };
 
   return (
     <div>
       <PurchaseListWrap>
         <p>선택한 상품</p>
-        {임시데이터.TempList.map(option => (
+        {임시데이터.TempList.map((option, index) => (
           <div key={option.productPK} className="WrapFlex">
             <div className="item-photo">
               <img src={option.ProductImg} />
             </div>
             <div className="item-desc">
               <strong>{option.productKorName}</strong>
-              <span>{option.productEngName}</span>
-              <p>{option.sellPrice} 원</p>
+              <p>{parseInt(option.sellPrice).toLocaleString()} 원</p>
               <div>
                 <FontAwesomeIcon
                   icon={faMinus}
                   onClick={() => handleCountMinus(option.productPK)}
                 />
-                <p>{itemCount}</p>
+                <p>{itemCount[index]}</p>
                 <FontAwesomeIcon
                   icon={faPlus}
                   onClick={() => handleCountPlus(option.productPK)}
@@ -91,7 +93,7 @@ const PurchaseList = () => {
       <TotalPrice>
         <div>
           <span>최종 결제금액</span>
-          <strong> /&&/ 원</strong>
+          <strong> {calcTotalSum().toLocaleString()} 원</strong>
         </div>
       </TotalPrice>
     </div>
