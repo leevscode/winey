@@ -1,29 +1,19 @@
 import React, { useState } from "react";
-import { ButtonOk, ButtonCancel } from "../../style/GlobalStyle";
+import { ButtonCancel } from "../../style/GlobalStyle";
 import {
   PickUpButton,
   OrdercancelBtn,
-  ModalColse,
-  SellListButton,
   SellListInfo,
-  SellListModal,
-  ModalText,
-  ReviewIcon,
-  ReviewModal,
 } from "../../style/SellListStyle";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  faFaceGrinSquint,
-  faFaceSmile,
-  faFaceRollingEyes,
-} from "@fortawesome/free-regular-svg-icons";
-import {
-  faXmark,
   faChevronRight,
   faExclamation,
 } from "@fortawesome/free-solid-svg-icons";
 import SellListCancel from "../../components/selllist/SellListCancel";
+import ReviewModal from "../../components/selllist/ReviewModal";
 import { ProductCartNone } from "../../style/ProductCartStyle";
+import { SellListButton } from "../../style/SellListReviewStyle";
 
 const SellList = () => {
   const [selectedOrderIndices, setSelectedOrderIndices] = useState([]);
@@ -35,7 +25,7 @@ const SellList = () => {
       orderNumber: "2316514564613",
       paymentMethod: "신용카드",
       amount: "38,700",
-      status: "배송완료",
+      status: "결제완료",
     },
     {
       date: "2023.07.25",
@@ -123,11 +113,17 @@ const SellList = () => {
     <>
       {orderItems.map((item, index) => (
         <div key={index}>
-          <OrdercancelBtn>
-            <button onClick={() => showCancelModal(index)}>
-              주문취소 <FontAwesomeIcon icon={faChevronRight} />
-            </button>
-          </OrdercancelBtn>
+          {/* 주문취소 모달 */}
+          {["픽업대기", "픽업완료"].includes(item.status) ? (
+            // 주문취소 버튼이 사라졌을때 빈 공백을 유지하는 스타일
+            <div style={{ height: "28px" }} />
+          ) : (
+            <OrdercancelBtn>
+              <button onClick={() => showCancelModal(index)}>
+                주문취소 <FontAwesomeIcon icon={faChevronRight} />
+              </button>
+            </OrdercancelBtn>
+          )}
           <SellListInfo>
             {item.date}
             <li>상품명: {item.product}</li>
@@ -163,52 +159,8 @@ const SellList = () => {
         </div>
       ))}
 
-      {/* 모달 내용 */}
-      <SellListModal modalVisible={modalVisible}>
-        {modalVisible && (
-          <div>
-            <ModalText>
-              <button onClick={() => hideModal()}>
-                <ModalColse>
-                  <FontAwesomeIcon icon={faXmark} />
-                </ModalColse>
-              </button>
-              <h1>드신 와인은 어떠셨나요?</h1>
-              <h2>지금 바로 평점을 남겨보세요!</h2>
-              <ReviewModal>
-                <button>
-                  <li>
-                    <ReviewIcon>
-                      <FontAwesomeIcon icon={faFaceGrinSquint} />
-                    </ReviewIcon>
-                    좋아요
-                  </li>
-                </button>
-                <button>
-                  <li>
-                    <ReviewIcon>
-                      <FontAwesomeIcon icon={faFaceSmile} />
-                    </ReviewIcon>
-                    보통이에요
-                  </li>
-                </button>
-                <button>
-                  <li>
-                    <ReviewIcon>
-                      <FontAwesomeIcon icon={faFaceRollingEyes} />
-                    </ReviewIcon>
-                    취향이아니에요
-                  </li>
-                </button>
-              </ReviewModal>
-              <SellListButton>
-                <ButtonOk>평점등록</ButtonOk>{" "}
-                <ButtonCancel onClick={() => hideModal()}>취소</ButtonCancel>
-              </SellListButton>
-            </ModalText>
-          </div>
-        )}
-      </SellListModal>
+      {/* 리뷰 모달 내용 */}
+      <ReviewModal modalVisible={modalVisible} hideModal={hideModal} />
     </>
   );
 };
