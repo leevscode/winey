@@ -29,13 +29,13 @@ const PurchaseList = () => {
   const numberArray = 임시데이터.TempList.map(item => item.number);
   const [itemCount, setItemCount] = useState(numberArray);
 
-
   // 수량 변경 핸들러
   const handleCountMinus = productPK => {
     setItemCount(prevCounts => {
       return prevCounts.map((count, index) => {
         if (임시데이터.TempList[index].productPK === productPK) {
-          return parseInt(count) - 1;
+          // 값이 0보다 작으면 0으로 제한
+          return Math.max(parseInt(count) - 1, 0);
         } else {
           return count;
         }
