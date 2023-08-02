@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { PurchaseListWrap, TotalPrice } from "../../style/ProductSellStyle";
 import { faMinus, faPlus } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-const PurchaseList = () => {
+const PurchaseList = ({ totalPrice, setTotalPrice }) => {
   const 임시데이터 = {
     TempList: [
       {
@@ -29,13 +29,16 @@ const PurchaseList = () => {
   const numberArray = 임시데이터.TempList.map(item => item.number);
   const [itemCount, setItemCount] = useState(numberArray);
 
+  // 총 금액 state
+  // const [totalPrice, setTotalPrice] = useState(0);
+
   // 수량 변경 핸들러
   const handleCountMinus = productPK => {
     setItemCount(prevCounts => {
       return prevCounts.map((count, index) => {
         if (임시데이터.TempList[index].productPK === productPK) {
           // 값이 0보다 작으면 0으로 제한
-          return Math.max(parseInt(count) - 1, 0);
+          return Math.max(parseInt(count) - 1, 1);
         } else {
           return count;
         }
@@ -46,7 +49,8 @@ const PurchaseList = () => {
     setItemCount(prevCounts => {
       return prevCounts.map((count, index) => {
         if (임시데이터.TempList[index].productPK === productPK) {
-          return parseInt(count) + 1;
+          // 값이 5보다 크면 5으로 제한
+          return Math.min(parseInt(count) + 1, 5);
         } else {
           return count;
         }
@@ -62,6 +66,9 @@ const PurchaseList = () => {
     });
     return itemtotal;
   };
+  useEffect(() => {
+    setTotalPrice(calcTotalSum);
+  }, []);
 
   return (
     <div>

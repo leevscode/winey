@@ -29,35 +29,13 @@ export const PickupPlaceClickWrap = styled.div`
       background: ${Maincolor.white};
       width: 18rem;
       height: 9rem;
-      padding: 1.5rem;
-      margin: 0.7rem 0;
       border: 0.1rem solid ${Maincolor.white};
       border-radius: 0.5rem;
     }
-    // 스와이퍼 navigation btn
-    /* .swiper-button-prev {
-      &::after {
-        position: absolute;
-        left: -0.8rem;
-        font-size: 1.5rem;
-        font-weight: 900;
-        color: ${Maincolor.redDeep};
-      }
-    }
-    .swiper-button-next {
-      &::after {
-        position: absolute;
-        right: -0.8rem;
-        font-size: 1.5rem;
-        font-weight: 900;
-        color: ${Maincolor.redDeep};
-      }
-    } */
-
     // 매장선택 btn
     & .store {
       background: ${Maincolor.beige};
-      padding: 1rem;
+      padding: 1.5rem;
       border-radius: 0.5rem;
 
       // 매장선택 btn
@@ -110,33 +88,18 @@ export const PickupPlaceClickWrap = styled.div`
   /* 날짜선택 */
   & .date {
     background: ${Maincolor.beige};
-    padding: 1.2rem;
+    padding: 1.5rem;
     display: flex;
     justify-content: space-around;
     align-items: center;
-    /* & button {
-      color: ${Maincolor.black};
-      background: ${Maincolor.white};
-      width: 16.8rem;
-      height: 8rem;
-      margin: 0.8rem 0.5rem;
-      border: 0.1rem solid ${Maincolor.white};
-      border-radius: 0.5rem;
-      & strong {
-        font-size: 1.5rem;
-        font-weight: 800;
-        text-align: left;
-      }
-    } */
-    button {
+    & button {
       background: ${Maincolor.white};
       font-size: 1.4rem;
       color: ${Maincolor.black};
-      /* border: 0.1rem solid ${opacity.white}; */
-      /* min-width: 8.5rem; */
       padding: 2rem 5rem;
       border-radius: 0.5rem;
       transition: 0.2s ease-in-out;
+
       & > strong {
         font-size: 1.5rem;
         font-weight: 800;
@@ -162,7 +125,7 @@ export const PickupPlaceClickWrap = styled.div`
   // 시간선택
   & .time {
     background: ${Maincolor.beige};
-    padding: 1rem;
+    padding: 1.5rem;
 
     // 스와이퍼 style
     .swiper-slide {
@@ -174,23 +137,6 @@ export const PickupPlaceClickWrap = styled.div`
       border: 0.1rem solid ${Maincolor.white};
       border-radius: 0.5rem;
 
-      // 시간선택 btn
-      /* & button {
-      color: ${Maincolor.black};
-      position: absolute;
-      top: 1.3rem;
-      left: 0;
-      padding: 0 2rem;
-      & strong {
-        font-size: 1.5rem;
-        font-weight: 800;
-        text-align: left;
-      }
-      & p {
-        font-size: 1.1rem;
-        text-align: left;
-      }
-    } */
       button {
         position: absolute;
         top: 0;
@@ -327,7 +273,7 @@ export const PurchaseBtn = styled.div`
   }
 
   button {
-    margin: 1rem 0 5rem 0;
+    margin: 1rem 0 6rem 0;
     svg {
       margin-right: 1rem;
     }
