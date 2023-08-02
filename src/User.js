@@ -4,7 +4,7 @@
   깃허브 : https://github.com/kimaydev
 */
 import React, { useEffect, useState } from "react";
-import { Outlet, useLocation, useNavigate } from "react-router-dom";
+import { Outlet, useLocation, useNavigate, useParams } from "react-router-dom";
 import { LayoutWrap } from "./style/LayoutStyle";
 import { AnimatePresence } from "framer-motion";
 
@@ -15,6 +15,7 @@ import Footer from "./components/Footer";
 import NavList from "./pages/NavList";
 
 const User = () => {
+  const { ilist } = useParams();
   const navigate = useNavigate();
   const location = useLocation();
   const [isNavActive, setIsNavActive] = useState(false);
@@ -60,6 +61,7 @@ const User = () => {
         <Outlet />
       </ContentsWrap>
       {location.pathname === "/" ||
+      location.pathname === `/productlist/${ilist}` ||
       location.pathname === "/productdetail" ||
       location.pathname === "/windeguide" ? (
         <Footer />

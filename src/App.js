@@ -23,7 +23,6 @@ import JoinEdit from "./pages/login/JoinEdit";
 import About from "./pages/About";
 import OpenSource from "./pages/OpenSource";
 import SellList from "./pages/product/SellList";
-import NavList from "./pages/NavList";
 import NotFound from "./pages/NotFound";
 
 function App() {

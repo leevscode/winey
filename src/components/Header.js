@@ -72,6 +72,23 @@ const Header = ({ handleOpenNav, isActive }) => {
       title: "오픈소스",
       path: "/opensource",
     },
+    // 와인 카테고리
+    {
+      title: "레드 와인",
+      path: "/productlist/0",
+    },
+    {
+      title: "화이트 와인",
+      path: "/productlist/1",
+    },
+    {
+      title: "스파클링 와인",
+      path: "/productlist/2",
+    },
+    {
+      title: "기타 와인",
+      path: "/productlist/3",
+    },
   ];
   useEffect(() => {
     const findPath = pageName.find(item => item.path === location.pathname);

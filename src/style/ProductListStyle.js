@@ -19,6 +19,7 @@ const gradientStyle = props => {
         ${Gradation.wineA} 35%,
         ${Gradation.wineC} 100%
       );
+      color: ${Maincolor.white};
     `;
   } else if (props.ilist === "1") {
     return css`
@@ -27,6 +28,7 @@ const gradientStyle = props => {
         ${Gradation.whiteA} 35%,
         ${Gradation.whiteB} 100%
       );
+      color: ${Maincolor.black};
     `;
   } else if (props.ilist === "2") {
     return css`
@@ -35,6 +37,7 @@ const gradientStyle = props => {
         ${Gradation.sparkA} 35%,
         ${Gradation.sparkB} 100%
       );
+      color: ${Maincolor.black};
     `;
   } else if (props.ilist === "3") {
     return css`
@@ -43,6 +46,7 @@ const gradientStyle = props => {
         ${Gradation.etcA} 35%,
         ${Gradation.etcB} 100%
       );
+      color: ${Maincolor.white};
     `;
   }
 };
@@ -57,7 +61,6 @@ export const ProductListTitleWrap = styled.div`
   h2 {
     font-size: 3rem;
     font-weight: 900;
-    color: ${Maincolor.white};
     span {
       display: block;
       font-size: 0.5em;
