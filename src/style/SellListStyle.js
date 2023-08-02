@@ -100,7 +100,7 @@ export const ReviewIcon = styled.i`
   margin-bottom: 15px;
 `;
 
-export const ReviewModal = styled.ul`
+export const ReviewModalbox = styled.ul`
   display: flex;
   font-size: 1.7rem;
   align-items: center;

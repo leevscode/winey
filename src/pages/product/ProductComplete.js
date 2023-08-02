@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { ButtonCancel, ButtonOk } from "../../style/GlobalStyle";
 import {
   ProductCompleteBox,
@@ -7,6 +7,15 @@ import {
 } from "../../style/ProductCompleteStyle";
 
 const ProductComplete = () => {
+  const [productData, setProductData] = useState({
+    productImage: "https://via.placeholder.com/200x200",
+    productName: "제프 까렐, 울띰 헤꼴뜨",
+    productBrand: "Ultime Recolte By Jeff Carrel",
+    productPrice: "32,900",
+    pickupLocation: "이마트 만촌점",
+    pickupTime: "07월 23일(일) 12:00",
+  });
+
   return (
     <>
       <ProductCompleteText>
@@ -15,13 +24,13 @@ const ProductComplete = () => {
         <span>픽업예정일과 시간에 맞춰 상품을 수령해주세요.</span>
       </ProductCompleteText>
       <ProductCompleteinfo>
-        <img src="https://via.placeholder.com/200x200" alt="" />
+        <img src={productData.productImage} alt="" />
         <ul>
-          <li>제프 까렐, 울띰 헤꼴뜨</li>
-          <li>Ultime Recolte By Jeff Carrel</li>
-          <li>32,900원</li>
-          <li>픽업 지점 : 이마트 만촌점</li>
-          <li>픽업 시간 : 07월 23일(일) 12:00</li>
+          <li>{productData.productName}</li>
+          <li>{productData.productBrand}</li>
+          <li>{productData.productPrice}원</li>
+          <li>픽업 지점: {productData.pickupLocation}</li>
+          <li>픽업 시간: {productData.pickupTime}</li>
         </ul>
       </ProductCompleteinfo>
       <ProductCompleteBox>

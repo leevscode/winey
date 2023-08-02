@@ -3,26 +3,16 @@ import { ButtonOk, ButtonCancel } from "../../style/GlobalStyle";
 import {
   PickUpButton,
   OrdercancelBtn,
-  ModalColse,
   SellListButton,
   SellListInfo,
-  SellListModal,
-  ModalText,
-  ReviewIcon,
-  ReviewModal,
 } from "../../style/SellListStyle";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  faFaceGrinSquint,
-  faFaceSmile,
-  faFaceRollingEyes,
-} from "@fortawesome/free-regular-svg-icons";
-import {
-  faXmark,
   faChevronRight,
   faExclamation,
 } from "@fortawesome/free-solid-svg-icons";
 import SellListCancel from "../../components/selllist/SellListCancel";
+import ReviewModal from "../../components/selllist/ReviewModal";
 import { ProductCartNone } from "../../style/ProductCartStyle";
 
 const SellList = () => {
@@ -123,6 +113,7 @@ const SellList = () => {
     <>
       {orderItems.map((item, index) => (
         <div key={index}>
+          {/* 주문취소 모달 */}
           <OrdercancelBtn>
             <button onClick={() => showCancelModal(index)}>
               주문취소 <FontAwesomeIcon icon={faChevronRight} />
@@ -163,52 +154,8 @@ const SellList = () => {
         </div>
       ))}
 
-      {/* 모달 내용 */}
-      <SellListModal modalVisible={modalVisible}>
-        {modalVisible && (
-          <div>
-            <ModalText>
-              <button onClick={() => hideModal()}>
-                <ModalColse>
-                  <FontAwesomeIcon icon={faXmark} />
-                </ModalColse>
-              </button>
-              <h1>드신 와인은 어떠셨나요?</h1>
-              <h2>지금 바로 평점을 남겨보세요!</h2>
-              <ReviewModal>
-                <button>
-                  <li>
-                    <ReviewIcon>
-                      <FontAwesomeIcon icon={faFaceGrinSquint} />
-                    </ReviewIcon>
-                    좋아요
-                  </li>
-                </button>
-                <button>
-                  <li>
-                    <ReviewIcon>
-                      <FontAwesomeIcon icon={faFaceSmile} />
-                    </ReviewIcon>
-                    보통이에요
-                  </li>
-                </button>
-                <button>
-                  <li>
-                    <ReviewIcon>
-                      <FontAwesomeIcon icon={faFaceRollingEyes} />
-                    </ReviewIcon>
-                    취향이아니에요
-                  </li>
-                </button>
-              </ReviewModal>
-              <SellListButton>
-                <ButtonOk>평점등록</ButtonOk>{" "}
-                <ButtonCancel onClick={() => hideModal()}>취소</ButtonCancel>
-              </SellListButton>
-            </ModalText>
-          </div>
-        )}
-      </SellListModal>
+      {/* 리뷰 모달 내용 */}
+      <ReviewModal modalVisible={modalVisible} hideModal={hideModal} />
     </>
   );
 };
