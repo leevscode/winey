@@ -1,9 +1,8 @@
 import React, { useState } from "react";
-import { ButtonOk, ButtonCancel } from "../../style/GlobalStyle";
+import { ButtonCancel } from "../../style/GlobalStyle";
 import {
   PickUpButton,
   OrdercancelBtn,
-  SellListButton,
   SellListInfo,
 } from "../../style/SellListStyle";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -14,6 +13,7 @@ import {
 import SellListCancel from "../../components/selllist/SellListCancel";
 import ReviewModal from "../../components/selllist/ReviewModal";
 import { ProductCartNone } from "../../style/ProductCartStyle";
+import { SellListButton } from "../../style/SellListReviewModalStyle";
 
 const SellList = () => {
   const [selectedOrderIndices, setSelectedOrderIndices] = useState([]);
@@ -25,7 +25,7 @@ const SellList = () => {
       orderNumber: "2316514564613",
       paymentMethod: "신용카드",
       amount: "38,700",
-      status: "배송완료",
+      status: "결제완료",
     },
     {
       date: "2023.07.25",
@@ -114,11 +114,16 @@ const SellList = () => {
       {orderItems.map((item, index) => (
         <div key={index}>
           {/* 주문취소 모달 */}
-          <OrdercancelBtn>
-            <button onClick={() => showCancelModal(index)}>
-              주문취소 <FontAwesomeIcon icon={faChevronRight} />
-            </button>
-          </OrdercancelBtn>
+          {["픽업대기", "픽업완료"].includes(item.status) ? (
+            // 주문취소 버튼이 사라졌을때 빈 공백을 유지하는 스타일
+            <div style={{ height: "28px" }} />
+          ) : (
+            <OrdercancelBtn>
+              <button onClick={() => showCancelModal(index)}>
+                주문취소 <FontAwesomeIcon icon={faChevronRight} />
+              </button>
+            </OrdercancelBtn>
+          )}
           <SellListInfo>
             {item.date}
             <li>상품명: {item.product}</li>

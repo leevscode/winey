@@ -1,12 +1,4 @@
 import React, { useState } from "react";
-import {
-  ModalColse,
-  SellListButton,
-  SellListModal,
-  ModalText,
-  ReviewIcon,
-  ReviewModalbox,
-} from "../../style/SellListStyle";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faFaceGrinSquint,
@@ -15,6 +7,7 @@ import {
 } from "@fortawesome/free-regular-svg-icons";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import { ButtonOk, ButtonCancel } from "../../style/GlobalStyle";
+import { ModalColse, ModalText, ReviewIcon, ReviewModalbox, SellListButton, SellListModal } from "../../style/SellListReviewModalStyle";
 
 const ReviewModal = ({ modalVisible, hideModal }) => {
   const [selectedReview, setSelectedReview] = useState(null);
@@ -81,7 +74,9 @@ const ReviewModal = ({ modalVisible, hideModal }) => {
               <ButtonOk onClick={handleReviewSubmit}>평점등록</ButtonOk>{" "}
               <ButtonCancel onClick={() => hideModal()}>취소</ButtonCancel>
             </SellListButton>
-            {showWarning && <p style={{ color: "red" }}>평점을 선택해주세요.</p>}
+            {showWarning && (
+              <p style={{ color: "red" }}>평점을 선택해주세요.</p>
+            )}
           </ModalText>
         </div>
       )}
