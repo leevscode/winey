@@ -17,7 +17,6 @@ export const HeaderWrap = styled.header`
   max-width: 560px;
   width: 100%;
   height: 6rem;
-  /* background: ${Maincolor.white}; */
   background: ${props => (props.mainBgc ? "transparent" : Maincolor.white)};
   border-bottom: 0.05rem solid
     ${props => (props.mainBgc ? opacity.whiteB : opacity.white)};
@@ -376,4 +375,15 @@ export const ScrollTopBtn = styled.div`
 export const ContentsWrap = styled.div`
   padding-top: 80px;
   min-height: calc(100vh - 350px);
+`;
+// 상품 리스트 아이템 기본 스타일링
+export const ContentsListItemWrap = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  margin-left: -7px;
+  margin-right: -7px;
+  & > div {
+    width: calc(100% / 3 - 14px);
+    margin: 0 7px 40px;
+  }
 `;

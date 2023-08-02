@@ -3,10 +3,10 @@
   노션 : https://www.notion.so/kimaydev
   깃허브 : https://github.com/kimaydev
 */
-import React, { useState } from "react";
-import { Navigate, Outlet, useLocation, useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import { LayoutWrap } from "./style/LayoutStyle";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence } from "framer-motion";
 
 import { ContentsWrap, NavWrap } from "./style/GlobalComponents";
 import Header from "./components/Header";
@@ -18,8 +18,28 @@ const User = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const [isNavActive, setIsNavActive] = useState(false);
+  // 스크롤 감지 state
+  const [scrollPosition, setScrollPosition] = useState(0);
+  // 헤더 클래스 토글 설정 state
+  const [isActive, setIsActive] = useState(false);
+  let activeScroll = () => {
+    setScrollPosition(window.scrollY);
+  };
+  // 헤더 스크롤 이벤트
+  useEffect(() => {
+    window.addEventListener("scroll", activeScroll);
+    if (scrollPosition !== 0) {
+      // console.log("스크롤 위치값", scrollPosition);
+      setIsActive(true);
+    } else {
+      setIsActive(false);
+    }
+    return () => {
+      window.removeEventListener("scroll", activeScroll);
+    };
+  }, [scrollPosition]);
   // 네비게이션 메뉴 버튼 핸들러
-  const handlerOpenNav = e => {
+  const handleOpenNav = e => {
     e.preventDefault();
     setIsNavActive(!isNavActive);
   };
@@ -27,10 +47,15 @@ const User = () => {
     setIsNavActive(false);
     navigate(path);
   };
+  // // Quick menu Scroll top 이벤트 핸들러
+  // const handleScrollTop = e => {
+  //   e.preventDefault();
+  //   console.log("스크롤 탑 이벤트 버튼");
+  // };
 
   return (
     <LayoutWrap>
-      <Header handlerOpenNav={handlerOpenNav} />
+      <Header handleOpenNav={handleOpenNav} isActive={isActive} />
       <ContentsWrap>
         <Outlet />
       </ContentsWrap>
@@ -39,7 +64,10 @@ const User = () => {
       location.pathname === "/windeguide" ? (
         <Footer />
       ) : null}
-      <QuickMenu handlerOpenNav={handlerOpenNav} />
+      <QuickMenu
+        handleOpenNav={handleOpenNav}
+        // handleScrollTop={handleScrollTop}
+      />
       {/* 네비게이션 메뉴 */}
       <AnimatePresence>
         {isNavActive && (
@@ -48,7 +76,7 @@ const User = () => {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
           >
-            <NavList handlerOpenNav={handlerOpenNav} closeNav={closeNav} />
+            <NavList handleOpenNav={handleOpenNav} closeNav={closeNav} />
           </NavWrap>
         )}
       </AnimatePresence>

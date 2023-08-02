@@ -3,7 +3,7 @@
   노션 : https://www.notion.so/kimaydev
   깃허브 : https://github.com/kimaydev
 */
-import React from "react";
+import React, { useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import { QuickWrap, ScrollTopBtn } from "../style/GlobalComponents";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -15,11 +15,19 @@ import {
   faWineGlass,
 } from "@fortawesome/free-solid-svg-icons";
 
-const QuickMenu = ({ handlerOpenNav }) => {
+const QuickMenu = ({ handleOpenNav }) => {
+  // Quick menu Scroll top 이벤트 핸들러
+  const handleScrollTop = () => {
+    // e.preventDefault();
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
   return (
     <>
       <ScrollTopBtn>
-        <button>
+        <button onClick={handleScrollTop}>
           <i>
             <FontAwesomeIcon icon={faArrowUp} />
           </i>
@@ -52,7 +60,7 @@ const QuickMenu = ({ handlerOpenNav }) => {
             </NavLink>
           </li>
           <li>
-            <button onClick={handlerOpenNav}>
+            <button onClick={handleOpenNav}>
               <img
                 src={`${process.env.PUBLIC_URL}/images/icon_navbtn_1.svg`}
                 alt="메뉴보기"

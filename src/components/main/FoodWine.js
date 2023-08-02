@@ -17,11 +17,11 @@ import {
 import {
   MainProductSecton,
   MainTabBtn,
-  MainTabContents,
   MainTabLink,
   MainTitle,
 } from "../../style/MainStyle";
 import { ProductListItem } from "../../style/ProductStyle";
+import { ContentsListItemWrap } from "../../style/GlobalComponents";
 
 const FoodWine = () => {
   // 상품 더미 데이터
@@ -140,7 +140,7 @@ const FoodWine = () => {
         </ul>
       </MainTabBtn>
       {/* 음식별 추천 와인 내용 */}
-      <MainTabContents>
+      <ContentsListItemWrap>
         {foodItem.map(item => (
           <ProductListItem key={item.iproduct}>
             <Link to={item.link}>
@@ -180,7 +180,7 @@ const FoodWine = () => {
             </Link>
           </ProductListItem>
         ))}
-      </MainTabContents>
+      </ContentsListItemWrap>
       {/* 음식별 추천 와인 전체보기 */}
       <MainTabLink>
         음식별 추천 와인 전체보기

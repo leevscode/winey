@@ -216,17 +216,6 @@ export const MainTabBtn = styled.div`
 export const MainProductSecton = styled.section`
   padding: ${WidthPd.padding};
 `;
-// 메인페이지 탭메뉴 상품 리스트 기본 스타일링
-export const MainTabContents = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  margin-left: -7px;
-  margin-right: -7px;
-  & > div {
-    width: calc(100% / 3 - 14px);
-    margin: 0 7px 40px;
-  }
-`;
 // 메인페이지 탭메뉴 전체보기 버튼 스타일링
 export const MainTabLink = styled(Link)`
   display: block;
@@ -337,6 +326,10 @@ export const RecommWineLogout = styled.div`
         color: ${Maincolor.white};
         padding: 10px 0;
         margin: 0 auto;
+        transition: 0.2s ease-in-out;
+        &:hover {
+          background: ${Maincolor.grayDeep};
+        }
       }
     }
   }

@@ -8,6 +8,7 @@ import styled from "@emotion/styled";
 // 가로폭
 export const WidthPd = {
   padding: "0 2%",
+  paddingTopSmall: "1.5rem",
 };
 
 // 컬러 ================
@@ -20,6 +21,7 @@ export const Maincolor = {
   redBold: "#7c1d34",
   redMedium: "#9a6a6a",
   grayBold: "#837575",
+  grayDeep: "#6b5b5b",
   grayMedium: "#e7e4e4",
 };
 // 그라데이션
@@ -29,12 +31,19 @@ export const Gradation = {
   wineC: "#912648",
   wineD: "#a92b52",
   wineE: "#c1305d",
+  whiteA: "#f6e889",
+  whiteB: "#fAf3be",
+  sparkA: "#d3cca1",
+  sparkB: "#ede5b9",
+  etcA: "#d37e72",
+  etcB: "#e4b8a7",
 };
 // 투명도
 export const opacity = {
   wine: "rgba(124, 29, 52, 0.65)",
   grayDeep: "rgba(60, 35, 35, 0.5)",
   gray: "rgba(60, 35, 35, 0.3)",
+  grayLight: "rgba(60, 35, 35, 0.1)",
   white: "rgba(60, 35, 35, 0.07)",
   whiteB: "rgba(255, 255, 255, 0.3)",
   whiteC: "rgba(60, 35, 35, 0.02)",

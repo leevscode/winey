@@ -24,7 +24,6 @@
 /* 스크롤바 막대 외부 */
 ::-webkit-scrollbar-track {
 }
-
 html,
 body {
   min-width: 320px;

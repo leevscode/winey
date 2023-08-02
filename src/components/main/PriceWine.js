@@ -10,11 +10,11 @@ import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import {
   MainProductSecton,
   MainTabBtn,
-  MainTabContents,
   MainTabLink,
   MainTitle,
 } from "../../style/MainStyle";
 import { ProductListItem } from "../../style/ProductStyle";
+import { ContentsListItemWrap } from "../../style/GlobalComponents";
 
 const PriceWine = () => {
   // 상품 더미 데이터
@@ -105,7 +105,7 @@ const PriceWine = () => {
         </ul>
       </MainTabBtn>
       {/* 가격별 추천 와인 내용 */}
-      <MainTabContents>
+      <ContentsListItemWrap>
         {PriceItem.map(item => (
           <ProductListItem key={item.iproduct}>
             <Link to={item.link}>
@@ -145,7 +145,7 @@ const PriceWine = () => {
             </Link>
           </ProductListItem>
         ))}
-      </MainTabContents>
+      </ContentsListItemWrap>
       {/* 국가별 추천 와인 전체보기 */}
       <MainTabLink>
         국가별 추천 와인 전체보기

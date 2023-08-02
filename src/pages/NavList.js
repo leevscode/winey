@@ -8,7 +8,7 @@ import { NavLink } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 
-const NavList = ({ handlerOpenNav, closeNav }) => {
+const NavList = ({ handleOpenNav, closeNav }) => {
   return (
     <>
       <ul className="top">
@@ -21,7 +21,7 @@ const NavList = ({ handlerOpenNav, closeNav }) => {
           </NavLink>
         </li>
         <li>
-          <button onClick={handlerOpenNav}>
+          <button onClick={handleOpenNav}>
             <i>
               <FontAwesomeIcon icon={faXmark} />
             </i>

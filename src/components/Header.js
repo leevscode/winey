@@ -9,35 +9,15 @@ import { BackBtn, HeaderTitle, HeaderWrap } from "../style/GlobalComponents";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 
-const Header = ({ handlerOpenNav }) => {
+const Header = ({ handleOpenNav, isActive }) => {
   const location = useLocation();
   const navigate = useNavigate();
   // 뒤로가기 버튼 핸들러
-  const handlerBack = () => navigate(-1);
-  // 스크롤 감지 state
-  const [scrollPosition, setScrollPosition] = useState(0);
-  // 헤더 클래스 토글 설정 state
-  const [isActive, setIsActive] = useState(false);
+  const handleBack = () => navigate(-1);
   // 서브페이지 헤더 페이지 타이틀 state
   const [pageTitle, setPageTitle] = useState("");
   // 서브페이지 헤더 페이지 위치 state
   const [pagePath, setPagePath] = useState("");
-  let activeScroll = () => {
-    setScrollPosition(window.scrollY);
-  };
-  // 헤더 스크롤 이벤트
-  useEffect(() => {
-    window.addEventListener("scroll", activeScroll);
-    if (scrollPosition !== 0) {
-      // console.log("스크롤 이벤트 나왔다.");
-      setIsActive(true);
-    } else {
-      setIsActive(false);
-    }
-    return () => {
-      window.removeEventListener("scroll", activeScroll);
-    };
-  }, [scrollPosition]);
   // 페이지별 타이틀
   const pageName = [
     {
@@ -114,7 +94,7 @@ const Header = ({ handlerOpenNav }) => {
           <li>
             {location.pathname === "/" ? (
               // 네비게이션 메뉴 보기 버튼
-              <button onClick={handlerOpenNav}>
+              <button onClick={handleOpenNav}>
                 <img
                   src={`${process.env.PUBLIC_URL}/images/icon_navbtn_1.svg`}
                   alt="메뉴보기"
@@ -126,7 +106,7 @@ const Header = ({ handlerOpenNav }) => {
               </button>
             ) : (
               // 서브페이지 헤더 뒤로가기 버튼
-              <BackBtn onClick={handlerBack}>
+              <BackBtn onClick={handleBack}>
                 <i>
                   <FontAwesomeIcon icon={faArrowLeft} />
                 </i>
