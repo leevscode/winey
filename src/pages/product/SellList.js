@@ -20,6 +20,7 @@ const SellList = () => {
   const [modalVisible, setModalVisible] = useState(false);
   const [orderItems, setOrderItems] = useState([
     {
+      key: 0,
       date: "2023.07.23",
       product: "제프 까렐, 울띰 헤꼴뜨",
       orderNumber: "2316514564613",
@@ -28,6 +29,7 @@ const SellList = () => {
       status: "결제완료",
     },
     {
+      key: 1,
       date: "2023.07.25",
       product: "몰루와인",
       orderNumber: "982737465858",
@@ -36,6 +38,7 @@ const SellList = () => {
       status: "픽업대기",
     },
     {
+      key: 2,
       date: "2023.07.27",
       product: "레드와인",
       orderNumber: "974151621",
@@ -111,15 +114,15 @@ const SellList = () => {
 
   return (
     <>
-      {orderItems.map((item, index) => (
-        <div key={index}>
+      {orderItems.map(item => (
+        <div key={item.key}>
           {/* 주문취소 모달 */}
           {["픽업대기", "픽업완료"].includes(item.status) ? (
             // 주문취소 버튼이 사라졌을때 빈 공백을 유지하는 스타일
             <div style={{ height: "28px" }} />
           ) : (
             <OrdercancelBtn>
-              <button onClick={() => showCancelModal(index)}>
+              <button onClick={() => showCancelModal(item.key)}>
                 주문취소 <FontAwesomeIcon icon={faChevronRight} />
               </button>
             </OrdercancelBtn>
@@ -136,12 +139,12 @@ const SellList = () => {
             <>
               {/* 주문 상태가 "픽업대기" 또는 "픽업완료"일 때 "픽업완료" 버튼을 클릭 가능 */}
               {["픽업대기", "픽업완료"].includes(item.status) ? (
-                selectedOrderIndices.includes(index) ? (
+                selectedOrderIndices.includes(item.key) ? (
                   <ButtonCancel onClick={() => showModal()}>
                     평점등록
                   </ButtonCancel>
                 ) : (
-                  <PickUpButton onClick={() => handlePickUpComplete(index)}>
+                  <PickUpButton onClick={() => handlePickUpComplete(item.key)}>
                     픽업완료
                   </PickUpButton>
                 )
@@ -150,10 +153,10 @@ const SellList = () => {
               )}
             </>
           </SellListButton>
-          {cancelModalVisible[index] && (
+          {cancelModalVisible[item.key] && (
             <SellListCancel
-              onCancel={() => handleCancel(index)}
-              onClose={() => hideCancelModal(index)}
+              onCancel={() => handleCancel(item.key)}
+              onClose={() => hideCancelModal(item.key)}
             />
           )}
         </div>
