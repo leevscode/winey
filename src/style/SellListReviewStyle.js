@@ -46,15 +46,21 @@ export const ReviewModalbox = styled.ul`
   align-items: center;
   justify-content: space-around;
   button {
-    /* padding: 30px; */
     width: 27%;
     height: 120px;
     background: #fcf8f1;
     border-radius: 20px;
     &:hover {
       color: #7c1d34;
-      transform: scale(1.3);
       cursor: pointer;
+      border: 2px solid #7c1d34;
+    }
+    &.selected {
+      border: 2px solid #7c1d34;
+      color: #7c1d34;
+    }
+    &:focus {
+      outline: none;
     }
   }
 `;

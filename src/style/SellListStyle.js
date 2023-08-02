@@ -46,9 +46,9 @@ export const PickUpButton = styled.button`
     background: ${Maincolor.redDeep};
   }
   &:disabled {
-    background-color: #bdc3c7;
-    color: #7f8c8d;
-    border: #bdc3c7;
+    background-color: #E7E4E4;
+    color: #FFFFFF;
+    border: #E7E4E4;
     cursor: not-allowed;
   }
 `;
