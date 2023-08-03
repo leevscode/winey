@@ -48,7 +48,7 @@ const Login = () => {
             autoComplete="on"
           >
             <Form.Item
-              name="userEmail"
+              name="userId"
               rules={[
                 {
                   required: true,
@@ -59,9 +59,9 @@ const Login = () => {
               <Input
                 prefix={<UserOutlined className="site-form-item-icon" />}
                 // 글자수 제한
-                maxLength={25}
+                maxLength={20}
                 size="large"
-                placeholder="아이디를 입력해 주세요. (example@winey.com)"
+                placeholder="아이디를 입력해 주세요."
               />
             </Form.Item>
 
@@ -77,7 +77,7 @@ const Login = () => {
               <Input.Password
                 prefix={<LockOutlined className="site-form-item-icon" />}
                 // 글자수 제한
-                maxLength={25}
+                maxLength={20}
                 size="large"
                 placeholder="비밀번호를 입력해 주세요"
               />

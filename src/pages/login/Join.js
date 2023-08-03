@@ -103,27 +103,23 @@ const Join = () => {
           layout="vertical"
         >
           <span>
-            아이디(E-mail)<b>*</b>
+            아이디<b>*</b>
           </span>
-          <p>사용하실 아이디를 이메일 형식으로 입력해 주세요.</p>
+          <p>사용하실 아이디를 입력해 주세요.</p>
           <ConfirmArray>
             <Form.Item
               name="userEmail"
               rules={[
                 {
-                  type: "email",
-                  message: "The input is not valid E-mail!",
-                },
-                {
                   required: true,
-                  message: "Please input your E-mail!",
+                  message: "Please input your ID!",
                 },
               ]}
             >
               <Input
                 size="large"
                 // 글자수 제한
-                maxLength={25}
+                maxLength={20}
                 placeholder="아이디를 입력해 주세요."
               />
             </Form.Item>
@@ -148,7 +144,7 @@ const Join = () => {
             <Input.Password
               size="large"
               // 글자수 제한
-              maxLength={25}
+              maxLength={20}
               placeholder="비밀번호를 입력해 주세요."
               value={password}
               onChange={changePassword}
@@ -174,7 +170,7 @@ const Join = () => {
             <Input.Password
               size="large"
               // 글자수 제한
-              maxLength={25}
+              maxLength={20}
               placeholder="비밀번호를 다시 한번 입력해 주세요"
               value={passwordConfirm}
               onChange={changePasswordConfirm}
