@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faFaceGrinSquint,
@@ -16,9 +16,25 @@ import {
   SellListModal,
 } from "../../style/SellListReviewStyle";
 
-const ReviewModal = ({ modalVisible, hideModal }) => {
+const ReviewModal = ({ modalVisible, hideModal, setReviewSubmitted  }) => {
   const [selectedReview, setSelectedReview] = useState(null);
   const [showWarning, setShowWarning] = useState(false);
+
+  // DB연동 예정
+  const handleReviewSubmit = () => {
+    if (selectedReview) {
+      console.log("평점이 등록되었습니다:", selectedReview);
+      // DB연동 예정
+
+      // 리뷰가 성공적으로 제출되면 reviewSubmitted를 true로 설정
+      setReviewSubmitted(true);
+
+      // 평점 처리가 완료되면 모달을 닫습니다.
+      hideModal();
+    } else {
+      setShowWarning(true);
+    }
+  };
 
   const handleReviewSelection = reviewType => {
     setSelectedReview(prevReview => {
@@ -29,25 +45,19 @@ const ReviewModal = ({ modalVisible, hideModal }) => {
     });
   };
 
-  // DB연동 예정
-  const handleReviewSubmit = () => {
-    if (selectedReview) {
-      console.log("평점이 등록되었습니다:", selectedReview);
-      // DB연동 예정
-
-      // 평점 처리가 완료되면 모달을 닫습니다.
-      hideModal();
-    } else {
-      setShowWarning(true);
-    }
+  // 모달 닫기를 처리하는 함수
+  const closeModal = () => {
+    // 모달이 닫힐 때 showWarning 상태를 false로 설정하여 경고 메시지를 숨깁니다.
+    setShowWarning(false);
+    hideModal();
   };
 
-    // 모달 닫기를 처리하는 함수
-    const closeModal = () => {
-      // 모달이 닫힐 때 showWarning 상태를 false로 설정하여 경고 메시지를 숨깁니다.
-      setShowWarning(false);
-      hideModal();
-    };
+  // 모달이 닫힐 때 selectedReview 상태를 null로 설정하여 평점 선택을 초기화합니다.
+  useEffect(() => {
+    if (!modalVisible) {
+      setSelectedReview(null);
+    }
+  }, [modalVisible]);
 
   return (
     <SellListModal modalVisible={modalVisible}>
@@ -56,7 +66,7 @@ const ReviewModal = ({ modalVisible, hideModal }) => {
           <ModalText>
             <button onClick={() => hideModal()}>
               <ModalColse>
-                <FontAwesomeIcon icon={faXmark} />
+                <FontAwesomeIcon onClick={() => closeModal()} icon={faXmark} />
               </ModalColse>
             </button>
             <h1>드신 와인은 어떠셨나요?</h1>

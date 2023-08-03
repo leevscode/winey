@@ -46,9 +46,9 @@ export const PickUpButton = styled.button`
     background: ${Maincolor.redDeep};
   }
   &:disabled {
-    background-color: #E7E4E4;
-    color: #FFFFFF;
-    border: #E7E4E4;
+    background-color: #e7e4e4;
+    color: #ffffff;
+    border: #e7e4e4;
     cursor: not-allowed;
   }
 `;
@@ -59,4 +59,19 @@ export const SellListInfo = styled.ul`
   font-size: 1.5rem;
   gap: 10px;
   margin: 6px;
+`;
+
+export const ReviewOk = styled.div`
+  display: flex;
+  background: ${Maincolor.white};
+  text-align: center;
+  justify-content: center;
+  padding: 15px;
+  color: ${Maincolor.black};
+  border: 0.05rem solid ${Maincolor.grayMedium};
+  font-size: 1.6rem;
+  font-weight: 500;
+  width: 100%;
+  height: 5rem;
+  border-radius: 0.5rem;
 `;
