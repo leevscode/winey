@@ -27,8 +27,6 @@ const JoinEdit = () => {
     userPhoneNum: "123-456-7890",
     userCity: "대구",
   };
-  //이전 회원정보 불러오기
-  const [savedUserInfo, setSavedUserInfo] = useState(초기데이터);
 
   //변경 회원정보를 담는 state
   const [editUserInfo, setEditUserInfo] = useState([]);

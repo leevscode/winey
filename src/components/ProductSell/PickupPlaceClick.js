@@ -15,13 +15,31 @@ const PickupPlaceClick = ({ selectCollect, setSelectCollet }) => {
       { pk: 14, title: "칠성점", address: "대구 북구 침산로 93 스펙트럼시티" },
       { pk: 15, title: "반야월점", address: "대구 동구 안심로 389-2" },
     ],
-    date: ["07월 29일 토요일", "07월 30일 일요일", "07월 31일 월요일"],
+    // date: ["07월 29일 토요일", "07월 30일 일요일", "07월 31일 월요일"],
     time: ["10:00", "12:00", "14:00", "16:00", "18:00", "20:00", "22:00"],
   };
 
+  // 픽업날짜(오늘 이후 3일 간)
+  const first = new Date();
+  const formatDate = date => {
+    return date.toLocaleString("ko-KR", {
+      weekday: "long",
+      month: "2-digit",
+      day: "2-digit",
+    });
+  };
+
+  const dateArray = [];
+  for (let i = 1; i <= 3; i++) {
+    const tempDate = new Date(first);
+    tempDate.setDate(first.getDate() + i);
+    dateArray.push(formatDate(tempDate));
+  }
+
   // click state
   const [isClick, setIsClick] = useState(false);
-  // state
+
+  // 픽업장소,날짜,시간 state
   const [pickUpSpot, setPickUpSpot] = useState([]);
   const [pickUpDate, setPickUpDate] = useState([]);
   const [pickUpTime, setPickUpTime] = useState([]);
@@ -79,15 +97,14 @@ const PickupPlaceClick = ({ selectCollect, setSelectCollet }) => {
       <div>
         <span>픽업예정일</span>
         <p>원하시는 픽업예정일 선택해 주세요</p>
-
         <div className="date">
-          {임시데이터.date.map((option, index) => (
+          {dateArray.map((option, index) => (
             <div key={index} onClick={e => handleChangePickDate(option, e)}>
               <button value={pickUpDate}>
                 {/* 날짜 */}
-                <strong>{option.substring(0, 7)}</strong>
+                <strong>{option.substring(0, 2)}월 {option.substring(3, 6)}일</strong>
                 {/* 요일 */}
-                <p>{option.substring(8, 11)}</p>
+                <p>{option.substring(7, 11)}</p>
               </button>
             </div>
           ))}

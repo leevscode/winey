@@ -9,7 +9,7 @@ import { Maincolor, WidthPd, opacity } from "./GlobalStyle";
 
 export const JoinWrap = styled.div`
   margin-top: 3rem;
-  margin-bottom: 6rem;
+  margin-bottom: 7rem;
   padding: ${WidthPd.padding};
   display: flex;
   justify-content: center;

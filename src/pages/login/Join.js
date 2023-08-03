@@ -19,6 +19,8 @@ import { useNavigate } from "react-router-dom";
 
 const Join = () => {
   const navigate = useNavigate();
+
+  const [userInfo, setUserInfo] = useState([]);
   //password 유효성 검증 state
   const [password, setPassword] = useState("");
   const [passwordConfirm, setPasswordConfirm] = useState("");
@@ -74,6 +76,7 @@ const Join = () => {
   const onFinish = values => {
     if (password === passwordConfirm) {
       console.log("Success:", values);
+      setUserInfo(values);
       navigate("/");
     } else {
       console.log("Failed");
