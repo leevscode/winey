@@ -1,3 +1,8 @@
+/*
+  작업자 : 김아영
+  노션 : https://www.notion.so/kimaydev
+  깃허브 : https://github.com/kimaydev
+*/
 import React from "react";
 import { ProductDetailWrap } from "../../style/ProductDetailStyle";
 import { SectionLine } from "../../style/GlobalStyle";
@@ -7,6 +12,7 @@ import WineReview from "../../components/productdetail/WineReview";
 import WineInfoTable from "../../components/productdetail/WineInfoTable";
 import WineLevel from "../../components/productdetail/WineLevel";
 import WineRecommend from "../../components/productdetail/WineRecommend";
+import WineSellQuick from "../../components/productdetail/WineSellQuick";
 
 const ProductDetail = () => {
   return (
@@ -28,6 +34,8 @@ const ProductDetail = () => {
       <SectionLine />
       {/* 상품 정보 */}
       <WineInfoTable />
+      {/* 구매하기 퀵메뉴 버튼 */}
+      <WineSellQuick />
     </ProductDetailWrap>
   );
 };

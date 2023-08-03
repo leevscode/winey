@@ -4,7 +4,7 @@
   깃허브 : https://github.com/kimaydev
 */
 import React, { useEffect } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation, useParams } from "react-router-dom";
 import { QuickWrap, ScrollTopBtn } from "../style/GlobalComponents";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -16,6 +16,8 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 
 const QuickMenu = ({ handleOpenNav }) => {
+  const location = useLocation();
+  const { iproduct } = useParams();
   // Quick menu Scroll top 이벤트 핸들러
   const handleScrollTop = () => {
     // e.preventDefault();
@@ -33,70 +35,72 @@ const QuickMenu = ({ handleOpenNav }) => {
           </i>
         </button>
       </ScrollTopBtn>
-      <QuickWrap>
-        <ul>
-          <li>
-            <NavLink
-              to="/"
-              className={({ isActive }) => {
-                return isActive ? "active" : "";
-              }}
-            >
-              <i>
-                <FontAwesomeIcon icon={faHouseChimney} />
-              </i>
-            </NavLink>
-          </li>
-          <li>
-            <NavLink
-              to="/keywordselectedit"
-              className={({ isActive }) => {
-                return isActive ? "active" : "";
-              }}
-            >
-              <i>
-                <FontAwesomeIcon icon={faHashtag} />
-              </i>
-            </NavLink>
-          </li>
-          <li>
-            <button onClick={handleOpenNav}>
-              <img
-                src={`${process.env.PUBLIC_URL}/images/icon_navbtn_1.svg`}
-                alt="메뉴보기"
-              />
-              <img
-                src={`${process.env.PUBLIC_URL}/images/icon_navbtn_3.svg`}
-                alt="메뉴보기"
-              />
-            </button>
-          </li>
-          <li>
-            <NavLink
-              to="/windeguide"
-              className={({ isActive }) => {
-                return isActive ? "active" : "";
-              }}
-            >
-              <i>
-                <FontAwesomeIcon icon={faWineGlass} />
-              </i>
-            </NavLink>
-          </li>
-          <li>
-            <NavLink
-              to="/mypageList"
-              className={({ isActive }) => {
-                return isActive ? "active" : "";
-              }}
-            >
-              <i>
-                <FontAwesomeIcon icon={faUser} />
-              </i>
-            </NavLink>
-          </li>
-        </ul>
-      </QuickWrap>
+      {location.pathname !== `/productdetail/${iproduct}` && (
+        <QuickWrap>
+          <ul>
+            <li>
+              <NavLink
+                to="/"
+                className={({ isActive }) => {
+                  return isActive ? "active" : "";
+                }}
+              >
+                <i>
+                  <FontAwesomeIcon icon={faHouseChimney} />
+                </i>
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                to="/keywordselectedit"
+                className={({ isActive }) => {
+                  return isActive ? "active" : "";
+                }}
+              >
+                <i>
+                  <FontAwesomeIcon icon={faHashtag} />
+                </i>
+              </NavLink>
+            </li>
+            <li>
+              <button onClick={handleOpenNav}>
+                <img
+                  src={`${process.env.PUBLIC_URL}/images/icon_navbtn_1.svg`}
+                  alt="메뉴보기"
+                />
+                <img
+                  src={`${process.env.PUBLIC_URL}/images/icon_navbtn_3.svg`}
+                  alt="메뉴보기"
+                />
+              </button>
+            </li>
+            <li>
+              <NavLink
+                to="/windeguide"
+                className={({ isActive }) => {
+                  return isActive ? "active" : "";
+                }}
+              >
+                <i>
+                  <FontAwesomeIcon icon={faWineGlass} />
+                </i>
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                to="/mypageList"
+                className={({ isActive }) => {
+                  return isActive ? "active" : "";
+                }}
+              >
+                <i>
+                  <FontAwesomeIcon icon={faUser} />
+                </i>
+              </NavLink>
+            </li>
+          </ul>
+        </QuickWrap>
+      )}
     </>
   );
 };
