@@ -181,23 +181,27 @@ export const PurchaseListWrap = styled.div`
     }
     // 제품 썸네일 사진
     & .item-photo {
-      /* width: 14rem;
-      height: 18rem; */
-      border: 1px solid ${opacity.white};
-      margin-right: 2rem;
+      width: 13.5rem;
+      height: 17.5rem;
+      position: relative;
+      /* padding-top: 135%; */
+      border: 0.05rem solid ${opacity.grayLight};
       overflow: hidden;
-      margin: 0 auto;
-      padding: 0.5rem;
+      isolation: isolate;
       & > img {
-        width: 13.5rem;
-        height: 17.5rem;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 100%;
+        height: 100%;
         object-fit: contain;
       }
     }
     // 제품 설명
     & .item-desc {
       width: 35rem;
-      margin-top: 2rem;
+      margin: 2rem 0 0.5rem 2rem;
 
       // 상품명(한글)
       & > strong {

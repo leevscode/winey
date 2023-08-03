@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { PurchaseListWrap, TotalPrice } from "../../style/ProductSellStyle";
 import { faMinus, faPlus } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+// import NoImage from "../../assets/no_image.jpg";
 
 const PurchaseList = ({ totalPrice, setTotalPrice }) => {
   const 임시데이터 = {
@@ -25,12 +26,14 @@ const PurchaseList = ({ totalPrice, setTotalPrice }) => {
     ],
   };
 
+  // 이미지 없을 때 error처리
+  // const onImgError = e => {
+  //   e.target.src = NoImage;
+  // };
+
   // 아이템 갯수 state
   const numberArray = 임시데이터.TempList.map(item => item.number);
   const [itemCount, setItemCount] = useState(numberArray);
-
-  // 총 금액 state
-  // const [totalPrice, setTotalPrice] = useState(0);
 
   // 수량 변경 핸들러
   const handleCountMinus = productPK => {
@@ -77,7 +80,11 @@ const PurchaseList = ({ totalPrice, setTotalPrice }) => {
         {임시데이터.TempList.map((option, index) => (
           <div key={option.productPK} className="WrapFlex">
             <div className="item-photo">
-              <img src={option.ProductImg} />
+              <img
+                src={option.ProductImg}
+                alt={option.productEngName}
+                // onError={onImgError}
+              />
             </div>
             <div className="item-desc">
               <strong>{option.productKorName}</strong>

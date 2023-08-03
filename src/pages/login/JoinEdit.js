@@ -22,9 +22,9 @@ const JoinEdit = () => {
   const navigate = useNavigate();
   // 회원정보 더미데이터
   const 초기데이터 = {
-    userId: "kimwine@red.com",
-    userName: "Kimwine",
-    userPhoneNum: "123-456-789",
+    userId: "kimwine1111",
+    userName: "김와인",
+    userPhoneNum: "123-456-7890",
     userCity: "대구",
   };
   //이전 회원정보 불러오기
@@ -33,13 +33,18 @@ const JoinEdit = () => {
   //변경 회원정보를 담는 state
   const [editUserInfo, setEditUserInfo] = useState([]);
 
-  // 아이디 변경 state
-  const [editId, setEditId] = useState()
+  // 아이디, 이름, 전화번호 변경 state
+  const [editId, setEditId] = useState(초기데이터.userId);
+  const [editUserName, setEditUserName] = useState(초기데이터.userName);
+  const [editUserTel, setEditUserTel] = useState(초기데이터.userPhoneNum);
+  const [editUserCity, setEditUserCity] = useState(초기데이터.userCity);
+
   //password 유효성 검증 state
-  const [password, setPassword] = useState("");
+  const [editpassword, setEditPassword] = useState("");
   const [passwordConfirm, setPasswordConfirm] = useState("");
   const [passwordError, setPasswordError] = useState(false);
 
+  // 지역옵션
   const regionOptions = [
     "서울",
     "경기",
@@ -67,6 +72,7 @@ const JoinEdit = () => {
       onOk() {},
     });
   };
+
   // 본인 인증 핸들러
   const handleCertifyPhone = () => {
     Modal.success({
@@ -76,22 +82,49 @@ const JoinEdit = () => {
     });
   };
 
+  // 아이디 수정
+  const handleEditId = e => {
+    setEditId(e.target.value);
+    console.log("editId", editId);
+  };
+  // 닉네임 수정
+  const handleEditUserName = e => {
+    setEditUserName(e.target.value);
+    console.log("editUserName", editUserName);
+  };
+  // 전화번호 수정
+  const handleEditUserTel = e => {
+    setEditUserTel(e.target.value);
+    console.log("editUserTel", editUserTel);
+  };
+  // 지역 수정
+  const handleEditUserCity = e => {
+    setEditUserCity(e.target.value);
+    console.log("editUserTel", editUserCity);
+  };
+
   // password 유효성 관련 핸들러
   const changePassword = e => {
-    setPassword(e.target.value);
+    setEditPassword(e.target.value);
     setPasswordError(e.target.value !== passwordConfirm);
   };
   const changePasswordConfirm = e => {
     setPasswordConfirm(e.target.value);
-    setPasswordError(e.target.value !== password);
+    setPasswordError(e.target.value !== editpassword);
   };
 
-  // 회원 가입 핸들러
+  // 회원정보수정 확인 핸들러
   const onFinish = values => {
-    if (password === passwordConfirm) {
-      console.log("Success:", values);
-      console.log("Success:", editUserInfo);
-      navigate("/");
+    if (editpassword === passwordConfirm) {
+      setEditUserInfo({
+        editId,
+        editpassword,
+        editUserName,
+        editUserTel,
+        editUserCity,
+      });
+      console.log("editUserInfo", editUserInfo);
+      // navigate("/");
     } else {
       console.log("Failed");
     }
@@ -118,11 +151,12 @@ const JoinEdit = () => {
         }}
       >
         <Form
-          initialValues={
-            {
-              // remember: true,
-            }
-          }
+          // 디폴트 값
+          initialValues={{
+            userId: editId,
+            userName: editUserName,
+            phoneNumber: editUserTel,
+          }}
           onFinish={onFinish}
           onFinishFailed={onFinishFailed}
           layout="vertical"
@@ -147,7 +181,8 @@ const JoinEdit = () => {
                 maxLength={20}
                 placeholder="아이디를 입력해 주세요."
                 // defaultValue={savedUserInfo.userId}
-                value={savedUserInfo.userId}
+                value={editId}
+                onChange={handleEditId}
               />
             </Form.Item>
             <ButtonConfirm onClick={handleCertifyID}>중복확인</ButtonConfirm>
@@ -173,7 +208,7 @@ const JoinEdit = () => {
               // 글자수 제한
               maxLength={20}
               placeholder="비밀번호를 입력해 주세요."
-              value={password}
+              value={editpassword}
               onChange={changePassword}
             />
           </Form.Item>
@@ -222,7 +257,8 @@ const JoinEdit = () => {
               // 글자수 제한
               maxLength={10}
               placeholder="이름을 입력해 주세요."
-              defaultValue={savedUserInfo.userName}
+              value={editUserName}
+              onChange={handleEditUserName}
             />
           </Form.Item>
 
@@ -249,7 +285,8 @@ const JoinEdit = () => {
                 // 글자수 제한
                 maxLength={15}
                 placeholder="연락처를 입력해 주세요."
-                defaultValue={savedUserInfo.userPhoneNum}
+                value={editUserTel}
+                onChange={handleEditUserTel}
               />
             </Form.Item>
             <ButtonConfirm onClick={handleCertifyPhone}>본인인증</ButtonConfirm>
@@ -260,9 +297,13 @@ const JoinEdit = () => {
             </span>
             <p>거주지역을 선택해 주세요.</p>
             <Form.Item name="userCity">
-              <Radio.Group defaultValue={savedUserInfo.userCity} size="large">
+              <Radio.Group defaultValue={editUserCity} size="large">
                 {regionOptions.map(option => (
-                  <Radio.Button key={option} value={option}>
+                  <Radio.Button
+                    key={option}
+                    value={option}
+                    onChange={handleEditUserCity}
+                  >
                     {option}
                   </Radio.Button>
                 ))}
