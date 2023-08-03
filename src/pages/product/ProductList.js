@@ -1,16 +1,21 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { ConfigProvider, Select } from "antd";
 import {
   ProductListItemWrap,
   ProductListWrap,
 } from "../../style/ProductListStyle";
 import { ProductListItem } from "../../style/ProductStyle";
 import { ContentsListItemWrap } from "../../style/GlobalComponents";
-import { ConfigProvider, Select } from "antd";
 import { Gradation } from "../../style/GlobalStyle";
 import ProductListTitle from "../../components/product/ProductListTitle";
+import NoImage from "../../assets/no_image.jpg";
 
 const ProductList = () => {
+  // 이미지 없을 때 error처리
+  const onImgError = e => {
+    e.target.src = NoImage;
+  };
   // 상품 총 갯수 카운트
   const [totalCount, setTotalCount] = useState("");
   // 상품 더미 데이터
@@ -20,8 +25,7 @@ const ProductList = () => {
       producttitle: "1",
       price: 34545,
       sale: 32900,
-      link: "/",
-      image: "https://via.placeholder.com/135x175",
+      image: "",
       isbadge: [0, 1],
     },
     {
@@ -29,7 +33,6 @@ const ProductList = () => {
       producttitle: "2",
       price: 10000,
       sale: 10000,
-      link: "/",
       image: "https://via.placeholder.com/135x175/123",
       isbadge: [],
     },
@@ -38,7 +41,6 @@ const ProductList = () => {
       producttitle: "3",
       price: 20000,
       sale: 20000,
-      link: "/",
       image: "https://via.placeholder.com/135x175/456",
       isbadge: [0, 1],
     },
@@ -47,7 +49,6 @@ const ProductList = () => {
       producttitle: "4",
       price: 40000,
       sale: 40000,
-      link: "/",
       image: "https://via.placeholder.com/135x175/789",
       isbadge: [0],
     },
@@ -56,7 +57,6 @@ const ProductList = () => {
       producttitle: "5",
       price: 50000,
       sale: 50000,
-      link: "/",
       image: "https://via.placeholder.com/135x175",
       isbadge: [1],
     },
@@ -65,7 +65,6 @@ const ProductList = () => {
       producttitle: "6",
       price: 60000,
       sale: 60000,
-      link: "/",
       image: "https://via.placeholder.com/135x175/123",
       isbadge: [0, 1],
     },
@@ -131,9 +130,13 @@ const ProductList = () => {
         <ContentsListItemWrap>
           {foodItem.map(item => (
             <ProductListItem key={item.iproduct}>
-              <Link to={item.link}>
+              <Link to={`/productdetail/${item.iproduct}`}>
                 <div className="img">
-                  <img src={item.image} alt={item.producttitle} />
+                  <img
+                    src={item.image}
+                    alt={item.producttitle}
+                    onError={onImgError}
+                  />
                   {/* 장바구니 버튼 */}
                   <button>
                     <img

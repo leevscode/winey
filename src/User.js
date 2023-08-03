@@ -15,7 +15,6 @@ import Footer from "./components/Footer";
 import NavList from "./pages/NavList";
 
 const User = () => {
-  // const { ilist } = useParams();
   const navigate = useNavigate();
   const location = useLocation();
   const [isNavActive, setIsNavActive] = useState(false);
@@ -60,10 +59,7 @@ const User = () => {
       <ContentsWrap>
         <Outlet />
       </ContentsWrap>
-      {location.pathname === "/" ||
-      // location.pathname === `/productlist/${ilist}` ||
-      location.pathname === "/productdetail" ||
-      location.pathname === "/windeguide" ? (
+      {location.pathname === "/" || location.pathname === "/windeguide" ? (
         <Footer />
       ) : null}
       <QuickMenu

@@ -4,8 +4,8 @@
   깃허브 : https://github.com/kimaydev
 */
 import styled from "@emotion/styled";
-import { Gradation, Maincolor, WidthPd, opacity } from "./GlobalStyle";
 import { css } from "@emotion/react";
+import { Gradation, Maincolor, WidthPd, opacity } from "./GlobalStyle";
 
 export const ProductListWrap = styled.div`
   margin-top: -2rem;
