@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { PickupPlaceClickWrap } from "../../style/ProductSellStyle";
 // import { ConfigProvider, Form, Radio } from "antd";
 // import Swiper from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css/navigation";
 
-const PickupPlaceClick = () => {
+const PickupPlaceClick = ({ selectCollect, setSelectCollect }) => {
   const 임시데이터 = {
     city: ["대구"],
     store: [
@@ -15,46 +15,74 @@ const PickupPlaceClick = () => {
       { pk: 14, title: "칠성점", address: "대구 북구 침산로 93 스펙트럼시티" },
       { pk: 15, title: "반야월점", address: "대구 동구 안심로 389-2" },
     ],
-    date: ["07월 29일 토요일", "07월 30일 일요일", "07월 31일 월요일"],
     time: ["10:00", "12:00", "14:00", "16:00", "18:00", "20:00", "22:00"],
   };
 
-  // state
+  // 픽업날짜(오늘 이후 3일 간)
+  const first = new Date();
+  const formatDate = date => {
+    return date.toLocaleString("ko-KR", {
+      weekday: "long",
+      month: "2-digit",
+      day: "2-digit",
+    });
+  };
+
+  const dateArray = [];
+  for (let i = 1; i <= 3; i++) {
+    const tempDate = new Date(first);
+    tempDate.setDate(first.getDate() + i);
+    dateArray.push(formatDate(tempDate));
+  }
+
+  // select state
+  const [sltStoreButton, setSltStoreButton] = useState(null);
+  const [sltDateButton, setSltDateButton] = useState(null);
+  const [sltTimeButton, setSltTimeButton] = useState(null);
+
+  // 픽업장소,날짜,시간 state
   const [pickUpSpot, setPickUpSpot] = useState([]);
   const [pickUpDate, setPickUpDate] = useState([]);
   const [pickUpTime, setPickUpTime] = useState([]);
 
-  // 선택값 담기
-  const [selectCollect, setSelectCollet] = useState([]);
-
   // 픽업장소 이벤트 핸들러
   const handleChangePickSpot = (option, e) => {
     e.preventDefault();
-    console.log("pickUpSpot", pickUpSpot);
-    setPickUpSpot(option);
 
-    setSelectCollet({ pickUpTime, pickUpDate, pickUpSpot });
-    console.log("selectCollect", selectCollect);
+    setPickUpSpot(option);
+    setSelectCollect(prevState => ({
+      ...prevState,
+      pickUpSpot: option,
+    }));
+
+    setSltStoreButton(option.pk);
   };
+
   // 픽업날짜 이벤트 핸들러
-  const handleChangePickDate = (option, e) => {
+  const handleChangePickDate = (option, e, index) => {
     e.preventDefault();
-    console.log("pickUpDate", pickUpDate);
     setPickUpDate(option);
 
-    setSelectCollet({ pickUpTime, pickUpDate, pickUpSpot });
-    console.log("selectCollect", selectCollect);
+    setSelectCollect(prevState => ({
+      ...prevState,
+      pickUpData: option,
+    }));
+
+    setSltDateButton(index);
+    console.log("sltDateButton", sltDateButton);
   };
 
   // 픽업시간 이벤트 핸들러
-  const handleChangePickTime = (option, e) => {
+  const handleChangePickTime = (option, e, index) => {
     e.preventDefault();
-    console.log("pickUpTime", pickUpTime);
     setPickUpTime(option);
 
-    setSelectCollet({ pickUpTime, pickUpDate, pickUpSpot });
+    setSelectCollect(prevState => ({
+      ...prevState,
+      pickUpTime: option,
+    }));
 
-    console.log("selectCollect", selectCollect);
+    setSltTimeButton(index);
   };
 
   return (
@@ -68,7 +96,13 @@ const PickupPlaceClick = () => {
             {임시데이터.store.map(option => (
               <SwiperSlide key={option.pk}>
                 <div onClick={e => handleChangePickSpot(option, e)}>
-                  <button type="button" value={pickUpSpot}>
+                  <button
+                    value={pickUpSpot}
+                    className={
+                      "btn" +
+                      (option.pk == sltStoreButton ? " activeStore" : "")
+                    }
+                  >
                     <b>{임시데이터.city}</b>
                     <br />
                     <strong>{option.title}</strong>
@@ -84,15 +118,24 @@ const PickupPlaceClick = () => {
       <div>
         <span>픽업예정일</span>
         <p>원하시는 픽업예정일 선택해 주세요</p>
-
         <div className="date">
-          {임시데이터.date.map((option, index) => (
-            <div key={index} onClick={e => handleChangePickDate(option, e)}>
-              <button type="button" value={pickUpDate}>
+          {dateArray.map((option, index) => (
+            <div
+              key={index}
+              onClick={e => handleChangePickDate(option, e, index)}
+            >
+              <button
+                value={pickUpDate}
+                className={
+                  "btn" + (index == sltDateButton ? " activeDate" : "")
+                }
+              >
                 {/* 날짜 */}
-                <strong>{option.substring(0, 7)}</strong>
+                <strong>
+                  {option.substring(0, 2)}월 {option.substring(3, 6)}일
+                </strong>
                 {/* 요일 */}
-                <p>{option.substring(8, 11)}</p>
+                <p>{option.substring(7, 11)}</p>
               </button>
             </div>
           ))}
@@ -107,8 +150,13 @@ const PickupPlaceClick = () => {
           <Swiper spaceBetween={40} slidesPerView={"auto"} loop={false}>
             {임시데이터.time.map((option, index) => (
               <SwiperSlide key={index}>
-                <div onClick={e => handleChangePickTime(option, e)}>
-                  <button type="button" value={pickUpTime}>
+                <div onClick={e => handleChangePickTime(option, e, index)}>
+                  <button
+                    value={pickUpTime}
+                    className={
+                      "btn" + (index == sltTimeButton ? " activeTime" : "")
+                    }
+                  >
                     <strong>{option}</strong>
                   </button>
                 </div>

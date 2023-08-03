@@ -9,7 +9,7 @@ import { Maincolor, WidthPd, opacity } from "./GlobalStyle";
 
 export const JoinWrap = styled.div`
   margin-top: 3rem;
-  margin-bottom: 6rem;
+  margin-bottom: 7rem;
   padding: ${WidthPd.padding};
   display: flex;
   justify-content: center;
@@ -87,18 +87,31 @@ export const RegionSelectWrap = styled.div`
     flex-wrap: wrap;
     gap: 0.3rem;
     & > label {
+      position: relative;
       width: 6.5rem;
       padding: 1.3rem;
       margin: 0.4rem;
       border: 0.1rem solid ${Maincolor.grayMedium};
-      border-radius: 0.5rem;
+      border-radius: 0.8rem;
       & span {
         position: absolute;
-        top: 1.1rem;
-        left: 1.7rem;
+        top: 1rem;
+        left: 1.9rem;
         font-size: 1.4rem;
-        font-weight: 400;
+        font-weight: 500;
       }
+    }
+    // 버튼 클릭 시 스타일 바꾸기
+    & .ant-radio-button-wrapper-checked {
+      background: ${Maincolor.redBold};
+      transition: 0.2s ease-in-out;
+      & > span {
+        color: ${Maincolor.white};
+      }
+    }
+    // ant button 좌측 선 없애기
+    & .ant-radio-button-wrapper::before {
+      width: 0;
     }
   }
 `;

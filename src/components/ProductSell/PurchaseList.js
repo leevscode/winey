@@ -1,14 +1,20 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { PurchaseListWrap, TotalPrice } from "../../style/ProductSellStyle";
 import { faMinus, faPlus } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+// import NoImage from "../../assets/no_image.jpg";
 
-const PurchaseList = () => {
+const PurchaseList = ({
+  totalPrice,
+  setTotalPrice,
+  productCollect,
+  setProductColloet,
+}) => {
   const 임시데이터 = {
     TempList: [
       {
         productPK: "22",
-        ProductImg: "https://via.placeholder.com/150x150/ffffff",
+        ProductImg: "https://via.placeholder.com/200x200/ffff22",
         productKorName: "프란시스 포드 코폴라, 엘레노어",
         productEngName: "Francis Ford Coppola, Eleanor",
         sellPrice: 32600,
@@ -16,7 +22,7 @@ const PurchaseList = () => {
       },
       {
         productPK: "23",
-        ProductImg: "https://via.placeholder.com/150x150/ffffff",
+        ProductImg: "https://via.placeholder.com/190x350/ffeeee",
         productKorName: "비냐 콘차이토로 푸두 카베르네 소비뇽 쉬라즈",
         productEngName: "VINA CONCHA Y TORO PUDU CABERNET SAUVIGNON SHIRAZ",
         sellPrice: 72000,
@@ -24,6 +30,11 @@ const PurchaseList = () => {
       },
     ],
   };
+
+  // 이미지 없을 때 error처리
+  // const onImgError = e => {
+  //   e.target.src = NoImage;
+  // };
 
   // 아이템 갯수 state
   const numberArray = 임시데이터.TempList.map(item => item.number);
@@ -35,7 +46,7 @@ const PurchaseList = () => {
       return prevCounts.map((count, index) => {
         if (임시데이터.TempList[index].productPK === productPK) {
           // 값이 0보다 작으면 0으로 제한
-          return Math.max(parseInt(count) - 1, 0);
+          return Math.max(parseInt(count) - 1, 1);
         } else {
           return count;
         }
@@ -46,7 +57,8 @@ const PurchaseList = () => {
     setItemCount(prevCounts => {
       return prevCounts.map((count, index) => {
         if (임시데이터.TempList[index].productPK === productPK) {
-          return parseInt(count) + 1;
+          // 값이 5보다 크면 5으로 제한
+          return Math.min(parseInt(count) + 1, 5);
         } else {
           return count;
         }
@@ -62,6 +74,9 @@ const PurchaseList = () => {
     });
     return itemtotal;
   };
+  useEffect(() => {
+    setTotalPrice(calcTotalSum);
+  }, []);
 
   return (
     <div>
@@ -70,10 +85,15 @@ const PurchaseList = () => {
         {임시데이터.TempList.map((option, index) => (
           <div key={option.productPK} className="WrapFlex">
             <div className="item-photo">
-              <img src={option.ProductImg} />
+              <img
+                src={option.ProductImg}
+                alt={option.productEngName}
+                // onError={onImgError}
+              />
             </div>
             <div className="item-desc">
               <strong>{option.productKorName}</strong>
+              <span>{option.productEngName}</span>
               <p>{parseInt(option.sellPrice).toLocaleString()} 원</p>
               <div>
                 <FontAwesomeIcon
