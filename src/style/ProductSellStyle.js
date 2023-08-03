@@ -172,18 +172,33 @@ export const PurchaseListWrap = styled.div`
   & .WrapFlex {
     border-bottom: 1px solid ${opacity.white};
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
     align-items: center;
-    padding: 3rem 0;
+    padding: 2rem 0;
+
     &:last-child {
       border-bottom: 0;
     }
+    // 제품 썸네일 사진
     & .item-photo {
+      /* width: 14rem;
+      height: 18rem; */
       border: 1px solid ${opacity.white};
+      margin-right: 2rem;
+      overflow: hidden;
+      margin: 0 auto;
+      padding: 0.5rem;
+      & > img {
+        width: 13.5rem;
+        height: 17.5rem;
+        object-fit: contain;
+      }
     }
+    // 제품 설명
     & .item-desc {
       width: 35rem;
       margin-top: 2rem;
+
       // 상품명(한글)
       & > strong {
         font-size: 1.7rem;
@@ -212,7 +227,7 @@ export const PurchaseListWrap = styled.div`
         align-items: center;
         & > p {
           display: inline-block;
-          width: 4rem;
+          width: 4.5rem;
           font-size: 1.5rem;
           font-weight: 600;
           color: ${Maincolor.black};

@@ -8,7 +8,7 @@ const PurchaseList = ({ totalPrice, setTotalPrice }) => {
     TempList: [
       {
         productPK: "22",
-        ProductImg: "https://via.placeholder.com/150x150/ffffff",
+        ProductImg: "https://via.placeholder.com/200x200/ffff22",
         productKorName: "프란시스 포드 코폴라, 엘레노어",
         productEngName: "Francis Ford Coppola, Eleanor",
         sellPrice: 32600,
@@ -16,7 +16,7 @@ const PurchaseList = ({ totalPrice, setTotalPrice }) => {
       },
       {
         productPK: "23",
-        ProductImg: "https://via.placeholder.com/150x150/ffffff",
+        ProductImg: "https://via.placeholder.com/190x350/ffeeee",
         productKorName: "비냐 콘차이토로 푸두 카베르네 소비뇽 쉬라즈",
         productEngName: "VINA CONCHA Y TORO PUDU CABERNET SAUVIGNON SHIRAZ",
         sellPrice: 72000,
@@ -81,6 +81,7 @@ const PurchaseList = ({ totalPrice, setTotalPrice }) => {
             </div>
             <div className="item-desc">
               <strong>{option.productKorName}</strong>
+              <span>{option.productEngName}</span>
               <p>{parseInt(option.sellPrice).toLocaleString()} 원</p>
               <div>
                 <FontAwesomeIcon

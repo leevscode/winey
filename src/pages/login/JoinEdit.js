@@ -33,6 +33,8 @@ const JoinEdit = () => {
   //변경 회원정보를 담는 state
   const [editUserInfo, setEditUserInfo] = useState([]);
 
+  // 아이디 변경 state
+  const [editId, setEditId] = useState()
   //password 유효성 검증 state
   const [password, setPassword] = useState("");
   const [passwordConfirm, setPasswordConfirm] = useState("");
@@ -116,9 +118,11 @@ const JoinEdit = () => {
         }}
       >
         <Form
-          initialValues={{
-            remember: true,
-          }}
+          initialValues={
+            {
+              // remember: true,
+            }
+          }
           onFinish={onFinish}
           onFinishFailed={onFinishFailed}
           layout="vertical"
@@ -126,15 +130,11 @@ const JoinEdit = () => {
           <span>
             아이디(E-mail)<b>*</b>
           </span>
-          <p>사용하실 아이디를 이메일 형식으로 입력해 주세요.</p>
+          <p>사용하실 아이디를 입력해 주세요.</p>
           <ConfirmArray>
             <Form.Item
-              name="userEmail"
+              name="userId"
               rules={[
-                {
-                  type: "email",
-                  message: "The input is not valid E-mail!",
-                },
                 {
                   required: true,
                   message: "Please input your E-mail!",
@@ -144,9 +144,10 @@ const JoinEdit = () => {
               <Input
                 size="large"
                 // 글자수 제한
-                maxLength={25}
+                maxLength={20}
                 placeholder="아이디를 입력해 주세요."
-                defaultValue={savedUserInfo.userId}
+                // defaultValue={savedUserInfo.userId}
+                value={savedUserInfo.userId}
               />
             </Form.Item>
             <ButtonConfirm onClick={handleCertifyID}>중복확인</ButtonConfirm>
@@ -170,7 +171,7 @@ const JoinEdit = () => {
             <Input.Password
               size="large"
               // 글자수 제한
-              maxLength={25}
+              maxLength={20}
               placeholder="비밀번호를 입력해 주세요."
               value={password}
               onChange={changePassword}
@@ -196,7 +197,7 @@ const JoinEdit = () => {
             <Input.Password
               size="large"
               // 글자수 제한
-              maxLength={25}
+              maxLength={20}
               placeholder="비밀번호를 다시 한번 입력해 주세요"
               value={passwordConfirm}
               onChange={changePasswordConfirm}
