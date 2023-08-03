@@ -16,9 +16,25 @@ import {
   SellListModal,
 } from "../../style/SellListReviewStyle";
 
-const ReviewModal = ({ modalVisible, hideModal }) => {
+const ReviewModal = ({ modalVisible, hideModal, setReviewSubmitted  }) => {
   const [selectedReview, setSelectedReview] = useState(null);
   const [showWarning, setShowWarning] = useState(false);
+
+  // DB연동 예정
+  const handleReviewSubmit = () => {
+    if (selectedReview) {
+      console.log("평점이 등록되었습니다:", selectedReview);
+      // DB연동 예정
+
+      // 리뷰가 성공적으로 제출되면 reviewSubmitted를 true로 설정
+      setReviewSubmitted(true);
+
+      // 평점 처리가 완료되면 모달을 닫습니다.
+      hideModal();
+    } else {
+      setShowWarning(true);
+    }
+  };
 
   const handleReviewSelection = reviewType => {
     setSelectedReview(prevReview => {
@@ -27,19 +43,6 @@ const ReviewModal = ({ modalVisible, hideModal }) => {
       // 선택한 평점을 다시 선택시 해제되도록 설정
       return newReview;
     });
-  };
-
-  // DB연동 예정
-  const handleReviewSubmit = () => {
-    if (selectedReview) {
-      console.log("평점이 등록되었습니다:", selectedReview);
-      // DB연동 예정
-
-      // 평점 처리가 완료되면 모달을 닫습니다.
-      hideModal();
-    } else {
-      setShowWarning(true);
-    }
   };
 
   // 모달 닫기를 처리하는 함수

@@ -4,6 +4,7 @@ import {
   PickUpButton,
   OrdercancelBtn,
   SellListInfo,
+  ReviewOk,
 } from "../../style/SellListStyle";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -62,15 +63,15 @@ const SellList = () => {
   };
 
   const showCancelModal = index => {
-    const updatedCancelModalVisible = [...cancelModalVisible];
-    updatedCancelModalVisible[index] = true;
-    setCancelModalVisible(updatedCancelModalVisible);
+    const updatedCancelModal = [...cancelModalVisible];
+    updatedCancelModal[index] = true;
+    setCancelModalVisible(updatedCancelModal);
   };
 
   const hideCancelModal = index => {
-    const updatedCancelModalVisible = [...cancelModalVisible];
-    updatedCancelModalVisible[index] = false;
-    setCancelModalVisible(updatedCancelModalVisible);
+    const updatedCancelModal = [...cancelModalVisible];
+    updatedCancelModal[index] = false;
+    setCancelModalVisible(updatedCancelModal);
   };
 
   const showModal = () => {
@@ -88,13 +89,11 @@ const SellList = () => {
   };
 
   const handlePickUpComplete = index => {
-    setSelectedOrderIndices(prevSelectedOrderIndices => {
-      if (prevSelectedOrderIndices.includes(index)) {
-        return prevSelectedOrderIndices.filter(
-          itemIndex => itemIndex !== index,
-        );
+    setSelectedOrderIndices(prevSelectedOrder => {
+      if (prevSelectedOrder.includes(index)) {
+        return prevSelectedOrder.filter(itemIndex => itemIndex !== index);
       } else {
-        return [...prevSelectedOrderIndices, index];
+        return [...prevSelectedOrder, index];
       }
     });
   };
@@ -111,6 +110,12 @@ const SellList = () => {
       </ProductCartNone>
     );
   }
+  // 리뷰 제출 상태를 관리할 상태 변수 추가
+  const [reviewSubmitted, setReviewSubmitted] = useState(false);
+  const tempTest = () => {
+    setReviewSubmitted(false);
+    return <ReviewOk>평점등록이 완료되었습니다</ReviewOk>;
+  };
 
   return (
     <>
@@ -135,14 +140,20 @@ const SellList = () => {
             <li>결제 금액: {item.amount}</li>
             <li>주문 상태: {item.status}</li>
           </SellListInfo>
+          {/* 리뷰가 제출되면 ReviewOk div를 조건부 렌더링합니다. */}
+          {/* {reviewSubmitted && <ReviewOk>평점등록이 완료되었습니다</ReviewOk>} */}
           <SellListButton>
             <>
               {/* 주문 상태가 "픽업대기" 또는 "픽업완료"일 때 "픽업완료" 버튼을 클릭 가능 */}
               {["픽업대기", "픽업완료"].includes(item.status) ? (
                 selectedOrderIndices.includes(item.key) ? (
-                  <ButtonCancel onClick={() => showModal()}>
-                    평점등록
-                  </ButtonCancel>
+                  reviewSubmitted ? (
+                    <ReviewOk>평점등록이 완료되었습니다</ReviewOk>
+                  ) : (
+                    <ButtonCancel onClick={() => showModal()}>
+                      평점등록
+                    </ButtonCancel>
+                  )
                 ) : (
                   <PickUpButton onClick={() => handlePickUpComplete(item.key)}>
                     픽업완료
@@ -161,9 +172,12 @@ const SellList = () => {
           )}
         </div>
       ))}
-
       {/* 리뷰 모달 내용 */}
-      <ReviewModal modalVisible={modalVisible} hideModal={hideModal} />
+      <ReviewModal
+        modalVisible={modalVisible}
+        hideModal={hideModal}
+        setReviewSubmitted={setReviewSubmitted}
+      />
     </>
   );
 };
