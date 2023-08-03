@@ -5,8 +5,11 @@ import {
   ProductCompleteText,
   ProductCompleteinfo,
 } from "../../style/ProductCompleteStyle";
+import { useLocation } from "react-router-dom";
 
 const ProductComplete = () => {
+  const { state } = useLocation();
+  console.log("state", state);
   const [productData, setProductData] = useState({
     productImage: "https://via.placeholder.com/200x200",
     productName: "제프 까렐, 울띰 헤꼴뜨",

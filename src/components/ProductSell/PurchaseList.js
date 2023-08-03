@@ -4,7 +4,12 @@ import { faMinus, faPlus } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 // import NoImage from "../../assets/no_image.jpg";
 
-const PurchaseList = ({ totalPrice, setTotalPrice }) => {
+const PurchaseList = ({
+  totalPrice,
+  setTotalPrice,
+  productCollect,
+  setProductColloet,
+}) => {
   const 임시데이터 = {
     TempList: [
       {
