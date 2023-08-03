@@ -53,7 +53,7 @@ export const PickupPlaceClickWrap = styled.div`
           color: ${Maincolor.white};
           font-size: 0.9rem;
           line-height: 2rem;
-          font-weight: 400;
+          font-weight: 500;
           padding: 0.2rem 0.5rem;
           border-radius: 0.3rem;
         }
@@ -81,6 +81,19 @@ export const PickupPlaceClickWrap = styled.div`
           & > p {
             color: ${Maincolor.white};
           }
+        }
+      }
+      & .activeStore {
+        background: ${Maincolor.redBold};
+        color: ${Maincolor.white};
+        border-radius: 0.5rem;
+        & > b {
+          background: ${Maincolor.white};
+          color: ${Maincolor.redBold};
+          font-weight: 600;
+        }
+        & > p {
+          color: ${Maincolor.white};
         }
       }
     }
@@ -113,12 +126,21 @@ export const PickupPlaceClickWrap = styled.div`
         letter-spacing: 0.07rem;
         color: ${Maincolor.redBold};
       }
+
       &:hover {
         background: ${Maincolor.redBold};
         color: ${Maincolor.white};
         & > p {
           color: ${Maincolor.white};
         }
+      }
+    }
+    & .activeDate {
+      background: ${Maincolor.redBold};
+      color: ${Maincolor.white};
+      border-radius: 0.5rem;
+      & > p {
+        color: ${Maincolor.white};
       }
     }
   }
@@ -131,7 +153,7 @@ export const PickupPlaceClickWrap = styled.div`
     .swiper-slide {
       position: relative;
       background: ${Maincolor.white};
-      height: 4rem;
+      height: 4.2rem;
       width: 6rem;
       /* margin: 0 2rem; */
       border: 0.1rem solid ${Maincolor.white};
@@ -155,6 +177,10 @@ export const PickupPlaceClickWrap = styled.div`
           background: ${Maincolor.redBold};
           color: ${Maincolor.white};
         }
+      }
+      & .activeTime {
+        background: ${Maincolor.redBold};
+        color: ${Maincolor.white};
       }
     }
   }

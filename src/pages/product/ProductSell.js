@@ -13,7 +13,7 @@ const ProductSell = () => {
 
   const navigate = useNavigate();
   // 선택값 담기 state
-  const [selectCollect, setSelectCollet] = useState([]);
+  const [selectCollect, setSelectCollect] = useState([]);
   // 합계값 담기 state
   const [totalPrice, setTotalPrice] = useState(0);
   // 카드결제 값 담기 state
@@ -39,7 +39,7 @@ const ProductSell = () => {
     <PurchaseWrap>
       <PickupPlaceClick
         selectCollect={selectCollect}
-        setSelectCollet={setSelectCollet}
+        setSelectCollect={setSelectCollect}
       />
       <PurchaseList totalPrice={totalPrice} setTotalPrice={setTotalPrice} />
 
