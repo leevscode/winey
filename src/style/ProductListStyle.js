@@ -12,7 +12,7 @@ export const ProductListWrap = styled.div`
 `;
 const gradientStyle = props => {
   // 상품 리스트의 params에 따라 타이틀 배경 색상 결정
-  if (props.ilist === "0") {
+  if (props.listPathName === "red") {
     return css`
       background: linear-gradient(
         90deg,
@@ -21,7 +21,7 @@ const gradientStyle = props => {
       );
       color: ${Maincolor.white};
     `;
-  } else if (props.ilist === "1") {
+  } else if (props.listPathName === "white") {
     return css`
       background: linear-gradient(
         90deg,
@@ -30,7 +30,7 @@ const gradientStyle = props => {
       );
       color: ${Maincolor.black};
     `;
-  } else if (props.ilist === "2") {
+  } else if (props.listPathName === "spakling") {
     return css`
       background: linear-gradient(
         90deg,
@@ -39,7 +39,7 @@ const gradientStyle = props => {
       );
       color: ${Maincolor.black};
     `;
-  } else if (props.ilist === "3") {
+  } else if (props.listPathName === "etc") {
     return css`
       background: linear-gradient(
         90deg,

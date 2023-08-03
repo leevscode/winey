@@ -75,19 +75,19 @@ const Header = ({ handleOpenNav, isActive }) => {
     // 와인 카테고리
     {
       title: "레드 와인",
-      path: "/productlist/0",
+      path: "/productlist/red",
     },
     {
       title: "화이트 와인",
-      path: "/productlist/1",
+      path: "/productlist/white",
     },
     {
       title: "스파클링 와인",
-      path: "/productlist/2",
+      path: "/productlist/spakling",
     },
     {
       title: "기타 와인",
-      path: "/productlist/3",
+      path: "/productlist/etc",
     },
   ];
   useEffect(() => {

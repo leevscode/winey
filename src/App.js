@@ -42,7 +42,14 @@ function App() {
         {/* 메인 */}
         <Route path="/" element={<Main />} />
         {/* 상품리스트 */}
-        <Route path="/productlist/:ilist" element={<ProductList />} />
+        {/* <Route path="/productlist/:ilist" element={<ProductList />} /> */}
+        <Route path="/productlist">
+          <Route path="red" element={<ProductList />} />
+          <Route path="white" element={<ProductList />} />
+          <Route path="spakling" element={<ProductList />} />
+          <Route path="etc" element={<ProductList />} />
+          <Route index path="*" element={<NotFound />} />
+        </Route>
         {/* 상품상세페이지 */}
         <Route path="/productdetail" element={<ProductDetail />} />
         {/* 구매하기 */}

@@ -32,9 +32,9 @@ const NavList = ({ handleOpenNav, closeNav }) => {
         <ul>
           <li>
             <NavLink
-              to="/productlist/0"
+              to="/productlist/red"
               onClick={() => {
-                closeNav("/productlist/0");
+                closeNav("/productlist/red");
               }}
             >
               레드 와인
@@ -42,9 +42,9 @@ const NavList = ({ handleOpenNav, closeNav }) => {
           </li>
           <li>
             <NavLink
-              to="/productlist/1"
+              to="/productlist/white"
               onClick={() => {
-                closeNav("/productlist/1");
+                closeNav("/productlist/white");
               }}
             >
               화이트 와인
@@ -52,9 +52,9 @@ const NavList = ({ handleOpenNav, closeNav }) => {
           </li>
           <li>
             <NavLink
-              to="/productlist/2"
+              to="/productlist/spakling"
               onClick={() => {
-                closeNav("/productlist/2");
+                closeNav("/productlist/spakling");
               }}
             >
               스파클링 와인
@@ -62,9 +62,9 @@ const NavList = ({ handleOpenNav, closeNav }) => {
           </li>
           <li>
             <NavLink
-              to="/productlist/3"
+              to="/productlist/etc"
               onClick={() => {
-                closeNav("/productlist/3");
+                closeNav("/productlist/etc");
               }}
             >
               기타
