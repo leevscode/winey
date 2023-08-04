@@ -67,17 +67,15 @@ const User = () => {
         // handleScrollTop={handleScrollTop}
       />
       {/* 네비게이션 메뉴 */}
-      <AnimatePresence>
-        {isNavActive && (
-          <NavWrap
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-          >
-            <NavList handleOpenNav={handleOpenNav} closeNav={closeNav} />
-          </NavWrap>
-        )}
-      </AnimatePresence>
+      {isNavActive && (
+        <NavWrap
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+        >
+          <NavList handleOpenNav={handleOpenNav} closeNav={closeNav} />
+        </NavWrap>
+      )}
     </LayoutWrap>
   );
 };
