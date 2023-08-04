@@ -27,7 +27,16 @@ const ProductSell = () => {
   const handleCreditCard = () => {
     info({
       title: "카드결제",
-      content: <div>결제가 완료되었습니다.</div>,
+      content: (
+        <div>
+          결제가 완료처리 되었습니다.
+          <br />
+          <strong>
+            해당사이트는 스터디용으로 제작되었으므로 실제 결제가 이루어지지
+            않음을 알려드립니다.
+          </strong>
+        </div>
+      ),
       onOk() {},
     });
     setIsPayment(1);

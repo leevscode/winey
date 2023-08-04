@@ -184,3 +184,18 @@ export const JoinEditBtn = styled.div`
     margin: 0.8rem 0;
   }
 `;
+
+export const TermsInfoScroll = styled.div`
+  font-size: 1rem;
+  width: 30rem;
+  height: 50rem;
+  overflow-y: scroll;
+  & h2 {
+    
+    font-size: 1.4rem;
+  }
+  & > p {
+    font-size: 1.2rem;
+    font-weight: 900;
+  }
+`;
