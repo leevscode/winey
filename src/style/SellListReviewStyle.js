@@ -77,8 +77,8 @@ export const SellListModal = styled.div`
   align-items: center;
   background-color: rgba(0, 0, 0, 0.5);
   z-index: 999;
-  visibility: ${({ modalVisible }) => (modalVisible ? "visible" : "hidden")};
-  opacity: ${({ modalVisible }) => (modalVisible ? 1 : 0)};
+  visibility: ${({ reviewReset }) => (reviewReset ? "visible" : "hidden")};
+  opacity: ${({ reviewReset }) => (reviewReset ? 1 : 0)};
   transition:
     visibility 0.3s,
     opacity 0.3s;

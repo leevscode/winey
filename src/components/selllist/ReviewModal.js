@@ -16,7 +16,7 @@ import {
   SellListModal,
 } from "../../style/SellListReviewStyle";
 
-const ReviewModal = ({ modalVisible, hideModal, setReviewSubmitted  }) => {
+const ReviewModal = ({ reviewReset, hideModal, reviewSubmitUpdate }) => {
   const [selectedReview, setSelectedReview] = useState(null);
   const [showWarning, setShowWarning] = useState(false);
 
@@ -26,8 +26,8 @@ const ReviewModal = ({ modalVisible, hideModal, setReviewSubmitted  }) => {
       console.log("평점이 등록되었습니다:", selectedReview);
       // DB연동 예정
 
-      // 리뷰가 성공적으로 제출되면 reviewSubmitted를 true로 설정
-      setReviewSubmitted(true);
+      // 리뷰가 성공적으로 제출되면 reviewSubmit를 true로 설정
+      reviewSubmitUpdate();
 
       // 평점 처리가 완료되면 모달을 닫습니다.
       hideModal();
@@ -47,21 +47,20 @@ const ReviewModal = ({ modalVisible, hideModal, setReviewSubmitted  }) => {
 
   // 모달 닫기를 처리하는 함수
   const closeModal = () => {
-    // 모달이 닫힐 때 showWarning 상태를 false로 설정하여 경고 메시지를 숨깁니다.
     setShowWarning(false);
     hideModal();
   };
 
-  // 모달이 닫힐 때 selectedReview 상태를 null로 설정하여 평점 선택을 초기화합니다.
+  // 모달이 닫힐 때 상태를 평점 선택을 초기화
   useEffect(() => {
-    if (!modalVisible) {
+    if (!reviewReset) {
       setSelectedReview(null);
     }
-  }, [modalVisible]);
+  }, [reviewReset]);
 
   return (
-    <SellListModal modalVisible={modalVisible}>
-      {modalVisible && (
+    <SellListModal reviewReset={reviewReset}>
+      {reviewReset && (
         <div>
           <ModalText>
             <button onClick={() => hideModal()}>
