@@ -147,7 +147,7 @@ const PickupPlaceClick = ({ selectCollect, setSelectCollect }) => {
         <p>픽업시간을 선택해 주세요</p>
 
         <div className="time">
-          <Swiper spaceBetween={40} slidesPerView={"auto"} loop={false}>
+          <Swiper spaceBetween={35} slidesPerView={"auto"} loop={false}>
             {임시데이터.time.map((option, index) => (
               <SwiperSlide key={index}>
                 <div onClick={e => handleChangePickTime(option, e, index)}>

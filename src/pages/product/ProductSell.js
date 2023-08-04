@@ -14,11 +14,11 @@ const ProductSell = () => {
   // 픽업 선택값 담기 state
   const [selectCollect, setSelectCollect] = useState([]);
   // 제품 선택 값 담기
-  const [productCollect, setProductColloet] = useState([]);
+  const [productCollect, setProductCollect] = useState([]);
   // 합계값 담기 state
   const [totalPrice, setTotalPrice] = useState(0);
   // 카드결제 유무 담기 state
-  const [isPayment, setIsPayment] = useState(false);
+  const [isPayment, setIsPayment] = useState(0);
   // 전체 담기 state
   const [totalPayList, setTotalPayList] = useState([]);
 
@@ -30,14 +30,15 @@ const ProductSell = () => {
       content: <div>결제가 완료되었습니다.</div>,
       onOk() {},
     });
-    setIsPayment(true);
+    setIsPayment(1);
+    console.log("isPayment", isPayment);
   };
   // 최종결제 버튼
   const handleFinalCharge = () => {
-    setTotalPayList({ selectCollect, totalPrice, isPayment });
-    console.log(totalPayList);
+    setTotalPayList({ productCollect, selectCollect, totalPrice, isPayment });
+    console.log("totalPayList", totalPayList);
 
-    // navigate("/ProductComplete", { state: totalPayList });
+    navigate("/ProductComplete", { state: totalPayList });
   };
 
   return (
@@ -50,7 +51,7 @@ const ProductSell = () => {
         totalPrice={totalPrice}
         setTotalPrice={setTotalPrice}
         productCollect={productCollect}
-        setProductColloet={setProductColloet}
+        setProductCollect={setProductCollect}
       />
 
       <PurchaseBtn>
