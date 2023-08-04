@@ -105,11 +105,12 @@ export const PickupPlaceClickWrap = styled.div`
     display: flex;
     justify-content: space-around;
     align-items: center;
+    gap: 0 1rem;
     & button {
       background: ${Maincolor.white};
       font-size: 1.4rem;
       color: ${Maincolor.black};
-      padding: 2rem 5rem;
+      padding: 2rem 4.7rem;
       border-radius: 0.5rem;
       transition: 0.2s ease-in-out;
 
@@ -269,6 +270,7 @@ export const PurchaseListWrap = styled.div`
           font-size: 1.5rem;
           border: 2px solid ${opacity.white};
           padding: 0.5rem;
+          cursor: pointer;
         }
       }
     }
