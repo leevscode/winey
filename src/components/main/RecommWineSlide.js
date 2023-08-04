@@ -16,8 +16,9 @@ import { RecommWineContents, RecommWineLogout } from "../../style/MainStyle";
 
 const RecommWineSlide = () => {
   // 더미데이터
-  const [isLoginChk, setIsLoginChk] = useState(null);
-  console.log(isLoginChk);
+  // const [isLoginChk, setIsLoginChk] = useState(null);
+  const [isLoginChk, setIsLoginChk] = useState(true);
+  // console.log(isLoginChk);
   const productSlide = [
     {
       iuser: 1,

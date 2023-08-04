@@ -6,6 +6,7 @@
 import styled from "@emotion/styled";
 import { motion } from "framer-motion";
 import { Maincolor, WidthPd, opacity } from "./GlobalStyle";
+import { Modal } from "antd";
 
 // 헤더
 export const HeaderWrap = styled.header`
@@ -111,6 +112,9 @@ export const HeaderWrap = styled.header`
         }
       }
     }
+  }
+  .test {
+    background: pink;
   }
 `;
 // 서브페이지 헤더 뒤로가기 버튼
@@ -385,5 +389,48 @@ export const ContentsListItemWrap = styled.div`
   & > div {
     width: calc(100% / 3 - 14px);
     margin: 0 7px 40px;
+  }
+`;
+// 준비중 모달창
+export const NoticeModal = styled(Modal)`
+  top: 25vh;
+  .ant-modal-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 75%;
+    height: 200px;
+    margin: 0 auto;
+  }
+  .ant-modal-body {
+    font-family:
+      "Pretendard Variable",
+      Pretendard,
+      -apple-system,
+      BlinkMacSystemFont,
+      system-ui,
+      Roboto,
+      "Helvetica Neue",
+      "Segoe UI",
+      "Apple SD Gothic Neo",
+      "Noto Sans KR",
+      "Malgun Gothic",
+      "Apple Color Emoji",
+      "Segoe UI Emoji",
+      "Segoe UI Symbol",
+      sans-serif;
+    color: ${Maincolor.black};
+    margin-top: 15px;
+    p {
+      font-size: 1.8rem;
+      font-weight: 700;
+      text-align: center;
+      i {
+        display: block;
+        font-size: 1.8em;
+        line-height: 1;
+        margin-bottom: 3px;
+      }
+    }
   }
 `;

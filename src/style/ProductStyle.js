@@ -15,7 +15,6 @@ export const ProductListItem = styled.div`
     padding-top: 135%;
     overflow: hidden;
     isolation: isolate;
-    box-shadow: 0px 9px 8px -6px ${opacity.white};
     & > img {
       position: absolute;
       top: 50%;

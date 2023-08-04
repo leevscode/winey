@@ -288,6 +288,9 @@ export const RecommWineContents = styled.div`
     overflow-x: clip;
     .swiper-slide {
       width: calc(100% / 3);
+      .img {
+        box-shadow: 0px 9px 8px -6px ${opacity.white};
+      }
     }
     .swiper-slide-next {
       & > div {

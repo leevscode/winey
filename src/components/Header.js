@@ -4,10 +4,18 @@
   깃허브 : https://github.com/kimaydev
 */
 import React, { useEffect, useState } from "react";
-import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
-import { BackBtn, HeaderTitle, HeaderWrap } from "../style/GlobalComponents";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
+import {
+  BackBtn,
+  HeaderTitle,
+  HeaderWrap,
+  NoticeModal,
+} from "../style/GlobalComponents";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
+import {
+  faArrowLeft,
+  faCircleExclamation,
+} from "@fortawesome/free-solid-svg-icons";
 
 const Header = ({ handleOpenNav, isActive }) => {
   const location = useLocation();
@@ -18,6 +26,17 @@ const Header = ({ handleOpenNav, isActive }) => {
   const [pageTitle, setPageTitle] = useState("");
   // 서브페이지 헤더 페이지 위치 state
   const [pagePath, setPagePath] = useState("");
+  // 검색 모달 state
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const showModal = () => {
+    setIsModalOpen(true);
+  };
+  const handleOk = () => {
+    setIsModalOpen(false);
+  };
+  const handleCancel = () => {
+    setIsModalOpen(false);
+  };
   // 페이지별 타이틀
   const pageName = [
     {
@@ -155,7 +174,7 @@ const Header = ({ handleOpenNav, isActive }) => {
           <li>
             <ol>
               <li>
-                <button className="search">
+                <button className="search" onClick={showModal}>
                   <img
                     src={`${process.env.PUBLIC_URL}/images/icon_search_1.svg`}
                     alt="검색"
@@ -183,6 +202,20 @@ const Header = ({ handleOpenNav, isActive }) => {
           </li>
         </ul>
       </HeaderWrap>
+      {/* 준비중 모달창 */}
+      <NoticeModal
+        open={isModalOpen}
+        onOk={handleOk}
+        onCancel={handleCancel}
+        footer={null}
+      >
+        <p>
+          <i>
+            <FontAwesomeIcon icon={faCircleExclamation} />
+          </i>
+          준비중입니다.
+        </p>
+      </NoticeModal>
     </>
   );
 };
