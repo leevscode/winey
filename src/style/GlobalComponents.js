@@ -113,9 +113,6 @@ export const HeaderWrap = styled.header`
       }
     }
   }
-  .test {
-    background: pink;
-  }
 `;
 // 서브페이지 헤더 뒤로가기 버튼
 export const BackBtn = styled.button`
