@@ -9,11 +9,15 @@ const PickupPlaceClick = ({ selectCollect, setSelectCollect }) => {
   const 임시데이터 = {
     city: ["대구"],
     store: [
-      { pk: 11, title: "성서점", address: "대구 달서구 이곡동로 24" },
-      { pk: 12, title: "월배점", address: "대구 달서구 진천로 92" },
-      { pk: 13, title: "만촌점", address: "대구 수성구 동원로 13" },
-      { pk: 14, title: "칠성점", address: "대구 북구 침산로 93 스펙트럼시티" },
-      { pk: 15, title: "반야월점", address: "대구 동구 안심로 389-2" },
+      { pk: 11, title: "이마트 성서점", address: "대구 달서구 이곡동로 24" },
+      { pk: 12, title: "이마트 월배점", address: "대구 달서구 진천로 92" },
+      { pk: 13, title: "이마트 만촌점", address: "대구 수성구 동원로 13" },
+      {
+        pk: 14,
+        title: "이마트 칠성점",
+        address: "대구 북구 침산로 93 스펙트럼시티",
+      },
+      { pk: 15, title: "이마트 반야월점", address: "대구 동구 안심로 389-2" },
     ],
     time: ["10:00", "12:00", "14:00", "16:00", "18:00", "20:00", "22:00"],
   };
@@ -44,11 +48,6 @@ const PickupPlaceClick = ({ selectCollect, setSelectCollect }) => {
   const [pickUpSpot, setPickUpSpot] = useState([]);
   const [pickUpDate, setPickUpDate] = useState([]);
   const [pickUpTime, setPickUpTime] = useState([]);
-
-  // 픽업장소,날짜,시간 Error
-  // const [errorSpot, setErrorSpot] = useState("");
-  // const [errorDate, setErrorDate] = useState("");
-  // const [errorTime, setErrorTime] = useState("");
 
   // 픽업장소 이벤트 핸들러
   const handleChangePickSpot = (option, e) => {

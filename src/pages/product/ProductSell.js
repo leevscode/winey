@@ -18,12 +18,42 @@ import { useNavigate } from "react-router-dom";
 import { Modal } from "antd";
 
 const ProductSell = () => {
+  const 임시데이터 = {
+    TempList: [
+      {
+        productPK: "22",
+        productImg: "",
+        productKorName: "프란시스 포드 코폴라, 엘레노어",
+        productEngName: "Francis Ford Coppola, Eleanor",
+        sellPrice: 32600,
+        number: 1,
+      },
+      {
+        productPK: "23",
+        productImg: "https://via.placeholder.com/190x350/ffeeee",
+        productKorName: "비냐 콘차이토로 푸두 카베르네 소비뇽 쉬라즈",
+        productEngName: "VINA CONCHA Y TORO PUDU CABERNET SAUVIGNON SHIRAZ",
+        sellPrice: 72000,
+        number: 3,
+      },
+      {
+        productPK: "24",
+        productImg: "https://via.placeholder.com/350x350/ffffee",
+        productKorName: "스가르지 루이지, 레티자 화이트",
+        productEngName: "Sgarzi Luigi, Letizia White",
+        sellPrice: 14500,
+        number: 2,
+      },
+    ],
+  };
+
   const navigate = useNavigate();
 
   // 픽업 선택값 담기 state
   const [selectCollect, setSelectCollect] = useState([]);
   // 제품 선택 값 담기
-  const [productCollect, setProductCollect] = useState([]);
+  const [productCollect, setProductCollect] = useState(임시데이터.TempList);
+  console.log("productCollect", productCollect);
   // 합계값 담기 state
   const [totalPrice, setTotalPrice] = useState(0);
   // 카드결제 유무 담기 state
@@ -33,8 +63,6 @@ const ProductSell = () => {
 
   // 에러처리 state
   const [paymentError, setPaymentError] = useState("");
-  // const [productError, setProductError] = useState("");
-  // const [cardError, setCardError] = useState("");
 
   // 카드결제 모달창
   const { info } = Modal;
