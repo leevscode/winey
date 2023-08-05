@@ -36,7 +36,7 @@ const ProductComplete = () => {
     totalPrice,
   } = firstItem;
 
-  console.log(productCollect);
+  console.log("productCollect", productCollect);
 
   // 이미지 없을 때 error처리
   const onImgError = e => {
@@ -67,7 +67,7 @@ const ProductComplete = () => {
         {firstItem.productCollect.map((option, index) => (
           <div key={index}>
             <div className="imgWrap">
-              <img src={option.ProductImg} alt="img" onError={onImgError} />
+              <img src={option.productImg} alt="img" onError={onImgError} />
             </div>
             <ul>
               <li>{option.productKorName}</li>

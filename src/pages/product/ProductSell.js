@@ -45,20 +45,22 @@ const ProductSell = () => {
       onOk() {},
     });
     setIsPayment(1);
+    setTotalPayList({ productCollect, selectCollect, totalPrice, isPayment });
     console.log("isPayment", isPayment);
+    console.log("totalPayList", totalPayList);
   };
-  
-    useEffect(() => {
-      console.log("totalPayList", totalPayList);
-    }, [totalPayList]); // totalPayList 값이 변경될 때마다 실행
 
   // 최종결제 버튼
   const handleFinalCharge = () => {
-    setTotalPayList({ productCollect, selectCollect, totalPrice, isPayment });
+    // setTotalPayList({ productCollect, selectCollect, totalPrice, isPayment });
     console.log("totalPayList", totalPayList);
 
     navigate("/ProductComplete", { state: totalPayList });
   };
+
+  useEffect(() => {
+    console.log("totalPayList", totalPayList);
+  }, [productCollect, selectCollect]); // totalPayList 값이 변경될 때마다 실행
 
   return (
     <PurchaseWrap>
