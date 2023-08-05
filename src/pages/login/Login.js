@@ -17,7 +17,7 @@ const Login = () => {
 
   const onFinish = values => {
     console.log("Success:", values);
-    navigate("/");
+    navigate("/main");
   };
   const onFinishFailed = errorInfo => {
     console.log("Failed:", errorInfo);

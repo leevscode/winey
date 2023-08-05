@@ -122,7 +122,7 @@ const JoinEdit = () => {
         editUserCity,
       });
       console.log("editUserInfo", editUserInfo);
-      // navigate("/");
+      // navigate("/main");
     } else {
       console.log("Failed");
     }
@@ -134,7 +134,7 @@ const JoinEdit = () => {
   // 회원탈퇴 핸들러
   const UserDropOut = () => {
     console.log("회원탈퇴");
-    navigate("/");
+    navigate("/main");
   };
 
   return (

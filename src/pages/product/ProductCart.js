@@ -58,7 +58,7 @@ const ProductCart = () => {
       ),
     );
   };
-  
+
   // 상품의 총 금액을 계산하는 함수
   const calculateTotalPrice = () => {
     let totalPrice = 0;
@@ -132,7 +132,7 @@ const ProductCart = () => {
       )}
       <ButtonCancel
         onClick={() => {
-          navigate("/");
+          navigate("/main");
         }}
       >
         메인으로 돌아가기

@@ -26,7 +26,7 @@ const RecommWineSlide = () => {
       producttitle: "상품1",
       price: 34545,
       sale: 32900,
-      link: "/",
+      link: "/main",
       image: "https://via.placeholder.com/135x175",
     },
     {
@@ -35,7 +35,7 @@ const RecommWineSlide = () => {
       producttitle: "상품2",
       price: 10000,
       sale: 10000,
-      link: "/",
+      link: "/main",
       image: "https://via.placeholder.com/135x175/123",
     },
     {
@@ -44,7 +44,7 @@ const RecommWineSlide = () => {
       producttitle: "상품3",
       price: 20000,
       sale: 20000,
-      link: "/",
+      link: "/main",
       image: "https://via.placeholder.com/135x175/456",
     },
     {
@@ -53,7 +53,7 @@ const RecommWineSlide = () => {
       producttitle: "상품4",
       price: 30000,
       sale: 30000,
-      link: "/",
+      link: "/main",
       image: "https://via.placeholder.com/135x175/789",
     },
   ];
@@ -65,7 +65,7 @@ const RecommWineSlide = () => {
           {productSlide.map(item => (
             <SwiperSlide key={item.iproduct}>
               <ProductListItem>
-                <Link to="/">
+                <Link to="/main">
                   <div className="img">
                     <img src={item.image} alt={item.producttitle} />
                     {/* 장바구니 버튼 */}

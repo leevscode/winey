@@ -37,13 +37,13 @@ function App() {
           <Route path="/admin" element={<AdminHome />} />
         </Route>
         {/* 인트로 */}
-        <Route path="/intro" element={<Intro />} />
+        <Route path="/" element={<Intro />} />
         {/* 성인인증 */}
         <Route path="/adultchk" element={<AdultChk />} />
         {/* 사용자 페이지 */}
         <Route element={<User />}>
           {/* 메인 */}
-          <Route path="/" element={<Main />} />
+          <Route path="/main" element={<Main />} />
           {/* 상품리스트 */}
           <Route path="/productlist">
             <Route path="red" element={<ProductList />} />

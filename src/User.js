@@ -59,7 +59,7 @@ const User = () => {
       <ContentsWrap>
         <Outlet />
       </ContentsWrap>
-      {location.pathname === "/" || location.pathname === "/windeguide" ? (
+      {location.pathname === "/main" || location.pathname === "/windeguide" ? (
         <Footer />
       ) : null}
       <QuickMenu

@@ -121,12 +121,11 @@ const KeywordChooseCp = () => {
   const handleKeywordChoice = () => {
     // favoriteKeyword();
     console.log("favoriteKeyword", favoriteKeyword);
-    navigator("/");
+    navigator("/main");
   };
   const handleKeywordAll = () => {
     setFavoriteKeyword({ ...wineOptions });
     console.log("확인중", favoriteKeyword);
-    // navigator("/");
   };
   return (
     <KeywordWrap>

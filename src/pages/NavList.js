@@ -13,7 +13,12 @@ const NavList = ({ handleOpenNav, closeNav }) => {
     <>
       <ul className="top">
         <li>
-          <NavLink to="/">
+          <NavLink
+            to="/main"
+            onClick={() => {
+              closeNav("/productlist/red");
+            }}
+          >
             <img
               src={`${process.env.PUBLIC_URL}/images/logo_1.svg`}
               alt="로고"

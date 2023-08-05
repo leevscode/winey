@@ -7,7 +7,7 @@ const WineSellQuick = () => {
     <SellQuickWrap>
       <ul>
         <li>
-          <NavLink to="/">구매하기</NavLink>
+          <NavLink to="/main">구매하기</NavLink>
         </li>
         <li>
           <NavLink to="/cart">

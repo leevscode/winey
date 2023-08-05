@@ -5,7 +5,11 @@
 */
 
 import React, { useEffect, useState } from "react";
-import { EditKeywordConfirmBtn, KeywordConfirmBtn, KeywordWrap } from "../../style/KeywordStyle";
+import {
+  EditKeywordConfirmBtn,
+  KeywordConfirmBtn,
+  KeywordWrap,
+} from "../../style/KeywordStyle";
 import { Checkbox, ConfigProvider } from "antd";
 import { ButtonCancel, ButtonOk } from "../../style/GlobalStyle";
 import { useNavigate } from "react-router-dom";
@@ -151,14 +155,14 @@ const KeywordSelectEdit = () => {
   const handleEditKeywordChoice = () => {
     // editFavoriteKeyword();
     console.log("editFavoriteKeyword", editFavoriteKeyword);
-    navigator("/");
+    navigator("/main");
   };
   const handleEditKeywordAll = () => {
     // editFavoriteKeyword("all");
     setEditFavoriteKeyword({ ...wineOptions });
     console.log("확인중", editFavoriteKeyword);
 
-    // navigator("/");
+    // navigator("/main");
   };
   return (
     <KeywordWrap>

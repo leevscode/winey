@@ -77,7 +77,7 @@ const Join = () => {
     if (password === passwordConfirm) {
       console.log("Success:", values);
       setUserInfo(values);
-      navigate("/");
+      navigate("/main");
     } else {
       console.log("Failed");
     }

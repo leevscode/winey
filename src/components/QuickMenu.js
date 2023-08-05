@@ -40,7 +40,7 @@ const QuickMenu = ({ handleOpenNav }) => {
           <ul>
             <li>
               <NavLink
-                to="/"
+                to="/main"
                 className={({ isActive }) => {
                   return isActive ? "active" : "";
                 }}

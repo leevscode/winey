@@ -123,12 +123,12 @@ const Header = ({ handleOpenNav, isActive }) => {
   return (
     <>
       <HeaderWrap
-        className={location.pathname === "/" && isActive ? "active" : ""}
-        mainBgc={location.pathname === "/"}
+        className={location.pathname === "/main" && isActive ? "active" : ""}
+        mainBgc={location.pathname === "/main"}
       >
         <ul>
           <li>
-            {location.pathname === "/" ? (
+            {location.pathname === "/main" ? (
               // 네비게이션 메뉴 보기 버튼
               <button onClick={handleOpenNav}>
                 <img
@@ -151,9 +151,9 @@ const Header = ({ handleOpenNav, isActive }) => {
           </li>
           <li>
             <h1>
-              {location.pathname === "/" ? (
+              {location.pathname === "/main" ? (
                 // 헤더 로고
-                <NavLink to="/">
+                <NavLink to="/main">
                   <img
                     src={`${process.env.PUBLIC_URL}/images/logo_1.svg`}
                     alt="로고"
