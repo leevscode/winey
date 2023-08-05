@@ -46,7 +46,7 @@ export const JoinWrap = styled.div`
   }
 `;
 
-// 중복확인 , 본인인증 btn
+// 인증메일발송 , 본인인증 btn
 export const ButtonConfirm = styled.button`
   display: block;
   background: ${Maincolor.grayBold};
@@ -55,7 +55,7 @@ export const ButtonConfirm = styled.button`
   font-size: 1.6rem;
   font-weight: 500;
   width: 100%;
-  height: 4rem;
+  height: 4.3rem;
   border-radius: 0.5rem;
   transition: 0.2s ease-in-out;
   &:hover {
@@ -75,6 +75,19 @@ export const ConfirmArray = styled.div`
   & button {
     margin: 0 auto;
     width: 15rem;
+    margin-left: 1rem;
+  }
+`;
+
+// 이메일 인증 component styled
+export const CertifyWrap = styled.div`
+  width: 40rem;
+  margin: 1rem;
+  & > p {
+    margin: 1rem 0 1rem 0;
+  }
+  & > form {
+    display: flex;
     margin-left: 1rem;
   }
 `;
@@ -179,23 +192,22 @@ export const TermsFlex = styled.div`
   }
 `;
 
-export const JoinEditBtn = styled.div`
-  & button {
-    margin: 0.8rem 0;
-  }
-`;
-
 export const TermsInfoScroll = styled.div`
   font-size: 1rem;
   width: 30rem;
   height: 50rem;
   overflow-y: scroll;
   & h2 {
-    
     font-size: 1.4rem;
   }
   & > p {
     font-size: 1.2rem;
     font-weight: 900;
+  }
+`;
+
+export const JoinEditBtn = styled.div`
+  & button {
+    margin: 0.8rem 0;
   }
 `;

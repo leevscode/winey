@@ -5,7 +5,7 @@
 */
 
 import React, { useState } from "react";
-import { Radio, Form, Input, ConfigProvider, Modal } from "antd";
+import { Radio, Form, Input, ConfigProvider, Modal, Button } from "antd";
 
 import {
   ButtonConfirm,
@@ -16,11 +16,16 @@ import {
 import { ButtonOk } from "../../style/GlobalStyle";
 import { Terms } from "../../components/join/Terms";
 import { useNavigate } from "react-router-dom";
+import CertifyEmail from "../../components/join/CertifyEmail";
 
 const Join = () => {
   const navigate = useNavigate();
 
   const [userInfo, setUserInfo] = useState([]);
+
+  // 이메일 인증 모달
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   //password 유효성 검증 state
   const [password, setPassword] = useState("");
   const [passwordConfirm, setPasswordConfirm] = useState("");
@@ -45,15 +50,18 @@ const Join = () => {
     "제주",
   ];
 
-  // 아이디 중복 확인 핸들러
-  const handleCertifyID = () => {
-    Modal.info({
-      title: "아이디 중복확인",
-      content: <div>기능 추가 필요</div>,
-      onOk() {},
-    });
+  // 아이디 중복 확인 모달창 핸들러
+  const showModal = () => {
+    setIsModalOpen(true);
   };
-  // 본인 인증 핸들러
+  const handleOk = () => {
+    setIsModalOpen(false);
+  };
+  const handleCancel = () => {
+    setIsModalOpen(false);
+  };
+
+  // 전화번호 본인 인증 핸들러
   const handleCertifyPhone = () => {
     Modal.success({
       title: "본인 인증",
@@ -106,16 +114,20 @@ const Join = () => {
           layout="vertical"
         >
           <span>
-            아이디<b>*</b>
+            아이디(Email)<b>*</b>
           </span>
-          <p>사용하실 아이디를 입력해 주세요.</p>
+          <p>사용하실 아이디를 이메일 형식으로 입력해 주세요.</p>
           <ConfirmArray>
             <Form.Item
               name="userEmail"
               rules={[
                 {
                   required: true,
-                  message: "Please input your ID!",
+                  message: "이메일을 입력해주세요",
+                },
+                {
+                  type: "email",
+                  message: "이메일을 입력해주세요",
                 },
               ]}
             >
@@ -126,7 +138,21 @@ const Join = () => {
                 placeholder="아이디를 입력해 주세요."
               />
             </Form.Item>
-            <ButtonConfirm onClick={handleCertifyID}>중복확인</ButtonConfirm>
+            <ButtonConfirm onClick={showModal}>인증메일발송</ButtonConfirm>
+            <Modal
+              title="이메일 인증 확인"
+              open={isModalOpen}
+              onOk={handleOk}
+              onCancel={handleCancel}
+              footer={[
+                <Button key="confirm" onClick={handleOk}>
+                  {" "}
+                  확인{" "}
+                </Button>,
+              ]}
+            >
+              <CertifyEmail />
+            </Modal>
           </ConfirmArray>
 
           <span>

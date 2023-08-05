@@ -13,9 +13,7 @@ import { faChevronRight } from "@fortawesome/free-solid-svg-icons";
 export const TermsInfo = () => {
   return (
     <TermsInfoScroll>
-      <p>
-        전자상거래(인터넷사이버몰) 표준약관
-      </p>
+      <p>전자상거래(인터넷사이버몰) 표준약관</p>
       <p>제1조(목적)</p> 이 약관은 PODOJECT 회사가 제작한 Winey 사이버 몰(이하
       `몰`이라 한다)에서 제공하는 인터넷 관련 서비스(이하 `서비스`라 한다)를
       이용함에 있어 사이버 몰과 이용자의 권리․의무 및 책임사항을 규정함을
@@ -506,6 +504,7 @@ export const Terms = () => {
     setCheckAll(list.length === checkedList.length);
   };
   const onCheckAllChange = e => {
+    console.log("allchecked", e.target.checked)
     setCheckedList(e.target.checked ? ["1", "2"] : []);
     setIndeterminate(false);
     setCheckAll(e.target.checked);

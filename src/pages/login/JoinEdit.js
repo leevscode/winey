@@ -32,7 +32,7 @@ const JoinEdit = () => {
   const [editUserInfo, setEditUserInfo] = useState([]);
 
   // 아이디, 이름, 전화번호 변경 state
-  const [editId, setEditId] = useState(초기데이터.userId);
+  const [editId] = useState(초기데이터.userId);
   const [editUserName, setEditUserName] = useState(초기데이터.userName);
   const [editUserTel, setEditUserTel] = useState(초기데이터.userPhoneNum);
   const [editUserCity, setEditUserCity] = useState(초기데이터.userCity);
@@ -62,15 +62,6 @@ const JoinEdit = () => {
     "제주",
   ];
 
-  // 아이디 중복 확인 핸들러
-  const handleCertifyID = () => {
-    Modal.info({
-      title: "아이디 중복확인",
-      content: <div>기능 추가 필요</div>,
-      onOk() {},
-    });
-  };
-
   // 본인 인증 핸들러
   const handleCertifyPhone = () => {
     Modal.success({
@@ -81,10 +72,10 @@ const JoinEdit = () => {
   };
 
   // 아이디 수정
-  const handleEditId = e => {
-    setEditId(e.target.value);
-    console.log("editId", editId);
-  };
+  // const handleEditId = e => {
+  //   setEditId(e.target.value);
+  //   console.log("editId", editId);
+  // };
   // 닉네임 수정
   const handleEditUserName = e => {
     setEditUserName(e.target.value);
@@ -115,7 +106,7 @@ const JoinEdit = () => {
   const onFinish = values => {
     if (editpassword === passwordConfirm) {
       setEditUserInfo({
-        editId,
+        // editId,
         editpassword,
         editUserName,
         editUserTel,
@@ -163,29 +154,21 @@ const JoinEdit = () => {
             아이디(E-mail)<b>*</b>
           </span>
           <p>사용하실 아이디를 입력해 주세요.</p>
-          <ConfirmArray>
-            <Form.Item
-              name="userId"
-              rules={[
-                {
-                  required: true,
-                  message: "Please input your E-mail!",
-                },
-              ]}
-            >
-              <Input
-                size="large"
-                // 글자수 제한
-                maxLength={20}
-                placeholder="아이디를 입력해 주세요."
-                // defaultValue={savedUserInfo.userId}
-                value={editId}
-                onChange={handleEditId}
-              />
-            </Form.Item>
-            <ButtonConfirm onClick={handleCertifyID}>중복확인</ButtonConfirm>
-          </ConfirmArray>
-
+          <Form.Item
+            name="userId"
+            rules={[
+              {
+                required: true,
+                message: "Please input your E-mail!",
+              },
+            ]}
+          >
+            <Input
+              size="large"
+              // 읽기전용
+              readOnly={true}
+            />
+          </Form.Item>
           <span>
             비밀번호<b>*</b>
           </span>
