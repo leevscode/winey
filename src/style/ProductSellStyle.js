@@ -302,7 +302,7 @@ export const TotalPrice = styled.div`
 // 주문 버튼
 export const PurchaseBtn = styled.div`
   padding: ${WidthPd.padding};
-  margin: 3rem 0;
+  margin-top: 3rem;
   & span {
     position: relative;
     font-size: 1.7rem;
@@ -320,9 +320,27 @@ export const PurchaseBtn = styled.div`
   }
 
   button {
-    margin: 1rem 0 6rem 0;
+    margin: 1rem 0 2rem 0;
+    &:last-child {
+      margin-bottom: 5rem;
+    }
     svg {
       margin-right: 1rem;
+    }
+  }
+`;
+
+export const ProductSellErrors = styled.div`
+  height: 2rem;
+  text-align: center;
+  margin-top: 3rem;
+
+  & > p {
+    color: ${Maincolor.redBold};
+    font-size: 1.6rem;
+    font-weight: 700;
+    & > svg {
+      margin-right: 0.5rem;
     }
   }
 `;

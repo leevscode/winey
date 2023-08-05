@@ -45,6 +45,11 @@ const PickupPlaceClick = ({ selectCollect, setSelectCollect }) => {
   const [pickUpDate, setPickUpDate] = useState([]);
   const [pickUpTime, setPickUpTime] = useState([]);
 
+  // 픽업장소,날짜,시간 Error
+  // const [errorSpot, setErrorSpot] = useState("");
+  // const [errorDate, setErrorDate] = useState("");
+  // const [errorTime, setErrorTime] = useState("");
+
   // 픽업장소 이벤트 핸들러
   const handleChangePickSpot = (option, e) => {
     e.preventDefault();

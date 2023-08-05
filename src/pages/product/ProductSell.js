@@ -7,9 +7,13 @@ import React, { useEffect, useState } from "react";
 import PickupPlaceClick from "../../components/ProductSell/PickupPlaceClick";
 import PurchaseList from "../../components/ProductSell/PurchaseList";
 import { ButtonCancel, ButtonOk } from "../../style/GlobalStyle";
-import { PurchaseBtn, PurchaseWrap } from "../../style/ProductSellStyle";
+import {
+  ProductSellErrors,
+  PurchaseBtn,
+  PurchaseWrap,
+} from "../../style/ProductSellStyle";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCreditCard } from "@fortawesome/free-solid-svg-icons";
+import { faCircleCheck, faCreditCard } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
 import { Modal } from "antd";
 
@@ -26,6 +30,11 @@ const ProductSell = () => {
   const [isPayment, setIsPayment] = useState(0);
   // 전체 담기 state
   const [totalPayList, setTotalPayList] = useState([]);
+
+  // 에러처리 state
+  const [paymentError, setPaymentError] = useState("");
+  // const [productError, setProductError] = useState("");
+  // const [cardError, setCardError] = useState("");
 
   // 카드결제 모달창
   const { info } = Modal;
@@ -51,9 +60,37 @@ const ProductSell = () => {
   };
 
   // 최종결제 버튼
-  const handleFinalCharge = () => {
-    // setTotalPayList({ productCollect, selectCollect, totalPrice, isPayment });
-    console.log("totalPayList", totalPayList);
+  const handleFinalCharge = e => {
+    // 에러처리
+    if (
+      selectCollect.pickUpData === undefined ||
+      selectCollect.pickUpData === ""
+    ) {
+      setPaymentError("픽업 날짜를 선택해 주세요.");
+      return;
+    }
+    if (
+      selectCollect.pickUpSpot === undefined ||
+      selectCollect.pickUpSpot === ""
+    ) {
+      setPaymentError("픽업 장소를 선택해 주세요.");
+      return;
+    }
+    if (
+      selectCollect.pickUpTime === undefined ||
+      selectCollect.pickUpTime === ""
+    ) {
+      setPaymentError("픽업 시간를 선택해 주세요.");
+      return;
+    }
+    if (productCollect === undefined || productCollect === "") {
+      setPaymentError("제품을 선택해 주세요.");
+      return;
+    }
+    if (isPayment === 0 || isPayment === "") {
+      setPaymentError("결제를 진행해 주세요.");
+      return;
+    }
 
     navigate("/ProductComplete", { state: totalPayList });
   };
@@ -82,6 +119,14 @@ const ProductSell = () => {
           <FontAwesomeIcon icon={faCreditCard} />
           카드결제
         </ButtonCancel>
+        <ProductSellErrors>
+          {paymentError ? (
+            <p>
+              <FontAwesomeIcon icon={faCircleCheck} />
+              {paymentError}
+            </p>
+          ) : null}
+        </ProductSellErrors>
         <ButtonOk onClick={handleFinalCharge}>
           {totalPrice.toLocaleString()}원 결제하기
         </ButtonOk>

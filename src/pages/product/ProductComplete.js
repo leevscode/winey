@@ -86,7 +86,8 @@ const ProductComplete = () => {
             <ul>
               <li>픽업 지점: {firstItem.selectCollect.pickUpSpot.title}</li>
               <li>
-                픽업 시간: {firstItem.selectCollect.pickUpData}{" "}
+                픽업 시간: {firstItem.selectCollect.pickUpData.substring(0, 2)}
+                월 {firstItem.selectCollect.pickUpData.substring(3, 6)}일{" "}
                 {firstItem.selectCollect.pickUpTime}
               </li>
             </ul>
