@@ -31,6 +31,11 @@ export const NotOrder = styled.div`
   font-size: 2rem;
 `;
 
+export const SellListProduct = styled.li`
+  display: flex;
+  flex-direction: column;
+`;
+
 export const PickUpButton = styled.button`
   display: block;
   background: ${Maincolor.redBold};
