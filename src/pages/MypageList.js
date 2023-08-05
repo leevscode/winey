@@ -4,13 +4,22 @@
   깃허브 : https://github.com/kimaydev
 */
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleRight } from "@fortawesome/free-solid-svg-icons";
 import { MypageWrap } from "../style/MypageStyle";
 import { SectionLine } from "../style/GlobalStyle";
+import Cookies from "universal-cookie";
 
 const MypageList = () => {
+  const navigate = useNavigate();
+  const cookies = new Cookies();
+  const handleLogout = e => {
+    e.preventDefault();
+    cookies.remove("accessToken");
+    cookies.remove("refreshToken");
+    navigate("/main");
+  };
   return (
     <MypageWrap>
       <div className="user-title">
@@ -80,7 +89,7 @@ const MypageList = () => {
           </Link>
         </li>
         <li>
-          <button>로그아웃</button>
+          <button onClick={handleLogout}>로그아웃</button>
         </li>
       </ul>
     </MypageWrap>
