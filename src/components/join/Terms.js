@@ -498,14 +498,17 @@ export const Terms = () => {
   const [checkedList, setCheckedList] = useState([]);
   const [indeterminate, setIndeterminate] = useState(true);
   const [checkAll, setCheckAll] = useState(false);
+
+  const plainOptions = ["terms", "private"];
+
   const onChange = list => {
     setCheckedList(list);
-    setIndeterminate(!!list.length && list.length < checkedList.length);
-    setCheckAll(list.length === checkedList.length);
+    setIndeterminate(!!list.length && list.length < plainOptions.length);
+    setCheckAll(list.length === plainOptions.length);
   };
   const onCheckAllChange = e => {
-    console.log("allchecked", e.target.checked)
-    setCheckedList(e.target.checked ? ["1", "2"] : []);
+    console.log("allchecked", e.target.checked);
+    setCheckedList(e.target.checked ? plainOptions : []);
     setIndeterminate(false);
     setCheckAll(e.target.checked);
   };
@@ -546,15 +549,19 @@ export const Terms = () => {
         전체 동의합니다.
       </Checkbox>
       <TermsFlex>
-        <Checkbox.Group value={checkedList} onChange={onChange}>
-          <Checkbox value="1">
+        <Checkbox.Group
+          // options={plainOptions}
+          value={checkedList}
+          onChange={onChange}
+        >
+          <Checkbox value={plainOptions[0]}>
             이용약관 동의 <strong>(필수)</strong>
           </Checkbox>{" "}
           <span onClick={handleCheckTerms}>
             약관보기
             <FontAwesomeIcon icon={faChevronRight} />
           </span>
-          <Checkbox value="2">
+          <Checkbox value={plainOptions[1]}>
             개인정보 수집·이용 동의 <strong>(필수)</strong>
           </Checkbox>
           <span onClick={handleCheckedPrivate}>

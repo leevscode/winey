@@ -35,35 +35,35 @@ const CertifyEmail = () => {
             span: 40,
           }}
         >
-            <Form.Item
-              name="certifyEmail"
-              rules={[
-                {
-                  type: "number",
-                  message: "숫자형식으로 입력해주세요",
-                },
-                {
-                  required: true,
-                  message: "인증번호를 입력하세요",
-                },
-              ]}
-            >
-              <Input
-                placeholder="인증번호를 입력하세요."
-                maxLength={6}
-                controls={false}
-              />
-            </Form.Item>
-            <Form.Item
-              wrapperCol={{
-                offset: 2,
-                span: 6,
-              }}
-            >
-              <Button type="primary" htmlType="submit">
-                인증확인
-              </Button>
-            </Form.Item>
+          <Form.Item
+            name="certifyEmail"
+            rules={[
+              {
+                required: true,
+                message: "인증번호를 입력하세요",
+              },
+              {
+                type: "number",
+                message: "숫자형식으로 입력해주세요",
+              },
+            ]}
+          >
+            <Input
+              placeholder="인증번호를 입력하세요."
+              maxLength={6}
+              controls={false}
+            />
+          </Form.Item>
+          <Form.Item
+            wrapperCol={{
+              offset: 2,
+              span: 10,
+            }}
+          >
+            <Button type="primary" htmlType="submit">
+              인증확인
+            </Button>
+          </Form.Item>
         </Form>
       </ConfigProvider>
     </CertifyWrap>

@@ -144,6 +144,7 @@ const Join = () => {
               open={isModalOpen}
               onOk={handleOk}
               onCancel={handleCancel}
+              width={400}
               footer={[
                 <Button key="confirm" onClick={handleOk}>
                   {" "}
@@ -164,7 +165,7 @@ const Join = () => {
             rules={[
               {
                 required: true,
-                message: "Please input your password!",
+                message: "패스워드를 입력해 주세요.",
               },
             ]}
             validateStatus={passwordError ? "error" : ""}
@@ -190,7 +191,7 @@ const Join = () => {
             rules={[
               {
                 required: true,
-                message: "Please input your password!",
+                message: "패스워드를 입력해 주세요.",
               },
             ]}
             validateStatus={passwordError ? "error" : ""}
@@ -215,7 +216,7 @@ const Join = () => {
             rules={[
               {
                 required: true,
-                message: "Please input your username!",
+                message: "이름을 입력해 주세요.",
               },
             ]}
           >
@@ -237,11 +238,11 @@ const Join = () => {
               rules={[
                 {
                   type: "tel",
-                  message: "The input is not valid phone number!",
+                  message: "잘못된 형식입니다.",
                 },
                 {
                   required: true,
-                  message: "Please input your phone number!",
+                  message: "연락처를 입력해 주세요.",
                 },
               ]}
             >
