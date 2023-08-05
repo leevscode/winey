@@ -507,10 +507,10 @@ export const Terms = () => {
     setCheckAll(list.length === plainOptions.length);
   };
   const onCheckAllChange = e => {
-    console.log("allchecked", e.target.checked);
     setCheckedList(e.target.checked ? plainOptions : []);
     setIndeterminate(false);
     setCheckAll(e.target.checked);
+    console.log("allchecked", e.target.checked);
   };
   // 약관보기 모달창 관련
   const handleCheckTerms = () => {

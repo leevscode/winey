@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { ButtonCancel, ButtonOk } from "../../style/GlobalStyle";
 import {
   ProductCompleteBox,
@@ -10,11 +10,16 @@ import { useLocation } from "react-router-dom";
 import NoImage from "../../assets/no_image.jpg";
 
 const ProductComplete = () => {
-  const { state } = useLocation();
-  console.log("state", state);
+  // const [isLoading, setIsLoading] = useState(true); // 로딩 상태
 
-  const data = [{ ...state }];
+  // const { state } = useLocation();
+  const location = useLocation();
+  // console.log("state", state);
+
+  const data = [{ ...location.state }];
+  // const { totalPayList } = location.state;
   console.log("data", data);
+  // console.log("totalPayList", totalPayList);
 
   // 첫 번째 요소 구조분해 할당
   const [firstItem] = data;
@@ -38,6 +43,16 @@ const ProductComplete = () => {
     e.target.src = NoImage;
   };
 
+  // useEffect(() => {
+  //   data({ ...state }).then(result => {
+  //     setIsLoading(false); // 로딩 상태 변경
+  //   });
+  // }, []);
+
+  // // 데이터 로딩 중인 경우 로딩 표시
+  // if (isLoading) {
+  //   return <div>Loading...</div>;
+  // }
   return (
     <ProductCompleteMain>
       <ProductCompleteText>
@@ -61,24 +76,23 @@ const ProductComplete = () => {
                 {(option.sellPrice * option.number).toLocaleString()}원{" "}
                 <span>{option.number}개</span>{" "}
               </li>
-              {/* <li>픽업 지점: {firstItem.selectCollect.pickUpSpot.title}</li>
-              <li>
-                픽업 시간: {firstItem.selectCollect.pickUpData}{" "}
-                {firstItem.selectCollect.pickUpTime}
-              </li> */}
             </ul>
           </div>
         ))}
       </ProductCompleteinfo>
       <ProductCompleteBox>
-        <ul>
-          <li>픽업 지점: {firstItem.selectCollect.pickUpSpot.title}</li>
-          <li>
-            픽업 시간: {firstItem.selectCollect.pickUpData}{" "}
-            {firstItem.selectCollect.pickUpTime}
-          </li>
-        </ul>
-        <p>총 결제금액 : {firstItem.totalPrice.toLocaleString()}원</p>
+        {firstItem && (
+          <div>
+            <ul>
+              <li>픽업 지점: {firstItem.selectCollect.pickUpSpot.title}</li>
+              <li>
+                픽업 시간: {firstItem.selectCollect.pickUpData}{" "}
+                {firstItem.selectCollect.pickUpTime}
+              </li>
+            </ul>
+            <p>총 결제금액 : {firstItem.totalPrice.toLocaleString()}원</p>
+          </div>
+        )}
         <ButtonOk>주문내역 확인 하기</ButtonOk>
         <ButtonCancel>메인보기</ButtonCancel>
       </ProductCompleteBox>

@@ -3,7 +3,7 @@
     노션 : https://www.notion.so/hyemdev
     깃허브 : https://github.com/hyemdev
 */
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import PickupPlaceClick from "../../components/ProductSell/PickupPlaceClick";
 import PurchaseList from "../../components/ProductSell/PurchaseList";
 import { ButtonCancel, ButtonOk } from "../../style/GlobalStyle";
@@ -47,6 +47,11 @@ const ProductSell = () => {
     setIsPayment(1);
     console.log("isPayment", isPayment);
   };
+  
+    useEffect(() => {
+      console.log("totalPayList", totalPayList);
+    }, [totalPayList]); // totalPayList 값이 변경될 때마다 실행
+
   // 최종결제 버튼
   const handleFinalCharge = () => {
     setTotalPayList({ productCollect, selectCollect, totalPrice, isPayment });
