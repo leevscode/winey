@@ -36,7 +36,7 @@ const ProductComplete = () => {
     totalPrice,
   } = firstItem;
 
-  console.log(productCollect);
+  console.log("productCollect", productCollect);
 
   // 이미지 없을 때 error처리
   const onImgError = e => {
@@ -63,30 +63,34 @@ const ProductComplete = () => {
         <p>결제가 완료되었습니다!</p>
         <span>픽업예정일과 시간에 맞춰 상품을 수령해주세요.</span>
       </ProductCompleteText>
-      <ProductCompleteinfo>
-        {firstItem.productCollect.map((option, index) => (
-          <div key={index}>
-            <div className="imgWrap">
-              <img src={option.ProductImg} alt="img" onError={onImgError} />
+      {firstItem && (
+        <ProductCompleteinfo>
+          {firstItem.productCollect.map((option, index) => (
+            <div key={index}>
+              <div className="imgWrap">
+                <img src={option.productImg} alt="img" onError={onImgError} />
+              </div>
+              <ul>
+                <li>{option.productKorName}</li>
+                <li>{option.productEngName}</li>
+                <li>
+                  {(option.sellPrice * option.number).toLocaleString()}원{" "}
+                  <span>{option.number}개</span>{" "}
+                </li>
+              </ul>
             </div>
-            <ul>
-              <li>{option.productKorName}</li>
-              <li>{option.productEngName}</li>
-              <li>
-                {(option.sellPrice * option.number).toLocaleString()}원{" "}
-                <span>{option.number}개</span>{" "}
-              </li>
-            </ul>
-          </div>
-        ))}
-      </ProductCompleteinfo>
+          ))}
+        </ProductCompleteinfo>
+      )}
       <ProductCompleteBox>
         {firstItem && (
           <div>
             <ul>
               <li>픽업 지점: {firstItem.selectCollect.pickUpSpot.title}</li>
+              <li>픽업 주소: {firstItem.selectCollect.pickUpSpot.address}</li>
               <li>
-                픽업 시간: {firstItem.selectCollect.pickUpData}{" "}
+                픽업 시간: {firstItem.selectCollect.pickUpData.substring(0, 2)}
+                월 {firstItem.selectCollect.pickUpData.substring(3, 6)}일{" "}
                 {firstItem.selectCollect.pickUpTime}
               </li>
             </ul>

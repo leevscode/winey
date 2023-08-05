@@ -100,6 +100,7 @@ export const ProductCompleteBox = styled.div`
     margin-left: 1rem;
     font-size: 1.5rem;
     & > li {
+      font-weight: 700;
     }
   }
   & p {

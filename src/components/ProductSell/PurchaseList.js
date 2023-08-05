@@ -15,34 +15,34 @@ const PurchaseList = ({
   productCollect,
   setProductCollect,
 }) => {
-  const 임시데이터 = {
-    TempList: [
-      {
-        productPK: "22",
-        productImg: "",
-        productKorName: "프란시스 포드 코폴라, 엘레노어",
-        productEngName: "Francis Ford Coppola, Eleanor",
-        sellPrice: 32600,
-        number: 1,
-      },
-      {
-        productPK: "23",
-        productImg: "https://via.placeholder.com/190x350/ffeeee",
-        productKorName: "비냐 콘차이토로 푸두 카베르네 소비뇽 쉬라즈",
-        productEngName: "VINA CONCHA Y TORO PUDU CABERNET SAUVIGNON SHIRAZ",
-        sellPrice: 72000,
-        number: 3,
-      },
-      {
-        productPK: "24",
-        productImg: "https://via.placeholder.com/350x350/ffffee",
-        productKorName: "스가르지 루이지, 레티자 화이트",
-        productEngName: "Sgarzi Luigi, Letizia White",
-        sellPrice: 14500,
-        number: 2,
-      },
-    ],
-  };
+  // const 임시데이터 = {
+  //   TempList: [
+  //     {
+  //       productPK: "22",
+  //       productImg: "",
+  //       productKorName: "프란시스 포드 코폴라, 엘레노어",
+  //       productEngName: "Francis Ford Coppola, Eleanor",
+  //       sellPrice: 32600,
+  //       number: 1,
+  //     },
+  //     {
+  //       productPK: "23",
+  //       productImg: "https://via.placeholder.com/190x350/ffeeee",
+  //       productKorName: "비냐 콘차이토로 푸두 카베르네 소비뇽 쉬라즈",
+  //       productEngName: "VINA CONCHA Y TORO PUDU CABERNET SAUVIGNON SHIRAZ",
+  //       sellPrice: 72000,
+  //       number: 3,
+  //     },
+  //     {
+  //       productPK: "24",
+  //       productImg: "https://via.placeholder.com/350x350/ffffee",
+  //       productKorName: "스가르지 루이지, 레티자 화이트",
+  //       productEngName: "Sgarzi Luigi, Letizia White",
+  //       sellPrice: 14500,
+  //       number: 2,
+  //     },
+  //   ],
+  // };
 
   // 이미지 없을 때 error처리
   const onImgError = e => {
@@ -50,7 +50,8 @@ const PurchaseList = ({
   };
 
   // 아이템 갯수 state
-  const numberArray = 임시데이터.TempList.map(item => item.number);
+  const numberArray = productCollect.map(item => item.number);
+  console.log("numberArray", numberArray);
   const [itemCount, setItemCount] = useState(numberArray);
 
   // 수량 변경 핸들러
@@ -58,7 +59,7 @@ const PurchaseList = ({
   const handleCountMinus = option => {
     setItemCount(prevCounts => {
       return prevCounts.map((count, index) => {
-        if (임시데이터.TempList[index].productPK === option.productPK) {
+        if (productCollect[index].productPK === option.productPK) {
           // 값이 0보다 작으면 0으로 제한
           return Math.max(parseInt(count) - 1, 1);
         } else {
@@ -71,7 +72,7 @@ const PurchaseList = ({
   const handleCountPlus = option => {
     setItemCount(prevCounts => {
       return prevCounts.map((count, index) => {
-        if (임시데이터.TempList[index].productPK === option.productPK) {
+        if (productCollect[index].productPK === option.productPK) {
           // 값이 5보다 크면 5으로 제한
           return Math.min(parseInt(count) + 1, 5);
         } else {
@@ -84,7 +85,7 @@ const PurchaseList = ({
   // 합계 계산
   const calcTotalSum = () => {
     let itemtotal = 0;
-    임시데이터.TempList.forEach((option, index) => {
+    productCollect.forEach((option, index) => {
       itemtotal += parseInt(option.sellPrice) * parseInt(itemCount[index]);
     });
     return itemtotal;
@@ -96,27 +97,21 @@ const PurchaseList = ({
   }, [calcTotalSum]);
 
   useEffect(() => {
-    // itemCount가 변경될 때마다 productCollect를 업데이트
-    const updatedProductCollect = 임시데이터.TempList.map((option, index) => {
+    const updatedProductCollect = productCollect.map((option, index) => {
       return {
         ...option,
         number: itemCount[index],
       };
     });
 
-    // setProductCollect(prevState => ({
-    //   // ...prevState,
-    //   ...productCollect,
-    //   updatedProductCollect,
-    // }));
-    setProductCollect(updatedProductCollect)
+    setProductCollect(updatedProductCollect);
     console.log("productCollect", productCollect);
   }, [itemCount]);
   return (
     <div>
       <PurchaseListWrap>
         <p>선택한 상품</p>
-        {임시데이터.TempList.map((option, index) => (
+        {productCollect.map((option, index) => (
           <div key={option.productPK} className="WrapFlex">
             <div className="item-photo">
               <img
