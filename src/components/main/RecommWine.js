@@ -45,10 +45,9 @@ const RecommWine = () => {
         </h2>
       </RecommWineTitle>
       {/* 로딩 */}
-      {/* {isLoading ? <ProductListSkeleton /> : null} */}
-
+      {isLoading ? <ProductListSkeleton /> : null}
       {/* 맞춤 와인 내용 */}
-      <RecommWineSlide />
+      {/* <RecommWineSlide /> */}
     </RecommWineWrap>
   );
 };

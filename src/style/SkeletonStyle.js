@@ -4,23 +4,23 @@
   깃허브 : https://github.com/kimaydev
 */
 import styled from "@emotion/styled";
-// import { keyframes } from "@emotion/react";
 import { Maincolor } from "./GlobalStyle";
-import { keyframes } from "@emotion/react";
 
 export const LoadingProductListItem = styled.div`
   width: calc(100% / 3 - 14px);
   div {
     position: relative;
     background: ${Maincolor.grayMedium};
+    overflow: hidden;
     border-radius: 3px;
     &::after {
       content: "";
       position: absolute;
       top: 0;
-      width: 50px;
+      width: 100px;
       height: 100%;
-      background: pink;
+      background: url(/images/skeleton_grade.png) center;
+      animation: skeleton 1.3s infinite ease-in-out;
     }
   }
   .img {
@@ -37,12 +37,4 @@ export const LoadingProductListItem = styled.div`
     min-height: 1.4rem;
     margin-top: 5px;
   }
-`;
-export const floating = keyframes`
-    from{
-      background: red;
-    }
-    to{
-      background: black;
-    }
 `;

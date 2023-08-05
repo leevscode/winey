@@ -1,14 +1,9 @@
 import React from "react";
-import { LoadingProductListItem, floating } from "../../style/SkeletonStyle";
-import { css } from "@emotion/react";
+import { LoadingProductListItem } from "../../style/SkeletonStyle";
 
 const ProductListSkeleton = () => {
   return (
-    <LoadingProductListItem
-      css={css`
-        animation: ${floating} 1s ease infinite;
-      `}
-    >
+    <LoadingProductListItem>
       <div className="img"></div>
       <div className="title"></div>
       <div className="price"></div>

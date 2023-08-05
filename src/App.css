@@ -1,0 +1,8 @@
+@keyframes skeleton {
+  from {
+    left: -100px;
+  }
+  to {
+    left: 110%;
+  }
+}
