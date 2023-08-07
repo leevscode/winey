@@ -10,9 +10,13 @@ import { Swiper, SwiperSlide } from "swiper/react";
 // Import Swiper styles
 import "swiper/css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faLock } from "@fortawesome/free-solid-svg-icons";
+import { faLock, faCircleQuestion } from "@fortawesome/free-solid-svg-icons";
 import { ProductListItem } from "../../style/ProductStyle";
-import { RecommWineContents, RecommWineLogout } from "../../style/MainStyle";
+import {
+  NotRandomWine,
+  RecommWineContents,
+  RecommWineLogout,
+} from "../../style/MainStyle";
 import ProductListSkeleton from "../skeleton/ProductListSkeleton";
 import NoImage from "../../assets/no_image.jpg";
 
@@ -125,47 +129,68 @@ const RecommWineSlide = ({ isLoading, randomWines }) => {
     <RecommWineContents className="clearfix">
       {isLoginChk ? (
         // 로그인
-        <Swiper slidesPerView={"auto"} spaceBetween={14}>
-          {isLoading
-            ? productListSkeleton.map(index => (
-                <SwiperSlide key={index}>
-                  <ProductListSkeleton />
-                </SwiperSlide>
-              ))
-            : randomWines.map((item, index) => (
-                <SwiperSlide key={index}>
-                  <ProductListItem>
-                    <NavLink to={`/productdetail/${item.productId}`}>
-                      <div className="img">
-                        <img
-                          src={`/img/${item.pic}`}
-                          alt={item.nmKor}
-                          onError={onImgError}
-                        />
-                        {/* 장바구니 버튼 */}
-                        <button>
+        <>
+          <Swiper slidesPerView={"auto"} spaceBetween={14}>
+            {isLoading
+              ? productListSkeleton.map(index => (
+                  <SwiperSlide key={index}>
+                    <ProductListSkeleton />
+                  </SwiperSlide>
+                ))
+              : randomWines.map((item, index) => (
+                  <SwiperSlide key={index}>
+                    <ProductListItem>
+                      <NavLink to={`/productdetail/${item.productId}`}>
+                        <div className="img">
                           <img
-                            src={`${process.env.PUBLIC_URL}/images/icon_cart_2.svg`}
-                            alt="장바구니에 담기"
+                            src={`/img/${item.pic}`}
+                            alt={item.nmKor}
+                            onError={onImgError}
                           />
-                        </button>
-                      </div>
-                      <div className="txt">
-                        <div className="title">{item.nmKor}</div>
-                        <ul className="price">
-                          <li>
-                            <span>{item.price.toLocaleString()}</span>원
-                          </li>
-                          <li>
-                            <span>{item.price.toLocaleString()}원</span>
-                          </li>
-                        </ul>
-                      </div>
-                    </NavLink>
-                  </ProductListItem>
-                </SwiperSlide>
-              ))}
-        </Swiper>
+                          {/* 장바구니 버튼 */}
+                          <button>
+                            <img
+                              src={`${process.env.PUBLIC_URL}/images/icon_cart_2.svg`}
+                              alt="장바구니에 담기"
+                            />
+                          </button>
+                        </div>
+                        <div className="txt">
+                          <div className="title">{item.nmKor}</div>
+                          <ul className="price">
+                            <li>
+                              <span>{item.price.toLocaleString()}</span>원
+                            </li>
+                            <li>
+                              <span>{item.price.toLocaleString()}원</span>
+                            </li>
+                          </ul>
+                        </div>
+                      </NavLink>
+                    </ProductListItem>
+                  </SwiperSlide>
+                ))}
+          </Swiper>
+          {randomWines.length === 0 && (
+            <NotRandomWine>
+              <ul>
+                <li>
+                  <i>
+                    <FontAwesomeIcon icon={faCircleQuestion} />
+                  </i>
+                </li>
+                <li>
+                  선호하는 와인을 찾을 수 없습니다.
+                  <br />
+                  키워드를 다시 선택해주세요.
+                </li>
+                <li>
+                  <Link to="/keywordselectedit">선호 키워드 변경하기</Link>
+                </li>
+              </ul>
+            </NotRandomWine>
+          )}
+        </>
       ) : (
         // 로그아웃
         <RecommWineLogout>

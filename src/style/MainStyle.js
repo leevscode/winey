@@ -325,18 +325,58 @@ export const RecommWineLogout = styled.div`
       color: ${Maincolor.grayBold};
       text-align: center;
       &:nth-of-type(2) {
-        margin: 15px 0 20px;
+        margin: 13px 0 20px;
+        line-height: 1.3;
       }
       i {
-        font-size: 2rem;
+        font-size: 2em;
       }
       a {
         display: block;
-        width: 12rem;
+        min-width: 12rem;
         background: ${Maincolor.grayBold};
         border-radius: 5px;
         color: ${Maincolor.white};
-        padding: 10px 0;
+        padding: 10px;
+        margin: 0 auto;
+        transition: 0.2s ease-in-out;
+        &:hover {
+          background: ${Maincolor.grayDeep};
+        }
+      }
+    }
+  }
+`;
+// 맞춤와인 데이터 존재하지 않을 경우 출력
+export const NotRandomWine = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: ${opacity.whiteB};
+  border: 0.05rem solid ${opacity.white};
+  border-radius: 10px;
+  min-height: 28rem;
+  margin: ${WidthPd.padding};
+  ul {
+    & > li {
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: ${Maincolor.grayBold};
+      text-align: center;
+      &:nth-of-type(2) {
+        margin: 13px 0 20px;
+        line-height: 1.3;
+      }
+      i {
+        font-size: 2em;
+      }
+      a {
+        display: block;
+        min-width: 12rem;
+        background: ${Maincolor.grayBold};
+        border-radius: 5px;
+        color: ${Maincolor.white};
+        padding: 10px;
         margin: 0 auto;
         transition: 0.2s ease-in-out;
         &:hover {

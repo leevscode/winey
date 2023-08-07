@@ -96,3 +96,24 @@ export const ProductListItem = styled.div`
     }
   }
 `;
+// 상품 리스트 아이템 존재하지 않음
+export const NotProductListItem = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100% !important;
+  height: 30vh;
+  margin-bottom: 20px !important;
+  & > div {
+    font-size: 1.8rem;
+    color: ${Maincolor.grayBold};
+    text-align: center;
+    i {
+      display: block;
+      margin-bottom: 10px;
+      font-size: 2em;
+    }
+    p {
+    }
+  }
+`;
