@@ -49,6 +49,7 @@ export const SellListDetailText = styled.div`
 
 export const SellListDetailinfo = styled.div`
   display: flex;
+  padding: 10px;
   img {
     padding: 0 20px;
   }

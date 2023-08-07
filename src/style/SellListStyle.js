@@ -66,6 +66,21 @@ export const SellListInfo = styled.ul`
   margin: 6px;
 `;
 
+export const SellListReady = styled.div`
+  display: flex;
+  background: ${Maincolor.white};
+  text-align: center;
+  justify-content: center;
+  padding: 15px;
+  color: ${Maincolor.black};
+  border: 0.05rem solid ${Maincolor.grayMedium};
+  font-size: 1.6rem;
+  font-weight: 500;
+  width: 100%;
+  height: 5rem;
+  border-radius: 0.5rem;
+`
+
 export const ReviewOk = styled.div`
   display: flex;
   background: ${Maincolor.white};
@@ -80,3 +95,5 @@ export const ReviewOk = styled.div`
   height: 5rem;
   border-radius: 0.5rem;
 `;
+
+
