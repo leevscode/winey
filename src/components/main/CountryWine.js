@@ -3,20 +3,31 @@
   노션 : https://www.notion.so/kimaydev
   깃허브 : https://github.com/kimaydev
 */
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { NavLink } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
+import {
+  faArrowRight,
+  faWineGlassEmpty,
+} from "@fortawesome/free-solid-svg-icons";
 import {
   MainProductSecton,
   MainTabBtn,
   MainTabLink,
   MainTitle,
 } from "../../style/MainStyle";
-import { ProductListItem } from "../../style/ProductStyle";
+import { NotProductListItem, ProductListItem } from "../../style/ProductStyle";
 import { ContentsListItemWrap } from "../../style/GlobalComponents";
+import { getContryWines } from "../../api/patchmain";
+import ProductListSkeleton from "../skeleton/ProductListSkeleton";
 
 const CountryWine = () => {
+  // 로딩 더미데이터
+  const productListSkeleton = [1, 2, 3, 4, 5, 6];
+  // 음식별 와인 데이터 보관할 state
+  const [countryWines, setCountryWines] = useState([]);
+  // 로딩 state
+  const [isLoading, setIsLoading] = useState(true);
   // 버튼 활성화 state
   const [isActive, setIsActive] = useState(1);
   // 국가별 와인 탭메뉴 버튼
@@ -24,27 +35,22 @@ const CountryWine = () => {
     {
       ibtn: 1,
       name: "프랑스",
-      contents: "테스트 육류",
     },
     {
       ibtn: 2,
       name: "미국",
-      contents: "테스트 해산물",
     },
     {
       ibtn: 3,
       name: "이탈리아",
-      contents: "테스트 유제품",
     },
     {
       ibtn: 4,
       name: "칠레",
-      contents: "테스트 야채",
     },
     {
       ibtn: 5,
       name: "기타",
-      contents: "테스트 디저트",
     },
   ];
   const handleTabBtn = (_ibtn, e) => {
@@ -54,60 +60,100 @@ const CountryWine = () => {
   // 상품 더미 데이터
   const countryItem = [
     {
-      iproduct: 1,
-      producttitle: "1",
-      price: 34545,
-      sale: 32900,
-      link: "/main",
-      image: "https://via.placeholder.com/135x175",
-      isbadge: [0, 1],
+      productId: 6,
+      categoryId: 1,
+      featureId: 151,
+      countryId: 1,
+      aromaId: 151,
+      nmKor: "바르티나",
+      nmEng: "Bartina",
+      price: 13640,
+      quantity: 7,
+      pic: "wine/6/xXCu1X1QRi2eVEsS3ij-tg_pb_x960.png",
+      promotion: 0,
+      beginner: 0,
+      alcohol: 9,
     },
     {
-      iproduct: 2,
-      producttitle: "2",
-      price: 10000,
-      sale: 10000,
-      link: "/main",
-      image: "https://via.placeholder.com/135x175/123",
-      isbadge: [],
+      productId: 10,
+      categoryId: 1,
+      featureId: 67,
+      countryId: 1,
+      aromaId: 67,
+      nmKor: "바디아 파시그나노 그란 셀레지온 치안티 클라시코",
+      nmEng: "Badia a Passignano Gran Selezione Chianti Classico",
+      price: 14000,
+      quantity: 10,
+      pic: "wine/10/hxzM5LQaQEmv24npsUIXfQ_pb_x960.png",
+      promotion: 0,
+      beginner: 0,
+      alcohol: 13,
     },
     {
-      iproduct: 3,
-      producttitle: "3",
-      price: 20000,
-      sale: 20000,
-      link: "/main",
-      image: "https://via.placeholder.com/135x175/456",
-      isbadge: [0, 1],
+      productId: 16,
+      categoryId: 1,
+      featureId: 55,
+      countryId: 1,
+      aromaId: 55,
+      nmKor: "콜리 델라 토스카나 센트랄 일 소렐 디 알레산드로",
+      nmEng: "Colli Della Toscana Centrale Il Sole di Alessandro",
+      price: 14550,
+      quantity: 30,
+      pic: "wine/16/b6bdHil1SQO31xJ5KI32-g_pb_x960.png",
+      promotion: 0,
+      beginner: 0,
+      alcohol: 9,
     },
     {
-      iproduct: 4,
-      producttitle: "4",
-      price: 40000,
-      sale: 40000,
-      link: "/main",
-      image: "https://via.placeholder.com/135x175/789",
-      isbadge: [0],
+      productId: 20,
+      categoryId: 1,
+      featureId: 475,
+      countryId: 1,
+      aromaId: 475,
+      nmKor: "부르봉 바렐 에이지드 레드 블렌드",
+      nmEng: "Bourbon Barrels Aged Red blend",
+      price: 15000,
+      quantity: 20,
+      pic: "wine/20/3IZf5taHRHimHaLvSkNABw_pb_x960.png",
+      promotion: 0,
+      beginner: 0,
+      alcohol: 13,
     },
     {
-      iproduct: 5,
-      producttitle: "5",
-      price: 50000,
-      sale: 50000,
-      link: "/main",
-      image: "https://via.placeholder.com/135x175",
-      isbadge: [1],
+      productId: 24,
+      categoryId: 1,
+      featureId: 49,
+      countryId: 1,
+      aromaId: 49,
+      nmKor: "컬멘 레저 바 리오하",
+      nmEng: "Culmen Reserva Rioja",
+      price: 15837,
+      quantity: 13,
+      pic: "wine/24/eyzAu-aCSJuV69OKW4mgEw_pb_x960.png",
+      promotion: 0,
+      beginner: 0,
+      alcohol: 10,
     },
     {
-      iproduct: 6,
-      producttitle: "6",
-      price: 60000,
-      sale: 60000,
-      link: "/main",
-      image: "https://via.placeholder.com/135x175/123",
-      isbadge: [0, 1],
+      productId: 32,
+      categoryId: 3,
+      featureId: 37,
+      countryId: 1,
+      aromaId: 37,
+      nmKor:
+        "카바 크립타 그란 레저바 브루트 네이처(Cava Kripta Grand Reserve Brut Nature",
+      nmEng: "Cava Kripta Gran Reserva Brut Nature",
+      price: 17472,
+      quantity: 11,
+      pic: "wine/32/XprZ9WneQUqv6mIclWCklA_pb_x960.png",
+      promotion: 0,
+      beginner: 0,
+      alcohol: 17,
     },
   ];
+  useEffect(() => {
+    getContryWines(isActive, setCountryWines, setIsLoading);
+  }, [isActive]);
   return (
     <MainProductSecton>
       {/* 타이틀 */}
@@ -124,9 +170,6 @@ const CountryWine = () => {
       {/* 탭메뉴 */}
       <MainTabBtn>
         <ul>
-          {/* <li>
-            <button>프랑스</button>
-          </li> */}
           {countryBtns.map(item => (
             <li key={item.ibtn}>
               <button
@@ -141,45 +184,56 @@ const CountryWine = () => {
       </MainTabBtn>
       {/* 국가별 추천 와인 내용 */}
       <ContentsListItemWrap>
-        {countryItem.map(item => (
-          <ProductListItem key={item.iproduct}>
-            <Link to={item.link}>
-              <div className="img">
-                <img src={item.image} alt={item.producttitle} />
-                {/* 장바구니 버튼 */}
-                <button>
-                  <img
-                    src={`${process.env.PUBLIC_URL}/images/icon_cart_2.svg`}
-                    alt="장바구니에 담기"
-                  />
-                </button>
-              </div>
-              <div className="txt">
-                <div className="badge">
-                  {item.isbadge.length !== 0 && (
-                    <>
-                      {item.isbadge.includes(0) && (
+        {isLoading
+          ? productListSkeleton.map(index => (
+              <ProductListSkeleton key={index} />
+            ))
+          : countryWines.map((item, index) => (
+              <ProductListItem key={index}>
+                <NavLink to={`/productdetail/${item.productId}`}>
+                  <div className="img">
+                    <img src={`/img/${item.pic}`} alt={item.nmKor} />
+                    {/* 장바구니 버튼 */}
+                    <button>
+                      <img
+                        src={`${process.env.PUBLIC_URL}/images/icon_cart_2.svg`}
+                        alt="장바구니에 담기"
+                      />
+                    </button>
+                  </div>
+                  <div className="txt">
+                    <div className="badge">
+                      {item.promotion === 1 && (
                         <span className="recommend">추천상품</span>
                       )}
-                      {item.isbadge.includes(1) && (
+                      {item.beginner === 1 && (
                         <span className="beginner">입문자추천</span>
                       )}
-                    </>
-                  )}
-                </div>
-                <div className="title">{item.producttitle}</div>
-                <ul className="price">
-                  <li>
-                    <span>{item.sale.toLocaleString()}</span>원
-                  </li>
-                  <li>
-                    <span>{item.price.toLocaleString()}원</span>
-                  </li>
-                </ul>
-              </div>
-            </Link>
-          </ProductListItem>
-        ))}
+                    </div>
+                    <div className="title">{item.nmKor}</div>
+                    <ul className="price">
+                      <li>
+                        <span>{item.price.toLocaleString()}</span>원
+                      </li>
+                      <li>
+                        <span>{item.price.toLocaleString()}원</span>
+                      </li>
+                    </ul>
+                  </div>
+                </NavLink>
+              </ProductListItem>
+            ))}
+        {/* 추천 와인 데이터 없을 경우 출력 */}
+        {countryWines.length === 0 && (
+          <NotProductListItem>
+            <div>
+              <i>
+                <FontAwesomeIcon icon={faWineGlassEmpty} />
+              </i>
+              <p>상품이 존재하지 않습니다.</p>
+            </div>
+          </NotProductListItem>
+        )}
       </ContentsListItemWrap>
       {/* 국가별 추천 와인 전체보기 */}
       <MainTabLink>

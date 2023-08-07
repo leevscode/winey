@@ -4,7 +4,7 @@
   깃허브 : https://github.com/kimaydev
 */
 import React, { useEffect, useState } from "react";
-import { Link, NavLink, useParams } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faBacon,
@@ -217,18 +217,14 @@ const FoodWine = () => {
                     </button>
                   </div>
                   <div className="txt">
-                    {/* <div className="badge">
-                  {item.isbadge.length !== 0 && (
-                    <>
-                      {item.isbadge.includes(0) && (
+                    <div className="badge">
+                      {item.promotion === 1 && (
                         <span className="recommend">추천상품</span>
                       )}
-                      {item.isbadge.includes(1) && (
+                      {item.beginner === 1 && (
                         <span className="beginner">입문자추천</span>
                       )}
-                    </>
-                  )}
-                </div> */}
+                    </div>
                     <div className="title">{item.nmKor}</div>
                     <ul className="price">
                       <li>
