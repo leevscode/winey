@@ -16,23 +16,23 @@ const SellListDetail = () => {
   const [reviewList, setReviewList] = useState([]);
   const [reviewSubmit, setReviewSubmit] = useState(false);
 
-  // 상품 더미 데이터
-  const productData = [
-    {
-      key: 1,
-      imageSrc: "https://via.placeholder.com/120x120",
-      productName: "제프 까렐, 울띰 헤꼴뜨",
-      productDescription: "Ultime Recolte By Jeff Carrel",
-      productPrice: "32,900원",
-    },
-    {
-      key: 2,
-      imageSrc: "https://via.placeholder.com/120x120",
-      productName: "Auth Wine",
-      productDescription: "Auth",
-      productPrice: "52,500원",
-    },
-  ];
+// 상품 더미 데이터
+const productData = [
+  {
+    key: 1,
+    imageSrc: "https://via.placeholder.com/120x120",
+    productName: "제프 까렐, 울띰 헤꼴뜨",
+    productDescription: "Ultime Recolte By Jeff Carrel",
+    productPrice: "32,900원",
+  },
+  {
+    key: 2,
+    imageSrc: "https://via.placeholder.com/120x120",
+    productName: "Auth Wine",
+    productDescription: "Auth",
+    productPrice: "52,500원",
+  },
+];
 
   // 결제 총 금액 더미데이터
   const orderData = {
@@ -40,27 +40,30 @@ const SellListDetail = () => {
     paymentMethod: "신용카드",
     pickupLocation: "이마트 만촌점",
     pickupTime: "07월 23일 일요일 12:00",
-    orderStatus: "픽업완료",
+    orderStatus: "배송중",
     totalAmount: 0,
   };
 
   // 주문 상태가 "픽업대기" 또는 "픽업완료"일 때 선택하고 평점을 등록하는 함수
-  const handlePickUpComplete = index => {
-    setSelectedItem(index);
-    setSelectedOrder(prevSelectedOrder => {
-      if (prevSelectedOrder.includes(index)) {
-        return prevSelectedOrder.filter(itemIndex => itemIndex !== index);
-      } else {
-        return [...prevSelectedOrder, index];
-      }
-    });
-  };
+const handlePickUpComplete = (index) => {
+  setSelectedItem(index);
+  setSelectedOrder((prevSelectedOrder) => {
+    if (prevSelectedOrder.includes(index)) {
+      return prevSelectedOrder.filter((itemIndex) => itemIndex !== index);
+    } else {
+      return [...prevSelectedOrder, index];
+    }
+  });
+};
+
 
   // 상품 가격 합산
   const calculateTotalAmount = () => {
     let totalPrice = 0;
     productData.forEach((product) => {
-      totalPrice += product.productPrice;
+      // Parse the productPrice as a number before adding it to the total
+      const price = parseInt(product.productPrice.replace(/[^0-9]/g, ""));
+      totalPrice += price;
     });
     return totalPrice;
   };
