@@ -5,6 +5,7 @@ import {
   OrdercancelBtn,
   SellListInfo,
   SellListProduct,
+  SellListReady,
 } from "../../style/SellListStyle";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -21,6 +22,7 @@ const SellList = () => {
   const [selectedItem, setSelectedItem] = useState(null);
   const [reviewList, setReviewList] = useState([]);
   // 목록
+  const [isPickUpComplete, setIsPickUpComplete] = useState(false);
   const [selectedOrder, setSelectedOrder] = useState([]);
   const [orderItems, setOrderItems] = useState([]);
   const [CancelModal, setCancelModal] = useState([]);
@@ -47,7 +49,7 @@ const SellList = () => {
         orderNumber: "98275858",
         paymentMethod: "신용카드",
         amount: "45,000",
-        status: "배송완료",
+        status: "배송중",
       },
       {
         key: 2,
@@ -175,27 +177,27 @@ const SellList = () => {
                 <li>주문 상태: {item.status}</li>
               </SellListInfo>
               <SellListButton>
-                {/* 주문 상태가 "픽업대기", "픽업완료", "배송중", "배송완료"일 때 "주문 내역" 버튼을 표시 */}
-                {["픽업대기", "픽업완료", "배송중", "배송완료"].includes(
-                  item.status,
-                ) ? (
-                  <ButtonCancel
-                    onClick={() => {
-                      navigate("/selllistdetail/:iselllist");
-                    }}
-                  >
-                    주문 내역
-                  </ButtonCancel>
-                ) : null}
-
-                {/* "픽업대기" 상태일 때 "픽업완료" 버튼 표시 */}
-                {item.status === "픽업대기" &&
-                !selectedOrder.includes(item.key) ? (
-                  <PickUpButton onClick={() => handlePickUpComplete(item.key)}>
-                    픽업완료
-                  </PickUpButton>
+                <ButtonCancel
+                  onClick={() => {
+                    navigate("/selllistdetail/:iselllist");
+                  }}
+                >
+                  주문 내역
+                </ButtonCancel>
+                {/* 상태가 "결제완료"일 때에만 <SellListReady> 표시 */}
+                {item.status === "결제완료" && (
+                  <SellListReady>상품 준비중입니다</SellListReady>
+                )}
+                {item.status === "픽업완료" ? (
+                  <PickUpButton disabled>픽업완료</PickUpButton>
                 ) : (
-                  <PickUpButton disabled>픽업이 완료 되었습니다</PickUpButton>
+                  ["배송중", "배송완료", "픽업대기"].includes(item.status) && (
+                    <PickUpButton
+                      onClick={() => handlePickUpComplete(item.key)}
+                    >
+                      픽업완료
+                    </PickUpButton>
+                  )
                 )}
               </SellListButton>
               {CancelModal[item.key] && (
