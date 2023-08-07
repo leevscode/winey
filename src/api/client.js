@@ -23,7 +23,7 @@ axios.interceptors.request.use(
 );
 
 // 쿠키 set 하기
-export const fetchLogin = async (userid, password) => {
+export const fetchLogin = async (userid, password, setLoginResult) => {
   try {
     const res = await client.post(`/sign-api/sign-in`, {
       email: userid,
@@ -31,6 +31,7 @@ export const fetchLogin = async (userid, password) => {
     });
     console.log(res.data);
     const result = await res.data;
+    console.log(result.success);
     setCookie("refreshToken", result.refreshToken, {
       path: "/",
       secure: true,
@@ -43,10 +44,9 @@ export const fetchLogin = async (userid, password) => {
       sameSite: "none",
       httpOnly: true,
     });
+    return setLoginResult(result.success);
     // axios.get(`/api/mypage/user_mypage?userId=2`);
   } catch (error) {
     console.log(error);
   }
 };
-
-

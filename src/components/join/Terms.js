@@ -497,20 +497,24 @@ export const PrivateInfo = () => {
 export const Terms = () => {
   const [checkedList, setCheckedList] = useState([]);
   const [indeterminate, setIndeterminate] = useState(true);
+
+  // 약관동의 state
   const [checkAll, setCheckAll] = useState(false);
 
   const plainOptions = ["terms", "private"];
 
-  const onChange = list => {
+  const onChange =  list => {
     setCheckedList(list);
     setIndeterminate(!!list.length && list.length < plainOptions.length);
     setCheckAll(list.length === plainOptions.length);
+    console.log("allcheck", checkAll);
   };
-  const onCheckAllChange = e => {
+  const onCheckAllChange =  e => {
+    console.log("onCheckAllChange", e);
     setCheckedList(e.target.checked ? plainOptions : []);
     setIndeterminate(false);
     setCheckAll(e.target.checked);
-    console.log("allchecked", e.target.checked);
+    console.log("allcheck", checkAll);
   };
   // 약관보기 모달창 관련
   const handleCheckTerms = () => {
@@ -543,8 +547,9 @@ export const Terms = () => {
       </span>
       <Checkbox
         indeterminate={indeterminate}
-        onChange={onCheckAllChange}
         checked={checkAll}
+        onChange={e => onCheckAllChange(e)}
+        // onClick={e => onCheckAllChange(e)}
       >
         전체 동의합니다.
       </Checkbox>
@@ -557,14 +562,14 @@ export const Terms = () => {
           <Checkbox value={plainOptions[0]}>
             이용약관 동의 <strong>(필수)</strong>
           </Checkbox>{" "}
-          <span onClick={handleCheckTerms}>
+          <span onClick={() => handleCheckTerms()}>
             약관보기
             <FontAwesomeIcon icon={faChevronRight} />
           </span>
           <Checkbox value={plainOptions[1]}>
             개인정보 수집·이용 동의 <strong>(필수)</strong>
           </Checkbox>
-          <span onClick={handleCheckedPrivate}>
+          <span onClick={() => handleCheckedPrivate()}>
             약관보기
             <FontAwesomeIcon icon={faChevronRight} />
           </span>

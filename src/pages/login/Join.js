@@ -17,6 +17,7 @@ import { ButtonOk } from "../../style/GlobalStyle";
 import { Terms } from "../../components/join/Terms";
 import { useNavigate } from "react-router-dom";
 import CertifyEmail from "../../components/join/CertifyEmail";
+import { postUserJoin } from "../../api/joinpatch";
 
 const Join = () => {
   const navigate = useNavigate();
@@ -31,23 +32,25 @@ const Join = () => {
   const [passwordConfirm, setPasswordConfirm] = useState("");
   const [passwordError, setPasswordError] = useState(false);
 
+  // 지역선택 옵션
   const regionOptions = [
-    "서울",
-    "경기",
-    "인천",
-    "강원",
-    "충남",
-    "대전",
-    "충북",
-    "경북",
-    "대구",
-    "전북",
-    "광주",
-    "전남",
-    "경남",
-    "울산",
-    "부산",
-    "제주",
+    { regionNmId: 1, value: "서울" },
+    { regionNmId: 2, value: "부산" },
+    { regionNmId: 3, value: "대구" },
+    { regionNmId: 4, value: "인천" },
+    { regionNmId: 5, value: "광주" },
+    { regionNmId: 6, value: "대전" },
+    { regionNmId: 7, value: "울산" },
+    { regionNmId: 8, value: "세종" },
+    { regionNmId: 9, value: "경기" },
+    { regionNmId: 10, value: "강원" },
+    { regionNmId: 11, value: "충북" },
+    { regionNmId: 12, value: "충남" },
+    { regionNmId: 13, value: "전북" },
+    { regionNmId: 14, value: "전남" },
+    { regionNmId: 15, value: "경북" },
+    { regionNmId: 16, value: "경남" },
+    { regionNmId: 17, value: "제주" },
   ];
 
   // 아이디 중복 확인 모달창 핸들러
@@ -81,11 +84,12 @@ const Join = () => {
   };
 
   // 회원 가입 핸들러
-  const onFinish = values => {
+  const onFinish = async values => {
     if (password === passwordConfirm) {
-      console.log("Success:", values);
-      setUserInfo(values);
-      navigate("/main");
+      setUserInfo({ ...values, role: "USER" });
+      console.log("userInfo", userInfo);
+      postUserJoin(userInfo);
+      // navigate("/main");
     } else {
       console.log("Failed");
     }
@@ -119,7 +123,7 @@ const Join = () => {
           <p>사용하실 아이디를 이메일 형식으로 입력해 주세요.</p>
           <ConfirmArray>
             <Form.Item
-              name="userEmail"
+              name="email"
               rules={[
                 {
                   required: true,
@@ -212,7 +216,7 @@ const Join = () => {
           </span>
           <p>이름을 입력해 주세요</p>
           <Form.Item
-            name="userName"
+            name="nm"
             rules={[
               {
                 required: true,
@@ -234,7 +238,7 @@ const Join = () => {
           <p>연락처를 숫자 형식으로 입력해 주세요.</p>
           <ConfirmArray>
             <Form.Item
-              name="phoneNumber"
+              name="tel"
               rules={[
                 {
                   type: "tel",
@@ -260,11 +264,14 @@ const Join = () => {
               거주지역<b>*</b>
             </span>
             <p>거주지역을 선택해 주세요.</p>
-            <Form.Item name="userCity">
-              <Radio.Group value="서울" size="large">
+            <Form.Item name="regionNmId">
+              <Radio.Group value={regionOptions.regionNmId} size="large">
                 {regionOptions.map(option => (
-                  <Radio.Button key={option} value={option}>
-                    {option}
+                  <Radio.Button
+                    key={option.regionNmId}
+                    value={option.regionNmId}
+                  >
+                    {option.value}
                   </Radio.Button>
                 ))}
               </Radio.Group>

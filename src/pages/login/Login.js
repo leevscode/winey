@@ -5,7 +5,7 @@
 */
 
 import React, { useState } from "react";
-import { ConfigProvider, Form, Input } from "antd";
+import { ConfigProvider, Form, Input, Modal, Result } from "antd";
 import { LockOutlined, UserOutlined } from "@ant-design/icons";
 
 import { FormWrap, LoginWrap, LogoDiv } from "../../style/LoginStyle";
@@ -18,23 +18,36 @@ const Login = () => {
   const [userid, setUserId] = useState("");
   const [password, setPassword] = useState("");
 
+  // 로그인 실패 처리
+  const [loginResult, setLoginResult] = useState("");
+  const config = {
+    title: "로그인 실패",
+    content: <p>아이디/패스워드를 다시 확인해 주세요.</p>,
+  };
+
   const navigate = useNavigate();
 
   const handleLoginID = e => {
-    console.log("id", e.target.value);
     setUserId(e.target.value);
   };
   const handleLoginPW = e => {
-    console.log("pw", e.target.value);
     setPassword(e.target.value);
   };
 
   const onFinish = async values => {
-    // values.preventDefault();
-    const login = await fetchLogin(userid, password);
-    console.log("login Success:", login);
-    console.log("values Success:", values);
-    navigate("/main");
+    const login = await fetchLogin(userid, password, setLoginResult);
+    const loginSuccess = await loginResult;
+    if (loginSuccess == true) {
+      console.log("values Success:", values);
+      console.log("loginSuccess", loginSuccess);
+      // navigate("/main");
+    }
+    else {
+      // 로그인 실패 시
+      Modal.warning(config);
+      console.log("로그인실패");
+      return;
+    }
   };
   const onFinishFailed = errorInfo => {
     console.log("Failed:", errorInfo);
