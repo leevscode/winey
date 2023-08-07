@@ -81,14 +81,23 @@ export const ConfirmArray = styled.div`
 
 // 이메일 인증 component styled
 export const CertifyWrap = styled.div`
-  width: 40rem;
-  margin: 1rem;
+  margin: 0 auto;
   & > p {
-    margin: 1rem 0 1rem 0;
+    text-align: center;
+    margin: 1rem 0 0.5rem 0;
   }
   & > form {
     display: flex;
-    margin-left: 1rem;
+    margin: 0 auto;
+    width: 25rem;
+    & button {
+      font-size: 1.4rem;
+      width: 7rem;
+      height: 3.2rem;
+    }
+    & .ant-form-item-explain-error{
+      margin-left: 0.4rem;
+    }
   }
 `;
 
@@ -127,15 +136,19 @@ export const RegionSelectWrap = styled.div`
       width: 0;
     }
   }
-  & > p {
+  & > ul {
     /* height: 2.6rem; */
+    color: ${Maincolor.black};
+    font-size: 1.1rem;
+    font-weight: 500;
+    margin-left: 0.2rem;
     margin-bottom: 0.5rem;
     padding: 0;
     line-height: 1rem;
-    & .error {
+    & li {
       color: #ff4d4f;
       font-size: 1.4rem;
-      margin: 0;
+      margin: 0.3rem 0;
       padding: 0;
     }
   }

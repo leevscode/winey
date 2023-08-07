@@ -5,8 +5,8 @@
 */
 import { Button, ConfigProvider, Form, Input } from "antd";
 import React from "react";
-import { ButtonOk } from "../../style/GlobalStyle";
 import { CertifyWrap } from "../../style/JoinStyle";
+import { ButtonOk } from "../../style/GlobalStyle";
 
 const CertifyEmail = () => {
   const onFinish = values => {
@@ -32,18 +32,22 @@ const CertifyEmail = () => {
           onFinish={onFinish}
           onFinishFailed={onFinishFailed}
           wrapperCol={{
-            span: 40,
+            span: 30,
           }}
         >
           <Form.Item
             name="certifyEmail"
             rules={[
+              // {
+              //   required: true,
+              //   message: "인증번호를 입력하세요",
+              // },
+              // {
+              //   type: "number",
+              //   message: "숫자형식으로 입력해주세요",
+              // },
               {
-                required: true,
-                message: "인증번호를 입력하세요",
-              },
-              {
-                type: "number",
+                pattern: /\d+/g,
                 message: "숫자형식으로 입력해주세요",
               },
             ]}
@@ -57,12 +61,12 @@ const CertifyEmail = () => {
           <Form.Item
             wrapperCol={{
               offset: 2,
-              span: 10,
+              span: 60,
             }}
           >
-            <Button type="primary" htmlType="submit">
+            <ButtonOk type="primary" htmlType="submit">
               인증확인
-            </Button>
+            </ButtonOk>
           </Form.Item>
         </Form>
       </ConfigProvider>

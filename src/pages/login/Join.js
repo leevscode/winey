@@ -112,7 +112,7 @@ const Join = () => {
       console.log("checkAll", checkAll);
       if (checkAll === true) {
         setUserInfo({ ...values });
-        postUserJoin(userInfo);
+        // postUserJoin(userInfo);
         // navigate("/main");
       } else {
         Modal.warning(config);
@@ -121,7 +121,6 @@ const Join = () => {
       console.log("Failed");
     }
   };
-  console.log("userInfo", userInfo);
   const onFinishFailed = errorInfo => {
     console.log("Failed:", errorInfo);
   };
@@ -291,10 +290,10 @@ const Join = () => {
             <span>
               거주지역<b>*</b>
             </span>
-            <p>
+            <ul>
               거주지역을 선택해 주세요.
-              {regionError ? <p className="error">{regionError}</p> : null}
-            </p>
+              {regionError ? <li>{regionError}</li> : null}
+            </ul>
             <Form.Item name="regionNmId">
               <Radio.Group
                 value={regionOptions.regionNmId}
