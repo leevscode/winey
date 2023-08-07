@@ -110,8 +110,8 @@ export const VisualText = styled.div`
 // 네비게이션 메뉴 리스트
 export const NavListWrap = styled.div`
   padding: ${WidthPd.padding};
-  padding-top: 50px;
-  padding-bottom: 50px;
+  padding-top: 40px;
+  padding-bottom: 40px;
   & > ul {
     display: flex;
     align-items: center;
@@ -123,6 +123,8 @@ export const NavListWrap = styled.div`
         display: block;
         img {
           display: block;
+          width: 70px;
+          height: auto;
         }
         span {
           display: block;
@@ -264,8 +266,11 @@ export const RecommWineTitle = styled.div`
         width: 18rem;
         i {
           display: inline-block;
-          vertical-align: -1px;
+          vertical-align: -0.8rem;
           margin-right: 5px;
+          img {
+            width: 12px;
+          }
         }
       }
     }

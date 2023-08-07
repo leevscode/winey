@@ -14,19 +14,8 @@ const RecommWine = () => {
   const [randomWines, setRandomWines] = useState([]);
   // 로딩 state
   const [isLoading, setIsLoading] = useState(true);
-  const RandomWinesData = async () => {
-    setIsLoading(true);
-    try {
-      const data = await getRandomWines();
-      setRandomWines(data);
-      console.log("데이터 받았어요", data);
-      // setIsLoading(false);
-    } catch (err) {
-      console.log(err);
-    }
-  };
   useEffect(() => {
-    RandomWinesData();
+    getRandomWines(setRandomWines, setIsLoading);
   }, []);
   return (
     <RecommWineWrap>
@@ -37,17 +26,18 @@ const RecommWine = () => {
           <p>
             <span>
               <i>
-                <img src="https://via.placeholder.com/7x17" alt="와인아이콘" />
+                <img
+                  src={`${process.env.PUBLIC_URL}/images/icon_recommwine.svg`}
+                  alt="와인아이콘"
+                />
               </i>
               입문용 와인 추천
             </span>
           </p>
         </h2>
       </RecommWineTitle>
-      {/* 로딩 */}
-      {isLoading ? <ProductListSkeleton /> : null}
       {/* 맞춤 와인 내용 */}
-      {/* <RecommWineSlide /> */}
+      <RecommWineSlide isLoading={isLoading} randomWines={randomWines} />
     </RecommWineWrap>
   );
 };

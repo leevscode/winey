@@ -7,12 +7,13 @@ import styled from "@emotion/styled";
 import { Maincolor } from "./GlobalStyle";
 
 export const LoadingProductListItem = styled.div`
-  width: calc(100% / 3 - 14px);
+  /* width: calc(100% / 3 - 14px); */
   div {
     position: relative;
-    background: ${Maincolor.grayMedium};
+    background: #f5f1eb;
     overflow: hidden;
     border-radius: 3px;
+    box-shadow: 0px 0 20px 0 #f2eade inset;
     &::after {
       content: "";
       position: absolute;
@@ -25,6 +26,7 @@ export const LoadingProductListItem = styled.div`
   }
   .img {
     padding-top: 135%;
+    box-shadow: none !important;
   }
   .title {
     margin: 15px 0 10px;

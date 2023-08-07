@@ -13,84 +13,157 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLock } from "@fortawesome/free-solid-svg-icons";
 import { ProductListItem } from "../../style/ProductStyle";
 import { RecommWineContents, RecommWineLogout } from "../../style/MainStyle";
+import ProductListSkeleton from "../skeleton/ProductListSkeleton";
+import NoImage from "../../assets/no_image.jpg";
 
-const RecommWineSlide = () => {
-  // 더미데이터
+const RecommWineSlide = ({ isLoading, randomWines }) => {
+  // 이미지 없을 때 error처리
+  const onImgError = e => {
+    e.target.src = NoImage;
+  };
+  // 로딩 더미데이터
+  const productListSkeleton = [1, 2, 3];
+  // 로그인 여부 체크 state
   // const [isLoginChk, setIsLoginChk] = useState(null);
   const [isLoginChk, setIsLoginChk] = useState(true);
   // console.log(isLoginChk);
-  const productSlide = [
-    {
-      iuser: 1,
-      iproduct: 1,
-      producttitle: "상품1",
-      price: 34545,
-      sale: 32900,
-      link: "/main",
-      image: "https://via.placeholder.com/135x175",
-    },
-    {
-      iuser: 1,
-      iproduct: 2,
-      producttitle: "상품2",
-      price: 10000,
-      sale: 10000,
-      link: "/main",
-      image: "https://via.placeholder.com/135x175/123",
-    },
-    {
-      iuser: 1,
-      iproduct: 3,
-      producttitle: "상품3",
-      price: 20000,
-      sale: 20000,
-      link: "/main",
-      image: "https://via.placeholder.com/135x175/456",
-    },
-    {
-      iuser: 1,
-      iproduct: 4,
-      producttitle: "상품4",
-      price: 30000,
-      sale: 30000,
-      link: "/main",
-      image: "https://via.placeholder.com/135x175/789",
-    },
-  ];
+  // 입문용 와인 더미데이터
+  // const productSlide = [
+  //   {
+  //     productId: 152,
+  //     categoryId: 1,
+  //     featureId: 460,
+  //     countryId: 4,
+  //     aromaId: 460,
+  //     nmKor: "리틀 퍼크 말벡",
+  //     nmEng: "Little Fuck Malbec",
+  //     price: 38776,
+  //     quantity: 6,
+  //     pic: "/home/download/wine/ukMGn1FlRkCZGgsVYtne1w_pb_x960.png",
+  //     promotion: 0,
+  //     beginner: 1,
+  //     alcohol: 15,
+  //   },
+  //   {
+  //     productId: 73,
+  //     categoryId: 1,
+  //     featureId: 25,
+  //     countryId: 1,
+  //     aromaId: 25,
+  //     nmKor: "말레올루스 드 발데라미로",
+  //     nmEng: "Malleolus de Valderramiro",
+  //     price: 25111,
+  //     quantity: 15,
+  //     pic: "/home/download/wine/OVnpuoGgSYOZBo_k4bJRtw_pb_x960.png",
+  //     promotion: 1,
+  //     beginner: 1,
+  //     alcohol: 10,
+  //   },
+  //   {
+  //     productId: 172,
+  //     categoryId: 1,
+  //     featureId: 4,
+  //     countryId: 4,
+  //     aromaId: 4,
+  //     nmKor: "볼게리 수페리오레",
+  //     nmEng: "Bolgheri Superiore",
+  //     price: 40010,
+  //     quantity: 11,
+  //     pic: "/home/download/wine/Unx9_x0PRI2NyaC5mqQtHQ_pb_x960.png",
+  //     promotion: 1,
+  //     beginner: 1,
+  //     alcohol: 15,
+  //   },
+  //   {
+  //     productId: 328,
+  //     categoryId: 1,
+  //     featureId: 116,
+  //     countryId: 2,
+  //     aromaId: 116,
+  //     nmKor: "카베르네 소비뇽",
+  //     nmEng: "Cabernet Sauvignon",
+  //     price: 73471,
+  //     quantity: 21,
+  //     pic: "/home/download/wine/QIEjFXbhT-yhKfSegKteig_pb_x960.png",
+  //     promotion: 1,
+  //     beginner: 1,
+  //     alcohol: 15,
+  //   },
+  //   {
+  //     productId: 188,
+  //     categoryId: 1,
+  //     featureId: 173,
+  //     countryId: 5,
+  //     aromaId: 173,
+  //     nmKor: "프라이빗 컬렉션 까베르네 소비뇽",
+  //     nmEng: "Private Collection Cabernet Sauvignon",
+  //     price: 41589,
+  //     quantity: 7,
+  //     pic: "/home/download/wine/xZ50vEWLR6alsc3WpJolpQ_pb_x960.png",
+  //     promotion: 1,
+  //     beginner: 1,
+  //     alcohol: 17,
+  //   },
+  //   {
+  //     productId: 227,
+  //     categoryId: 1,
+  //     featureId: 352,
+  //     countryId: 4,
+  //     aromaId: 352,
+  //     nmKor: "루지",
+  //     nmEng: "Rouge",
+  //     price: 49906,
+  //     quantity: 30,
+  //     pic: "/home/download/wine/KR-TRoCWR4uavhPMOa-MuA_pb_x960.png",
+  //     promotion: 1,
+  //     beginner: 1,
+  //     alcohol: 11,
+  //   },
+  // ];
   return (
     <RecommWineContents className="clearfix">
       {isLoginChk ? (
         // 로그인
         <Swiper slidesPerView={"auto"} spaceBetween={14}>
-          {productSlide.map(item => (
-            <SwiperSlide key={item.iproduct}>
-              <ProductListItem>
-                <Link to="/main">
-                  <div className="img">
-                    <img src={item.image} alt={item.producttitle} />
-                    {/* 장바구니 버튼 */}
-                    <button>
-                      <img
-                        src={`${process.env.PUBLIC_URL}/images/icon_cart_2.svg`}
-                        alt="장바구니에 담기"
-                      />
-                    </button>
-                  </div>
-                  <div className="txt">
-                    <div className="title">{item.producttitle}</div>
-                    <ul className="price">
-                      <li>
-                        <span>{item.sale.toLocaleString()}</span>원
-                      </li>
-                      <li>
-                        <span>{item.price.toLocaleString()}원</span>
-                      </li>
-                    </ul>
-                  </div>
-                </Link>
-              </ProductListItem>
-            </SwiperSlide>
-          ))}
+          {isLoading
+            ? productListSkeleton.map(index => (
+                <SwiperSlide key={index}>
+                  <ProductListSkeleton />
+                </SwiperSlide>
+              ))
+            : randomWines.map((item, index) => (
+                <SwiperSlide key={index}>
+                  <ProductListItem>
+                    <Link to="/main">
+                      <div className="img">
+                        <img
+                          src={`http://192.168.0.144:5004${item.pic}`}
+                          alt={item.nmKor}
+                          onError={onImgError}
+                        />
+                        {/* 장바구니 버튼 */}
+                        <button>
+                          <img
+                            src={`${process.env.PUBLIC_URL}/images/icon_cart_2.svg`}
+                            alt="장바구니에 담기"
+                          />
+                        </button>
+                      </div>
+                      <div className="txt">
+                        <div className="title">{item.nmKor}</div>
+                        <ul className="price">
+                          <li>
+                            <span>{item.price.toLocaleString()}</span>원
+                          </li>
+                          <li>
+                            <span>{item.price.toLocaleString()}원</span>
+                          </li>
+                        </ul>
+                      </div>
+                    </Link>
+                  </ProductListItem>
+                </SwiperSlide>
+              ))}
         </Swiper>
       ) : (
         // 로그아웃
