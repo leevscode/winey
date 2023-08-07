@@ -3,7 +3,7 @@
   노션 : https://www.notion.so/kimaydev
   깃허브 : https://github.com/kimaydev
 */
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
@@ -17,6 +17,40 @@ import { ProductListItem } from "../../style/ProductStyle";
 import { ContentsListItemWrap } from "../../style/GlobalComponents";
 
 const CountryWine = () => {
+  // 버튼 활성화 state
+  const [isActive, setIsActive] = useState(1);
+  // 국가별 와인 탭메뉴 버튼
+  const countryBtns = [
+    {
+      ibtn: 1,
+      name: "프랑스",
+      contents: "테스트 육류",
+    },
+    {
+      ibtn: 2,
+      name: "미국",
+      contents: "테스트 해산물",
+    },
+    {
+      ibtn: 3,
+      name: "이탈리아",
+      contents: "테스트 유제품",
+    },
+    {
+      ibtn: 4,
+      name: "칠레",
+      contents: "테스트 야채",
+    },
+    {
+      ibtn: 5,
+      name: "기타",
+      contents: "테스트 디저트",
+    },
+  ];
+  const handleTabBtn = (_ibtn, e) => {
+    e.preventDefault();
+    setIsActive(_ibtn);
+  };
   // 상품 더미 데이터
   const countryItem = [
     {
@@ -90,21 +124,19 @@ const CountryWine = () => {
       {/* 탭메뉴 */}
       <MainTabBtn>
         <ul>
-          <li>
+          {/* <li>
             <button>프랑스</button>
-          </li>
-          <li>
-            <button>미국</button>
-          </li>
-          <li>
-            <button>이탈리아</button>
-          </li>
-          <li>
-            <button>칠레</button>
-          </li>
-          <li>
-            <button>기타</button>
-          </li>
+          </li> */}
+          {countryBtns.map(item => (
+            <li key={item.ibtn}>
+              <button
+                className={isActive === item.ibtn ? "active" : null}
+                onClick={e => handleTabBtn(item.ibtn, e)}
+              >
+                {item.name}
+              </button>
+            </li>
+          ))}
         </ul>
       </MainTabBtn>
       {/* 국가별 추천 와인 내용 */}

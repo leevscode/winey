@@ -206,6 +206,10 @@ export const MainTabBtn = styled.div`
         i {
           margin-right: 3px;
         }
+        &.active {
+          background: ${Maincolor.redBold};
+          color: ${Maincolor.white};
+        }
         &:hover {
           background: ${Maincolor.redBold};
           color: ${Maincolor.white};

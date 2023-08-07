@@ -13,7 +13,7 @@ export const LoadingProductListItem = styled.div`
     background: #f5f1eb;
     overflow: hidden;
     border-radius: 3px;
-    box-shadow: 0px 0 20px 0 #f2eade inset;
+    box-shadow: 0px 0 20px 0 #f2eade inset !important;
     &::after {
       content: "";
       position: absolute;
@@ -26,7 +26,6 @@ export const LoadingProductListItem = styled.div`
   }
   .img {
     padding-top: 135%;
-    box-shadow: none !important;
   }
   .title {
     margin: 15px 0 10px;

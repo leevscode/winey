@@ -1,4 +1,4 @@
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useLocation } from "react-router-dom";
 import "./App.css";
 // 관리자
 import Admin from "./Admin";
@@ -26,8 +26,14 @@ import SellList from "./pages/product/SellList";
 import NotFound from "./pages/NotFound";
 import { AnimatePresence } from "framer-motion";
 import SellListDetail from "./pages/product/SellListDetail";
+import { useEffect } from "react";
 
 function App() {
+  // 페이지 이동 시 스크롤 최상단으로 올라가는 코드
+  const { pathname } = useLocation();
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
   return (
     <AnimatePresence>
       <Routes>

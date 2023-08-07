@@ -23,6 +23,7 @@ export const ProductListItem = styled.div`
       width: 100%;
       height: 100%;
       object-fit: contain;
+      padding: 15px;
     }
     button {
       position: absolute;

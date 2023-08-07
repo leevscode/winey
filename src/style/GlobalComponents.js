@@ -383,6 +383,7 @@ export const ContentsListItemWrap = styled.div`
   flex-wrap: wrap;
   margin-left: -7px;
   margin-right: -7px;
+  min-height: 730px;
   & > div {
     width: calc(100% / 3 - 14px);
     margin: 0 7px 40px;

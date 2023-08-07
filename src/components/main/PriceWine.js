@@ -3,7 +3,7 @@
   노션 : https://www.notion.so/kimaydev
   깃허브 : https://github.com/kimaydev
 */
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
@@ -17,6 +17,35 @@ import { ProductListItem } from "../../style/ProductStyle";
 import { ContentsListItemWrap } from "../../style/GlobalComponents";
 
 const PriceWine = () => {
+  // 버튼 활성화 state
+  const [isActive, setIsActive] = useState(1);
+  // 가격별 와인 탭메뉴 버튼
+  const priceBtns = [
+    {
+      ibtn: 1,
+      name: "2만원 미만",
+      contents: "테스트 육류",
+    },
+    {
+      ibtn: 2,
+      name: "2~5만원",
+      contents: "테스트 해산물",
+    },
+    {
+      ibtn: 3,
+      name: "5~10만원",
+      contents: "테스트 유제품",
+    },
+    {
+      ibtn: 4,
+      name: "10만원 이상",
+      contents: "테스트 야채",
+    },
+  ];
+  const handleTabBtn = (_ibtn, e) => {
+    e.preventDefault();
+    setIsActive(_ibtn);
+  };
   // 상품 더미 데이터
   const PriceItem = [
     {
@@ -90,18 +119,16 @@ const PriceWine = () => {
       {/* 탭메뉴 */}
       <MainTabBtn>
         <ul>
-          <li>
-            <button>2만원 미만</button>
-          </li>
-          <li>
-            <button>2~5만원</button>
-          </li>
-          <li>
-            <button>5~10만원</button>
-          </li>
-          <li>
-            <button>10만원 이상</button>
-          </li>
+          {priceBtns.map(item => (
+            <li key={item.ibtn}>
+              <button
+                className={isActive === item.ibtn ? "active" : null}
+                onClick={e => handleTabBtn(item.ibtn, e)}
+              >
+                {item.name}
+              </button>
+            </li>
+          ))}
         </ul>
       </MainTabBtn>
       {/* 가격별 추천 와인 내용 */}
