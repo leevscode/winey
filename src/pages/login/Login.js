@@ -17,9 +17,7 @@ const Login = () => {
   // 아이디, 비밀번호
   const [userid, setUserId] = useState("");
   const [password, setPassword] = useState("");
-
-  // 로그인 실패 처리
-  const [loginResult, setLoginResult] = useState("");
+  
   const config = {
     title: "로그인 실패",
     content: <p>아이디/패스워드를 다시 확인해 주세요.</p>,
@@ -35,18 +33,11 @@ const Login = () => {
   };
 
   const onFinish = async values => {
-    const login = await fetchLogin(userid, password, setLoginResult);
-    const loginSuccess = await loginResult;
-    if (loginSuccess == true) {
-      console.log("values Success:", values);
-      console.log("loginSuccess", loginSuccess);
-      // navigate("/main");
-    }
-    else {
-      // 로그인 실패 시
+    try {
+      const login = await fetchLogin(userid, password);
+      navigate("/main");
+    } catch (error) {
       Modal.warning(config);
-      console.log("로그인실패");
-      return;
     }
   };
   const onFinishFailed = errorInfo => {

@@ -127,6 +127,18 @@ export const RegionSelectWrap = styled.div`
       width: 0;
     }
   }
+  & > p {
+    /* height: 2.6rem; */
+    margin-bottom: 0.5rem;
+    padding: 0;
+    line-height: 1rem;
+    & .error {
+      color: #ff4d4f;
+      font-size: 1.4rem;
+      margin: 0;
+      padding: 0;
+    }
+  }
 `;
 
 // 이용약관

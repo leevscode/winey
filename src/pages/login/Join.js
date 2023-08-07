@@ -32,6 +32,17 @@ const Join = () => {
   const [passwordConfirm, setPasswordConfirm] = useState("");
   const [passwordError, setPasswordError] = useState(false);
 
+  // 약관동의 state
+  const [checkAll, setCheckAll] = useState(false);
+  const config = {
+    title: "이용약관동의",
+    content: <p>이용약관동의를 진행해 주세요</p>,
+  };
+
+  // 지역선택 에러처리
+  const [regionError, setRegionError] = useState("");
+  const [regionClick, setRegionClick] = useState();
+
   // 지역선택 옵션
   const regionOptions = [
     { regionNmId: 1, value: "서울" },
@@ -83,17 +94,34 @@ const Join = () => {
     setPasswordError(e.target.value !== password);
   };
 
+  // 지역선택 에러처리
+  const handleRegion = e => {
+    setRegionClick(e.target.value);
+    if (e.target.value != null) {
+      setRegionError("");
+    }
+  };
+
   // 회원 가입 핸들러
   const onFinish = async values => {
+    if (regionClick === undefined || regionClick === "") {
+      setRegionError("지역을 선택해 주세요.");
+      return;
+    }
     if (password === passwordConfirm) {
-      setUserInfo({ ...values, role: "USER" });
-      console.log("userInfo", userInfo);
-      postUserJoin(userInfo);
-      // navigate("/main");
+      console.log("checkAll", checkAll);
+      if (checkAll === true) {
+        setUserInfo({ ...values });
+        postUserJoin(userInfo);
+        // navigate("/main");
+      } else {
+        Modal.warning(config);
+      }
     } else {
       console.log("Failed");
     }
   };
+  console.log("userInfo", userInfo);
   const onFinishFailed = errorInfo => {
     console.log("Failed:", errorInfo);
   };
@@ -173,7 +201,7 @@ const Join = () => {
               },
             ]}
             validateStatus={passwordError ? "error" : ""}
-            help={passwordError && "비밀번호가 일치하지 않습니다."}
+            // help={passwordError && "비밀번호가 일치하지 않습니다."}
           >
             <Input.Password
               size="large"
@@ -263,9 +291,16 @@ const Join = () => {
             <span>
               거주지역<b>*</b>
             </span>
-            <p>거주지역을 선택해 주세요.</p>
+            <p>
+              거주지역을 선택해 주세요.
+              {regionError ? <p className="error">{regionError}</p> : null}
+            </p>
             <Form.Item name="regionNmId">
-              <Radio.Group value={regionOptions.regionNmId} size="large">
+              <Radio.Group
+                value={regionOptions.regionNmId}
+                size="large"
+                onChange={e => handleRegion(e)}
+              >
                 {regionOptions.map(option => (
                   <Radio.Button
                     key={option.regionNmId}
@@ -278,7 +313,7 @@ const Join = () => {
             </Form.Item>
           </RegionSelectWrap>
           {/* 이용약관 컴포넌트 */}
-          <Terms />
+          <Terms checkAll={checkAll} setCheckAll={setCheckAll} />
           <Form.Item>
             <ButtonOk>회원가입</ButtonOk>
           </Form.Item>

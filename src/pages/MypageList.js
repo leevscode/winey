@@ -10,6 +10,7 @@ import { faAngleRight } from "@fortawesome/free-solid-svg-icons";
 import { MypageWrap } from "../style/MypageStyle";
 import { SectionLine } from "../style/GlobalStyle";
 import Cookies from "universal-cookie";
+// import { postLogout } from "../api/joinpatch";
 
 const MypageList = () => {
   const navigate = useNavigate();
@@ -18,6 +19,7 @@ const MypageList = () => {
     e.preventDefault();
     cookies.remove("accessToken");
     cookies.remove("refreshToken");
+    // postLogout("");
     navigate("/main");
   };
   return (

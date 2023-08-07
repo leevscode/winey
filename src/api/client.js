@@ -1,5 +1,6 @@
 import axios from "axios";
 import { getCookie, setCookie } from "./cookie";
+import { Modal } from "antd";
 
 export const client = axios.create({
   baseURL: "http://localhost:3000",
@@ -23,7 +24,7 @@ axios.interceptors.request.use(
 );
 
 // 쿠키 set 하기
-export const fetchLogin = async (userid, password, setLoginResult) => {
+export const fetchLogin = async (userid, password) => {
   try {
     const res = await client.post(`/sign-api/sign-in`, {
       email: userid,
@@ -31,7 +32,6 @@ export const fetchLogin = async (userid, password, setLoginResult) => {
     });
     console.log(res.data);
     const result = await res.data;
-    console.log(result.success);
     setCookie("refreshToken", result.refreshToken, {
       path: "/",
       secure: true,
@@ -44,9 +44,16 @@ export const fetchLogin = async (userid, password, setLoginResult) => {
       sameSite: "none",
       httpOnly: true,
     });
-    return setLoginResult(result.success);
+    return result;
     // axios.get(`/api/mypage/user_mypage?userId=2`);
   } catch (error) {
     console.log(error);
+    const config = {
+      title: "로그인 실패",
+      content: <p>아이디/패스워드를 다시 확인해 주세요.</p>,
+    };
+    Modal.warning(config);
+
+    return error;
   }
 };

@@ -494,27 +494,26 @@ export const PrivateInfo = () => {
   );
 };
 
-export const Terms = () => {
+export const Terms = ({checkAll, setCheckAll }) => {
   const [checkedList, setCheckedList] = useState([]);
   const [indeterminate, setIndeterminate] = useState(true);
 
-  // 약관동의 state
-  const [checkAll, setCheckAll] = useState(false);
+  // // 약관동의 state
+  // const [checkAll, setCheckAll] = useState(false);
 
   const plainOptions = ["terms", "private"];
 
-  const onChange =  list => {
+  const onChange = list => {
     setCheckedList(list);
     setIndeterminate(!!list.length && list.length < plainOptions.length);
     setCheckAll(list.length === plainOptions.length);
-    console.log("allcheck", checkAll);
   };
-  const onCheckAllChange =  e => {
+
+  const onCheckAllChange = e => {
     console.log("onCheckAllChange", e);
     setCheckedList(e.target.checked ? plainOptions : []);
     setIndeterminate(false);
     setCheckAll(e.target.checked);
-    console.log("allcheck", checkAll);
   };
   // 약관보기 모달창 관련
   const handleCheckTerms = () => {
