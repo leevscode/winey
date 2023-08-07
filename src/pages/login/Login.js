@@ -4,20 +4,41 @@
     깃허브 : https://github.com/hyemdev
 */
 
-import React from "react";
-import { ConfigProvider, Form, Input } from "antd";
+import React, { useState } from "react";
+import { ConfigProvider, Form, Input, Modal, Result } from "antd";
 import { LockOutlined, UserOutlined } from "@ant-design/icons";
 
 import { FormWrap, LoginWrap, LogoDiv } from "../../style/LoginStyle";
 import { Link, useNavigate } from "react-router-dom";
 import { ButtonCancel, ButtonOk } from "../../style/GlobalStyle";
+import { fetchLogin } from "../../api/client";
 
 const Login = () => {
+  // 아이디, 비밀번호
+  const [userid, setUserId] = useState("");
+  const [password, setPassword] = useState("");
+  
+  const config = {
+    title: "로그인 실패",
+    content: <p>아이디/패스워드를 다시 확인해 주세요.</p>,
+  };
+
   const navigate = useNavigate();
 
-  const onFinish = values => {
-    console.log("Success:", values);
-    navigate("/main");
+  const handleLoginID = e => {
+    setUserId(e.target.value);
+  };
+  const handleLoginPW = e => {
+    setPassword(e.target.value);
+  };
+
+  const onFinish = async values => {
+    try {
+      const login = await fetchLogin(userid, password);
+      navigate("/main");
+    } catch (error) {
+      Modal.warning(config);
+    }
   };
   const onFinishFailed = errorInfo => {
     console.log("Failed:", errorInfo);
@@ -66,6 +87,7 @@ const Login = () => {
                 maxLength={20}
                 size="large"
                 placeholder="아이디를 이메일 형식으로 입력해 주세요."
+                onChange={e => handleLoginID(e)}
               />
             </Form.Item>
 
@@ -84,6 +106,7 @@ const Login = () => {
                 maxLength={20}
                 size="large"
                 placeholder="비밀번호를 입력해 주세요"
+                onChange={e => handleLoginPW(e)}
               />
             </Form.Item>
 
