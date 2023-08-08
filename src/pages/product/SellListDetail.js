@@ -10,29 +10,30 @@ import { ReviewOk } from "../../style/SellListStyle";
 import ReviewModal from "../../components/selllist/ReviewModal";
 
 const SellListDetail = () => {
-  const [reviewReset, setreviewReset] = useState(false);
-  const [selectedItem, setSelectedItem] = useState(null);
-  const [selectedOrder, setSelectedOrder] = useState([]);
-  const [reviewList, setReviewList] = useState([]);
-  const [reviewSubmit, setReviewSubmit] = useState(false);
+  const [reviewReset, setReviewReset] = useState(false);
+  const [reviewSubmit, setReviewSubmit] = useState({});
 
-// 상품 더미 데이터
-const productData = [
-  {
-    key: 1,
-    imageSrc: "https://via.placeholder.com/120x120",
-    productName: "제프 까렐, 울띰 헤꼴뜨",
-    productDescription: "Ultime Recolte By Jeff Carrel",
-    productPrice: "32,900원",
-  },
-  {
-    key: 2,
-    imageSrc: "https://via.placeholder.com/120x120",
-    productName: "Auth Wine",
-    productDescription: "Auth",
-    productPrice: "52,500원",
-  },
-];
+  // reviewSubmit 상태를 객체로 변경하여 상품별로 리뷰 등록 상태를 기록합니다.
+
+  // 상품 더미 데이터
+  const [productData, setProductData] = useState([
+    {
+      key: 1,
+      imageSrc: "https://via.placeholder.com/120x120",
+      productName: "제프 까렐, 울띰 헤꼴뜨",
+      productDescription: "Ultime Recolte By Jeff Carrel",
+      productPrice: "32,900원",
+      rating: null, // 각 상품의 평점을 저장할 속성
+    },
+    {
+      key: 2,
+      imageSrc: "https://via.placeholder.com/120x120",
+      productName: "Auth Wine",
+      productDescription: "Auth",
+      productPrice: "52,500원",
+      rating: null, // 각 상품의 평점을 저장할 속성
+    },
+  ]);
 
   // 결제 총 금액 더미데이터
   const orderData = {
@@ -44,23 +45,10 @@ const productData = [
     totalAmount: 0,
   };
 
-  // 주문 상태가 "픽업대기" 또는 "픽업완료"일 때 선택하고 평점을 등록하는 함수
-const handlePickUpComplete = (index) => {
-  setSelectedItem(index);
-  setSelectedOrder((prevSelectedOrder) => {
-    if (prevSelectedOrder.includes(index)) {
-      return prevSelectedOrder.filter((itemIndex) => itemIndex !== index);
-    } else {
-      return [...prevSelectedOrder, index];
-    }
-  });
-};
-
-
   // 상품 가격 합산
   const calculateTotalAmount = () => {
     let totalPrice = 0;
-    productData.forEach((product) => {
+    productData.forEach(product => {
       // Parse the productPrice as a number before adding it to the total
       const price = parseInt(product.productPrice.replace(/[^0-9]/g, ""));
       totalPrice += price;
@@ -70,28 +58,38 @@ const handlePickUpComplete = (index) => {
 
   // 리뷰 모달을 여는 함수
   const showModal = () => {
-    setreviewReset(true);
+    setReviewReset(true);
   };
 
   // 리뷰 모달을 닫는 함수
   const hideModal = () => {
-    setreviewReset(false);
-  };
-
-  // 평점 등록이 완료되었을 때 보여줄 메시지 div
-  const renderReviewMessage = () => {
-    return <ReviewOk>평점등록이 완료되었습니다</ReviewOk>;
+    setReviewReset(false);
   };
 
   // 평점 등록이 완료된 항목만 상태를 업데이트
-  const reviewSubmitUpdate = () => {
-    setReviewSubmit(true);
+  const reviewSubmitUpdate = (index) => {
+    setReviewSubmit((prevReviewSubmit) => {
+      console.log(" key: 1");
+      return { ...prevReviewSubmit, [index]: true };
+    });
   };
 
+  // 상품에 해당하는 평점을 등록하는 함수
+  const submitRating = (index, rating) => {
+    const updatedReviewSubmit = { ...reviewSubmit };
+    updatedReviewSubmit[index] = true; // 평점 등록 상태를 true로 표시
+    setReviewSubmit(updatedReviewSubmit);
+  
+    // 평점을 포함하여 productData 상태를 업데이트합니다.
+    const updatedProductData = [...productData];
+    updatedProductData[index].rating = rating;
+    setProductData(updatedProductData);
+  };
+  
   return (
     <>
       <DetailDay>{orderData.orderDate}</DetailDay>
-      {productData.map(product => (
+      {productData.map((product, ) => (
         <SellListDetailinfo key={product.key}>
           <img src={product.imageSrc} alt="" />
           <ul>
@@ -102,10 +100,7 @@ const handlePickUpComplete = (index) => {
         </SellListDetailinfo>
       ))}
       <SellListDetailBox>
-        {/* 평점이 등록되지 않았을 때만 버튼을 보여줌 */}
-        {!reviewSubmit && <ButtonOk onClick={showModal}>평점등록</ButtonOk>}
-        {/* 리뷰 제출 완료 시 메시지를 보여줌 */}
-        {reviewSubmit && renderReviewMessage()}
+      <ButtonOk onClick={() => showModal()}>평점등록</ButtonOk>
       </SellListDetailBox>
       <DetailTotalPrice>
         <p>결제 방법: {orderData.paymentMethod}</p>
@@ -113,18 +108,18 @@ const handlePickUpComplete = (index) => {
         <p>픽업 시간: {orderData.pickupTime}</p>
         <p>주문 상태: {orderData.orderStatus}</p>
         <p>
-        총 결제금액{" "}
+          총 결제금액{" "}
           <strong>{calculateTotalAmount().toLocaleString()}원</strong>
         </p>
       </DetailTotalPrice>
 
       {/* 리뷰 모달 내용 */}
       <ReviewModal
-        reviewReset={reviewReset}
-        hideModal={hideModal}
-        setReviewSubmit={setReviewSubmit}
-        reviewSubmitUpdate={reviewSubmitUpdate}
-      />
+  reviewReset={reviewReset}
+  hideModal={hideModal}
+  reviewSubmitUpdate={reviewSubmitUpdate}
+/>
+<ReviewOk>평점등록이 완료되었습니다</ReviewOk>
     </>
   );
 };

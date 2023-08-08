@@ -96,10 +96,10 @@ const SellList = () => {
   };
 
   // 주문취소 모달에서 "네" 버튼 활성화
-  const handleCancel = index => {
-    const updatedItems = orderItems.filter((_, i) => i !== index);
+  const handleCancel = key => {
+    const updatedItems = orderItems.filter(item => item.key !== key);
     setOrderItems(updatedItems);
-    hideCancelModal(index);
+    hideCancelModal(key);
     console.log("주문취소 성공:", updatedItems);
   };
 
@@ -110,51 +110,49 @@ const SellList = () => {
     setCancelModal(updatedCancelModal);
   };
 
-// 주문 상태가 "픽업대기" 또는 "픽업완료"일 때 선택하고 평점을 등록하는 함수
-const handlePickUpComplete = index => {
-  setSelectedItem(index);
-  setSelectedOrder(prevSelectedOrder => {
-    if (prevSelectedOrder.includes(index)) {
-      return prevSelectedOrder.filter(itemIndex => itemIndex !== index);
-    } else {
-      return [...prevSelectedOrder, index];
-    }
-  });
-
-  // "픽업완료 확정을 하시겠습니까?" 모달을 표시합니다
-  setPickupModalVisible(true);
-};
-
-// "픽업완료" 모달의 확인 버튼을 처리하는 함수
-const handleConfirmPickUp = index => {
-  // "픽업완료" 확인 처리를 위한 로직을 작성합니다
-  // 예를 들어, 백엔드에서 주문 상태를 "픽업완료"로 변경하는 등의 작업을 수행합니다
-
-  // 추가: 이미 픽업완료된 주문을 completedPickUpOrders에 추가합니다
-  setCompletedPickUpOrders(prevCompletedOrders => [
-    ...prevCompletedOrders,
-    index,
-  ]);
-
-  // 확인 후 모달을 숨깁니다
-  setPickupModalVisible(false);
-
-  // 주문 상태를 "픽업완료"로 변경
-  setOrderItems(prevOrderItems => {
-    const updatedOrderItems = prevOrderItems.map(item => {
-      if (item.key === index) {
-        return {
-          ...item,
-          status: "픽업완료",
-        };
+  // 주문 상태가 "픽업대기" 또는 "픽업완료"일 때 선택하고 평점을 등록하는 함수
+  const handlePickUpComplete = index => {
+    setSelectedItem(index);
+    setSelectedOrder(prevSelectedOrder => {
+      if (prevSelectedOrder.includes(index)) {
+        return prevSelectedOrder.filter(itemIndex => itemIndex !== index);
+      } else {
+        return [...prevSelectedOrder, index];
       }
-      return item;
     });
-    return updatedOrderItems;
-  });
-};
 
+    // "픽업완료 확정을 하시겠습니까?" 모달을 표시합니다
+    setPickupModalVisible(true);
+  };
 
+  // "픽업완료" 모달의 확인 버튼을 처리하는 함수
+  const handleConfirmPickUp = index => {
+    // "픽업완료" 확인 처리를 위한 로직을 작성합니다
+    // 예를 들어, 백엔드에서 주문 상태를 "픽업완료"로 변경하는 등의 작업을 수행합니다
+
+    // 추가: 이미 픽업완료된 주문을 completedPickUpOrders에 추가합니다
+    setCompletedPickUpOrders(prevCompletedOrders => [
+      ...prevCompletedOrders,
+      index,
+    ]);
+
+    // 확인 후 모달을 숨깁니다
+    setPickupModalVisible(false);
+
+    // 주문 상태를 "픽업완료"로 변경
+    setOrderItems(prevOrderItems => {
+      const updatedOrderItems = prevOrderItems.map(item => {
+        if (item.key === index) {
+          return {
+            ...item,
+            status: "픽업완료",
+          };
+        }
+        return item;
+      });
+      return updatedOrderItems;
+    });
+  };
 
   useEffect(() => {
     console.log("selectedItem : ", selectedItem);
@@ -213,26 +211,26 @@ const handleConfirmPickUp = index => {
                 )}
                 {/* 픽업완료 버튼을 누르면 "픽업완료" 상태로 바뀌면서 버튼이 disabled */}
                 {item.status === "픽업완료" ? (
-  <PickUpButton disabled>픽업완료</PickUpButton>
-) : (
-  ["배송중", "배송완료", "픽업대기"].includes(item.status) && (
-    <PickUpButton
-      onClick={() => handlePickUpComplete(item.key)}
-      disabled={completedPickUpOrders.includes(item.key)}
-    >
-      픽업완료
-    </PickUpButton>
-  )
-)}
-{/* "픽업완료" 모달을 렌더링합니다 */}
-{pickupModalVisible && (
-  <PickUpModal
-    onCancel={() => setPickupModalVisible(false)}
-    onConfirm={handleConfirmPickUp}
-    onClose={() => setPickupModalVisible(false)}
-    onPick={selectedItem}
-  />
-)}
+                  <PickUpButton disabled>픽업완료</PickUpButton>
+                ) : (
+                  ["배송중", "배송완료", "픽업대기"].includes(item.status) && (
+                    <PickUpButton
+                      onClick={() => handlePickUpComplete(item.key)}
+                      disabled={completedPickUpOrders.includes(item.key)}
+                    >
+                      픽업완료
+                    </PickUpButton>
+                  )
+                )}
+                {/* "픽업완료" 모달을 렌더링합니다 */}
+                {pickupModalVisible && (
+                  <PickUpModal
+                    onCancel={() => setPickupModalVisible(false)}
+                    onConfirm={handleConfirmPickUp}
+                    onClose={() => setPickupModalVisible(false)}
+                    onPick={selectedItem}
+                  />
+                )}
               </SellListButton>
               {CancelModal[item.key] && (
                 <SellListCancel

@@ -27,7 +27,7 @@ const ReviewModal = ({ reviewReset, hideModal, reviewSubmitUpdate }) => {
       // DB연동 예정
 
       // 리뷰가 성공적으로 제출되면 reviewSubmit를 true로 설정
-      reviewSubmitUpdate();
+      reviewSubmitUpdate(selectedReview);
 
       // 평점 처리가 완료되면 모달을 닫습니다.
       hideModal();
@@ -36,8 +36,8 @@ const ReviewModal = ({ reviewReset, hideModal, reviewSubmitUpdate }) => {
     }
   };
 
-  const handleReviewSelection = reviewType => {
-    setSelectedReview(prevReview => {
+  const handleReviewSelection = (reviewType) => {
+    setSelectedReview((prevReview) => {
       const newReview = prevReview === reviewType ? null : reviewType;
       console.log("선택된 평점:", newReview);
       // 선택한 평점을 다시 선택시 해제되도록 설정
