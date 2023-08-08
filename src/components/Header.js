@@ -118,11 +118,12 @@ const Header = ({ handleOpenNav, isActive }) => {
     if (findPath) {
       setPageTitle(findPath.title);
       setPagePath(findPath.path);
+    } else if (iproduct) {
+      const readKorNm = async () => {
+        await getKorNm(setKorNm, iproduct);
+      };
+      readKorNm();
     }
-    const readKorNm = async () => {
-      await getKorNm(setKorNm, iproduct);
-    };
-    readKorNm();
     // console.log("현재위치:", location.pathname);
     // console.log("실시간타이틀", pageTitle);
     // console.log("실시간위치", pagePath);

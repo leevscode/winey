@@ -6,7 +6,7 @@ export const getKorNm = async (_setKorNm, _productId) => {
     const res = await axios.get(`/detail/korNm/${_productId}`);
     const result = res.data;
     _setKorNm(result);
-    console.log("와인 한글이름 axios", result);
+    // console.log("와인 한글이름 axios", result);
     return result;
   } catch (err) {
     console.log("와인 한글이름 에러발생", err);

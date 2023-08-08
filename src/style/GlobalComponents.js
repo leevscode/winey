@@ -5,7 +5,7 @@
 */
 import styled from "@emotion/styled";
 import { motion } from "framer-motion";
-import { Maincolor, WidthPd, opacity } from "./GlobalStyle";
+import { Maincolor, WidthPd, ellipsis, opacity } from "./GlobalStyle";
 import { Modal } from "antd";
 
 // 헤더
@@ -120,8 +120,11 @@ export const BackBtn = styled.button`
 `;
 // 서브페이지 헤더 페이지 이름 출력
 export const HeaderTitle = styled.span`
+  display: block;
+  max-width: 350px;
   font-size: 1.8rem;
   font-weight: 700;
+  ${ellipsis.one};
 `;
 
 // 네비게이션 메뉴
