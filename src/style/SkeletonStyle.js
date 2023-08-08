@@ -4,7 +4,6 @@
   깃허브 : https://github.com/kimaydev
 */
 import styled from "@emotion/styled";
-import { Maincolor } from "./GlobalStyle";
 
 export const LoadingProductListItem = styled.div`
   /* width: calc(100% / 3 - 14px); */

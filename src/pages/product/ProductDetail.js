@@ -20,8 +20,11 @@ const ProductDetail = () => {
   const { iproduct } = useParams();
   // 상품 상세페이지 데이터 보관할 state
   const [productDetail, setProductDetail] = useState({});
+  const getData = async () => {
+    await getProductDetail(setProductDetail, iproduct);
+  };
   useEffect(() => {
-    getProductDetail(setProductDetail, iproduct);
+    getData();
   }, []);
   // console.log(productDetail);
   return (
