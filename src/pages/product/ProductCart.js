@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { ButtonCancel, ButtonOk } from "../../style/GlobalStyle";
 import {
   ProudctTotalItem,
@@ -16,50 +17,66 @@ import {
 import { useNavigate } from "react-router";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faExclamation } from "@fortawesome/free-solid-svg-icons";
+import {
+  addItem,
+  increaseQuantity,
+  decreaseQuantity,
+  removeItem,
+} from "../../reducers/userSlice";
+import { fetchCartData } from "../../../src/api/patchcart"
 
 const ProductCart = () => {
-  // 장바구니에 담긴 상품 리스트를 추적하는 상태
-  const [cartItems, setCartItems] = useState([]);
+  const cartItems = useSelector((state) => state.cart);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-  // 상품을 장바구니에 추가하는 함수
+//  userId: 유저PK값,
+// quantity: 수량,
+// nmKor: 한글 이름,
+// nmEng: 영어 이름,
+// price: 가격,
+// salePrice: 할인가격,
+// pic: 사진,
+
+  useEffect(() => {
+    // 컴포넌트가 마운트될 때 API 요청 보내기
+    fetchCartData()
+      .then((cartData) => {
+        // 받아온 데이터를 처리할 수 있습니다.
+        console.log("받아온 카트 데이터:", cartData);
+      })
+      .catch((error) => {
+        console.error("API 요청 중 오류 발생:", error);
+      });
+  }, []);
+
   const addItemToCart = () => {
     const newItem = {
       id: cartItems.length + 1,
-      name: "제프 까렐, 울띰 헤꼴뜨",
-      description: "Ultime Recolte By Jeff Carrel",
+      nmKor: "제프 까렐, 울락 헤꼴뜨",
+      nmEng: "Ultime Recolte By Jeff Carrel",
       price: "32,900원",
       quantity: 1,
-      image: <img src="https://via.placeholder.com/200x200" alt="샘플이미지" />,
+      pic: <img src="https://via.placeholder.com/200x200" alt="샘플이미지" />,
     };
-    setCartItems([...cartItems, newItem]);
+    dispatch(addItem(newItem));
   };
 
   // 상품을 장바구니에서 제거하는 함수
   const removeItemFromCart = id => {
-    setCartItems(cartItems.filter(item => item.id !== id));
+    dispatch(removeItem(id));
   };
 
   // 상품의 수량을 증가시키는 함수
-  const increaseQuantity = id => {
-    setCartItems(prevItems =>
-      prevItems.map(item =>
-        item.id === id ? { ...item, quantity: item.quantity + 1 } : item,
-      ),
-    );
+  const increaseQuantityHandler = id => {
+    dispatch(increaseQuantity(id));
   };
 
   // 상품의 수량을 감소시키는 함수
-  const decreaseQuantity = id => {
-    setCartItems(prevItems =>
-      prevItems.map(item =>
-        item.id === id && item.quantity > 1
-          ? { ...item, quantity: item.quantity - 1 }
-          : item,
-      ),
-    );
+  const decreaseQuantityHandler = id => {
+    dispatch(decreaseQuantity(id));
   };
 
-  // 상품의 총 금액을 계산하는 함수
   const calculateTotalPrice = () => {
     let totalPrice = 0;
     cartItems.forEach(item => {
@@ -71,12 +88,9 @@ const ProductCart = () => {
     return totalPrice;
   };
 
-  const navigate = useNavigate();
-
   return (
     <>
       <button onClick={addItemToCart}>상품 추가 테스트 버튼</button>
-      {/* 상품이 장바구니에 담겨있지 않을 때 */}
       {cartItems.length === 0 ? (
         <ProductCartNone>
           <div>
@@ -87,7 +101,6 @@ const ProductCart = () => {
           장바구니에 담긴 상품이 없습니다.
         </ProductCartNone>
       ) : (
-        // 상품이 장바구니에 담겨있을 때
         <ProductCartIn>
           <ProudctTotalItem>
             장바구니에 총 {cartItems.length}개의 상품이 있습니다.
@@ -95,16 +108,19 @@ const ProductCart = () => {
           <ul>
             {cartItems.map(item => (
               <ProductCartInfo key={item.id}>
-                {/* 상품 정보를 표시하는 JSX */}
-                <CartDetailImg>{item.image}</CartDetailImg>
+                <CartDetailImg>{item.pic}</CartDetailImg>
                 <CartDetail>
-                  <p>{item.name}</p>
-                  <CartInfoDes>{item.description}</CartInfoDes>
+                  <p>{item.nmKor}</p>
+                  <CartInfoDes>{item.nmEng}</CartInfoDes>
                   <span>{item.price}</span>
                   <GoodsEa>
-                    <button onClick={() => decreaseQuantity(item.id)}>-</button>
+                    <button onClick={() => decreaseQuantityHandler(item.id)}>
+                      -
+                    </button>
                     <span>{item.quantity}</span>
-                    <button onClick={() => increaseQuantity(item.id)}>+</button>
+                    <button onClick={() => increaseQuantityHandler(item.id)}>
+                      +
+                    </button>
                   </GoodsEa>
                 </CartDetail>
                 <CartDetaiClose onClick={() => removeItemFromCart(item.id)}>
@@ -116,25 +132,14 @@ const ProductCart = () => {
           <CartTotalPrice>
             <li>최종결제금액</li>
             <CartTotalPriceOne>
-              {/* calculateTotalPrice 로 총 금액 표시 */}
               {calculateTotalPrice().toLocaleString()}
               <span>원</span>
             </CartTotalPriceOne>
           </CartTotalPrice>
-          <ButtonOk
-            onClick={() => {
-              navigate("/productsell");
-            }}
-          >
-            구매하기
-          </ButtonOk>
+          <ButtonOk onClick={() => navigate("/productsell")}>구매하기</ButtonOk>
         </ProductCartIn>
       )}
-      <ButtonCancel
-        onClick={() => {
-          navigate("/main");
-        }}
-      >
+      <ButtonCancel onClick={() => navigate("/main")}>
         메인으로 돌아가기
       </ButtonCancel>
     </>
