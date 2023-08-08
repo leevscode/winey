@@ -252,12 +252,12 @@ const JoinEdit = () => {
               name="phoneNumber"
               rules={[
                 {
-                  type: "tel",
-                  message: "The input is not valid phone number!",
+                  pattern: /^[0-9\-.]{1,14}$/,
+                  message: "잘못된 형식입니다.",
                 },
                 {
                   required: true,
-                  message: "Please input your phone number!",
+                  message: "연락처를 입력해 주세요.",
                 },
               ]}
             >

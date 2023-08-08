@@ -267,8 +267,12 @@ const Join = () => {
             <Form.Item
               name="tel"
               rules={[
+                // {
+                //   type: "tel",
+                //   message: "잘못된 형식입니다.",
+                // },
                 {
-                  type: "tel",
+                  pattern: /^[0-9\-.]{1,14}$/,
                   message: "잘못된 형식입니다.",
                 },
                 {
