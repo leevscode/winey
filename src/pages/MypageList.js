@@ -19,6 +19,7 @@ const MypageList = () => {
     e.preventDefault();
     cookies.remove("accessToken");
     cookies.remove("refreshToken");
+    console.log("로그아웃 실행")
     // postLogout("");
     navigate("/main");
   };

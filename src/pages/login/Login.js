@@ -11,13 +11,13 @@ import { LockOutlined, UserOutlined } from "@ant-design/icons";
 import { FormWrap, LoginWrap, LogoDiv } from "../../style/LoginStyle";
 import { Link, useNavigate } from "react-router-dom";
 import { ButtonCancel, ButtonOk } from "../../style/GlobalStyle";
-import { fetchLogin } from "../../api/client";
+import { fetchLogin, fetchRefreshToken } from "../../api/client";
 
 const Login = () => {
   // 아이디, 비밀번호
   const [userid, setUserId] = useState("");
   const [password, setPassword] = useState("");
-  
+
   const config = {
     title: "로그인 실패",
     content: <p>아이디/패스워드를 다시 확인해 주세요.</p>,
@@ -35,6 +35,11 @@ const Login = () => {
   const onFinish = async values => {
     try {
       const login = await fetchLogin(userid, password);
+      // 로그인성공 후 cookie에 있는 accessToken을 확인하자
+      console.log("login.token", login.accessToken);
+
+      // 리프레쉬 토큰 요청
+      // fetchRefreshToken()
       navigate("/main");
     } catch (error) {
       Modal.warning(config);
