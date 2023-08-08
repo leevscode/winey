@@ -86,6 +86,7 @@ export const InfoWrap = styled.section`
       width: 100%;
       height: 100%;
       object-fit: contain;
+      padding: 20px;
     }
   }
   .txt {

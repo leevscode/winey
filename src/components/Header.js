@@ -4,7 +4,7 @@
   깃허브 : https://github.com/kimaydev
 */
 import React, { useEffect, useState } from "react";
-import { NavLink, useLocation, useNavigate } from "react-router-dom";
+import { NavLink, useLocation, useNavigate, useParams } from "react-router-dom";
 import {
   BackBtn,
   HeaderTitle,
@@ -16,8 +16,10 @@ import {
   faArrowLeft,
   faCircleExclamation,
 } from "@fortawesome/free-solid-svg-icons";
+import { getKorNm } from "../api/patchproduct";
 
 const Header = ({ handleOpenNav, isActive }) => {
+  const { iproduct } = useParams();
   const location = useLocation();
   const navigate = useNavigate();
   // 뒤로가기 버튼 핸들러
@@ -26,6 +28,8 @@ const Header = ({ handleOpenNav, isActive }) => {
   const [pageTitle, setPageTitle] = useState("");
   // 서브페이지 헤더 페이지 위치 state
   const [pagePath, setPagePath] = useState("");
+  // 와인 한글이름 보관할 state
+  const [korNm, setKorNm] = useState("");
   // 검색 모달 state
   const [isModalOpen, setIsModalOpen] = useState(false);
   const showModal = () => {
@@ -115,10 +119,15 @@ const Header = ({ handleOpenNav, isActive }) => {
       setPageTitle(findPath.title);
       setPagePath(findPath.path);
     }
+    const readKorNm = async () => {
+      await getKorNm(setKorNm, iproduct);
+    };
+    readKorNm();
     // console.log("현재위치:", location.pathname);
     // console.log("실시간타이틀", pageTitle);
     // console.log("실시간위치", pagePath);
-  });
+    // console.log("상품이름", korNm.nmKor);
+  }, [location.pathname]);
 
   return (
     <>
@@ -166,7 +175,7 @@ const Header = ({ handleOpenNav, isActive }) => {
               ) : (
                 // 서브페이지 헤더 페이지 이름 출력
                 <HeaderTitle>
-                  {location.pathname === pagePath ? pageTitle : ""}
+                  {location.pathname === pagePath ? pageTitle : korNm?.nmKor}
                 </HeaderTitle>
               )}
             </h1>

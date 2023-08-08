@@ -4,7 +4,7 @@
   깃허브 : https://github.com/kimaydev
 */
 import React, { useState } from "react";
-import { Link, NavLink, useParams } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
 // Import Swiper styles
@@ -21,7 +21,6 @@ import ProductListSkeleton from "../skeleton/ProductListSkeleton";
 import NoImage from "../../assets/no_image.jpg";
 
 const RecommWineSlide = ({ isLoading, randomWines }) => {
-  // const { iproduct } = useParams();
   // 이미지 없을 때 error처리
   const onImgError = e => {
     e.target.src = NoImage;

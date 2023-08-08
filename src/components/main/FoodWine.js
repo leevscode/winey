@@ -25,8 +25,13 @@ import { NotProductListItem, ProductListItem } from "../../style/ProductStyle";
 import { ContentsListItemWrap } from "../../style/GlobalComponents";
 import { getFoodWines } from "../../api/patchmain";
 import ProductListSkeleton from "../skeleton/ProductListSkeleton";
+import NoImage from "../../assets/no_image.jpg";
 
 const FoodWine = () => {
+  // 이미지 없을 때 error처리
+  const onImgError = e => {
+    e.target.src = NoImage;
+  };
   // 로딩 더미데이터
   const productListSkeleton = [1, 2, 3, 4, 5, 6];
   // 음식별 와인 데이터 보관할 state
@@ -207,7 +212,11 @@ const FoodWine = () => {
               <ProductListItem key={index}>
                 <NavLink to={`/productdetail/${item.productId}`}>
                   <div className="img">
-                    <img src={`/img/${item.pic}`} alt={item.nmKor} />
+                    <img
+                      src={`/img/${item.pic}`}
+                      alt={item.nmKor}
+                      onError={onImgError}
+                    />
                     {/* 장바구니 버튼 */}
                     <button>
                       <img
