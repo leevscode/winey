@@ -145,11 +145,11 @@ const JoinEdit = () => {
             userId: editId,
             userName: editUserName,
             phoneNumber: editUserTel,
+            userCity: editUserCity,
           }}
           onFinish={onFinish}
           onFinishFailed={onFinishFailed}
-          layout="vertical"
-        >
+          layout="vertical" >
           <span>
             아이디(E-mail)<b>*</b>
           </span>
@@ -193,7 +193,6 @@ const JoinEdit = () => {
               onChange={changePassword}
             />
           </Form.Item>
-
           <span>
             비밀번호 확인<b>*</b>
           </span>
@@ -219,7 +218,6 @@ const JoinEdit = () => {
               onChange={changePasswordConfirm}
             />
           </Form.Item>
-
           <span>
             이름<b>*</b>
           </span>
@@ -242,7 +240,6 @@ const JoinEdit = () => {
               onChange={handleEditUserName}
             />
           </Form.Item>
-
           <span>
             연락처<b>*</b>
           </span>
@@ -278,7 +275,9 @@ const JoinEdit = () => {
             </span>
             <p>거주지역을 선택해 주세요.</p>
             <Form.Item name="userCity">
-              <Radio.Group defaultValue={editUserCity} size="large">
+              <Radio.Group 
+              // defaultValue={editUserCity} 
+              size="large">
                 {regionOptions.map(option => (
                   <Radio.Button
                     key={option}

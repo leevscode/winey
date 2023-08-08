@@ -1,6 +1,8 @@
 import axios from "axios";
-import { getCookie, setCookie } from "./cookie";
+import { getCookie, removeCookie, setCookie } from "./cookie";
 import { Modal } from "antd";
+import { useNavigate } from "react-router";
+import { Cookies } from "react-cookie";
 
 export const client = axios.create({
   baseURL: "http://localhost:3000",
@@ -23,50 +25,6 @@ axios.interceptors.request.use(
   error => console.log(error),
 );
 
-
-
-// 토큰 갱신 함수
-const refreshToken = async () => {
-  try {
-    const res = await axios.post(`/sign-api/refresh-token`, {
-      refreshToken: getCookie("refreshToken"),
-    });
-    const result = res.data;
-    console.log("갱신result", result);
-    if (result) {
-      setCookie("accessToken", result, {
-        path: "/",
-        secure: true,
-        sameSite: "none",
-        httpOnly: true,
-      });
-      
-      console.log("Access token updated", result);
-      processFailedQueue(null, result);
-    } else {
-      console.log("토큰갱신실패");
-    }
-  } catch (error) {
-    processFailedQueue(error, null);
-    console.log(error);
-  }
-};
-
-// 토큰 갱신 후 실패한 요청을 저장하는 배열
-let failedQueue = [];
-
-// 토큰 갱신 후 실패한 요청을 재시도하는 함수
-const processFailedQueue = (error, token = null) => {
-  failedQueue.forEach(prom => {
-    if (error) {
-      prom.reject(error);
-    } else {
-      prom.config.headers.Authorization = `Bearer ${token}`;
-      prom.resolve(client(prom.config));
-    }
-  });
-  failedQueue = [];
-};
 // 쿠키 set 하기
 export const fetchLogin = async (userid, password) => {
   try {
@@ -74,7 +32,7 @@ export const fetchLogin = async (userid, password) => {
       email: userid,
       pw: password,
     });
-    console.log(res.data);
+    console.log("login완료", res.data);
     const result = res.data;
     setCookie("refreshToken", result.refreshToken, {
       path: "/",
@@ -90,8 +48,9 @@ export const fetchLogin = async (userid, password) => {
     });
 
     // n분 후에 refreshToken 함수 호출
-    setInterval(refreshToken, 500000);
-    console.log(setInterval);
+    // setInterval(refreshToken, 100000);
+    // console.log("setInterval", setInterval);
+    // console.log("refreshToken", refreshToken);
     return result;
     // axios.get(`/api/mypage/user_mypage?userId=2`);
   } catch (error) {
@@ -105,3 +64,63 @@ export const fetchLogin = async (userid, password) => {
     return error;
   }
 };
+
+// 토큰 갱신 함수
+export const fetchRefreshToken = async () => {
+  const navigate = useNavigate();
+  console.log("리프레쉬토큰 호출");
+  try {
+    const res = await axios.post(`/sign-api/refresh-token`, {
+      refreshToken: getCookie("refreshToken"),
+    });
+    const result = res.data;
+    console.log("갱신result", result);
+    if (result.success) {
+      setCookie("accessToken", result.accessToken, {
+        path: "/",
+        secure: true,
+        sameSite: "none",
+        httpOnly: true,
+      });
+      setCookie("refreshToken", result.refreshToken, {
+        path: "/",
+        secure: true,
+        sameSite: "none",
+        httpOnly: true,
+      });
+
+      // processFailedQueue(null, result);
+    } else {
+      console.log("토큰갱신실패");
+      // 갱신 실패 시, 안내창 띄우고 로그인창으로 이동
+      alert("로그아웃 되었습니다");
+      removeCookie("accessToken");
+      removeCookie("refreshToken");
+      navigate("/login");
+    }
+  } catch (error) {
+    // processFailedQueue(error, null);
+    console.log(error);
+    // 갱신 실패 시, 안내창 띄우고 로그인창으로 이동
+    alert("로그아웃 되었습니다");
+    removeCookie("accessToken");
+    Cookies.remove("refreshToken");
+    navigate("/login");
+  }
+};
+
+// 토큰 갱신 후 실패한 요청을 저장하는 배열
+// let failedQueue = [];
+
+// 토큰 갱신 후 실패한 요청을 재시도하는 함수
+// const processFailedQueue = (error, token = null) => {
+//   failedQueue.forEach(prom => {
+//     if (error) {
+//       prom.reject(error);
+//     } else {
+//       prom.config.headers.Authorization = `Bearer ${token}`;
+//       prom.resolve(client(prom.config));
+//     }
+//   });
+//   failedQueue = [];
+// };

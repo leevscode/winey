@@ -112,8 +112,8 @@ const Join = () => {
       console.log("checkAll", checkAll);
       if (checkAll === true) {
         setUserInfo({ ...values });
-        // postUserJoin(userInfo);
-        // navigate("/main");
+        postUserJoin(userInfo);
+        navigate("/login");
       } else {
         Modal.warning(config);
       }

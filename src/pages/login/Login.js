@@ -11,7 +11,7 @@ import { LockOutlined, UserOutlined } from "@ant-design/icons";
 import { FormWrap, LoginWrap, LogoDiv } from "../../style/LoginStyle";
 import { Link, useNavigate } from "react-router-dom";
 import { ButtonCancel, ButtonOk } from "../../style/GlobalStyle";
-import { fetchLogin } from "../../api/client";
+import { fetchLogin, fetchRefreshToken } from "../../api/client";
 
 const Login = () => {
   // 아이디, 비밀번호
@@ -35,6 +35,8 @@ const Login = () => {
   const onFinish = async values => {
     try {
       const login = await fetchLogin(userid, password);
+      // 리프레쉬 토큰 요청
+      // fetchRefreshToken()
       navigate("/main");
     } catch (error) {
       Modal.warning(config);
