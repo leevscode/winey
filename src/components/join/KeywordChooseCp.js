@@ -20,24 +20,49 @@ const KeywordChooseCp = () => {
   const [wineCountryCheckedList, setWineCountryCheckedList] = useState([]);
 
   const wineOptions = {
-    type: ["레드", "화이트", "스파클링", "기타"],
-    price: ["2만원미만", "2~5만원", "5~10만원", "10만원이상"],
-    withFood: [
-      "스테이크",
-      "돼지고기",
-      "치킨",
-      "해산물",
-      "어패류",
-      "샐러드",
-      "튀김",
-      "치즈",
-      "과일",
-      "한식",
-      "피자",
-      "디저트",
+    cateId: [
+      { id: 1, value: "레드" },
+      { id: 2, value: "화이트" },
+      { id: 3, value: "스파클링" },
+      { id: 4, value: "기타" },
     ],
-    flavor: ["꽃", "식물", "과일", "향신료", "흙냄새", "오크", "견과류"],
-    country: ["프랑스", "이탈리아", "스페인", "칠레", "호주", "미국", "기타"],
+    priceRange: [
+      { id: 1, value: "2만원미만" },
+      { id: 2, value: "2~5만원" },
+      { id: 3, value: "5~10만원" },
+      { id: 4, value: "10만원이상" },
+    ],
+    smallcategoryId: [
+      { id: 1, value: "스테이크" },
+      { id: 2, value: "치킨" },
+      { id: 3, value: "lamp?" },
+      { id: 4, value: "돼지고기" },
+      { id: 5, value: "어패류" },
+      { id: 6, value: "해산물" },
+      { id: 7, value: "shrimp?" },
+      { id: 8, value: "clamp?" },
+      { id: 9, value: "치즈" },
+      { id: 10, value: "과일" },
+      { id: 11, value: "피자" },
+      { id: 12, value: "pasta?" },
+    ],
+    aroma: [
+      { id: 1, value: "꽃" },
+      { id: 2, value: "식물" },
+      { id: 3, value: "과일" },
+      { id: 4, value: "향신료" },
+      { id: 5, value: "흙냄새" },
+      { id: 6, value: "오크" },
+      { id: 7, value: "견과류" },
+    ],
+    countryId: [
+      { id: 1, value: "미국" },
+      { id: 2, value: "스페인" },
+      { id: 3, value: "이탈리아" },
+      { id: 4, value: "칠레" },
+      { id: 5, value: "포르투갈" },
+      { id: 6, value: "프랑스" },
+    ],
   };
 
   // 와인종류 핸들러
@@ -146,7 +171,7 @@ const KeywordChooseCp = () => {
                 value={wineTypeCheckedList}
                 onChange={handleTypeOnChange}
               >
-                {wineOptions.type.map(option => (
+                {wineOptions.cateId.map(option => (
                   <Checkbox key={option} value={option}>
                     {option}
                   </Checkbox>

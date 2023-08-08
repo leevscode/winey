@@ -46,6 +46,13 @@ export const fetchLogin = async (userid, password) => {
       sameSite: "none",
       httpOnly: true,
     });
+    // userPK 쿠키 저장
+    //   setCookie("userPK", result.userPK, {
+    //   path: "/",
+    //   secure: true,
+    //   sameSite: "none",
+    //   httpOnly: true,
+    // });
 
     // n분 후에 refreshToken 함수 호출
     // setInterval(refreshToken, 100000);

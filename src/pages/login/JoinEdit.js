@@ -4,7 +4,7 @@
     깃허브 : https://github.com/hyemdev
 */
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Radio, Form, Input, ConfigProvider, Modal } from "antd";
 
 import {
@@ -15,8 +15,8 @@ import {
   RegionSelectWrap,
 } from "../../style/JoinStyle";
 import { ButtonCancel, ButtonOk } from "../../style/GlobalStyle";
-import { Terms } from "../../components/join/Terms";
 import { useNavigate } from "react-router-dom";
+import { patchMemberInfo, patchMemberPW } from "../../api/joinpatch";
 
 const JoinEdit = () => {
   const navigate = useNavigate();
@@ -24,8 +24,9 @@ const JoinEdit = () => {
   const 초기데이터 = {
     userId: "kimwine1111",
     userName: "김와인",
-    userPhoneNum: "123-456-7890",
-    userCity: "대구",
+    userPw: "123123",
+    userPhoneNum: "12300567890",
+    userCity: 3,
   };
 
   //변경 회원정보를 담는 state
@@ -38,28 +39,29 @@ const JoinEdit = () => {
   const [editUserCity, setEditUserCity] = useState(초기데이터.userCity);
 
   //password 유효성 검증 state
-  const [editpassword, setEditPassword] = useState("");
+  const [editpassword, setEditPassword] = useState(초기데이터.userPw);
   const [passwordConfirm, setPasswordConfirm] = useState("");
   const [passwordError, setPasswordError] = useState(false);
 
   // 지역옵션
   const regionOptions = [
-    "서울",
-    "경기",
-    "인천",
-    "강원",
-    "충남",
-    "대전",
-    "충북",
-    "경북",
-    "대구",
-    "전북",
-    "광주",
-    "전남",
-    "경남",
-    "울산",
-    "부산",
-    "제주",
+    { regionNmId: 1, value: "서울" },
+    { regionNmId: 2, value: "부산" },
+    { regionNmId: 3, value: "대구" },
+    { regionNmId: 4, value: "인천" },
+    { regionNmId: 5, value: "광주" },
+    { regionNmId: 6, value: "대전" },
+    { regionNmId: 7, value: "울산" },
+    { regionNmId: 8, value: "세종" },
+    { regionNmId: 9, value: "경기" },
+    { regionNmId: 10, value: "강원" },
+    { regionNmId: 11, value: "충북" },
+    { regionNmId: 12, value: "충남" },
+    { regionNmId: 13, value: "전북" },
+    { regionNmId: 14, value: "전남" },
+    { regionNmId: 15, value: "경북" },
+    { regionNmId: 16, value: "경남" },
+    { regionNmId: 17, value: "제주" },
   ];
 
   // 본인 인증 핸들러
@@ -76,6 +78,7 @@ const JoinEdit = () => {
   //   setEditId(e.target.value);
   //   console.log("editId", editId);
   // };
+
   // 닉네임 수정
   const handleEditUserName = e => {
     setEditUserName(e.target.value);
@@ -114,6 +117,8 @@ const JoinEdit = () => {
       });
       console.log("editUserInfo", editUserInfo);
       // navigate("/main");
+      patchMemberInfo(editUserInfo);
+      patchMemberPW(editUserInfo);
     } else {
       console.log("Failed");
     }
@@ -121,6 +126,8 @@ const JoinEdit = () => {
   const onFinishFailed = errorInfo => {
     console.log("Failed:", errorInfo);
   };
+
+  useEffect(() => {}, []);
 
   // 회원탈퇴 핸들러
   const UserDropOut = () => {
@@ -143,13 +150,15 @@ const JoinEdit = () => {
           // 디폴트 값
           initialValues={{
             userId: editId,
+            password: editpassword,
             userName: editUserName,
             phoneNumber: editUserTel,
-            userCity: editUserCity,
+            regionNmId: editUserCity,
           }}
           onFinish={onFinish}
           onFinishFailed={onFinishFailed}
-          layout="vertical" >
+          layout="vertical"
+        >
           <span>
             아이디(E-mail)<b>*</b>
           </span>
@@ -182,7 +191,6 @@ const JoinEdit = () => {
               },
             ]}
             validateStatus={passwordError ? "error" : ""}
-            help={passwordError && "비밀번호가 일치하지 않습니다."}
           >
             <Input.Password
               size="large"
@@ -249,8 +257,8 @@ const JoinEdit = () => {
               name="phoneNumber"
               rules={[
                 {
-                  pattern: /^[0-9\-.]{1,14}$/,
-                  message: "잘못된 형식입니다.",
+                  pattern: /^[0-9]+$/,
+                  message: "숫자만 입력해 주세요.",
                 },
                 {
                   required: true,
@@ -261,7 +269,7 @@ const JoinEdit = () => {
               <Input
                 size="large"
                 // 글자수 제한
-                maxLength={15}
+                maxLength={11}
                 placeholder="연락처를 입력해 주세요."
                 value={editUserTel}
                 onChange={handleEditUserTel}
@@ -274,24 +282,25 @@ const JoinEdit = () => {
               거주지역<b>*</b>
             </span>
             <p>거주지역을 선택해 주세요.</p>
-            <Form.Item name="userCity">
-              <Radio.Group 
-              // defaultValue={editUserCity} 
-              size="large">
+            <Form.Item name="regionNmId">
+              <Radio.Group
+                value={regionOptions.regionNmId}
+                size="large"
+                onClick={handleEditUserCity}
+              >
                 {regionOptions.map(option => (
                   <Radio.Button
-                    key={option}
-                    value={option}
-                    onChange={handleEditUserCity}
+                    key={option.regionNmId}
+                    value={option.regionNmId}
                   >
-                    {option}
+                    {option.value}
                   </Radio.Button>
                 ))}
               </Radio.Group>
             </Form.Item>
           </RegionSelectWrap>
-          {/* 이용약관 컴포넌트 */}
-          <Terms />
+          {/* 이용약관 컴포넌트
+          <Terms /> */}
           <Form.Item>
             <JoinEditBtn>
               <ButtonOk>수정하기</ButtonOk>

@@ -26,6 +26,11 @@ const Join = () => {
 
   // 이메일 인증 모달
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [emailCertifyOk, setEmailCertifyOk] = useState(false);
+  const emailOk = {
+    title: "메일인증확인",
+    content: <p>이메일 인증을 진행해 주세요.</p>,
+  };
 
   //password 유효성 검증 state
   const [password, setPassword] = useState("");
@@ -104,6 +109,10 @@ const Join = () => {
 
   // 회원 가입 핸들러
   const onFinish = async values => {
+    if (emailCertifyOk === false) {
+      Modal.warning(emailOk);
+      return;
+    }
     if (regionClick === undefined || regionClick === "") {
       setRegionError("지역을 선택해 주세요.");
       return;
@@ -183,7 +192,7 @@ const Join = () => {
                 </Button>,
               ]}
             >
-              <CertifyEmail />
+              <CertifyEmail setEmailCertifyOk={setEmailCertifyOk} />
             </Modal>
           </ConfirmArray>
 
@@ -267,13 +276,9 @@ const Join = () => {
             <Form.Item
               name="tel"
               rules={[
-                // {
-                //   type: "tel",
-                //   message: "잘못된 형식입니다.",
-                // },
                 {
-                  pattern: /^[0-9\-.]{1,14}$/,
-                  message: "잘못된 형식입니다.",
+                  pattern: /^[0-9]+$/,
+                  message: "숫자만 입력해 주세요.",
                 },
                 {
                   required: true,
@@ -284,8 +289,8 @@ const Join = () => {
               <Input
                 size="large"
                 // 글자수 제한
-                maxLength={15}
-                placeholder="연락처를 입력해 주세요."
+                maxLength={11}
+                placeholder="연락처를 입력해 주세요. (EX. 01012345678)"
               />
             </Form.Item>
             <ButtonConfirm onClick={handleCertifyPhone}>본인인증</ButtonConfirm>

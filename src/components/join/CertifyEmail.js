@@ -8,9 +8,9 @@ import React from "react";
 import { CertifyWrap } from "../../style/JoinStyle";
 import { ButtonOk } from "../../style/GlobalStyle";
 
-const CertifyEmail = () => {
+const CertifyEmail = ({ setEmailCertifyOk }) => {
   const onFinish = values => {
-    console.log(values);
+    setEmailCertifyOk(true);
   };
   const onFinishFailed = errorInfo => {
     console.log("Failed:", errorInfo);
