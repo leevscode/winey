@@ -8,6 +8,7 @@ import {
 } from "../../style/SellListDetailStyle";
 import { ReviewOk } from "../../style/SellListStyle";
 import ReviewModal from "../../components/selllist/ReviewModal";
+import submitReview from "../../api/patchselllist";
 
 const SellListDetail = () => {
   const [reviewReset, setReviewReset] = useState(false);
@@ -82,17 +83,26 @@ const SellListDetail = () => {
     });
   };
 
-  // 상품에 해당하는 평점을 등록하는 함수
-  const submitRating = (index, rating) => {
-    const updatedReviewSubmit = { ...reviewSubmit };
-    updatedReviewSubmit[index] = true; // 평점 등록 상태를 true로 표시
-    setReviewSubmit(updatedReviewSubmit);
+// 상품에 해당하는 평점을 등록하는 함수
+const submitRating = (index, rating) => {
+  const updatedReviewSubmit = { ...reviewSubmit };
+  updatedReviewSubmit[index] = true; // 평점 등록 상태를 true로 표시
+  setReviewSubmit(updatedReviewSubmit);
 
-    // 평점을 포함하여 productData 상태를 업데이트합니다.
-    const updatedProductData = [...productData];
-    updatedProductData[index].rating = rating;
-    setProductData(updatedProductData);
+  // 평점을 포함하여 productData 상태를 업데이트합니다.
+  const updatedProductData = [...productData];
+  updatedProductData[index].rating = rating;
+  setProductData(updatedProductData);
+
+  // 리뷰 데이터를 생성하여 엔드포인트로 전송
+  const reviewData = {
+    orderDetailId: updatedProductData[index].key, // 주문 상세 pk값 추가
+    review_level: rating, // 리뷰 평점 추가
+    // 필요한 다른 리뷰 데이터를 여기에 추가하세요
   };
+
+  submitReview(reviewData);
+};
 
   return (
     <>
