@@ -179,9 +179,10 @@ export const DetailInfoWrap = styled.section`
       margin-bottom: 0;
       i {
         display: inline-block;
-        width: 7px;
-        height: 10px;
-        background: pink;
+        width: 8px;
+        height: 11px;
+        background: url(/images/icon_red_waterdrop.svg) center no-repeat;
+        background-size: contain;
         margin-right: 5px;
       }
     }
@@ -227,20 +228,22 @@ export const DetailInfoWrap = styled.section`
             width: 100%;
             height: 100%;
           }
-          &:nth-of-type(1)::after {
-            background: ${Gradation.wineE};
-          }
-          &:nth-of-type(2)::after {
-            background: ${Gradation.wineD};
-          }
-          &:nth-of-type(3)::after {
-            background: ${Gradation.wineC};
-          }
-          &:nth-of-type(4)::after {
-            background: ${Gradation.wineB};
-          }
-          &:nth-of-type(5)::after {
-            background: ${Gradation.wineA};
+          &.active {
+            &:nth-of-type(1)::after {
+              background: ${Gradation.wineE};
+            }
+            &:nth-of-type(2)::after {
+              background: ${Gradation.wineD};
+            }
+            &:nth-of-type(3)::after {
+              background: ${Gradation.wineC};
+            }
+            &:nth-of-type(4)::after {
+              background: ${Gradation.wineB};
+            }
+            &:nth-of-type(5)::after {
+              background: ${Gradation.wineA};
+            }
           }
         }
       }

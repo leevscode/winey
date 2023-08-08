@@ -30,7 +30,7 @@ const ProductDetail = () => {
       <WineInfo productDetail={productDetail} />
       <SectionLine />
       {/* 당도, 산도, 바디 */}
-      <WindeDetailInfo />
+      <WindeDetailInfo productDetail={productDetail} />
       <SectionLine />
       {/* 입문 난이도 */}
       <WineLevel />

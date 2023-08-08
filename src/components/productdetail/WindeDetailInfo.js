@@ -6,51 +6,55 @@
 import React from "react";
 import { DetailInfoWrap } from "../../style/ProductDetailStyle";
 
-const WindeDetailInfo = () => {
+const WindeDetailInfo = ({ productDetail }) => {
   return (
     <DetailInfoWrap>
-      <ul>
-        <li className="title component-title">
-          <i></i>당도
-        </li>
-        <li className="bar">
-          <ol>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-          </ol>
-        </li>
-      </ul>
-      <ul>
-        <li className="title component-title">
-          <i></i>산도
-        </li>
-        <li className="bar">
-          <ol>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-          </ol>
-        </li>
-      </ul>
-      <ul>
-        <li className="title component-title">
-          <i></i>바디
-        </li>
-        <li className="bar">
-          <ol>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-          </ol>
-        </li>
-      </ul>
+      {productDetail.wineDetailVo && (
+        <>
+          <ul>
+            <li className="title component-title">
+              <i></i>당도
+            </li>
+            <li className="bar">
+              <ol>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+              </ol>
+            </li>
+          </ul>
+          <ul>
+            <li className="title component-title">
+              <i></i>산도
+            </li>
+            <li className="bar">
+              <ol>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+              </ol>
+            </li>
+          </ul>
+          <ul>
+            <li className="title component-title">
+              <i></i>바디
+            </li>
+            <li className="bar">
+              <ol>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+              </ol>
+            </li>
+          </ul>
+        </>
+      )}
     </DetailInfoWrap>
   );
 };

@@ -20,7 +20,7 @@ const WineInfo = ({ productDetail }) => {
             {/* 상품 이미지 */}
             <img
               src={`/img/${productDetail.wineDetailVo.pic}`}
-              alt=""
+              alt={productDetail.wineDetailVo.nmKor}
               onError={onImgError}
             />
           </div>
@@ -28,14 +28,14 @@ const WineInfo = ({ productDetail }) => {
             <div className="title-wrap">
               <ul>
                 {/* 와인 종류 */}
-                <li>레드와인</li>
+                <li>{productDetail.wineDetailVo.categoryNm}&nbsp;와인</li>
                 {/* 원산지 */}
-                <li>프랑스</li>
+                <li>{productDetail.wineDetailVo.countryNm}</li>
               </ul>
               {/* 상품명 */}
               <h2>
-                상품이름
-                <span>Ultime Recolte By Jeff Carrel</span>
+                {productDetail.wineDetailVo.nmKor}
+                <span>{productDetail.wineDetailVo.nmEng}</span>
               </h2>
             </div>
             <div className="price-wrap">
@@ -43,11 +43,14 @@ const WineInfo = ({ productDetail }) => {
                 <ul>
                   <li>
                     {/* 판매가 */}
-                    <span>32900</span>원
+                    <span>
+                      {productDetail.wineDetailVo.price.toLocaleString()}
+                    </span>
+                    원
                   </li>
                   <li>
                     {/* 원가 */}
-                    34545원
+                    {productDetail.wineDetailVo.price.toLocaleString()}원
                   </li>
                 </ul>
               </div>

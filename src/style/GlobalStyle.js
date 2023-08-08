@@ -33,6 +33,7 @@ export const Gradation = {
   wineE: "#c1305d",
   whiteA: "#f6e889",
   whiteB: "#fAf3be",
+  whiteC: "#C9BC65",
   sparkA: "#d3cca1",
   sparkB: "#ede5b9",
   etcA: "#d37e72",
@@ -116,4 +117,5 @@ export const ellipsis = {
 export const SectionLine = styled.div`
   height: 10px;
   background: ${Maincolor.beige};
+  padding: 0 !important;
 `;

@@ -170,7 +170,8 @@ const RecommWineSlide = ({ isLoading, randomWines }) => {
                   </SwiperSlide>
                 ))}
           </Swiper>
-          {randomWines.length === 0 && (
+          {/* 선호하는 와인 없을 때 출력되는 컴포넌트 */}
+          {/* {randomWines.length === 0 && (
             <NotRandomWine>
               <ul>
                 <li>
@@ -188,7 +189,7 @@ const RecommWineSlide = ({ isLoading, randomWines }) => {
                 </li>
               </ul>
             </NotRandomWine>
-          )}
+          )} */}
         </>
       ) : (
         // 로그아웃
