@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import { ButtonOk } from "../../style/GlobalStyle";
+
 import {
+  DetailButtonOk,
   DetailDay,
   DetailTotalPrice,
-  SellListDetailBox,
   SellListDetailinfo,
 } from "../../style/SellListDetailStyle";
 import { ReviewOk } from "../../style/SellListStyle";
@@ -23,7 +23,7 @@ const SellListDetail = () => {
       productName: "제프 까렐, 울띰 헤꼴뜨",
       productDescription: "Ultime Recolte By Jeff Carrel",
       productPrice: "32,900원",
-      rating: null, // 각 상품의 평점을 저장할 속성
+      rating: null,
     },
     {
       key: 2,
@@ -31,6 +31,14 @@ const SellListDetail = () => {
       productName: "Auth Wine",
       productDescription: "Auth",
       productPrice: "52,500원",
+      rating: null, // 각 상품의 평점을 저장할 속성
+    },
+    {
+      key: 3,
+      imageSrc: "https://via.placeholder.com/120x120",
+      productName: "Auth Wine",
+      productDescription: "Auth",
+      productPrice: "82,500원",
       rating: null, // 각 상품의 평점을 저장할 속성
     },
   ]);
@@ -67,8 +75,8 @@ const SellListDetail = () => {
   };
 
   // 평점 등록이 완료된 항목만 상태를 업데이트
-  const reviewSubmitUpdate = (index) => {
-    setReviewSubmit((prevReviewSubmit) => {
+  const reviewSubmitUpdate = index => {
+    setReviewSubmit(prevReviewSubmit => {
       console.log(" key: 1");
       return { ...prevReviewSubmit, [index]: true };
     });
@@ -79,29 +87,30 @@ const SellListDetail = () => {
     const updatedReviewSubmit = { ...reviewSubmit };
     updatedReviewSubmit[index] = true; // 평점 등록 상태를 true로 표시
     setReviewSubmit(updatedReviewSubmit);
-  
+
     // 평점을 포함하여 productData 상태를 업데이트합니다.
     const updatedProductData = [...productData];
     updatedProductData[index].rating = rating;
     setProductData(updatedProductData);
   };
-  
+
   return (
     <>
       <DetailDay>{orderData.orderDate}</DetailDay>
-      {productData.map((product, ) => (
+      {productData.map(product => (
         <SellListDetailinfo key={product.key}>
-          <img src={product.imageSrc} alt="" />
-          <ul>
-            <li>{product.productName}</li>
-            <li>{product.productDescription}</li>
-            <li>{product.productPrice}</li>
-          </ul>
+          <div>
+            <img src={product.imageSrc} alt="" />
+            <ul>
+              <li>{product.productName}</li>
+              <li>{product.productDescription}</li>
+              <li>{product.productPrice}</li>
+            </ul>
+          </div>
+          <DetailButtonOk onClick={() => showModal()}>평점등록</DetailButtonOk>
         </SellListDetailinfo>
       ))}
-      <SellListDetailBox>
-      <ButtonOk onClick={() => showModal()}>평점등록</ButtonOk>
-      </SellListDetailBox>
+
       <DetailTotalPrice>
         <p>결제 방법: {orderData.paymentMethod}</p>
         <p>픽업 지점: {orderData.pickupLocation}</p>
@@ -112,14 +121,14 @@ const SellListDetail = () => {
           <strong>{calculateTotalAmount().toLocaleString()}원</strong>
         </p>
       </DetailTotalPrice>
-
+      <ReviewOk>평점등록이 완료되었습니다</ReviewOk>
       {/* 리뷰 모달 내용 */}
       <ReviewModal
-  reviewReset={reviewReset}
-  hideModal={hideModal}
-  reviewSubmitUpdate={reviewSubmitUpdate}
-/>
-<ReviewOk>평점등록이 완료되었습니다</ReviewOk>
+        reviewReset={reviewReset}
+        hideModal={hideModal}
+        reviewSubmitUpdate={reviewSubmitUpdate}
+        submitRating={rating => submitRating(rating)}
+      />
     </>
   );
 };

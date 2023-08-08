@@ -48,12 +48,17 @@ export const SellListDetailText = styled.div`
 `;
 
 export const SellListDetailinfo = styled.div`
-  display: flex;
-  padding: 10px;
+  padding: 20px;
+  div {
+    margin-bottom: 30px;
+    display: flex;
+  }
   img {
     padding: 0 20px;
   }
   ul {
+    display: flex;
+    flex-direction: column;
     margin-top: 20px;
   }
   li:nth-of-type(1) {
@@ -80,11 +85,20 @@ export const SellListDetailinfo = styled.div`
   }
 `;
 
-export const SellListDetailBox = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  padding: 20px;
+export const DetailButtonOk = styled.button`
+  display: block;
+  background: ${Maincolor.redBold};
+  color: ${Maincolor.white};
+  border: 0.05rem solid ${Maincolor.redBold};
+  font-size: 1.6rem;
+  font-weight: 500;
+  width: 100%;
+  height: 5rem;
+  border-radius: 0.5rem;
+  transition: 0.2s ease-in-out;
+  &:hover {
+    background: ${Maincolor.redDeep};
+  }
 `;
 
 export const DetailTotalPrice = styled.div`
