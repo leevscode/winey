@@ -25,8 +25,7 @@ const ProductDetail = () => {
   };
   useEffect(() => {
     getData();
-  }, []);
-  // console.log(productDetail);
+  }, [iproduct]);
   return (
     <ProductDetailWrap>
       {/* 상품 이미지, 와인 종류, 원산지, 이름, 가격정보 */}
@@ -36,10 +35,10 @@ const ProductDetail = () => {
       <WindeDetailInfo productDetail={productDetail} />
       <SectionLine />
       {/* 입문 난이도 */}
-      <WineLevel productDetail={productDetail} iproduct={iproduct} />
+      <WineLevel productDetail={productDetail} />
       <SectionLine />
       {/* 페어링, 아로마, 음용온도 */}
-      <WineRecommend />
+      <WineRecommend productDetail={productDetail} />
       <SectionLine />
       {/* 와인 평점 */}
       <WineReview />

@@ -41,21 +41,31 @@ const WineInfo = ({ productDetail }) => {
             <div className="price-wrap">
               <div className="price">
                 <ul>
-                  <li>
+                  <li className="sale-price">
                     {/* 판매가 */}
                     <span>
-                      {productDetail.wineDetailVo.price.toLocaleString()}
+                      {productDetail.selSale === null
+                        ? productDetail.wineDetailVo.price.toLocaleString()
+                        : productDetail.selSale.salePrice.toLocaleString()}
                     </span>
                     원
                   </li>
-                  <li>
-                    {/* 원가 */}
-                    {productDetail.wineDetailVo.price.toLocaleString()}원
-                  </li>
+                  {productDetail.selSale && (
+                    <>
+                      <li className="default-price">
+                        {/* 원가 */}
+                        {productDetail.wineDetailVo.price.toLocaleString()}원
+                      </li>
+                    </>
+                  )}
                 </ul>
               </div>
               {/* 할인율 */}
-              <div className="percent">5%</div>
+              {productDetail.selSale && (
+                <>
+                  <div className="percent">{productDetail.selSale?.sale}%</div>
+                </>
+              )}
             </div>
           </div>
         </>

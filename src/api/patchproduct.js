@@ -27,14 +27,14 @@ export const getProductDetail = async (_setProductDetail, _productId) => {
 };
 
 // 입문 난이도 GET
-export const getFeature = async (_setFeature, _productId) => {
-  try {
-    const res = await axios.get(`/api/main/feature?productId=${_productId}`);
-    const result = res.data;
-    _setFeature(result);
-    console.log("입문 난이도 axios", result);
-    return result;
-  } catch (err) {
-    console.log("입문 난이도 에러 발생", err);
-  }
-};
+// export const getFeature = async (_setFeature, _productId) => {
+//   try {
+//     const res = await axios.get(`/api/main/feature?productId=${_productId}`);
+//     const result = res.data;
+//     _setFeature(result);
+//     // console.log("입문 난이도 axios", result);
+//     return result;
+//   } catch (err) {
+//     console.log("입문 난이도 에러 발생", err);
+//   }
+// };

@@ -30,7 +30,7 @@ const PriceWine = () => {
     e.target.src = NoImage;
   };
   // 로딩 더미데이터
-  const productListSkeleton = [1, 2, 3, 4];
+  const productListSkeleton = [1, 2, 3, 4, 5, 6];
   // 금액별 와인 데이터 보관할 state
   const [priceWines, setPriceWines] = useState([]);
   // 로딩 state

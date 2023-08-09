@@ -8,28 +8,9 @@ import { DetailInfoWrap } from "../../style/ProductDetailStyle";
 
 const WindeDetailInfo = ({ productDetail }) => {
   // 당도 데이터 보관 state
-  const [sweety, setSweety] = useState();
-  // 산도 데이터 보관 state
-  const [acidity, setAcidity] = useState();
-  // 바디 데이터 보관 state
-  const [body, setBody] = useState();
-  // 당도
-  const getSweety = async () => {
-    await setSweety(productDetail.wineDetailVo?.sweety);
-  };
-  // 산도
-  const getAcidity = async () => {
-    await setAcidity(productDetail.wineDetailVo?.acidity);
-  };
-  // 바디
-  const getBody = async () => {
-    await setBody(productDetail.wineDetailVo?.body);
-  };
-  useEffect(() => {
-    getSweety();
-    getAcidity();
-    getBody();
-  }, [productDetail]);
+  const sweety = productDetail.wineDetailVo?.sweety;
+  const acidity = productDetail.wineDetailVo?.acidity;
+  const body = productDetail.wineDetailVo?.body;
   // console.log("당도", sweety);
   // console.log("산도", acidity);
   // console.log("바디", body);
@@ -43,13 +24,10 @@ const WindeDetailInfo = ({ productDetail }) => {
             </li>
             <li className="bar">
               <ol className="active_bar">
-                {Array(sweety)
-                  .fill()
-                  .map(index => (
-                    <>
-                      <li key={index}></li>
-                    </>
-                  ))}
+                {sweety !== undefined &&
+                  Array(sweety)
+                    .fill()
+                    .map(index => <li key={index}></li>)}
               </ol>
               <ol className="default_bar">
                 <li></li>
@@ -66,13 +44,10 @@ const WindeDetailInfo = ({ productDetail }) => {
             </li>
             <li className="bar">
               <ol className="active_bar">
-                {Array(acidity)
-                  .fill()
-                  .map(index => (
-                    <>
-                      <li key={index}></li>
-                    </>
-                  ))}
+                {acidity !== undefined &&
+                  Array(acidity)
+                    .fill()
+                    .map(index => <li key={index}></li>)}
               </ol>
               <ol className="default_bar">
                 <li></li>
@@ -89,13 +64,10 @@ const WindeDetailInfo = ({ productDetail }) => {
             </li>
             <li className="bar">
               <ol className="active_bar">
-                {Array(body)
-                  .fill()
-                  .map(index => (
-                    <>
-                      <li key={index}></li>
-                    </>
-                  ))}
+                {body !== undefined &&
+                  Array(body)
+                    .fill()
+                    .map(index => <li key={index}></li>)}
               </ol>
               <ol className="default_bar">
                 <li></li>

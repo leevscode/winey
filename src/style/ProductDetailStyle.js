@@ -137,12 +137,13 @@ export const InfoWrap = styled.section`
       align-items: flex-end;
       justify-content: space-between;
       margin-top: 15px;
+      min-height: 3.4rem;
       .price {
         ul {
           display: flex;
           align-items: flex-end;
           font-size: 1.8rem;
-          li:first-of-type {
+          li.sale-price {
             font-weight: 700;
             margin-right: 8px;
             color: ${Maincolor.redBold};
@@ -151,7 +152,7 @@ export const InfoWrap = styled.section`
               font-weight: 900;
             }
           }
-          li:last-of-type {
+          li.default-price {
             text-decoration: line-through;
             color: ${Maincolor.grayBold};
           }
