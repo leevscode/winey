@@ -18,7 +18,11 @@ import {
 import { ButtonCancel, ButtonOk } from "../../style/GlobalStyle";
 import { useState } from "react";
 import { removeCookie } from "../../api/cookie";
-import { patchMemberInfo, patchMemberPW } from "../../api/joinpatch";
+import {
+  deleteMember,
+  patchMemberInfo,
+  patchMemberPW,
+} from "../../api/joinpatch";
 import { useNavigate } from "react-router";
 
 const JoinEditForm = ({ editUserInfo, setEditUserInfo }) => {
@@ -90,6 +94,13 @@ const JoinEditForm = ({ editUserInfo, setEditUserInfo }) => {
 
   // 회원정보수정 확인 핸들러
   const onFinish = values => {
+    setEditUserInfo({
+      editId,
+      editpassword,
+      editUserName,
+      editUserTel,
+      editUserCity,
+    });
     if (editpassword === "") {
       Modal.warning({
         title: "비밀번호 확인",
@@ -99,17 +110,9 @@ const JoinEditForm = ({ editUserInfo, setEditUserInfo }) => {
       return;
     }
     if (editpassword === passwordConfirm) {
-      setEditUserInfo({
-        editId,
-        editpassword,
-        editUserName,
-        editUserTel,
-        editUserCity,
-      });
-      console.log("editUserInfo", editUserInfo);
-      // navigate("/main");
       patchMemberInfo(editUserInfo);
       patchMemberPW(editUserInfo);
+      // navigate("/main");
     } else {
       console.log("Failed");
     }
@@ -124,11 +127,11 @@ const JoinEditForm = ({ editUserInfo, setEditUserInfo }) => {
       icon: <ExclamationCircleFilled />,
       content: "정말 탈퇴 하시겠습니까?",
       onOk() {
-        // deleteMember();
+        deleteMember();
         removeCookie("accessToken");
         removeCookie("refreshToken");
+        navigate("/main");
         console.log("회원탈퇴");
-        // navigate("/main");
       },
       onCancel() {
         console.log("Cancel");

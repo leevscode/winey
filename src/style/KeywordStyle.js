@@ -1,9 +1,10 @@
 import styled from "@emotion/styled";
-import { ButtonOk, Maincolor, opacity } from "./GlobalStyle";
+import { ButtonOk, Maincolor, WidthPd, opacity } from "./GlobalStyle";
 
 // 회원가입완료 component
 export const WelcomeWrap = styled.div`
-  height: 25rem;
+  padding: ${WidthPd.padding};
+  margin-top: 20rem;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -22,9 +23,18 @@ export const WelcomeWrap = styled.div`
     line-height: 2rem;
     margin-bottom: 2rem;
   }
+  & button {
+    margin-top: 3rem;
+    & > a {
+      font-weight: 600;
+
+      color: ${Maincolor.white};
+    }
+  }
 `;
 export const LetsChoice = styled.div`
   & div {
+    margin-top: 2rem;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -43,7 +53,7 @@ export const LetsChoice = styled.div`
     }
   }
   & h4 {
-    font-size: 1.4rem;
+    font-size: 1.6rem;
     font-weight: 500;
     text-align: center;
     line-height: 1.5rem;
@@ -51,8 +61,10 @@ export const LetsChoice = styled.div`
   }
 
   & h5 {
-    font-size: 1.2rem;
+    margin-top: 2rem;
+    font-size: 1.4rem;
     text-align: center;
+    line-height: 1.7rem;
   }
 `;
 

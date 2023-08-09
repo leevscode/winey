@@ -122,7 +122,7 @@ const Join = () => {
       if (checkAll === true) {
         setUserInfo({ ...values });
         postUserJoin(userInfo);
-        // navigate("/login");
+        navigate("/welcome");
       } else {
         Modal.warning(config);
       }

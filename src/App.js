@@ -27,6 +27,7 @@ import NotFound from "./pages/NotFound";
 import { AnimatePresence } from "framer-motion";
 import SellListDetail from "./pages/product/SellListDetail";
 import { useEffect } from "react";
+import Welcome from "./components/join/Welcome";
 
 function App() {
   // 페이지 이동 시 스크롤 최상단으로 올라가는 코드
@@ -68,6 +69,8 @@ function App() {
           <Route path="/login" element={<Login />} />
           {/* 회원가입 */}
           <Route path="/join" element={<Join />} />
+          {/* 회원가입환영 */}
+          <Route path="/welcome" element={<Welcome />} />
           {/* 키워드선택 */}
           <Route path="/keywordselect" element={<KeywordSelect />} />
           {/* 마이페이지 */}

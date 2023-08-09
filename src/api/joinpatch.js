@@ -73,7 +73,7 @@ export const patchMemberPW = async editUserInfo => {
 // 회원탈퇴 delete
 export const deleteMember = async () => {
   try {
-    const res = await axios.delete("/");
+    const res = await axios.delete("/api");
     console.log("res", res);
     const result = await res.data;
     console.log("회원삭제성공", result);
