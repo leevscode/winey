@@ -40,6 +40,7 @@ export const ProductCartInfo = styled.div`
 `;
 
 export const CartDetailWrap = styled.div`
+  margin-bottom: 15px;
   position: relative;
   padding-top: 135%;
   border: 0.05rem solid ${opacity.grayLight};
@@ -67,16 +68,19 @@ export const CartDetail = styled.span`
   }
 `;
 
-export const CartDetaiClose = styled.div``;
+export const CartDetaiClose = styled.button`
+  display: inline-flex;
+`;
 
 export const Cartnmkor = styled.p`
   font-size: 1.6rem;
   font-weight: bold;
+  color: #3c2323;
 `;
 
 export const CartnmEng = styled.p`
   font-size: 1.4rem !important;
-  margin-bottom: 30px;
+  margin-bottom: 40px;
   color: #837575;
 `;
 
@@ -88,9 +92,8 @@ export const Cratprice = styled.p`
 export const GoodsEa = styled.div`
   margin-top: 10px;
   span {
-    display: flex;
-    justify-content: center;
     border: 1px solid;
+    padding: 0 20px;
   }
   button {
     border: 1px solid;
@@ -107,7 +110,9 @@ export const CartTotalPrice = styled.ul`
   font-size: 2rem;
   background: #fcf8f1;
   span {
-    font-size: 1.5rem;
+    font-size: 2rem;
+    font-weight: bold;
+    color: #7c1d34;
   }
 `;
 
