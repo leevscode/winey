@@ -4,51 +4,25 @@
     깃허브 : https://github.com/hyemdev
 */
 
-import React, { useState } from "react";
-import { Radio, Form, Input, ConfigProvider, Modal, Button } from "antd";
+import React from "react";
+import { Radio, Form, Input, ConfigProvider, Modal } from "antd";
+import { ExclamationCircleFilled } from "@ant-design/icons";
 
 import {
   ButtonConfirm,
   ConfirmArray,
+  JoinEditBtn,
   JoinWrap,
   RegionSelectWrap,
 } from "../../style/JoinStyle";
-import { ButtonOk } from "../../style/GlobalStyle";
-import { Terms } from "../../components/join/Terms";
-import { useNavigate } from "react-router-dom";
-import CertifyEmail from "../../components/join/CertifyEmail";
-import { postUserJoin } from "../../api/joinpatch";
+import { ButtonCancel, ButtonOk } from "../../style/GlobalStyle";
+import { useState } from "react";
+import { removeCookie } from "../../api/cookie";
+import { patchMemberInfo, patchMemberPW } from "../../api/joinpatch";
+import { useNavigate } from "react-router";
 
-const Join = () => {
-  const navigate = useNavigate();
-
-  const [userInfo, setUserInfo] = useState([]);
-
-  // 이메일 인증 모달
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [emailCertifyOk, setEmailCertifyOk] = useState(false);
-  const emailOk = {
-    title: "메일인증확인",
-    content: <p>이메일 인증을 진행해 주세요.</p>,
-  };
-
-  //password 유효성 검증 state
-  const [password, setPassword] = useState("");
-  const [passwordConfirm, setPasswordConfirm] = useState("");
-  const [passwordError, setPasswordError] = useState(false);
-
-  // 약관동의 state
-  const [checkAll, setCheckAll] = useState(false);
-  const config = {
-    title: "이용약관동의",
-    content: <p>이용약관동의를 진행해 주세요</p>,
-  };
-
-  // 지역선택 에러처리state
-  const [regionError, setRegionError] = useState("");
-  const [regionClick, setRegionClick] = useState();
-
-  // 지역선택 옵션
+const JoinEditForm = ({ editUserInfo, setEditUserInfo }) => {
+  // 지역옵션
   const regionOptions = [
     { regionNmId: 1, value: "서울" },
     { regionNmId: 2, value: "부산" },
@@ -69,18 +43,34 @@ const Join = () => {
     { regionNmId: 17, value: "제주" },
   ];
 
-  // 아이디 중복 확인 모달창 핸들러
-  const showModal = () => {
-    setIsModalOpen(true);
+  const navigate = useNavigate();
+
+  // 아이디, 이름, 전화번호 변경 state
+  const [editId] = useState(editUserInfo.email);
+
+  const [editUserName, setEditUserName] = useState(editUserInfo.nm);
+  const [editUserTel, setEditUserTel] = useState(editUserInfo.tel);
+  const [editUserCity, setEditUserCity] = useState(editUserInfo.regionNmId);
+
+  //password 유효성 검증 state
+  const [editpassword, setEditPassword] = useState("");
+  const [passwordConfirm, setPasswordConfirm] = useState("");
+  const [passwordError, setPasswordError] = useState(false);
+
+  // 닉네임 수정
+  const handleEditUserName = e => {
+    setEditUserName(e.target.value);
   };
-  const handleOk = () => {
-    setIsModalOpen(false);
+  // 전화번호 수정
+  const handleEditUserTel = e => {
+    setEditUserTel(e.target.value);
   };
-  const handleCancel = () => {
-    setIsModalOpen(false);
+  // 지역 수정
+  const handleEditUserCity = e => {
+    setEditUserCity(e.target.value);
   };
 
-  // 전화번호 본인 인증 모달 핸들러
+  // 본인 인증 핸들러
   const handleCertifyPhone = () => {
     Modal.success({
       title: "본인 인증",
@@ -88,44 +78,30 @@ const Join = () => {
       onOk() {},
     });
   };
-
   // password 유효성 관련 핸들러
   const changePassword = e => {
-    setPassword(e.target.value);
+    setEditPassword(e.target.value);
     setPasswordError(e.target.value !== passwordConfirm);
   };
   const changePasswordConfirm = e => {
     setPasswordConfirm(e.target.value);
-    setPasswordError(e.target.value !== password);
+    setPasswordError(e.target.value !== editpassword);
   };
 
-  // 지역선택 에러처리
-  const handleRegion = e => {
-    setRegionClick(e.target.value);
-    if (e.target.value != null) {
-      setRegionError("");
-    }
-  };
-
-  // 회원 가입 핸들러
-  const onFinish = async values => {
-    if (emailCertifyOk === false) {
-      Modal.warning(emailOk);
-      return;
-    }
-    if (regionClick === undefined || regionClick === "") {
-      setRegionError("지역을 선택해 주세요.");
-      return;
-    }
-    if (password === passwordConfirm) {
-      console.log("checkAll", checkAll);
-      if (checkAll === true) {
-        setUserInfo({ ...values });
-        postUserJoin(userInfo);
-        navigate("/login");
-      } else {
-        Modal.warning(config);
-      }
+  // 회원정보수정 확인 핸들러
+  const onFinish = values => {
+    if (editpassword === passwordConfirm) {
+      setEditUserInfo({
+        // editId,
+        editpassword,
+        editUserName,
+        editUserTel,
+        editUserCity,
+      });
+      console.log("editUserInfo", editUserInfo);
+      // navigate("/main");
+      patchMemberInfo(editUserInfo);
+      patchMemberPW(editUserInfo);
     } else {
       console.log("Failed");
     }
@@ -133,9 +109,28 @@ const Join = () => {
   const onFinishFailed = errorInfo => {
     console.log("Failed:", errorInfo);
   };
-
+  // 회원탈퇴 핸들러
+  const UserDropOut = () => {
+    Modal.confirm({
+      title: "회원탈퇴",
+      icon: <ExclamationCircleFilled />,
+      content: "정말 탈퇴 하시겠습니까?",
+      onOk() {
+        // deleteMember();
+        removeCookie("accessToken");
+        removeCookie("refreshToken");
+        console.log("회원탈퇴");
+        // navigate("/main");
+      },
+      onCancel() {
+        console.log("Cancel");
+      },
+    });
+  };
+  //
   return (
-    <JoinWrap>
+    <div>
+      {" "}
       <ConfigProvider
         theme={{
           token: {
@@ -146,56 +141,37 @@ const Join = () => {
         }}
       >
         <Form
+          // 디폴트 값
           initialValues={{
-            remember: true,
+            userId: editId,
+            password: editpassword,
+            userName: editUserName,
+            phoneNumber: editUserTel,
+            regionNmId: editUserCity,
           }}
           onFinish={onFinish}
           onFinishFailed={onFinishFailed}
           layout="vertical"
         >
           <span>
-            아이디(Email)<b>*</b>
+            아이디(E-mail)<b>*</b>
           </span>
-          <p>사용하실 아이디를 이메일 형식으로 입력해 주세요.</p>
-          <ConfirmArray>
-            <Form.Item
-              name="email"
-              rules={[
-                {
-                  required: true,
-                  message: "이메일을 입력해주세요",
-                },
-                {
-                  type: "email",
-                  message: "이메일을 입력해주세요",
-                },
-              ]}
-            >
-              <Input
-                size="large"
-                // 글자수 제한
-                maxLength={20}
-                placeholder="아이디를 입력해 주세요."
-              />
-            </Form.Item>
-            <ButtonConfirm onClick={showModal}>인증메일발송</ButtonConfirm>
-            <Modal
-              title="이메일 인증 확인"
-              open={isModalOpen}
-              onOk={handleOk}
-              onCancel={handleCancel}
-              width={400}
-              footer={[
-                <Button key="confirm" onClick={handleOk}>
-                  {" "}
-                  확인{" "}
-                </Button>,
-              ]}
-            >
-              <CertifyEmail setEmailCertifyOk={setEmailCertifyOk} />
-            </Modal>
-          </ConfirmArray>
-
+          <p>사용하실 아이디를 입력해 주세요.</p>
+          <Form.Item
+            name="userId"
+            rules={[
+              {
+                required: true,
+                message: "Please input your E-mail!",
+              },
+            ]}
+          >
+            <Input
+              size="large"
+              // 읽기전용
+              readOnly={true}
+            />
+          </Form.Item>
           <span>
             비밀번호<b>*</b>
           </span>
@@ -205,22 +181,20 @@ const Join = () => {
             rules={[
               {
                 required: true,
-                message: "패스워드를 입력해 주세요.",
+                message: "Please input your password!",
               },
             ]}
             validateStatus={passwordError ? "error" : ""}
-            // help={passwordError && "비밀번호가 일치하지 않습니다."}
           >
             <Input.Password
               size="large"
               // 글자수 제한
               maxLength={20}
               placeholder="비밀번호를 입력해 주세요."
-              value={password}
+              value={editpassword}
               onChange={changePassword}
             />
           </Form.Item>
-
           <span>
             비밀번호 확인<b>*</b>
           </span>
@@ -231,7 +205,7 @@ const Join = () => {
             rules={[
               {
                 required: true,
-                message: "패스워드를 입력해 주세요.",
+                message: "Please input your password!",
               },
             ]}
             validateStatus={passwordError ? "error" : ""}
@@ -246,17 +220,16 @@ const Join = () => {
               onChange={changePasswordConfirm}
             />
           </Form.Item>
-
           <span>
             이름<b>*</b>
           </span>
           <p>이름을 입력해 주세요</p>
           <Form.Item
-            name="nm"
+            name="userName"
             rules={[
               {
                 required: true,
-                message: "이름을 입력해 주세요.",
+                message: "Please input your username!",
               },
             ]}
           >
@@ -265,16 +238,17 @@ const Join = () => {
               // 글자수 제한
               maxLength={10}
               placeholder="이름을 입력해 주세요."
+              value={editUserName}
+              onChange={handleEditUserName}
             />
           </Form.Item>
-
           <span>
             연락처<b>*</b>
           </span>
           <p>연락처를 숫자 형식으로 입력해 주세요.</p>
           <ConfirmArray>
             <Form.Item
-              name="tel"
+              name="phoneNumber"
               rules={[
                 {
                   pattern: /^[0-9]+$/,
@@ -290,7 +264,9 @@ const Join = () => {
                 size="large"
                 // 글자수 제한
                 maxLength={11}
-                placeholder="연락처를 입력해 주세요. (EX. 01012345678)"
+                placeholder="연락처를 입력해 주세요."
+                value={editUserTel}
+                onChange={handleEditUserTel}
               />
             </Form.Item>
             <ButtonConfirm onClick={handleCertifyPhone}>본인인증</ButtonConfirm>
@@ -299,15 +275,12 @@ const Join = () => {
             <span>
               거주지역<b>*</b>
             </span>
-            <ul>
-              거주지역을 선택해 주세요.
-              {regionError ? <li>{regionError}</li> : null}
-            </ul>
+            <p>거주지역을 선택해 주세요.</p>
             <Form.Item name="regionNmId">
               <Radio.Group
                 value={regionOptions.regionNmId}
                 size="large"
-                onChange={e => handleRegion(e)}
+                onClick={handleEditUserCity}
               >
                 {regionOptions.map(option => (
                   <Radio.Button
@@ -320,15 +293,18 @@ const Join = () => {
               </Radio.Group>
             </Form.Item>
           </RegionSelectWrap>
-          {/* 이용약관 컴포넌트 */}
-          <Terms checkAll={checkAll} setCheckAll={setCheckAll} />
+          {/* 이용약관 컴포넌트
+    <Terms /> */}
           <Form.Item>
-            <ButtonOk>회원가입</ButtonOk>
+            <JoinEditBtn>
+              <ButtonOk>수정하기</ButtonOk>
+              <ButtonCancel onClick={UserDropOut}>회원탈퇴</ButtonCancel>
+            </JoinEditBtn>
           </Form.Item>
         </Form>
       </ConfigProvider>
-    </JoinWrap>
+    </div>
   );
 };
 
-export default Join;
+export default JoinEditForm;

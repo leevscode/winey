@@ -111,7 +111,7 @@ export const fetchRefreshToken = async () => {
     // 갱신 실패 시, 안내창 띄우고 로그인창으로 이동
     alert("로그아웃 되었습니다");
     removeCookie("accessToken");
-    Cookies.remove("refreshToken");
+    removeCookie("refreshToken");
     navigate("/login");
   }
 };
