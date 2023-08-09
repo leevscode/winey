@@ -223,13 +223,13 @@ const WineRecommend = ({ productDetail }) => {
           <div className="component-bar"></div>
           <ol className="component-bar-text">
             <li>
-              <span>10°C</span>
+              <span>약 10°C</span>
             </li>
             <li>
-              <span>15°C</span>
+              <span>약 15°C</span>
             </li>
             <li>
-              <span>18°C</span>
+              <span>약 18°C</span>
             </li>
           </ol>
         </li>
