@@ -25,7 +25,10 @@ const Welcome = () => {
           </strong>
           <FontAwesomeIcon icon={faDiamond} />
         </div>
-        <h4>로그인 후 와인 선호 키워드를 설정해주세요.</h4>
+        <h4>
+          <strong>로그인</strong> 후 <strong>와인 선호 키워드</strong>를
+          설정해주세요.
+        </h4>
         <h5>
           선호 키워드를 입력하시면 <br />
           취향에 맞는 와인을 추천해드리겠습니다.
