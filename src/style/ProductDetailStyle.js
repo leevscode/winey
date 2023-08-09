@@ -265,15 +265,15 @@ export const DetailInfoWrap = styled.section`
 // 입문 난이도 바 스타일링
 export const LevelBar = props => {
   // 입문 난이도에서 전달받은 데이터 값에 따라 바 넓이 결정
-  if (props.feature === 1) {
+  if (props.feature === 1 || props.temp === 10) {
     return css`
       width: 3%;
     `;
-  } else if (props.feature === 2) {
+  } else if (props.feature === 2 || props.temp === 15) {
     return css`
       width: 50%;
     `;
-  } else if (props.feature === 3) {
+  } else if (props.feature === 3 || props.temp === 18) {
     return css`
       width: 100%;
     `;
@@ -301,7 +301,7 @@ export const RecommendWrap = styled.section`
   }
   .component-bar {
     &::after {
-      width: 3%;
+      ${LevelBar};
     }
   }
   .recommend-slide {

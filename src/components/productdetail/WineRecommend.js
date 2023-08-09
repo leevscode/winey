@@ -22,6 +22,9 @@ const WineRecommend = ({ productDetail }) => {
   // 페어링
   const pairing = productDetail.selPairing;
   // console.log("페어링", pairing);
+  // 음용 온도
+  const temp = productDetail.wineDetailVo?.temp;
+  console.log("음용 온도", temp);
   // 페어링 더미 데이터
   const pairingSlide = [
     {
@@ -166,7 +169,7 @@ const WineRecommend = ({ productDetail }) => {
   // console.log("일치하는 아로마 배열", aromaArr);
   // console.log("일치하는 페어링 배열", pairingArr);
   return (
-    <RecommendWrap>
+    <RecommendWrap temp={temp}>
       <ul>
         <li className="component-title">
           <i>
