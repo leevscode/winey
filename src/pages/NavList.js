@@ -3,12 +3,32 @@
   노션 : https://www.notion.so/kimaydev
   깃허브 : https://github.com/kimaydev
 */
-import React from "react";
+import React, { useEffect } from "react";
 import { NavLink } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { getMemberInfo } from "../api/joinpatch";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 
 const NavList = ({ handleOpenNav, closeNav }) => {
+  // const navigate = useNavigate();
+  const dispatch = useDispatch();
+  // const cookies = new Cookies();
+  // const handleLogout = e => {
+  //   e.preventDefault();
+  //   postLogout("");
+  //   dispatch(logoutUser());
+  //   cookies.remove("accessToken");
+  //   cookies.remove("refreshToken");
+  //   console.log("로그아웃 실행");
+  //   // navigate("/main");
+  // };
+  // 회원정보 불러오기
+  const userData = useSelector(state => state.user);
+  useEffect(() => {
+    dispatch(getMemberInfo());
+    console.log("리덕스 성공해라", userData);
+  }, []);
   return (
     <>
       <ul className="top">
@@ -77,7 +97,6 @@ const NavList = ({ handleOpenNav, closeNav }) => {
           </li>
         </ul>
       </div>
-
       <ul className="bottom">
         <li>
           <NavLink
