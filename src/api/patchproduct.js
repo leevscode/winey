@@ -19,7 +19,7 @@ export const getProductDetail = async (_setProductDetail, _productId) => {
     const res = await axios.get(`/detail/${_productId}`);
     const result = res.data;
     _setProductDetail(result);
-    console.log("와인 상세페이지 axios", result);
+    // console.log("와인 상세페이지 axios", result);
     return result;
   } catch (err) {
     console.log("와인 상세페이지 에러 발생", err);

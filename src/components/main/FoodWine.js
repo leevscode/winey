@@ -204,51 +204,52 @@ const FoodWine = () => {
       </MainTabBtn>
       {/* 음식별 추천 와인 내용 - 탭메뉴 내용 */}
       <ContentsListItemWrap>
-        {isLoading
-          ? productListSkeleton.map(index => (
-              <ProductListSkeleton key={index} />
-            ))
-          : foodWines.map((item, index) => (
-              <ProductListItem key={index}>
-                <NavLink to={`/productdetail/${item.productId}`}>
-                  <div className="img">
+        {isLoading ? (
+          // 로딩 화면 출력
+          productListSkeleton.map(index => <ProductListSkeleton key={index} />)
+        ) : foodWines.length > 0 ? (
+          // 상품이 존재할 경우 출력
+          foodWines.map((item, index) => (
+            <ProductListItem key={index}>
+              <NavLink to={`/productdetail/${item.productId}`}>
+                <div className="img">
+                  <img
+                    src={`/img/${item.pic}`}
+                    alt={item.nmKor}
+                    onError={onImgError}
+                  />
+                  {/* 장바구니 버튼 */}
+                  <button>
                     <img
-                      src={`/img/${item.pic}`}
-                      alt={item.nmKor}
-                      onError={onImgError}
+                      src={`${process.env.PUBLIC_URL}/images/icon_cart_2.svg`}
+                      alt="장바구니에 담기"
                     />
-                    {/* 장바구니 버튼 */}
-                    <button>
-                      <img
-                        src={`${process.env.PUBLIC_URL}/images/icon_cart_2.svg`}
-                        alt="장바구니에 담기"
-                      />
-                    </button>
+                  </button>
+                </div>
+                <div className="txt">
+                  <div className="badge">
+                    {item.promotion === 1 && (
+                      <span className="recommend">추천상품</span>
+                    )}
+                    {item.beginner === 1 && (
+                      <span className="beginner">입문자추천</span>
+                    )}
                   </div>
-                  <div className="txt">
-                    <div className="badge">
-                      {item.promotion === 1 && (
-                        <span className="recommend">추천상품</span>
-                      )}
-                      {item.beginner === 1 && (
-                        <span className="beginner">입문자추천</span>
-                      )}
-                    </div>
-                    <div className="title">{item.nmKor}</div>
-                    <ul className="price">
-                      <li>
-                        <span>{item.price.toLocaleString()}</span>원
-                      </li>
-                      <li>
-                        <span>{item.price.toLocaleString()}원</span>
-                      </li>
-                    </ul>
-                  </div>
-                </NavLink>
-              </ProductListItem>
-            ))}
-        {/* 추천 와인 데이터 없을 경우 출력 */}
-        {foodWines.length === 0 && (
+                  <div className="title">{item.nmKor}</div>
+                  <ul className="price">
+                    <li>
+                      <span>{item.price.toLocaleString()}</span>원
+                    </li>
+                    <li>
+                      <span>{item.price.toLocaleString()}원</span>
+                    </li>
+                  </ul>
+                </div>
+              </NavLink>
+            </ProductListItem>
+          ))
+        ) : (
+          // 상품이 존재하지 않을 경우 출력
           <NotProductListItem>
             <div>
               <i>
