@@ -4,6 +4,8 @@
   깃허브 : https://github.com/kimaydev
 */
 import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import { getProductDetail } from "../../api/patchproduct";
 import { ProductDetailWrap } from "../../style/ProductDetailStyle";
 import { SectionLine } from "../../style/GlobalStyle";
 import WineInfo from "../../components/productdetail/WineInfo";
@@ -13,8 +15,6 @@ import WineInfoTable from "../../components/productdetail/WineInfoTable";
 import WineLevel from "../../components/productdetail/WineLevel";
 import WineRecommend from "../../components/productdetail/WineRecommend";
 import WineSellQuick from "../../components/productdetail/WineSellQuick";
-import { useParams } from "react-router";
-import { getProductDetail } from "../../api/patchproduct";
 
 const ProductDetail = () => {
   const { iproduct } = useParams();
@@ -36,7 +36,7 @@ const ProductDetail = () => {
       <WindeDetailInfo productDetail={productDetail} />
       <SectionLine />
       {/* 입문 난이도 */}
-      <WineLevel />
+      <WineLevel productDetail={productDetail} iproduct={iproduct} />
       <SectionLine />
       {/* 페어링, 아로마, 음용온도 */}
       <WineRecommend />

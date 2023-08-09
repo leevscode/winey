@@ -3,14 +3,22 @@
   노션 : https://www.notion.so/kimaydev
   깃허브 : https://github.com/kimaydev
 */
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSeedling } from "@fortawesome/free-solid-svg-icons";
 import { LevelWrap } from "../../style/ProductDetailStyle";
+import { getFeature } from "../../api/patchproduct";
 
-const WineLevel = () => {
+const WineLevel = ({ productDetail, iproduct }) => {
+  // console.log("현재 페이지 param", iproduct);
+  // 입문 난이도 state
+  const [feature, setFeature] = useState();
+  useEffect(() => {
+    getFeature(setFeature, iproduct);
+  }, [productDetail]);
+  console.log("입문 난이도", feature);
   return (
-    <LevelWrap>
+    <LevelWrap feature={feature}>
       <ul>
         <li className="component-title">
           <i>

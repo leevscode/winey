@@ -5,6 +5,7 @@
 */
 import styled from "@emotion/styled";
 import { Gradation, Maincolor, WidthPd, badge, opacity } from "./GlobalStyle";
+import { css } from "@emotion/react";
 
 // 상품 상세페이지 전체
 export const ProductDetailWrap = styled.div`
@@ -260,12 +261,29 @@ export const DetailInfoWrap = styled.section`
     }
   }
 `;
+// 입문 난이도 바 스타일링
+export const LevelBar = props => {
+  // 입문 난이도에서 전달받은 데이터 값에 따라 바 넓이 결정
+  if (props.feature === 1) {
+    return css`
+      width: 3%;
+    `;
+  } else if (props.feature === 2) {
+    return css`
+      width: 50%;
+    `;
+  } else if (props.feature === 3) {
+    return css`
+      width: 100%;
+    `;
+  }
+};
 // 입문 난이도
 export const LevelWrap = styled.section`
   margin: 3rem 0;
   .component-bar {
     &::after {
-      width: 50%;
+      ${LevelBar};
     }
   }
 `;
