@@ -1,9 +1,10 @@
 import axios from "axios";
+import { client } from "./client";
 
 // 장바구니 출력
 export const fetchCartData = async () => {
   try {
-    const response = await axios.get("api/wine/filledcart");
+    const response = await client.get("/api/wine/filledcart");
     const cartData = response.data;
     return cartData; // 받아온 데이터를 반환
   } catch (error) {

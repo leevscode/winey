@@ -1,8 +1,9 @@
 import axios from "axios";
+import { client } from "./client";
 
 // 리뷰를 등록하는 함수
-const submitReview = (reviewData) => {
-  axios
+const submitReview = reviewData => {
+  client
     .post("/api/payment/review", reviewData)
     .then(response => {
       console.log("리뷰가 성공적으로 제출되었습니다:", response.data);
