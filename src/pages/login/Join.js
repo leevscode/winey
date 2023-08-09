@@ -27,10 +27,6 @@ const Join = () => {
   // 이메일 인증 모달
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [emailCertifyOk, setEmailCertifyOk] = useState(false);
-  const emailOk = {
-    title: "메일인증확인",
-    content: <p>이메일 인증을 진행해 주세요.</p>,
-  };
 
   //password 유효성 검증 state
   const [password, setPassword] = useState("");
@@ -39,10 +35,6 @@ const Join = () => {
 
   // 약관동의 state
   const [checkAll, setCheckAll] = useState(false);
-  const config = {
-    title: "이용약관동의",
-    content: <p>이용약관동의를 진행해 주세요</p>,
-  };
 
   // 지역선택 에러처리state
   const [regionError, setRegionError] = useState("");
@@ -108,26 +100,31 @@ const Join = () => {
   };
 
   // 회원 가입 핸들러
-  const onFinish = values => {
-    setUserInfo({ ...values });
+  const onFinish = async values => {
+
     if (emailCertifyOk === false) {
-      Modal.warning(emailOk);
+      Modal.warning({
+        title: "메일인증확인",
+        content: <p>이메일 인증을 진행해 주세요.</p>,
+      });
       return;
     }
     if (regionClick === undefined || regionClick === "") {
       setRegionError("지역을 선택해 주세요.");
       return;
     }
-    if (password === passwordConfirm) {
-      console.log("checkAll", checkAll);
-      if (checkAll === true) {
-        postUserJoin(userInfo);
-        navigate("/welcome");
-      } else {
-        Modal.warning(config);
-      }
+    if (password !== passwordConfirm) {
+      console.log("비밀번호 불일치");
+      return;
+    }
+    if (checkAll === true) {
+      const goJoin = await postUserJoin(values);
+      navigate("/welcome");
     } else {
-      console.log("Failed");
+      Modal.warning({
+        title: "이용약관동의",
+        content: <p>이용약관동의를 진행해 주세요</p>,
+      });
     }
   };
 
@@ -188,8 +185,7 @@ const Join = () => {
               width={400}
               footer={[
                 <Button key="confirm" onClick={handleOk}>
-                  {" "}
-                  확인{" "}
+                  확인
                 </Button>,
               ]}
             >

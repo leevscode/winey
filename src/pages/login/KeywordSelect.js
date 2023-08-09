@@ -11,7 +11,6 @@ import KeywordChooseCp from "../../components/join/KeywordChooseCp";
 const KeywordSelect = () => {
   return (
     <div>
-      <Welcome />
       <KeywordChooseCp />
     </div>
   );

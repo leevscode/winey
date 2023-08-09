@@ -1,3 +1,9 @@
+/*
+    작업자 : 최혜미
+    노션 : https://www.notion.so/hyemdev
+    깃허브 : https://github.com/hyemdev
+*/
+
 import styled from "@emotion/styled";
 import { ButtonOk, Maincolor, WidthPd, opacity } from "./GlobalStyle";
 
@@ -79,10 +85,10 @@ export const KeywordWrap = styled.div`
   flex-direction: column;
   width: 100%;
   background: ${Maincolor.beige};
-  padding: 3rem 2rem;
+  padding: 5rem 2rem;
   & > ul {
     & li {
-      margin-bottom: 2.5rem;
+      margin-bottom: 3rem;
       & h3 {
         text-align: center;
         font-size: 1.5rem;
@@ -152,7 +158,7 @@ export const KeywordConfirmBtn = styled.div`
   margin: 2rem 0 1rem 0;
   & button {
     width: 51rem;
-    margin: 0.5rem 0;
+    margin: 1rem 0;
   }
 `;
 export const EditKeywordConfirmBtn = styled.div`

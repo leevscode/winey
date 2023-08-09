@@ -5,22 +5,8 @@ import { PickupPlaceClickWrap } from "../../style/ProductSellStyle";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css/navigation";
 
-const PickupPlaceClick = ({ selectCollect, setSelectCollect }) => {
-  const 임시데이터 = {
-    city: ["대구"],
-    store: [
-      { pk: 11, title: "이마트 성서점", address: "대구 달서구 이곡동로 24" },
-      { pk: 12, title: "이마트 월배점", address: "대구 달서구 진천로 92" },
-      { pk: 13, title: "이마트 만촌점", address: "대구 수성구 동원로 13" },
-      {
-        pk: 14,
-        title: "이마트 칠성점",
-        address: "대구 북구 침산로 93 스펙트럼시티",
-      },
-      { pk: 15, title: "이마트 반야월점", address: "대구 동구 안심로 389-2" },
-    ],
-    time: ["10:00", "12:00", "14:00", "16:00", "18:00", "20:00", "22:00"],
-  };
+const PickupPlaceClick = ({ userStore, selectCollect, setSelectCollect }) => {
+  const pickTime = ["10:00", "12:00", "14:00", "16:00", "18:00", "20:00", "22:00"];
 
   // 픽업날짜(오늘 이후 3일 간)
   const first = new Date();
@@ -59,7 +45,7 @@ const PickupPlaceClick = ({ selectCollect, setSelectCollect }) => {
       pickUpSpot: option,
     }));
 
-    setSltStoreButton(option.pk);
+    setSltStoreButton(option.storeId);
   };
 
   // 픽업날짜 이벤트 핸들러
@@ -101,20 +87,20 @@ const PickupPlaceClick = ({ selectCollect, setSelectCollect }) => {
         <p>원하시는 픽업지점을 선택해 주세요</p>
         <div className="store">
           <Swiper spaceBetween={18} slidesPerView={"auto"} loop={true}>
-            {임시데이터.store.map(option => (
-              <SwiperSlide key={option.pk}>
+            {userStore.map(option => (
+              <SwiperSlide key={option.storeId}>
                 <div onClick={e => handleChangePickSpot(option, e)}>
                   <button
                     value={pickUpSpot}
                     className={
                       "btn" +
-                      (option.pk == sltStoreButton ? " activeStore" : "")
+                      (option.storeId == sltStoreButton ? " activeStore" : "")
                     }
                   >
-                    <b>{임시데이터.city}</b>
+                    <b>{option.regionNm}</b>
                     <br />
-                    <strong>{option.title}</strong>
-                    <p>{option.address}</p>
+                    <strong>{option.nm}</strong>
+                    <p>{option.regionNm}</p>
                   </button>
                 </div>
               </SwiperSlide>
@@ -156,7 +142,7 @@ const PickupPlaceClick = ({ selectCollect, setSelectCollect }) => {
 
         <div className="time">
           <Swiper spaceBetween={35} slidesPerView={"auto"} loop={false}>
-            {임시데이터.time.map((option, index) => (
+            {pickTime.map((option, index) => (
               <SwiperSlide key={index}>
                 <div onClick={e => handleChangePickTime(option, e, index)}>
                   <button

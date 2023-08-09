@@ -10,17 +10,17 @@ import { faAngleRight } from "@fortawesome/free-solid-svg-icons";
 import { MypageWrap } from "../style/MypageStyle";
 import { SectionLine } from "../style/GlobalStyle";
 import Cookies from "universal-cookie";
-// import { postLogout } from "../api/joinpatch";
+import { postLogout } from "../api/joinpatch";
+import { removeCookie } from "../api/cookie";
 
 const MypageList = () => {
   const navigate = useNavigate();
-  const cookies = new Cookies();
   const handleLogout = e => {
     e.preventDefault();
-    cookies.remove("accessToken");
-    cookies.remove("refreshToken");
-    console.log("로그아웃 실행")
-    // postLogout("");
+    postLogout("");
+    removeCookie("accessToken");
+    removeCookie("refreshToken");
+    console.log("로그아웃 실행");
     navigate("/main");
   };
   return (
