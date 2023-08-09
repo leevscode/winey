@@ -1,9 +1,16 @@
 import axios from "axios";
+import { client } from "./client";
 
 // 회원가입
 export const postUserJoin = async userInfo => {
+  console.log("patch클릭", userInfo);
+  console.log("patch클릭", userInfo.email);
+  console.log("patch클릭", userInfo.password);
+  console.log("patch클릭", userInfo.nm);
+  console.log("patch클릭", userInfo.tel);
+  console.log("patch클릭", userInfo.regionNmId);
   try {
-    const res = await axios.post("/sign-api/sign-up", {
+    const res = await client.post("/sign-api/sign-up", {
       email: userInfo.email,
       pw: userInfo.password,
       role: "USER",
@@ -41,6 +48,7 @@ export const patchMemberInfo = async editUserInfo => {
       tel: editUserInfo.editUserTel,
       regionNmId: editUserInfo.editUserCity,
     });
+    console.log("res", res);
     const result = await res.data;
     console.log(result);
   } catch (error) {
@@ -53,6 +61,8 @@ export const patchMemberPW = async editUserInfo => {
     const res = await axios.patch("/api/updPassword", {
       pw: editUserInfo.editpassword,
     });
+    console.log("res", res);
+
     const result = await res.data;
     console.log(result);
   } catch (error) {

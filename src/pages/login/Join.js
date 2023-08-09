@@ -108,7 +108,7 @@ const Join = () => {
   };
 
   // 회원 가입 핸들러
-  const onFinish = async values => {
+  const onFinish = values => {
     if (emailCertifyOk === false) {
       Modal.warning(emailOk);
       return;
@@ -122,7 +122,7 @@ const Join = () => {
       if (checkAll === true) {
         setUserInfo({ ...values });
         postUserJoin(userInfo);
-        navigate("/login");
+        // navigate("/login");
       } else {
         Modal.warning(config);
       }
@@ -130,6 +130,7 @@ const Join = () => {
       console.log("Failed");
     }
   };
+
   const onFinishFailed = errorInfo => {
     console.log("Failed:", errorInfo);
   };
