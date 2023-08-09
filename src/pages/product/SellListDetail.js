@@ -14,33 +14,29 @@ const SellListDetail = () => {
   const [reviewReset, setReviewReset] = useState(false);
   const [reviewSubmit, setReviewSubmit] = useState({});
 
-  // reviewSubmit 상태를 객체로 변경하여 상품별로 리뷰 등록 상태를 기록합니다.
-
   // 상품 더미 데이터
   const [productData, setProductData] = useState([
     {
-      key: 1,
+      orderId: 1,
+      quantity: 1,
       imageSrc: "https://via.placeholder.com/120x120",
       productName: "제프 까렐, 울띰 헤꼴뜨",
       productDescription: "Ultime Recolte By Jeff Carrel",
       productPrice: "32,900원",
-      rating: null,
     },
     {
       key: 2,
       imageSrc: "https://via.placeholder.com/120x120",
-      productName: "Auth Wine",
-      productDescription: "Auth",
+      productName: "white Wine",
+      productDescription: "white",
       productPrice: "52,500원",
-      rating: null, // 각 상품의 평점을 저장할 속성
     },
     {
       key: 3,
       imageSrc: "https://via.placeholder.com/120x120",
-      productName: "Auth Wine",
-      productDescription: "Auth",
+      productName: "Red Wine",
+      productDescription: "Red",
       productPrice: "82,500원",
-      rating: null, // 각 상품의 평점을 저장할 속성
     },
   ]);
 
@@ -58,7 +54,6 @@ const SellListDetail = () => {
   const calculateTotalAmount = () => {
     let totalPrice = 0;
     productData.forEach(product => {
-      // Parse the productPrice as a number before adding it to the total
       const price = parseInt(product.productPrice.replace(/[^0-9]/g, ""));
       totalPrice += price;
     });
@@ -76,33 +71,34 @@ const SellListDetail = () => {
   };
 
   // 평점 등록이 완료된 항목만 상태를 업데이트
-  const reviewSubmitUpdate = index => {
+  const reviewSubmitUpdate = key => {
     setReviewSubmit(prevReviewSubmit => {
-      console.log(" key: 1");
-      return { ...prevReviewSubmit, [index]: true };
+      console.log("");
+      return { ...prevReviewSubmit, [key]: true };
     });
   };
 
-// 상품에 해당하는 평점을 등록하는 함수
-const submitRating = (index, rating) => {
-  const updatedReviewSubmit = { ...reviewSubmit };
-  updatedReviewSubmit[index] = true; // 평점 등록 상태를 true로 표시
-  setReviewSubmit(updatedReviewSubmit);
+  // 상품에 해당하는 평점을 등록하는 함수
+  const submitRating = (key, rating) => {
+    const updatedReviewSubmit = { ...reviewSubmit };
+    updatedReviewSubmit[key] = true; // 평점 등록 상태를 true로 표시
+    setReviewSubmit(updatedReviewSubmit);
 
-  // 평점을 포함하여 productData 상태를 업데이트합니다.
-  const updatedProductData = [...productData];
-  updatedProductData[index].rating = rating;
-  setProductData(updatedProductData);
+    // 평점을 포함하여 productData 상태를 업데이트합니다.
+    const updatedProductData = [...productData];
+    updatedProductData[key].rating = rating;
+    setProductData(updatedProductData);
 
-  // 리뷰 데이터를 생성하여 엔드포인트로 전송
-  const reviewData = {
-    orderDetailId: updatedProductData[index].key, // 주문 상세 pk값 추가
-    review_level: rating, // 리뷰 평점 추가
-    // 필요한 다른 리뷰 데이터를 여기에 추가하세요
+    // 리뷰 데이터를 생성하여 엔드포인트로 전송
+    const reviewData = {
+      orderDetailId: updatedProductData[key].key, // 주문 상세 pk값 추가
+      review_level: rating, 
+      // 리뷰 평점 추가
+
+    };
+
+    submitReview(reviewData);
   };
-
-  submitReview(reviewData);
-};
 
   return (
     <>

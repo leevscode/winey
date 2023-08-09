@@ -23,7 +23,7 @@ import {
   decreaseQuantity,
   removeItem,
 } from "../../reducers/userSlice";
-import { fetchCartData } from "../../../src/api/patchcart"
+import { fetchCartData, addToCart, removeFromCart, changeQuantity } from "../../../src/api/patchcart"
 
 const ProductCart = () => {
   const cartItems = useSelector((state) => state.cart);
@@ -50,17 +50,18 @@ const ProductCart = () => {
       });
   }, []);
 
-  const addItemToCart = () => {
-    const newItem = {
-      id: cartItems.length + 1,
-      nmKor: "제프 까렐, 울락 헤꼴뜨",
-      nmEng: "Ultime Recolte By Jeff Carrel",
-      price: "32,900원",
-      quantity: 1,
-      pic: <img src="https://via.placeholder.com/200x200" alt="샘플이미지" />,
-    };
-    dispatch(addItem(newItem));
-  };
+  // 더미데이터 추가 버튼
+  // const addItemToCart = () => {
+  //   const newItem = {
+  //     userid: cartItems.length + 1,
+  //     nmKor: "제프 까렐, 울락 헤꼴뜨",
+  //     nmEng: "Ultime Recolte By Jeff Carrel",
+  //     price: "32,900원",
+  //     quantity: 1,
+  //     pic: <img src="https://via.placeholder.com/200x200" alt="샘플이미지" />,
+  //   };
+  //   dispatch(addItem(newItem));
+  // };
 
   // 상품을 장바구니에서 제거하는 함수
   const removeItemFromCart = id => {
@@ -77,6 +78,7 @@ const ProductCart = () => {
     dispatch(decreaseQuantity(id));
   };
 
+  
   const calculateTotalPrice = () => {
     let totalPrice = 0;
     cartItems.forEach(item => {
@@ -88,9 +90,9 @@ const ProductCart = () => {
     return totalPrice;
   };
 
+
   return (
     <>
-      <button onClick={addItemToCart}>상품 추가 테스트 버튼</button>
       {cartItems.length === 0 ? (
         <ProductCartNone>
           <div>

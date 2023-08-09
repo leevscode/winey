@@ -41,27 +41,33 @@ const SellList = () => {
         date: "2023.07.23",
         product: ["제프 까렐", "울띰 헤꼴뜨", "와인1", "와인2", "와인3"],
         orderNumber: "2316514513",
-        paymentMethod: "신용카드",
-        amount: "68,700",
-        status: "결제완료",
+        payment: "신용카드",
+        totalOrderPrice: "68,700",
+        nm: "이마트 원주점",
+        pickupTime: "오전11시",
+        orderStatus: "결제완료",
       },
       {
         key: 1,
         date: "2023.07.25",
         product: ["스파클링와인", "울띰 헤꼴뜨", "와인1", "와인2"],
         orderNumber: "98275858",
-        paymentMethod: "신용카드",
-        amount: "45,000",
-        status: "배송완료",
+        payment: "신용카드",
+        totalOrderPrice: "45,000",
+        nm: "이마트 춘천점",
+        pickupTime: "오후1시",
+        orderStatus: "배송완료",
       },
       {
         key: 2,
         date: "2023.07.27",
         product: ["레드 와인", "울띰 헤꼴뜨", "와인1"],
         orderNumber: "9741201",
-        paymentMethod: "신용카드",
-        amount: "32,000",
-        status: "픽업대기",
+        payment: "신용카드",
+        totalOrderPrice: "52,000",
+        pickupTime: "오후3시",
+        nm: "이마트 강릉점",
+        orderStatus: "픽업대기",
       },
     ];
 
@@ -145,7 +151,7 @@ const SellList = () => {
         if (item.key === index) {
           return {
             ...item,
-            status: "픽업완료",
+            orderStatus: "픽업완료",
           };
         }
         return item;
@@ -175,7 +181,7 @@ const SellList = () => {
           {orderItems.map(item => (
             <div key={item.key}>
               {/* 주문취소 모달 */}
-              {["픽업대기", "픽업완료"].includes(item.status) ? (
+              {["픽업대기", "픽업완료"].includes(item.orderStatus) ? (
                 // 주문취소 버튼이 사라졌을때 빈 공백을 유지하는 스타일
                 <div style={{ height: "28px" }} />
               ) : (
@@ -193,9 +199,11 @@ const SellList = () => {
                     ` 외 ${item.product.length - 1}건`}
                 </SellListProduct>
                 <li>주문번호: {item.orderNumber}</li>
-                <li>결제 방법: {item.paymentMethod}</li>
-                <li>결제 금액: {item.amount}</li>
-                <li>주문 상태: {item.status}</li>
+                <li>결제 방법: {item.payment}</li>
+                <li>총 결제 금액: {item.totalOrderPrice}</li>
+                <li>픽업 지점: {item.nm}</li>
+                <li>픽업 시간: {item.pickupTime}</li>
+                <li>주문 상태: {item.orderStatus}</li>
               </SellListInfo>
               <SellListButton>
                 <ButtonCancel
@@ -206,14 +214,14 @@ const SellList = () => {
                   주문 내역
                 </ButtonCancel>
                 {/* 상태가 "결제완료"일 때에만 상품 준비중입니다 표시 */}
-                {item.status === "결제완료" && (
+                {item.orderStatus === "결제완료" && (
                   <SellListReady>상품 준비중입니다</SellListReady>
                 )}
                 {/* 픽업완료 버튼을 누르면 "픽업완료" 상태로 바뀌면서 버튼이 disabled */}
-                {item.status === "픽업완료" ? (
+                {item.orderStatus === "픽업완료" ? (
                   <PickUpButton disabled>픽업완료</PickUpButton>
                 ) : (
-                  ["배송중", "배송완료", "픽업대기"].includes(item.status) && (
+                  ["배송중", "배송완료", "픽업대기"].includes(item.orderStatus) && (
                     <PickUpButton
                       onClick={() => handlePickUpComplete(item.key)}
                       disabled={completedPickUpOrders.includes(item.key)}
