@@ -4,7 +4,7 @@
   깃허브 : https://github.com/kimaydev
 */
 import React from "react";
-import { MainProductWrap, MainWrap } from "../style/MainStyle";
+import { MainWrap } from "../style/MainStyle";
 import Visual from "../components/main/Visual";
 import NavList from "../components/main/NavList";
 import RecommWine from "../components/main/RecommWine";

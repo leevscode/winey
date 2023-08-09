@@ -17,6 +17,7 @@ import {
   faCircleExclamation,
 } from "@fortawesome/free-solid-svg-icons";
 import { getKorNm } from "../api/patchproduct";
+import { getMemberInfo } from "../api/joinpatch";
 
 const Header = ({ handleOpenNav, isActive }) => {
   const { iproduct } = useParams();
@@ -30,6 +31,9 @@ const Header = ({ handleOpenNav, isActive }) => {
   const [pagePath, setPagePath] = useState("");
   // 와인 한글이름 보관할 state
   const [korNm, setKorNm] = useState("");
+  // 회원정보를 담는 state
+  // const [editUserInfo, setEditUserInfo] = useState("");
+  // console.log("회원정보 담았어요", editUserInfo);
   // 검색 모달 state
   const [isModalOpen, setIsModalOpen] = useState(false);
   const showModal = () => {
@@ -128,6 +132,7 @@ const Header = ({ handleOpenNav, isActive }) => {
     // console.log("실시간타이틀", pageTitle);
     // console.log("실시간위치", pagePath);
     // console.log("상품이름", korNm.nmKor);
+    // getMemberInfo(setEditUserInfo);
   }, [location.pathname]);
 
   return (
