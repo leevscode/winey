@@ -5,310 +5,38 @@
 */
 
 import React, { useEffect, useState } from "react";
-import { Radio, Form, Input, ConfigProvider, Modal } from "antd";
-
-import {
-  ButtonConfirm,
-  ConfirmArray,
-  JoinEditBtn,
-  JoinWrap,
-  RegionSelectWrap,
-} from "../../style/JoinStyle";
-import { ButtonCancel, ButtonOk } from "../../style/GlobalStyle";
+import { JoinWrap } from "../../style/JoinStyle";
 import { useNavigate } from "react-router-dom";
-import { patchMemberInfo, patchMemberPW } from "../../api/joinpatch";
+import { getMemberInfo } from "../../api/joinpatch";
+import JoinEditForm from "../../components/join/JoinEditForm";
 
 const JoinEdit = () => {
   const navigate = useNavigate();
-  // 회원정보 더미데이터
-  const 초기데이터 = {
-    userId: "kimwine1111",
-    userName: "김와인",
-    userPw: "123123",
-    userPhoneNum: "12300567890",
-    userCity: 3,
-  };
 
   //변경 회원정보를 담는 state
-  const [editUserInfo, setEditUserInfo] = useState([]);
+  const [editUserInfo, setEditUserInfo] = useState("");
+  console.log(editUserInfo);
 
-  // 아이디, 이름, 전화번호 변경 state
-  const [editId] = useState(초기데이터.userId);
-  const [editUserName, setEditUserName] = useState(초기데이터.userName);
-  const [editUserTel, setEditUserTel] = useState(초기데이터.userPhoneNum);
-  const [editUserCity, setEditUserCity] = useState(초기데이터.userCity);
-
-  //password 유효성 검증 state
-  const [editpassword, setEditPassword] = useState(초기데이터.userPw);
-  const [passwordConfirm, setPasswordConfirm] = useState("");
-  const [passwordError, setPasswordError] = useState(false);
-
-  // 지역옵션
-  const regionOptions = [
-    { regionNmId: 1, value: "서울" },
-    { regionNmId: 2, value: "부산" },
-    { regionNmId: 3, value: "대구" },
-    { regionNmId: 4, value: "인천" },
-    { regionNmId: 5, value: "광주" },
-    { regionNmId: 6, value: "대전" },
-    { regionNmId: 7, value: "울산" },
-    { regionNmId: 8, value: "세종" },
-    { regionNmId: 9, value: "경기" },
-    { regionNmId: 10, value: "강원" },
-    { regionNmId: 11, value: "충북" },
-    { regionNmId: 12, value: "충남" },
-    { regionNmId: 13, value: "전북" },
-    { regionNmId: 14, value: "전남" },
-    { regionNmId: 15, value: "경북" },
-    { regionNmId: 16, value: "경남" },
-    { regionNmId: 17, value: "제주" },
-  ];
-
-  // 본인 인증 핸들러
-  const handleCertifyPhone = () => {
-    Modal.success({
-      title: "본인 인증",
-      content: <div>본인인증이 완료되었습니다.</div>,
-      onOk() {},
-    });
+  const getMemberInfoWait = async setEditUserInfo => {
+    await getMemberInfo(setEditUserInfo);
   };
 
-  // 아이디 수정
-  // const handleEditId = e => {
-  //   setEditId(e.target.value);
-  //   console.log("editId", editId);
-  // };
+  useEffect(() => {
+    getMemberInfoWait(setEditUserInfo);
+  }, []);
 
-  // 닉네임 수정
-  const handleEditUserName = e => {
-    setEditUserName(e.target.value);
-    console.log("editUserName", editUserName);
-  };
-  // 전화번호 수정
-  const handleEditUserTel = e => {
-    setEditUserTel(e.target.value);
-    console.log("editUserTel", editUserTel);
-  };
-  // 지역 수정
-  const handleEditUserCity = e => {
-    setEditUserCity(e.target.value);
-    console.log("editUserTel", editUserCity);
-  };
-
-  // password 유효성 관련 핸들러
-  const changePassword = e => {
-    setEditPassword(e.target.value);
-    setPasswordError(e.target.value !== passwordConfirm);
-  };
-  const changePasswordConfirm = e => {
-    setPasswordConfirm(e.target.value);
-    setPasswordError(e.target.value !== editpassword);
-  };
-
-  // 회원정보수정 확인 핸들러
-  const onFinish = values => {
-    if (editpassword === passwordConfirm) {
-      setEditUserInfo({
-        // editId,
-        editpassword,
-        editUserName,
-        editUserTel,
-        editUserCity,
-      });
-      console.log("editUserInfo", editUserInfo);
-      // navigate("/main");
-      patchMemberInfo(editUserInfo);
-      patchMemberPW(editUserInfo);
-    } else {
-      console.log("Failed");
-    }
-  };
-  const onFinishFailed = errorInfo => {
-    console.log("Failed:", errorInfo);
-  };
-
-  useEffect(() => {}, []);
-
-  // 회원탈퇴 핸들러
-  const UserDropOut = () => {
-    console.log("회원탈퇴");
-    navigate("/main");
-  };
+  // 데이터가 다 get되면 화면을 그리자~
+  const isRendering = Object.keys(editUserInfo).length > 0;
 
   return (
     <JoinWrap>
-      <ConfigProvider
-        theme={{
-          token: {
-            colorPrimary: "#79213d",
-            fontFamily:
-              '"Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif',
-          },
-        }}
-      >
-        <Form
-          // 디폴트 값
-          initialValues={{
-            userId: editId,
-            password: editpassword,
-            userName: editUserName,
-            phoneNumber: editUserTel,
-            regionNmId: editUserCity,
-          }}
-          onFinish={onFinish}
-          onFinishFailed={onFinishFailed}
-          layout="vertical"
-        >
-          <span>
-            아이디(E-mail)<b>*</b>
-          </span>
-          <p>사용하실 아이디를 입력해 주세요.</p>
-          <Form.Item
-            name="userId"
-            rules={[
-              {
-                required: true,
-                message: "Please input your E-mail!",
-              },
-            ]}
-          >
-            <Input
-              size="large"
-              // 읽기전용
-              readOnly={true}
-            />
-          </Form.Item>
-          <span>
-            비밀번호<b>*</b>
-          </span>
-          <p>비밀번호를 입력해 주세요.</p>
-          <Form.Item
-            name="password"
-            rules={[
-              {
-                required: true,
-                message: "Please input your password!",
-              },
-            ]}
-            validateStatus={passwordError ? "error" : ""}
-          >
-            <Input.Password
-              size="large"
-              // 글자수 제한
-              maxLength={20}
-              placeholder="비밀번호를 입력해 주세요."
-              value={editpassword}
-              onChange={changePassword}
-            />
-          </Form.Item>
-          <span>
-            비밀번호 확인<b>*</b>
-          </span>
-          <p>비밀번호를 다시 한번 입력해 주세요.</p>
-          <Form.Item
-            name="passwordConfirm"
-            dependencies={["password"]}
-            rules={[
-              {
-                required: true,
-                message: "Please input your password!",
-              },
-            ]}
-            validateStatus={passwordError ? "error" : ""}
-            help={passwordError && "비밀번호가 일치하지 않습니다."}
-          >
-            <Input.Password
-              size="large"
-              // 글자수 제한
-              maxLength={20}
-              placeholder="비밀번호를 다시 한번 입력해 주세요"
-              value={passwordConfirm}
-              onChange={changePasswordConfirm}
-            />
-          </Form.Item>
-          <span>
-            이름<b>*</b>
-          </span>
-          <p>이름을 입력해 주세요</p>
-          <Form.Item
-            name="userName"
-            rules={[
-              {
-                required: true,
-                message: "Please input your username!",
-              },
-            ]}
-          >
-            <Input
-              size="large"
-              // 글자수 제한
-              maxLength={10}
-              placeholder="이름을 입력해 주세요."
-              value={editUserName}
-              onChange={handleEditUserName}
-            />
-          </Form.Item>
-          <span>
-            연락처<b>*</b>
-          </span>
-          <p>연락처를 숫자 형식으로 입력해 주세요.</p>
-          <ConfirmArray>
-            <Form.Item
-              name="phoneNumber"
-              rules={[
-                {
-                  pattern: /^[0-9]+$/,
-                  message: "숫자만 입력해 주세요.",
-                },
-                {
-                  required: true,
-                  message: "연락처를 입력해 주세요.",
-                },
-              ]}
-            >
-              <Input
-                size="large"
-                // 글자수 제한
-                maxLength={11}
-                placeholder="연락처를 입력해 주세요."
-                value={editUserTel}
-                onChange={handleEditUserTel}
-              />
-            </Form.Item>
-            <ButtonConfirm onClick={handleCertifyPhone}>본인인증</ButtonConfirm>
-          </ConfirmArray>
-          <RegionSelectWrap>
-            <span>
-              거주지역<b>*</b>
-            </span>
-            <p>거주지역을 선택해 주세요.</p>
-            <Form.Item name="regionNmId">
-              <Radio.Group
-                value={regionOptions.regionNmId}
-                size="large"
-                onClick={handleEditUserCity}
-              >
-                {regionOptions.map(option => (
-                  <Radio.Button
-                    key={option.regionNmId}
-                    value={option.regionNmId}
-                  >
-                    {option.value}
-                  </Radio.Button>
-                ))}
-              </Radio.Group>
-            </Form.Item>
-          </RegionSelectWrap>
-          {/* 이용약관 컴포넌트
-          <Terms /> */}
-          <Form.Item>
-            <JoinEditBtn>
-              <ButtonOk>수정하기</ButtonOk>
-              <ButtonCancel onClick={UserDropOut}>회원탈퇴</ButtonCancel>
-            </JoinEditBtn>
-          </Form.Item>
-        </Form>
-      </ConfigProvider>
+      {isRendering && (
+        //화면
+        <JoinEditForm
+          editUserInfo={editUserInfo}
+          setEditUserInfo={setEditUserInfo}
+        />
+      )}
     </JoinWrap>
   );
 };

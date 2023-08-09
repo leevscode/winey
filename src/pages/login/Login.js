@@ -35,14 +35,19 @@ const Login = () => {
   const onFinish = async values => {
     try {
       const login = await fetchLogin(userid, password);
-      // 로그인성공 후 cookie에 있는 accessToken을 확인하자
-      console.log("login.token", login.accessToken);
+      if (login.success == true) {
+        // 로그인성공 후 cookie에 있는 accessToken을 확인하자
+        console.log("login.token", login.accessToken);
 
-      // 리프레쉬 토큰 요청
-      // fetchRefreshToken()
-      navigate("/main");
+        // 리프레쉬 토큰 요청
+        // fetchRefreshToken()
+        navigate("/main");
+      } else {
+        Modal.warning(config);
+      }
     } catch (error) {
       Modal.warning(config);
+      return;
     }
   };
   const onFinishFailed = errorInfo => {

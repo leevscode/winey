@@ -1,8 +1,6 @@
 import axios from "axios";
 import { getCookie, removeCookie, setCookie } from "./cookie";
-import { Modal } from "antd";
 import { useNavigate } from "react-router";
-import { Cookies } from "react-cookie";
 
 export const client = axios.create({
   baseURL: "http://localhost:3000",
@@ -13,7 +11,7 @@ export const client = axios.create({
 });
 
 // Request 처리
-axios.interceptors.request.use(
+client.interceptors.request.use(
   config => {
     // cookie를 활용 한 경우
     const token = getCookie("accessToken");
@@ -24,6 +22,36 @@ axios.interceptors.request.use(
   },
   error => console.log(error),
 );
+
+// Response 처리
+// client.interceptors.response.use(
+//   response => {
+//     console.log("response", response);
+//     return response;
+//   },
+//   async error => {
+//     const { config, response } = error;
+//     const refreshToken = getCookie("refreshToken");
+//     if (response.status === 401 && refreshToken) {
+//       console.log("토큰만료, 갱신시도");
+//       try {
+//         const { data } = await client.post(`/sign-api/refresh-token`, {
+//           refreshToken,
+//         });
+//         const accessToken = data;
+//         setCookie("accessToken", accessToken);
+//         console.log(accessToken);
+//         config.headers.Authorization = `Bearer ${accessToken}`;
+
+//         // 토큰 갱신 후 재시도
+//         const reTryResponse = await client(config);
+//         return reTryResponse;
+//       } catch (error) {
+//         console.log(error);
+//       }
+//     }
+//   },
+// );
 
 // 쿠키 set 하기
 export const fetchLogin = async (userid, password) => {
@@ -46,27 +74,9 @@ export const fetchLogin = async (userid, password) => {
       sameSite: "none",
       httpOnly: true,
     });
-    // userPK 쿠키 저장
-    //   setCookie("userPK", result.userPK, {
-    //   path: "/",
-    //   secure: true,
-    //   sameSite: "none",
-    //   httpOnly: true,
-    // });
-
-    // n분 후에 refreshToken 함수 호출
-    // setInterval(refreshToken, 100000);
-    // console.log("setInterval", setInterval);
-    // console.log("refreshToken", refreshToken);
     return result;
-    // axios.get(`/api/mypage/user_mypage?userId=2`);
   } catch (error) {
     console.log(error);
-    const config = {
-      title: "로그인 실패",
-      content: <p>아이디/패스워드를 다시 확인해 주세요.</p>,
-    };
-    Modal.warning(config);
 
     return error;
   }
@@ -111,23 +121,7 @@ export const fetchRefreshToken = async () => {
     // 갱신 실패 시, 안내창 띄우고 로그인창으로 이동
     alert("로그아웃 되었습니다");
     removeCookie("accessToken");
-    Cookies.remove("refreshToken");
+    removeCookie("refreshToken");
     navigate("/login");
   }
 };
-
-// 토큰 갱신 후 실패한 요청을 저장하는 배열
-// let failedQueue = [];
-
-// 토큰 갱신 후 실패한 요청을 재시도하는 함수
-// const processFailedQueue = (error, token = null) => {
-//   failedQueue.forEach(prom => {
-//     if (error) {
-//       prom.reject(error);
-//     } else {
-//       prom.config.headers.Authorization = `Bearer ${token}`;
-//       prom.resolve(client(prom.config));
-//     }
-//   });
-//   failedQueue = [];
-// };

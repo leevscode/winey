@@ -69,30 +69,34 @@ const KeywordChooseCp = () => {
   const isTypeIndeterminate =
     !!wineTypeCheckedList.length &&
     wineTypeCheckedList.length < wineOptions.type.length;
-  const isTypeCheckAll = wineTypeCheckedList.length === wineOptions.type.length;
+  const isTypeCheckAll =
+    wineTypeCheckedList.length === wineOptions.cateId.length;
   const handleTypeCheckAllChange = e => {
-    setWineTypeCheckedList(e.target.checked ? wineOptions.type : []);
-    setFavoriteKeyword(prev => ({ ...prev, wineType: wineOptions.type }));
+    setWineTypeCheckedList(e.target.checked ? wineOptions.cateId : []);
+    setFavoriteKeyword(prev => ({ ...prev, cateId: wineOptions.cateId }));
   };
   const handleTypeOnChange = list => {
     setWineTypeCheckedList(list);
-    setFavoriteKeyword(prev => ({ ...prev, wineType: list }));
+    setFavoriteKeyword(prev => ({ ...prev, cateId: list }));
     console.log("favoriteKeyword", favoriteKeyword);
   };
 
   // 와인금액 핸들러
   const isPriceIndeterminate =
     !!winePriceCheckedList.length &&
-    winePriceCheckedList.length < wineOptions.price.length;
+    winePriceCheckedList.length < wineOptions.priceRange.length;
   const isPriceCheckAll =
-    winePriceCheckedList.length === wineOptions.price.length;
+    winePriceCheckedList.length === wineOptions.priceRange.length;
   const handlePriceCheckAllChange = e => {
-    setWinePriceCheckedList(e.target.checked ? wineOptions.price : []);
-    setFavoriteKeyword(prev => ({ ...prev, winePrice: wineOptions.price }));
+    setWinePriceCheckedList(e.target.checked ? wineOptions.priceRange : []);
+    setFavoriteKeyword(prev => ({
+      ...prev,
+      priceRange: wineOptions.priceRange,
+    }));
   };
   const handlePriceOnChange = list => {
     setWinePriceCheckedList(list);
-    setFavoriteKeyword(prev => ({ ...prev, winePrice: list }));
+    setFavoriteKeyword(prev => ({ ...prev, priceRange: list }));
 
     console.log("favoriteKeyword", favoriteKeyword);
   };
@@ -100,46 +104,51 @@ const KeywordChooseCp = () => {
   // 페어링 음식 핸들러
   const isWithFoodIndeterminate =
     !!wineWithFoodCheckedList.length &&
-    wineWithFoodCheckedList.length < wineOptions.withFood.length;
+    wineWithFoodCheckedList.length < wineOptions.smallcategoryId.length;
   const isWithFoodCheckAll =
-    wineWithFoodCheckedList.length === wineOptions.withFood.length;
+    wineWithFoodCheckedList.length === wineOptions.smallcategoryId.length;
   const handleWithFoodCheckAllChange = e => {
-    setWineWithFoodCheckedList(e.target.checked ? wineOptions.withFood : []);
-    setFavoriteKeyword(prev => ({ ...prev, wineFood: wineOptions.withFood }));
+    setWineWithFoodCheckedList(
+      e.target.checked ? wineOptions.smallcategoryId : [],
+    );
+    setFavoriteKeyword(prev => ({
+      ...prev,
+      smallcategoryId: wineOptions.smallcategoryId,
+    }));
   };
   const handleWithFoodOnChange = list => {
     setWineWithFoodCheckedList(list);
-    setFavoriteKeyword(prev => ({ ...prev, wineFood: list }));
+    setFavoriteKeyword(prev => ({ ...prev, smallcategoryId: list }));
     console.log("favoriteKeyword", favoriteKeyword);
   };
 
   // 향 핸들러
   const isFlavorIndeterminate =
     !!wineFlavorCheckedList.length &&
-    wineFlavorCheckedList.length < wineOptions.flavor.length;
+    wineFlavorCheckedList.length < wineOptions.aroma.length;
   const isFlavorCheckAll =
-    wineFlavorCheckedList.length === wineOptions.flavor.length;
+    wineFlavorCheckedList.length === wineOptions.aroma.length;
   const handleFlavorCheckAllChange = e => {
-    setWineFlavorCheckedList(e.target.checked ? wineOptions.flavor : []);
-    setFavoriteKeyword(prev => ({ ...prev, wineFlavor: wineOptions.flavor }));
+    setWineFlavorCheckedList(e.target.checked ? wineOptions.aroma : []);
+    setFavoriteKeyword(prev => ({ ...prev, aroma: wineOptions.aroma }));
   };
   const handleFlavorOnChange = list => {
     setWineFlavorCheckedList(list);
-    setFavoriteKeyword(prev => ({ ...prev, wineFlavor: list }));
+    setFavoriteKeyword(prev => ({ ...prev, aroma: list }));
   };
   // 원산지 핸들러
   const isCountryIndeterminate =
     !!wineCountryCheckedList.length &&
-    wineCountryCheckedList.length < wineOptions.country.length;
+    wineCountryCheckedList.length < wineOptions.countryId.length;
   const isCountryCheckAll =
-    wineCountryCheckedList.length === wineOptions.country.length;
+    wineCountryCheckedList.length === wineOptions.countryId.length;
   const handleCountryCheckAllChange = e => {
-    setWineCountryCheckedList(e.target.checked ? wineOptions.country : []);
-    setFavoriteKeyword(prev => ({ ...prev, wineCountry: wineOptions.country }));
+    setWineCountryCheckedList(e.target.checked ? wineOptions.countryId : []);
+    setFavoriteKeyword(prev => ({ ...prev, countryId: wineOptions.countryId }));
   };
   const handleCountryOnChange = list => {
     setWineCountryCheckedList(list);
-    setFavoriteKeyword(prev => ({ ...prev, wineCountry: list }));
+    setFavoriteKeyword(prev => ({ ...prev, countryId: list }));
   };
 
   // 이벤트핸들러
@@ -172,8 +181,8 @@ const KeywordChooseCp = () => {
                 onChange={handleTypeOnChange}
               >
                 {wineOptions.cateId.map(option => (
-                  <Checkbox key={option} value={option}>
-                    {option}
+                  <Checkbox key={option.id} value={option.id}>
+                    {option.value}
                   </Checkbox>
                 ))}
               </Checkbox.Group>
@@ -194,9 +203,9 @@ const KeywordChooseCp = () => {
                 value={winePriceCheckedList}
                 onChange={handlePriceOnChange}
               >
-                {wineOptions.price.map(option => (
-                  <Checkbox key={option} value={option}>
-                    {option}
+                {wineOptions.priceRange.map(option => (
+                  <Checkbox key={option.id} value={option.id}>
+                    {option.value}
                   </Checkbox>
                 ))}
               </Checkbox.Group>
@@ -217,9 +226,9 @@ const KeywordChooseCp = () => {
                 value={wineWithFoodCheckedList}
                 onChange={handleWithFoodOnChange}
               >
-                {wineOptions.withFood.map(option => (
-                  <Checkbox key={option} value={option}>
-                    {option}
+                {wineOptions.smallcategoryId.map(option => (
+                  <Checkbox key={option.id} value={option.id}>
+                    {option.value}
                   </Checkbox>
                 ))}
               </Checkbox.Group>
@@ -239,9 +248,9 @@ const KeywordChooseCp = () => {
                 value={wineFlavorCheckedList}
                 onChange={handleFlavorOnChange}
               >
-                {wineOptions.flavor.map(option => (
-                  <Checkbox key={option} value={option}>
-                    {option}
+                {wineOptions.aroma.map(option => (
+                  <Checkbox key={option.id} value={option.id}>
+                    {option.value}
                   </Checkbox>
                 ))}
               </Checkbox.Group>
@@ -261,9 +270,9 @@ const KeywordChooseCp = () => {
                 value={wineCountryCheckedList}
                 onChange={handleCountryOnChange}
               >
-                {wineOptions.country.map(option => (
-                  <Checkbox key={option} value={option}>
-                    {option}
+                {wineOptions.countryId.map(option => (
+                  <Checkbox key={option.id} value={option.id}>
+                    {option.value}
                   </Checkbox>
                 ))}
               </Checkbox.Group>
