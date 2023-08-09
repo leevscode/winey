@@ -11,8 +11,8 @@ import {
   GoodsEa,
   CartTotalPrice,
   CartTotalPriceOne,
-  CartDetailImg,
   CartDetaiClose,
+  CartDetailWrap,
 } from "../../style/ProductCartStyle";
 import { useNavigate } from "react-router";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -23,37 +23,47 @@ import {
   decreaseQuantity,
   removeItem,
 } from "../../reducers/userSlice";
-import { fetchCartData, addToCart, removeFromCart, changeQuantity } from "../../../src/api/patchcart"
+import {
+  fetchCartData,
+  addToCart,
+  removeFromCart,
+  changeQuantity,
+} from "../../../src/api/patchcart";
+import { useState } from "react";
 
 const ProductCart = () => {
-  const cartItems = useSelector((state) => state.cart);
+  const cartItems = useSelector(state => state.cart);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [CartData, setCartData] = useState([]);
 
-//  userId: 유저PK값,
-// quantity: 수량,
-// nmKor: 한글 이름,
-// nmEng: 영어 이름,
-// price: 가격,
-// salePrice: 할인가격,
-// pic: 사진,
+  // quantity: 수량,
+  // nmKor: 한글 이름,
+  // nmEng: 영어 이름,
+  // price: 가격,
+  // salePrice: 할인가격,
+  // pic: 사진,
+
+  const filledCartData = async () => {
+    try {
+      const data = await fetchCartData();
+      setCartData(data);
+      console.log("이게되냐?", data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   useEffect(() => {
-    // 컴포넌트가 마운트될 때 API 요청 보내기
-    fetchCartData()
-      .then((cartData) => {
-        // 받아온 데이터를 처리할 수 있습니다.
-        console.log("받아온 카트 데이터:", cartData);
-      })
-      .catch((error) => {
-        console.error("API 요청 중 오류 발생:", error);
-      });
+    filledCartData();
   }, []);
+
+  console.log("ㅁㅈㅇㅈㅁㅇ", CartData);
 
   // 더미데이터 추가 버튼
   // const addItemToCart = () => {
   //   const newItem = {
-  //     userid: cartItems.length + 1,
+  //     productId : 1,
   //     nmKor: "제프 까렐, 울락 헤꼴뜨",
   //     nmEng: "Ultime Recolte By Jeff Carrel",
   //     price: "32,900원",
@@ -78,7 +88,6 @@ const ProductCart = () => {
     dispatch(decreaseQuantity(id));
   };
 
-  
   const calculateTotalPrice = () => {
     let totalPrice = 0;
     cartItems.forEach(item => {
@@ -90,10 +99,9 @@ const ProductCart = () => {
     return totalPrice;
   };
 
-
   return (
     <>
-      {cartItems.length === 0 ? (
+      {CartData.length === 0 ? (
         <ProductCartNone>
           <div>
             <i>
@@ -108,9 +116,11 @@ const ProductCart = () => {
             장바구니에 총 {cartItems.length}개의 상품이 있습니다.
           </ProudctTotalItem>
           <ul>
-            {cartItems.map(item => (
-              <ProductCartInfo key={item.id}>
-                <CartDetailImg>{item.pic}</CartDetailImg>
+            {CartData.map((item, index) => (
+              <ProductCartInfo key={index}>
+                <CartDetailWrap>
+                  <img src={`/img/${item.pic}`} alt="와인사진"></img>
+                </CartDetailWrap>
                 <CartDetail>
                   <p>{item.nmKor}</p>
                   <CartInfoDes>{item.nmEng}</CartInfoDes>

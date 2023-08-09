@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import {
   DetailButtonOk,
@@ -13,11 +13,15 @@ import submitReview from "../../api/patchselllist";
 const SellListDetail = () => {
   const [reviewReset, setReviewReset] = useState(false);
   const [reviewSubmit, setReviewSubmit] = useState({});
+  // 선택된 구매 아이디
+  const [reviewSelect, setReviewSelect] = useState([]);
+  const [reviewId, setReviewId] = useState(null);
 
   // 상품 더미 데이터
+  // productId 는 상품별 고유 pk 값입니다
   const [productData, setProductData] = useState([
     {
-      orderId: 1,
+      productId: 1,
       quantity: 1,
       imageSrc: "https://via.placeholder.com/120x120",
       productName: "제프 까렐, 울띰 헤꼴뜨",
@@ -25,20 +29,35 @@ const SellListDetail = () => {
       productPrice: "32,900원",
     },
     {
-      key: 2,
+      productId: 2,
       imageSrc: "https://via.placeholder.com/120x120",
       productName: "white Wine",
       productDescription: "white",
       productPrice: "52,500원",
     },
     {
-      key: 3,
+      productId: 3,
       imageSrc: "https://via.placeholder.com/120x120",
       productName: "Red Wine",
       productDescription: "Red",
       productPrice: "82,500원",
     },
   ]);
+
+  const getSellListData = () => {
+    // 1. server get 해서  setProductData 진행
+
+    // 2.
+    const arr = productData.map(item => {
+      return { orderId: item.orderId, reviewCompleted: false };
+    });
+    // {orderId:평점등록된 orderID, reviewCompleted:평점이 등록되었는지}
+    setReviewSelect(arr);
+  };
+  useEffect(() => {
+    console.log("gogo");
+    getSellListData();
+  }, []);
 
   // 결제 총 금액 더미데이터
   const orderData = {
@@ -61,7 +80,9 @@ const SellListDetail = () => {
   };
 
   // 리뷰 모달을 여는 함수
-  const showModal = () => {
+  const showModal = _id => {
+    console.log(_id)
+    setReviewId(_id);
     setReviewReset(true);
   };
 
@@ -92,9 +113,8 @@ const SellListDetail = () => {
     // 리뷰 데이터를 생성하여 엔드포인트로 전송
     const reviewData = {
       orderDetailId: updatedProductData[key].key, // 주문 상세 pk값 추가
-      review_level: rating, 
+      review_level: rating,
       // 리뷰 평점 추가
-
     };
 
     submitReview(reviewData);
@@ -104,7 +124,7 @@ const SellListDetail = () => {
     <>
       <DetailDay>{orderData.orderDate}</DetailDay>
       {productData.map(product => (
-        <SellListDetailinfo key={product.key}>
+        <SellListDetailinfo key={product.orderId}>
           <div>
             <img src={product.imageSrc} alt="" />
             <ul>
@@ -113,7 +133,10 @@ const SellListDetail = () => {
               <li>{product.productPrice}</li>
             </ul>
           </div>
-          <DetailButtonOk onClick={() => showModal()}>평점등록</DetailButtonOk>
+          <DetailButtonOk onClick={() => showModal(product.orderId)}>
+            평점등록
+          </DetailButtonOk>
+          <ReviewOk>평점등록이 완료되었습니다</ReviewOk>
         </SellListDetailinfo>
       ))}
 
