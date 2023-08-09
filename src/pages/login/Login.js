@@ -96,7 +96,7 @@ const Login = () => {
                 // 글자수 제한
                 maxLength={20}
                 size="large"
-                placeholder="아이디를 이메일 형식으로 입력해 주세요."
+                placeholder="아이디를 입력해 주세요. (ex. example@example.com)"
                 onChange={e => handleLoginID(e)}
               />
             </Form.Item>

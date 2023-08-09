@@ -128,9 +128,9 @@ const JoinEditForm = ({ editUserInfo, setEditUserInfo }) => {
       content: "정말 탈퇴 하시겠습니까?",
       onOk() {
         deleteMember();
-        removeCookie("accessToken");
-        removeCookie("refreshToken");
-        navigate("/main");
+        // removeCookie("accessToken");
+        // removeCookie("refreshToken");
+        // navigate("/main");
         console.log("회원탈퇴");
       },
       onCancel() {

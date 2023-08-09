@@ -24,10 +24,9 @@ export const WelcomeWrap = styled.div`
     margin-bottom: 2rem;
   }
   & button {
-    margin-top: 3rem;
+    margin-top: 5rem;
     & > a {
       font-weight: 600;
-
       color: ${Maincolor.white};
     }
   }
@@ -58,6 +57,9 @@ export const LetsChoice = styled.div`
     text-align: center;
     line-height: 1.5rem;
     margin-bottom: 1rem;
+    & > strong {
+      font-weight: 700;
+    }
   }
 
   & h5 {
@@ -89,12 +91,6 @@ export const KeywordWrap = styled.div`
         margin: 1rem 0;
       }
       div {
-        /* display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-direction: row;
-        flex-wrap: wrap;
-        gap: 0.5rem; */
         text-align: center;
         /* 체크박스 그룹 인라인 속성 추가 */
         .ant-checkbox-group {
@@ -103,14 +99,9 @@ export const KeywordWrap = styled.div`
         label {
           background: ${Maincolor.white};
           color: ${Maincolor.black};
-          /* border: 0.05rem solid ${Maincolor.white}; */
           width: 8rem;
           height: 4rem;
           border-radius: 0.7rem;
-          /* margin: 0.4rem;
-          display: flex;
-          justify-content: center;
-          align-items: center; */
 
           /* antdesign 고유의 margin값 없애기 위해서 margin에 !important 사용 */
           position: relative;

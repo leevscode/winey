@@ -109,6 +109,7 @@ const Join = () => {
 
   // 회원 가입 핸들러
   const onFinish = values => {
+    setUserInfo({ ...values });
     if (emailCertifyOk === false) {
       Modal.warning(emailOk);
       return;
@@ -120,7 +121,6 @@ const Join = () => {
     if (password === passwordConfirm) {
       console.log("checkAll", checkAll);
       if (checkAll === true) {
-        setUserInfo({ ...values });
         postUserJoin(userInfo);
         navigate("/welcome");
       } else {
