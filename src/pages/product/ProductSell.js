@@ -16,8 +16,11 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleCheck, faCreditCard } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
 import { Modal } from "antd";
+import { getUserStoreInfo } from "../../api/purchasepatch";
 
 const ProductSell = () => {
+  const [userStore, setUserInfo] = useState([]);
+  
   const 임시데이터 = {
     TempList: [
       {
@@ -124,12 +127,15 @@ const ProductSell = () => {
   };
 
   useEffect(() => {
+    getUserStoreInfo(setUserInfo);
     console.log("totalPayList", totalPayList);
   }, [productCollect, selectCollect]); // totalPayList 값이 변경될 때마다 실행
 
   return (
     <PurchaseWrap>
       <PickupPlaceClick
+        // get한 지점정보
+        userStore={userStore}
         selectCollect={selectCollect}
         setSelectCollect={setSelectCollect}
       />
