@@ -38,14 +38,6 @@ const CertifyEmail = ({ setEmailCertifyOk }) => {
           <Form.Item
             name="certifyEmail"
             rules={[
-              // {
-              //   required: true,
-              //   message: "인증번호를 입력하세요",
-              // },
-              // {
-              //   type: "number",
-              //   message: "숫자형식으로 입력해주세요",
-              // },
               {
                 pattern: /\d+/g,
                 message: "숫자형식으로 입력해주세요",

@@ -94,29 +94,30 @@ const JoinEditForm = ({ editUserInfo, setEditUserInfo }) => {
 
   // 회원정보수정 확인 핸들러
   const onFinish = values => {
-    setEditUserInfo({
-      editId,
-      editpassword,
-      editUserName,
-      editUserTel,
-      editUserCity,
-    });
-    if (editpassword === "") {
-      Modal.warning({
-        title: "비밀번호 확인",
-        content: <p>비밀번호를 다시 확인해 주세요.</p>,
-      });
-      console.log("비밀번호확인");
-      return;
-    }
     if (editpassword === passwordConfirm) {
-      patchMemberInfo(editUserInfo);
-      patchMemberPW(editUserInfo);
-      // navigate("/main");
+      const update = {
+        editId,
+        editpassword,
+        editUserName,
+        editUserTel,
+        editUserCity,
+      };
+      if (editpassword === "") {
+        Modal.warning({
+          title: "비밀번호 확인",
+          content: <p>비밀번호를 다시 확인해 주세요.</p>,
+        });
+        console.log("비밀번호확인");
+      } else {
+        patchMemberInfo(update);
+        patchMemberPW(update);
+        navigate("/main");
+      }
     } else {
       console.log("Failed");
     }
   };
+
   const onFinishFailed = errorInfo => {
     console.log("Failed:", errorInfo);
   };
@@ -128,9 +129,9 @@ const JoinEditForm = ({ editUserInfo, setEditUserInfo }) => {
       content: "정말 탈퇴 하시겠습니까?",
       onOk() {
         deleteMember();
-        // removeCookie("accessToken");
-        // removeCookie("refreshToken");
-        // navigate("/main");
+        removeCookie("accessToken");
+        removeCookie("refreshToken");
+        navigate("/main");
         console.log("회원탈퇴");
       },
       onCancel() {
