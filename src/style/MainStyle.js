@@ -128,7 +128,7 @@ export const NavListWrap = styled.div`
         }
         span {
           display: block;
-          font-size: 1.6rem;
+          font-size: 1.4rem;
           margin-top: 10px;
         }
       }

@@ -3,38 +3,36 @@
   노션 : https://www.notion.so/kimaydev
   깃허브 : https://github.com/kimaydev
 */
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { DetailInfoWrap } from "../../style/ProductDetailStyle";
 
 const WindeDetailInfo = ({ productDetail }) => {
-  const barOl = useRef();
-  const barLi = barOl.current?.children;
-  // 당도 보관 state
+  // 당도 데이터 보관 state
   const [sweety, setSweety] = useState();
+  // 산도 데이터 보관 state
+  const [acidity, setAcidity] = useState();
+  // 바디 데이터 보관 state
+  const [body, setBody] = useState();
+  // 당도
   const getSweety = async () => {
-    console.log("==========시작===========");
     await setSweety(productDetail.wineDetailVo?.sweety);
-    console.log("==========끝===========");
+  };
+  // 산도
+  const getAcidity = async () => {
+    await setAcidity(productDetail.wineDetailVo?.acidity);
+  };
+  // 바디
+  const getBody = async () => {
+    await setBody(productDetail.wineDetailVo?.body);
   };
   useEffect(() => {
     getSweety();
-    // if (sweety === 1) {
-    //   console.log("당도 1이에요");
-    // } else if (sweety === 2) {
-    //   console.log("당도 2에요");
-    // } else if (sweety === 3) {
-    //   console.log("당도 3이에요");
-    // } else if (sweety === 4) {
-    //   console.log("당도 4에요");
-    // } else if (sweety === 5) {
-    //   console.log("당도 5에요");
-    // }
+    getAcidity();
+    getBody();
   }, [productDetail]);
-  console.log("li태그", barLi);
-  // console.log("li태그배열", liArray());
-  console.log("당도", sweety);
-  // const test = barLi[0];
-  // console.log("li 선택해", test);
+  // console.log("당도", sweety);
+  // console.log("산도", acidity);
+  // console.log("바디", body);
   return (
     <DetailInfoWrap>
       {productDetail.wineDetailVo && (
@@ -44,8 +42,16 @@ const WindeDetailInfo = ({ productDetail }) => {
               <i></i>당도
             </li>
             <li className="bar">
-              {/* <ol ref={barOl}>{barLi}</ol> */}
-              <ol ref={barOl}>
+              <ol className="active_bar">
+                {Array(sweety)
+                  .fill()
+                  .map(index => (
+                    <>
+                      <li key={index}></li>
+                    </>
+                  ))}
+              </ol>
+              <ol className="default_bar">
                 <li></li>
                 <li></li>
                 <li></li>
@@ -59,7 +65,16 @@ const WindeDetailInfo = ({ productDetail }) => {
               <i></i>산도
             </li>
             <li className="bar">
-              <ol>
+              <ol className="active_bar">
+                {Array(acidity)
+                  .fill()
+                  .map(index => (
+                    <>
+                      <li key={index}></li>
+                    </>
+                  ))}
+              </ol>
+              <ol className="default_bar">
                 <li></li>
                 <li></li>
                 <li></li>
@@ -73,7 +88,16 @@ const WindeDetailInfo = ({ productDetail }) => {
               <i></i>바디
             </li>
             <li className="bar">
-              <ol>
+              <ol className="active_bar">
+                {Array(body)
+                  .fill()
+                  .map(index => (
+                    <>
+                      <li key={index}></li>
+                    </>
+                  ))}
+              </ol>
+              <ol className="default_bar">
                 <li></li>
                 <li></li>
                 <li></li>

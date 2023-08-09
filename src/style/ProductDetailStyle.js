@@ -187,30 +187,15 @@ export const DetailInfoWrap = styled.section`
       }
     }
     .bar {
+      position: relative;
       width: calc(100% - 13rem);
       ol {
         display: flex;
         position: relative;
         padding-bottom: 1.3rem;
-        &::before {
-          content: "LOW";
-          position: absolute;
-          bottom: -4px;
-          left: 0;
-          font-size: 1.2rem;
-          color: ${Maincolor.grayBold};
-        }
-        &::after {
-          content: "HIGH";
-          position: absolute;
-          bottom: -4px;
-          right: 0;
-          font-size: 1.2rem;
-          color: ${Maincolor.grayBold};
-        }
         li {
           position: relative;
-          width: 100%;
+          width: calc(100% / 5 - 7px);
           height: 10px;
           background: ${Maincolor.grayMedium};
           border-radius: 15px;
@@ -228,22 +213,47 @@ export const DetailInfoWrap = styled.section`
             width: 100%;
             height: 100%;
           }
-          &.active {
-            &:nth-of-type(1)::after {
-              background: ${Gradation.wineE};
-            }
-            &:nth-of-type(2)::after {
-              background: ${Gradation.wineD};
-            }
-            &:nth-of-type(3)::after {
-              background: ${Gradation.wineC};
-            }
-            &:nth-of-type(4)::after {
-              background: ${Gradation.wineB};
-            }
-            &:nth-of-type(5)::after {
-              background: ${Gradation.wineA};
-            }
+        }
+      }
+      .default_bar {
+        &::before {
+          content: "LOW";
+          position: absolute;
+          bottom: -4px;
+          left: 0;
+          font-size: 1.2rem;
+          color: ${Maincolor.grayBold};
+        }
+        &::after {
+          content: "HIGH";
+          position: absolute;
+          bottom: -4px;
+          right: 0;
+          font-size: 1.2rem;
+          color: ${Maincolor.grayBold};
+        }
+      }
+      .active_bar {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        z-index: 1;
+        li {
+          &:nth-of-type(1)::after {
+            background: ${Gradation.wineE};
+          }
+          &:nth-of-type(2)::after {
+            background: ${Gradation.wineD};
+          }
+          &:nth-of-type(3)::after {
+            background: ${Gradation.wineC};
+          }
+          &:nth-of-type(4)::after {
+            background: ${Gradation.wineB};
+          }
+          &:nth-of-type(5)::after {
+            background: ${Gradation.wineA};
           }
         }
       }
