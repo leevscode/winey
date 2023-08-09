@@ -85,8 +85,9 @@ export const postLogout = async () => {
   try {
     const res = await client.post("/sign-api/logout");
     console.log(res);
-    const data = await res.data;
-    console.log(data);
+    const result = await res.data;
+    console.log(result);
+    return result;
   } catch (error) {
     console.log(error);
   }
