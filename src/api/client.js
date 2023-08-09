@@ -62,11 +62,6 @@ export const fetchLogin = async (userid, password) => {
     // axios.get(`/api/mypage/user_mypage?userId=2`);
   } catch (error) {
     console.log(error);
-    const config = {
-      title: "로그인 실패",
-      content: <p>아이디/패스워드를 다시 확인해 주세요.</p>,
-    };
-    Modal.warning(config);
 
     return error;
   }

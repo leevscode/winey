@@ -205,7 +205,7 @@ const Join = () => {
             rules={[
               {
                 required: true,
-                message: "패스워드를 입력해 주세요.",
+                message: "비밀번호를 입력해 주세요.",
               },
             ]}
             validateStatus={passwordError ? "error" : ""}

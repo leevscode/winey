@@ -90,9 +90,17 @@ const JoinEditForm = ({ editUserInfo, setEditUserInfo }) => {
 
   // 회원정보수정 확인 핸들러
   const onFinish = values => {
+    if (editpassword === "") {
+      Modal.warning({
+        title: "비밀번호 확인",
+        content: <p>비밀번호를 다시 확인해 주세요.</p>,
+      });
+      console.log("비밀번호확인");
+      return;
+    }
     if (editpassword === passwordConfirm) {
       setEditUserInfo({
-        // editId,
+        editId,
         editpassword,
         editUserName,
         editUserTel,
@@ -162,7 +170,7 @@ const JoinEditForm = ({ editUserInfo, setEditUserInfo }) => {
             rules={[
               {
                 required: true,
-                message: "Please input your E-mail!",
+                message: "이메일을 입력해주세요",
               },
             ]}
           >
@@ -181,7 +189,7 @@ const JoinEditForm = ({ editUserInfo, setEditUserInfo }) => {
             rules={[
               {
                 required: true,
-                message: "Please input your password!",
+                message: "비밀번호를 입력해 주세요.",
               },
             ]}
             validateStatus={passwordError ? "error" : ""}
@@ -205,7 +213,7 @@ const JoinEditForm = ({ editUserInfo, setEditUserInfo }) => {
             rules={[
               {
                 required: true,
-                message: "Please input your password!",
+                message: "비밀번호를 입력해 주세요.",
               },
             ]}
             validateStatus={passwordError ? "error" : ""}
@@ -229,7 +237,7 @@ const JoinEditForm = ({ editUserInfo, setEditUserInfo }) => {
             rules={[
               {
                 required: true,
-                message: "Please input your username!",
+                message: "이름을 입력해 주세요.",
               },
             ]}
           >

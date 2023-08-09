@@ -20,12 +20,12 @@ export const postUserJoin = async userInfo => {
 };
 
 // 회원정보 get(정보수정페이지 사용)
-export const getMemberInfo = async(setEditUserInfo)  => {
+export const getMemberInfo = async setEditUserInfo => {
   try {
     const res = await axios.get("/api");
     const result = await res.data;
     console.log("result", result);
-    setEditUserInfo(result)
+    setEditUserInfo(result);
     return result;
   } catch (error) {
     console.log(error);
@@ -36,13 +36,11 @@ export const getMemberInfo = async(setEditUserInfo)  => {
 export const patchMemberInfo = async editUserInfo => {
   try {
     const res = await axios.patch("/api/upduser", {
-      // "email": "string",
-      // email: "test4@test.net",
+      email: editUserInfo.email,
       name: editUserInfo.editUserName,
       tel: editUserInfo.editUserTel,
       regionNmId: editUserInfo.editUserCity,
     });
-    console.log(res);
     const result = await res.data;
     console.log(result);
   } catch (error) {
@@ -55,7 +53,6 @@ export const patchMemberPW = async editUserInfo => {
     const res = await axios.patch("/api/updPassword", {
       pw: editUserInfo.editpassword,
     });
-    console.log(res);
     const result = await res.data;
     console.log(result);
   } catch (error) {
