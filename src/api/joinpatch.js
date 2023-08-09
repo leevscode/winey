@@ -1,5 +1,6 @@
 import axios from "axios";
 import { client } from "./client";
+import { getUser } from "../reducers/userSlice";
 
 // 회원가입
 export const postUserJoin = async userInfo => {
@@ -21,12 +22,25 @@ export const postUserJoin = async userInfo => {
 };
 
 // 회원정보 get(정보수정페이지 사용)
-export const getMemberInfo = async setEditUserInfo => {
+// export const getMemberInfo = async setEditUserInfo => {
+//   try {
+//     const res = await client.get("/api");
+//     const result = await res.data;
+//     console.log("result", result);
+//     setEditUserInfo(result);
+//     return result;
+//   } catch (error) {
+//     console.log(error);
+//   }
+// };
+
+// 회원정보 get redux toolkit
+export const getMemberInfo = () => async dispatch => {
   try {
     const res = await client.get("/api");
     const result = await res.data;
-    console.log("result", result);
-    setEditUserInfo(result);
+    // console.log("회원정보 get result", result);
+    dispatch(getUser(result));
     return result;
   } catch (error) {
     console.log(error);

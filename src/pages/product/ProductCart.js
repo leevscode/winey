@@ -22,7 +22,7 @@ import {
   increaseQuantity,
   decreaseQuantity,
   removeItem,
-} from "../../reducers/userSlice";
+} from "../../reducers/cartSlice";
 import { fetchCartData } from "../../../src/api/patchcart";
 import { useState } from "react";
 
