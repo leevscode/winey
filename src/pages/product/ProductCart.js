@@ -4,65 +4,49 @@ import { ButtonCancel, ButtonOk } from "../../style/GlobalStyle";
 import {
   ProudctTotalItem,
   ProductCartNone,
-  ProductCartIn,
-  ProductCartInfo,
   CartDetail,
-  CartInfoDes,
   GoodsEa,
   CartTotalPrice,
   CartTotalPriceOne,
-  CartDetailImg,
   CartDetaiClose,
+  CartDetailWrap,
+  ProductCartInfo,
+  CartnmEng,
+  Cartnmkor,
+  Cratprice,
+
 } from "../../style/ProductCartStyle";
 import { useNavigate } from "react-router";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faExclamation } from "@fortawesome/free-solid-svg-icons";
 import {
-  addItem,
   increaseQuantity,
   decreaseQuantity,
   removeItem,
 } from "../../reducers/userSlice";
-import { fetchCartData } from "../../../src/api/patchcart"
+import { fetchCartData } from "../../../src/api/patchcart";
+import { useState } from "react";
 
 const ProductCart = () => {
-  const cartItems = useSelector((state) => state.cart);
+  const cartItems = useSelector(state => state.cart);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [CartData, setCartData] = useState([]);
 
-//  userId: 유저PK값,
-// quantity: 수량,
-// nmKor: 한글 이름,
-// nmEng: 영어 이름,
-// price: 가격,
-// salePrice: 할인가격,
-// pic: 사진,
-
-  useEffect(() => {
-    // 컴포넌트가 마운트될 때 API 요청 보내기
-    fetchCartData()
-      .then((cartData) => {
-        // 받아온 데이터를 처리할 수 있습니다.
-        console.log("받아온 카트 데이터:", cartData);
-      })
-      .catch((error) => {
-        console.error("API 요청 중 오류 발생:", error);
-      });
-  }, []);
-
-  const addItemToCart = () => {
-    const newItem = {
-      id: cartItems.length + 1,
-      nmKor: "제프 까렐, 울락 헤꼴뜨",
-      nmEng: "Ultime Recolte By Jeff Carrel",
-      price: "32,900원",
-      quantity: 1,
-      pic: <img src="https://via.placeholder.com/200x200" alt="샘플이미지" />,
-    };
-    dispatch(addItem(newItem));
+  const filledCartData = async () => {
+    try {
+      const data = await fetchCartData();
+      setCartData(data);
+      console.log("장바구니 리스트 출력", data);
+    } catch (err) {
+      console.log(err);
+    }
   };
 
-  // 상품을 장바구니에서 제거하는 함수
+  useEffect(() => {
+    filledCartData();
+  }, []);
+
   const removeItemFromCart = id => {
     dispatch(removeItem(id));
   };
@@ -90,8 +74,7 @@ const ProductCart = () => {
 
   return (
     <>
-      <button onClick={addItemToCart}>상품 추가 테스트 버튼</button>
-      {cartItems.length === 0 ? (
+      {CartData.length === 0 ? (
         <ProductCartNone>
           <div>
             <i>
@@ -101,18 +84,20 @@ const ProductCart = () => {
           장바구니에 담긴 상품이 없습니다.
         </ProductCartNone>
       ) : (
-        <ProductCartIn>
+        <div>
           <ProudctTotalItem>
-            장바구니에 총 {cartItems.length}개의 상품이 있습니다.
+            장바구니에 총 {CartData.length}개의 상품이 있습니다.
           </ProudctTotalItem>
           <ul>
-            {cartItems.map(item => (
-              <ProductCartInfo key={item.id}>
-                <CartDetailImg>{item.pic}</CartDetailImg>
+            {CartData.map((item, index) => (
+              <ProductCartInfo key={index}>
+                <CartDetailWrap>
+                  <img src={`/img/${item.pic}`} alt="와인사진" />
+                </CartDetailWrap>
                 <CartDetail>
-                  <p>{item.nmKor}</p>
-                  <CartInfoDes>{item.nmEng}</CartInfoDes>
-                  <span>{item.price}</span>
+                  <Cartnmkor>{item.nmKor}</Cartnmkor>
+                  <CartnmEng>{item.nmEng}</CartnmEng>
+                  <Cratprice>{item.price}원</Cratprice>
                   <GoodsEa>
                     <button onClick={() => decreaseQuantityHandler(item.id)}>
                       -
@@ -137,7 +122,7 @@ const ProductCart = () => {
             </CartTotalPriceOne>
           </CartTotalPrice>
           <ButtonOk onClick={() => navigate("/productsell")}>구매하기</ButtonOk>
-        </ProductCartIn>
+        </div>
       )}
       <ButtonCancel onClick={() => navigate("/main")}>
         메인으로 돌아가기
