@@ -13,19 +13,37 @@ export const fetchCartData = async () => {
   }
 };
 
-// 장바구니 총합계
-export const fetchCartTotal = async () => {
+// 상품을 장바구니에서 삭제
+export const removeCarts = async _removeCart => {
   try {
-    const response = await axios.get(``);
-    const cartTotal = response.data;
-    return cartTotal;
+    const response = await client.delete("/api/wine/delete", {
+      data: {
+        cartId: _removeCart,
+      },
+    });
+    console.log("장바구니 삭제요청했냐?");
+    const removedItem = response.data;
+    return removedItem; // 삭제된 상품 데이터를 반환
   } catch (error) {
     console.error("API 요청 중 오류 발생:", error);
+    return [];
   }
 };
 
+// 장바구니 총합계
+// export const fetchCartTotal = async () => {
+//   try {
+//     const response = await axios.get(``);
+//     const cartTotal = response.data;
+//     return cartTotal;
+//   } catch (error) {
+//     console.error("API 요청 중 오류 발생:", error);
+//   }
+// };
+
 // 상품을 장바구니에 추가
-export const addToCart = async () => {
+
+export const addCart = async () => {
   try {
     const response = await axios.post(``);
     const addedItem = response.data;
@@ -43,17 +61,6 @@ export const changeQuantity = async (itemId, newQuantity) => {
     });
     const updatedItem = response.data;
     return updatedItem; // 변경된 상품 데이터를 반환
-  } catch (error) {
-    console.error("API 요청 중 오류 발생:", error);
-  }
-};
-
-// 상품을 장바구니에서 삭제
-export const removeFromCart = async () => {
-  try {
-    const response = await axios.delete(``);
-    const removedItem = response.data;
-    return removedItem; // 삭제된 상품 데이터를 반환
   } catch (error) {
     console.error("API 요청 중 오류 발생:", error);
   }

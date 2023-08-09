@@ -18,12 +18,8 @@ import {
 import { useNavigate } from "react-router";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faExclamation } from "@fortawesome/free-solid-svg-icons";
-import {
-  increaseQuantity,
-  decreaseQuantity,
-  removeItem,
-} from "../../reducers/userSlice";
-import { fetchCartData } from "../../../src/api/patchcart";
+import { increaseQuantity, decreaseQuantity } from "../../reducers/cartSlice";
+import { fetchCartData, removeCarts } from "../../../src/api/patchcart";
 import { useState } from "react";
 
 const ProductCart = () => {
@@ -46,8 +42,15 @@ const ProductCart = () => {
     filledCartData();
   }, []);
 
-  const removeItemFromCart = id => {
-    dispatch(removeItem(id));
+  const removeItemCart = async removeCart => {
+    alert(removeCart);
+    try {
+      const data = await removeCarts(removeCart);
+      filledCartData(data);
+      console.log("장바구니 삭제 되야 함", data);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   // 상품의 수량을 증가시키는 함수
@@ -61,14 +64,10 @@ const ProductCart = () => {
   };
 
   const calculateTotalPrice = () => {
-    let totalPrice = 0;
-    cartItems.forEach(item => {
-      const priceWithoutWon = Number(
-        item.price.replace("원", "").replace(",", ""),
-      );
-      totalPrice += priceWithoutWon * item.quantity;
-    });
-    return totalPrice;
+    return CartData.reduce(
+      (total, item) => total + item.price * item.quantity,
+      0,
+    );
   };
 
   return (
@@ -96,7 +95,7 @@ const ProductCart = () => {
                 <CartDetail>
                   <Cartnmkor>{item.nmKor}</Cartnmkor>
                   <CartnmEng>{item.nmEng}</CartnmEng>
-                  <Cratprice>{item.price}원</Cratprice>
+                  <Cratprice>{item.price.toLocaleString()}원</Cratprice>
                   <GoodsEa>
                     <button onClick={() => decreaseQuantityHandler(item.id)}>
                       -
@@ -107,7 +106,7 @@ const ProductCart = () => {
                     </button>
                   </GoodsEa>
                 </CartDetail>
-                <CartDetaiClose onClick={() => removeItemFromCart(item.id)}>
+                <CartDetaiClose onClick={() => removeItemCart(item.cartId)}>
                   X
                 </CartDetaiClose>
               </ProductCartInfo>
@@ -116,8 +115,7 @@ const ProductCart = () => {
           <CartTotalPrice>
             <li>최종결제금액</li>
             <CartTotalPriceOne>
-              {calculateTotalPrice().toLocaleString()}
-              <span>원</span>
+              <span>{calculateTotalPrice().toLocaleString()}원</span>
             </CartTotalPriceOne>
           </CartTotalPrice>
           <ButtonOk onClick={() => navigate("/productsell")}>구매하기</ButtonOk>
