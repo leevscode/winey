@@ -10,7 +10,7 @@ import { LevelWrap } from "../../style/ProductDetailStyle";
 
 const WineLevel = ({ productDetail }) => {
   const feature = productDetail.level;
-  console.log("입문난이도", feature);
+  // console.log("입문난이도", feature);
   return (
     <LevelWrap feature={feature}>
       <ul>

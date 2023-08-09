@@ -24,7 +24,7 @@ const WineRecommend = ({ productDetail }) => {
   // console.log("페어링", pairing);
   // 음용 온도
   const temp = productDetail.wineDetailVo?.temp;
-  console.log("음용 온도", temp);
+  // console.log("음용 온도", temp);
   // 페어링 더미 데이터
   const pairingSlide = [
     {

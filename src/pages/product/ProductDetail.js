@@ -41,7 +41,7 @@ const ProductDetail = () => {
       <WineRecommend productDetail={productDetail} />
       <SectionLine />
       {/* 와인 평점 */}
-      <WineReview />
+      <WineReview productDetail={productDetail} />
       <SectionLine />
       {/* 상품 정보 */}
       <WineInfoTable />
