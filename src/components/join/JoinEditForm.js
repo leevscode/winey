@@ -4,7 +4,7 @@
     깃허브 : https://github.com/hyemdev
 */
 
-import React from "react";
+import React, { useEffect } from "react";
 import { Radio, Form, Input, ConfigProvider, Modal } from "antd";
 import { ExclamationCircleFilled } from "@ant-design/icons";
 
@@ -20,12 +20,17 @@ import { useState } from "react";
 import { removeCookie } from "../../api/cookie";
 import {
   deleteMember,
+  getMemberInfo,
   patchMemberInfo,
   patchMemberPW,
 } from "../../api/joinpatch";
 import { useNavigate } from "react-router";
+import { useDispatch, useSelector } from "react-redux";
 
-const JoinEditForm = ({ editUserInfo, setEditUserInfo }) => {
+const JoinEditForm = () => {
+  const dispatch = useDispatch();
+  const editUserInfo = useSelector(state => state.user);
+
   // 지역옵션
   const regionOptions = [
     { regionNmId: 1, value: "서울" },
@@ -144,6 +149,9 @@ const JoinEditForm = ({ editUserInfo, setEditUserInfo }) => {
     });
   };
   //
+  useEffect(() => {
+    dispatch(getMemberInfo());
+  }, []);
   return (
     <div>
       {" "}

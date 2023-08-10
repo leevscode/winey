@@ -101,14 +101,16 @@ const Join = () => {
 
   // 회원 가입 핸들러
   const onFinish = async values => {
+    console.log("join values", values);
+    // 인증메일 3차 때 진행 예정
 
-    if (emailCertifyOk === false) {
-      Modal.warning({
-        title: "메일인증확인",
-        content: <p>이메일 인증을 진행해 주세요.</p>,
-      });
-      return;
-    }
+    // if (emailCertifyOk === false) {
+    //   Modal.warning({
+    //     title: "메일인증확인",
+    //     content: <p>이메일 인증을 진행해 주세요.</p>,
+    //   });
+    //   return;
+    // }
     if (regionClick === undefined || regionClick === "") {
       setRegionError("지역을 선택해 주세요.");
       return;
@@ -119,7 +121,7 @@ const Join = () => {
     }
     if (checkAll === true) {
       const goJoin = await postUserJoin(values);
-      navigate("/welcome");
+      // navigate("/welcome");
     } else {
       Modal.warning({
         title: "이용약관동의",
@@ -189,7 +191,10 @@ const Join = () => {
                 </Button>,
               ]}
             >
-              <CertifyEmail setEmailCertifyOk={setEmailCertifyOk} />
+              {" "}
+              이메일 인증은 프로젝트 3차에 진행예정입니다.
+              {/* 메일 인증 3차 때 진행 예정 */}
+              {/* <CertifyEmail setEmailCertifyOk={setEmailCertifyOk} /> */}
             </Modal>
           </ConfirmArray>
 

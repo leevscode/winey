@@ -9,20 +9,24 @@ import { JoinWrap } from "../../style/JoinStyle";
 import { useNavigate } from "react-router-dom";
 import { getMemberInfo } from "../../api/joinpatch";
 import JoinEditForm from "../../components/join/JoinEditForm";
+import { useDispatch, useSelector } from "react-redux";
 
 const JoinEdit = () => {
   const navigate = useNavigate();
 
-  //변경 회원정보를 담는 state
-  const [editUserInfo, setEditUserInfo] = useState("");
-  console.log(editUserInfo);
+  const dispatch = useDispatch();
+  const editUserInfo = useSelector(state => state.user);
 
-  const getMemberInfoWait = async setEditUserInfo => {
-    await getMemberInfo(setEditUserInfo);
-  };
+  //변경 회원정보를 담는 state
+  // const [editUserInfo, setEditUserInfo] = useState("");
+  // console.log(editUserInfo);
+
+  // const getMemberInfoWait = async setEditUserInfo => {
+  //   await getMemberInfo(setEditUserInfo);
+  // };
 
   useEffect(() => {
-    getMemberInfoWait(setEditUserInfo);
+    dispatch(getMemberInfo());
   }, []);
 
   // 데이터가 다 get되면 화면을 그리자~
@@ -33,8 +37,8 @@ const JoinEdit = () => {
       {isRendering && (
         //화면
         <JoinEditForm
-          editUserInfo={editUserInfo}
-          setEditUserInfo={setEditUserInfo}
+          // editUserInfo={editUserInfo}
+          // setEditUserInfo={setEditUserInfo}
         />
       )}
     </JoinWrap>

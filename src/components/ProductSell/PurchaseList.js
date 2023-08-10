@@ -10,39 +10,13 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import NoImage from "../../assets/no_image.jpg";
 
 const PurchaseList = ({
+  productDirInfo,
   totalPrice,
   setTotalPrice,
   productCollect,
   setProductCollect,
 }) => {
-  // const 임시데이터 = {
-  //   TempList: [
-  //     {
-  //       productPK: "22",
-  //       productImg: "",
-  //       productKorName: "프란시스 포드 코폴라, 엘레노어",
-  //       productEngName: "Francis Ford Coppola, Eleanor",
-  //       sellPrice: 32600,
-  //       number: 1,
-  //     },
-  //     {
-  //       productPK: "23",
-  //       productImg: "https://via.placeholder.com/190x350/ffeeee",
-  //       productKorName: "비냐 콘차이토로 푸두 카베르네 소비뇽 쉬라즈",
-  //       productEngName: "VINA CONCHA Y TORO PUDU CABERNET SAUVIGNON SHIRAZ",
-  //       sellPrice: 72000,
-  //       number: 3,
-  //     },
-  //     {
-  //       productPK: "24",
-  //       productImg: "https://via.placeholder.com/350x350/ffffee",
-  //       productKorName: "스가르지 루이지, 레티자 화이트",
-  //       productEngName: "Sgarzi Luigi, Letizia White",
-  //       sellPrice: 14500,
-  //       number: 2,
-  //     },
-  //   ],
-  // };
+  console.log("productDirInfo", productDirInfo);
 
   // 이미지 없을 때 error처리
   const onImgError = e => {
@@ -50,9 +24,9 @@ const PurchaseList = ({
   };
 
   // 아이템 갯수 state
-  const numberArray = productCollect.map(item => item.number);
-  console.log("numberArray", numberArray);
-  const [itemCount, setItemCount] = useState(numberArray);
+  // const numberArray = productCollect.map(item => item.number);
+  // const [itemCount, setItemCount] = useState(numberArray);
+  const [itemCount, setItemCount] = useState(1);
 
   // 수량 변경 핸들러
   // 수량 마이너스
@@ -111,19 +85,19 @@ const PurchaseList = ({
     <div>
       <PurchaseListWrap>
         <p>선택한 상품</p>
-        {productCollect.map((option, index) => (
-          <div key={option.productPK} className="WrapFlex">
+        {productDirInfo.map((option, index) => (
+          <div key={option.wineDetailVo.productId} className="WrapFlex">
             <div className="item-photo">
               <img
-                src={option.productImg}
-                alt={option.productEngName}
+                src={`/img/${option.wineDetailVo.pic}`}
+                alt={option.wineDetailVo.nmKor}
                 onError={onImgError}
               />
             </div>
             <div className="item-desc">
-              <strong>{option.productKorName}</strong>
-              <span>{option.productEngName}</span>
-              <p>{parseInt(option.sellPrice).toLocaleString()} 원</p>
+              <strong>{option.wineDetailVo.nmKor}</strong>
+              <span>{option.wineDetailVo.nmEng}</span>
+              <p>{parseInt(option.selSale.salePrice).toLocaleString()} 원</p>
               <div>
                 <FontAwesomeIcon
                   icon={faMinus}
