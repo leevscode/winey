@@ -6,7 +6,7 @@ export const fetchCartData = async () => {
   try {
     const response = await client.get("/api/wine/filledcart");
     const cartData = response.data;
-    return cartData; // 받아온 데이터를 반환
+    return cartData;
   } catch (error) {
     console.error("API 요청 중 오류 발생:", error);
     return [];
@@ -21,7 +21,7 @@ export const removeCarts = async _removeCart => {
         cartId: _removeCart,
       },
     });
-    console.log("장바구니 삭제요청했냐?");
+    console.log("장바구니 삭제 성공");
     const removedItem = response.data;
     return removedItem; // 삭제된 상품 데이터를 반환
   } catch (error) {
@@ -30,18 +30,27 @@ export const removeCarts = async _removeCart => {
   }
 };
 
-// 장바구니 총합계
-// export const fetchCartTotal = async () => {
+// 상품 수량을 변경
+// export const changeQuantity = async (cartId, newQuantity) => {
 //   try {
-//     const response = await axios.get(``);
-//     const cartTotal = response.data;
-//     return cartTotal;
+//     const response = await client.put(`/api/wine/quantity`, {
+//       cartId: cartId,
+//       quantity: newQuantity,
+//     });
+
+//     if (response.status === 200) {
+//       const updatedItem = response.data;
+//       return updatedItem; // 변경된 상품 데이터를 반환
+//     } else {
+//       console.error("상품 수량 변경 실패:", response);
+//       return null; // 실패 시에는 null
+//     }
 //   } catch (error) {
 //     console.error("API 요청 중 오류 발생:", error);
 //   }
 // };
 
-// 상품을 장바구니에 추가
+
 
 export const addCart = async () => {
   try {
@@ -53,15 +62,3 @@ export const addCart = async () => {
   }
 };
 
-// 상품 수량을 변경
-export const changeQuantity = async (itemId, newQuantity) => {
-  try {
-    const response = await axios.put(``, {
-      quantity: newQuantity,
-    });
-    const updatedItem = response.data;
-    return updatedItem; // 변경된 상품 데이터를 반환
-  } catch (error) {
-    console.error("API 요청 중 오류 발생:", error);
-  }
-};

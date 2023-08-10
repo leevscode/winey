@@ -43,7 +43,7 @@ const SellList = () => {
         orderNumber: "2316514513",
         payment: "신용카드",
         totalOrderPrice: "68,700",
-        nm: "이마트 원주점",
+        storeNm: "이마트 원주점",
         pickupTime: "오전11시",
         orderStatus: "결제완료",
       },
@@ -54,7 +54,7 @@ const SellList = () => {
         orderNumber: "98275858",
         payment: "신용카드",
         totalOrderPrice: "45,000",
-        nm: "이마트 춘천점",
+        storeNm: "이마트 춘천점",
         pickupTime: "오후1시",
         orderStatus: "배송완료",
       },
@@ -66,7 +66,7 @@ const SellList = () => {
         payment: "신용카드",
         totalOrderPrice: "52,000",
         pickupTime: "오후3시",
-        nm: "이마트 강릉점",
+        storeNm: "이마트 강릉점",
         orderStatus: "픽업대기",
       },
     ];
@@ -85,14 +85,15 @@ const SellList = () => {
     console.log(reviewList);
   }, [reviewList]);
 
-  // const orderStatusValues = {
-  //   주문취소: 0,
-  //   결제완료: 1,
-  //   배송중: 2,
-  //   배송완료: 3,
-  //   픽업대기: 4,
-  //   픽업완료: 5,
-  // };
+  // ordeId 는주문내역 pk값
+
+  // 스웨거에 적용된 orderStatus 상태
+  // 1 : 결제완료
+  // 2 : 배송중
+  // 3 : 배송완료
+  // 4 : 픽업대기
+  // 5 : 픽업완료
+  // 6 : 주문취소
 
   // 특정 경우에 주문취소가 보이게 하는 함수
   const showCancelModal = index => {
@@ -103,7 +104,9 @@ const SellList = () => {
 
   // 주문취소 모달에서 "네" 버튼 활성화
   const handleCancel = productId => {
-    const updatedItems = orderItems.filter(item => item.productId !== productId);
+    const updatedItems = orderItems.filter(
+      item => item.productId !== productId,
+    );
     setOrderItems(updatedItems);
     hideCancelModal(productId);
     console.log("주문취소 성공:", updatedItems);
@@ -201,7 +204,7 @@ const SellList = () => {
                 <li>주문번호: {item.orderNumber}</li>
                 <li>결제 방법: {item.payment}</li>
                 <li>총 결제 금액: {item.totalOrderPrice}</li>
-                <li>픽업 지점: {item.nm}</li>
+                <li>픽업 지점: {item.storeNm}</li>
                 <li>픽업 시간: {item.pickupTime}</li>
                 <li>주문 상태: {item.orderStatus}</li>
               </SellListInfo>
@@ -221,7 +224,9 @@ const SellList = () => {
                 {item.orderStatus === "픽업완료" ? (
                   <PickUpButton disabled>픽업완료</PickUpButton>
                 ) : (
-                  ["배송중", "배송완료", "픽업대기"].includes(item.orderStatus) && (
+                  ["배송중", "배송완료", "픽업대기"].includes(
+                    item.orderStatus,
+                  ) && (
                     <PickUpButton
                       onClick={() => handlePickUpComplete(item.productId)}
                       disabled={completedPickUpOrders.includes(item.productId)}
