@@ -5,6 +5,7 @@
 */
 import React, { useState } from "react";
 import { Link, NavLink } from "react-router-dom";
+import { useSelector } from "react-redux";
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
 // Import Swiper styles
@@ -25,6 +26,8 @@ const RecommWineSlide = ({ isLoading, randomWines }) => {
   const onImgError = e => {
     e.target.src = NoImage;
   };
+  // 회원정보 불러오기
+  const userData = useSelector(state => state.user);
   // 로딩 더미데이터
   const productListSkeleton = [1, 2, 3];
   // 로그인 여부 체크 state
@@ -32,181 +35,181 @@ const RecommWineSlide = ({ isLoading, randomWines }) => {
   const [isLoginChk, setIsLoginChk] = useState(true);
   // console.log(isLoginChk);
   // 입문용 와인 더미데이터
-  const productSlide = [
-    {
-      productId: 6,
-      categoryId: 1,
-      featureId: 151,
-      countryId: 1,
-      aromaId: 151,
-      nmKor: "바르티나",
-      nmEng: "Bartina",
-      price: 13700,
-      quantity: 7,
-      pic: "wine/6/xXCu1X1QRi2eVEsS3ij-tg_pb_x960.png",
-      promotion: 0,
-      beginner: 0,
-      alcohol: 9,
-      sale: 10,
-      salePrice: 237686,
-    },
-    {
-      productId: 10,
-      categoryId: 1,
-      featureId: 67,
-      countryId: 1,
-      aromaId: 67,
-      nmKor: "바디아 파시그나노 그란 셀레지온 치안티 클라시코",
-      nmEng: "Badia a Passignano Gran Selezione Chianti Classico",
-      price: 14000,
-      quantity: 10,
-      pic: "wine/10/hxzM5LQaQEmv24npsUIXfQ_pb_x960.png",
-      promotion: 0,
-      beginner: 0,
-      alcohol: 13,
-      sale: 11,
-      salePrice: 87899,
-    },
-    {
-      productId: 16,
-      categoryId: 1,
-      featureId: 55,
-      countryId: 1,
-      aromaId: 55,
-      nmKor: "콜리 델라 토스카나 센트랄 일 소렐 디 알레산드로",
-      nmEng: "Colli Della Toscana Centrale Il Sole di Alessandro",
-      price: 14600,
-      quantity: 30,
-      pic: "wine/16/b6bdHil1SQO31xJ5KI32-g_pb_x960.png",
-      promotion: 0,
-      beginner: 0,
-      alcohol: 9,
-      sale: 10,
-      salePrice: 67393,
-    },
-    {
-      productId: 20,
-      categoryId: 1,
-      featureId: 475,
-      countryId: 1,
-      aromaId: 475,
-      nmKor: "부르봉 바렐 에이지드 레드 블렌드",
-      nmEng: "Bourbon Barrels Aged Red blend",
-      price: 15000,
-      quantity: 20,
-      pic: "wine/20/3IZf5taHRHimHaLvSkNABw_pb_x960.png",
-      promotion: 0,
-      beginner: 0,
-      alcohol: 13,
-      sale: 11,
-      salePrice: 151467,
-    },
-    {
-      productId: 24,
-      categoryId: 1,
-      featureId: 49,
-      countryId: 1,
-      aromaId: 49,
-      nmKor: "컬멘 레저 바 리오하",
-      nmEng: "Culmen Reserva Rioja",
-      price: 15900,
-      quantity: 13,
-      pic: "wine/24/eyzAu-aCSJuV69OKW4mgEw_pb_x960.png",
-      promotion: 0,
-      beginner: 0,
-      alcohol: 10,
-      sale: 11,
-      salePrice: 59275,
-    },
-    {
-      productId: 32,
-      categoryId: 3,
-      featureId: 37,
-      countryId: 1,
-      aromaId: 37,
-      nmKor: "카바 크립타 그란 레저바 브루트 네이처",
-      nmEng: "Cava Kripta Gran Reserva Brut Nature",
-      price: 17500,
-      quantity: 11,
-      pic: "wine/32/XprZ9WneQUqv6mIclWCklA_pb_x960.png",
-      promotion: 0,
-      beginner: 0,
-      alcohol: 17,
-      sale: 10,
-      salePrice: 128307,
-    },
-  ];
+  // const productSlide = [
+  //   {
+  //     productId: 6,
+  //     categoryId: 1,
+  //     featureId: 151,
+  //     countryId: 1,
+  //     aromaId: 151,
+  //     nmKor: "바르티나",
+  //     nmEng: "Bartina",
+  //     price: 13700,
+  //     quantity: 7,
+  //     pic: "wine/6/xXCu1X1QRi2eVEsS3ij-tg_pb_x960.png",
+  //     promotion: 0,
+  //     beginner: 0,
+  //     alcohol: 9,
+  //     sale: 10,
+  //     salePrice: 237686,
+  //   },
+  //   {
+  //     productId: 10,
+  //     categoryId: 1,
+  //     featureId: 67,
+  //     countryId: 1,
+  //     aromaId: 67,
+  //     nmKor: "바디아 파시그나노 그란 셀레지온 치안티 클라시코",
+  //     nmEng: "Badia a Passignano Gran Selezione Chianti Classico",
+  //     price: 14000,
+  //     quantity: 10,
+  //     pic: "wine/10/hxzM5LQaQEmv24npsUIXfQ_pb_x960.png",
+  //     promotion: 0,
+  //     beginner: 0,
+  //     alcohol: 13,
+  //     sale: 11,
+  //     salePrice: 87899,
+  //   },
+  //   {
+  //     productId: 16,
+  //     categoryId: 1,
+  //     featureId: 55,
+  //     countryId: 1,
+  //     aromaId: 55,
+  //     nmKor: "콜리 델라 토스카나 센트랄 일 소렐 디 알레산드로",
+  //     nmEng: "Colli Della Toscana Centrale Il Sole di Alessandro",
+  //     price: 14600,
+  //     quantity: 30,
+  //     pic: "wine/16/b6bdHil1SQO31xJ5KI32-g_pb_x960.png",
+  //     promotion: 0,
+  //     beginner: 0,
+  //     alcohol: 9,
+  //     sale: 10,
+  //     salePrice: 67393,
+  //   },
+  //   {
+  //     productId: 20,
+  //     categoryId: 1,
+  //     featureId: 475,
+  //     countryId: 1,
+  //     aromaId: 475,
+  //     nmKor: "부르봉 바렐 에이지드 레드 블렌드",
+  //     nmEng: "Bourbon Barrels Aged Red blend",
+  //     price: 15000,
+  //     quantity: 20,
+  //     pic: "wine/20/3IZf5taHRHimHaLvSkNABw_pb_x960.png",
+  //     promotion: 0,
+  //     beginner: 0,
+  //     alcohol: 13,
+  //     sale: 11,
+  //     salePrice: 151467,
+  //   },
+  //   {
+  //     productId: 24,
+  //     categoryId: 1,
+  //     featureId: 49,
+  //     countryId: 1,
+  //     aromaId: 49,
+  //     nmKor: "컬멘 레저 바 리오하",
+  //     nmEng: "Culmen Reserva Rioja",
+  //     price: 15900,
+  //     quantity: 13,
+  //     pic: "wine/24/eyzAu-aCSJuV69OKW4mgEw_pb_x960.png",
+  //     promotion: 0,
+  //     beginner: 0,
+  //     alcohol: 10,
+  //     sale: 11,
+  //     salePrice: 59275,
+  //   },
+  //   {
+  //     productId: 32,
+  //     categoryId: 3,
+  //     featureId: 37,
+  //     countryId: 1,
+  //     aromaId: 37,
+  //     nmKor: "카바 크립타 그란 레저바 브루트 네이처",
+  //     nmEng: "Cava Kripta Gran Reserva Brut Nature",
+  //     price: 17500,
+  //     quantity: 11,
+  //     pic: "wine/32/XprZ9WneQUqv6mIclWCklA_pb_x960.png",
+  //     promotion: 0,
+  //     beginner: 0,
+  //     alcohol: 17,
+  //     sale: 10,
+  //     salePrice: 128307,
+  //   },
+  // ];
   return (
     <RecommWineContents className="clearfix">
-      {isLoginChk ? (
+      {userData.userId ? (
         // 로그인
         <>
           <Swiper slidesPerView={"auto"} spaceBetween={14}>
-            {isLoading
-              ? productListSkeleton.map(index => (
-                  <SwiperSlide key={index}>
-                    <ProductListSkeleton />
-                  </SwiperSlide>
-                ))
-              : randomWines.map((item, index) => (
-                  <SwiperSlide key={index}>
-                    <ProductListItem>
-                      <NavLink to={`/productdetail/${item.productId}`}>
-                        <div className="img">
+            {isLoading ? (
+              productListSkeleton.map(index => (
+                <SwiperSlide key={index}>
+                  <ProductListSkeleton />
+                </SwiperSlide>
+              ))
+            ) : randomWines.length > 0 ? (
+              randomWines.map((item, index) => (
+                <SwiperSlide key={index}>
+                  <ProductListItem>
+                    <NavLink to={`/productdetail/${item.productId}`}>
+                      <div className="img">
+                        <img
+                          src={`/img/${item.pic}`}
+                          alt={item.nmKor}
+                          onError={onImgError}
+                        />
+                        {/* 장바구니 버튼 */}
+                        <button>
                           <img
-                            src={`/img/${item.pic}`}
-                            alt={item.nmKor}
-                            onError={onImgError}
+                            src={`${process.env.PUBLIC_URL}/images/icon_cart_2.svg`}
+                            alt="장바구니에 담기"
                           />
-                          {/* 장바구니 버튼 */}
-                          <button>
-                            <img
-                              src={`${process.env.PUBLIC_URL}/images/icon_cart_2.svg`}
-                              alt="장바구니에 담기"
-                            />
-                          </button>
-                        </div>
-                        <div className="txt">
-                          <div className="title">{item.nmKor}</div>
-                          <ul className="price">
-                            <li>
-                              <span>
-                                {item.salePrice === null
-                                  ? item.price.toLocaleString()
-                                  : item.salePrice.toLocaleString()}
-                              </span>
-                              원
-                            </li>
-                            <li>
-                              <span>{item.price.toLocaleString()}원</span>
-                            </li>
-                          </ul>
-                        </div>
-                      </NavLink>
-                    </ProductListItem>
-                  </SwiperSlide>
-                ))}
+                        </button>
+                      </div>
+                      <div className="txt">
+                        <div className="title">{item.nmKor}</div>
+                        <ul className="price">
+                          <li>
+                            <span>
+                              {item.salePrice === null
+                                ? item.price.toLocaleString()
+                                : item.salePrice.toLocaleString()}
+                            </span>
+                            원
+                          </li>
+                          <li>
+                            <span>{item.price.toLocaleString()}원</span>
+                          </li>
+                        </ul>
+                      </div>
+                    </NavLink>
+                  </ProductListItem>
+                </SwiperSlide>
+              ))
+            ) : (
+              <NotRandomWine>
+                <ul>
+                  <li>
+                    <i>
+                      <FontAwesomeIcon icon={faCircleQuestion} />
+                    </i>
+                  </li>
+                  <li>
+                    선호하는 와인을 찾을 수 없습니다.
+                    <br />
+                    키워드를 다시 선택해주세요.
+                  </li>
+                  <li>
+                    <Link to="/keywordselectedit">선호 키워드 변경하기</Link>
+                  </li>
+                </ul>
+              </NotRandomWine>
+            )}
           </Swiper>
-          {/* 선호하는 와인 없을 때 출력되는 컴포넌트 */}
-          {/* {randomWines.length === 0 && (
-            <NotRandomWine>
-              <ul>
-                <li>
-                  <i>
-                    <FontAwesomeIcon icon={faCircleQuestion} />
-                  </i>
-                </li>
-                <li>
-                  선호하는 와인을 찾을 수 없습니다.
-                  <br />
-                  키워드를 다시 선택해주세요.
-                </li>
-                <li>
-                  <Link to="/keywordselectedit">선호 키워드 변경하기</Link>
-                </li>
-              </ul>
-            </NotRandomWine>
-          )} */}
         </>
       ) : (
         // 로그아웃
