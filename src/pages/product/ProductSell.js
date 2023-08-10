@@ -62,6 +62,7 @@ const ProductSell = () => {
       ),
       onOk() {},
     });
+    setPaymentError(null)
     setIsPayment(1);
     setTotalPayList({ productCollect, selectCollect, totalPrice, isPayment });
     console.log("isPayment", isPayment);
@@ -101,8 +102,8 @@ const ProductSell = () => {
       return;
     }
     // 최종결제완료
-
-    navigate("/ProductComplete", { state: totalPayList });
+    console.log("결제정보");
+    // navigate("/ProductComplete", { state: totalPayList });
   };
 
   const getItemDetail = async (setProductDifInfo, productId) => {

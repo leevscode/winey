@@ -15,6 +15,7 @@ import { removeCookie } from "../api/cookie";
 import { NoticeModal } from "../style/GlobalComponents";
 import { useDispatch, useSelector } from "react-redux";
 import { logoutUser } from "../reducers/userSlice";
+import { Modal } from "antd";
 
 const MypageList = () => {
   const navigate = useNavigate();
@@ -37,14 +38,23 @@ const MypageList = () => {
     setIsModalOpen(false);
   };
   const handleLogout = async e => {
-    e.preventDefault();
-    await postLogout("");
-    dispatch(logoutUser({}));
-    removeCookie("accessToken");
-    removeCookie("refreshToken");
-    // console.log("로그아웃 실행");
-    navigate("/main");
-    closeNav("/main");
+    Modal.confirm({
+      title: "로그아웃",
+      content: "로그아웃 하시겠습니까?",
+      async onOk() {
+        e.preventDefault();
+        await postLogout("");
+        dispatch(logoutUser({}));
+        removeCookie("accessToken");
+        removeCookie("refreshToken");
+        // console.log("로그아웃 실행");
+        navigate("/main");
+        closeNav("/main");
+      },
+      onCancel() {
+        console.log("Cancel");
+      },
+    });
   };
   return (
     <>
