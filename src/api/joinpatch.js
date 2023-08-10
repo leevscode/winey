@@ -5,7 +5,7 @@
 */
 import axios from "axios";
 import { client } from "./client";
-import { getUser, getUserId } from "../reducers/userSlice";
+import { getUser } from "../reducers/userSlice";
 
 // 회원가입
 export const postUserJoin = async userInfo => {
@@ -44,7 +44,7 @@ export const getMemberInfo = () => async dispatch => {
   try {
     const res = await client.get("/api");
     const result = await res.data;
-    console.log("회원정보 get result", result);
+    // console.log("회원정보 get result", result);
     dispatch(getUser(result));
     return result;
   } catch (error) {
@@ -100,7 +100,7 @@ export const postLogout = async () => {
     const res = await client.post("/sign-api/logout");
     console.log(res);
     const result = await res.data;
-    console.log("로그아웃 결과", result);
+    console.log(result);
     return result;
   } catch (error) {
     console.log(error);

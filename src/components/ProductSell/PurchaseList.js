@@ -10,14 +10,12 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import NoImage from "../../assets/no_image.jpg";
 
 const PurchaseList = ({
-  productDirInfo,
+  productInfoArray,
   totalPrice,
   setTotalPrice,
   productCollect,
   setProductCollect,
 }) => {
-  console.log("productDirInfo", productDirInfo);
-
   // 이미지 없을 때 error처리
   const onImgError = e => {
     e.target.src = NoImage;
@@ -26,7 +24,7 @@ const PurchaseList = ({
   // 아이템 갯수 state
   // const numberArray = productCollect.map(item => item.number);
   // const [itemCount, setItemCount] = useState(numberArray);
-  const [itemCount, setItemCount] = useState(1);
+  const [itemCount, setItemCount] = useState([1]);
 
   // 수량 변경 핸들러
   // 수량 마이너스
@@ -59,8 +57,8 @@ const PurchaseList = ({
   // 합계 계산
   const calcTotalSum = () => {
     let itemtotal = 0;
-    productCollect.forEach((option, index) => {
-      itemtotal += parseInt(option.sellPrice) * parseInt(itemCount[index]);
+    productInfoArray.forEach((option, index) => {
+      itemtotal += parseInt(option.salePrice) * parseInt(itemCount[index]);
     });
     return itemtotal;
   };
@@ -71,21 +69,19 @@ const PurchaseList = ({
   }, [calcTotalSum]);
 
   useEffect(() => {
-    const updatedProductCollect = productCollect.map((option, index) => {
+    const updatedProductCollect = productInfoArray.map((option, index) => {
       return {
         ...option,
-        number: itemCount[index],
+        quantity: itemCount[index],
       };
     });
-
-    setProductCollect(updatedProductCollect);
-    console.log("productCollect", productCollect);
-  }, [itemCount]);
+    setProductCollect({ updatedProductCollect });
+  }, []);
   return (
     <div>
       <PurchaseListWrap>
         <p>선택한 상품</p>
-        {productDirInfo.map((option, index) => (
+        {productInfoArray.map((option, index) => (
           <div key={option.wineDetailVo.productId} className="WrapFlex">
             <div className="item-photo">
               <img
