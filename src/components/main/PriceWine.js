@@ -5,6 +5,7 @@
 */
 import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
+import { v4 } from "uuid";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faArrowRight,
@@ -211,11 +212,11 @@ const PriceWine = () => {
       <ContentsListItemWrap>
         {isLoading ? (
           // 로딩 화면 출력
-          productListSkeleton.map(index => <ProductListSkeleton key={index} />)
+          productListSkeleton.map(index => <ProductListSkeleton key={v4()} />)
         ) : priceWines.length > 0 ? (
           // 상품이 존재할 경우 출력
           priceWines.map((item, index) => (
-            <ProductListItem key={index}>
+            <ProductListItem key={v4()}>
               <NavLink to={`/productdetail/${item.productId}`}>
                 <div className="img">
                   <img

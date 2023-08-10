@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
 import { Link, useLocation } from "react-router-dom";
+import { v4 } from "uuid";
 import { ConfigProvider, Select } from "antd";
 import {
   ProductListWrap,
@@ -126,7 +127,7 @@ const ProductMainList = () => {
         </ul>
         <ContentsListItemWrap>
           {listScroll?.map((item, index) => (
-            <ProductListItem key={index}>
+            <ProductListItem key={v4()}>
               <Link to={`/productdetail/${item.productId}`}>
                 <div className="img">
                   <img

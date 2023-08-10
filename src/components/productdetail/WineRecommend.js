@@ -4,6 +4,7 @@
   깃허브 : https://github.com/kimaydev
 */
 import React, { useEffect, useState } from "react";
+import { v4 } from "uuid";
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
 // Import Swiper styles
@@ -181,7 +182,7 @@ const WineRecommend = ({ productDetail }) => {
           <Swiper slidesPerView={"auto"} spaceBetween={15} freeMode={true}>
             {pairing &&
               pairingArr.map((item, index) => (
-                <SwiperSlide key={index}>
+                <SwiperSlide key={v4()}>
                   <img
                     src={`${process.env.PUBLIC_URL}/images/${item.image}`}
                     alt={item.title}
@@ -201,7 +202,7 @@ const WineRecommend = ({ productDetail }) => {
           <Swiper slidesPerView={"auto"} spaceBetween={15} freeMode={true}>
             {aroma &&
               aromaArr.map((item, index) => (
-                <SwiperSlide key={index}>
+                <SwiperSlide key={v4()}>
                   <img
                     src={`${process.env.PUBLIC_URL}/images/${item.image}`}
                     alt={item.title}

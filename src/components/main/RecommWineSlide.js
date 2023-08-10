@@ -5,6 +5,7 @@
 */
 import React, { useState } from "react";
 import { Link, NavLink } from "react-router-dom";
+import { v4 } from "uuid";
 import { useSelector } from "react-redux";
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -147,13 +148,13 @@ const RecommWineSlide = ({ isLoading, randomWines }) => {
           <Swiper slidesPerView={"auto"} spaceBetween={14}>
             {isLoading ? (
               productListSkeleton.map(index => (
-                <SwiperSlide key={index}>
+                <SwiperSlide key={v4()}>
                   <ProductListSkeleton />
                 </SwiperSlide>
               ))
             ) : randomWines.length > 0 ? (
               randomWines.map((item, index) => (
-                <SwiperSlide key={index}>
+                <SwiperSlide key={v4()}>
                   <ProductListItem>
                     <NavLink to={`/productdetail/${item.productId}`}>
                       <div className="img">

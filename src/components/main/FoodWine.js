@@ -4,6 +4,7 @@
   깃허브 : https://github.com/kimaydev
 */
 import React, { useEffect, useState } from "react";
+import { v4 } from "uuid";
 import { NavLink } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -206,11 +207,11 @@ const FoodWine = () => {
       <ContentsListItemWrap>
         {isLoading ? (
           // 로딩 화면 출력
-          productListSkeleton.map(index => <ProductListSkeleton key={index} />)
+          productListSkeleton.map(index => <ProductListSkeleton key={v4()} />)
         ) : foodWines.length > 0 ? (
           // 상품이 존재할 경우 출력
           foodWines.map((item, index) => (
-            <ProductListItem key={index}>
+            <ProductListItem key={v4()}>
               <NavLink to={`/productdetail/${item.productId}`}>
                 <div className="img">
                   <img

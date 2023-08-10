@@ -3,7 +3,8 @@
   노션 : https://www.notion.so/kimaydev
   깃허브 : https://github.com/kimaydev
 */
-import React, { useEffect, useState } from "react";
+import React from "react";
+import { v4 } from "uuid";
 import { DetailInfoWrap } from "../../style/ProductDetailStyle";
 
 const WindeDetailInfo = ({ productDetail }) => {
@@ -14,6 +15,7 @@ const WindeDetailInfo = ({ productDetail }) => {
   // console.log("당도", sweety);
   // console.log("산도", acidity);
   // console.log("바디", body);
+  // console.log("uuid", v4());
   return (
     <DetailInfoWrap>
       {productDetail.wineDetailVo && (
@@ -27,7 +29,7 @@ const WindeDetailInfo = ({ productDetail }) => {
                 {sweety !== undefined &&
                   Array(sweety)
                     .fill()
-                    .map(index => <li key={index}></li>)}
+                    .map(index => <li key={v4()}></li>)}
               </ol>
               <ol className="default_bar">
                 <li></li>
@@ -47,7 +49,7 @@ const WindeDetailInfo = ({ productDetail }) => {
                 {acidity !== undefined &&
                   Array(acidity)
                     .fill()
-                    .map(index => <li key={index}></li>)}
+                    .map(index => <li key={v4()}></li>)}
               </ol>
               <ol className="default_bar">
                 <li></li>
@@ -67,7 +69,7 @@ const WindeDetailInfo = ({ productDetail }) => {
                 {body !== undefined &&
                   Array(body)
                     .fill()
-                    .map(index => <li key={index}></li>)}
+                    .map(index => <li key={v4()}></li>)}
               </ol>
               <ol className="default_bar">
                 <li></li>

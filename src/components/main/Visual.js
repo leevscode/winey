@@ -5,6 +5,7 @@
 */
 import React from "react";
 import { Link } from "react-router-dom";
+import { v4 } from "uuid";
 import { VisualText, VisualWrap } from "../../style/MainStyle";
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -43,7 +44,7 @@ const Visual = () => {
       <Swiper pagination={pagination} modules={[Pagination]}>
         {visualSlide.map((item, index) => (
           <SwiperSlide
-            key={index}
+            key={v4()}
             style={{ backgroundImage: `url(${item.image})` }}
           >
             <VisualText>
