@@ -65,33 +65,61 @@ const ProductCart = () => {
   };
 
   const increaseItemQuantity = async cartId => {
-    try {
-      const updatedItem = await changeQuantity(
-        cartId,
-        CartData.find(item => item.cartId === cartId).quantity + 1,
-      );
-      // 장바구니 수량 +
-      setCartData(prevCartData =>
-        prevCartData.map(item => (item.cartId === cartId ? updatedItem : item)),
-      );
-    } catch (error) {
-      console.log(error);
-    }
+    const arr = CartData.map(item => {
+      if (item.cartId === cartId) {
+        item.quantity += 1;
+      }
+      return item;
+    });
+    setCartData(arr);
+    // try {
+    //   const updatedItem = await changeQuantity(
+    //     cartId,
+    //     CartData.find(item => item.cartId === cartId).quantity + 1,
+    //   );
+    //   // 장바구니 수량 +
+    //   setCartData(prevCartData =>
+    //     prevCartData.map(item => (item.cartId === cartId ? updatedItem : item)),
+    //   );
+    // } catch (error) {
+    //   console.log(error);
+    // }
   };
 
   const decreaseItemQuantity = async cartId => {
-    try {
-      const updatedItem = await changeQuantity(
-        cartId,
-        CartData.find(item => item.cartId === cartId).quantity - 1,
-      );
-      // 장바구니 수량 -
-      setCartData(prevCartData =>
-        prevCartData.map(item => (item.cartId === cartId ? updatedItem : item)),
-      );
-    } catch (error) {
-      console.log(error);
-    }
+    const arr = CartData.map(item => {
+      if (item.cartId === cartId) {
+        item.quantity -= 1;
+        if (item.quantity < 1) {
+          item.quantity = 1;
+        }
+      }
+      return item;
+    });
+    setCartData(arr);
+    // try {
+    //   const updatedItem = await changeQuantity(
+    //     cartId,
+    //     CartData.find(item => item.cartId === cartId).quantity - 1,
+    //   );
+    //   // 장바구니 수량 -
+    //   setCartData(prevCartData =>
+    //     prevCartData.map(item => (item.cartId === cartId ? updatedItem : item)),
+    //   );
+    // } catch (error) {
+    //   console.log(error);
+    // }
+  };
+
+  const buyGood = async () => {
+    console.log("장바구니 내역을 서버로 전송함");
+    // awati
+    // awati
+    // awati
+    // awati
+    // awati
+    // awati
+    navigate("/productsell");
   };
 
   return (
@@ -111,8 +139,8 @@ const ProductCart = () => {
             장바구니에 총 {CartData.length}개의 상품이 있습니다.
           </ProudctTotalItem>
           <ul>
-            {CartData.map((item, index) => (
-              <ProductCartInfo key={index}>
+            {CartData.map(item => (
+              <ProductCartInfo key={item.cartId}>
                 <CartDetailWrap>
                   <img src={`/img/${item.pic}`} alt="와인사진" />
                 </CartDetailWrap>
@@ -142,7 +170,7 @@ const ProductCart = () => {
               <span>{calculateTotalPrice().toLocaleString()}원</span>
             </CartTotalPriceOne>
           </CartTotalPrice>
-          <ButtonOk onClick={() => navigate("/productsell")}>구매하기</ButtonOk>
+          <ButtonOk onClick={buyGood}>결제하기</ButtonOk>
         </div>
       )}
       <ButtonCancel onClick={() => navigate("/main")}>

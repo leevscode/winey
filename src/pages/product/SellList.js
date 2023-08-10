@@ -85,7 +85,6 @@ const SellList = () => {
     console.log(reviewList);
   }, [reviewList]);
 
-
   // ordeId 는주문내역 pk값
 
   // 스웨거에 적용된 orderStatus 상태
@@ -105,7 +104,9 @@ const SellList = () => {
 
   // 주문취소 모달에서 "네" 버튼 활성화
   const handleCancel = productId => {
-    const updatedItems = orderItems.filter(item => item.productId !== productId);
+    const updatedItems = orderItems.filter(
+      item => item.productId !== productId,
+    );
     setOrderItems(updatedItems);
     hideCancelModal(productId);
     console.log("주문취소 성공:", updatedItems);
@@ -223,7 +224,9 @@ const SellList = () => {
                 {item.orderStatus === "픽업완료" ? (
                   <PickUpButton disabled>픽업완료</PickUpButton>
                 ) : (
-                  ["배송중", "배송완료", "픽업대기"].includes(item.orderStatus) && (
+                  ["배송중", "배송완료", "픽업대기"].includes(
+                    item.orderStatus,
+                  ) && (
                     <PickUpButton
                       onClick={() => handlePickUpComplete(item.productId)}
                       disabled={completedPickUpOrders.includes(item.productId)}

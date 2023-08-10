@@ -16,14 +16,20 @@ import {
   SellListModal,
 } from "../../style/SellListReviewStyle";
 
-const ReviewModal = ({ reviewReset, hideModal, reviewSubmitUpdate }) => {
+const ReviewModal = ({
+  reviewId,
+  reviewReset,
+  hideModal,
+  reviewSubmitUpdate,
+}) => {
   const [selectedReview, setSelectedReview] = useState(null);
   const [showWarning, setShowWarning] = useState(false);
 
   // DB연동 예정
   const handleReviewSubmit = () => {
     if (selectedReview) {
-      console.log("평점이 등록되었습니다:", selectedReview);
+      console.log("평점이 등록될 orderDetailId :", reviewId);
+      console.log("평점이 등록되었습니다 평점 레벨 :", selectedReview);
       // DB연동 예정
 
       // 리뷰가 성공적으로 제출되면 reviewSubmit를 true로 설정
@@ -36,8 +42,8 @@ const ReviewModal = ({ reviewReset, hideModal, reviewSubmitUpdate }) => {
     }
   };
 
-  const handleReviewSelection = (reviewType) => {
-    setSelectedReview((prevReview) => {
+  const handleReviewSelection = reviewType => {
+    setSelectedReview(prevReview => {
       const newReview = prevReview === reviewType ? null : reviewType;
       console.log("선택된 평점:", newReview);
       // 선택한 평점을 다시 선택시 해제되도록 설정
