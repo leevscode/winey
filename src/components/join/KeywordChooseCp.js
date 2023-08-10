@@ -21,47 +21,47 @@ const KeywordChooseCp = () => {
 
   const wineOptions = {
     cateId: [
-      { id: 0, value: "레드" },
-      { id: 1, value: "화이트" },
-      { id: 2, value: "스파클링" },
-      { id: 3, value: "기타" },
+      { id: 1, value: "레드" },
+      { id: 2, value: "화이트" },
+      { id: 3, value: "스파클링" },
+      { id: 4, value: "기타" },
     ],
     priceRange: [
-      { id: 0, value: "2만원미만" },
-      { id: 1, value: "2~5만원" },
-      { id: 2, value: "5~10만원" },
-      { id: 3, value: "10만원이상" },
+      { id: 1, value: "2만원미만" },
+      { id: 2, value: "2~5만원" },
+      { id: 3, value: "5~10만원" },
+      { id: 4, value: "10만원이상" },
     ],
     smallcategoryId: [
-      { id: 0, value: "스테이크" },
-      { id: 1, value: "돼지고기" },
-      { id: 2, value: "치킨" },
-      { id: 3, value: "해산물" },
-      { id: 4, value: "어패류" },
-      { id: 5, value: "샐러드" },
-      { id: 6, value: "튀김" },
-      { id: 7, value: "치즈" },
-      { id: 8, value: "과일" },
-      { id: 9, value: "한식" },
-      { id: 10, value: "피자" },
-      { id: 11, value: "디저트" },
+      { id: 1, value: "스테이크" },
+      { id: 2, value: "돼지고기" },
+      { id: 3, value: "치킨" },
+      { id: 4, value: "해산물" },
+      { id: 5, value: "어패류" },
+      { id: 6, value: "샐러드" },
+      { id: 7, value: "튀김" },
+      { id: 8, value: "치즈" },
+      { id: 9, value: "과일" },
+      { id: 10, value: "한식" },
+      { id: 11, value: "피자" },
+      { id: 12, value: "디저트" },
     ],
     aroma: [
-      { id: 0, value: "꽃" },
-      { id: 1, value: "식물" },
-      { id: 2, value: "과일" },
-      { id: 3, value: "향신료" },
-      { id: 4, value: "흙냄새" },
-      { id: 5, value: "오크" },
-      { id: 6, value: "견과류" },
+      { num: 0, id: 1, value: "꽃" },
+      { num: 0, id: 2, value: "식물" },
+      { num: 0, id: 3, value: "과일" },
+      { num: 0, id: 4, value: "향신료" },
+      { num: 0, id: 5, value: "흙냄새" },
+      { num: 0, id: 6, value: "오크" },
+      { num: 0, id: 7, value: "견과류" },
     ],
     countryId: [
-      { id: 0, value: "미국" },
-      { id: 1, value: "스페인" },
-      { id: 2, value: "이탈리아" },
-      { id: 3, value: "칠레" },
-      { id: 4, value: "포르투갈" },
-      { id: 5, value: "프랑스" },
+      { id: 1, value: "미국" },
+      { id: 2, value: "스페인" },
+      { id: 3, value: "이탈리아" },
+      { id: 4, value: "칠레" },
+      { id: 5, value: "포르투갈" },
+      { id: 6, value: "프랑스" },
     ],
   };
 
@@ -125,8 +125,8 @@ const KeywordChooseCp = () => {
   const isFlavorCheckAll =
     wineFlavorCheckedList.length === wineOptions.aroma.length;
   const handleFlavorCheckAllChange = e => {
-    setWineFlavorCheckedList(e.target.checked ? wineOptions.aroma : []);
-    setFavoriteKeyword(prev => ({ ...prev, aroma: wineOptions.aroma }));
+    setWineFlavorCheckedList(e.target.checked ? wineOptions.aroma.num : []);
+    setFavoriteKeyword(prev => ({ ...prev, aroma: wineOptions.aroma.num }));
   };
   const handleFlavorOnChange = list => {
     setWineFlavorCheckedList(list);
@@ -223,7 +223,7 @@ const KeywordChooseCp = () => {
                 onChange={handleWithFoodOnChange}
               >
                 {wineOptions.smallcategoryId.map(option => (
-                  <Checkbox key={option.id} value={option.id}>
+                  <Checkbox key={option.id} value={option.Num}>
                     {option.value}
                   </Checkbox>
                 ))}

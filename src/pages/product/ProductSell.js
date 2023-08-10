@@ -16,47 +16,21 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleCheck, faCreditCard } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
 import { Modal } from "antd";
-import { getUserStoreInfo } from "../../api/purchasepatch";
+import { getBuyProductDetail, getUserStoreInfo } from "../../api/purchasepatch";
 
 const ProductSell = () => {
-  const [userStore, setUserInfo] = useState([]);
-  
-  const 임시데이터 = {
-    TempList: [
-      {
-        productPK: "22",
-        productImg: "",
-        productKorName: "프란시스 포드 코폴라, 엘레노어",
-        productEngName: "Francis Ford Coppola, Eleanor",
-        sellPrice: 32600,
-        number: 1,
-      },
-      {
-        productPK: "23",
-        productImg: "https://via.placeholder.com/190x350/ffeeee",
-        productKorName: "비냐 콘차이토로 푸두 카베르네 소비뇽 쉬라즈",
-        productEngName: "VINA CONCHA Y TORO PUDU CABERNET SAUVIGNON SHIRAZ",
-        sellPrice: 72000,
-        number: 3,
-      },
-      {
-        productPK: "24",
-        productImg: "https://via.placeholder.com/350x350/ffffee",
-        productKorName: "스가르지 루이지, 레티자 화이트",
-        productEngName: "Sgarzi Luigi, Letizia White",
-        sellPrice: 14500,
-        number: 2,
-      },
-    ],
-  };
+  // 구매상품정보(상품id 임시값임)
+  const productId = 381;
 
   const navigate = useNavigate();
+  const [userStore, setUserStore] = useState([]);
+  const [productDirInfo, setProductDifInfo] = useState([]);
 
   // 픽업 선택값 담기 state
   const [selectCollect, setSelectCollect] = useState([]);
   // 제품 선택 값 담기
-  const [productCollect, setProductCollect] = useState(임시데이터.TempList);
-  console.log("productCollect", productCollect);
+  const [productCollect, setProductCollect] = useState("");
+
   // 합계값 담기 state
   const [totalPrice, setTotalPrice] = useState(0);
   // 카드결제 유무 담기 state
@@ -126,26 +100,40 @@ const ProductSell = () => {
     navigate("/ProductComplete", { state: totalPayList });
   };
 
+
+
   useEffect(() => {
-    getUserStoreInfo(setUserInfo);
+    // 유저 매장정보 get
+    getUserStoreInfo(setUserStore);
+    // 상품정보 get
+    getBuyProductDetail(setProductDifInfo, productId);
+  }, []);
+
+  useEffect(() => {
     console.log("totalPayList", totalPayList);
   }, [productCollect, selectCollect]); // totalPayList 값이 변경될 때마다 실행
-
   return (
     <PurchaseWrap>
       <PickupPlaceClick
         // get한 지점정보
         userStore={userStore}
+        // 선택한 값
         selectCollect={selectCollect}
         setSelectCollect={setSelectCollect}
       />
-      <PurchaseList
-        totalPrice={totalPrice}
-        setTotalPrice={setTotalPrice}
-        productCollect={productCollect}
-        setProductCollect={setProductCollect}
-      />
 
+      {productDirInfo && (
+        <PurchaseList
+          // 합계값
+          totalPrice={totalPrice}
+          setTotalPrice={setTotalPrice}
+          // 상품변경정보
+          productCollect={productCollect}
+          setProductCollect={setProductCollect}
+          // 상품정보 보내기
+          productDirInfo={productDirInfo}
+        />
+      )}
       <PurchaseBtn>
         <span>결제수단</span>
         <p>결제수단을 선택해 주세요</p>
