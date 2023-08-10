@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import { ButtonCancel, ButtonOk } from "../../style/GlobalStyle";
 import {
   ProudctTotalItem,
@@ -18,16 +17,13 @@ import {
 import { useNavigate } from "react-router";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faExclamation } from "@fortawesome/free-solid-svg-icons";
-// import { increaseQuantity, decreaseQuantity } from "../../reducers/cartSlice";
 import {
-  changeQuantity,
   fetchCartData,
   removeCarts,
 } from "../../../src/api/patchcart";
 import { useState } from "react";
 
 const ProductCart = () => {
-  const cartItems = useSelector(state => state.cart);
   // const dispatch = useDispatch();
   const navigate = useNavigate();
   const [CartData, setCartData] = useState([]);
@@ -92,6 +88,8 @@ const ProductCart = () => {
         item.quantity -= 1;
         if (item.quantity < 1) {
           item.quantity = 1;
+        } else if (item.quantity > 5) {
+          item.quantity = 5;
         }
       }
       return item;
@@ -113,12 +111,7 @@ const ProductCart = () => {
 
   const buyGood = async () => {
     console.log("장바구니 내역을 서버로 전송함");
-    // awati
-    // awati
-    // awati
-    // awati
-    // awati
-    // awati
+  
     navigate("/productsell");
   };
 
