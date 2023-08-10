@@ -14,10 +14,13 @@ import {
   faUser,
   faWineGlass,
 } from "@fortawesome/free-solid-svg-icons";
+import { useSelector } from "react-redux";
 
 const QuickMenu = ({ handleOpenNav }) => {
   const location = useLocation();
   const { iproduct } = useParams();
+  // 회원정보 불러오기
+  const userData = useSelector(state => state.user);
   // Quick menu Scroll top 이벤트 핸들러
   const handleScrollTop = () => {
     // e.preventDefault();
@@ -52,7 +55,7 @@ const QuickMenu = ({ handleOpenNav }) => {
             </li>
             <li>
               <NavLink
-                to="/keywordselectedit"
+                to={userData.userId ? "/keywordselectedit" : "/login"}
                 className={({ isActive }) => {
                   return isActive ? "active" : "";
                 }}

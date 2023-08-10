@@ -17,11 +17,13 @@ import {
   faCircleExclamation,
 } from "@fortawesome/free-solid-svg-icons";
 import { getKorNm } from "../api/patchproduct";
+import { useSelector } from "react-redux";
 
 const Header = ({ handleOpenNav, isActive }) => {
   const { iproduct } = useParams();
   const location = useLocation();
   const navigate = useNavigate();
+  const userData = useSelector(state => state.user);
   // 뒤로가기 버튼 핸들러
   const handleBack = () => navigate(-1);
   // 서브페이지 헤더 페이지 타이틀 state
@@ -208,7 +210,10 @@ const Header = ({ handleOpenNav, isActive }) => {
                 </button>
               </li>
               <li>
-                <NavLink to="/cart" className="cart">
+                <NavLink
+                  to={userData.userId ? "/cart" : "/login"}
+                  className="cart"
+                >
                   <img
                     src={`${process.env.PUBLIC_URL}/images/icon_cart_1.svg`}
                     alt="장바구니"
