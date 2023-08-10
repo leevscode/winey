@@ -18,13 +18,17 @@ import {
 import { useNavigate } from "react-router";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faExclamation } from "@fortawesome/free-solid-svg-icons";
-import { increaseQuantity, decreaseQuantity } from "../../reducers/cartSlice";
-import { fetchCartData, removeCarts } from "../../../src/api/patchcart";
+// import { increaseQuantity, decreaseQuantity } from "../../reducers/cartSlice";
+import {
+  changeQuantity,
+  fetchCartData,
+  removeCarts,
+} from "../../../src/api/patchcart";
 import { useState } from "react";
 
 const ProductCart = () => {
   const cartItems = useSelector(state => state.cart);
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   const navigate = useNavigate();
   const [CartData, setCartData] = useState([]);
 
@@ -53,21 +57,41 @@ const ProductCart = () => {
     }
   };
 
-  // 상품의 수량을 증가시키는 함수
-  const increaseQuantityHandler = id => {
-    dispatch(increaseQuantity(id));
-  };
-
-  // 상품의 수량을 감소시키는 함수
-  const decreaseQuantityHandler = id => {
-    dispatch(decreaseQuantity(id));
-  };
-
   const calculateTotalPrice = () => {
     return CartData.reduce(
       (total, item) => total + item.price * item.quantity,
       0,
     );
+  };
+
+  const increaseItemQuantity = async cartId => {
+    try {
+      const updatedItem = await changeQuantity(
+        cartId,
+        CartData.find(item => item.cartId === cartId).quantity + 1,
+      );
+      // 장바구니 수량 +
+      setCartData(prevCartData =>
+        prevCartData.map(item => (item.cartId === cartId ? updatedItem : item)),
+      );
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const decreaseItemQuantity = async cartId => {
+    try {
+      const updatedItem = await changeQuantity(
+        cartId,
+        CartData.find(item => item.cartId === cartId).quantity - 1,
+      );
+      // 장바구니 수량 -
+      setCartData(prevCartData =>
+        prevCartData.map(item => (item.cartId === cartId ? updatedItem : item)),
+      );
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -97,11 +121,11 @@ const ProductCart = () => {
                   <CartnmEng>{item.nmEng}</CartnmEng>
                   <Cratprice>{item.price.toLocaleString()}원</Cratprice>
                   <GoodsEa>
-                    <button onClick={() => decreaseQuantityHandler(item.id)}>
+                    <button onClick={() => decreaseItemQuantity(item.cartId)}>
                       -
                     </button>
                     <span>{item.quantity}</span>
-                    <button onClick={() => increaseQuantityHandler(item.id)}>
+                    <button onClick={() => increaseItemQuantity(item.cartId)}>
                       +
                     </button>
                   </GoodsEa>
