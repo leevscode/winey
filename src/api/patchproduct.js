@@ -27,17 +27,22 @@ export const getProductDetail = async (_setProductDetail, _productId) => {
 };
 
 // 상품리스트 전체보기 - 국가별 와인리스트 GET
-export const getTotalCountry = async _setTotalList => {
+export const getTotalCountry = async (
+  _setListScroll,
+  _setHasNextPage,
+  _page,
+) => {
   try {
     const res = await axios.get(
-      // `/api/main/food?bigCategoryId=1&page=${_pageId}&row=9`,
-      `/api/main/food?bigCategoryId=1&page=1&row=9`,
+      `/api/main/food?bigCategoryId=1&page=${_page.current}&row=9`,
     );
-    // 카테고리 id 값에 따라 내용 다르게 출력하는 작업 필요함
-    // const res = await axios.get(`/api/main/food?bigCategoryId=1&page=1&row=9`)
     const result = res.data;
     console.log("국가별 와인리스트 GET", result);
-    _setTotalList(result);
+    _setListScroll(prevPosts => [...prevPosts, ...result]);
+    _setHasNextPage(result.length === 9);
+    if (result.length) {
+      _page.current += 1;
+    }
     return result;
   } catch (err) {
     console.log("국가별 와인리스트 전체보기 에러 발생", err);

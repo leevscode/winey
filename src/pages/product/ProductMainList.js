@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { useObserver } from "../../hooks/useObserver";
 import { ConfigProvider, Select } from "antd";
 import {
   ProductListWrap,
@@ -24,8 +23,28 @@ const ProductMainList = () => {
   };
   // 상품 총 갯수 카운트
   const [totalCount, setTotalCount] = useState("");
-  // 상품리스트 전체보기 - 국가별 와인리스트 GET
-  const [totalList, setTotalList] = useState([]);
+  // 상품 페이징 처리
+  const [listScroll, setListScroll] = useState([]);
+  const [hasNextPage, setHasNextPage] = useState(true);
+  const page = useRef(1);
+  const observerTargetEl = useRef(null);
+  const getListData = async () => {
+    await getTotalCountry(setListScroll, setHasNextPage, page);
+  };
+  useEffect(() => {
+    if (!observerTargetEl.current || !hasNextPage) return;
+
+    const io = new IntersectionObserver((entries, observer) => {
+      if (entries[0].isIntersecting) {
+        getListData();
+      }
+    });
+    io.observe(observerTargetEl.current);
+
+    return () => {
+      io.disconnect();
+    };
+  }, [getListData, hasNextPage]);
   // 상품 더미 데이터
   // const foodItem = [
   //   {
@@ -46,13 +65,13 @@ const ProductMainList = () => {
   //     salePrice: 30644,
   //   },
   // ];
+  // useEffect(() => {
+  //   getTotalCountry(setTotalList);
+  // }, [location.pathname]);
   useEffect(() => {
-    getTotalCountry(setTotalList);
-  }, [location.pathname]);
-  useEffect(() => {
-    setTotalCount(totalList.length);
+    setTotalCount(listScroll.length);
     // console.log("상품 총 갯수", totalCount);
-  }, [totalList]);
+  }, [listScroll]);
   // 상품 정렬 옵션
   const options = [
     {
@@ -106,7 +125,7 @@ const ProductMainList = () => {
           </li>
         </ul>
         <ContentsListItemWrap>
-          {totalList.map((item, index) => (
+          {listScroll?.map((item, index) => (
             <ProductListItem key={index}>
               <Link to={`/productdetail/${item.productId}`}>
                 <div className="img">
@@ -150,6 +169,7 @@ const ProductMainList = () => {
               </Link>
             </ProductListItem>
           ))}
+          <div ref={observerTargetEl}></div>
         </ContentsListItemWrap>
       </ProductMainItemWrap>
     </ProductListWrap>
