@@ -88,9 +88,7 @@ const ProductCart = () => {
         item.quantity -= 1;
         if (item.quantity < 1) {
           item.quantity = 1;
-        } else if (item.quantity > 5) {
-          item.quantity = 5;
-        }
+        } 
       }
       return item;
     });

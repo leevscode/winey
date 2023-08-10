@@ -17,8 +17,11 @@ import SellListCancel from "../../components/selllist/SellListCancel";
 import { SellListButton } from "../../style/SellListReviewStyle";
 import { useNavigate } from "react-router";
 import PickUpModal from "../../components/selllist/PickUpModal";
+import { fetchSellListData } from "../../api/patchselllist";
 
 const SellList = () => {
+  // 주문 내역 get
+  const [SellListData, setSellListData] = useState([]);
   // 선택된 번호 state
   const [selectedItem, setSelectedItem] = useState(null);
   const [reviewList, setReviewList] = useState([]);
@@ -32,58 +35,26 @@ const SellList = () => {
   const navigate = useNavigate();
 
   // 추후 axios 처리를 할 함수
-  const getSellData = () => {};
-  useEffect(() => {
-    getSellData();
-    const testData = [
-      {
-        date: "2023.07.23",
-        product: ["제프 까렐", "울띰 헤꼴뜨", "와인1", "와인2", "와인3"],
-        productId: 0,
-        orderNumber: "2316514513",
-        payment: "신용카드",
-        totalOrderPrice: "68,700",
-        storeNm: "이마트 원주점",
-        pickupTime: "오전11시",
-        orderStatus: "결제완료",
-      },
-      {
-        date: "2023.07.25",
-        productId: 1,
-        product: ["스파클링와인", "울띰 헤꼴뜨", "와인1", "와인2"],
-        orderNumber: "98275858",
-        payment: "신용카드",
-        totalOrderPrice: "45,000",
-        storeNm: "이마트 춘천점",
-        pickupTime: "오후1시",
-        orderStatus: "배송완료",
-      },
-      {
-        date: "2023.07.27",
-        productId: 2,
-        product: ["레드 와인", "울띰 헤꼴뜨", "와인1"],
-        orderNumber: "9741201",
-        payment: "신용카드",
-        totalOrderPrice: "52,000",
-        pickupTime: "오후3시",
-        storeNm: "이마트 강릉점",
-        orderStatus: "픽업대기",
-      },
-    ];
+  // const getSellData = () => {};
+  // useEffect(() => {
+  //   getSellData();
+  //   const testData = [
 
-    let tempArr = [];
-    for (let i = 0; i < testData.length; i++) {
-      tempArr.push(false);
-    }
-    setReviewList([...tempArr]);
+  //   ];
 
-    setOrderItems(testData);
-    setCancelModal(Array(testData.length).fill(false));
-  }, []);
+  //   let tempArr = [];
+  //   for (let i = 0; i < testData.length; i++) {
+  //     tempArr.push(false);
+  //   }
+  //   setReviewList([...tempArr]);
 
-  useEffect(() => {
-    console.log(reviewList);
-  }, [reviewList]);
+  //   setOrderItems(testData);
+  //   setCancelModal(Array(testData.length).fill(false));
+  // }, []);
+
+  // useEffect(() => {
+  //   console.log(reviewList);
+  // }, [reviewList]);
 
   // ordeId 는주문내역 pk값
 
@@ -94,6 +65,24 @@ const SellList = () => {
   // 4 : 픽업대기
   // 5 : 픽업완료
   // 6 : 주문취소
+
+  const filledSellListData = async () => {
+    try {
+      const data = await fetchSellListData();
+      setSellListData(data);
+      console.log("주문내역 출력", data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  useEffect(() => {
+    filledSellListData();
+  }, []);
+  
+  useEffect(() => {
+    console.log("SellListData:", SellListData);
+  }, [SellListData]);
 
   // 특정 경우에 주문취소가 보이게 하는 함수
   const showCancelModal = index => {
@@ -195,13 +184,12 @@ const SellList = () => {
                 </OrdercancelBtn>
               )}
               <SellListInfo>
-                {item.date}
+                {item.orderDate}
                 <SellListProduct>
-                  상품명: {item.product[0]}
-                  {item.product.length > 1 &&
-                    ` 외 ${item.product.length - 1}건`}
+                  상품명: {item.nmKor[0]}
+                  {item.nmKor.length > 1 && ` 외 ${item.product.nmKor - 1}건`}
                 </SellListProduct>
-                <li>주문번호: {item.orderNumber}</li>
+                <li>주문번호: {item.orderId}</li>
                 <li>결제 방법: {item.payment}</li>
                 <li>총 결제 금액: {item.totalOrderPrice}</li>
                 <li>픽업 지점: {item.storeNm}</li>
