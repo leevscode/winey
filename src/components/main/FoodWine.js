@@ -261,7 +261,7 @@ const FoodWine = () => {
         )}
       </ContentsListItemWrap>
       {/* 음식별 추천 와인 전체보기 */}
-      <MainTabLink>
+      <MainTabLink to="/productmainlist/food">
         음식별 추천 와인 전체보기
         <i>
           <FontAwesomeIcon icon={faArrowRight} />

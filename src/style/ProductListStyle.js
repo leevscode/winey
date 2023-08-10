@@ -106,3 +106,40 @@ export const ProductListItemWrap = styled.div`
     margin-right: -7px;
   }
 `;
+// 상품 메인 추천별 상품리스트
+export const ProductMainItemWrap = styled.div`
+  padding: ${WidthPd.padding};
+  padding-top: ${WidthPd.paddingTopSmall};
+  padding-bottom: 100px;
+  & > ul {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 0.05rem solid ${opacity.grayLight};
+    padding-bottom: 2px;
+    margin-bottom: 15px;
+    li {
+      font-size: 1.2rem;
+      &:first-of-type {
+      }
+      &:last-of-type {
+      }
+    }
+    /* ant 셀렉트 컴포넌트 스타일링 */
+    .ant-select {
+      margin-right: -4px;
+      .ant-select-selector {
+        box-shadow: none !important;
+      }
+      .ant-select-arrow {
+        font-size: 0.9rem;
+      }
+    }
+  }
+  & > div {
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: -7px;
+    margin-right: -7px;
+  }
+`;

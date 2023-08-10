@@ -243,7 +243,12 @@ const PriceWine = () => {
                   <div className="title">{item.nmKor}</div>
                   <ul className="price">
                     <li>
-                      <span>{item.price.toLocaleString()}</span>원
+                      <span>
+                        {item.salePrice === null
+                          ? item.price.toLocaleString()
+                          : item.salePrice.toLocaleString()}
+                      </span>
+                      원
                     </li>
                     <li>
                       <span>{item.price.toLocaleString()}원</span>
@@ -265,9 +270,9 @@ const PriceWine = () => {
           </NotProductListItem>
         )}
       </ContentsListItemWrap>
-      {/* 국가별 추천 와인 전체보기 */}
-      <MainTabLink>
-        국가별 추천 와인 전체보기
+      {/* 가격별 추천 와인 전체보기 */}
+      <MainTabLink to="/productmainlist/price">
+        가격별 추천 와인 전체보기
         <i>
           <FontAwesomeIcon icon={faArrowRight} />
         </i>

@@ -28,6 +28,7 @@ import { AnimatePresence } from "framer-motion";
 import SellListDetail from "./pages/product/SellListDetail";
 import { useEffect } from "react";
 import Welcome from "./components/join/Welcome";
+import ProductMainList from "./pages/product/ProductMainList";
 
 function App() {
   // 페이지 이동 시 스크롤 최상단으로 올라가는 코드
@@ -51,6 +52,13 @@ function App() {
         <Route element={<User />}>
           {/* 메인 */}
           <Route path="/main" element={<Main />} />
+          {/* 상품 메인 추천별 상품리스트  */}
+          <Route path="/productmainlist">
+            <Route path="food" element={<ProductMainList />} />
+            <Route path="country" element={<ProductMainList />} />
+            <Route path="price" element={<ProductMainList />} />
+            <Route index path="*" element={<NotFound />} />
+          </Route>
           {/* 상품리스트 */}
           <Route path="/productlist">
             <Route path="red" element={<ProductList />} />

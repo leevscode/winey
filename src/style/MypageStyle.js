@@ -37,6 +37,8 @@ export const MypageWrap = styled.div`
       button {
         padding: ${WidthPd.padding};
         font-size: 1.5rem;
+        width: 100%;
+        text-align: left;
         padding-top: 20px;
         padding-bottom: 20px;
       }

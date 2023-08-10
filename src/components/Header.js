@@ -112,6 +112,19 @@ const Header = ({ handleOpenNav, isActive }) => {
       title: "기타 와인",
       path: "/productlist/etc",
     },
+    // 와인 전체보기 카테고리
+    {
+      title: "음식별 추천 와인",
+      path: "/productmainlist/food",
+    },
+    {
+      title: "국가별 추천 와인",
+      path: "/productmainlist/country",
+    },
+    {
+      title: "가격별 추천 와인",
+      path: "/productmainlist/price",
+    },
   ];
   useEffect(() => {
     const findPath = pageName.find(item => item.path === location.pathname);
