@@ -12,8 +12,13 @@ import { FormWrap, LoginWrap, LogoDiv } from "../../style/LoginStyle";
 import { Link, useNavigate } from "react-router-dom";
 import { ButtonCancel, ButtonOk } from "../../style/GlobalStyle";
 import { fetchLogin, fetchRefreshToken } from "../../api/client";
+import { useDispatch, useSelector } from "react-redux";
+import { getMemberInfo } from "../../api/joinpatch";
 
 const Login = () => {
+  const dispatch = useDispatch();
+  // 회원정보 불러오기
+  const userData = useSelector(state => state.user);
   // 아이디, 비밀번호
   const [userid, setUserId] = useState("");
   const [password, setPassword] = useState("");
@@ -38,7 +43,8 @@ const Login = () => {
       if (login.success == true) {
         // 로그인성공 후 cookie에 있는 accessToken을 확인하자
         console.log("login.token", login.accessToken);
-
+        // 회원 정보 저장
+        dispatch(getMemberInfo());
         // 리프레쉬 토큰 요청
         // fetchRefreshToken()
         navigate("/main");

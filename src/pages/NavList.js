@@ -4,23 +4,29 @@
   깃허브 : https://github.com/kimaydev
 */
 import React, { useEffect } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { getMemberInfo } from "../api/joinpatch";
+import { getMemberInfo, postLogout } from "../api/joinpatch";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
+import { removeCookie } from "../api/cookie";
+import { logoutUser } from "../reducers/userSlice";
 
 const NavList = ({ handleOpenNav, closeNav }) => {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   // 회원정보 불러오기
   const userData = useSelector(state => state.user);
-  useEffect(() => {
-    if (userData) {
-      console.log("결과가 참이에요");
-      dispatch(getMemberInfo());
-    }
-    console.log("리덕스 성공해라", userData);
-  }, [userData]);
+  const handleLogout = async e => {
+    e.preventDefault();
+    await postLogout("");
+    dispatch(logoutUser({}));
+    removeCookie("accessToken");
+    removeCookie("refreshToken");
+    // console.log("로그아웃 실행");
+    navigate("/main");
+    closeNav("/main");
+  };
   return (
     <>
       <ul className="top">
@@ -90,26 +96,46 @@ const NavList = ({ handleOpenNav, closeNav }) => {
         </ul>
       </div>
       <ul className="bottom">
-        <li>
-          <NavLink
-            to="/login"
-            onClick={() => {
-              closeNav("/login");
-            }}
-          >
-            로그인
-          </NavLink>
-        </li>
-        <li>
-          <NavLink
-            to="/join"
-            onClick={() => {
-              closeNav("/join");
-            }}
-          >
-            회원가입
-          </NavLink>
-        </li>
+        {userData.userId ? (
+          <>
+            <li>
+              <button onClick={handleLogout}>로그아웃</button>
+            </li>
+            <li>
+              <NavLink
+                to="/mypageList"
+                onClick={() => {
+                  closeNav("/mypageList");
+                }}
+              >
+                마이페이지
+              </NavLink>
+            </li>
+          </>
+        ) : (
+          <>
+            <li>
+              <NavLink
+                to="/login"
+                onClick={() => {
+                  closeNav("/login");
+                }}
+              >
+                로그인
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                to="/join"
+                onClick={() => {
+                  closeNav("/join");
+                }}
+              >
+                회원가입
+              </NavLink>
+            </li>
+          </>
+        )}
       </ul>
     </>
   );

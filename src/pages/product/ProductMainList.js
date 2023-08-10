@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
+import { useObserver } from "../../hooks/useObserver";
 import { ConfigProvider, Select } from "antd";
 import {
   ProductListWrap,
@@ -26,32 +27,32 @@ const ProductMainList = () => {
   // 상품리스트 전체보기 - 국가별 와인리스트 GET
   const [totalList, setTotalList] = useState([]);
   // 상품 더미 데이터
-  const foodItem = [
-    {
-      productId: 22,
-      categoryId: 2,
-      featureId: 110,
-      countryId: 2,
-      aromaId: 110,
-      nmKor: "슈샤르조프버거 리슬링 스패틀레스",
-      nmEng: "Scharzhofberger Riesling Spätlese",
-      price: 15600,
-      quantity: 30,
-      pic: "wine/22/NwRt7c2oQF6-mdBgs9gSLQ_pb_x960.png",
-      promotion: 0,
-      beginner: 0,
-      alcohol: 8,
-      sale: 10,
-      salePrice: 30644,
-    },
-  ];
+  // const foodItem = [
+  //   {
+  //     productId: 22,
+  //     categoryId: 2,
+  //     featureId: 110,
+  //     countryId: 2,
+  //     aromaId: 110,
+  //     nmKor: "슈샤르조프버거 리슬링 스패틀레스",
+  //     nmEng: "Scharzhofberger Riesling Spätlese",
+  //     price: 15600,
+  //     quantity: 30,
+  //     pic: "wine/22/NwRt7c2oQF6-mdBgs9gSLQ_pb_x960.png",
+  //     promotion: 0,
+  //     beginner: 0,
+  //     alcohol: 8,
+  //     sale: 10,
+  //     salePrice: 30644,
+  //   },
+  // ];
   useEffect(() => {
     getTotalCountry(setTotalList);
   }, [location.pathname]);
   useEffect(() => {
-    setTotalCount(foodItem.length);
+    setTotalCount(totalList.length);
     // console.log("상품 총 갯수", totalCount);
-  }, []);
+  }, [totalList]);
   // 상품 정렬 옵션
   const options = [
     {
@@ -105,7 +106,7 @@ const ProductMainList = () => {
           </li>
         </ul>
         <ContentsListItemWrap>
-          {foodItem.map((item, index) => (
+          {totalList.map((item, index) => (
             <ProductListItem key={index}>
               <Link to={`/productdetail/${item.productId}`}>
                 <div className="img">

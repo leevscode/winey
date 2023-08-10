@@ -206,8 +206,10 @@ export const NavWrap = styled(motion.div)`
       &:last-of-type::after {
         display: none;
       }
-      a {
+      a,
+      button {
         font-size: 1.4rem;
+        color: ${Maincolor.black};
         margin: 0 20px;
       }
     }

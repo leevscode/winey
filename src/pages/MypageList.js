@@ -28,9 +28,9 @@ const MypageList = () => {
   const handleCancel = () => {
     setIsModalOpen(false);
   };
-  const handleLogout = e => {
+  const handleLogout = async e => {
     e.preventDefault();
-    postLogout("");
+    await postLogout("");
     removeCookie("accessToken");
     removeCookie("refreshToken");
     console.log("로그아웃 실행");
