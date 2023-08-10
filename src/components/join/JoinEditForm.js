@@ -125,6 +125,7 @@ const JoinEditForm = () => {
     } else {
       console.log("Failed");
     }
+    dispatch(getMemberInfo());
   };
 
   const onFinishFailed = errorInfo => {
@@ -150,7 +151,7 @@ const JoinEditForm = () => {
   };
   //
   useEffect(() => {
-    dispatch(getMemberInfo());
+    // dispatch(getMemberInfo());
   }, []);
   return (
     <div>

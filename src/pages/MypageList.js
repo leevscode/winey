@@ -4,23 +4,31 @@
   깃허브 : https://github.com/kimaydev
 */
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleExclamation } from "@fortawesome/free-solid-svg-icons";
 import { faAngleRight } from "@fortawesome/free-solid-svg-icons";
 import { MypageWrap } from "../style/MypageStyle";
-import { SectionLine } from "../style/GlobalStyle";
+import { ButtonOk, SectionLine } from "../style/GlobalStyle";
 import { postLogout } from "../api/joinpatch";
 import { removeCookie } from "../api/cookie";
 import { NoticeModal } from "../style/GlobalComponents";
+import { useDispatch, useSelector } from "react-redux";
+import { logoutUser } from "../reducers/userSlice";
 
 const MypageList = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  // 회원정보 불러오기
+  const userData = useSelector(state => state.user);
   // 검색 모달 state
   const [isModalOpen, setIsModalOpen] = useState(false);
   const showModal = e => {
     e.preventDefault();
     setIsModalOpen(true);
+  };
+  const closeNav = path => {
+    navigate(path);
   };
   const handleOk = () => {
     setIsModalOpen(false);
@@ -31,83 +39,109 @@ const MypageList = () => {
   const handleLogout = async e => {
     e.preventDefault();
     await postLogout("");
+    dispatch(logoutUser({}));
     removeCookie("accessToken");
     removeCookie("refreshToken");
-    console.log("로그아웃 실행");
+    // console.log("로그아웃 실행");
     navigate("/main");
+    closeNav("/main");
   };
   return (
     <>
       <MypageWrap>
         <div className="user-title">
           <h2>
-            <span>고객이름</span>님
+            {userData.userId ? (
+              <>
+                <p>반갑습니다.</p>
+                <span>{userData.nm}</span>님
+              </>
+            ) : (
+              <div>
+                <img
+                  src={`${process.env.PUBLIC_URL}/images/logo_1.svg`}
+                  alt="로고"
+                />
+                <p>
+                  와이니와 함께 하시면
+                  <br />
+                  당신을 위한 와인을 추천드려요.
+                </p>
+                <Link to="/login">
+                  <ButtonOk component={Link} to="/login">
+                    로그인 · 회원가입
+                  </ButtonOk>
+                </Link>
+              </div>
+            )}
           </h2>
         </div>
         <SectionLine />
         <ul>
           <li>
-            <Link to="/cart">
+            <NavLink to={userData.userId ? "/cart" : "/login"}>
               장바구니
               <i>
                 <FontAwesomeIcon icon={faAngleRight} />
               </i>
-            </Link>
+            </NavLink>
           </li>
           <li>
-            <Link to="/selllist">
+            <NavLink to={userData.userId ? "/selllist" : "/login"}>
               주문 내역
               <i>
                 <FontAwesomeIcon icon={faAngleRight} />
               </i>
-            </Link>
+            </NavLink>
           </li>
           <li>
-            <Link to="/keywordselectedit">
+            <NavLink to={userData.userId ? "/keywordselectedit" : "/login"}>
               선호 키워드 변경
               <i>
                 <FontAwesomeIcon icon={faAngleRight} />
               </i>
-            </Link>
+            </NavLink>
           </li>
           <li>
-            <Link to="/windeguide">
+            <NavLink to="/windeguide">
               와인 가이드
               <i>
                 <FontAwesomeIcon icon={faAngleRight} />
               </i>
-            </Link>
+            </NavLink>
           </li>
           <li>
-            <Link to="/joinedit">
+            <NavLink to={userData.userId ? "/joinedit" : "/login"}>
               정보수정
               <i>
                 <FontAwesomeIcon icon={faAngleRight} />
               </i>
-            </Link>
+            </NavLink>
           </li>
         </ul>
         <SectionLine />
         <ul>
           <li>
-            <Link to="/about" onClick={showModal}>
+            <NavLink to="/about" onClick={showModal}>
               만든 사람들
               <i>
                 <FontAwesomeIcon icon={faAngleRight} />
               </i>
-            </Link>
+            </NavLink>
           </li>
           <li>
-            <Link to="/opensource" onClick={showModal}>
+            <NavLink to="/opensource" onClick={showModal}>
               오픈소스
               <i>
                 <FontAwesomeIcon icon={faAngleRight} />
               </i>
-            </Link>
+            </NavLink>
           </li>
-          <li>
-            <button onClick={handleLogout}>로그아웃</button>
-          </li>
+          {userData.userId && (
+            <li>
+              <button onClick={handleLogout}>로그아웃</button>
+            </li>
+          )}
         </ul>
       </MypageWrap>
       {/* 준비중 모달창 */}

@@ -13,6 +13,25 @@ export const MypageWrap = styled.div`
     h2 {
       font-size: 2rem;
       font-weight: 700;
+      & > p {
+        font-size: 0.7em;
+        font-weight: 500;
+        margin-bottom: 5px;
+      }
+      & > div {
+        img {
+          display: block;
+          width: 100px;
+          height: auto;
+          margin: 10px auto 15px;
+        }
+        p {
+          font-size: 1.6rem;
+          line-height: 1.5;
+          text-align: center;
+          margin-bottom: 25px;
+        }
+      }
     }
   }
   ul {

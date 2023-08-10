@@ -26,7 +26,7 @@ const JoinEdit = () => {
   // };
 
   useEffect(() => {
-    dispatch(getMemberInfo());
+    // dispatch(getMemberInfo());
   }, []);
 
   // 데이터가 다 get되면 화면을 그리자~
@@ -37,8 +37,8 @@ const JoinEdit = () => {
       {isRendering && (
         //화면
         <JoinEditForm
-          // editUserInfo={editUserInfo}
-          // setEditUserInfo={setEditUserInfo}
+        // editUserInfo={editUserInfo}
+        // setEditUserInfo={setEditUserInfo}
         />
       )}
     </JoinWrap>
