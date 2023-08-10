@@ -6,12 +6,13 @@
 
 import React, { useState } from "react";
 import { KeywordConfirmBtn, KeywordWrap } from "../../style/KeywordStyle";
-import { Checkbox, ConfigProvider } from "antd";
+import { Checkbox, ConfigProvider, Modal } from "antd";
 import { ButtonCancel, ButtonOk } from "../../style/GlobalStyle";
 import { useNavigate } from "react-router-dom";
 
 const KeywordChooseCp = () => {
   const navigator = useNavigate();
+
   const [favoriteKeyword, setFavoriteKeyword] = useState([]);
   const [wineTypeCheckedList, setWineTypeCheckedList] = useState([]);
   const [winePriceCheckedList, setWinePriceCheckedList] = useState([]);
@@ -125,8 +126,8 @@ const KeywordChooseCp = () => {
   const isFlavorCheckAll =
     wineFlavorCheckedList.length === wineOptions.aroma.length;
   const handleFlavorCheckAllChange = e => {
-    setWineFlavorCheckedList(e.target.checked ? wineOptions.aroma.num : []);
-    setFavoriteKeyword(prev => ({ ...prev, aroma: wineOptions.aroma.num }));
+    setWineFlavorCheckedList(e.target.checked ? wineOptions.aroma : []);
+    setFavoriteKeyword(prev => ({ ...prev, aroma: wineOptions.aroma }));
   };
   const handleFlavorOnChange = list => {
     setWineFlavorCheckedList(list);
@@ -149,8 +150,17 @@ const KeywordChooseCp = () => {
 
   // 이벤트핸들러
   const handleKeywordChoice = () => {
-    // favoriteKeyword();
-    navigator("/main");
+    Modal.confirm({
+      title: "선호 키워드",
+      content: "선택한 내용을 저장하시겠습니까?",
+      onOk() {
+        // favoriteKeyword();
+        navigator("/main");
+      },
+      onCancel() {
+        console.log("Cancel");
+      },
+    });
   };
   console.log("favoriteKeyword", favoriteKeyword);
 
@@ -223,7 +233,7 @@ const KeywordChooseCp = () => {
                 onChange={handleWithFoodOnChange}
               >
                 {wineOptions.smallcategoryId.map(option => (
-                  <Checkbox key={option.id} value={option.Num}>
+                  <Checkbox key={option.id} value={option.id}>
                     {option.value}
                   </Checkbox>
                 ))}

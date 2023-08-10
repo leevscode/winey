@@ -6,7 +6,15 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css/navigation";
 
 const PickupPlaceClick = ({ userStore, selectCollect, setSelectCollect }) => {
-  const pickTime = ["10:00", "12:00", "14:00", "16:00", "18:00", "20:00", "22:00"];
+  const pickTime = [
+    "10:00",
+    "12:00",
+    "14:00",
+    "16:00",
+    "18:00",
+    "20:00",
+    "22:00",
+  ];
 
   // 픽업날짜(오늘 이후 3일 간)
   const first = new Date();
@@ -55,7 +63,7 @@ const PickupPlaceClick = ({ userStore, selectCollect, setSelectCollect }) => {
 
     setSelectCollect(prevState => ({
       ...prevState,
-      pickUpData: option,
+      pickUpDate: option,
     }));
 
     setSltDateButton(index);
@@ -78,6 +86,7 @@ const PickupPlaceClick = ({ userStore, selectCollect, setSelectCollect }) => {
   useEffect(() => {
     console.log("selectCollect", selectCollect);
   }, [pickUpSpot, pickUpDate, pickUpTime]); // totalPayList 값이 변경될 때마다 실행
+
 
   return (
     <PickupPlaceClickWrap>
