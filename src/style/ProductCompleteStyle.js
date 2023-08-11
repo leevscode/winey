@@ -108,7 +108,7 @@ export const ProductCompleteBox = styled.div`
       & > li {
         display: flex;
         justify-content: space-between;
-        font-size: 1.7rem;
+        font-size: 1.6rem;
         color: ${Maincolor.black};
         font-weight: 500;
         line-height: 2rem;

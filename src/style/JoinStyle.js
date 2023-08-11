@@ -30,7 +30,7 @@ export const JoinWrap = styled.div`
   }
   & p {
     color: ${Maincolor.black};
-    font-size: 1.1rem;
+    font-size: 1.2rem;
     font-weight: 500;
     line-height: 2rem;
     margin-left: 0.2rem;
@@ -139,7 +139,7 @@ export const RegionSelectWrap = styled.div`
   & > ul {
     /* height: 2.6rem; */
     color: ${Maincolor.black};
-    font-size: 1.1rem;
+    font-size: 1.2rem;
     font-weight: 500;
     margin-left: 0.2rem;
     margin-bottom: 0.5rem;
@@ -167,7 +167,7 @@ export const TermsWarp = styled.div`
   }
   & > span {
     position: relative;
-    font-size: 1.8rem;
+    font-size: 1.7rem;
     font-weight: 700;
     line-height: 1.7rem;
     margin-bottom: 1rem;
