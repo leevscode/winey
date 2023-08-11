@@ -49,7 +49,6 @@ const FoodWine = ({ setIsModalOpen }) => {
   const showModal = useCallback(
     (_iproduct, e) => {
       e.preventDefault();
-      // 비회원인 상태에서 장바구니 버튼 클릭했을 때
       addCart(_iproduct);
       setIsModalOpen(true);
     },

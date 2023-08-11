@@ -12,22 +12,33 @@ import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import { removeCookie } from "../api/cookie";
 import { logoutUser } from "../reducers/userSlice";
 import { totalItem } from "../reducers/cartSlice";
+import { Modal } from "antd";
 
 const NavList = ({ handleOpenNav, closeNav }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   // 회원정보 불러오기
   const userData = useSelector(state => state.user);
+  // 로그아웃
   const handleLogout = async e => {
-    e.preventDefault();
-    await postLogout("");
-    dispatch(logoutUser({}));
-    dispatch(totalItem(0));
-    removeCookie("accessToken");
-    removeCookie("refreshToken");
-    // console.log("로그아웃 실행");
-    navigate("/main");
-    closeNav("/main");
+    Modal.confirm({
+      title: "로그아웃",
+      content: "로그아웃 하시겠습니까?",
+      async onOk() {
+        e.preventDefault();
+        await postLogout("");
+        dispatch(logoutUser({}));
+        dispatch(totalItem(0));
+        removeCookie("accessToken");
+        removeCookie("refreshToken");
+        // console.log("로그아웃 실행");
+        navigate("/main");
+        closeNav("/main");
+      },
+      onCancel() {
+        console.log("Cancel");
+      },
+    });
   };
   return (
     <>

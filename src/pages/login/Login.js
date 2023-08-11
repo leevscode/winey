@@ -4,7 +4,7 @@
     깃허브 : https://github.com/hyemdev
 */
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { ConfigProvider, Form, Input, Modal, Result } from "antd";
 import { LockOutlined, UserOutlined } from "@ant-design/icons";
 
@@ -14,11 +14,14 @@ import { ButtonCancel, ButtonOk } from "../../style/GlobalStyle";
 import { fetchLogin, fetchRefreshToken } from "../../api/client";
 import { useDispatch, useSelector } from "react-redux";
 import { getMemberInfo } from "../../api/joinpatch";
+import { cartLengthData } from "../../api/patchcart";
 
 const Login = () => {
   const dispatch = useDispatch();
   // 회원정보 불러오기
   const userData = useSelector(state => state.user);
+  // 장바구니 갯수 불러오기
+  const cartData = useSelector(state => state.cart);
   // 아이디, 비밀번호
   const [userid, setUserId] = useState("");
   const [password, setPassword] = useState("");
@@ -45,6 +48,7 @@ const Login = () => {
         console.log("login.token", login.accessToken);
         // 회원 정보 저장
         dispatch(getMemberInfo());
+        cartLengthData(dispatch);
         // 리프레쉬 토큰 요청
         // fetchRefreshToken()
         navigate("/main");

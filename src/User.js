@@ -12,8 +12,8 @@ import Header from "./components/Header";
 import QuickMenu from "./components/QuickMenu";
 import Footer from "./components/Footer";
 import NavList from "./pages/NavList";
-import { cartLengthData } from "./api/patchcart";
-import { useDispatch } from "react-redux";
+// import { cartLengthData } from "./api/patchcart";
+// import { useDispatch } from "react-redux";
 
 const User = () => {
   const navigate = useNavigate();

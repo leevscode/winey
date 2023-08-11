@@ -17,9 +17,15 @@ import {
 import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faExclamation } from "@fortawesome/free-solid-svg-icons";
-import { fetchCartData, removeCarts } from "../../../src/api/patchcart";
+import {
+  cartLengthData,
+  fetchCartData,
+  removeCarts,
+} from "../../../src/api/patchcart";
+import { useDispatch } from "react-redux";
 
 const ProductCart = () => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const [CartData, setCartData] = useState([]);
 
@@ -42,6 +48,7 @@ const ProductCart = () => {
     try {
       const data = await removeCarts(removeCart);
       filledCartData(data);
+      cartLengthData(dispatch);
       console.log("장바구니 삭제 되야 함", data);
     } catch (error) {
       console.log(error);

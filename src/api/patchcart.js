@@ -6,8 +6,9 @@ export const fetchCartData = async () => {
   try {
     const response = await client.get("/api/wine/filledcart");
     const cartData = await response.data;
-    const cartLength = await cartData.length;
-    console.log("장바구니 갯수 출력", cartLength);
+    // console.log(cartData);
+    // const cartLength = await cartData.length;
+    // console.log("장바구니 갯수 출력", cartLength);
     return cartData;
   } catch (error) {
     console.error("API 요청 중 오류 발생:", error);
@@ -20,12 +21,11 @@ export const cartLengthData = async dispatch => {
     const res = await client.get("/api/wine/filledcart");
     const result = await res.data;
     const cartLength = await result.length;
-    console.log("장바구니 갯수 출력", cartLength);
+    // console.log("장바구니 갯수 출력", cartLength);
     dispatch(totalItem(cartLength));
-    // return result;
+    return cartLength;
   } catch (error) {
     console.error("API 요청 중 오류 발생:", error);
-    // return [];
   }
 };
 

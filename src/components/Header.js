@@ -24,10 +24,14 @@ const Header = ({ handleOpenNav, isActive }) => {
   const { iproduct, isell } = useParams();
   const location = useLocation();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  // 사용자 정보
   const userData = useSelector(state => state.user);
-  // 테스트
+  // 장바구니 상품 갯수
   const cartData = useSelector(state => state.cart);
-  // console.log("뭘까", cartData.cartLength);
+  // console.log("사용자 정보", userData);
+  // console.log("장바구니 상품 갯수", cartData.cartLength);
+
   // 뒤로가기 버튼 핸들러
   const handleBack = () => navigate(-1);
   // 서브페이지 헤더 페이지 타이틀 state
@@ -143,16 +147,18 @@ const Header = ({ handleOpenNav, isActive }) => {
       };
       readKorNm();
     }
+    // 로그인 했을 때 이벤트 발생
+    if (userData.userId) {
+      cartLengthData(dispatch);
+    }
     // console.log("현재위치:", location.pathname);
     // console.log("실시간타이틀", pageTitle);
     // console.log("실시간위치", pagePath);
     // console.log("상품이름", korNm.nmKor);
   }, [location.pathname]);
 
-  const dispatch = useDispatch();
-
   useEffect(() => {
-    cartLengthData(dispatch);
+    // cartLengthData(dispatch);
   }, []);
   return (
     <>

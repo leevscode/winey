@@ -11,7 +11,6 @@ const cartSlice = createSlice({
   initialState,
   reducers: {
     totalItem: (state, action) => {
-      console.log(action);
       state.cartLength = action.payload;
     },
   },
