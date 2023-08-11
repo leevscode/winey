@@ -1,8 +1,14 @@
 import React from "react";
 import { CartCompleteModal } from "../../style/GlobalComponents";
 import { ButtonOk } from "../../style/GlobalStyle";
+import { useNavigate } from "react-router";
 
 const ProductCartModal = ({ isModalOpen, handleOk, handleCancel }) => {
+  const navigate = useNavigate();
+  const handleCartLink = e => {
+    e.preventDefault();
+    navigate("/cart");
+  };
   return (
     <CartCompleteModal
       open={isModalOpen}
@@ -19,7 +25,7 @@ const ProductCartModal = ({ isModalOpen, handleOk, handleCancel }) => {
         </i>
         상품을 장바구니에 담았습니다.
       </p>
-      <ButtonOk>장바구니 바로가기</ButtonOk>
+      <ButtonOk onClick={handleCartLink}>장바구니 바로가기</ButtonOk>
     </CartCompleteModal>
   );
 };
