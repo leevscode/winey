@@ -77,24 +77,40 @@ const ProductComplete = () => {
         </ProductCompleteinfo>
       )}
       <ProductCompleteBox>
-        {state && (
-          <div>
-            <ul>
-              <li>픽업 지점: 이마트 {state[0].selectCollect.pickUpSpot.nm}</li>
-              <li>픽업 주소: {state[0].selectCollect.pickUpSpot.address}</li>
-              <li>
-                픽업 시간: {state[0].selectCollect.changeDate.substring(0, 12)}
-              </li>
-            </ul>
-            <p>총 결제금액 : {state[0].totalPrice.toLocaleString()}원</p>
-          </div>
-        )}
+        <div>
+          {state && (
+            <div>
+              <ul>
+                <li>
+                  <span>픽업 지점</span>
+                  <span>이마트 {state[0].selectCollect.pickUpSpot.nm}</span>
+                </li>
+                <li>
+                  <span>픽업 주소</span>{" "}
+                  <span>{state[0].selectCollect.pickUpSpot.address}</span>
+                </li>
+                <li>
+                  <span>픽업 날짜</span>
+                  <span>
+                    {state[0].selectCollect.changeDate.substring(0, 16)}
+                  </span>
+                </li>
+                <li>
+                  <span>총 결제금액</span>{" "}
+                  <span>{state[0].totalPrice.toLocaleString()}원</span>
+                </li>
+              </ul>
+            </div>
+          )}
+        </div>
+        <div className="confirmButton">
         <ButtonOk>
           <Link to="/selllist">주문내역 확인 하기</Link>
         </ButtonOk>
         <ButtonCancel>
           <Link to="/main">메인보기</Link>
         </ButtonCancel>
+        </div>
       </ProductCompleteBox>
     </ProductCompleteMain>
   );
