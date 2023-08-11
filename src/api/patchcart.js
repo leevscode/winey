@@ -50,15 +50,17 @@ export const removeCarts = async _removeCart => {
 //   }
 // };
 
-
-
-export const addCart = async () => {
+// 장바구니 추가 POST
+export const addCart = async _productId => {
   try {
-    const response = await axios.post(``);
-    const addedItem = response.data;
-    return addedItem; // 추가된 상품 데이터를 반환
+    const res = await client.post("/api/wine/cart", {
+      quantity: 1,
+      productId: _productId,
+    });
+    const result = res.data;
+    // console.log("장바구니 추가 POST 성공", result);
+    return result;
   } catch (error) {
     console.error("API 요청 중 오류 발생:", error);
   }
 };
-

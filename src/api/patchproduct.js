@@ -3,7 +3,7 @@ import axios from "axios";
 // 와인 한글이름 GET
 export const getKorNm = async (_setKorNm, _productId) => {
   try {
-    const res = await axios.get(`/detail/korNm/${_productId}`);
+    const res = await axios.get(`/api/detail/korNm/${_productId}`);
     const result = res.data;
     _setKorNm(result);
     // console.log("와인 한글이름 axios", result);
@@ -16,7 +16,7 @@ export const getKorNm = async (_setKorNm, _productId) => {
 // 와인 상세페이지 GET
 export const getProductDetail = async (_setProductDetail, _productId) => {
   try {
-    const res = await axios.get(`/detail/${_productId}`);
+    const res = await axios.get(`/api/detail/${_productId}`);
     const result = res.data;
     _setProductDetail(result);
     // console.log("와인 상세페이지 axios", result);
@@ -26,7 +26,7 @@ export const getProductDetail = async (_setProductDetail, _productId) => {
   }
 };
 
-// 상품리스트 전체보기 - 국가별 와인리스트 GET
+// 상품리스트 전체보기 - 음식별 와인리스트 GET
 export const getTotalCountry = async (
   _setListScroll,
   _setHasNextPage,
@@ -37,7 +37,7 @@ export const getTotalCountry = async (
       `/api/main/food?bigCategoryId=1&page=${_page.current}&row=9`,
     );
     const result = res.data;
-    console.log("국가별 와인리스트 GET", result);
+    console.log("음식별 와인리스트 GET", result);
     _setListScroll(prevPosts => [...prevPosts, ...result]);
     _setHasNextPage(result.length === 9);
     if (result.length) {
@@ -45,6 +45,6 @@ export const getTotalCountry = async (
     }
     return result;
   } catch (err) {
-    console.log("국가별 와인리스트 전체보기 에러 발생", err);
+    console.log("음식별 와인리스트 전체보기 에러 발생", err);
   }
 };

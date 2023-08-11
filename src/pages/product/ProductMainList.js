@@ -11,25 +11,30 @@ import { ContentsListItemWrap } from "../../style/GlobalComponents";
 import { ProductListItem } from "../../style/ProductStyle";
 import NoImage from "../../assets/no_image.jpg";
 import { getTotalCountry } from "../../api/patchproduct";
+import ProductListSkeleton from "../../components/skeleton/ProductListSkeleton";
 
 const ProductMainList = () => {
   const { pathname } = useLocation();
   // pathname에서 /productmainlist/ 는 제외처리
   const listPathName = pathname.slice(17);
   // console.log(listPathName);
-
   // 이미지 없을 때 error처리
   const onImgError = e => {
     e.target.src = NoImage;
   };
-  // 상품 총 갯수 카운트
+  // 로딩 더미데이터
+  const productListSkeleton = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+  // 로딩 state
+  const [isLoading, setIsLoading] = useState(true);
+  // 상품 총 갯수 카운트 state
   const [totalCount, setTotalCount] = useState("");
-  // 상품 페이징 처리
+  // 상품 페이징 처리 state
   const [listScroll, setListScroll] = useState([]);
   const [hasNextPage, setHasNextPage] = useState(true);
   const page = useRef(1);
   const observerTargetEl = useRef(null);
   const getListData = async () => {
+    //상품리스트 전체보기 - 음식별 와인리스트 GET
     await getTotalCountry(setListScroll, setHasNextPage, page);
   };
   useEffect(() => {
@@ -73,6 +78,13 @@ const ProductMainList = () => {
     setTotalCount(listScroll.length);
     // console.log("상품 총 갯수", totalCount);
   }, [listScroll]);
+  useEffect(() => {
+    // 2초 뒤에 인트로 화면 사라짐
+    const introTimeout = setTimeout(() => {
+      setIsLoading(false);
+    }, 300);
+    return () => clearTimeout(introTimeout);
+  }, []);
   // 상품 정렬 옵션
   const options = [
     {
@@ -126,51 +138,59 @@ const ProductMainList = () => {
           </li>
         </ul>
         <ContentsListItemWrap>
-          {listScroll?.map((item, index) => (
-            <ProductListItem key={v4()}>
-              <Link to={`/productdetail/${item.productId}`}>
-                <div className="img">
-                  <img
-                    src={`/img/${item.pic}`}
-                    alt={item.nmKor}
-                    onError={onImgError}
-                  />
-                  {/* 장바구니 버튼 */}
-                  <button>
-                    <img
-                      src={`${process.env.PUBLIC_URL}/images/icon_cart_2.svg`}
-                      alt="장바구니에 담기"
-                    />
-                  </button>
-                </div>
-                <div className="txt">
-                  <div className="badge">
-                    {item.promotion === 1 && (
-                      <span className="recommend">추천상품</span>
-                    )}
-                    {item.beginner === 1 && (
-                      <span className="beginner">입문자추천</span>
-                    )}
-                  </div>
-                  <div className="title">{item.nmKor}</div>
-                  <ul className="price">
-                    <li>
-                      <span>
-                        {item.salePrice === null
-                          ? item.price.toLocaleString()
-                          : item.salePrice.toLocaleString()}
-                      </span>
-                      원
-                    </li>
-                    <li>
-                      <span>{item.price.toLocaleString()}원</span>
-                    </li>
-                  </ul>
-                </div>
-              </Link>
-            </ProductListItem>
-          ))}
-          <div ref={observerTargetEl}></div>
+          {isLoading ? (
+            // 로딩 화면 출력
+            productListSkeleton.map(index => <ProductListSkeleton key={v4()} />)
+          ) : (
+            // 상품 리스트
+            <>
+              {listScroll?.map((item, index) => (
+                <ProductListItem key={v4()}>
+                  <Link to={`/productdetail/${item.productId}`}>
+                    <div className="img">
+                      <img
+                        src={`/img/${item.pic}`}
+                        alt={item.nmKor}
+                        onError={onImgError}
+                      />
+                      {/* 장바구니 버튼 */}
+                      <button>
+                        <img
+                          src={`${process.env.PUBLIC_URL}/images/icon_cart_2.svg`}
+                          alt="장바구니에 담기"
+                        />
+                      </button>
+                    </div>
+                    <div className="txt">
+                      <div className="badge">
+                        {item.promotion === 1 && (
+                          <span className="recommend">추천상품</span>
+                        )}
+                        {item.beginner === 1 && (
+                          <span className="beginner">입문자추천</span>
+                        )}
+                      </div>
+                      <div className="title">{item.nmKor}</div>
+                      <ul className="price">
+                        <li>
+                          <span>
+                            {item.salePrice === null
+                              ? item.price.toLocaleString()
+                              : item.salePrice.toLocaleString()}
+                          </span>
+                          원
+                        </li>
+                        <li>
+                          <span>{item.price.toLocaleString()}원</span>
+                        </li>
+                      </ul>
+                    </div>
+                  </Link>
+                </ProductListItem>
+              ))}
+              <div ref={observerTargetEl}></div>
+            </>
+          )}
         </ContentsListItemWrap>
       </ProductMainItemWrap>
     </ProductListWrap>
