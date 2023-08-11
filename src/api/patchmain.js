@@ -25,7 +25,7 @@ export const getFoodWines = async (_bigCategoryId, _setFoodWines, _loading) => {
     );
     // const res = await axios.get("test");
     const result = res.data;
-    console.log("음식별 와인 데이터", result);
+    // console.log("음식별 와인 데이터", result);
     _setFoodWines(result);
     _loading(false);
     return result;

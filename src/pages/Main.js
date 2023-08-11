@@ -31,13 +31,13 @@ const Main = () => {
         <NavList></NavList>
         <div className="main-product-wrap">
           {/* 맞춤 와인 추천 */}
-          <RecommWine></RecommWine>
+          <RecommWine setIsModalOpen={setIsModalOpen}></RecommWine>
           {/* 음식별 추천 와인 */}
           <FoodWine setIsModalOpen={setIsModalOpen}></FoodWine>
           {/* 국가별 추천 와인 */}
-          <CountryWine></CountryWine>
+          <CountryWine setIsModalOpen={setIsModalOpen}></CountryWine>
           {/* 가격별 추천 와인 */}
-          <PriceWine></PriceWine>
+          <PriceWine setIsModalOpen={setIsModalOpen}></PriceWine>
         </div>
       </MainWrap>
       {/* 장바구니 완료 모달창 */}

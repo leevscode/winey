@@ -32,6 +32,7 @@ import { useSelector } from "react-redux";
 
 const FoodWine = ({ setIsModalOpen }) => {
   const navigate = useNavigate();
+  const userData = useSelector(state => state.user);
   // 이미지 없을 때 error처리
   const onImgError = e => {
     e.target.src = NoImage;
@@ -44,8 +45,6 @@ const FoodWine = ({ setIsModalOpen }) => {
   const [isLoading, setIsLoading] = useState(true);
   // 버튼 활성화 state
   const [isActive, setIsActive] = useState(1);
-  //
-  const userData = useSelector(state => state.user);
   // 장바구니 버튼 클릭 이벤트
   const showModal = useCallback(
     (_iproduct, e) => {

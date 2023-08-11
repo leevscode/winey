@@ -3,8 +3,8 @@
   노션 : https://www.notion.so/kimaydev
   깃허브 : https://github.com/kimaydev
 */
-import React, { useEffect, useState } from "react";
-import { NavLink } from "react-router-dom";
+import React, { useCallback, useEffect, useState } from "react";
+import { NavLink, useNavigate } from "react-router-dom";
 import { v4 } from "uuid";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -22,8 +22,12 @@ import { ContentsListItemWrap } from "../../style/GlobalComponents";
 import { getContryWines } from "../../api/patchmain";
 import ProductListSkeleton from "../skeleton/ProductListSkeleton";
 import NoImage from "../../assets/no_image.jpg";
+import { useSelector } from "react-redux";
+import { addCart } from "../../api/patchcart";
 
-const CountryWine = () => {
+const CountryWine = ({ setIsModalOpen }) => {
+  const navigate = useNavigate();
+  const userData = useSelector(state => state.user);
   // 이미지 없을 때 error처리
   const onImgError = e => {
     e.target.src = NoImage;
@@ -36,6 +40,22 @@ const CountryWine = () => {
   const [isLoading, setIsLoading] = useState(true);
   // 버튼 활성화 state
   const [isActive, setIsActive] = useState(1);
+  // 장바구니 버튼 클릭 이벤트
+  const showModal = useCallback(
+    (_iproduct, e) => {
+      e.preventDefault();
+      // 비회원인 상태에서 장바구니 버튼 클릭했을 때
+      if (userData.userId) {
+        // 장바구니 POST 성공
+        addCart(_iproduct);
+        setIsModalOpen(true);
+      } else {
+        navigate("/login");
+      }
+      // console.log("선택한 상품의 아이디 값", _iproduct);
+    },
+    [setIsModalOpen],
+  );
   // 국가별 와인 탭메뉴 버튼
   const countryBtns = [
     {
@@ -62,6 +82,8 @@ const CountryWine = () => {
   const handleTabBtn = (_ibtn, e) => {
     e.preventDefault();
     setIsActive(_ibtn);
+    setCountryWines([]); // 기존 랜더링된 값 초기화
+    setIsLoading(true);
   };
   // 상품 더미 데이터
   // const countryItem = [
@@ -205,7 +227,7 @@ const CountryWine = () => {
                     onError={onImgError}
                   />
                   {/* 장바구니 버튼 */}
-                  <button>
+                  <button onClick={e => showModal(item.productId, e)}>
                     <img
                       src={`${process.env.PUBLIC_URL}/images/icon_cart_2.svg`}
                       alt="장바구니에 담기"
@@ -262,4 +284,4 @@ const CountryWine = () => {
   );
 };
 
-export default CountryWine;
+export default React.memo(CountryWine);

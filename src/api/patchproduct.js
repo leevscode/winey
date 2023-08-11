@@ -37,7 +37,7 @@ export const getTotalCountry = async (
       `/api/main/food?bigCategoryId=1&page=${_page.current}&row=9`,
     );
     const result = res.data;
-    console.log("음식별 와인리스트 GET", result);
+    // console.log("음식별 와인리스트 GET", result);
     _setListScroll(prevPosts => [...prevPosts, ...result]);
     _setHasNextPage(result.length === 9);
     if (result.length) {
