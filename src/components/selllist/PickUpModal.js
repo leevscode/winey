@@ -5,8 +5,20 @@ import {
   OrderCancelModal,
   OrderCancelText,
 } from "../../style/SellListCancelStyle";
+import {finishSellListData} from "../../api/patchselllist"
 
-const PickUpModal = ({ onConfirm, onClose, onPick }) => {
+const PickUpModal = ({
+  onConfirm,
+  onClose,
+  onPick,
+}) => {
+  const finishSellList = async() => {
+    await finishSellListData(onPick);
+    alert("픽업이 완료 되었습니다");
+    window.location.reload();
+  };
+  console.log(onPick)
+
   return (
     <>
       <OrderCancelModal>
@@ -16,6 +28,7 @@ const PickUpModal = ({ onConfirm, onClose, onPick }) => {
             onClick={() => {
               // "픽업완료" 확인 처리를 위해 onConfirm 함수를 호출합니다
               onConfirm(onPick);
+              finishSellList()
               onClose();
             }}
           >

@@ -174,7 +174,7 @@ const SellList = () => {
           {SellListData.map(item => (
             <div key={item.orderId}>
               {/* 주문취소 모달 */}
-              {[4, 5].includes(item.orderStatus) ? (
+              {item.orderStatus === 4 || item.orderStatus === 5 || item.orderStatus === 6 ? (
                 // 주문취소 버튼이 사라졌을때 빈 공백을 유지하는 스타일
                 <div style={{ height: "28px" }} />
               ) : (
@@ -186,20 +186,20 @@ const SellList = () => {
               )}
               <SellListInfo>
                 <SellListProduct>
-                  상품명: {item.nmKor}
-                  {item.nmKor.length > 1 && ` 외 ${item.nmKor.length - 1}건`}
+                  상품명 : {item.nmKor}
+                  {/* {item.nmKor.length > 1 && ` 외 ${item.nmKor.length - 1}건`}  */}
                 </SellListProduct>
-                <li>주문번호: {item.orderId}</li>
-                <li>결제 방법: {payment[`${item.payment}`]}</li>
-                <li>총 결제 금액: {item.totalOrderPrice.toLocaleString()}</li>
-                <li>픽업 지점: {item.storeNm}</li>
-                <li>픽업 시간: {item.pickupTime}</li>
-                <li>주문 상태:{orderStatus[`${item.orderStatus}`]}</li>
+                <li>주문번호 : {item.orderId}</li>
+                <li>결제 방법 : {payment[`${item.payment}`]}</li>
+                <li>총 결제 금액 : {item.totalOrderPrice.toLocaleString()}</li>
+                <li>픽업 지점 : {item.storeNm}</li>
+                <li>픽업 시간 : {item.pickupTime}</li>
+                <li>주문 상태 : {orderStatus[`${item.orderStatus}`]}</li>
               </SellListInfo>
               <SellListButton>
                 <ButtonCancel
                   onClick={() => {
-                    navigate("/selllistdetail/:iselllist");
+                    navigate(`/selllistdetail/:iselllist/$`);
                   }}
                 >
                   주문 내역
