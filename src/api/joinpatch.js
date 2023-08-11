@@ -56,7 +56,7 @@ export const getMemberInfo = () => async dispatch => {
 export const patchMemberInfo = async editUserInfo => {
   try {
     const res = await client.patch("/api/upduser", {
-      email: editUserInfo.email,
+      pw: editUserInfo.editpassword,
       name: editUserInfo.editUserName,
       tel: editUserInfo.editUserTel,
       regionNmId: editUserInfo.editUserCity,
@@ -69,19 +69,19 @@ export const patchMemberInfo = async editUserInfo => {
   }
 };
 // 비번수정
-export const patchMemberPW = async editUserInfo => {
-  try {
-    const res = await client.patch("/api/updPassword", {
-      pw: editUserInfo.editpassword,
-    });
-    console.log("res", res);
+// export const patchMemberPW = async editUserInfo => {
+//   try {
+//     const res = await client.patch("/api/updPassword", {
+//       pw: editUserInfo.editpassword,
+//     });
+//     console.log("res", res);
 
-    const result = await res.data;
-    console.log(result);
-  } catch (error) {
-    console.log(error);
-  }
-};
+//     const result = await res.data;
+//     console.log(result);
+//   } catch (error) {
+//     console.log(error);
+//   }
+// };
 
 // 회원탈퇴 delete
 export const deleteMember = async () => {

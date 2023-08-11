@@ -40,9 +40,9 @@ const ProductSell = () => {
   // get한 아이템정보를 배열에 담자
   const productInfoArray = [productCollect];
 
+  // 수량변경 state
   const [editQuantity, setEditQuantity] = useState(1);
 
-  // 수량변경 state
   // 합계값 담기 state
   const [totalPrice, setTotalPrice] = useState(0);
 
@@ -75,7 +75,6 @@ const ProductSell = () => {
 
   // 최종결제 버튼
   const handleFinalCharge = e => {
-
     // 에러처리
     if (
       selectCollect.pickUpDate === undefined ||
@@ -106,16 +105,34 @@ const ProductSell = () => {
       setPaymentError("결제를 진행해 주세요.");
       return;
     }
-    // 최종결제완료
-    // navigate("/ProductComplete", { state: totalPayList });
-    postOneItemPurchase({
-      productCollect,
-      selectCollect,
-      isPayment,
-      totalPrice,
-      editQuantity,
+    Modal.confirm({
+      title: "최종결제확인",
+      content: "주문을 완료하시겠습니까?",
+      onOk() {
+        // 최종결제완료
+        postOneItemPurchase({
+          productCollect,
+          selectCollect,
+          isPayment,
+          totalPrice,
+          editQuantity,
+        });
+        navigate("/ProductComplete", {
+          state: {
+            productCollect,
+            selectCollect,
+            isPayment,
+            totalPrice,
+            editQuantity,
+          },
+        });
+        // navigate("/ProductComplete");
+        console.log("결제완료");
+      },
+      onCancel() {
+        console.log("Cancel");
+      },
     });
-    navigate("/ProductComplete");
   };
 
   useEffect(() => {

@@ -323,7 +323,7 @@ export const PurchaseBtn = styled.div`
   button {
     margin: 1rem 0 2rem 0;
     &:last-child {
-      margin-bottom: 5rem;
+      margin-bottom: 6.5rem;
     }
     svg {
       margin-right: 1rem;
