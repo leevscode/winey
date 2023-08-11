@@ -93,7 +93,7 @@ const PurchaseList = ({
             <div className="item-desc">
               <strong>{option.wineDetailVo.nmKor}</strong>
               <span>{option.wineDetailVo.nmEng}</span>
-              <p>{parseInt(option.selSale.salePrice).toLocaleString()} 원</p>
+              {/* <p>{parseInt(option.selSale.salePrice).toLocaleString()} 원</p> */}
               <div>
                 <FontAwesomeIcon
                   icon={faMinus}

@@ -14,13 +14,15 @@ import {
 } from "../../style/ProductSellStyle";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleCheck, faCreditCard } from "@fortawesome/free-solid-svg-icons";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { Modal } from "antd";
 import { getBuyProductDetail, getUserStoreInfo } from "../../api/purchasepatch";
 
 const ProductSell = () => {
+  const { isell } = useParams();
   // 구매상품정보(상품id 임시값임)
-  const productId = 381;
+  // const productId = 381;
+  const productId = isell;
 
   const navigate = useNavigate();
   // 정보불러오기 state

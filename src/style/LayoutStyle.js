@@ -14,4 +14,5 @@ export const LayoutWrap = styled.div`
   margin: 0 auto;
   border-left: 0.05rem solid ${opacity.white};
   border-right: 0.05rem solid ${opacity.white};
+  overflow: hidden;
 `;

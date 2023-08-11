@@ -1,4 +1,5 @@
 import React from "react";
+import { easeIn, easeInOut, motion } from "framer-motion";
 import { Collapse } from "antd";
 import { WineGuideWrap } from "../style/WineGuideStyle";
 import WineStorage from "../components/wineguide/WineStorage";

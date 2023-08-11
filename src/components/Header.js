@@ -20,7 +20,7 @@ import { getKorNm } from "../api/patchproduct";
 import { useSelector } from "react-redux";
 
 const Header = ({ handleOpenNav, isActive }) => {
-  const { iproduct } = useParams();
+  const { iproduct, isell } = useParams();
   const location = useLocation();
   const navigate = useNavigate();
   const userData = useSelector(state => state.user);
@@ -51,7 +51,7 @@ const Header = ({ handleOpenNav, isActive }) => {
     },
     {
       title: "구매하기",
-      path: "/productsell",
+      path: `/productsell/${isell}`,
     },
     {
       title: "구매완료",

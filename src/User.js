@@ -6,7 +6,6 @@
 import React, { useEffect, useState } from "react";
 import { Outlet, useLocation, useNavigate, useParams } from "react-router-dom";
 import { LayoutWrap } from "./style/LayoutStyle";
-import { AnimatePresence } from "framer-motion";
 
 import { ContentsWrap, NavWrap } from "./style/GlobalComponents";
 import Header from "./components/Header";

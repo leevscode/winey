@@ -46,7 +46,7 @@ const ProductDetail = () => {
       {/* 상품 정보 */}
       <WineInfoTable productDetail={productDetail} />
       {/* 구매하기 퀵메뉴 버튼 */}
-      <WineSellQuick />
+      <WineSellQuick iproduct={iproduct} />
     </ProductDetailWrap>
   );
 };

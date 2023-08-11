@@ -70,7 +70,7 @@ function App() {
           {/* 상품상세페이지 */}
           <Route path="/productdetail/:iproduct" element={<ProductDetail />} />
           {/* 구매하기 */}
-          <Route path="/productsell" element={<ProductSell />} />
+          <Route path="/productsell/:isell" element={<ProductSell />} />
           {/* 구매완료 */}
           <Route path="/productcomplete" element={<ProductComplete />} />
           {/* 로그인 */}

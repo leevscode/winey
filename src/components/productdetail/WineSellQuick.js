@@ -2,12 +2,12 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import { SellQuickWrap } from "../../style/ProductDetailStyle";
 
-const WineSellQuick = () => {
+const WineSellQuick = ({ iproduct }) => {
   return (
     <SellQuickWrap>
       <ul>
         <li>
-          <NavLink to="/main">구매하기</NavLink>
+          <NavLink to={`/productsell/${iproduct}`}>구매하기</NavLink>
         </li>
         <li>
           <NavLink to="/cart">
