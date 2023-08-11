@@ -13,10 +13,10 @@ const ProductComplete = () => {
   // const [isLoading, setIsLoading] = useState(true); // 로딩 상태
 
   // const { state } = useLocation();
-  // const location = useLocation();
-
-  // const data = [{ ...location.state }];
-  // const { totalPayList } = location.state;
+  const location = useLocation();
+  const state = [location.state];
+  // console.log("location", location);
+  console.log("state", state);
 
   // 첫 번째 요소 구조분해 할당
   const [firstItem] = [];
@@ -38,16 +38,6 @@ const ProductComplete = () => {
     e.target.src = NoImage;
   };
 
-  // useEffect(() => {
-  //   data({ ...state }).then(result => {
-  //     setIsLoading(false); // 로딩 상태 변경
-  //   });
-  // }, []);
-
-  // // 데이터 로딩 중인 경우 로딩 표시
-  // if (isLoading) {
-  //   return <div>Loading...</div>;
-  // }
   return (
     <ProductCompleteMain>
       <ProductCompleteText>
@@ -58,19 +48,28 @@ const ProductComplete = () => {
         <p>결제가 완료되었습니다!</p>
         <span>픽업예정일과 시간에 맞춰 상품을 수령해주세요.</span>
       </ProductCompleteText>
-      {firstItem && (
+      {state && (
         <ProductCompleteinfo>
-          {firstItem.productCollect.map((option, index) => (
+          {state.map((option, index) => (
             <div key={index}>
               <div className="imgWrap">
-                <img src={option.productImg} alt="img" onError={onImgError} />
+                <img
+                  src={`/img/${option.productCollect.wineDetailVo.pic}`}
+                  alt="img"
+                  onError={onImgError}
+                />
               </div>
               <ul>
-                <li>{option.productKorName}</li>
-                <li>{option.productEngName}</li>
+                <li>{option.productCollect.wineDetailVo.nmKor}</li>
+                <li>{option.productCollect.wineDetailVo.nmEng}</li>
                 <li>
-                  {(option.sellPrice * option.number).toLocaleString()}원{" "}
-                  <span>{option.number}개</span>{" "}
+                  {(
+                    (option.productCollect.selSale === null
+                      ? parseInt(option.productCollect.wineDetailVo.price)
+                      : parseInt(option.productCollect.selSale.salePrice)) *
+                    option.editQuantity.quantity
+                  ).toLocaleString()}
+                  원 <span>{option.editQuantity.quantity}개</span>{" "}
                 </li>
               </ul>
             </div>
@@ -78,26 +77,40 @@ const ProductComplete = () => {
         </ProductCompleteinfo>
       )}
       <ProductCompleteBox>
-        {firstItem && (
-          <div>
-            <ul>
-              <li>픽업 지점: {firstItem.selectCollect.pickUpSpot.title}</li>
-              <li>픽업 주소: {firstItem.selectCollect.pickUpSpot.address}</li>
-              <li>
-                픽업 시간: {firstItem.selectCollect.pickUpData.substring(0, 2)}
-                월 {firstItem.selectCollect.pickUpData.substring(3, 6)}일{" "}
-                {firstItem.selectCollect.pickUpTime}
-              </li>
-            </ul>
-            <p>총 결제금액 : {firstItem.totalPrice.toLocaleString()}원</p>
-          </div>
-        )}
-      <ButtonOk>
-        <Link to="/selllist">주문내역 확인 하기</Link>
-      </ButtonOk>
-      <ButtonCancel>
-        <Link to="/main">메인보기</Link>
-      </ButtonCancel>
+        <div>
+          {state && (
+            <div>
+              <ul>
+                <li>
+                  <span>픽업 지점</span>
+                  <span>이마트 {state[0].selectCollect.pickUpSpot.nm}</span>
+                </li>
+                <li>
+                  <span>픽업 주소</span>{" "}
+                  <span>{state[0].selectCollect.pickUpSpot.address}</span>
+                </li>
+                <li>
+                  <span>픽업 날짜</span>
+                  <span>
+                    {state[0].selectCollect.changeDate.substring(0, 16)}
+                  </span>
+                </li>
+                <li>
+                  <span>총 결제금액</span>{" "}
+                  <span>{state[0].totalPrice.toLocaleString()}원</span>
+                </li>
+              </ul>
+            </div>
+          )}
+        </div>
+        <div className="confirmButton">
+        <ButtonOk>
+          <Link to="/selllist">주문내역 확인 하기</Link>
+        </ButtonOk>
+        <ButtonCancel>
+          <Link to="/main">메인보기</Link>
+        </ButtonCancel>
+        </div>
       </ProductCompleteBox>
     </ProductCompleteMain>
   );

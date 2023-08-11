@@ -11,10 +11,10 @@ import NoImage from "../../assets/no_image.jpg";
 
 const PurchaseList = ({
   productInfoArray,
-  totalPrice,
   setTotalPrice,
   productCollect,
   setProductCollect,
+  setEditQuantity,
 }) => {
   // 이미지 없을 때 error처리
   const onImgError = e => {
@@ -59,25 +59,37 @@ const PurchaseList = ({
     let itemtotal = 0;
     productInfoArray.forEach((option, index) => {
       itemtotal +=
-        parseInt(option.selSale.salePrice) * parseInt(itemCount[index]);
+        (option.selSale === null
+          ? parseInt(option.wineDetailVo.price)
+          : parseInt(option.selSale.salePrice)) * parseInt(itemCount[index]);
     });
     return itemtotal;
   };
 
   useEffect(() => {
     setTotalPrice(calcTotalSum);
-    console.log("totalPrice", totalPrice);
   }, [calcTotalSum]);
 
   useEffect(() => {
     const updatedProductCollect = productInfoArray.map((option, index) => {
       return {
-        ...option,
         quantity: itemCount[index],
       };
     });
-    setProductCollect({ updatedProductCollect });
-  }, []);
+    setEditQuantity(...updatedProductCollect);
+    setProductCollect({ ...productCollect, ...updatedProductCollect });
+  }, [itemCount]);
+  // useEffect(() => {
+  //   const updatedProductCollect = {};
+
+  //   productInfoArray.forEach((option, index) => {
+  //     updatedProductCollect[index] = {
+  //       quantity: itemCount[index],
+  //     };
+  //   });
+  //   setEditQuantity(updatedProductCollect);
+  //   setProductCollect({ ...productCollect, ...updatedProductCollect });
+  // }, [itemCount]);
   return (
     <div>
       <PurchaseListWrap>
@@ -95,6 +107,12 @@ const PurchaseList = ({
               <strong>{option.wineDetailVo.nmKor}</strong>
               <span>{option.wineDetailVo.nmEng}</span>
               {/* <p>{parseInt(option.selSale.salePrice).toLocaleString()} 원</p> */}
+              <p>
+                {option.selSale === null
+                  ? parseInt(option.wineDetailVo.price).toLocaleString()
+                  : parseInt(option.selSale.salePrice).toLocaleString()}
+                원
+              </p>
               <div>
                 <FontAwesomeIcon
                   icon={faMinus}
