@@ -437,3 +437,60 @@ export const NoticeModal = styled(Modal)`
     }
   }
 `;
+// 준비중 모달창
+export const CartCompleteModal = styled(Modal)`
+  top: 25vh;
+  .ant-modal-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 75%;
+    height: auto;
+    margin: 0 auto;
+    padding: 60px 25px;
+  }
+  .ant-modal-body {
+    font-family:
+      "Pretendard Variable",
+      Pretendard,
+      -apple-system,
+      BlinkMacSystemFont,
+      system-ui,
+      Roboto,
+      "Helvetica Neue",
+      "Segoe UI",
+      "Apple SD Gothic Neo",
+      "Noto Sans KR",
+      "Malgun Gothic",
+      "Apple Color Emoji",
+      "Segoe UI Emoji",
+      "Segoe UI Symbol",
+      sans-serif;
+    color: ${Maincolor.black};
+    margin-top: 15px;
+    p {
+      font-size: 1.8rem;
+      font-weight: 700;
+      text-align: center;
+      margin-bottom: 20px;
+      i {
+        display: block;
+        position: relative;
+        width: 50px;
+        height: 50px;
+        border-radius: 100%;
+        background: ${Maincolor.black};
+        font-size: 1.8em;
+        line-height: 1;
+        margin: 0 auto 10px;
+        img {
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          width: 20px;
+        }
+      }
+    }
+  }
+`;

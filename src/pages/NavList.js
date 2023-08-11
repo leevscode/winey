@@ -11,6 +11,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import { removeCookie } from "../api/cookie";
 import { logoutUser } from "../reducers/userSlice";
+import { totalItem } from "../reducers/cartSlice";
 
 const NavList = ({ handleOpenNav, closeNav }) => {
   const navigate = useNavigate();
@@ -21,6 +22,7 @@ const NavList = ({ handleOpenNav, closeNav }) => {
     e.preventDefault();
     await postLogout("");
     dispatch(logoutUser({}));
+    dispatch(totalItem(0));
     removeCookie("accessToken");
     removeCookie("refreshToken");
     // console.log("로그아웃 실행");

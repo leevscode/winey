@@ -20,13 +20,38 @@ export const getUserStoreInfo = async setUserStore => {
 };
 
 // 구입상품 디테일 정보 get
-export const getBuyProductDetail = async (setProductDifInfo, productId) => {
+export const getBuyProductDetail = async (setProductCollect, productId) => {
   try {
-    const res = await client.get(`/detail/${productId}`);
+    const res = await client.get(`/api/detail/${productId}`);
     const result = res.data;
     console.log("result", result);
-    setProductDifInfo(result);
+    setProductCollect(result);
   } catch (err) {
     console.log("와인정보 get 실패", err);
+  }
+};
+
+// 상세페이지에서 direct로 결제하기 post
+export const postOneItemPurchase = async ({
+  productCollect,
+  selectCollect,
+  isPayment,
+  totalPrice,
+  editQuantity,
+}) => {
+  try {
+    const res = await client.post("/api/payment/eachpayment", {
+      productId: productCollect.wineDetailVo.productId, // 상품 pk
+      storeId: selectCollect.pickUpSpot.storeId, //지점 pk
+      salePrice: totalPrice, //총 금액,
+      payment: isPayment, //카드결제 1번
+      pickupTime: selectCollect.changeDate,
+      quantity: editQuantity.quantity, // 수량
+    });
+    console.log(res);
+    const data = await res.data;
+    console.log("결제성공", data);
+  } catch (error) {
+    console.log("결제실패", error);
   }
 };

@@ -17,7 +17,7 @@ export const PickupPlaceClickWrap = styled.div`
     & > p {
       padding: ${WidthPd.padding};
       color: ${Maincolor.black};
-      font-size: 1.1rem;
+      font-size: 1.2rem;
       font-weight: 500;
       line-height: 2rem;
       margin-left: 0.2rem;
@@ -51,7 +51,7 @@ export const PickupPlaceClickWrap = styled.div`
         & b {
           background: ${Maincolor.redMedium};
           color: ${Maincolor.white};
-          font-size: 0.9rem;
+          font-size: 1.2rem;
           line-height: 2rem;
           font-weight: 500;
           padding: 0.2rem 0.5rem;
@@ -65,9 +65,10 @@ export const PickupPlaceClickWrap = styled.div`
         }
         //address
         & p {
-          font-size: 1.1rem;
+          font-size: 1.2rem;
           line-height: 1.5rem;
           margin-top: 1rem;
+          letter-spacing: -0.03rem;
         }
         &:hover {
           background: ${Maincolor.redBold};
@@ -313,7 +314,7 @@ export const PurchaseBtn = styled.div`
   }
   & p {
     color: ${Maincolor.black};
-    font-size: 1.1rem;
+    font-size: 1.2rem;
     font-weight: 500;
     line-height: 2rem;
     margin-left: 0.2rem;
@@ -323,7 +324,7 @@ export const PurchaseBtn = styled.div`
   button {
     margin: 1rem 0 2rem 0;
     &:last-child {
-      margin-bottom: 5rem;
+      margin-bottom: 6.5rem;
     }
     svg {
       margin-right: 1rem;

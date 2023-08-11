@@ -9,7 +9,7 @@ import { RecommWineTitle, RecommWineWrap } from "../../style/MainStyle";
 import RecommWineSlide from "./RecommWineSlide";
 import ProductListSkeleton from "../skeleton/ProductListSkeleton";
 
-const RecommWine = () => {
+const RecommWine = ({ setIsModalOpen }) => {
   // 입문용 와인 데이터 보관할 state
   const [randomWines, setRandomWines] = useState([]);
   // 로딩 state
@@ -37,7 +37,11 @@ const RecommWine = () => {
         </h2>
       </RecommWineTitle>
       {/* 맞춤 와인 내용 */}
-      <RecommWineSlide isLoading={isLoading} randomWines={randomWines} />
+      <RecommWineSlide
+        isLoading={isLoading}
+        randomWines={randomWines}
+        setIsModalOpen={setIsModalOpen}
+      />
     </RecommWineWrap>
   );
 };

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { ButtonCancel, ButtonOk } from "../../style/GlobalStyle";
 import {
   ProudctTotalItem,
@@ -14,17 +14,12 @@ import {
   Cartnmkor,
   Cratprice,
 } from "../../style/ProductCartStyle";
-import { useNavigate } from "react-router";
+import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faExclamation } from "@fortawesome/free-solid-svg-icons";
-import {
-  fetchCartData,
-  removeCarts,
-} from "../../../src/api/patchcart";
-import { useState } from "react";
+import { fetchCartData, removeCarts } from "../../../src/api/patchcart";
 
 const ProductCart = () => {
-  // const dispatch = useDispatch();
   const navigate = useNavigate();
   const [CartData, setCartData] = useState([]);
 
@@ -88,7 +83,7 @@ const ProductCart = () => {
         item.quantity -= 1;
         if (item.quantity < 1) {
           item.quantity = 1;
-        } 
+        }
       }
       return item;
     });
@@ -109,7 +104,7 @@ const ProductCart = () => {
 
   const buyGood = async () => {
     console.log("장바구니 내역을 서버로 전송함");
-  
+
     navigate("/productsell");
   };
 
@@ -130,30 +125,31 @@ const ProductCart = () => {
             장바구니에 총 {CartData.length}개의 상품이 있습니다.
           </ProudctTotalItem>
           <ul>
-            {CartData.map(item => (
-              <ProductCartInfo key={item.cartId}>
-                <CartDetailWrap>
-                  <img src={`/img/${item.pic}`} alt="와인사진" />
-                </CartDetailWrap>
-                <CartDetail>
-                  <Cartnmkor>{item.nmKor}</Cartnmkor>
-                  <CartnmEng>{item.nmEng}</CartnmEng>
-                  <Cratprice>{item.price.toLocaleString()}원</Cratprice>
-                  <GoodsEa>
-                    <button onClick={() => decreaseItemQuantity(item.cartId)}>
-                      -
-                    </button>
-                    <span>{item.quantity}</span>
-                    <button onClick={() => increaseItemQuantity(item.cartId)}>
-                      +
-                    </button>
-                  </GoodsEa>
-                </CartDetail>
-                <CartDetaiClose onClick={() => removeItemCart(item.cartId)}>
-                  X
-                </CartDetaiClose>
-              </ProductCartInfo>
-            ))}
+            {CartData &&
+              CartData.map(item => (
+                <ProductCartInfo key={item.cartId}>
+                  <CartDetailWrap>
+                    <img src={`/img/${item.pic}`} alt="와인사진" />
+                  </CartDetailWrap>
+                  <CartDetail>
+                    <Cartnmkor>{item.nmKor}</Cartnmkor>
+                    <CartnmEng>{item.nmEng}</CartnmEng>
+                    <Cratprice>{item.price.toLocaleString()}원</Cratprice>
+                    <GoodsEa>
+                      <button onClick={() => decreaseItemQuantity(item.cartId)}>
+                        -
+                      </button>
+                      <span>{item.quantity}</span>
+                      <button onClick={() => increaseItemQuantity(item.cartId)}>
+                        +
+                      </button>
+                    </GoodsEa>
+                  </CartDetail>
+                  <CartDetaiClose onClick={() => removeItemCart(item.cartId)}>
+                    X
+                  </CartDetaiClose>
+                </ProductCartInfo>
+              ))}
           </ul>
           <CartTotalPrice>
             <li>최종결제금액</li>

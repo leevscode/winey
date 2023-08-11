@@ -119,7 +119,6 @@ const JoinEditForm = () => {
           content: "수정내용을 저장하시겠습니까?",
           onOk() {
             patchMemberInfo(update);
-            patchMemberPW(update);
             dispatch(getMemberInfo());
             navigate("/main");
             console.log("정보수정");
@@ -129,6 +128,7 @@ const JoinEditForm = () => {
           },
         });
       }
+      dispatch(getMemberInfo());
     } else {
       console.log("Failed");
     }

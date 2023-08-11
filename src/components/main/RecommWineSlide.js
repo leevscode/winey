@@ -3,8 +3,8 @@
   노션 : https://www.notion.so/kimaydev
   깃허브 : https://github.com/kimaydev
 */
-import React, { useState } from "react";
-import { Link, NavLink } from "react-router-dom";
+import React, { useCallback, useState } from "react";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import { v4 } from "uuid";
 import { useSelector } from "react-redux";
 // Import Swiper React components
@@ -21,19 +21,33 @@ import {
 } from "../../style/MainStyle";
 import ProductListSkeleton from "../skeleton/ProductListSkeleton";
 import NoImage from "../../assets/no_image.jpg";
+import { addCart } from "../../api/patchcart";
 
-const RecommWineSlide = ({ isLoading, randomWines }) => {
+const RecommWineSlide = ({ isLoading, randomWines, setIsModalOpen }) => {
+  const navigate = useNavigate();
+  const userData = useSelector(state => state.user);
   // 이미지 없을 때 error처리
   const onImgError = e => {
     e.target.src = NoImage;
   };
-  // 회원정보 불러오기
-  const userData = useSelector(state => state.user);
+  // 장바구니 버튼 클릭 이벤트
+  const showModal = useCallback(
+    (_iproduct, e) => {
+      e.preventDefault();
+      // 비회원인 상태에서 장바구니 버튼 클릭했을 때
+      if (userData.userId) {
+        // 장바구니 POST 성공
+        addCart(_iproduct);
+        setIsModalOpen(true);
+      } else {
+        navigate("/login");
+      }
+      // console.log("선택한 상품의 아이디 값", _iproduct);
+    },
+    [setIsModalOpen],
+  );
   // 로딩 더미데이터
   const productListSkeleton = [1, 2, 3];
-  // 로그인 여부 체크 state
-  // const [isLoginChk, setIsLoginChk] = useState(null);
-  const [isLoginChk, setIsLoginChk] = useState(true);
   // console.log(isLoginChk);
   // 입문용 와인 더미데이터
   // const productSlide = [
@@ -164,7 +178,7 @@ const RecommWineSlide = ({ isLoading, randomWines }) => {
                           onError={onImgError}
                         />
                         {/* 장바구니 버튼 */}
-                        <button>
+                        <button onClick={e => showModal(item.productId, e)}>
                           <img
                             src={`${process.env.PUBLIC_URL}/images/icon_cart_2.svg`}
                             alt="장바구니에 담기"
@@ -236,4 +250,4 @@ const RecommWineSlide = ({ isLoading, randomWines }) => {
   );
 };
 
-export default RecommWineSlide;
+export default React.memo(RecommWineSlide);
