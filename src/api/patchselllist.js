@@ -12,6 +12,19 @@ export const fetchSellListData = async () => {
   }
 };
 
+// 주문 내역 취소
+export const cancelSellListData = async()=> {
+  try {
+    const res = await client.put("orderList/cancel", {
+    });
+    console.log("res", res);
+    const result = await res.data;
+    console.log(result);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 // 리뷰를 등록하는 함수
 const submitReview = reviewData => {
   client
