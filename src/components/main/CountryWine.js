@@ -45,14 +45,16 @@ const CountryWine = ({ setIsModalOpen }) => {
     (_iproduct, e) => {
       e.preventDefault();
       // 비회원인 상태에서 장바구니 버튼 클릭했을 때
-      if (userData.userId) {
-        // 장바구니 POST 성공
-        addCart(_iproduct);
-        setIsModalOpen(true);
-      } else {
-        navigate("/login");
-      }
-      // console.log("선택한 상품의 아이디 값", _iproduct);
+      addCart(_iproduct);
+      setIsModalOpen(true);
+    },
+    [setIsModalOpen],
+  );
+  // 비회원 장바구니 버튼 클릭 이벤트
+  const handleNotUser = useCallback(
+    e => {
+      e.preventDefault();
+      navigate("/login");
     },
     [setIsModalOpen],
   );
@@ -227,7 +229,13 @@ const CountryWine = ({ setIsModalOpen }) => {
                     onError={onImgError}
                   />
                   {/* 장바구니 버튼 */}
-                  <button onClick={e => showModal(item.productId, e)}>
+                  <button
+                    onClick={
+                      userData.userId
+                        ? e => showModal(item.productId, e)
+                        : e => handleNotUser(e)
+                    }
+                  >
                     <img
                       src={`${process.env.PUBLIC_URL}/images/icon_cart_2.svg`}
                       alt="장바구니에 담기"

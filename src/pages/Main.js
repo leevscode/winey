@@ -14,7 +14,7 @@ import PriceWine from "../components/main/PriceWine";
 import ProductCartModal from "../components/product/ProductCartModal";
 
 const Main = () => {
-  // 검색 모달 state
+  // 장바구니 완료 모달 state
   const [isModalOpen, setIsModalOpen] = useState(false);
   const handleOk = () => {
     setIsModalOpen(false);

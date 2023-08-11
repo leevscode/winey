@@ -3,7 +3,6 @@
     노션 : https://www.notion.so/hyemdev
     깃허브 : https://github.com/hyemdev
 */
-import axios from "axios";
 import { client } from "./client";
 import { getUser } from "../reducers/userSlice";
 
@@ -25,19 +24,6 @@ export const postUserJoin = async userInfo => {
     console.log(error);
   }
 };
-
-// 회원정보 get(정보수정페이지 사용)
-// export const getMemberInfo = async setEditUserInfo => {
-//   try {
-//     const res = await client.get("/api");
-//     const result = await res.data;
-//     console.log("result", result);
-//     setEditUserInfo(result);
-//     return result;
-//   } catch (error) {
-//     console.log(error);
-//   }
-// };
 
 // 회원정보 get redux toolkit
 export const getMemberInfo = () => async dispatch => {
@@ -68,20 +54,6 @@ export const patchMemberInfo = async editUserInfo => {
     console.log(error);
   }
 };
-// 비번수정
-// export const patchMemberPW = async editUserInfo => {
-//   try {
-//     const res = await client.patch("/api/updPassword", {
-//       pw: editUserInfo.editpassword,
-//     });
-//     console.log("res", res);
-
-//     const result = await res.data;
-//     console.log(result);
-//   } catch (error) {
-//     console.log(error);
-//   }
-// };
 
 // 회원탈퇴 delete
 export const deleteMember = async () => {
@@ -98,9 +70,9 @@ export const deleteMember = async () => {
 export const postLogout = async () => {
   try {
     const res = await client.post("/sign-api/logout");
-    console.log(res);
+    // console.log(res);
     const result = await res.data;
-    console.log(result);
+    // console.log(result);
     return result;
   } catch (error) {
     console.log(error);

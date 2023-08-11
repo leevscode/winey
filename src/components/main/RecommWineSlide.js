@@ -30,19 +30,12 @@ const RecommWineSlide = ({ isLoading, randomWines, setIsModalOpen }) => {
   const onImgError = e => {
     e.target.src = NoImage;
   };
-  // 장바구니 버튼 클릭 이벤트
+  // 회원 장바구니 버튼 클릭 이벤트
   const showModal = useCallback(
     (_iproduct, e) => {
       e.preventDefault();
-      // 비회원인 상태에서 장바구니 버튼 클릭했을 때
-      if (userData.userId) {
-        // 장바구니 POST 성공
-        addCart(_iproduct);
-        setIsModalOpen(true);
-      } else {
-        navigate("/login");
-      }
-      // console.log("선택한 상품의 아이디 값", _iproduct);
+      addCart(_iproduct);
+      setIsModalOpen(true);
     },
     [setIsModalOpen],
   );
