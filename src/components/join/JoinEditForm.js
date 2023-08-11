@@ -69,17 +69,14 @@ const JoinEditForm = () => {
   // 닉네임 수정
   const handleEditUserName = e => {
     setEditUserName(e.target.value);
-    console.log("tel", e.target.value);
   };
   // 전화번호 수정
   const handleEditUserTel = e => {
     setEditUserTel(e.target.value);
-    console.log("tel", e.target.value);
   };
   // 지역 수정
   const handleEditUserCity = e => {
     setEditUserCity(e.target.value);
-    console.log("city", e.target.value);
   };
 
   // 본인 인증 핸들러
@@ -99,7 +96,6 @@ const JoinEditForm = () => {
     setPasswordConfirm(e.target.value);
     setPasswordError(e.target.value !== editpassword);
   };
-  console.log("editpassword", editpassword);
 
   // 회원정보수정 확인 핸들러
   const onFinish = values => {
@@ -118,14 +114,24 @@ const JoinEditForm = () => {
         });
         console.log("비밀번호확인");
       } else {
-        patchMemberInfo(update);
-        patchMemberPW(update);
-        navigate("/main");
+        Modal.confirm({
+          title: "회원정보수정",
+          content: "수정내용을 저장하시겠습니까?",
+          onOk() {
+            patchMemberInfo(update);
+            patchMemberPW(update);
+            dispatch(getMemberInfo());
+            navigate("/main");
+            console.log("정보수정");
+          },
+          onCancel() {
+            console.log("Cancel");
+          },
+        });
       }
     } else {
       console.log("Failed");
     }
-    dispatch(getMemberInfo());
   };
 
   const onFinishFailed = errorInfo => {

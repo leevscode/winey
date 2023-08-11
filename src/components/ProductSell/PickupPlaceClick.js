@@ -87,7 +87,6 @@ const PickupPlaceClick = ({ userStore, selectCollect, setSelectCollect }) => {
     console.log("selectCollect", selectCollect);
   }, [pickUpSpot, pickUpDate, pickUpTime]); // totalPayList 값이 변경될 때마다 실행
 
-
   return (
     <PickupPlaceClickWrap>
       {/* 픽업지점 */}
@@ -109,7 +108,7 @@ const PickupPlaceClick = ({ userStore, selectCollect, setSelectCollect }) => {
                     <b>{option.regionNm}</b>
                     <br />
                     <strong>{option.nm}</strong>
-                    <p>{option.regionNm}</p>
+                    <p>{option.address}</p>
                   </button>
                 </div>
               </SwiperSlide>

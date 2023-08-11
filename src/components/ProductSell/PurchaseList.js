@@ -31,7 +31,7 @@ const PurchaseList = ({
   const handleCountMinus = option => {
     setItemCount(prevCounts => {
       return prevCounts.map((count, index) => {
-        if (productCollect[index].productPK === option.productPK) {
+        if (productInfoArray[index].productId === option.productId) {
           // 값이 0보다 작으면 0으로 제한
           return Math.max(parseInt(count) - 1, 1);
         } else {
@@ -44,7 +44,7 @@ const PurchaseList = ({
   const handleCountPlus = option => {
     setItemCount(prevCounts => {
       return prevCounts.map((count, index) => {
-        if (productCollect[index].productPK === option.productPK) {
+        if (productInfoArray[index].productId === option.productId) {
           // 값이 5보다 크면 5으로 제한
           return Math.min(parseInt(count) + 1, 5);
         } else {
@@ -58,7 +58,8 @@ const PurchaseList = ({
   const calcTotalSum = () => {
     let itemtotal = 0;
     productInfoArray.forEach((option, index) => {
-      itemtotal += parseInt(option.salePrice) * parseInt(itemCount[index]);
+      itemtotal +=
+        parseInt(option.selSale.salePrice) * parseInt(itemCount[index]);
     });
     return itemtotal;
   };

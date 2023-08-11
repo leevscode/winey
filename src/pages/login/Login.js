@@ -48,6 +48,7 @@ const Login = () => {
         // 리프레쉬 토큰 요청
         // fetchRefreshToken()
         navigate("/main");
+        // navigate("/keywordselect");
       } else {
         Modal.warning(config);
       }

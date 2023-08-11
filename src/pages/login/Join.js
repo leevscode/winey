@@ -120,8 +120,12 @@ const Join = () => {
       return;
     }
     if (checkAll === true) {
-      const goJoin = await postUserJoin(values);
-      // navigate("/welcome");
+      try {
+        const goJoin = await postUserJoin(values);
+        navigate("/welcome");
+      } catch (error) {
+        console.log("err", error);
+      }
     } else {
       Modal.warning({
         title: "이용약관동의",
