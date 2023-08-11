@@ -16,33 +16,38 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleCheck, faCreditCard } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate, useParams } from "react-router-dom";
 import { Modal } from "antd";
-import { getBuyProductDetail, getUserStoreInfo } from "../../api/purchasepatch";
+import {
+  getBuyProductDetail,
+  getUserStoreInfo,
+  postOneItemPurchase,
+} from "../../api/purchasepatch";
 
 const ProductSell = () => {
+  const navigate = useNavigate();
   const { isell } = useParams();
-  // 구매상품정보(상품id 임시값임)
-  // const productId = 381;
+
+  // 상세페이지에서 결제 클릭 시 상품정보(productID)
   const productId = isell;
 
-  const navigate = useNavigate();
-  // 정보불러오기 state
+  // user별 매장정보
   const [userStore, setUserStore] = useState([]);
-  const [productDirInfo, setProductDifInfo] = useState("");
 
-  // get한 아이템정보를 배열에 담자~
-  const productInfoArray = [productDirInfo];
-
-  // 픽업 선택값 담기 state
+  // 픽업 선택 값 담기
   const [selectCollect, setSelectCollect] = useState([]);
-  // 제품 선택 값 담기
-  const [productCollect, setProductCollect] = useState("");
 
+  // 상품 정보 값 담기
+  const [productCollect, setProductCollect] = useState("");
+  // get한 아이템정보를 배열에 담자
+  const productInfoArray = [productCollect];
+
+  const [editQuantity, setEditQuantity] = useState(1);
+
+  // 수량변경 state
   // 합계값 담기 state
   const [totalPrice, setTotalPrice] = useState(0);
+
   // 카드결제 유무 담기 state
   const [isPayment, setIsPayment] = useState(0);
-  // 전체 담기 state
-  const [totalPayList, setTotalPayList] = useState([]);
 
   // 에러처리 state
   const [paymentError, setPaymentError] = useState("");
@@ -66,13 +71,11 @@ const ProductSell = () => {
     });
     setPaymentError(null);
     setIsPayment(1);
-    setTotalPayList({ productCollect, selectCollect, totalPrice, isPayment });
-    console.log("isPayment", isPayment);
-    console.log("totalPayList", totalPayList);
   };
 
   // 최종결제 버튼
   const handleFinalCharge = e => {
+
     // 에러처리
     if (
       selectCollect.pickUpDate === undefined ||
@@ -104,50 +107,51 @@ const ProductSell = () => {
       return;
     }
     // 최종결제완료
-    console.log("결제정보");
     // navigate("/ProductComplete", { state: totalPayList });
+    postOneItemPurchase({
+      productCollect,
+      selectCollect,
+      isPayment,
+      totalPrice,
+      editQuantity,
+    });
     navigate("/ProductComplete");
-  };
-
-  const getItemDetail = async (setProductDifInfo, productId) => {
-    try {
-      const data = await getBuyProductDetail(setProductDifInfo, productId);
-      console.log(data);
-    } catch (error) {
-      console.log(error);
-    }
   };
 
   useEffect(() => {
     // 유저 매장정보 get
     getUserStoreInfo(setUserStore);
     // 상품정보 get
-    getItemDetail(setProductDifInfo, productId);
-  }, [productId]);
+    getBuyProductDetail(setProductCollect, productId);
+    // setProductCollect(productInfoArray);
+  }, []);
+  console.log("productCollect", productCollect);
+  console.log("totalPrice", totalPrice);
+  console.log("editQuantity", editQuantity);
 
-  useEffect(() => {
-    console.log("totalPayList", totalPayList);
-  }, [productCollect, selectCollect]); // totalPayList 값이 변경될 때마다 실행
+  // useEffect(() => {}, [productCollect, selectCollect]); // 값 변경될때마다 랜더링
   return (
     <PurchaseWrap>
       <PickupPlaceClick
-        // get한 지점정보
+        // get한 지점정보 보내기
         userStore={userStore}
-        // 선택한 값
+        // 픽업정보 담아오기
         selectCollect={selectCollect}
         setSelectCollect={setSelectCollect}
       />
 
-      {productDirInfo && (
+      {productCollect && (
         <PurchaseList
-          // 합계값
+          // 합계값 담아오기
           totalPrice={totalPrice}
           setTotalPrice={setTotalPrice}
-          // 상품변경정보
+          // 상품변경정보 담아오기
           productCollect={productCollect}
           setProductCollect={setProductCollect}
           // 상품정보 보내기
           productInfoArray={productInfoArray}
+          // 수량변경값
+          setEditQuantity={setEditQuantity}
         />
       )}
       <PurchaseBtn>

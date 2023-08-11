@@ -7,23 +7,24 @@ import "swiper/css/navigation";
 
 const PickupPlaceClick = ({ userStore, selectCollect, setSelectCollect }) => {
   const pickTime = [
-    "10:00",
-    "12:00",
-    "14:00",
-    "16:00",
-    "18:00",
-    "20:00",
-    "22:00",
+    "10:00:00",
+    "12:00:00",
+    "14:00:00",
+    "16:00:00",
+    "18:00:00",
+    "20:00:00",
+    "22:00:00",
   ];
 
   // 픽업날짜(오늘 이후 3일 간)
   const first = new Date();
   const formatDate = date => {
-    return date.toLocaleString("ko-KR", {
-      weekday: "long",
-      month: "2-digit",
-      day: "2-digit",
-    });
+    // return date.toLocaleString("ko-KR", {
+    //   weekday: "long",
+    //   month: "2-digit",
+    //   day: "2-digit",
+    // });
+    return date.toISOString().toLocaleString("ko-KR").substring(0, 10);
   };
 
   const dateArray = [];
@@ -84,7 +85,10 @@ const PickupPlaceClick = ({ userStore, selectCollect, setSelectCollect }) => {
   };
 
   useEffect(() => {
-    console.log("selectCollect", selectCollect);
+    // 날짜형식바꿔서 보내기
+    const changeDate = `${pickUpDate} ${pickUpTime}`;
+    setSelectCollect({ ...selectCollect, changeDate });
+    
   }, [pickUpSpot, pickUpDate, pickUpTime]); // totalPayList 값이 변경될 때마다 실행
 
   return (
@@ -134,10 +138,10 @@ const PickupPlaceClick = ({ userStore, selectCollect, setSelectCollect }) => {
               >
                 {/* 날짜 */}
                 <strong>
-                  {option.substring(0, 2)}월 {option.substring(3, 6)}일
+                  {option.substring(5, 7)}월 {option.substring(8, 11)}일
                 </strong>
                 {/* 요일 */}
-                <p>{option.substring(7, 11)}</p>
+                {/* <p>{option.substring(7, 11)}</p> */}
               </button>
             </div>
           ))}
@@ -159,7 +163,7 @@ const PickupPlaceClick = ({ userStore, selectCollect, setSelectCollect }) => {
                       "btn" + (index == sltTimeButton ? " activeTime" : "")
                     }
                   >
-                    <strong>{option}</strong>
+                    <strong>{option.substring(0, 5)}</strong>
                   </button>
                 </div>
               </SwiperSlide>
