@@ -108,7 +108,7 @@ const PickupPlaceClick = ({ userStore, selectCollect, setSelectCollect }) => {
                     <b>{option.regionNm}</b>
                     <br />
                     <strong>{option.nm}</strong>
-                    <p>{option.regionNm}</p>
+                    <p>{option.address}</p>
                   </button>
                 </div>
               </SwiperSlide>

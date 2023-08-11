@@ -96,6 +96,10 @@ export const ProductCompleteinfo = styled.div`
 `;
 
 export const ProductCompleteBox = styled.div`
+  & > button:nth-of-type(1) > a {
+    color: ${Maincolor.white};
+  }
+ */
   & ul {
     margin-left: 1rem;
     font-size: 1.5rem;

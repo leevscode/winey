@@ -6,37 +6,32 @@ import {
   ProductCompleteText,
   ProductCompleteinfo,
 } from "../../style/ProductCompleteStyle";
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import NoImage from "../../assets/no_image.jpg";
 
 const ProductComplete = () => {
   // const [isLoading, setIsLoading] = useState(true); // 로딩 상태
 
   // const { state } = useLocation();
-  const location = useLocation();
-  // console.log("state", state);
+  // const location = useLocation();
 
-  const data = [{ ...location.state }];
+  // const data = [{ ...location.state }];
   // const { totalPayList } = location.state;
-  console.log("data", data);
-  // console.log("totalPayList", totalPayList);
 
   // 첫 번째 요소 구조분해 할당
-  const [firstItem] = data;
+  const [firstItem] = [];
 
   // 내부의 객체들 구조분해 할당
-  const {
-    isPayment,
-    productCollect,
-    selectCollect: {
-      pickUpSpot: { address, pk, title },
-      pickUpData,
-      pickUpTime,
-    },
-    totalPrice,
-  } = firstItem;
-
-  console.log("productCollect", productCollect);
+  // const {
+  //   isPayment,
+  //   productCollect,
+  //   selectCollect: {
+  //     pickUpSpot: { address, pk, title },
+  //     pickUpData,
+  //     pickUpTime,
+  //   },
+  //   totalPrice,
+  // } = firstItem;
 
   // 이미지 없을 때 error처리
   const onImgError = e => {
@@ -97,8 +92,12 @@ const ProductComplete = () => {
             <p>총 결제금액 : {firstItem.totalPrice.toLocaleString()}원</p>
           </div>
         )}
-        <ButtonOk>주문내역 확인 하기</ButtonOk>
-        <ButtonCancel>메인보기</ButtonCancel>
+      <ButtonOk>
+        <Link to="/selllist">주문내역 확인 하기</Link>
+      </ButtonOk>
+      <ButtonCancel>
+        <Link to="/main">메인보기</Link>
+      </ButtonCancel>
       </ProductCompleteBox>
     </ProductCompleteMain>
   );
