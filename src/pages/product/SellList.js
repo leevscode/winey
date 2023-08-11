@@ -24,46 +24,23 @@ const SellList = () => {
   const [SellListData, setSellListData] = useState([]);
   // 선택된 번호 state
   const [selectedItem, setSelectedItem] = useState(null);
-  const [reviewList, setReviewList] = useState([]);
+  // const [reviewList, setReviewList] = useState([]);
   // 목록
   const [pickupModalVisible, setPickupModalVisible] = useState(false);
 
   const [selectedOrder, setSelectedOrder] = useState([]);
   const [completedPickUpOrders, setCompletedPickUpOrders] = useState([]);
   const [orderId, setorderId] = useState([]);
+  const [orderCancelId, setorderCancelId] = useState();
   const [CancelModal, setCancelModal] = useState([]);
   const navigate = useNavigate();
-
-  // 추후 axios 처리를 할 함수
-  // const getSellData = () => {};
-  // useEffect(() => {
-  //   getSellData();
-  //   const testData = [
-
-  //   ];
-
-  //   let tempArr = [];
-  //   for (let i = 0; i < testData.length; i++) {
-  //     tempArr.push(false);
-  //   }
-  //   setReviewList([...tempArr]);
-
-  //   setorderId(testData);
-  //   setCancelModal(Array(testData.length).fill(false));
-  // }, []);
-
-  // useEffect(() => {
-  //   console.log(reviewList);
-  // }, [reviewList]);
-
-  // ordeId 는주문내역 pk값
 
   const cancelSellList = async data => {
     try {
       await cancelSellListData(data); // 취소 요청 보내기
 
       // 취소를 반영하기 위해 상태를 업데이트합니다
-      const updatedItems = orderId.filter(item => item.data !== data);
+      const updatedItems = orderId.filter(item => item.orderId !== data);
       setorderId(updatedItems);
       hideCancelModal(data);
       console.log("주문취소 성공:", updatedItems);
@@ -83,27 +60,33 @@ const SellList = () => {
     }
   };
 
+  // 주문내역 출력 useEffect
   useEffect(() => {
     filledSellListData();
   }, []);
-
   useEffect(() => {
     console.log("SellListData:", SellListData);
   }, [SellListData]);
 
   // 특정 경우에 주문취소가 보이게 하는 함수
   const showCancelModal = index => {
+    setorderCancelId(index);
     const updatedCancelModal = [...CancelModal];
     updatedCancelModal[index] = true;
     setCancelModal(updatedCancelModal);
   };
 
   // 주문취소 모달에서 "네" 버튼 활성화
-  const handleCancel = productId => {
-    const updatedItems = orderId.filter(item => item.productId !== productId);
-    setorderId(updatedItems);
-    hideCancelModal(productId);
-    console.log("주문취소 성공:", updatedItems);
+  const handleCancel = async orderId => {
+    try {
+      await cancelSellListData(orderId);
+      const updatedItems = orderId.filter(item => item.orderId !== orderId);
+      setorderId(updatedItems);
+      hideCancelModal(orderId);
+      console.log("주문취소 성공:", updatedItems);
+    } catch (error) {
+      console.log("주문취소 실패:", error);
+    }
   };
 
   // 주문취소 모달에서 "아니요" 버튼 활성화
@@ -145,7 +128,7 @@ const SellList = () => {
     // 주문 상태를 "픽업완료"로 변경
     setorderId(prevorderId => {
       const updatedorderId = prevorderId.map(item => {
-        if (item.productId === index) {
+        if (item.orderId === index) {
           return {
             ...item,
             orderStatus: 5,
@@ -170,6 +153,11 @@ const SellList = () => {
     6: "주문취소",
   };
 
+  const payment = {
+    0: "신용카드",
+    1: "신용카드",
+  };
+
   return (
     <>
       {orderId.length !== 0 ? (
@@ -178,42 +166,40 @@ const SellList = () => {
           <i>
             <FontAwesomeIcon icon={faExclamation} />
             <br />
-            주문 내역이 없습니다{" "}
+            주문 내역이 없습니다
           </i>
         </ProductCartNone>
       ) : (
         <div>
           {SellListData.map(item => (
-            <div key={item.productId}>
+            <div key={item.orderId}>
               {/* 주문취소 모달 */}
-              {[4, 5].includes(item.orderStatus) ? (
+              {item.orderStatus === 4 || item.orderStatus === 5 || item.orderStatus === 6 ? (
                 // 주문취소 버튼이 사라졌을때 빈 공백을 유지하는 스타일
                 <div style={{ height: "28px" }} />
               ) : (
                 <OrdercancelBtn>
-                  <button onClick={() => showCancelModal(item.productId)}>
+                  <button onClick={() => showCancelModal(item.orderId)}>
                     주문취소 <FontAwesomeIcon icon={faChevronRight} />
                   </button>
                 </OrdercancelBtn>
               )}
               <SellListInfo>
                 <SellListProduct>
-                  상품명: {item.nmKor}
-                  {item.nmKor.length > 1 && ` 외 ${item.nmKor.length - 1}건`}
+                  상품명 : {item.nmKor}
+                  {/* {item.nmKor.length > 1 && ` 외 ${item.nmKor.length - 1}건`}  */}
                 </SellListProduct>
-                <li>주문번호: {item.orderId}</li>
-                <li>결제 방법: {item.payment}</li>
-                <li>총 결제 금액: {item.totalOrderPrice}</li>
-                <li>픽업 지점: {item.storeNm}</li>
-                <li>픽업 시간: {item.pickupTime}</li>
-                <li>
-                  주문 상태: {orderStatus[`${item.orderStatus}`]}
-                </li>
+                <li>주문번호 : {item.orderId}</li>
+                <li>결제 방법 : {payment[`${item.payment}`]}</li>
+                <li>총 결제 금액 : {item.totalOrderPrice.toLocaleString()}</li>
+                <li>픽업 지점 : {item.storeNm}</li>
+                <li>픽업 시간 : {item.pickupTime}</li>
+                <li>주문 상태 : {orderStatus[`${item.orderStatus}`]}</li>
               </SellListInfo>
               <SellListButton>
                 <ButtonCancel
                   onClick={() => {
-                    navigate("/selllistdetail/:iselllist");
+                    navigate(`/selllistdetail/:iselllist/$`);
                   }}
                 >
                   주문 내역
@@ -226,12 +212,10 @@ const SellList = () => {
                 {item.orderStatus === 5 ? (
                   <PickUpButton disabled>픽업완료</PickUpButton>
                 ) : (
-                  [3, 4, 5].includes(
-                    item.orderStatus,
-                  ) && (
+                  [3, 4, 5].includes(item.orderStatus) && (
                     <PickUpButton
-                      onClick={() => handlePickUpComplete(item.productId)}
-                      disabled={completedPickUpOrders.includes(item.productId)}
+                      onClick={() => handlePickUpComplete(item.orderId)}
+                      disabled={completedPickUpOrders.includes(item.orderId)}
                     >
                       픽업완료
                     </PickUpButton>
@@ -247,10 +231,12 @@ const SellList = () => {
                   />
                 )}
               </SellListButton>
-              {CancelModal[item.productId] && (
+              {/* 주문취소 모달 */}
+              {CancelModal[item.orderId] && (
                 <SellListCancel
-                  onCancel={() => handleCancel(item.productId)}
-                  onClose={() => hideCancelModal(item.productId)}
+                  onCancel={() => handleCancel(item.orderId)}
+                  onClose={() => hideCancelModal(item.orderId)}
+                  orderCancelId={orderCancelId}
                 />
               )}
             </div>
