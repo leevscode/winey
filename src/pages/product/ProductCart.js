@@ -22,6 +22,8 @@ import { fetchCartData, removeCarts } from "../../../src/api/patchcart";
 const ProductCart = () => {
   const navigate = useNavigate();
   const [CartData, setCartData] = useState([]);
+  // 변하는 값(수량,총합) 담는 state
+  const [totalPrice, setTotalPrice] = useState(0);
 
   const filledCartData = async () => {
     try {
@@ -48,11 +50,19 @@ const ProductCart = () => {
     }
   };
 
-  const calculateTotalPrice = () => {
-    return CartData.reduce(
-      (total, item) => total + item.price * item.quantity,
-      0,
-    );
+  // const calculateTotalPrice = () => {
+  //   return CartData.reduce(
+  //     (total, item) => total + item.price * item.quantity,
+  //     0,
+  //   );
+  // };
+
+  const calcTotalSum = () => {
+    let itemTotal = 0;
+    CartData.map((item, index) => {
+      itemTotal += item.price * item.quantity;
+    });
+    return itemTotal;
   };
 
   const increaseItemQuantity = async cartId => {
@@ -88,6 +98,7 @@ const ProductCart = () => {
       return item;
     });
     setCartData(arr);
+
     // try {
     //   const updatedItem = await changeQuantity(
     //     cartId,
@@ -101,13 +112,25 @@ const ProductCart = () => {
     //   console.log(error);
     // }
   };
-
   const buyGood = async () => {
     console.log("장바구니 내역을 서버로 전송함");
 
-    navigate("/productsell");
+    navigate("/productsellcart", {
+      state: {
+        CartData,
+        totalPrice,
+      },
+    });
   };
 
+  // 토탈값 바뀔때마다 갱신되는 useEffect
+  useEffect(() => {
+    // setTotalPrice(calculateTotalPrice());
+    setTotalPrice(calcTotalSum);
+  }, [calcTotalSum]);
+
+  console.log("CartData", CartData);
+  console.log("totalPrice", totalPrice);
   return (
     <>
       {CartData.length === 0 ? (
@@ -154,7 +177,8 @@ const ProductCart = () => {
           <CartTotalPrice>
             <li>최종결제금액</li>
             <CartTotalPriceOne>
-              <span>{calculateTotalPrice().toLocaleString()}원</span>
+              {/* <span>{calculateTotalPrice().toLocaleString()}원</span> */}
+              <span>{calcTotalSum().toLocaleString()}원</span>
             </CartTotalPriceOne>
           </CartTotalPrice>
           <ButtonOk onClick={buyGood}>결제하기</ButtonOk>

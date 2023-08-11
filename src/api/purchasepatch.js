@@ -55,3 +55,49 @@ export const postOneItemPurchase = async ({
     console.log("결제실패", error);
   }
 };
+
+// 장바구니에서 결제하기 post
+export const postSomeItemPurchase = async ({
+  productCollect,
+  selectCollect,
+  isPayment,
+  totalPrice,
+  editQuantity,
+}) => {
+  const list = productCollect.CartData.map(cartItem => ({
+    cartId: cartItem.cartId,
+    productId: cartItem.productId,
+    quantity: productCollect.finalQuantity,
+    pic: cartItem.pic,
+    salePrice: cartItem.salePrice,
+    price: cartItem.price,
+    nmKor: cartItem.nmKor,
+    nmEng: cartItem.nmEng,
+  }));
+
+  try {
+    const res = await client.post("/api/payment/payment", {
+      storeId: selectCollect.pickUpSpot.storeId,
+      pickupTime: selectCollect.changeDate,
+      totalOrderPrice: totalPrice,
+      // list: [
+      //   {
+      //     cartId: productCollect.CartData.cartId,
+      //     productId: productCollect.CartData.productId,
+      //     quantity: productCollect.finalQuantity,
+      //     pic: productCollect.CartData.pic,
+      //     salePrice: productCollect.CartData.salePrice,
+      //     price: productCollect.CartData.price,
+      //     nmKor: productCollect.CartData.nmKor,
+      //     nmEng: productCollect.CartData.nmEng,
+      //   },
+      // ],
+      list: list,
+    });
+    console.log(res);
+    const data = await res.data;
+    console.log("결제성공", data);
+  } catch (error) {
+    console.log("결제실패", error);
+  }
+};
