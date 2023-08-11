@@ -17,7 +17,7 @@ import SellListCancel from "../../components/selllist/SellListCancel";
 import { SellListButton } from "../../style/SellListReviewStyle";
 import { useNavigate } from "react-router";
 import PickUpModal from "../../components/selllist/PickUpModal";
-import { fetchSellListData } from "../../api/patchselllist";
+import { cancelSellListData, fetchSellListData } from "../../api/patchselllist";
 
 const SellList = () => {
   // 주문 내역 get
@@ -30,7 +30,7 @@ const SellList = () => {
 
   const [selectedOrder, setSelectedOrder] = useState([]);
   const [completedPickUpOrders, setCompletedPickUpOrders] = useState([]);
-  const [orderItems, setOrderItems] = useState([]);
+  const [orderId, setorderId] = useState([]);
   const [CancelModal, setCancelModal] = useState([]);
   const navigate = useNavigate();
 
@@ -48,7 +48,7 @@ const SellList = () => {
   //   }
   //   setReviewList([...tempArr]);
 
-  //   setOrderItems(testData);
+  //   setorderId(testData);
   //   setCancelModal(Array(testData.length).fill(false));
   // }, []);
 
@@ -58,14 +58,21 @@ const SellList = () => {
 
   // ordeId 는주문내역 pk값
 
-  // 스웨거에 적용된 orderStatus 상태
-  // 1 : 결제완료
-  // 2 : 배송중
-  // 3 : 배송완료
-  // 4 : 픽업대기
-  // 5 : 픽업완료
-  // 6 : 주문취소
+  const cancelSellList = async data => {
+    try {
+      await cancelSellListData(data); // 취소 요청 보내기
 
+      // 취소를 반영하기 위해 상태를 업데이트합니다
+      const updatedItems = orderId.filter(item => item.data !== data);
+      setorderId(updatedItems);
+      hideCancelModal(data);
+      console.log("주문취소 성공:", updatedItems);
+    } catch (error) {
+      console.log("주문취소 실패:", error);
+    }
+  };
+
+  // 주문내역 리스트 출력
   const filledSellListData = async () => {
     try {
       const data = await fetchSellListData();
@@ -79,7 +86,7 @@ const SellList = () => {
   useEffect(() => {
     filledSellListData();
   }, []);
-  
+
   useEffect(() => {
     console.log("SellListData:", SellListData);
   }, [SellListData]);
@@ -93,10 +100,8 @@ const SellList = () => {
 
   // 주문취소 모달에서 "네" 버튼 활성화
   const handleCancel = productId => {
-    const updatedItems = orderItems.filter(
-      item => item.productId !== productId,
-    );
-    setOrderItems(updatedItems);
+    const updatedItems = orderId.filter(item => item.productId !== productId);
+    setorderId(updatedItems);
     hideCancelModal(productId);
     console.log("주문취소 성공:", updatedItems);
   };
@@ -138,17 +143,17 @@ const SellList = () => {
     setPickupModalVisible(false);
 
     // 주문 상태를 "픽업완료"로 변경
-    setOrderItems(prevOrderItems => {
-      const updatedOrderItems = prevOrderItems.map(item => {
+    setorderId(prevorderId => {
+      const updatedorderId = prevorderId.map(item => {
         if (item.productId === index) {
           return {
             ...item,
-            orderStatus: "픽업완료",
+            orderStatus: 5,
           };
         }
         return item;
       });
-      return updatedOrderItems;
+      return updatedorderId;
     });
   };
 
@@ -156,12 +161,20 @@ const SellList = () => {
     console.log("selectedItem : ", selectedItem);
   }, [selectedItem]);
 
+  const orderStatus = {
+    1: "결제 완료",
+    2: "배송중",
+    3: "배송완료",
+    4: "픽업대기",
+    5: "픽업완료",
+    6: "주문취소",
+  };
+
   return (
     <>
-      {orderItems.length === 0 ? (
+      {orderId.length !== 0 ? (
         // 주문 목록이 없을 경우 출력하는 내용
         <ProductCartNone>
-          {" "}
           <i>
             <FontAwesomeIcon icon={faExclamation} />
             <br />
@@ -170,10 +183,10 @@ const SellList = () => {
         </ProductCartNone>
       ) : (
         <div>
-          {orderItems.map(item => (
+          {SellListData.map(item => (
             <div key={item.productId}>
               {/* 주문취소 모달 */}
-              {["픽업대기", "픽업완료"].includes(item.orderStatus) ? (
+              {[4, 5].includes(item.orderStatus) ? (
                 // 주문취소 버튼이 사라졌을때 빈 공백을 유지하는 스타일
                 <div style={{ height: "28px" }} />
               ) : (
@@ -184,17 +197,18 @@ const SellList = () => {
                 </OrdercancelBtn>
               )}
               <SellListInfo>
-                {item.orderDate}
                 <SellListProduct>
-                  상품명: {item.nmKor[0]}
-                  {item.nmKor.length > 1 && ` 외 ${item.product.nmKor - 1}건`}
+                  상품명: {item.nmKor}
+                  {item.nmKor.length > 1 && ` 외 ${item.nmKor.length - 1}건`}
                 </SellListProduct>
                 <li>주문번호: {item.orderId}</li>
                 <li>결제 방법: {item.payment}</li>
                 <li>총 결제 금액: {item.totalOrderPrice}</li>
                 <li>픽업 지점: {item.storeNm}</li>
                 <li>픽업 시간: {item.pickupTime}</li>
-                <li>주문 상태: {item.orderStatus}</li>
+                <li>
+                  주문 상태: {orderStatus[`${item.orderStatus}`]}
+                </li>
               </SellListInfo>
               <SellListButton>
                 <ButtonCancel
@@ -205,14 +219,14 @@ const SellList = () => {
                   주문 내역
                 </ButtonCancel>
                 {/* 상태가 "결제완료"일 때에만 상품 준비중입니다 표시 */}
-                {item.orderStatus === "결제완료" && (
+                {item.orderStatus === 1 && (
                   <SellListReady>상품 준비중입니다</SellListReady>
                 )}
                 {/* 픽업완료 버튼을 누르면 "픽업완료" 상태로 바뀌면서 버튼이 disabled */}
-                {item.orderStatus === "픽업완료" ? (
+                {item.orderStatus === 5 ? (
                   <PickUpButton disabled>픽업완료</PickUpButton>
                 ) : (
-                  ["배송중", "배송완료", "픽업대기"].includes(
+                  [3, 4, 5].includes(
                     item.orderStatus,
                   ) && (
                     <PickUpButton
