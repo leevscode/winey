@@ -3,7 +3,7 @@ import axios from "axios";
 // 와인 한글이름 GET
 export const getKorNm = async (_setKorNm, _productId) => {
   try {
-    const res = await axios.get(`/detail/korNm/${_productId}`);
+    const res = await axios.get(`/api/detail/korNm/${_productId}`);
     const result = res.data;
     _setKorNm(result);
     // console.log("와인 한글이름 axios", result);
@@ -16,7 +16,7 @@ export const getKorNm = async (_setKorNm, _productId) => {
 // 와인 상세페이지 GET
 export const getProductDetail = async (_setProductDetail, _productId) => {
   try {
-    const res = await axios.get(`/detail/${_productId}`);
+    const res = await axios.get(`/api/detail/${_productId}`);
     const result = res.data;
     _setProductDetail(result);
     // console.log("와인 상세페이지 axios", result);

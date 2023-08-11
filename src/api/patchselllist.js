@@ -3,7 +3,7 @@ import { client } from "./client";
 // 주문 내역 출력
 export const fetchSellListData = async () => {
   try {
-    const response = await client.get(`orderList/user`);
+    const response = await client.get(`/api/orderList/user`);
     const sellListData = response.data;
     return sellListData;
   } catch (error) {
@@ -13,19 +13,21 @@ export const fetchSellListData = async () => {
 };
 
 // 주문 내역 취소
-export const cancelSellListData = async()=> {
+export const cancelSellListData = async cancelSellListData => {
   try {
-    const res = await client.put("orderList/cancel", {
-    });
+    const res = await client.put(
+      `/api/orderList/cancel?orderId=${cancelSellListData}`,
+    );
     console.log("res", res);
     const result = await res.data;
-    console.log(result);
+    console.log("주문이 취소 되었습니다", result);
+    return result;
   } catch (error) {
     console.log(error);
   }
 };
 
-// 리뷰를 등록하는 함수
+// 리뷰 등록
 const submitReview = reviewData => {
   client
     .post("/api/payment/review", reviewData)
