@@ -17,13 +17,17 @@ import {
   faCircleExclamation,
 } from "@fortawesome/free-solid-svg-icons";
 import { getKorNm } from "../api/patchproduct";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { cartLengthData } from "../api/patchcart";
 
 const Header = ({ handleOpenNav, isActive }) => {
   const { iproduct, isell } = useParams();
   const location = useLocation();
   const navigate = useNavigate();
   const userData = useSelector(state => state.user);
+  // 테스트
+  const cartData = useSelector(state => state.cart);
+  // console.log("뭘까", cartData.cartLength);
   // 뒤로가기 버튼 핸들러
   const handleBack = () => navigate(-1);
   // 서브페이지 헤더 페이지 타이틀 state
@@ -144,6 +148,12 @@ const Header = ({ handleOpenNav, isActive }) => {
     // console.log("실시간위치", pagePath);
     // console.log("상품이름", korNm.nmKor);
   }, [location.pathname]);
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    cartLengthData(dispatch);
+  }, []);
   return (
     <>
       <HeaderWrap
@@ -222,7 +232,7 @@ const Header = ({ handleOpenNav, isActive }) => {
                     src={`${process.env.PUBLIC_URL}/images/icon_cart_2.svg`}
                     alt="장바구니"
                   />
-                  <span>0</span>
+                  <span>{cartData.cartLength}</span>
                 </NavLink>
               </li>
             </ol>

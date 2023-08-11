@@ -16,6 +16,7 @@ import { NoticeModal } from "../style/GlobalComponents";
 import { useDispatch, useSelector } from "react-redux";
 import { logoutUser } from "../reducers/userSlice";
 import { Modal } from "antd";
+import { totalItem } from "../reducers/cartSlice";
 
 const MypageList = () => {
   const navigate = useNavigate();
@@ -45,6 +46,7 @@ const MypageList = () => {
         e.preventDefault();
         await postLogout("");
         dispatch(logoutUser({}));
+        dispatch(totalItem(0));
         removeCookie("accessToken");
         removeCookie("refreshToken");
         // console.log("로그아웃 실행");
