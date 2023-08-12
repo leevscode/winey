@@ -31,9 +31,14 @@ const SellListDetail = () => {
   // 상품 가격 합산
   const calculateTotalAmount = () => {
     let totalPrice = 0;
-    productData.forEach(product => {
-      const price = parseInt(product.productPrice.replace(/[^0-9]/g, ""));
-      totalPrice += price;
+    productInfo.forEach(item => {
+      // item.salePrice가 문자열이 아닌 경우에 대한 처리 추가
+      if (typeof item.salePrice === "string") {
+        const price = parseInt(item.salePrice.replace(/[^0-9]/g, ""), 10);
+        if (!isNaN(price)) {
+          totalPrice += price;
+        }
+      }
     });
     return totalPrice;
   };
@@ -123,7 +128,7 @@ const SellListDetail = () => {
             <ul>
               <li>{item.nmKor}</li>
               <li>{item.nmEng}</li>
-              <li>{item.salePrice}</li>
+              <li>{item.salePrice.toLocaleString()}</li>
             </ul>
           </div>
 
@@ -143,7 +148,11 @@ const SellListDetail = () => {
         <p>픽업 시간: {productDes.pickupTime}</p>
         <p>주문 상태: {productDes.orderStatus}</p>
         <p>
-          총 결제금액 <strong>{productDes.totalOrderPrice}원</strong>
+          총 결제금액{" "}
+          <strong>
+            {calculateTotalAmount() + parseInt(productDes.totalOrderPrice)}
+            원
+          </strong>
         </p>
       </DetailTotalPrice>
       <ReviewOk>평점등록이 완료되었습니다</ReviewOk>

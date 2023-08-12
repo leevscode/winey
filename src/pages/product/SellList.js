@@ -63,10 +63,6 @@ const SellList = () => {
   useEffect(() => {
     filledSellListData();
   }, []);
-  
-  useEffect(() => {
-    console.log("SellListData:", SellListData);
-  }, [SellListData]);
 
   // 특정 경우에 주문취소가 보이게 하는 함수
   const showCancelModal = index => {
@@ -111,7 +107,6 @@ const SellList = () => {
     setPickupModalVisible(true);
   };
 
-
   const handleConfirmPickUp = index => {
     setCompletedPickUpOrders(prevCompletedOrders => [
       ...prevCompletedOrders,
@@ -135,10 +130,6 @@ const SellList = () => {
       return updatedorderId;
     });
   };
-
-  useEffect(() => {
-    console.log("selectedItem : ", selectedItem);
-  }, [selectedItem]);
 
   const orderStatus = {
     1: "결제 완료",
@@ -170,7 +161,9 @@ const SellList = () => {
           {SellListData.map(item => (
             <div key={item.orderId}>
               {/* 주문취소 모달 */}
-              {item.orderStatus === 4 || item.orderStatus === 5 || item.orderStatus === 6 ? (
+              {item.orderStatus === 4 ||
+              item.orderStatus === 5 ||
+              item.orderStatus === 6 ? (
                 // 주문취소 버튼이 사라졌을때 빈 공백을 유지하는 스타일
                 <div style={{ height: "28px" }} />
               ) : (

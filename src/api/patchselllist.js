@@ -49,7 +49,7 @@ export const fetchdetailData = async numberValue => {
       `/api/orderList/detail?orderId=${numberValue}`,
     );
     const detailData = response.data;
-    console.log("불러왔니?", detailData);
+    console.log("detailData?", detailData);
     return detailData;
   } catch (error) {
     console.error("API 요청 중 오류 발생", error);
