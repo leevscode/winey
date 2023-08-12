@@ -150,11 +150,12 @@ export const GoodsEa = styled.div`
 
 export const CartTotalPrice = styled.ul`
   display: flex;
-  padding: 20px;
-  margin: 20px 0;
   justify-content: space-between;
-  color: black;
-  font-size: 2rem;
+  align-items: center;
+  padding: 2rem;
+  margin: 3rem 0;
+  color: ${Maincolor.black};
+  font-size: 1.5rem;
   background: #fcf8f1;
   span {
     font-size: 2rem;
@@ -172,5 +173,4 @@ export const CartTotalPriceOne = styled.li`
 export const ButtonDiv = styled.div`
   padding: ${WidthPd.padding};
   margin-top: 1.5rem;
-
-`
+`;
