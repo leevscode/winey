@@ -75,7 +75,7 @@ const PurchaseListCart = ({
       };
     });
     setProductCollect({ ...productCollect, ...updatedProductCollect });
-  }, [itemCount]);
+  }, []);
   console.log("productCollect", productCollect);
   return (
     <div>

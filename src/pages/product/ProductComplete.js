@@ -16,7 +16,6 @@ const ProductComplete = () => {
   const location = useLocation();
   const state = [location.state];
   console.log("state", state);
-
   // 이미지 없을 때 error처리
   const onImgError = e => {
     e.target.src = NoImage;
@@ -37,44 +36,25 @@ const ProductComplete = () => {
           {state.map((option, index) => (
             <div key={index}>
               <div className="imgWrap">
-                {option.editQuantity === undefined ? (
-                  <img
-                    src={`/img/${option.productCollect.CartData.pic}`}
-                    alt="img"
-                    onError={onImgError}
-                  />
-                ) : (
-                  <img
-                    src={`/img/${option.productCollect.wineDetailVo.pic}`}
-                    alt="img"
-                    onError={onImgError}
-                  />
-                )}
+                <img
+                  src={`/img/${option.productCollect.wineDetailVo.pic}`}
+                  alt="img"
+                  onError={onImgError}
+                />
               </div>
-              {option.editQuantity === undefined ? (
-                <ul>
-                  <li>{option.productCollect.CartData.nmKor}</li>
-                  <li>{option.productCollect.CartData.nmEng}</li>
-                  <li>
-                    {option.productCollect.CartData.price}원{" "}
-                    <span>{option.productCollect.finalQuantity}개</span>{" "}
-                  </li>
-                </ul>
-              ) : (
-                <ul>
-                  <li>{option.productCollect.wineDetailVo.nmKor}</li>
-                  <li>{option.productCollect.wineDetailVo.nmEng}</li>
-                  <li>
-                    {(
-                      (option.productCollect.selSale === null
-                        ? parseInt(option.productCollect.wineDetailVo.price)
-                        : parseInt(option.productCollect.selSale.salePrice)) *
-                      option.editQuantity.quantity
-                    ).toLocaleString()}
-                    원 <span>{option.editQuantity.quantity}개</span>{" "}
-                  </li>
-                </ul>
-              )}
+              <ul>
+                <li>{option.productCollect.wineDetailVo.nmKor}</li>
+                <li>{option.productCollect.wineDetailVo.nmEng}</li>
+                <li>
+                  {(
+                    (option.productCollect.selSale === null
+                      ? parseInt(option.productCollect.wineDetailVo.price)
+                      : parseInt(option.productCollect.selSale.salePrice)) *
+                    option.editQuantity.quantity
+                  ).toLocaleString()}
+                  원 <span>{option.editQuantity.quantity}개</span>{" "}
+                </li>
+              </ul>
             </div>
           ))}
         </ProductCompleteinfo>
