@@ -5,6 +5,16 @@ export const WidthPd = {
   paddingTopSmall: "1.5rem",
 };
 
+export const opacity = {
+  wine: "rgba(124, 29, 52, 0.65)",
+  grayDeep: "rgba(60, 35, 35, 0.5)",
+  gray: "rgba(60, 35, 35, 0.3)",
+  grayLight: "rgba(60, 35, 35, 0.1)",
+  white: "rgba(60, 35, 35, 0.07)",
+  whiteB: "rgba(255, 255, 255, 0.3)",
+  whiteC: "rgba(60, 35, 35, 0.03)",
+};
+
 export const Maincolor = {
   beige: "#fcf8f1",
   white: "#fff",
@@ -46,6 +56,25 @@ export const SellListDetailText = styled.div`
     margin-bottom: 20px;
   }
 `;
+
+export const SellListDetailWrap = styled.div`
+  margin-bottom: 15px;
+  position: relative;
+  padding-top: 135%;
+  border: 0.05rem solid ${opacity.grayLight};
+  overflow: hidden;
+  isolation: isolate;
+  img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+`
+
 
 export const SellListDetailinfo = styled.div`
   padding: 20px;

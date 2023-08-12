@@ -43,10 +43,13 @@ export const finishSellListData = async finishSellListData => {
 };
 
 // 주문 상세 내역
-export const detailSellListData = async () => {
+export const fetchdetailData = async numberValue => {
   try {
-    const response = await client.get(`/api/orderList/detail/user`);
+    const response = await client.get(
+      `/api/orderList/detail?orderId=${numberValue}`,
+    );
     const detailData = response.data;
+    console.log("불러왔니?", detailData);
     return detailData;
   } catch (error) {
     console.error("API 요청 중 오류 발생", error);
@@ -54,17 +57,14 @@ export const detailSellListData = async () => {
   }
 };
 
-
 // 리뷰 등록
-const submitReview = reviewData => {
-  client
-    .post("/api/payment/review", reviewData)
-    .then(response => {
-      console.log("리뷰가 성공적으로 제출되었습니다:", response.data);
-    })
-    .catch(error => {
-      console.error("리뷰 제출 중 에러 발생:", error);
-    });
+export const submitReview = async () => {
+  try {
+    const res = await client.post(`/api/payment/review`);
+    console.log("리뷰가 성공적으로 제출되었습니다:");
+    const result = await res.data;
+    return result;
+  } catch (error) {
+    console.log("리뷰 제출 중 에러 발생:", error);
+  }
 };
-
-export default submitReview;

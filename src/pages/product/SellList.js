@@ -63,6 +63,7 @@ const SellList = () => {
   useEffect(() => {
     filledSellListData();
   }, []);
+  
   useEffect(() => {
     console.log("SellListData:", SellListData);
   }, [SellListData]);
@@ -106,22 +107,18 @@ const SellList = () => {
       }
     });
 
-    // "픽업완료 확정을 하시겠습니까?" 모달을 표시합니다
+    // "픽업완료 확정을 하시겠습니까?" 모달을 표시
     setPickupModalVisible(true);
   };
 
-  // "픽업완료" 모달의 확인 버튼을 처리하는 함수
-  const handleConfirmPickUp = index => {
-    // "픽업완료" 확인 처리를 위한 로직을 작성합니다
-    // 예를 들어, 백엔드에서 주문 상태를 "픽업완료"로 변경하는 등의 작업을 수행합니다
 
-    // 추가: 이미 픽업완료된 주문을 completedPickUpOrders에 추가합니다
+  const handleConfirmPickUp = index => {
     setCompletedPickUpOrders(prevCompletedOrders => [
       ...prevCompletedOrders,
       index,
     ]);
 
-    // 확인 후 모달을 숨깁니다
+    // 확인 후 모달을 숨김
     setPickupModalVisible(false);
 
     // 주문 상태를 "픽업완료"로 변경
@@ -198,7 +195,7 @@ const SellList = () => {
               <SellListButton>
                 <ButtonCancel
                   onClick={() => {
-                    navigate(`/selllistdetail/:iselllist`);
+                    navigate(`/selllistdetail/:iselllist:${item.orderId}`);
                   }}
                 >
                   주문 내역
@@ -220,7 +217,7 @@ const SellList = () => {
                     </PickUpButton>
                   )
                 )}
-                {/* "픽업완료" 모달을 렌더링합니다 */}
+                {/* "픽업완료" 모달을 렌더링*/}
                 {pickupModalVisible && (
                   <PickUpModal
                     onCancel={() => setPickupModalVisible(false)}

@@ -4,58 +4,29 @@ import {
   DetailButtonOk,
   DetailDay,
   DetailTotalPrice,
+  SellListDetailWrap,
   SellListDetailinfo,
 } from "../../style/SellListDetailStyle";
 import { ReviewOk } from "../../style/SellListStyle";
 import ReviewModal from "../../components/selllist/ReviewModal";
-import submitReview from "../../api/patchselllist";
+import { fetchdetailData, submitReview } from "../../api/patchselllist";
+import { useParams } from "react-router";
 
 const SellListDetail = () => {
   // 주문 상세내역 get
-  const [detaillistdata, setDetailListData] = useState([])
+  const { iselllist } = useParams();
+  const [detailData, setDetailData] = useState([]);
+  const [productInfo, setProductInfo] = useState([]);
+  const [productDes, setproductDes] = useState({});
   const [reviewReset, setReviewReset] = useState(false);
   const [reviewSubmit, setReviewSubmit] = useState({});
   // 리뷰 목록 팝업창 전달 아이디 state
   const [reviewId, setReviewId] = useState(null);
 
-  // 상품 더미 데이터
-  // productId 는 상품별 고유 pk 값입니다
-  const [productData, setProductData] = useState([
-    {
-      orderDetailId: 1,
-      quantity: 1,
-      imageSrc: "https://via.placeholder.com/120x120",
-      nmKor: "제프 까렐, 울띰 헤꼴뜨",
-      nmEng: "Ultime Recolte By Jeff Carrel",
-      salePrice: "32,900원",
-    },
-    {
-      orderDetailId: 2,
-      quantity: 1,
-      imageSrc: "https://via.placeholder.com/120x120",
-      nmKor: "white Wine",
-      nmEng: "white",
-      salePrice: "52,500원",
-    },
-    {
-      orderDetailId: 3,
-      quantity: 1,
-      imageSrc: "https://via.placeholder.com/120x120",
-      productName: "Red Wine",
-      productDescription: "Red",
-      salePrice: "82,500원",
-    },
-  ]);
+  const [productData, setProductData] = useState([]);
 
   // 결제 총 금액 더미데이터
-  const orderData = {
-    orderDate: "2023.08.07",
-    payment: "신용카드",
-    storeNm: "이마트 만촌점",
-    pickupTime: "07월 23일 일요일 12:00",
-    orderStatus: "배송중",
-    totalAmount: 0,
-  };
+  const orderData = {};
 
   // 상품 가격 합산
   const calculateTotalAmount = () => {
@@ -68,19 +39,27 @@ const SellListDetail = () => {
   };
 
   // 주문 상세 내역 출력
-  const detailSellListData = async () => {
+  const filleddetailData = async () => {
+    const parts = iselllist.split(":");
+    const numberPart = parts[2];
+    const numberValue = parseInt(numberPart);
     try {
-      const data = await detailSellListData();
-      setDetailListData(data);
+      const data = await fetchdetailData(numberValue);
+      setDetailData(data);
+      setProductInfo(data.vo1);
+      setproductDes(data.vo2);
+      console.log("vo1 데이터 ", data.vo1);
+      console.log("vo2 데이터 ", data.vo2);
       console.log("주문 상세 내역 출력", data);
     } catch (err) {
       console.log(err);
     }
   };
 
+  // 주문내역 출력 useEffect
   useEffect(() => {
-    console.log("detaillistdata:", detaillistdata);
-  }, [detaillistdata]);
+    filleddetailData();
+  }, []);
 
   // 리뷰 모달을 여는 함수
   const showModal = _orderDetailId => {
@@ -117,7 +96,7 @@ const SellListDetail = () => {
     updatedReviewSubmit[key] = true; // 평점 등록 상태를 true로 표시
     setReviewSubmit(updatedReviewSubmit);
 
-    // 평점을 포함하여 productData 상태를 업데이트합니다.
+    // 평점을 포함하여 productData 상태를 업데이트
     const updatedProductData = [...productData];
     updatedProductData[key].rating = rating;
     setProductData(updatedProductData);
@@ -134,22 +113,24 @@ const SellListDetail = () => {
 
   return (
     <>
-      <DetailDay>{orderData.orderDate}</DetailDay>
-      {productData.map((product, idx) => (
-        <SellListDetailinfo key={product.orderDetailId}>
+      <DetailDay>{orderData.orderDetailId}</DetailDay>
+      {productInfo.map((item, idx) => (
+        <SellListDetailinfo key={idx}>
+          <SellListDetailWrap>
+            <img src={`/img/${item.pic}`} alt="와인사진" />
+          </SellListDetailWrap>
           <div>
-            <img src={product.imageSrc} alt="" />
             <ul>
-              <li>{product.nmKor}</li>
-              <li>{product.nmEng}</li>
-              <li>{product.salePrice}</li>
+              <li>{item.nmKor}</li>
+              <li>{item.nmEng}</li>
+              <li>{item.salePrice}</li>
             </ul>
           </div>
 
-          {product.review ? (
+          {item.review ? (
             <ReviewOk>평점등록이 완료되었습니다</ReviewOk>
           ) : (
-            <DetailButtonOk onClick={() => showModal(product.orderDetailId)}>
+            <DetailButtonOk onClick={() => showModal(item.orderDetailId)}>
               평점등록
             </DetailButtonOk>
           )}
@@ -157,12 +138,12 @@ const SellListDetail = () => {
       ))}
 
       <DetailTotalPrice>
-        <p>결제 방법: {orderData.payment}</p>
-        <p>픽업 지점: {orderData.storeNm}</p>
-        <p>픽업 시간: {orderData.pickupTime}</p>
-        <p>주문 상태: {orderData.orderStatus}</p>
+        <p>결제 방법: {productDes.payment}</p>
+        <p>픽업 지점: {productDes.storeNm}</p>
+        <p>픽업 시간: {productDes.pickupTime}</p>
+        <p>주문 상태: {productDes.orderStatus}</p>
         <p>
-          총 결제금액 <strong>{orderData.totalOrderPrice}원</strong>
+          총 결제금액 <strong>{productDes.totalOrderPrice}원</strong>
         </p>
       </DetailTotalPrice>
       <ReviewOk>평점등록이 완료되었습니다</ReviewOk>
