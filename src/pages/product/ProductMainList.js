@@ -78,13 +78,6 @@ const ProductMainList = () => {
     setTotalCount(listScroll.length);
     // console.log("상품 총 갯수", totalCount);
   }, [listScroll]);
-  useEffect(() => {
-    // 2초 뒤에 인트로 화면 사라짐
-    const introTimeout = setTimeout(() => {
-      setIsLoading(false);
-    }, 300);
-    return () => clearTimeout(introTimeout);
-  }, []);
   // 상품 정렬 옵션
   const options = [
     {
@@ -104,7 +97,17 @@ const ProductMainList = () => {
   // 상품 정렬 선택
   const handleChange = value => {
     // console.log(`selected ${value}`);
+    if (value === "최신등록순") {
+      console.log("최신등록순 눌렀어요");
+    }
   };
+  useEffect(() => {
+    // 0.3초 뒤에 로딩 화면 사라짐
+    const introTimeout = setTimeout(() => {
+      setIsLoading(false);
+    }, 300);
+    return () => clearTimeout(introTimeout);
+  }, []);
   return (
     <ProductListWrap>
       {/* 상품리스트 목록 */}
