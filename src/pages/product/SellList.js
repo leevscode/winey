@@ -27,7 +27,6 @@ const SellList = () => {
   // const [reviewList, setReviewList] = useState([]);
   // 목록
   const [pickupModalVisible, setPickupModalVisible] = useState(false);
-
   const [selectedOrder, setSelectedOrder] = useState([]);
   const [completedPickUpOrders, setCompletedPickUpOrders] = useState([]);
   const [orderId, setorderId] = useState([]);
@@ -199,7 +198,7 @@ const SellList = () => {
               <SellListButton>
                 <ButtonCancel
                   onClick={() => {
-                    navigate(`/selllistdetail/:iselllist/$`);
+                    navigate(`/selllistdetail/:iselllist`);
                   }}
                 >
                   주문 내역

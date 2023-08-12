@@ -42,6 +42,19 @@ export const finishSellListData = async finishSellListData => {
   }
 };
 
+// 주문 상세 내역
+export const detailSellListData = async () => {
+  try {
+    const response = await client.get(`/api/orderList/detail/user`);
+    const detailData = response.data;
+    return detailData;
+  } catch (error) {
+    console.error("API 요청 중 오류 발생", error);
+    return [];
+  }
+};
+
+
 // 리뷰 등록
 const submitReview = reviewData => {
   client

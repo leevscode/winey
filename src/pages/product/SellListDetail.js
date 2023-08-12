@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import {
   DetailButtonOk,
@@ -11,6 +11,8 @@ import ReviewModal from "../../components/selllist/ReviewModal";
 import submitReview from "../../api/patchselllist";
 
 const SellListDetail = () => {
+  // 주문 상세내역 get
+  const [detaillistdata, setDetailListData] = useState([])
   const [reviewReset, setReviewReset] = useState(false);
   const [reviewSubmit, setReviewSubmit] = useState({});
   // 리뷰 목록 팝업창 전달 아이디 state
@@ -64,6 +66,21 @@ const SellListDetail = () => {
     });
     return totalPrice;
   };
+
+  // 주문 상세 내역 출력
+  const detailSellListData = async () => {
+    try {
+      const data = await detailSellListData();
+      setDetailListData(data);
+      console.log("주문 상세 내역 출력", data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  useEffect(() => {
+    console.log("detaillistdata:", detaillistdata);
+  }, [detaillistdata]);
 
   // 리뷰 모달을 여는 함수
   const showModal = _orderDetailId => {
