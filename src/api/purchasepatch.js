@@ -64,7 +64,7 @@ export const postSomeItemPurchase = async ({
   totalPrice,
   editQuantity,
 }) => {
-  const list = productCollect.CartData.map(cartItem => ({
+  const list = await productCollect.CartData.map(cartItem => ({
     cartId: cartItem.cartId,
     productId: cartItem.productId,
     quantity: productCollect.finalQuantity,
@@ -80,18 +80,6 @@ export const postSomeItemPurchase = async ({
       storeId: selectCollect.pickUpSpot.storeId,
       pickupTime: selectCollect.changeDate,
       totalOrderPrice: totalPrice,
-      // list: [
-      //   {
-      //     cartId: productCollect.CartData.cartId,
-      //     productId: productCollect.CartData.productId,
-      //     quantity: productCollect.finalQuantity,
-      //     pic: productCollect.CartData.pic,
-      //     salePrice: productCollect.CartData.salePrice,
-      //     price: productCollect.CartData.price,
-      //     nmKor: productCollect.CartData.nmKor,
-      //     nmEng: productCollect.CartData.nmEng,
-      //   },
-      // ],
       list: list,
     });
     console.log(res);
