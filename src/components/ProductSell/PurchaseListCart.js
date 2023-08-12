@@ -54,8 +54,6 @@ const PurchaseListCart = ({
     });
   };
 
-  console.log("productInfoArray", productInfoArray);
-
   const calcTotalSum = () => {
     let itemtotal = 0;
     productInfoArray.forEach((option, index) => {
@@ -75,7 +73,7 @@ const PurchaseListCart = ({
       };
     });
     setProductCollect({ ...productCollect, ...updatedProductCollect });
-  }, []);
+  }, [itemCount]);
   console.log("productCollect", productCollect);
   return (
     <div>

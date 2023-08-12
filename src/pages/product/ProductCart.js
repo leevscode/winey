@@ -18,7 +18,6 @@ import {
 import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  faCircleXmark,
   faExclamation,
   faMinus,
   faPlus,

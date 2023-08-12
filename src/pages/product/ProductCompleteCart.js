@@ -10,9 +10,6 @@ import { Link, useLocation } from "react-router-dom";
 import NoImage from "../../assets/no_image.jpg";
 
 const ProductCompleteCart = () => {
-  // const [isLoading, setIsLoading] = useState(true); // 로딩 상태
-
-  // const { state } = useLocation();
   const location = useLocation();
   const stateItem = location.state.productCollect;
   const statePick = location.state;
@@ -21,7 +18,6 @@ const ProductCompleteCart = () => {
   };
   console.log("stateItem", stateItem);
   console.log("statePick", statePick);
-  console.log("finalQuan", finalQuan());
 
   // 이미지 없을 때 error처리
   const onImgError = e => {
@@ -54,7 +50,7 @@ const ProductCompleteCart = () => {
                 <li>{option.nmKor}</li>
                 <li>{option.nmEng}</li>
                 <li>
-                  {option.price}원{" "}
+                  {((option.price) * finalQuan(index)).toLocaleString()}원{" "}
                   <span>
                     {/* {option.finalQuantity} */}
                     {finalQuan(index)}개
