@@ -12,6 +12,7 @@ import ProductList from "./pages/product/ProductList";
 import ProductDetail from "./pages/product/ProductDetail";
 import ProductSell from "./pages/product/ProductSell";
 import ProductComplete from "./pages/product/ProductComplete";
+import ProductCompleteCart from "./pages/product/ProductCompleteCart";
 import Login from "./pages/login/Login";
 import Join from "./pages/login/Join";
 import KeywordSelect from "./pages/login/KeywordSelect";
@@ -29,6 +30,7 @@ import SellListDetail from "./pages/product/SellListDetail";
 import { useEffect } from "react";
 import Welcome from "./components/join/Welcome";
 import ProductMainList from "./pages/product/ProductMainList";
+import ProductSellCart from "./pages/product/ProductSellCart";
 
 function App() {
   // 페이지 이동 시 스크롤 최상단으로 올라가는 코드
@@ -69,10 +71,17 @@ function App() {
           </Route>
           {/* 상품상세페이지 */}
           <Route path="/productdetail/:iproduct" element={<ProductDetail />} />
-          {/* 구매하기 */}
+          {/* 구매하기(상세페이지에서 바로결제) */}
           <Route path="/productsell/:isell" element={<ProductSell />} />
+          {/* 구매하기(장바구니에서 결제) */}
+          <Route path="/productsellcart" element={<ProductSellCart />} />
           {/* 구매완료 */}
           <Route path="/productcomplete" element={<ProductComplete />} />
+          {/* 카트 구매완료 */}
+          <Route
+            path="/ProductCompleteCart"
+            element={<ProductCompleteCart />}
+          />
           {/* 로그인 */}
           <Route path="/login" element={<Login />} />
           {/* 회원가입 */}

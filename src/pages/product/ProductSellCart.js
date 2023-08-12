@@ -20,14 +20,15 @@ import {
   getBuyProductDetail,
   getUserStoreInfo,
   postOneItemPurchase,
+  postSomeItemPurchase,
 } from "../../api/purchasepatch";
+import PurchaseListCart from "../../components/ProductSell/PurchaseListCart";
 
-const ProductSell = () => {
+const ProductSellCart = () => {
   const navigate = useNavigate();
   const { isell } = useParams();
-
-  // 상세페이지에서 결제 클릭 시 상품정보(productID)
-  const productId = isell;
+  const state = useLocation();
+  const cartState = state.state;
 
   // user별 매장정보
   const [userStore, setUserStore] = useState([]);
@@ -36,16 +37,15 @@ const ProductSell = () => {
   const [selectCollect, setSelectCollect] = useState([]);
 
   // 상품 정보 값 담기
-  const [productCollect, setProductCollect] = useState("");
+  const [productCollect, setProductCollect] = useState(cartState);
   // get한 아이템정보를 배열에 담자
-  const productInfoArray = [productCollect];
-  console.log("productInfoArray", productInfoArray);
+  const productInfoArray = productCollect.CartData;
 
   // 수량변경 state
-  const [editQuantity, setEditQuantity] = useState(1);
+  const [editQuantity, setEditQuantity] = useState(cartState.CartData.quantity);
 
   // 합계값 담기 state
-  const [totalPrice, setTotalPrice] = useState(0);
+  const [totalPrice, setTotalPrice] = useState(cartState.totalPrice);
 
   // 카드결제 유무 담기 state
   const [isPayment, setIsPayment] = useState(0);
@@ -111,12 +111,11 @@ const ProductSell = () => {
       content: "주문을 완료하시겠습니까?",
       onOk() {
         // 최종결제완료
-        postOneItemPurchase({
+        postSomeItemPurchase({
           productCollect,
           selectCollect,
           isPayment,
           totalPrice,
-          editQuantity,
         });
         navigate("/ProductComplete", {
           state: {
@@ -127,7 +126,6 @@ const ProductSell = () => {
             editQuantity,
           },
         });
-        // navigate("/ProductComplete");
         console.log("결제완료");
       },
       onCancel() {
@@ -140,11 +138,8 @@ const ProductSell = () => {
     // 유저 매장정보 get
     getUserStoreInfo(setUserStore);
     // 상품정보 get
-    getBuyProductDetail(setProductCollect, productId);
+    // getBuyProductDetail(setProductCollect, productId);
   }, []);
-  console.log("productCollect", productCollect);
-  console.log("totalPrice", totalPrice);
-  console.log("editQuantity", editQuantity);
 
   // useEffect(() => {}, [productCollect, selectCollect]); // 값 변경될때마다 랜더링
   return (
@@ -158,7 +153,7 @@ const ProductSell = () => {
       />
 
       {productCollect && (
-        <PurchaseList
+        <PurchaseListCart
           // 합계값 담아오기
           totalPrice={totalPrice}
           setTotalPrice={setTotalPrice}
@@ -194,4 +189,4 @@ const ProductSell = () => {
   );
 };
 
-export default ProductSell;
+export default ProductSellCart;
