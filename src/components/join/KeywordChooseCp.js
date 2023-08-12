@@ -139,7 +139,7 @@ const KeywordChooseCp = () => {
   const handleFlavorCheckAllChange = e => {
     const updatedAroma = wineOptions.aroma.map(option => ({
       ...option,
-      num: e.target.checked ? 1 : 0,
+      num: 0,
     }));
 
     setWineFlavorCheckedList(

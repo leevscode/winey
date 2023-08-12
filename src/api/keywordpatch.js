@@ -9,7 +9,7 @@ import { client } from "./client";
 // 선호키워드 선택 post
 export const postUserKeyword = async favoriteKeyword => {
   try {
-    const res = await client.post("", {
+    const res = await client.post("/api/recommend/wine", {
       categoryId: favoriteKeyword.categoryId,
       countryId: favoriteKeyword.countryId,
       smallCategoryId: favoriteKeyword.smallCategoryId,
