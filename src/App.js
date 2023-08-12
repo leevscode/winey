@@ -12,6 +12,7 @@ import ProductList from "./pages/product/ProductList";
 import ProductDetail from "./pages/product/ProductDetail";
 import ProductSell from "./pages/product/ProductSell";
 import ProductComplete from "./pages/product/ProductComplete";
+import ProductCompleteCart from "./pages/product/ProductCompleteCart";
 import Login from "./pages/login/Login";
 import Join from "./pages/login/Join";
 import KeywordSelect from "./pages/login/KeywordSelect";
@@ -76,6 +77,11 @@ function App() {
           <Route path="/productsellcart" element={<ProductSellCart />} />
           {/* 구매완료 */}
           <Route path="/productcomplete" element={<ProductComplete />} />
+          {/* 카트 구매완료 */}
+          <Route
+            path="/ProductCompleteCart"
+            element={<ProductCompleteCart />}
+          />
           {/* 로그인 */}
           <Route path="/login" element={<Login />} />
           {/* 회원가입 */}

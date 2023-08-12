@@ -9,13 +9,13 @@ import {
 import { Link, useLocation } from "react-router-dom";
 import NoImage from "../../assets/no_image.jpg";
 
-const ProductComplete = () => {
+const ProductCompleteCart = () => {
   // const [isLoading, setIsLoading] = useState(true); // 로딩 상태
 
   // const { state } = useLocation();
   const location = useLocation();
   const state = [location.state];
-  console.log("state", state);
+
   // 이미지 없을 때 error처리
   const onImgError = e => {
     e.target.src = NoImage;
@@ -37,7 +37,8 @@ const ProductComplete = () => {
             <div key={index}>
               <div className="imgWrap">
                 <img
-                  src={`/img/${option.productCollect.wineDetailVo.pic}`}
+                  src={`/img/${option.productCollect.wineDetailVo.pic}
+                  `}
                   alt="img"
                   onError={onImgError}
                 />
@@ -99,4 +100,4 @@ const ProductComplete = () => {
   );
 };
 
-export default ProductComplete;
+export default ProductCompleteCart;

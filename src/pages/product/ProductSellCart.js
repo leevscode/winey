@@ -117,15 +117,15 @@ const ProductSellCart = () => {
           isPayment,
           totalPrice,
         });
-        // navigate("/ProductComplete", {
-        //   state: {
-        //     productCollect,
-        //     selectCollect,
-        //     isPayment,
-        //     totalPrice,
-        //     editQuantity,
-        //   },
-        // });
+        navigate("/ProductComplete", {
+          state: {
+            productCollect,
+            selectCollect,
+            isPayment,
+            totalPrice,
+            editQuantity,
+          },
+        });
         console.log("결제완료");
       },
       onCancel() {
