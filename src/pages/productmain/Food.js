@@ -4,7 +4,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { v4 } from "uuid";
 import { ConfigProvider, Select } from "antd";
 import NoImage from "../../assets/no_image.jpg";
-import { getTotalCountry } from "../../api/patchproduct";
+import {
+  getTotalFoodCheap,
+  getTotalFoodExpensive,
+  getTotalFoodNew,
+} from "../../api/patchproduct";
 import {
   ProductListWrap,
   ProductMainItemWrap,
@@ -14,6 +18,7 @@ import { ContentsListItemWrap } from "../../style/GlobalComponents";
 import ProductListSkeleton from "../../components/skeleton/ProductListSkeleton";
 import { ProductListItem } from "../../style/ProductStyle";
 import { addCart, cartLengthData } from "../../api/patchcart";
+import { useInView } from "react-intersection-observer";
 
 const Food = ({ setIsModalOpen }) => {
   const navigate = useNavigate();
@@ -25,10 +30,50 @@ const Food = ({ setIsModalOpen }) => {
   };
   // 로딩 더미데이터
   const productListSkeleton = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+  // 상품 더미 데이터
+  /*
+  const foodItem = [
+    {
+      productId: 22,
+      categoryId: 2,
+      featureId: 110,
+      countryId: 2,
+      aromaId: 110,
+      nmKor: "슈샤르조프버거 리슬링 스패틀레스",
+      nmEng: "Scharzhofberger Riesling Spätlese",
+      price: 15600,
+      quantity: 30,
+      pic: "wine/22/NwRt7c2oQF6-mdBgs9gSLQ_pb_x960.png",
+      promotion: 0,
+      beginner: 0,
+      alcohol: 8,
+      sale: 10,
+      salePrice: 30644,
+    },
+  ];
+ */
+  //react-intersection-observer state
+  const [ref, inView] = useInView();
   // 로딩 state
   const [isLoading, setIsLoading] = useState(true);
   // 상품 총 갯수 카운트 state
   const [totalCount, setTotalCount] = useState("");
+  // 화면 데이터 보관할 state
+  const [listScroll, setListScroll] = useState([]);
+  const [hasNextPage, setHasNextPage] = useState(true);
+  // value 보관할 state
+  const [optionValue, setOptionValue] = useState(1);
+  const page = useRef(1);
+  // value값에 따라 데이터 바뀜
+  const getListData = useCallback(async value => {
+    if (value === 1) {
+      await getTotalFoodNew(setListScroll, setHasNextPage, page);
+    } else if (value === 2) {
+      await getTotalFoodExpensive(setListScroll, setHasNextPage, page);
+    } else if (value === 3) {
+      await getTotalFoodCheap(setListScroll, setHasNextPage, page);
+    }
+  }, []);
   // 회원 장바구니 버튼 클릭 이벤트
   const showModal = useCallback(
     (_iproduct, e) => {
@@ -47,85 +92,90 @@ const Food = ({ setIsModalOpen }) => {
     },
     [setIsModalOpen],
   );
-  // 상품 페이징 처리 시작
-  const [listScroll, setListScroll] = useState([]);
-  const [hasNextPage, setHasNextPage] = useState(true);
-  const page = useRef(1);
-  const observerTargetEl = useRef(null);
-  const getListData = async () => {
-    //상품리스트 전체보기 - 음식별 와인리스트 GET
-    await getTotalCountry(setListScroll, setHasNextPage, page);
-  };
-  useEffect(() => {
-    if (!observerTargetEl.current || !hasNextPage) return;
-
-    const io = new IntersectionObserver((entries, observer) => {
-      if (entries[0].isIntersecting) {
-        getListData();
-      }
-    });
-    io.observe(observerTargetEl.current);
-
-    return () => {
-      io.disconnect();
-    };
-  }, [getListData, hasNextPage]);
-  // 상품 페이징 처리 끝
-  // 상품 더미 데이터
-  // const foodItem = [
-  //   {
-  //     productId: 22,
-  //     categoryId: 2,
-  //     featureId: 110,
-  //     countryId: 2,
-  //     aromaId: 110,
-  //     nmKor: "슈샤르조프버거 리슬링 스패틀레스",
-  //     nmEng: "Scharzhofberger Riesling Spätlese",
-  //     price: 15600,
-  //     quantity: 30,
-  //     pic: "wine/22/NwRt7c2oQF6-mdBgs9gSLQ_pb_x960.png",
-  //     promotion: 0,
-  //     beginner: 0,
-  //     alcohol: 8,
-  //     sale: 10,
-  //     salePrice: 30644,
-  //   },
-  // ];
-  // useEffect(() => {
-  //   getTotalCountry(setTotalList);
-  // }, [location.pathname]);
-  useEffect(() => {
-    setTotalCount(listScroll.length);
-    // console.log("상품 총 갯수", totalCount);
-  }, [listScroll]);
   // 상품 정렬 옵션
   const options = [
     {
-      value: "최신등록순",
+      value: 1,
       label: "최신등록순",
     },
     {
-      value: "높은가격순",
+      value: 2,
       label: "높은가격순",
     },
     {
-      value: "낮은가격순",
+      value: 3,
       label: "낮은가격순",
     },
   ];
   // console.log("상품 정렬 옵션 첫번째", options[0]);
   // 상품 정렬 선택
-  const handleChange = value => {
-    // console.log(`selected ${value}`);
-    if (value === "최신등록순") {
-      console.log("최신등록순 눌렀어요");
+  // const handleChange = value => {
+  //   getListData(value);
+  //   setOptionValue(value);
+  //   // setListScroll([]);
+  //   // setListData(value);
+  //   // console.log("value 출력합니다", value);
+  //   switch (value) {
+  //     case 1:
+  //       // getListData(1);
+  //       console.log("최신등록순 눌렀어요");
+  //       break;
+  //     case 2:
+  //       // getListData(2);
+  //       console.log("높은가격순 눌렀어요");
+  //       break;
+  //     case 3:
+  //       // getListData(3);
+  //       console.log("낮은가격순 눌렀어요");
+  //       break;
+  //   }
+  // };
+  const handleChange = useCallback(
+    value => {
+      getListData(value);
+      setOptionValue(value);
+      setListScroll([]);
+      // setListData(value);
+      // console.log("value 출력합니다", value);
+      switch (value) {
+        case 1:
+          console.log("최신등록순 눌렀어요");
+          break;
+        case 2:
+          console.log("높은가격순 눌렀어요");
+          break;
+        case 3:
+          console.log("낮은가격순 눌렀어요");
+          break;
+      }
+    },
+    [setListScroll],
+  );
+  // 상품 총 갯수 불러옴
+  useEffect(() => {
+    setTotalCount(listScroll.length);
+    console.log("value 출력", optionValue);
+    // console.log("화면 그려내", listScroll);
+    // console.log("상품 총 갯수", totalCount);
+  }, [listScroll]);
+  // 무한 스크롤 처리
+  useEffect(() => {
+    // console.log(inView, hasNextPage);
+    if (inView && hasNextPage) {
+      // console.log("value 출력", optionValue);
+      // handleChange(optionValue);
+      getListData(optionValue);
     }
-  };
+  }, [getListData, hasNextPage, inView, setOptionValue]);
+  // 화면 로딩 처리
   useEffect(() => {
     // 0.3초 뒤에 로딩 화면 사라짐
     const introTimeout = setTimeout(() => {
       setIsLoading(false);
     }, 300);
+    // 최초 실행 시 value 1 실행
+    // console.log("버튼 클릭했을때 딱 한번 실행");
+    getListData(1);
     return () => clearTimeout(introTimeout);
   }, []);
   return (
@@ -217,7 +267,7 @@ const Food = ({ setIsModalOpen }) => {
                   </Link>
                 </ProductListItem>
               ))}
-              <div ref={observerTargetEl}></div>
+              <div ref={ref}></div>
             </>
           )}
         </ContentsListItemWrap>

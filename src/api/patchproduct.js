@@ -26,18 +26,20 @@ export const getProductDetail = async (_setProductDetail, _productId) => {
   }
 };
 
-// 상품리스트 전체보기 - 음식별 와인리스트 GET
-export const getTotalCountry = async (
+// 상품리스트 전체보기 - 음식별 와인리스트 GET(최신등록순)
+export const getTotalFoodNew = async (
   _setListScroll,
   _setHasNextPage,
   _page,
+  // _setListData,
 ) => {
   try {
     const res = await axios.get(
-      `/api/main/food?bigCategoryId=1&page=${_page.current}&row=9`,
+      `/api/main/food/new?bigCategoryId=1&page=${_page.current}&row=9`,
     );
     const result = res.data;
-    // console.log("음식별 와인리스트 GET", result);
+    console.log("음식별 와인리스트 GET(최신등록순)", result);
+    // _setListData(result);
     _setListScroll(prevPosts => [...prevPosts, ...result]);
     _setHasNextPage(result.length === 9);
     if (result.length) {
@@ -45,6 +47,56 @@ export const getTotalCountry = async (
     }
     return result;
   } catch (err) {
-    console.log("음식별 와인리스트 전체보기 에러 발생", err);
+    console.log("음식별 와인리스트 GET(최신등록순) 에러 발생", err);
+  }
+};
+
+// 상품리스트 전체보기 - 음식별 와인리스트 GET(높은금액순)
+export const getTotalFoodExpensive = async (
+  _setListScroll,
+  _setHasNextPage,
+  _page,
+  // _setListData,
+) => {
+  try {
+    const res = await axios.get(
+      `/api/main/food/expensive?bigCategoryId=1&page=${_page.current}&row=9`,
+    );
+    const result = res.data;
+    console.log("음식별 와인리스트 GET(높은금액순)", result);
+    // _setListData(result);
+    _setListScroll(prevPosts => [...prevPosts, ...result]);
+    _setHasNextPage(result.length === 9);
+    if (result.length) {
+      _page.current += 1;
+    }
+    return result;
+  } catch (err) {
+    console.log("음식별 와인리스트 GET(높은금액순) 에러 발생", err);
+  }
+};
+
+// 상품리스트 전체보기 - 음식별 와인리스트 GET(낮은금액순)
+export const getTotalFoodCheap = async (
+  _setListScroll,
+  _setHasNextPage,
+  _page,
+  // _setListData,
+) => {
+  try {
+    const res = await axios.get(
+      `/api/main/food/cheap?bigCategoryId=1&page=${_page.current}&row=9`,
+    );
+    const result = res.data;
+    console.log("음식별 와인리스트 GET(낮은금액순)", result);
+    // _setListData(result);
+    _setListScroll(prevPosts => [...prevPosts, ...result]);
+    _setHasNextPage(result.length === 9);
+    if (result.length) {
+      _page.current += 1;
+    }
+    return result;
+  } catch (err) {
+    console.log("음식별 와인리스트 GET(낮은금액순) 에러 발생", err);
   }
 };
