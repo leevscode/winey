@@ -1,7 +1,7 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import { CartCompleteModal } from "../../style/GlobalComponents";
 import { ButtonOk } from "../../style/GlobalStyle";
-import { useNavigate } from "react-router";
 
 const ProductCartModal = ({ isModalOpen, handleOk, handleCancel }) => {
   const navigate = useNavigate();

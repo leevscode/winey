@@ -3,7 +3,7 @@
   노션 : https://www.notion.so/kimaydev
   깃허브 : https://github.com/kimaydev
 */
-import React, { useCallback, useState } from "react";
+import React, { useState } from "react";
 import { MainWrap } from "../style/MainStyle";
 import Visual from "../components/main/Visual";
 import NavList from "../components/main/NavList";

@@ -22,11 +22,12 @@ import { ContentsListItemWrap } from "../../style/GlobalComponents";
 import { getContryWines } from "../../api/patchmain";
 import ProductListSkeleton from "../skeleton/ProductListSkeleton";
 import NoImage from "../../assets/no_image.jpg";
-import { useSelector } from "react-redux";
-import { addCart } from "../../api/patchcart";
+import { useDispatch, useSelector } from "react-redux";
+import { addCart, cartLengthData } from "../../api/patchcart";
 
 const CountryWine = ({ setIsModalOpen }) => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const userData = useSelector(state => state.user);
   // 이미지 없을 때 error처리
   const onImgError = e => {
@@ -46,6 +47,7 @@ const CountryWine = ({ setIsModalOpen }) => {
       e.preventDefault();
       // 비회원인 상태에서 장바구니 버튼 클릭했을 때
       addCart(_iproduct);
+      cartLengthData(dispatch);
       setIsModalOpen(true);
     },
     [setIsModalOpen],

@@ -3,10 +3,10 @@
   노션 : https://www.notion.so/kimaydev
   깃허브 : https://github.com/kimaydev
 */
-import React, { useCallback, useState } from "react";
+import React, { useCallback } from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import { v4 } from "uuid";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
 // Import Swiper styles
@@ -21,10 +21,11 @@ import {
 } from "../../style/MainStyle";
 import ProductListSkeleton from "../skeleton/ProductListSkeleton";
 import NoImage from "../../assets/no_image.jpg";
-import { addCart } from "../../api/patchcart";
+import { addCart, cartLengthData } from "../../api/patchcart";
 
 const RecommWineSlide = ({ isLoading, randomWines, setIsModalOpen }) => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const userData = useSelector(state => state.user);
   // 이미지 없을 때 error처리
   const onImgError = e => {
@@ -35,6 +36,7 @@ const RecommWineSlide = ({ isLoading, randomWines, setIsModalOpen }) => {
     (_iproduct, e) => {
       e.preventDefault();
       addCart(_iproduct);
+      cartLengthData(dispatch);
       setIsModalOpen(true);
     },
     [setIsModalOpen],

@@ -27,11 +27,12 @@ import {
   getPricePlusTen,
 } from "../../api/patchmain";
 import ProductListSkeleton from "../skeleton/ProductListSkeleton";
-import { useSelector } from "react-redux";
-import { addCart } from "../../api/patchcart";
+import { useDispatch, useSelector } from "react-redux";
+import { addCart, cartLengthData } from "../../api/patchcart";
 
 const PriceWine = ({ setIsModalOpen }) => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const userData = useSelector(state => state.user);
   // 이미지 없을 때 error처리
   const onImgError = e => {
@@ -50,6 +51,7 @@ const PriceWine = ({ setIsModalOpen }) => {
     (_iproduct, e) => {
       e.preventDefault();
       addCart(_iproduct);
+      cartLengthData(dispatch);
       setIsModalOpen(true);
     },
     [setIsModalOpen],

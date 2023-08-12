@@ -4,7 +4,7 @@
   깃허브 : https://github.com/kimaydev
 */
 import React, { useEffect, useState } from "react";
-import { Outlet, useLocation, useNavigate, useParams } from "react-router-dom";
+import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import { LayoutWrap } from "./style/LayoutStyle";
 
 import { ContentsWrap, NavWrap } from "./style/GlobalComponents";
@@ -12,8 +12,6 @@ import Header from "./components/Header";
 import QuickMenu from "./components/QuickMenu";
 import Footer from "./components/Footer";
 import NavList from "./pages/NavList";
-// import { cartLengthData } from "./api/patchcart";
-// import { useDispatch } from "react-redux";
 
 const User = () => {
   const navigate = useNavigate();

@@ -125,15 +125,15 @@ const Header = ({ handleOpenNav, isActive }) => {
     // 와인 전체보기 카테고리
     {
       title: "음식별 추천 와인",
-      path: "/productmainlist/food",
+      path: "/productmain/food",
     },
     {
       title: "국가별 추천 와인",
-      path: "/productmainlist/country",
+      path: "/productmain/country",
     },
     {
       title: "가격별 추천 와인",
-      path: "/productmainlist/price",
+      path: "/productmain/price",
     },
   ];
   useEffect(() => {

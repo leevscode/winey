@@ -27,10 +27,14 @@ import SellList from "./pages/product/SellList";
 import NotFound from "./pages/NotFound";
 import { AnimatePresence } from "framer-motion";
 import SellListDetail from "./pages/product/SellListDetail";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Welcome from "./components/join/Welcome";
-import ProductMainList from "./pages/product/ProductMainList";
+// import ProductMainList from "./pages/product/ProductMainList";
 import ProductSellCart from "./pages/product/ProductSellCart";
+import Food from "./pages/productmain/Food";
+import Country from "./pages/productmain/Country";
+import Price from "./pages/productmain/Price";
+import ProductMain from "./pages/productmain/ProductMain";
 
 function App() {
   // 페이지 이동 시 스크롤 최상단으로 올라가는 코드
@@ -55,12 +59,18 @@ function App() {
           {/* 메인 */}
           <Route path="/main" element={<Main />} />
           {/* 상품 메인 추천별 상품리스트  */}
-          <Route path="/productmainlist">
+          <Route path="/productmain" element={<ProductMain />}>
+            <Route path="food" element={<Food />} />
+            <Route path="country" element={<Country />} />
+            <Route path="price" element={<Price />} />
+            <Route index path="*" element={<NotFound />} />
+          </Route>
+          {/* <Route path="/productmainlist">
             <Route path="food" element={<ProductMainList />} />
             <Route path="country" element={<ProductMainList />} />
             <Route path="price" element={<ProductMainList />} />
             <Route index path="*" element={<NotFound />} />
-          </Route>
+          </Route> */}
           {/* 상품리스트 */}
           <Route path="/productlist">
             <Route path="red" element={<ProductList />} />
