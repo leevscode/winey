@@ -88,7 +88,7 @@ export const postSomeItemPurchase = async ({
   }));
 
   try {
-    const res = await client.post("/api/payment/payment", {
+    const res = await client.post("/api/payment/payment1", {
       storeId: selectCollect.pickUpSpot.storeId,
       pickupTime: selectCollect.changeDate,
       totalOrderPrice: totalPrice,

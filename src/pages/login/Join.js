@@ -62,7 +62,8 @@ const Join = () => {
   ];
 
   // 아이디 중복 확인 모달창 핸들러
-  const showModal = () => {
+  const showModal = e => {
+    e.preventDefault();
     setIsModalOpen(true);
   };
   const handleOk = () => {
@@ -73,7 +74,8 @@ const Join = () => {
   };
 
   // 전화번호 본인 인증 모달 핸들러
-  const handleCertifyPhone = () => {
+  const handleCertifyPhone = e => {
+    e.preventDefault();
     Modal.success({
       title: "본인 인증",
       content: <div>본인인증이 완료되었습니다.</div>,
@@ -182,7 +184,9 @@ const Join = () => {
                 placeholder="아이디를 입력해 주세요."
               />
             </Form.Item>
-            <ButtonConfirm onClick={showModal}>인증메일발송</ButtonConfirm>
+            <ButtonConfirm onClick={e => showModal(e)}>
+              인증메일발송
+            </ButtonConfirm>
             <Modal
               title="이메일 인증 확인"
               open={isModalOpen}
@@ -299,7 +303,9 @@ const Join = () => {
                 placeholder="연락처를 입력해 주세요. (EX. 01012345678)"
               />
             </Form.Item>
-            <ButtonConfirm onClick={handleCertifyPhone}>본인인증</ButtonConfirm>
+            <ButtonConfirm onClick={e => handleCertifyPhone(e)}>
+              본인인증
+            </ButtonConfirm>
           </ConfirmArray>
           <RegionSelectWrap>
             <span>
