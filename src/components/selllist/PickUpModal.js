@@ -4,19 +4,18 @@ import {
   OrderCancelContent,
   OrderCancelModal,
 } from "../../style/SellListCancelStyle";
-import {finishSellListData} from "../../api/patchselllist"
+import { finishSellListData, getSellListData } from "../../api/patchselllist";
 
-const PickUpModal = ({
-  onConfirm,
-  onClose,
-  onPick,
-}) => {
-  const finishSellList = async() => {
+const PickUpModal = ({ onConfirm, onClose, onPick, setSellListData }) => {
+  const finishSellList = async () => {
     await finishSellListData(onPick);
-    alert("픽업이 완료 되었습니다");
-    // window.location.reload();
+    // alert("픽업이 완료 되었습니다");
+    const data = await getSellListData();
+    setSellListData(data);
   };
-  console.log(onPick)
+  const finishSellListWait = async () => {
+    await finishSellList();
+  };
 
   return (
     <>
@@ -27,14 +26,15 @@ const PickUpModal = ({
             onClick={() => {
               // "픽업완료" 확인 처리를 위해 onConfirm 함수를 호출합니다
               onConfirm(onPick);
-              finishSellList()
+              finishSellList();
               onClose();
+              finishSellListWait();
             }}
           >
             네
           </ButtonOk>
           <div style={{ marginTop: "8px" }}>
-            <ButtonCancel onClick={()=>onClose()}>아니요</ButtonCancel>
+            <ButtonCancel onClick={() => onClose()}>아니요</ButtonCancel>
           </div>
         </OrderCancelContent>
       </OrderCancelModal>
