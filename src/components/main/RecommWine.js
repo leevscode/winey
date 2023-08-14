@@ -18,21 +18,14 @@ const RecommWine = ({ setIsModalOpen }) => {
   const userData = useSelector(state => state.user);
 
   useEffect(() => {
-    if (userData.userId === null) {
-      console.log("로그아웃상태");
-    } else {
-      getRandomWines(setRandomWines, setIsLoading);
-      console.log("화면갱신 테스트");
-    }
-  }, [userData.userId]);
+    // if (userData.userId === null) {
+    //   console.log("로그아웃상태");
+    // } else {
+    //   getRandomWines(setRandomWines, setIsLoading);
+    // }
+    getRandomWines(setRandomWines, setIsLoading);
 
-  // useEffect(() => {
-  //   if (userData.userId === null) {
-  //     console.log("로그아웃상태");
-  //   } else {
-  //     getRandomWines(setRandomWines, setIsLoading);
-  //   }
-  // }, []);
+  }, []);
   return (
     <RecommWineWrap>
       {/* 맞춤 와인 타이틀 */}

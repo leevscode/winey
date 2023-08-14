@@ -116,6 +116,7 @@ const ProductSellCart = () => {
           selectCollect,
           isPayment,
           totalPrice,
+          navigate,
         });
         navigate("/ProductCompleteCart", {
           state: {

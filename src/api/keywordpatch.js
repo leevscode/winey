@@ -4,7 +4,9 @@
     깃허브 : https://github.com/hyemdev
 */
 
+import { Modal } from "antd";
 import { client } from "./client";
+// const nav = useNavigate();
 // 선호키워드리스트 유무 확인
 export const getUserFavoriteKey = async () => {
   try {
@@ -19,7 +21,7 @@ export const getUserFavoriteKey = async () => {
 };
 
 // 선호키워드 선택 post
-export const postUserKeyword = async favoriteKeyword => {
+export const postUserKeyword = async (favoriteKeyword, navigator) => {
   try {
     const res = await client.post("/api/recommend/wine", {
       categoryId: favoriteKeyword.categoryId,
@@ -37,9 +39,18 @@ export const postUserKeyword = async favoriteKeyword => {
     console.log(res);
     const data = await res.data;
     console.log(data);
-    return data;
+    navigator("/main");
   } catch (error) {
     console.log(error);
-    return error;
+    Modal.error({
+      title: "키워드 재선택",
+      content: (
+        <>
+          선택 키워드에 대한 와인리스트가 없습니다. <br />
+          키워드를 다시 선택해주세요.
+        </>
+      ),
+    });
+    navigator("/keywordselect");
   }
 };

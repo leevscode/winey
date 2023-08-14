@@ -30,6 +30,7 @@ import { useDispatch, useSelector } from "react-redux";
 const JoinEditForm = () => {
   const dispatch = useDispatch();
   const editUserInfo = useSelector(state => state.user);
+  const navigate = useNavigate();
 
   // 지역옵션
   const regionOptions = [
@@ -51,8 +52,6 @@ const JoinEditForm = () => {
     { regionNmId: 16, value: "경남" },
     { regionNmId: 17, value: "제주" },
   ];
-
-  const navigate = useNavigate();
 
   // 아이디, 이름, 전화번호 변경 state
   const [editId] = useState(editUserInfo.email);
@@ -133,10 +132,10 @@ const JoinEditForm = () => {
       console.log("Failed");
     }
   };
-
   const onFinishFailed = errorInfo => {
     console.log("Failed:", errorInfo);
   };
+
   // 회원탈퇴 핸들러
   const UserDropOut = () => {
     Modal.confirm({
@@ -157,7 +156,7 @@ const JoinEditForm = () => {
   };
   //
   useEffect(() => {
-    // dispatch(getMemberInfo());
+    dispatch(getMemberInfo());
   }, []);
   return (
     <div>
@@ -175,7 +174,6 @@ const JoinEditForm = () => {
           // 디폴트 값
           initialValues={{
             userId: editId,
-            password: editpassword,
             userName: editUserName,
             phoneNumber: editUserTel,
             regionNmId: editUserCity,
@@ -329,11 +327,13 @@ const JoinEditForm = () => {
           <Form.Item>
             <JoinEditBtn>
               <ButtonOk>수정하기</ButtonOk>
-              <ButtonCancel onClick={UserDropOut}>회원탈퇴</ButtonCancel>
             </JoinEditBtn>
           </Form.Item>
         </Form>
       </ConfigProvider>
+      <JoinEditBtn>
+        <ButtonCancel onClick={UserDropOut}>회원탈퇴</ButtonCancel>
+      </JoinEditBtn>
     </div>
   );
 };

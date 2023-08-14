@@ -4,6 +4,7 @@
     깃허브 : https://github.com/hyemdev
 */
 
+import { Modal } from "antd";
 import { client } from "./client";
 
 // 유저 매장정보 get
@@ -38,6 +39,8 @@ export const postOneItemPurchase = async ({
   isPayment,
   totalPrice,
   editQuantity,
+  navigate,
+  isell,
 }) => {
   try {
     const res = await client.post("/api/payment/eachpayment", {
@@ -53,6 +56,16 @@ export const postOneItemPurchase = async ({
     console.log("결제성공", data);
   } catch (error) {
     console.log("결제실패", error);
+    Modal.error({
+      title: "결제실패",
+      content: (
+        <>
+          결제에 실패했습니다. <br />
+          확인 후 다시한번 시도해 주세요.
+        </>
+      ),
+    });
+    navigate(`/productsell/${isell}`);
   }
 };
 
@@ -60,9 +73,8 @@ export const postOneItemPurchase = async ({
 export const postSomeItemPurchase = async ({
   productCollect,
   selectCollect,
-  isPayment,
   totalPrice,
-  editQuantity,
+  navigate,
 }) => {
   const list = await productCollect.CartData.map(cartItem => ({
     cartId: cartItem.cartId,
@@ -87,5 +99,15 @@ export const postSomeItemPurchase = async ({
     console.log("결제성공", data);
   } catch (error) {
     console.log("결제실패", error);
+    Modal.error({
+      title: "결제실패",
+      content: (
+        <>
+          결제에 실패했습니다. <br />
+          확인 후 다시한번 시도해 주세요.
+        </>
+      ),
+    });
+    navigate("/cart");
   }
 };

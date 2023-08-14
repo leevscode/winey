@@ -39,7 +39,6 @@ const ProductSell = () => {
   const [productCollect, setProductCollect] = useState("");
   // get한 아이템정보를 배열에 담자
   const productInfoArray = [productCollect];
-  console.log("productInfoArray", productInfoArray);
 
   // 수량변경 state
   const [editQuantity, setEditQuantity] = useState(1);
@@ -117,6 +116,8 @@ const ProductSell = () => {
           isPayment,
           totalPrice,
           editQuantity,
+          navigate,
+          isell,
         });
         navigate("/ProductComplete", {
           state: {
