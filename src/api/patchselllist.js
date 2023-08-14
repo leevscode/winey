@@ -1,3 +1,8 @@
+/*
+    작업자 : 이동은
+    노션 : https://www.notion.so/leevscode/leevscode-5223e3d332604844a255a0c63113a284
+    깃허브 : https://github.com/leevscode
+*/
 import { client } from "./client";
 
 // 주문 내역 출력
@@ -57,11 +62,12 @@ export const getdetailData = async numberValue => {
 };
 
 // 리뷰 등록
-export const submitReview = async (orderDetailId, reviewLevel) => {
+export const submitReview = async (orderDetailId, reviewLevel, userId) => {
   try {
     const res = await client.post(`/api/payment/review`, {
       orderDetailId,
       reviewLevel,
+      userId,
     });
     console.log("리뷰가 성공적으로 제출되었습니다:");
     const result = await res.data;

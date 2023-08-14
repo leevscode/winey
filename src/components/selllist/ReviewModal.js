@@ -16,6 +16,7 @@ import {
   SellListModal,
 } from "../../style/SellListReviewStyle";
 import { submitReview } from "../../api/patchselllist";
+import { useSelector } from "react-redux";
 
 const ReviewModal = ({
   reviewId,
@@ -25,21 +26,24 @@ const ReviewModal = ({
 }) => {
   const [selectedReview, setSelectedReview] = useState(null);
   const [showWarning, setShowWarning] = useState(false);
+  //const [submitReview, setSubmitReview] = useState()
 
-  const handleReviewSubmit = () => {
+  // 사용자 정보
+  const userData = useSelector(state => state.user);
+  const handleReviewSubmit = async () => {
     if (selectedReview) {
       console.log("평점이 등록될 orderDetailId :", reviewId);
       console.log("평점이 등록되었습니다 평점 레벨 :", selectedReview);
       // DB연동 예정
+      await submitReview(reviewId, selectedReview, userData.userId);
 
       // 리뷰가 성공적으로 제출되면 reviewSubmit를 true로 설정
       reviewSubmitUpdate(selectedReview);
 
       // 평점 처리가 완료되면 모달을 닫습니다.
-      submitReview();
-      console.log("평점 등록", submitReview);
-      hideModal();
 
+      console.log("평점 등록");
+      hideModal();
     } else {
       setShowWarning(true);
     }
@@ -81,8 +85,8 @@ const ReviewModal = ({
             <h2>지금 바로 평점을 남겨보세요!</h2>
             <ReviewModalbox>
               <button
-                onClick={() => handleReviewSelection("good")}
-                className={selectedReview === "good" ? "selected" : ""}
+                onClick={() => handleReviewSelection(1)}
+                className={selectedReview === 1 ? "selected" : ""}
               >
                 <li>
                   <ReviewIcon>
@@ -92,8 +96,8 @@ const ReviewModal = ({
                 </li>
               </button>
               <button
-                onClick={() => handleReviewSelection("normal")}
-                className={selectedReview === "normal" ? "selected" : ""}
+                onClick={() => handleReviewSelection(2)}
+                className={selectedReview === 2 ? "selected" : ""}
               >
                 <li>
                   <ReviewIcon>
@@ -103,8 +107,8 @@ const ReviewModal = ({
                 </li>
               </button>
               <button
-                onClick={() => handleReviewSelection("bad")}
-                className={selectedReview === "bad" ? "selected" : ""}
+                onClick={() => handleReviewSelection(3)}
+                className={selectedReview === 3 ? "selected" : ""}
               >
                 <li>
                   <ReviewIcon>
