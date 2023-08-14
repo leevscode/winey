@@ -44,7 +44,8 @@ export const ProudctTotalItem = styled.div`
 
 export const ProductCartInfo = styled.div`
   padding: ${WidthPd.padding};
-  padding-top: 2rem;
+  /* padding-top: 2rem; */
+  padding: 2rem 1rem;
   border-bottom: 1px solid ${opacity.white};
   font-size: 2rem;
   display: grid;
@@ -52,21 +53,19 @@ export const ProductCartInfo = styled.div`
   grid-template-columns: 1fr 2.5fr 30px;
   button {
     font-size: 2.2rem;
-    /* margin: 10px; */
   }
 `;
 
 export const CartDetailWrap = styled.div`
-  width: 14rem;
-  height: 18rem;
-  margin-bottom: 15px;
+  width: 15rem;
+  height: 15rem;
   position: relative;
-  padding-top: 135%;
-  border: 0.05rem solid ${opacity.white};
+  /* padding-top: 135%; */
+  border: 0.05rem solid ${opacity.grayLight};
   overflow: hidden;
   isolation: isolate;
   img {
-    padding: 0.5rem;
+    padding: 1rem;
     position: absolute;
     top: 50%;
     left: 50%;
@@ -79,7 +78,7 @@ export const CartDetailWrap = styled.div`
 
 export const CartDetail = styled.span`
   display: flex;
-  padding: 3rem;
+  padding: 1rem 2rem;
   flex-direction: column;
   align-items: flex-start;
   justify-content: flex-start;
@@ -108,8 +107,7 @@ export const CartnmEng = styled.p`
   font-size: 1.2rem;
   font-weight: 400;
   line-height: 2rem;
-  margin-bottom: 2.5rem;
-  margin-bottom: 40px;
+  margin-bottom: 2rem;
   color: #837575;
 `;
 

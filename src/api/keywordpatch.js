@@ -5,6 +5,8 @@
 */
 
 import { client } from "./client";
+// 선호키워드리스트 유무 확인
+export const getUserFavoriteKey = () => {};
 
 // 선호키워드 선택 post
 export const postUserKeyword = async favoriteKeyword => {
