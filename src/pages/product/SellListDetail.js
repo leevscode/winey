@@ -22,7 +22,6 @@ const SellListDetail = () => {
   const [reviewSubmit, setReviewSubmit] = useState({});
   // 리뷰 목록 팝업창 전달 아이디 state
   const [reviewId, setReviewId] = useState(null);
-
   const [productData, setProductData] = useState([]);
 
   // 결제 총 금액 더미데이터
@@ -46,7 +45,7 @@ const SellListDetail = () => {
   // 주문 상세 내역 출력
   const filleddetailData = async () => {
     const parts = iselllist.split(":");
-    const numberPart = parts[2];
+    const numberPart = parts[0];
     const numberValue = parseInt(numberPart);
     try {
       const data = await getdetailData(numberValue);
@@ -113,7 +112,6 @@ const SellListDetail = () => {
     //   // 리뷰 평점 추가
     // };
 
-    
     // submitReview(reviewData);
   };
 
@@ -143,7 +141,7 @@ const SellListDetail = () => {
             <ul>
               <li>{item.nmKor}</li>
               <li>{item.nmEng}</li>
-              <li>{item.salePrice.toLocaleString()}</li>
+              <li>{parseInt(item.price).toLocaleString()}</li>
             </ul>
           </div>
 
@@ -158,12 +156,20 @@ const SellListDetail = () => {
       ))}
 
       <DetailTotalPrice>
-        <p>결제 방법: {payment[`${productDes.payment}`]}</p>
-        <p>픽업 지점: {productDes.storeNm}</p>
-        <p>픽업 시간: {productDes.pickupTime}</p>
-        <p>주문 상태: {orderStatus[`${productDes.orderStatus}`]}</p>
         <p>
-          총 결제금액{" "}
+          결제 방법 <span>{payment[`${productDes.payment}`]}</span>
+        </p>
+        <p>
+          픽업 지점 <span> {productDes.storeNm}</span>
+        </p>
+        <p>
+          픽업 시간 <span> {productDes.pickupTime}</span>
+        </p>
+        <p>
+          주문 상태 <span>{orderStatus[`${productDes.orderStatus}`]}</span>
+        </p>
+        <p>
+          총 결제금액
           <strong>
             {parseInt(productDes.totalOrderPrice).toLocaleString()}원
           </strong>

@@ -1,3 +1,8 @@
+/*
+    작업자 : 이동은
+    노션 : https://www.notion.so/leevscode/leevscode-5223e3d332604844a255a0c63113a284
+    깃허브 : https://github.com/leevscode
+*/
 import React, { useEffect, useState } from "react";
 import { ButtonCancel, ButtonOk } from "../../style/GlobalStyle";
 import {
@@ -63,13 +68,6 @@ const ProductCart = () => {
     }
   };
 
-  // const calculateTotalPrice = () => {
-  //   return CartData.reduce(
-  //     (total, item) => total + item.price * item.quantity,
-  //     0,
-  //   );
-  // };
-
   const calcTotalSum = () => {
     let itemTotal = 0;
     CartData.map((item, index) => {
@@ -86,18 +84,6 @@ const ProductCart = () => {
       return item;
     });
     setCartData(arr);
-    // try {
-    //   const updatedItem = await changeQuantity(
-    //     cartId,
-    //     CartData.find(item => item.cartId === cartId).quantity + 1,
-    //   );
-    //   // 장바구니 수량 +
-    //   setCartData(prevCartData =>
-    //     prevCartData.map(item => (item.cartId === cartId ? updatedItem : item)),
-    //   );
-    // } catch (error) {
-    //   console.log(error);
-    // }
   };
 
   const decreaseItemQuantity = async cartId => {
@@ -111,20 +97,8 @@ const ProductCart = () => {
       return item;
     });
     setCartData(arr);
-
-    // try {
-    //   const updatedItem = await changeQuantity(
-    //     cartId,
-    //     CartData.find(item => item.cartId === cartId).quantity - 1,
-    //   );
-    //   // 장바구니 수량 -
-    //   setCartData(prevCartData =>
-    //     prevCartData.map(item => (item.cartId === cartId ? updatedItem : item)),
-    //   );
-    // } catch (error) {
-    //   console.log(error);
-    // }
   };
+
   const buyGood = async () => {
     console.log("장바구니 내역을 서버로 전송함");
 
@@ -143,7 +117,6 @@ const ProductCart = () => {
 
   // 토탈값 바뀔때마다 갱신되는 useEffect
   useEffect(() => {
-    // setTotalPrice(calculateTotalPrice());
     setTotalPrice(calcTotalSum);
   }, [calcTotalSum]);
 
