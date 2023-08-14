@@ -65,12 +65,6 @@ function App() {
             <Route path="price" element={<Price />} />
             <Route index path="*" element={<NotFound />} />
           </Route>
-          {/* <Route path="/productmainlist">
-            <Route path="food" element={<ProductMainList />} />
-            <Route path="country" element={<ProductMainList />} />
-            <Route path="price" element={<ProductMainList />} />
-            <Route index path="*" element={<NotFound />} />
-          </Route> */}
           {/* 상품리스트 */}
           <Route path="/productlist">
             <Route path="red" element={<ProductList />} />

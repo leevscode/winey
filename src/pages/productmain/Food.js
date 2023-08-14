@@ -1,3 +1,8 @@
+/*
+  작업자 : 김아영
+  노션 : https://www.notion.so/kimaydev
+  깃허브 : https://github.com/kimaydev
+*/
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -107,29 +112,6 @@ const Food = ({ setIsModalOpen }) => {
       label: "낮은가격순",
     },
   ];
-  // console.log("상품 정렬 옵션 첫번째", options[0]);
-  // 상품 정렬 선택
-  // const handleChange = value => {
-  //   getListData(value);
-  //   setOptionValue(value);
-  //   // setListScroll([]);
-  //   // setListData(value);
-  //   // console.log("value 출력합니다", value);
-  //   switch (value) {
-  //     case 1:
-  //       // getListData(1);
-  //       console.log("최신등록순 눌렀어요");
-  //       break;
-  //     case 2:
-  //       // getListData(2);
-  //       console.log("높은가격순 눌렀어요");
-  //       break;
-  //     case 3:
-  //       // getListData(3);
-  //       console.log("낮은가격순 눌렀어요");
-  //       break;
-  //   }
-  // };
   const handleChange = useCallback(
     value => {
       getListData(value);
@@ -139,13 +121,13 @@ const Food = ({ setIsModalOpen }) => {
       // console.log("value 출력합니다", value);
       switch (value) {
         case 1:
-          console.log("최신등록순 눌렀어요");
+          // console.log("최신등록순 눌렀어요");
           break;
         case 2:
-          console.log("높은가격순 눌렀어요");
+          // console.log("높은가격순 눌렀어요");
           break;
         case 3:
-          console.log("낮은가격순 눌렀어요");
+          // console.log("낮은가격순 눌렀어요");
           break;
       }
     },
@@ -154,7 +136,7 @@ const Food = ({ setIsModalOpen }) => {
   // 상품 총 갯수 불러옴
   useEffect(() => {
     setTotalCount(listScroll.length);
-    console.log("value 출력", optionValue);
+    // console.log("value 출력", optionValue);
     // console.log("화면 그려내", listScroll);
     // console.log("상품 총 갯수", totalCount);
   }, [listScroll]);
