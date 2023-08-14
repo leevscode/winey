@@ -4,23 +4,20 @@ import { useDispatch, useSelector } from "react-redux";
 import { v4 } from "uuid";
 import { ConfigProvider, Select } from "antd";
 import NoImage from "../../assets/no_image.jpg";
-import {
-  ProductListWrap,
-  ProductMainItemWrap,
-} from "../../style/ProductListStyle";
+import { ProductListItemWrap } from "../../style/ProductListStyle";
+import { Gradation } from "../../style/GlobalStyle";
 import { ContentsListItemWrap } from "../../style/GlobalComponents";
-import ProductListSkeleton from "../../components/skeleton/ProductListSkeleton";
 import { ProductListItem } from "../../style/ProductStyle";
+import { addCart, cartLengthData } from "../../api/patchcart";
+import ProductListSkeleton from "../skeleton/ProductListSkeleton";
 import { useInView } from "react-intersection-observer";
 import {
-  getTotalMinusTwoCheap,
-  getTotalMinusTwoExpensive,
-  getTotalMinusTwoNew,
+  getRedWineCheap,
+  getRedWineExpensive,
+  getRedWineNew,
 } from "../../api/patchproduct";
-import { addCart, cartLengthData } from "../../api/patchcart";
-import { Gradation } from "../../style/GlobalStyle";
 
-const Price = ({ setIsModalOpen }) => {
+const Red = ({ setIsModalOpen }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const userData = useSelector(state => state.user);
@@ -51,7 +48,7 @@ const Price = ({ setIsModalOpen }) => {
       salePrice: 30644,
     },
   ];
- */
+  */
   //react-intersection-observer state
   const [ref, inView] = useInView();
   // 로딩 state
@@ -67,11 +64,11 @@ const Price = ({ setIsModalOpen }) => {
   // value값에 따라 데이터 바뀜
   const getListData = useCallback(async value => {
     if (value === 1) {
-      await getTotalMinusTwoNew(setListScroll, setHasNextPage, page);
+      await getRedWineNew(setListScroll, setHasNextPage, page);
     } else if (value === 2) {
-      await getTotalMinusTwoExpensive(setListScroll, setHasNextPage, page);
+      await getRedWineExpensive(setListScroll, setHasNextPage, page);
     } else if (value === 3) {
-      await getTotalMinusTwoCheap(setListScroll, setHasNextPage, page);
+      await getRedWineCheap(setListScroll, setHasNextPage, page);
     }
   }, []);
   // 회원 장바구니 버튼 클릭 이벤트
@@ -156,101 +153,99 @@ const Price = ({ setIsModalOpen }) => {
     return () => clearTimeout(introTimeout);
   }, []);
   return (
-    <ProductListWrap>
+    <ProductListItemWrap>
       {/* 상품리스트 목록 */}
-      <ProductMainItemWrap>
-        <ul>
-          <li>
-            {/* 상품 총 갯수 */}총 <span>{totalCount}</span>개
-          </li>
-          <li>
-            {/* 상품 정렬 */}
-            <ConfigProvider
-              theme={{
-                token: {
-                  colorPrimary: Gradation.wineD,
-                  borderRadius: 4,
-                  fontSize: 12,
-                  controlHeight: 24,
-                  colorBorder: "transparent",
-                  colorPrimaryHover: "transparent",
-                  fontFamily:
-                    '"Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif',
-                },
-              }}
-            >
-              <Select
-                defaultValue={options[0]}
-                onChange={handleChange}
-                options={options}
-              />
-            </ConfigProvider>
-          </li>
-        </ul>
-        <ContentsListItemWrap>
-          {isLoading ? (
-            // 로딩 화면 출력
-            productListSkeleton.map(index => <ProductListSkeleton key={v4()} />)
-          ) : (
-            // 상품 리스트
-            <>
-              {listScroll?.map((item, index) => (
-                <ProductListItem key={v4()}>
-                  <Link to={`/productdetail/${item.productId}`}>
-                    <div className="img">
+      <ul>
+        <li>
+          {/* 상품 총 갯수 */}총 <span>{totalCount}</span>개
+        </li>
+        <li>
+          {/* 상품 정렬 */}
+          <ConfigProvider
+            theme={{
+              token: {
+                colorPrimary: Gradation.wineD,
+                borderRadius: 4,
+                fontSize: 12,
+                controlHeight: 24,
+                colorBorder: "transparent",
+                colorPrimaryHover: "transparent",
+                fontFamily:
+                  '"Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif',
+              },
+            }}
+          >
+            <Select
+              defaultValue={options[0]}
+              onChange={handleChange}
+              options={options}
+            />
+          </ConfigProvider>
+        </li>
+      </ul>
+      <ContentsListItemWrap>
+        {isLoading ? (
+          // 로딩 화면 출력
+          productListSkeleton.map(index => <ProductListSkeleton key={v4()} />)
+        ) : (
+          // 상품 리스트
+          <>
+            {listScroll?.map((item, index) => (
+              <ProductListItem key={v4()}>
+                <Link to={`/productdetail/${item.productId}`}>
+                  <div className="img">
+                    <img
+                      src={`/img/${item.pic}`}
+                      alt={item.nmKor}
+                      onError={onImgError}
+                    />
+                    {/* 장바구니 버튼 */}
+                    <button
+                      onClick={
+                        userData.userId
+                          ? e => showModal(item.productId, e)
+                          : e => handleNotUser(e)
+                      }
+                    >
                       <img
-                        src={`/img/${item.pic}`}
-                        alt={item.nmKor}
-                        onError={onImgError}
+                        src={`${process.env.PUBLIC_URL}/images/icon_cart_2.svg`}
+                        alt="장바구니에 담기"
                       />
-                      {/* 장바구니 버튼 */}
-                      <button
-                        onClick={
-                          userData.userId
-                            ? e => showModal(item.productId, e)
-                            : e => handleNotUser(e)
-                        }
-                      >
-                        <img
-                          src={`${process.env.PUBLIC_URL}/images/icon_cart_2.svg`}
-                          alt="장바구니에 담기"
-                        />
-                      </button>
+                    </button>
+                  </div>
+                  <div className="txt">
+                    <div className="badge">
+                      {item.promotion === 1 && (
+                        <span className="recommend">추천상품</span>
+                      )}
+                      {item.beginner === 1 && (
+                        <span className="beginner">입문자추천</span>
+                      )}
                     </div>
-                    <div className="txt">
-                      <div className="badge">
-                        {item.promotion === 1 && (
-                          <span className="recommend">추천상품</span>
-                        )}
-                        {item.beginner === 1 && (
-                          <span className="beginner">입문자추천</span>
-                        )}
-                      </div>
-                      <div className="title">{item.nmKor}</div>
-                      <ul className="price">
-                        <li>
-                          <span>
-                            {item.salePrice === null
-                              ? item.price.toLocaleString()
-                              : item.salePrice.toLocaleString()}
-                          </span>
-                          원
-                        </li>
-                        <li>
-                          <span>{item.price.toLocaleString()}원</span>
-                        </li>
-                      </ul>
-                    </div>
-                  </Link>
-                </ProductListItem>
-              ))}
-              <div ref={ref}></div>
-            </>
-          )}
-        </ContentsListItemWrap>
-      </ProductMainItemWrap>
-    </ProductListWrap>
+                    <div className="title">{item.nmKor}</div>
+                    <ul className="price">
+                      <li>
+                        <span>
+                          {item.salePrice === null
+                            ? item.price.toLocaleString()
+                            : item.salePrice.toLocaleString()}
+                        </span>
+                        원
+                      </li>
+                      <li>
+                        <span>{item.price.toLocaleString()}원</span>
+                      </li>
+                    </ul>
+                  </div>
+                </Link>
+              </ProductListItem>
+            ))}
+            <div ref={ref}></div>
+          </>
+        )}
+      </ContentsListItemWrap>
+    </ProductListItemWrap>
   );
 };
 
-export default React.memo(Price);
+export default React.memo(Red);

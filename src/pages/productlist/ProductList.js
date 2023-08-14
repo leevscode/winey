@@ -1,13 +1,10 @@
-/*
-  작업자 : 김아영
-  노션 : https://www.notion.so/kimaydev
-  깃허브 : https://github.com/kimaydev
-*/
 import React, { useState } from "react";
 import { Outlet } from "react-router-dom";
+import { ProductListWrap } from "../../style/ProductListStyle";
+import ProductListTitle from "../../components/product/ProductListTitle";
 import ProductCartModal from "../../components/product/ProductCartModal";
 
-const ProductMain = () => {
+const ProductList = () => {
   // 장바구니 완료 모달 state
   const [isModalOpen, setIsModalOpen] = useState(false);
   const handleOk = () => {
@@ -18,7 +15,12 @@ const ProductMain = () => {
   };
   return (
     <>
-      <Outlet setIsModalOpen={setIsModalOpen} />
+      <ProductListWrap>
+        {/* 상품리스트 타이틀 */}
+        <ProductListTitle />
+        {/* 상품리스트 목록 */}
+        <Outlet setIsModalOpen={setIsModalOpen} />
+      </ProductListWrap>
       {/* 장바구니 완료 모달창 */}
       <ProductCartModal
         isModalOpen={isModalOpen}
@@ -29,4 +31,4 @@ const ProductMain = () => {
   );
 };
 
-export default ProductMain;
+export default ProductList;

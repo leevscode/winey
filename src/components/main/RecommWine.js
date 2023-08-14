@@ -7,7 +7,6 @@ import React, { useEffect, useState } from "react";
 import { getRandomWines } from "../../api/patchmain";
 import { RecommWineTitle, RecommWineWrap } from "../../style/MainStyle";
 import RecommWineSlide from "./RecommWineSlide";
-import ProductListSkeleton from "../skeleton/ProductListSkeleton";
 import { useSelector } from "react-redux";
 
 const RecommWine = ({ setIsModalOpen }) => {
@@ -18,8 +17,7 @@ const RecommWine = ({ setIsModalOpen }) => {
 
   const userData = useSelector(state => state.user);
 
-  useEffect(() => {
-    // if (userData.userId === null) {
+  useEffect(() => {    
     if (userData.userId === null) {
       console.log("로그아웃상태");
     } else {

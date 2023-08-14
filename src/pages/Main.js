@@ -26,18 +26,18 @@ const Main = () => {
     <>
       <MainWrap>
         {/* 비주얼 슬라이드 */}
-        <Visual></Visual>
+        <Visual />
         {/* 네비게이션 메뉴 리스트 */}
-        <NavList></NavList>
+        <NavList />
         <div className="main-product-wrap">
           {/* 맞춤 와인 추천 */}
-          <RecommWine setIsModalOpen={setIsModalOpen}></RecommWine>
+          <RecommWine setIsModalOpen={setIsModalOpen} />
           {/* 음식별 추천 와인 */}
-          <FoodWine setIsModalOpen={setIsModalOpen}></FoodWine>
+          <FoodWine setIsModalOpen={setIsModalOpen} />
           {/* 국가별 추천 와인 */}
-          <CountryWine setIsModalOpen={setIsModalOpen}></CountryWine>
+          <CountryWine setIsModalOpen={setIsModalOpen} />
           {/* 가격별 추천 와인 */}
-          <PriceWine setIsModalOpen={setIsModalOpen}></PriceWine>
+          <PriceWine setIsModalOpen={setIsModalOpen} />
         </div>
       </MainWrap>
       {/* 장바구니 완료 모달창 */}

@@ -1,13 +1,22 @@
+/*
+  작업자 : 김아영
+  노션 : https://www.notion.so/kimaydev
+  깃허브 : https://github.com/kimaydev
+*/
 import React from "react";
 import { NavLink } from "react-router-dom";
+import { useSelector } from "react-redux";
 import { SellQuickWrap } from "../../style/ProductDetailStyle";
 
 const WineSellQuick = ({ iproduct }) => {
+  const userData = useSelector(state => state.user);
   return (
     <SellQuickWrap>
       <ul>
         <li>
-          <NavLink to={`/productsell/${iproduct}`}>구매하기</NavLink>
+          <NavLink to={userData.userId ? `/productsell/${iproduct}` : `/login`}>
+            구매하기
+          </NavLink>
         </li>
         <li>
           <NavLink to="/cart">
