@@ -8,14 +8,23 @@ import { getRandomWines } from "../../api/patchmain";
 import { RecommWineTitle, RecommWineWrap } from "../../style/MainStyle";
 import RecommWineSlide from "./RecommWineSlide";
 import ProductListSkeleton from "../skeleton/ProductListSkeleton";
+import { useSelector } from "react-redux";
 
 const RecommWine = ({ setIsModalOpen }) => {
   // 입문용 와인 데이터 보관할 state
   const [randomWines, setRandomWines] = useState([]);
   // 로딩 state
   const [isLoading, setIsLoading] = useState(true);
+
+  const userData = useSelector(state => state.user);
+
   useEffect(() => {
-    getRandomWines(setRandomWines, setIsLoading);
+    // if (userData.userId === null) {
+    if (userData.userId === null) {
+      console.log("로그아웃상태");
+    } else {
+      getRandomWines(setRandomWines, setIsLoading);
+    }
   }, []);
   return (
     <RecommWineWrap>
