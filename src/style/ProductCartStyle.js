@@ -60,7 +60,6 @@ export const CartDetailWrap = styled.div`
   width: 15rem;
   height: 15rem;
   position: relative;
-  /* padding-top: 135%; */
   border: 0.05rem solid ${opacity.grayLight};
   overflow: hidden;
   isolation: isolate;

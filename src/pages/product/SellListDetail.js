@@ -24,7 +24,7 @@ const SellListDetail = () => {
   const [reviewId, setReviewId] = useState(null);
   const [productData, setProductData] = useState([]);
 
-  // 결제 총 금액 더미데이터
+  // 결제 총 금액
   const orderData = {};
 
   // 상품 가격 합산
@@ -121,7 +121,7 @@ const SellListDetail = () => {
             <ul>
               <li>{item.nmKor}</li>
               <li>{item.nmEng}</li>
-              <li>{parseInt(item.price).toLocaleString()}</li>
+              <li>{parseInt(item.price).toLocaleString()}원</li>
             </ul>
           </div>
           {item.review ? (
