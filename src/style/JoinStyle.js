@@ -8,7 +8,7 @@ import styled from "@emotion/styled";
 import { Maincolor, WidthPd, opacity } from "./GlobalStyle";
 
 export const JoinWrap = styled.div`
-  margin-top: 3rem;
+  margin-top: 1rem;
   margin-bottom: 7rem;
   padding: ${WidthPd.padding};
   display: flex;
@@ -160,7 +160,7 @@ export const TermsWarp = styled.div`
   align-content: space-between;
   flex-direction: column;
   margin-bottom: 3rem;
-  & label > span {
+  & > label > span {
     font-size: 1.4rem;
     font-weight: 600;
     line-height: 1.7rem;
@@ -199,7 +199,7 @@ export const TermsFlex = styled.div`
     & > span {
       position: relative;
       display: inline-block;
-      font-size: 1.3rem;
+      font-size: 1.4rem;
       font-weight: 700;
       color: ${Maincolor.redDeep};
       line-height: 1.7rem;
@@ -218,7 +218,7 @@ export const TermsFlex = styled.div`
 `;
 
 export const TermsInfoScroll = styled.div`
-  font-size: 1rem;
+  font-size: 1.1rem;
   width: 30rem;
   height: 50rem;
   overflow-y: scroll;
