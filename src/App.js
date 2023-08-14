@@ -38,6 +38,7 @@ import White from "./components/productlist/White";
 import Spakling from "./components/productlist/Spakling";
 import Etc from "./components/productlist/Etc";
 import ProductList from "./pages/productlist/ProductList";
+import { Helmet } from "react-helmet-async";
 
 function App() {
   // 페이지 이동 시 스크롤 최상단으로 올라가는 코드
@@ -46,83 +47,114 @@ function App() {
     window.scrollTo(0, 0);
   }, [pathname]);
   return (
-    <AnimatePresence>
-      <Routes>
-        {/* 관리자 페이지 */}
-        {/* -> 관리자 페이지 추후 별도 프로젝트 생성해서 작업 할 것 */}
-        <Route element={<Admin />}>
-          <Route path="/admin" element={<AdminHome />} />
-        </Route>
-        {/* 인트로 */}
-        <Route path="/" element={<Intro />} />
-        {/* 성인인증 */}
-        <Route path="/adultchk" element={<AdultChk />} />
-        {/* 사용자 페이지 */}
-        <Route element={<User />}>
-          {/* 메인 */}
-          <Route path="/main" element={<Main />} />
-          {/* 상품 메인 추천별 상품리스트  */}
-          <Route path="/productmain" element={<ProductMain />}>
-            <Route path="food" element={<Food />} />
-            <Route path="country" element={<Country />} />
-            <Route path="price" element={<Price />} />
-            <Route index path="*" element={<NotFound />} />
+    <>
+      {/* 사이트 SEO 최적화 작업을 위한 컴포넌트 */}
+      <Helmet>
+        <meta
+          name="description"
+          content="와인이 처음인 당신을 위한 와인 픽업 서비스 Winey"
+        />
+        <meta
+          name="keywords"
+          content="와인, 와인 픽업, 초보자용 와인 추천, 쉬운 와인 선택, 와인 픽업 추천, 와인 초보자 맞춤 추천"
+        />
+        <link rel="canonical" href="" />
+        <meta property="og:locale" content="ko_KR" />
+        <meta property="og:type" content="website" />
+        <meta property="og:site_name" content="Winey 와이니" />
+        <meta property="og:title" content="Winey 와이니" />
+        <meta
+          property="og:description"
+          content="와인이 처음인 당신을 위한 와인 픽업 서비스 Winey"
+        />
+        <meta property="og:url" content="" />
+        <meta
+          property="og:image"
+          content={`${process.env.PUBLIC_URL}/images/og_img.jpg`}
+        />
+        <title>Winey 와이니</title>
+      </Helmet>
+      <AnimatePresence>
+        <Routes>
+          {/* 관리자 페이지 */}
+          {/* -> 관리자 페이지 추후 별도 프로젝트 생성해서 작업 할 것 */}
+          <Route element={<Admin />}>
+            <Route path="/admin" element={<AdminHome />} />
           </Route>
-          {/* 상품리스트 */}
-          <Route path="/productlist" element={<ProductList />}>
-            <Route path="red" element={<Red />} />
-            <Route path="white" element={<White />} />
-            <Route path="spakling" element={<Spakling />} />
-            <Route path="etc" element={<Etc />} />
-            <Route index path="*" element={<NotFound />} />
+          {/* 인트로 */}
+          <Route path="/" element={<Intro />} />
+          {/* 성인인증 */}
+          <Route path="/adultchk" element={<AdultChk />} />
+          {/* 사용자 페이지 */}
+          <Route element={<User />}>
+            {/* 메인 */}
+            <Route path="/main" element={<Main />} />
+            {/* 상품 메인 추천별 상품리스트  */}
+            <Route path="/productmain" element={<ProductMain />}>
+              <Route path="food" element={<Food />} />
+              <Route path="country" element={<Country />} />
+              <Route path="price" element={<Price />} />
+              <Route index path="*" element={<NotFound />} />
+            </Route>
+            {/* 상품리스트 */}
+            <Route path="/productlist" element={<ProductList />}>
+              <Route path="red" element={<Red />} />
+              <Route path="white" element={<White />} />
+              <Route path="spakling" element={<Spakling />} />
+              <Route path="etc" element={<Etc />} />
+              <Route index path="*" element={<NotFound />} />
+            </Route>
+            {/* 상품상세페이지 */}
+            <Route
+              path="/productdetail/:iproduct"
+              element={<ProductDetail />}
+            />
+            {/* 구매하기(상세페이지에서 바로결제) */}
+            <Route path="/productsell/:isell" element={<ProductSell />} />
+            {/* 구매하기(장바구니에서 결제) */}
+            <Route path="/productsellcart" element={<ProductSellCart />} />
+            {/* 구매완료 */}
+            <Route path="/productcomplete" element={<ProductComplete />} />
+            {/* 카트 구매완료 */}
+            <Route
+              path="/ProductCompleteCart"
+              element={<ProductCompleteCart />}
+            />
+            {/* 로그인 */}
+            <Route path="/login" element={<Login />} />
+            {/* 회원가입 */}
+            <Route path="/join" element={<Join />} />
+            {/* 회원가입환영 */}
+            <Route path="/welcome" element={<Welcome />} />
+            {/* 키워드선택 */}
+            <Route path="/keywordselect" element={<KeywordSelect />} />
+            {/* 마이페이지 */}
+            <Route path="/mypageList" element={<MypageList />} />
+            {/* 장바구니 */}
+            <Route path="/cart" element={<ProductCart />} />
+            {/* 주문내역 */}
+            <Route path="/selllist" element={<SellList />} />
+            {/* 주문내역상세페이지 */}
+            <Route
+              path="/selllistdetail/:iselllist"
+              element={<SellListDetail />}
+            />
+            {/* 선호키워드변경 */}
+            <Route path="/keywordselectedit" element={<KeywordSelectEdit />} />
+            {/* 와인가이드 */}
+            <Route path="/windeguide" element={<WineGuide />} />
+            {/* 정보수정 */}
+            <Route path="/joinedit" element={<JoinEdit />} />
+            {/* 만든사람들 */}
+            <Route path="/about" element={<About />} />
+            {/* 오픈소스 */}
+            <Route path="/opensource" element={<OpenSource />} />
+            {/* 잘못된 경로 페이지 처리 */}
+            <Route path="/*" element={<NotFound />} />
           </Route>
-          {/* 상품상세페이지 */}
-          <Route path="/productdetail/:iproduct" element={<ProductDetail />} />
-          {/* 구매하기(상세페이지에서 바로결제) */}
-          <Route path="/productsell/:isell" element={<ProductSell />} />
-          {/* 구매하기(장바구니에서 결제) */}
-          <Route path="/productsellcart" element={<ProductSellCart />} />
-          {/* 구매완료 */}
-          <Route path="/productcomplete" element={<ProductComplete />} />
-          {/* 카트 구매완료 */}
-          <Route
-            path="/ProductCompleteCart"
-            element={<ProductCompleteCart />}
-          />
-          {/* 로그인 */}
-          <Route path="/login" element={<Login />} />
-          {/* 회원가입 */}
-          <Route path="/join" element={<Join />} />
-          {/* 회원가입환영 */}
-          <Route path="/welcome" element={<Welcome />} />
-          {/* 키워드선택 */}
-          <Route path="/keywordselect" element={<KeywordSelect />} />
-          {/* 마이페이지 */}
-          <Route path="/mypageList" element={<MypageList />} />
-          {/* 장바구니 */}
-          <Route path="/cart" element={<ProductCart />} />
-          {/* 주문내역 */}
-          <Route path="/selllist" element={<SellList />} />
-          {/* 주문내역상세페이지 */}
-          <Route
-            path="/selllistdetail/:iselllist"
-            element={<SellListDetail />}
-          />
-          {/* 선호키워드변경 */}
-          <Route path="/keywordselectedit" element={<KeywordSelectEdit />} />
-          {/* 와인가이드 */}
-          <Route path="/windeguide" element={<WineGuide />} />
-          {/* 정보수정 */}
-          <Route path="/joinedit" element={<JoinEdit />} />
-          {/* 만든사람들 */}
-          <Route path="/about" element={<About />} />
-          {/* 오픈소스 */}
-          <Route path="/opensource" element={<OpenSource />} />
-          {/* 잘못된 경로 페이지 처리 */}
-          <Route path="/*" element={<NotFound />} />
-        </Route>
-      </Routes>
-    </AnimatePresence>
+        </Routes>
+      </AnimatePresence>
+    </>
   );
 }
 
