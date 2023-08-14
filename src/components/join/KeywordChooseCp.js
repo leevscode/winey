@@ -14,6 +14,7 @@ import { postUserKeyword } from "../../api/keywordpatch";
 const KeywordChooseCp = () => {
   const navigator = useNavigate();
 
+  const [getError, setGetError] = useState("");
   const [favoriteKeyword, setFavoriteKeyword] = useState([]);
   const [wineTypeCheckedList, setWineTypeCheckedList] = useState([]);
   const [winePriceCheckedList, setWinePriceCheckedList] = useState([]);
@@ -151,8 +152,6 @@ const KeywordChooseCp = () => {
     setFavoriteKeyword(prev => ({ ...prev, countryId: list }));
   };
 
-  console.log("wineCountryCheckedList", wineCountryCheckedList);
-
   // 향 선택 3차때 업데이트
   // // 향 핸들러
   const isFlavorIndeterminate =
@@ -185,26 +184,21 @@ const KeywordChooseCp = () => {
   console.log("favoriteKeyword", favoriteKeyword);
 
   // 이벤트핸들러 (저장하기)
+  const [isError, setIsError] = useState(false);
   const handleKeywordChoice = () => {
     try {
       Modal.confirm({
         title: "선호 키워드",
         content: "선택한 내용을 저장하시겠습니까?",
         onOk() {
-          postUserKeyword(favoriteKeyword);
-          navigator("/main");
+          postUserKeyword(favoriteKeyword, navigator);
         },
         onCancel() {
           console.log("Cancel");
         },
       });
     } catch (error) {
-      if (error) {
-        Modal.warning({
-          title: "선호키워드 확인",
-          content: <p>선호키워드를 다시 확인해 주세요</p>,
-        });
-      }
+      console.log(error);
     }
   };
 
@@ -222,7 +216,7 @@ const KeywordChooseCp = () => {
       aroma: updatedAroma,
     }));
     try {
-      postUserKeyword(favoriteKeyword);
+      postUserKeyword(favoriteKeyword, setGetError);
       navigator("/main");
     } catch (error) {
       console.log(error);

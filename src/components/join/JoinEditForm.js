@@ -99,6 +99,7 @@ const JoinEditForm = () => {
 
   // 회원정보수정 확인 핸들러
   const onFinish = values => {
+    
     if (editpassword === passwordConfirm) {
       const update = {
         editId,
