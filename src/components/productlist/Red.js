@@ -49,6 +49,7 @@ const Red = ({ setIsModalOpen }) => {
     },
   ];
   */
+
   //react-intersection-observer state
   const [ref, inView] = useInView();
   // 로딩 state
@@ -61,14 +62,19 @@ const Red = ({ setIsModalOpen }) => {
   // value 보관할 state
   const [optionValue, setOptionValue] = useState(1);
   const page = useRef(1);
+
   // value값에 따라 데이터 바뀜
   const getListData = useCallback(async value => {
+    setIsLoading(true);
     if (value === 1) {
       await getRedWineNew(setListScroll, setHasNextPage, page);
+      setIsLoading(false);
     } else if (value === 2) {
       await getRedWineExpensive(setListScroll, setHasNextPage, page);
+      setIsLoading(false);
     } else if (value === 3) {
       await getRedWineCheap(setListScroll, setHasNextPage, page);
+      setIsLoading(false);
     }
   }, []);
   // 회원 장바구니 버튼 클릭 이벤트
@@ -106,6 +112,7 @@ const Red = ({ setIsModalOpen }) => {
   ];
   const handleChange = useCallback(
     value => {
+      page.current = 1;
       getListData(value);
       setOptionValue(value);
       setListScroll([]);
@@ -125,9 +132,11 @@ const Red = ({ setIsModalOpen }) => {
     },
     [setListScroll],
   );
+
   // 상품 총 갯수 불러옴
   useEffect(() => {
     setTotalCount(listScroll.length);
+    // console.log("page", page.current);
     // console.log("value 출력", optionValue);
     // console.log("화면 그려내", listScroll);
     // console.log("상품 총 갯수", totalCount);
@@ -152,6 +161,7 @@ const Red = ({ setIsModalOpen }) => {
     getListData(1);
     return () => clearTimeout(introTimeout);
   }, []);
+
   return (
     <ProductListItemWrap>
       {/* 상품리스트 목록 */}

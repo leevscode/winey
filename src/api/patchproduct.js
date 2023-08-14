@@ -314,7 +314,7 @@ export const getWhiteWineNew = async (
       `/api/main/whiteWine/new?page=${_page.current}&row=9`,
     );
     const result = res.data;
-    console.log("화이트와인 와인리스트 GET(최신등록순)", result);
+    // console.log("화이트와인 와인리스트 GET(최신등록순)", result);
     _setListScroll(prevPosts => [...prevPosts, ...result]);
     _setHasNextPage(result.length === 9);
     if (result.length) {
@@ -337,7 +337,7 @@ export const getWhiteWineExpensive = async (
       `/api/main/whiteWine/expencive?page=${_page.current}&row=9`,
     );
     const result = res.data;
-    console.log("화이트와인 와인리스트 GET(높은금액순)", result);
+    // console.log("화이트와인 와인리스트 GET(높은금액순)", result);
     _setListScroll(prevPosts => [...prevPosts, ...result]);
     _setHasNextPage(result.length === 9);
     if (result.length) {
@@ -360,7 +360,7 @@ export const getWhiteWineCheap = async (
       `/api/main/whiteWine/cheap?page=${_page.current}&row=9`,
     );
     const result = res.data;
-    console.log("화이트와인 와인리스트 GET(낮은금액순)", result);
+    // console.log("화이트와인 와인리스트 GET(낮은금액순)", result);
     _setListScroll(prevPosts => [...prevPosts, ...result]);
     _setHasNextPage(result.length === 9);
     if (result.length) {

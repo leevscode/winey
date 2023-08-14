@@ -13,6 +13,7 @@ const ProductList = () => {
   const handleCancel = () => {
     setIsModalOpen(false);
   };
+
   return (
     <>
       <ProductListWrap>

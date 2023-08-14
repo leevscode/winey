@@ -133,7 +133,8 @@ const RecommWineSlide = ({ isLoading, randomWines, setIsModalOpen }) => {
                     키워드를 다시 선택해주세요.
                   </li>
                   <li>
-                    <Link to="/keywordselectedit">선호 키워드 변경하기</Link>
+                    <Link to="/keywordselect">선호 키워드 변경하기</Link>
+                    {/* <Link to="/keywordselectedit">선호 키워드 변경하기</Link> */}
                   </li>
                 </ul>
               </NotRandomWine>

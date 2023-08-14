@@ -63,12 +63,16 @@ const White = ({ setIsModalOpen }) => {
   const page = useRef(1);
   // value값에 따라 데이터 바뀜
   const getListData = useCallback(async value => {
+    setIsLoading(true);
     if (value === 1) {
       await getWhiteWineNew(setListScroll, setHasNextPage, page);
+      setIsLoading(false);
     } else if (value === 2) {
       await getWhiteWineExpensive(setListScroll, setHasNextPage, page);
+      setIsLoading(false);
     } else if (value === 3) {
       await getWhiteWineCheap(setListScroll, setHasNextPage, page);
+      setIsLoading(false);
     }
   }, []);
   // 회원 장바구니 버튼 클릭 이벤트
@@ -106,6 +110,7 @@ const White = ({ setIsModalOpen }) => {
   ];
   const handleChange = useCallback(
     value => {
+      page.current = 1;
       getListData(value);
       setOptionValue(value);
       setListScroll([]);
