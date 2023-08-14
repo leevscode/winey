@@ -383,7 +383,7 @@ export const getSpaklingWineNew = async (
       `/api/main/sparklingWine/new?page=${_page.current}&row=9`,
     );
     const result = res.data;
-    console.log("스파클링와인 와인리스트 GET(최신등록순)", result);
+    // console.log("스파클링와인 와인리스트 GET(최신등록순)", result);
     _setListScroll(prevPosts => [...prevPosts, ...result]);
     _setHasNextPage(result.length === 9);
     if (result.length) {
@@ -405,7 +405,7 @@ export const getSpaklingWineExpensive = async (
       `/api/main/sparklingWine/expencive?page=${_page.current}&row=9`,
     );
     const result = res.data;
-    console.log("스파클링와인 와인리스트 GET(높은금액순)", result);
+    // console.log("스파클링와인 와인리스트 GET(높은금액순)", result);
     _setListScroll(prevPosts => [...prevPosts, ...result]);
     _setHasNextPage(result.length === 9);
     if (result.length) {
@@ -427,7 +427,7 @@ export const getSpaklingWineCheap = async (
       `/api/main/sparklingWine/cheap?page=${_page.current}&row=9`,
     );
     const result = res.data;
-    console.log("스파클링와인 와인리스트 GET(낮은금액순)", result);
+    // console.log("스파클링와인 와인리스트 GET(낮은금액순)", result);
     _setListScroll(prevPosts => [...prevPosts, ...result]);
     _setHasNextPage(result.length === 9);
     if (result.length) {
@@ -445,7 +445,7 @@ export const getEtcWineNew = async (_setListScroll, _setHasNextPage, _page) => {
       `/api/main/otherWine/new?page=${_page.current}&row=9`,
     );
     const result = res.data;
-    console.log("기타와인 와인리스트 GET(최신등록순)", result);
+    // console.log("기타와인 와인리스트 GET(최신등록순)", result);
     _setListScroll(prevPosts => [...prevPosts, ...result]);
     _setHasNextPage(result.length === 9);
     if (result.length) {
@@ -467,7 +467,7 @@ export const getEtcWineExpensive = async (
       `/api/main/otherWine/expencive?page=${_page.current}&row=9`,
     );
     const result = res.data;
-    console.log("기타와인 와인리스트 GET(높은금액순)", result);
+    // console.log("기타와인 와인리스트 GET(높은금액순)", result);
     _setListScroll(prevPosts => [...prevPosts, ...result]);
     _setHasNextPage(result.length === 9);
     if (result.length) {
@@ -489,7 +489,7 @@ export const getEtcWineCheap = async (
       `/api/main/otherWine/cheap?page=${_page.current}&row=9`,
     );
     const result = res.data;
-    console.log("기타와인 와인리스트 GET(낮은금액순)", result);
+    // console.log("기타와인 와인리스트 GET(낮은금액순)", result);
     _setListScroll(prevPosts => [...prevPosts, ...result]);
     _setHasNextPage(result.length === 9);
     if (result.length) {

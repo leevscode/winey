@@ -5,21 +5,24 @@
 */
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import { v4 } from "uuid";
+import Item from "./Item";
+import {
+  ProductListWrap,
+  ProductMainItemWrap,
+} from "../../style/ProductListStyle";
 import { ConfigProvider, Select } from "antd";
-import { ProductListItemWrap } from "../../style/ProductListStyle";
 import { Gradation } from "../../style/GlobalStyle";
 import { ContentsListItemWrap } from "../../style/GlobalComponents";
 import ProductListSkeleton from "../skeleton/ProductListSkeleton";
 import { useInView } from "react-intersection-observer";
 import {
-  getWhiteWineCheap,
-  getWhiteWineExpensive,
-  getWhiteWineNew,
+  getTotalMinusTwoCheap,
+  getTotalMinusTwoExpensive,
+  getTotalMinusTwoNew,
 } from "../../api/patchproduct";
-import Item from "./Item";
 import ProductCartModal from "../product/ProductCartModal";
 
-const White = () => {
+const Price = () => {
   // 로딩 더미데이터
   const productListSkeleton = [1, 2, 3, 4, 5, 6, 7, 8, 9];
   // 상품 더미 데이터
@@ -43,7 +46,7 @@ const White = () => {
       salePrice: 30644,
     },
   ];
-  */
+ */
   // 장바구니 완료 모달 state
   const [isModalOpen, setIsModalOpen] = useState(false);
   const handleOk = () => {
@@ -57,7 +60,7 @@ const White = () => {
   // 로딩 state
   const [isLoading, setIsLoading] = useState(true);
   // 상품 총 갯수 카운트 state
-  const [totalCount, setTotalCount] = useState(0);
+  const [totalCount, setTotalCount] = useState("");
   // 화면 데이터 보관할 state
   const [listScroll, setListScroll] = useState([]);
   const [hasNextPage, setHasNextPage] = useState(true);
@@ -67,11 +70,11 @@ const White = () => {
   // value값에 따라 데이터 바뀜
   const getListData = useCallback(async value => {
     if (value === 1) {
-      await getWhiteWineNew(setListScroll, setHasNextPage, page);
+      await getTotalMinusTwoNew(setListScroll, setHasNextPage, page);
     } else if (value === 2) {
-      await getWhiteWineExpensive(setListScroll, setHasNextPage, page);
+      await getTotalMinusTwoExpensive(setListScroll, setHasNextPage, page);
     } else if (value === 3) {
-      await getWhiteWineCheap(setListScroll, setHasNextPage, page);
+      await getTotalMinusTwoCheap(setListScroll, setHasNextPage, page);
     }
   }, []);
   // 상품 정렬 옵션
@@ -114,15 +117,16 @@ const White = () => {
   // 상품 총 갯수 불러옴
   useEffect(() => {
     setTotalCount(listScroll.length);
-    // console.log("page", page.current);
     // console.log("value 출력", optionValue);
     // console.log("화면 그려내", listScroll);
     // console.log("상품 총 갯수", totalCount);
   }, [listScroll]);
   // 무한 스크롤 처리
   useEffect(() => {
+    // console.log(inView, hasNextPage);
     if (inView && hasNextPage) {
       // console.log("value 출력", optionValue);
+      // handleChange(optionValue);
       getListData(optionValue);
     }
   }, [getListData, hasNextPage, inView, setOptionValue]);
@@ -137,52 +141,55 @@ const White = () => {
     getListData(1);
     return () => clearTimeout(introTimeout);
   }, []);
-
   return (
     <>
-      <ProductListItemWrap>
+      <ProductListWrap>
         {/* 상품리스트 목록 */}
-        <ul>
-          <li>
-            {/* 상품 총 갯수 */}총 <span>{totalCount}</span>개
-          </li>
-          <li>
-            {/* 상품 정렬 */}
-            <ConfigProvider
-              theme={{
-                token: {
-                  colorPrimary: Gradation.wineD,
-                  borderRadius: 4,
-                  fontSize: 12,
-                  controlHeight: 24,
-                  colorBorder: "transparent",
-                  colorPrimaryHover: "transparent",
-                  fontFamily:
-                    '"Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif',
-                },
-              }}
-            >
-              <Select
-                defaultValue={options[0]}
-                onChange={handleChange}
-                options={options}
-              />
-            </ConfigProvider>
-          </li>
-        </ul>
-        <ContentsListItemWrap>
-          {isLoading ? (
-            // 로딩 화면 출력
-            productListSkeleton.map(index => <ProductListSkeleton key={v4()} />)
-          ) : (
-            // 상품 리스트
-            <>
-              <Item listScroll={listScroll} setIsModalOpen={setIsModalOpen} />
-              <div ref={ref}></div>
-            </>
-          )}
-        </ContentsListItemWrap>
-      </ProductListItemWrap>
+        <ProductMainItemWrap>
+          <ul>
+            <li>
+              {/* 상품 총 갯수 */}총 <span>{totalCount}</span>개
+            </li>
+            <li>
+              {/* 상품 정렬 */}
+              <ConfigProvider
+                theme={{
+                  token: {
+                    colorPrimary: Gradation.wineD,
+                    borderRadius: 4,
+                    fontSize: 12,
+                    controlHeight: 24,
+                    colorBorder: "transparent",
+                    colorPrimaryHover: "transparent",
+                    fontFamily:
+                      '"Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif',
+                  },
+                }}
+              >
+                <Select
+                  defaultValue={options[0]}
+                  onChange={handleChange}
+                  options={options}
+                />
+              </ConfigProvider>
+            </li>
+          </ul>
+          <ContentsListItemWrap>
+            {isLoading ? (
+              // 로딩 화면 출력
+              productListSkeleton.map(index => (
+                <ProductListSkeleton key={v4()} />
+              ))
+            ) : (
+              // 상품 리스트
+              <>
+                <Item listScroll={listScroll} setIsModalOpen={setIsModalOpen} />
+                <div ref={ref}></div>
+              </>
+            )}
+          </ContentsListItemWrap>
+        </ProductMainItemWrap>
+      </ProductListWrap>
       {/* 장바구니 완료 모달창 */}
       <ProductCartModal
         isModalOpen={isModalOpen}
@@ -193,4 +200,4 @@ const White = () => {
   );
 };
 
-export default White;
+export default Price;

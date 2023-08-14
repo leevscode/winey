@@ -37,8 +37,9 @@ export const postUserKeyword = async favoriteKeyword => {
     console.log(res);
     const data = await res.data;
     console.log(data);
+    return data;
   } catch (error) {
     console.log(error);
-    return error
+    return error;
   }
 };

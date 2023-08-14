@@ -252,10 +252,12 @@ export const FooterWrap = styled.footer`
           }
         }
       }
-      a {
+      a,
+      button {
         display: inline-block;
         position: relative;
         font-size: 1.4rem;
+        color: ${Maincolor.black};
         &::after {
           content: "";
           display: none;
