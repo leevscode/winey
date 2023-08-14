@@ -17,21 +17,27 @@ const PickupPlaceClick = ({ userStore, selectCollect, setSelectCollect }) => {
   ];
 
   // 픽업날짜(오늘 이후 3일 간)
-  const first = new Date();
+  const today = new Date();
   const formatDate = date => {
-    // return date.toLocaleString("ko-KR", {
-    //   weekday: "long",
-    //   month: "2-digit",
-    //   day: "2-digit",
-    // });
     return date.toISOString().toLocaleString("ko-KR").substring(0, 10);
+  };
+
+  console.log("formatDate", formatDate);
+  const formatWeek = date => {
+    return date.toLocaleString("ko-KR", {
+      weekday: "long",
+    });
+    // return date.toLocaleString("ko-KR").substring(0, 13);
   };
 
   const dateArray = [];
   for (let i = 1; i <= 3; i++) {
-    const tempDate = new Date(first);
-    tempDate.setDate(first.getDate() + i);
-    dateArray.push(formatDate(tempDate));
+    const tempDate = new Date(today);
+    tempDate.setDate(today.getDate() + i);
+    dateArray.push({
+      date: formatDate(tempDate),
+      week: formatWeek(tempDate),
+    });
   }
 
   // select state
@@ -60,16 +66,17 @@ const PickupPlaceClick = ({ userStore, selectCollect, setSelectCollect }) => {
   // 픽업날짜 이벤트 핸들러
   const handleChangePickDate = (option, e, index) => {
     e.preventDefault();
-    setPickUpDate(option);
+    setPickUpDate(option.date);
 
     setSelectCollect(prevState => ({
       ...prevState,
-      pickUpDate: option,
+      pickUpDate: option.date,
     }));
 
     setSltDateButton(index);
     console.log("sltDateButton", sltDateButton);
   };
+  console.log("selectCollect", selectCollect);
 
   // 픽업시간 이벤트 핸들러
   const handleChangePickTime = (option, e, index) => {
@@ -88,7 +95,6 @@ const PickupPlaceClick = ({ userStore, selectCollect, setSelectCollect }) => {
     // 날짜형식바꿔서 보내기
     const changeDate = `${pickUpDate} ${pickUpTime}`;
     setSelectCollect({ ...selectCollect, changeDate });
-    
   }, [pickUpSpot, pickUpDate, pickUpTime]); // totalPayList 값이 변경될 때마다 실행
 
   return (
@@ -138,10 +144,11 @@ const PickupPlaceClick = ({ userStore, selectCollect, setSelectCollect }) => {
               >
                 {/* 날짜 */}
                 <strong>
-                  {option.substring(5, 7)}월 {option.substring(8, 11)}일
+                  {option.date.substring(5, 7)}월 {option.date.substring(8, 11)}
+                  일
                 </strong>
                 {/* 요일 */}
-                {/* <p>{option.substring(7, 11)}</p> */}
+                <p>{option.week.substring(0, 3)}</p>
               </button>
             </div>
           ))}
