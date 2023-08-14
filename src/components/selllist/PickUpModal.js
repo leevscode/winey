@@ -14,7 +14,7 @@ const PickUpModal = ({
   const finishSellList = async() => {
     await finishSellListData(onPick);
     alert("픽업이 완료 되었습니다");
-    window.location.reload();
+    // window.location.reload();
   };
   console.log(onPick)
 
@@ -34,7 +34,7 @@ const PickUpModal = ({
             네
           </ButtonOk>
           <div style={{ marginTop: "8px" }}>
-            <ButtonCancel onClick={onClose}>아니요</ButtonCancel>
+            <ButtonCancel onClick={()=>onClose()}>아니요</ButtonCancel>
           </div>
         </OrderCancelContent>
       </OrderCancelModal>

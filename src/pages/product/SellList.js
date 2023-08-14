@@ -224,6 +224,8 @@ const SellList = () => {
                 <SellListCancel
                   onCancel={() => handleCancel(item.orderId)}
                   onClose={() => hideCancelModal(item.orderId)}
+                  setPickupModalVisible={setPickupModalVisible}
+                  setSellListData={setSellListData}
                   orderCancelId={orderCancelId}
                 />
               )}
