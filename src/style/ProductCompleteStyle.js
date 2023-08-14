@@ -62,13 +62,15 @@ export const ProductCompleteinfo = styled.div`
     /* kor name */
     li:nth-of-type(1) {
       color: ${Maincolor.black};
-      font-size: 1.8rem;
-      font-weight: bold;
-      margin-top: 0.5rem;
+      font-size: 1.6rem;
+      font-weight: 700;
+      margin-top: 1rem;
     }
     /* Eng name */
     li:nth-of-type(2) {
-      font-size: 1.4rem;
+      font-weight: 400;
+      font-size: 1.2rem;
+      line-height: 2rem;
       margin-bottom: 3rem;
     }
     /* 상품가격 */
@@ -108,7 +110,7 @@ export const ProductCompleteBox = styled.div`
       & > li {
         display: flex;
         justify-content: space-between;
-        font-size: 1.6rem;
+        font-size: 1.4rem;
         color: ${Maincolor.black};
         font-weight: 500;
         line-height: 2rem;

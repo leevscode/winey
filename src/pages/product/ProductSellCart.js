@@ -17,17 +17,15 @@ import { faCircleCheck, faCreditCard } from "@fortawesome/free-solid-svg-icons";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { Modal } from "antd";
 import {
-  getBuyProductDetail,
   getUserStoreInfo,
-  postOneItemPurchase,
   postSomeItemPurchase,
 } from "../../api/purchasepatch";
 import PurchaseListCart from "../../components/ProductSell/PurchaseListCart";
 
 const ProductSellCart = () => {
   const navigate = useNavigate();
-  const { isell } = useParams();
   const state = useLocation();
+  console.log("state.state", state.state);
   const cartState = state.state;
 
   // user별 매장정보
@@ -38,6 +36,8 @@ const ProductSellCart = () => {
 
   // 상품 정보 값 담기
   const [productCollect, setProductCollect] = useState(cartState);
+  // const [productCollect, setProductCollect] = useState(cartState.CartData);
+  console.log("productCollect", productCollect);
   // get한 아이템정보를 배열에 담자
   const productInfoArray = productCollect.CartData;
 
@@ -117,13 +117,12 @@ const ProductSellCart = () => {
           isPayment,
           totalPrice,
         });
-        navigate("/ProductComplete", {
+        navigate("/ProductCompleteCart", {
           state: {
             productCollect,
             selectCollect,
             isPayment,
             totalPrice,
-            editQuantity,
           },
         });
         console.log("결제완료");

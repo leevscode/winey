@@ -9,6 +9,7 @@ import { KeywordConfirmBtn, KeywordWrap } from "../../style/KeywordStyle";
 import { Checkbox, ConfigProvider, Modal } from "antd";
 import { ButtonCancel, ButtonOk } from "../../style/GlobalStyle";
 import { useNavigate } from "react-router-dom";
+import { postUserKeyword } from "../../api/keywordpatch";
 
 const KeywordChooseCp = () => {
   const navigator = useNavigate();
@@ -21,7 +22,7 @@ const KeywordChooseCp = () => {
   const [wineCountryCheckedList, setWineCountryCheckedList] = useState([]);
 
   const wineOptions = {
-    cateId: [
+    categoryId: [
       { id: 1, value: "레드" },
       { id: 2, value: "화이트" },
       { id: 3, value: "스파클링" },
@@ -33,7 +34,7 @@ const KeywordChooseCp = () => {
       { id: 3, value: "5~10만원" },
       { id: 4, value: "10만원이상" },
     ],
-    smallcategoryId: [
+    smallCategoryId: [
       { id: 1, value: "스테이크" },
       { id: 2, value: "돼지고기" },
       { id: 3, value: "치킨" },
@@ -48,13 +49,13 @@ const KeywordChooseCp = () => {
       { id: 12, value: "디저트" },
     ],
     aroma: [
-      { num: 0, id: 1, value: "꽃" },
-      { num: 0, id: 2, value: "식물" },
-      { num: 0, id: 3, value: "과일" },
-      { num: 0, id: 4, value: "향신료" },
-      { num: 0, id: 5, value: "흙냄새" },
-      { num: 0, id: 6, value: "오크" },
-      { num: 0, id: 7, value: "견과류" },
+      { num: 0, id: "flower", value: "꽃" },
+      { num: 0, id: "plant", value: "식물" },
+      { num: 0, id: "fruit", value: "과일" },
+      { num: 0, id: "spicy", value: "향신료" },
+      { num: 0, id: "earth", value: "흙냄새" },
+      { num: 0, id: "oak", value: "오크" },
+      { num: 0, id: "nuts", value: "견과류" },
     ],
     countryId: [
       { id: 1, value: "미국" },
@@ -69,16 +70,22 @@ const KeywordChooseCp = () => {
   // 와인종류 핸들러
   const isTypeIndeterminate =
     !!wineTypeCheckedList.length &&
-    wineTypeCheckedList.length < wineOptions.cateId.length;
+    wineTypeCheckedList.length < wineOptions.categoryId.length;
   const isTypeCheckAll =
-    wineTypeCheckedList.length === wineOptions.cateId.length;
+    wineTypeCheckedList.length === wineOptions.categoryId.length;
+
   const handleTypeCheckAllChange = e => {
-    setWineTypeCheckedList(e.target.checked ? wineOptions.cateId : []);
-    setFavoriteKeyword(prev => ({ ...prev, cateId: wineOptions.cateId }));
+    setWineTypeCheckedList(
+      e.target.checked ? wineOptions.categoryId.map(option => option.id) : [],
+    );
+    setFavoriteKeyword(prev => ({
+      ...prev,
+      categoryId: wineOptions.categoryId.map(option => option.id),
+    }));
   };
   const handleTypeOnChange = list => {
     setWineTypeCheckedList(list);
-    setFavoriteKeyword(prev => ({ ...prev, cateId: list }));
+    setFavoriteKeyword(prev => ({ ...prev, categoryId: list }));
   };
 
   // 와인금액 핸들러
@@ -88,10 +95,12 @@ const KeywordChooseCp = () => {
   const isPriceCheckAll =
     winePriceCheckedList.length === wineOptions.priceRange.length;
   const handlePriceCheckAllChange = e => {
-    setWinePriceCheckedList(e.target.checked ? wineOptions.priceRange : []);
+    setWinePriceCheckedList(
+      e.target.checked ? wineOptions.priceRange.map(option => option.id) : [],
+    );
     setFavoriteKeyword(prev => ({
       ...prev,
-      priceRange: wineOptions.priceRange,
+      priceRange: wineOptions.priceRange.map(option => option.id),
     }));
   };
   const handlePriceOnChange = list => {
@@ -102,21 +111,23 @@ const KeywordChooseCp = () => {
   // 페어링 음식 핸들러
   const isWithFoodIndeterminate =
     !!wineWithFoodCheckedList.length &&
-    wineWithFoodCheckedList.length < wineOptions.smallcategoryId.length;
+    wineWithFoodCheckedList.length < wineOptions.smallCategoryId.length;
   const isWithFoodCheckAll =
-    wineWithFoodCheckedList.length === wineOptions.smallcategoryId.length;
+    wineWithFoodCheckedList.length === wineOptions.smallCategoryId.length;
   const handleWithFoodCheckAllChange = e => {
     setWineWithFoodCheckedList(
-      e.target.checked ? wineOptions.smallcategoryId : [],
+      e.target.checked
+        ? wineOptions.smallCategoryId.map(option => option.id)
+        : [],
     );
     setFavoriteKeyword(prev => ({
       ...prev,
-      smallcategoryId: wineOptions.smallcategoryId,
+      smallCategoryId: wineOptions.smallCategoryId.map(option => option.id),
     }));
   };
   const handleWithFoodOnChange = list => {
     setWineWithFoodCheckedList(list);
-    setFavoriteKeyword(prev => ({ ...prev, smallcategoryId: list }));
+    setFavoriteKeyword(prev => ({ ...prev, smallCategoryId: list }));
   };
 
   // 향 핸들러
@@ -126,35 +137,55 @@ const KeywordChooseCp = () => {
   const isFlavorCheckAll =
     wineFlavorCheckedList.length === wineOptions.aroma.length;
   const handleFlavorCheckAllChange = e => {
-    setWineFlavorCheckedList(e.target.checked ? wineOptions.aroma : []);
-    setFavoriteKeyword(prev => ({ ...prev, aroma: wineOptions.aroma }));
+    const updatedAroma = wineOptions.aroma.map(option => ({
+      ...option,
+      num: 0,
+    }));
+
+    setWineFlavorCheckedList(
+      e.target.checked ? wineOptions.aroma.map(option => option.id) : [],
+    );
+    setFavoriteKeyword(prev => ({ ...prev, aroma: updatedAroma }));
   };
-  const handleFlavorOnChange = list => {
+
+  // 향 선택부분 데이터형식 변경함
+  const handleChangeFlavorType = list => {
+    const clickFlavor = wineOptions.aroma.map(option => ({
+      ...option,
+      num: list.includes(option.id) ? 1 : 0,
+    }));
     setWineFlavorCheckedList(list);
-    setFavoriteKeyword(prev => ({ ...prev, aroma: list }));
+    setFavoriteKeyword(prev => ({ ...prev, aroma: clickFlavor }));
   };
+
   // 원산지 핸들러
   const isCountryIndeterminate =
     !!wineCountryCheckedList.length &&
     wineCountryCheckedList.length < wineOptions.countryId.length;
   const isCountryCheckAll =
     wineCountryCheckedList.length === wineOptions.countryId.length;
+
   const handleCountryCheckAllChange = e => {
-    setWineCountryCheckedList(e.target.checked ? wineOptions.countryId : []);
-    setFavoriteKeyword(prev => ({ ...prev, countryId: wineOptions.countryId }));
+    setWineCountryCheckedList(
+      e.target.checked ? wineOptions.countryId.map(option => option.id) : [],
+    );
+    setFavoriteKeyword(prev => ({
+      ...prev,
+      countryId: wineOptions.countryId.map(option => option.id),
+    }));
   };
   const handleCountryOnChange = list => {
     setWineCountryCheckedList(list);
     setFavoriteKeyword(prev => ({ ...prev, countryId: list }));
   };
 
-  // 이벤트핸들러
+  // 이벤트핸들러 (저장하기)
   const handleKeywordChoice = () => {
     Modal.confirm({
       title: "선호 키워드",
       content: "선택한 내용을 저장하시겠습니까?",
       onOk() {
-        // favoriteKeyword();
+        postUserKeyword(favoriteKeyword);
         navigator("/main");
       },
       onCancel() {
@@ -164,6 +195,7 @@ const KeywordChooseCp = () => {
   };
   console.log("favoriteKeyword", favoriteKeyword);
 
+  // 모두선택하기
   const handleKeywordAll = () => {
     setFavoriteKeyword({ ...wineOptions });
   };
@@ -186,7 +218,7 @@ const KeywordChooseCp = () => {
                 value={wineTypeCheckedList}
                 onChange={handleTypeOnChange}
               >
-                {wineOptions.cateId.map(option => (
+                {wineOptions.categoryId.map(option => (
                   <Checkbox key={option.id} value={option.id}>
                     {option.value}
                   </Checkbox>
@@ -232,7 +264,7 @@ const KeywordChooseCp = () => {
                 value={wineWithFoodCheckedList}
                 onChange={handleWithFoodOnChange}
               >
-                {wineOptions.smallcategoryId.map(option => (
+                {wineOptions.smallCategoryId.map(option => (
                   <Checkbox key={option.id} value={option.id}>
                     {option.value}
                   </Checkbox>
@@ -252,7 +284,7 @@ const KeywordChooseCp = () => {
             <div>
               <Checkbox.Group
                 value={wineFlavorCheckedList}
-                onChange={handleFlavorOnChange}
+                onChange={handleChangeFlavorType}
               >
                 {wineOptions.aroma.map(option => (
                   <Checkbox key={option.id} value={option.id}>

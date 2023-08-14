@@ -54,8 +54,6 @@ const PurchaseListCart = ({
     });
   };
 
-  console.log("productInfoArray", productInfoArray);
-
   const calcTotalSum = () => {
     let itemtotal = 0;
     productInfoArray.forEach((option, index) => {
