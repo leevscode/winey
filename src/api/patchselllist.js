@@ -62,11 +62,12 @@ export const getdetailData = async numberValue => {
 };
 
 // 리뷰 등록
-export const submitReview = async (orderDetailId, reviewLevel) => {
+export const submitReview = async (orderDetailId, reviewLevel, userId) => {
   try {
     const res = await client.post(`/api/payment/review`, {
       orderDetailId,
       reviewLevel,
+      userId,
     });
     console.log("리뷰가 성공적으로 제출되었습니다:");
     const result = await res.data;
