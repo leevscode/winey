@@ -151,42 +151,36 @@ const KeywordChooseCp = () => {
     setFavoriteKeyword(prev => ({ ...prev, countryId: list }));
   };
 
-  // 향 핸들러
+  // 향 선택 3차때 업데이트 예정
+  // // 향 핸들러 
   // const isFlavorIndeterminate =
   //   !!wineFlavorCheckedList.length &&
   //   wineFlavorCheckedList.length < wineOptions.aroma.length;
-  const isFlavorCheckAll =
-    wineFlavorCheckedList.length === wineOptions.aroma.length;
-  const handleFlavorCheckAllChange = e => {
-    // const updatedAroma = wineOptions.aroma.map(option => ({
-    //   ...option,
-    //   num: 0,
-    // }));
-    const updatedAroma = wineOptions.aroma.map(option => ({
-      num: 0,
-    }));
-    setWineFlavorCheckedList(
-      e.target.checked ? wineOptions.aroma.map(option => option.id) : [],
-    );
-    // setFavoriteKeyword(prev => ({ ...prev, aroma: updatedAroma }));
-    setFavoriteKeyword(prev => ({ aroma: updatedAroma }));
-  };
+  // const isFlavorCheckAll =
+  //   wineFlavorCheckedList.length === wineOptions.aroma.length;
+  // const handleFlavorCheckAllChange = e => {
+  //   const updatedAroma = wineOptions.aroma.map(option => ({
+  //     ...option,
+  //     num: 0,
+  //   }));
+  //   setWineFlavorCheckedList(
+  //     e.target.checked ? wineOptions.aroma.map(option => option.id) : [],
+  //   );
+  //   setFavoriteKeyword(prev => ({ ...prev, aroma: updatedAroma }));
+  //   setFavoriteKeyword(prev => ({ aroma: updatedAroma }));
+  // };
 
-  // 향 선택부분 데이터형식 변경함
+  // // 향 선택부분 데이터형식 변경함
   // const handleChangeFlavorType = list => {
   //   const clickFlavor = wineOptions.aroma.map(option => ({
   //     ...option,
   //     num: list.includes(option.id) ? 1 : 0,
   //   }));
-  const handleChangeFlavorType = list => {
-    const clickFlavor = wineOptions.aroma.map(option => ({
-      num: list.includes(option.id) ? 1 : 0,
-    }));
-    setWineFlavorCheckedList(list);
-    setFavoriteKeyword(prev => ({ ...prev, aroma: clickFlavor }));
-  };
+  //   setWineFlavorCheckedList(list);
+  //   setFavoriteKeyword(prev => ({ ...prev, aroma: clickFlavor }));
+  // };
 
-  console.log("wineFlavorCheckedList", wineFlavorCheckedList);
+  // console.log("wineFlavorCheckedList", wineFlavorCheckedList);
   console.log("favoriteKeyword", favoriteKeyword);
 
   // 이벤트핸들러 (저장하기)
@@ -320,7 +314,8 @@ const KeywordChooseCp = () => {
               </Checkbox>
             </div>
           </li>
-          <li>
+          {/* 향 취향선택 3차에 업데이트 예정 */}
+          {/* <li>
             <h3>향</h3>
             <div>
               <Checkbox.Group
@@ -342,7 +337,7 @@ const KeywordChooseCp = () => {
                 아무거나
               </Checkbox>
             </div>
-          </li>
+          </li> */}
         </ul>
       </ConfigProvider>
       <KeywordConfirmBtn>
