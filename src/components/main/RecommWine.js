@@ -7,7 +7,6 @@ import React, { useEffect, useState } from "react";
 import { getRandomWines } from "../../api/patchmain";
 import { RecommWineTitle, RecommWineWrap } from "../../style/MainStyle";
 import RecommWineSlide from "./RecommWineSlide";
-import ProductListSkeleton from "../skeleton/ProductListSkeleton";
 
 const RecommWine = ({ setIsModalOpen }) => {
   // 입문용 와인 데이터 보관할 state

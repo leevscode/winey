@@ -295,6 +295,9 @@ export const RecommWineContents = styled.div`
     width: 91%;
     float: right;
     overflow-x: clip;
+    &.active {
+      width: 100%;
+    }
     .swiper-slide {
       width: calc(100% / 3);
       .img {

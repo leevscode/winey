@@ -111,7 +111,7 @@ export const getTotalCountryNew = async (
       `/api/main/country/new/?countryId=1&page=${_page.current}&row=9`,
     );
     const result = res.data;
-    console.log("국가별 와인리스트 GET(최신등록순)", result);
+    // console.log("국가별 와인리스트 GET(최신등록순)", result);
     _setListScroll(prevPosts => [...prevPosts, ...result]);
     _setHasNextPage(result.length === 9);
     if (result.length) {
@@ -134,7 +134,7 @@ export const getTotalCountryExpensive = async (
       `/api/main/country/expensive?countryId=1&page=${_page.current}&row=9`,
     );
     const result = res.data;
-    console.log("국가별 와인리스트 GET(높은금액순)", result);
+    // console.log("국가별 와인리스트 GET(높은금액순)", result);
     _setListScroll(prevPosts => [...prevPosts, ...result]);
     _setHasNextPage(result.length === 9);
     if (result.length) {
@@ -157,7 +157,7 @@ export const getTotalCountryCheap = async (
       `/api/main/country/cheap?countryId=1&page=${_page.current}&row=9`,
     );
     const result = res.data;
-    console.log("국가별 와인리스트 GET(낮은금액순)", result);
+    // console.log("국가별 와인리스트 GET(낮은금액순)", result);
     _setListScroll(prevPosts => [...prevPosts, ...result]);
     _setHasNextPage(result.length === 9);
     if (result.length) {
@@ -166,5 +166,74 @@ export const getTotalCountryCheap = async (
     return result;
   } catch (err) {
     console.log("국가별 와인리스트 GET(낮은금액순) 에러 발생", err);
+  }
+};
+
+// 상품리스트 전체보기 - 2만원 미만 와인리스트 GET(최신등록순)
+export const getTotalMinusTwoNew = async (
+  _setListScroll,
+  _setHasNextPage,
+  _page,
+) => {
+  try {
+    const res = await axios.get(
+      `/api/main/price2/new?page=${_page.current}&row=9`,
+    );
+    const result = res.data;
+    console.log("2만원 미만 와인리스트 GET(최신등록순)", result);
+    _setListScroll(prevPosts => [...prevPosts, ...result]);
+    _setHasNextPage(result.length === 9);
+    if (result.length) {
+      _page.current += 1;
+    }
+    return result;
+  } catch (err) {
+    console.log("2만원 미만 와인리스트 GET(최신등록순) 에러 발생", err);
+  }
+};
+
+// 상품리스트 전체보기 - 2만원 미만 와인리스트 GET(높은금액순)
+export const getTotalMinusTwoExpensive = async (
+  _setListScroll,
+  _setHasNextPage,
+  _page,
+) => {
+  try {
+    const res = await axios.get(
+      `/api/main/price2/expencive?page=${_page.current}&row=9`,
+    );
+    const result = res.data;
+    console.log("2만원 미만 와인리스트 GET(높은금액순)", result);
+    _setListScroll(prevPosts => [...prevPosts, ...result]);
+    _setHasNextPage(result.length === 9);
+    if (result.length) {
+      _page.current += 1;
+    }
+    return result;
+  } catch (err) {
+    console.log("2만원 미만 와인리스트 GET(높은금액순) 에러 발생", err);
+  }
+};
+
+// 상품리스트 전체보기 - 2만원 미만 와인리스트 GET(낮은금액순)
+export const getTotalMinusTwoCheap = async (
+  _setListScroll,
+  _setHasNextPage,
+  _page,
+) => {
+  try {
+    const res = await axios.get(
+      `/api/main/price2/cheap?page=${_page.current}&row=9`,
+    );
+    const result = res.data;
+    console.log("2만원 미만 와인리스트 GET(낮은금액순)", result);
+    _setListScroll(prevPosts => [...prevPosts, ...result]);
+    _setHasNextPage(result.length === 9);
+    if (result.length) {
+      _page.current += 1;
+    }
+    return result;
+  } catch (err) {
+    console.log("2만원 미만 와인리스트 GET(낮은금액순) 에러 발생", err);
   }
 };
