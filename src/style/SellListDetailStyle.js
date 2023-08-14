@@ -135,7 +135,6 @@ export const DetailButtonOk = styled.button`
     border: #e7e4e4;
     cursor: not-allowed;
   }
-
 `;
 
 export const DetailTotalPrice = styled.div`

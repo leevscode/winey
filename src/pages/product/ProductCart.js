@@ -57,7 +57,7 @@ const ProductCart = () => {
   }, []);
 
   const removeItemCart = async removeCart => {
-    alert(removeCart);
+    alert("장바구니 상품이 삭제 되었습니다");
     try {
       const data = await removeCarts(removeCart);
       filledCartData(data);
@@ -170,7 +170,6 @@ const ProductCart = () => {
           <CartTotalPrice>
             <li>최종결제금액</li>
             <CartTotalPriceOne>
-              {/* <span>{calculateTotalPrice().toLocaleString()}원</span> */}
               <span>{calcTotalSum().toLocaleString()}원</span>
             </CartTotalPriceOne>
           </CartTotalPrice>
