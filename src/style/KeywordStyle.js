@@ -115,7 +115,7 @@ export const KeywordWrap = styled.div`
   padding: 5rem 2rem;
   & > ul {
     & li {
-      margin-bottom: 6rem;
+      margin-bottom: 3rem;
       & h3 {
         text-align: center;
         font-size: 1.5rem;
