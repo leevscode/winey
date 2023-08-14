@@ -1,12 +1,12 @@
 /*
     작업자 : 최혜미
-    노션 : https://www.notion.so/hyemdev
+    노션 : https://hyemdev.notion.site/hyemdev/hyem-s-dev-STUDY-75ffe819c7534a049b59871e6fe17dd4
     깃허브 : https://github.com/hyemdev
 */
 
 import React, { useState } from "react";
 import { KeywordConfirmBtn, KeywordWrap } from "../../style/KeywordStyle";
-import { Checkbox, ConfigProvider, Modal } from "antd";
+import { Checkbox, ConfigProvider, Modal, Radio, Select } from "antd";
 import { ButtonCancel, ButtonOk } from "../../style/GlobalStyle";
 import { useNavigate } from "react-router-dom";
 import { postUserKeyword } from "../../api/keywordpatch";
@@ -130,34 +130,6 @@ const KeywordChooseCp = () => {
     setFavoriteKeyword(prev => ({ ...prev, smallCategoryId: list }));
   };
 
-  // 향 핸들러
-  const isFlavorIndeterminate =
-    !!wineFlavorCheckedList.length &&
-    wineFlavorCheckedList.length < wineOptions.aroma.length;
-  const isFlavorCheckAll =
-    wineFlavorCheckedList.length === wineOptions.aroma.length;
-  const handleFlavorCheckAllChange = e => {
-    const updatedAroma = wineOptions.aroma.map(option => ({
-      ...option,
-      num: 0,
-    }));
-
-    setWineFlavorCheckedList(
-      e.target.checked ? wineOptions.aroma.map(option => option.id) : [],
-    );
-    setFavoriteKeyword(prev => ({ ...prev, aroma: updatedAroma }));
-  };
-
-  // 향 선택부분 데이터형식 변경함
-  const handleChangeFlavorType = list => {
-    const clickFlavor = wineOptions.aroma.map(option => ({
-      ...option,
-      num: list.includes(option.id) ? 1 : 0,
-    }));
-    setWineFlavorCheckedList(list);
-    setFavoriteKeyword(prev => ({ ...prev, aroma: clickFlavor }));
-  };
-
   // 원산지 핸들러
   const isCountryIndeterminate =
     !!wineCountryCheckedList.length &&
@@ -179,21 +151,67 @@ const KeywordChooseCp = () => {
     setFavoriteKeyword(prev => ({ ...prev, countryId: list }));
   };
 
+  // 향 핸들러
+  // const isFlavorIndeterminate =
+  //   !!wineFlavorCheckedList.length &&
+  //   wineFlavorCheckedList.length < wineOptions.aroma.length;
+  const isFlavorCheckAll =
+    wineFlavorCheckedList.length === wineOptions.aroma.length;
+  const handleFlavorCheckAllChange = e => {
+    // const updatedAroma = wineOptions.aroma.map(option => ({
+    //   ...option,
+    //   num: 0,
+    // }));
+    const updatedAroma = wineOptions.aroma.map(option => ({
+      num: 0,
+    }));
+    setWineFlavorCheckedList(
+      e.target.checked ? wineOptions.aroma.map(option => option.id) : [],
+    );
+    // setFavoriteKeyword(prev => ({ ...prev, aroma: updatedAroma }));
+    setFavoriteKeyword(prev => ({ aroma: updatedAroma }));
+  };
+
+  // 향 선택부분 데이터형식 변경함
+  // const handleChangeFlavorType = list => {
+  //   const clickFlavor = wineOptions.aroma.map(option => ({
+  //     ...option,
+  //     num: list.includes(option.id) ? 1 : 0,
+  //   }));
+  const handleChangeFlavorType = list => {
+    const clickFlavor = wineOptions.aroma.map(option => ({
+      num: list.includes(option.id) ? 1 : 0,
+    }));
+    setWineFlavorCheckedList(list);
+    setFavoriteKeyword(prev => ({ ...prev, aroma: clickFlavor }));
+  };
+
+  console.log("wineFlavorCheckedList", wineFlavorCheckedList);
+  console.log("favoriteKeyword", favoriteKeyword);
+
   // 이벤트핸들러 (저장하기)
   const handleKeywordChoice = () => {
-    Modal.confirm({
-      title: "선호 키워드",
-      content: "선택한 내용을 저장하시겠습니까?",
-      onOk() {
-        postUserKeyword(favoriteKeyword);
-        navigator("/main");
-      },
-      onCancel() {
-        console.log("Cancel");
-      },
-    });
+    try {
+      Modal.confirm({
+        title: "선호 키워드",
+        content: "선택한 내용을 저장하시겠습니까?",
+        onOk() {
+          postUserKeyword(favoriteKeyword);
+          navigator("/main");
+        },
+        onCancel() {
+          console.log("Cancel");
+        },
+      });
+    } catch (error) {
+      if (error) {
+        Modal.warning({
+          title: "선호키워드 확인",
+          content: <p>선호키워드를 다시 확인해 주세요</p>,
+        });
+      }
+    }
   };
-  console.log("favoriteKeyword", favoriteKeyword);
 
   // 모두선택하기
   const handleKeywordAll = () => {
@@ -280,28 +298,6 @@ const KeywordChooseCp = () => {
             </div>
           </li>
           <li>
-            <h3>향</h3>
-            <div>
-              <Checkbox.Group
-                value={wineFlavorCheckedList}
-                onChange={handleChangeFlavorType}
-              >
-                {wineOptions.aroma.map(option => (
-                  <Checkbox key={option.id} value={option.id}>
-                    {option.value}
-                  </Checkbox>
-                ))}
-              </Checkbox.Group>
-              <Checkbox
-                indeterminate={isFlavorIndeterminate}
-                onChange={handleFlavorCheckAllChange}
-                checked={isFlavorCheckAll}
-              >
-                아무거나
-              </Checkbox>
-            </div>
-          </li>
-          <li>
             <h3>원산지</h3>
             <div>
               <Checkbox.Group
@@ -319,6 +315,29 @@ const KeywordChooseCp = () => {
                 indeterminate={isCountryIndeterminate}
                 onChange={handleCountryCheckAllChange}
                 checked={isCountryCheckAll}
+              >
+                아무거나
+              </Checkbox>
+            </div>
+          </li>
+          <li>
+            <h3>향</h3>
+            <div>
+              <Checkbox.Group
+                value={wineFlavorCheckedList}
+                onChange={handleChangeFlavorType}
+                // onChange={handleChangeFlavorType}
+              >
+                {wineOptions.aroma.map(option => (
+                  <Checkbox key={option.id} value={option.id}>
+                    {option.value}
+                  </Checkbox>
+                ))}
+              </Checkbox.Group>
+              <Checkbox
+                // indeterminate={isFlavorIndeterminate}
+                onChange={handleFlavorCheckAllChange}
+                checked={isFlavorCheckAll}
               >
                 아무거나
               </Checkbox>

@@ -7,14 +7,22 @@ import React, { useEffect, useState } from "react";
 import { getRandomWines } from "../../api/patchmain";
 import { RecommWineTitle, RecommWineWrap } from "../../style/MainStyle";
 import RecommWineSlide from "./RecommWineSlide";
+import { useSelector } from "react-redux";
 
 const RecommWine = ({ setIsModalOpen }) => {
   // 입문용 와인 데이터 보관할 state
   const [randomWines, setRandomWines] = useState([]);
   // 로딩 state
   const [isLoading, setIsLoading] = useState(true);
-  useEffect(() => {
-    getRandomWines(setRandomWines, setIsLoading);
+
+  const userData = useSelector(state => state.user);
+
+  useEffect(() => {    
+    if (userData.userId === null) {
+      console.log("로그아웃상태");
+    } else {
+      getRandomWines(setRandomWines, setIsLoading);
+    }
   }, []);
   return (
     <RecommWineWrap>

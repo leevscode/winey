@@ -1,6 +1,6 @@
 /*
     작업자 : 최혜미
-    노션 : https://www.notion.so/hyemdev
+    노션 : https://hyemdev.notion.site/hyemdev/hyem-s-dev-STUDY-75ffe819c7534a049b59871e6fe17dd4
     깃허브 : https://github.com/hyemdev
 */
 
@@ -15,6 +15,7 @@ import { fetchLogin, fetchRefreshToken } from "../../api/client";
 import { useDispatch, useSelector } from "react-redux";
 import { getMemberInfo } from "../../api/joinpatch";
 import { cartLengthData } from "../../api/patchcart";
+import { getUserFavoriteKey } from "../../api/keywordpatch";
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -49,10 +50,17 @@ const Login = () => {
         // 회원 정보 저장
         dispatch(getMemberInfo());
         cartLengthData(dispatch);
-        // 리프레쉬 토큰 요청
+        // 리프레쉬 토큰 요청_3차때 업데이트 예정
         // fetchRefreshToken()
-        navigate("/main");
-        // navigate("/keywordselect");
+
+        // 선호키워드 정보 유무를 받아오자
+        const favoriteKeyInfo = await getUserFavoriteKey();
+        // 키워드 정보가 있으면 바로 메인으로, 없으면 키워드 선택 페이지로 가자
+        if (favoriteKeyInfo.length > 0) {
+          navigate("/main");
+        } else {
+          navigate("/keywordselect");
+        }
       } else {
         Modal.warning(config);
       }
