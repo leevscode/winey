@@ -180,7 +180,7 @@ export const getTotalMinusTwoNew = async (
       `/api/main/price2/new?page=${_page.current}&row=9`,
     );
     const result = res.data;
-    console.log("2만원 미만 와인리스트 GET(최신등록순)", result);
+    // console.log("2만원 미만 와인리스트 GET(최신등록순)", result);
     _setListScroll(prevPosts => [...prevPosts, ...result]);
     _setHasNextPage(result.length === 9);
     if (result.length) {
@@ -203,7 +203,7 @@ export const getTotalMinusTwoExpensive = async (
       `/api/main/price2/expencive?page=${_page.current}&row=9`,
     );
     const result = res.data;
-    console.log("2만원 미만 와인리스트 GET(높은금액순)", result);
+    // console.log("2만원 미만 와인리스트 GET(높은금액순)", result);
     _setListScroll(prevPosts => [...prevPosts, ...result]);
     _setHasNextPage(result.length === 9);
     if (result.length) {
@@ -226,7 +226,7 @@ export const getTotalMinusTwoCheap = async (
       `/api/main/price2/cheap?page=${_page.current}&row=9`,
     );
     const result = res.data;
-    console.log("2만원 미만 와인리스트 GET(낮은금액순)", result);
+    // console.log("2만원 미만 와인리스트 GET(낮은금액순)", result);
     _setListScroll(prevPosts => [...prevPosts, ...result]);
     _setHasNextPage(result.length === 9);
     if (result.length) {
@@ -235,5 +235,268 @@ export const getTotalMinusTwoCheap = async (
     return result;
   } catch (err) {
     console.log("2만원 미만 와인리스트 GET(낮은금액순) 에러 발생", err);
+  }
+};
+
+// 상품리스트 - 레드와인 와인리스트 GET(최신금액순)
+export const getRedWineNew = async (_setListScroll, _setHasNextPage, _page) => {
+  try {
+    const res = await axios.get(
+      `/api/main/redWine/new?page=${_page.current}&row=9`,
+    );
+    const result = res.data;
+    // console.log("레드와인 와인리스트 GET(최신등록순)", result);
+    _setListScroll(prevPosts => [...prevPosts, ...result]);
+    _setHasNextPage(result.length === 9);
+    if (result.length) {
+      _page.current += 1;
+    }
+    return result;
+  } catch (err) {
+    console.log("레드와인 와인리스트 GET(최신등록순) 에러 발생", err);
+  }
+};
+
+// 상품리스트 - 레드와인 와인리스트 GET(높은금액순)
+export const getRedWineExpensive = async (
+  _setListScroll,
+  _setHasNextPage,
+  _page,
+) => {
+  try {
+    const res = await axios.get(
+      `/api/main/redWine/expencive?page=${_page.current}&row=9`,
+    );
+    const result = res.data;
+    // console.log("레드와인 와인리스트 GET(높은금액순)", result);
+    _setListScroll(prevPosts => [...prevPosts, ...result]);
+    _setHasNextPage(result.length === 9);
+    if (result.length) {
+      _page.current += 1;
+    }
+    return result;
+  } catch (err) {
+    console.log("레드와인 와인리스트 GET(높은금액순) 에러 발생", err);
+  }
+};
+
+// 상품리스트 - 레드와인 와인리스트 GET(낮은금액순)
+export const getRedWineCheap = async (
+  _setListScroll,
+  _setHasNextPage,
+  _page,
+) => {
+  try {
+    const res = await axios.get(
+      `/api/main/redWine/cheap?page=${_page.current}&row=9`,
+    );
+    const result = res.data;
+    // console.log("레드와인 와인리스트 GET(낮은금액순)", result);
+    _setListScroll(prevPosts => [...prevPosts, ...result]);
+    _setHasNextPage(result.length === 9);
+    if (result.length) {
+      _page.current += 1;
+    }
+    return result;
+  } catch (err) {
+    console.log("레드와인 와인리스트 GET(낮은금액순) 에러 발생", err);
+  }
+};
+
+// 상품리스트 - 화이트와인 와인리스트 GET(최신금액순)
+export const getWhiteWineNew = async (
+  _setListScroll,
+  _setHasNextPage,
+  _page,
+) => {
+  try {
+    const res = await axios.get(
+      `/api/main/whiteWine/new?page=${_page.current}&row=9`,
+    );
+    const result = res.data;
+    console.log("화이트와인 와인리스트 GET(최신등록순)", result);
+    _setListScroll(prevPosts => [...prevPosts, ...result]);
+    _setHasNextPage(result.length === 9);
+    if (result.length) {
+      _page.current += 1;
+    }
+    return result;
+  } catch (err) {
+    console.log("화이트와인 와인리스트 GET(최신등록순) 에러 발생", err);
+  }
+};
+
+// 상품리스트 - 화이트와인 와인리스트 GET(높은금액순)
+export const getWhiteWineExpensive = async (
+  _setListScroll,
+  _setHasNextPage,
+  _page,
+) => {
+  try {
+    const res = await axios.get(
+      `/api/main/whiteWine/expencive?page=${_page.current}&row=9`,
+    );
+    const result = res.data;
+    console.log("화이트와인 와인리스트 GET(높은금액순)", result);
+    _setListScroll(prevPosts => [...prevPosts, ...result]);
+    _setHasNextPage(result.length === 9);
+    if (result.length) {
+      _page.current += 1;
+    }
+    return result;
+  } catch (err) {
+    console.log("화이트와인 와인리스트 GET(높은금액순) 에러 발생", err);
+  }
+};
+
+// 상품리스트 - 화이트와인 와인리스트 GET(낮은금액순)
+export const getWhiteWineCheap = async (
+  _setListScroll,
+  _setHasNextPage,
+  _page,
+) => {
+  try {
+    const res = await axios.get(
+      `/api/main/whiteWine/cheap?page=${_page.current}&row=9`,
+    );
+    const result = res.data;
+    console.log("화이트와인 와인리스트 GET(낮은금액순)", result);
+    _setListScroll(prevPosts => [...prevPosts, ...result]);
+    _setHasNextPage(result.length === 9);
+    if (result.length) {
+      _page.current += 1;
+    }
+    return result;
+  } catch (err) {
+    console.log("화이트와인 와인리스트 GET(낮은금액순) 에러 발생", err);
+  }
+};
+
+// 상품리스트 - 스파클링와인 와인리스트 GET(최신금액순)
+export const getSpaklingWineNew = async (
+  _setListScroll,
+  _setHasNextPage,
+  _page,
+) => {
+  try {
+    const res = await axios.get(
+      `/api/main/sparklingWine/new?page=${_page.current}&row=9`,
+    );
+    const result = res.data;
+    console.log("스파클링와인 와인리스트 GET(최신등록순)", result);
+    _setListScroll(prevPosts => [...prevPosts, ...result]);
+    _setHasNextPage(result.length === 9);
+    if (result.length) {
+      _page.current += 1;
+    }
+    return result;
+  } catch (err) {
+    console.log("스파클링와인 와인리스트 GET(최신등록순) 에러 발생", err);
+  }
+};
+// 상품리스트 - 스파클링와인 와인리스트 GET(높은금액순)
+export const getSpaklingWineExpensive = async (
+  _setListScroll,
+  _setHasNextPage,
+  _page,
+) => {
+  try {
+    const res = await axios.get(
+      `/api/main/sparklingWine/expencive?page=${_page.current}&row=9`,
+    );
+    const result = res.data;
+    console.log("스파클링와인 와인리스트 GET(높은금액순)", result);
+    _setListScroll(prevPosts => [...prevPosts, ...result]);
+    _setHasNextPage(result.length === 9);
+    if (result.length) {
+      _page.current += 1;
+    }
+    return result;
+  } catch (err) {
+    console.log("스파클링와인 와인리스트 GET(높은금액순) 에러 발생", err);
+  }
+};
+// 상품리스트 - 스파클링와인 와인리스트 GET(낮은금액순)
+export const getSpaklingWineCheap = async (
+  _setListScroll,
+  _setHasNextPage,
+  _page,
+) => {
+  try {
+    const res = await axios.get(
+      `/api/main/sparklingWine/cheap?page=${_page.current}&row=9`,
+    );
+    const result = res.data;
+    console.log("스파클링와인 와인리스트 GET(낮은금액순)", result);
+    _setListScroll(prevPosts => [...prevPosts, ...result]);
+    _setHasNextPage(result.length === 9);
+    if (result.length) {
+      _page.current += 1;
+    }
+    return result;
+  } catch (err) {
+    console.log("스파클링와인 와인리스트 GET(낮은금액순) 에러 발생", err);
+  }
+};
+// 상품리스트 - 기타와인 와인리스트 GET(최신금액순)
+export const getEtcWineNew = async (_setListScroll, _setHasNextPage, _page) => {
+  try {
+    const res = await axios.get(
+      `/api/main/otherWine/new?page=${_page.current}&row=9`,
+    );
+    const result = res.data;
+    console.log("기타와인 와인리스트 GET(최신등록순)", result);
+    _setListScroll(prevPosts => [...prevPosts, ...result]);
+    _setHasNextPage(result.length === 9);
+    if (result.length) {
+      _page.current += 1;
+    }
+    return result;
+  } catch (err) {
+    console.log("기타와인 와인리스트 GET(최신등록순) 에러 발생", err);
+  }
+};
+// 상품리스트 - 기타와인 와인리스트 GET(높은금액순)
+export const getEtcWineExpensive = async (
+  _setListScroll,
+  _setHasNextPage,
+  _page,
+) => {
+  try {
+    const res = await axios.get(
+      `/api/main/otherWine/expencive?page=${_page.current}&row=9`,
+    );
+    const result = res.data;
+    console.log("기타와인 와인리스트 GET(높은금액순)", result);
+    _setListScroll(prevPosts => [...prevPosts, ...result]);
+    _setHasNextPage(result.length === 9);
+    if (result.length) {
+      _page.current += 1;
+    }
+    return result;
+  } catch (err) {
+    console.log("기타와인 와인리스트 GET(높은금액순) 에러 발생", err);
+  }
+};
+// 상품리스트 - 기타와인 와인리스트 GET(낮은금액순)
+export const getEtcWineCheap = async (
+  _setListScroll,
+  _setHasNextPage,
+  _page,
+) => {
+  try {
+    const res = await axios.get(
+      `/api/main/otherWine/cheap?page=${_page.current}&row=9`,
+    );
+    const result = res.data;
+    console.log("기타와인 와인리스트 GET(낮은금액순)", result);
+    _setListScroll(prevPosts => [...prevPosts, ...result]);
+    _setHasNextPage(result.length === 9);
+    if (result.length) {
+      _page.current += 1;
+    }
+    return result;
+  } catch (err) {
+    console.log("기타와인 와인리스트 GET(낮은금액순) 에러 발생", err);
   }
 };

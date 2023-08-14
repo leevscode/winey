@@ -8,7 +8,6 @@ import User from "./User";
 import Intro from "./pages/Intro";
 import AdultChk from "./pages/AdultChk";
 import Main from "./pages/Main";
-import ProductList from "./pages/product/ProductList";
 import ProductDetail from "./pages/product/ProductDetail";
 import ProductSell from "./pages/product/ProductSell";
 import ProductComplete from "./pages/product/ProductComplete";
@@ -29,12 +28,16 @@ import { AnimatePresence } from "framer-motion";
 import SellListDetail from "./pages/product/SellListDetail";
 import { useEffect, useState } from "react";
 import Welcome from "./components/join/Welcome";
-// import ProductMainList from "./pages/product/ProductMainList";
 import ProductSellCart from "./pages/product/ProductSellCart";
 import Food from "./pages/productmain/Food";
 import Country from "./pages/productmain/Country";
 import Price from "./pages/productmain/Price";
 import ProductMain from "./pages/productmain/ProductMain";
+import Red from "./components/productlist/Red";
+import White from "./components/productlist/White";
+import Spakling from "./components/productlist/Spakling";
+import Etc from "./components/productlist/Etc";
+import ProductList from "./pages/productlist/ProductList";
 
 function App() {
   // 페이지 이동 시 스크롤 최상단으로 올라가는 코드
@@ -66,11 +69,11 @@ function App() {
             <Route index path="*" element={<NotFound />} />
           </Route>
           {/* 상품리스트 */}
-          <Route path="/productlist">
-            <Route path="red" element={<ProductList />} />
-            <Route path="white" element={<ProductList />} />
-            <Route path="spakling" element={<ProductList />} />
-            <Route path="etc" element={<ProductList />} />
+          <Route path="/productlist" element={<ProductList />}>
+            <Route path="red" element={<Red />} />
+            <Route path="white" element={<White />} />
+            <Route path="spakling" element={<Spakling />} />
+            <Route path="etc" element={<Etc />} />
             <Route index path="*" element={<NotFound />} />
           </Route>
           {/* 상품상세페이지 */}
