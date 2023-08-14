@@ -30,6 +30,7 @@ export const WelcomeWrap = styled.div`
     margin-bottom: 2rem;
   }
   & button {
+    width: 50rem;
     margin-top: 5rem;
     & > a {
       font-weight: 600;
