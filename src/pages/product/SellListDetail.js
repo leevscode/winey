@@ -9,7 +9,7 @@ import {
 } from "../../style/SellListDetailStyle";
 import { ReviewOk } from "../../style/SellListStyle";
 import ReviewModal from "../../components/selllist/ReviewModal";
-import { getdetailData, submitReview } from "../../api/patchselllist";
+import { getdetailData } from "../../api/patchselllist";
 import { useParams } from "react-router";
 
 const SellListDetail = () => {
@@ -101,19 +101,20 @@ const SellListDetail = () => {
     updatedReviewSubmit[key] = true; // 평점 등록 상태를 true로 표시
     setReviewSubmit(updatedReviewSubmit);
 
-    // 평점을 포함하여 productData 상태를 업데이트
-    const updatedProductData = [...productData];
-    updatedProductData[key].rating = rating;
-    setProductData(updatedProductData);
+    // // 평점을 포함하여 productData 상태를 업데이트
+    // const updatedProductData = [...productData];
+    // updatedProductData[key].rating = rating;
+    // setProductData(updatedProductData);
 
-    // 리뷰 데이터를 생성하여 엔드포인트로 전송
-    const reviewData = {
-      orderDetailId: updatedProductData[key].key, // 주문 상세 pk값 추가
-      review_level: rating,
-      // 리뷰 평점 추가
-    };
+    // // 리뷰 데이터를 생성하여 엔드포인트로 전송
+    // const reviewData = {
+    //   orderDetailId: updatedProductData[key].key,
+    //   reviewLevel: rating,
+    //   // 리뷰 평점 추가
+    // };
 
-    submitReview(reviewData);
+    
+    // submitReview(reviewData);
   };
 
   const payment = {
