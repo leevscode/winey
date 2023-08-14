@@ -74,71 +74,44 @@ const RecommWineSlide = ({ isLoading, randomWines, setIsModalOpen }) => {
             spaceBetween={14}
             className={randomWines.length > 0 ? null : "active"}
           >
-            {isLoading ? (
-              productListSkeleton.map(index => (
-                <SwiperSlide key={v4()}>
-                  <ProductListSkeleton />
-                </SwiperSlide>
-              ))
-            ) : randomWines.length > 0 ? (
-              randomWines.map((item, index) => (
-                <SwiperSlide key={v4()}>
-                  <ProductListItem>
-                    <NavLink to={`/productdetail/${item.productId}`}>
-                      <div className="img">
+            {randomWines?.map((item, index) => (
+              <SwiperSlide key={v4()}>
+                <ProductListItem>
+                  <NavLink to={`/productdetail/${item.productId}`}>
+                    <div className="img">
+                      <img
+                        src={`/img/${item.pic}`}
+                        alt={item.nmKor}
+                        onError={onImgError}
+                      />
+                      {/* 장바구니 버튼 */}
+                      <button onClick={e => showModal(item.productId, e)}>
                         <img
-                          src={`/img/${item.pic}`}
-                          alt={item.nmKor}
-                          onError={onImgError}
+                          src={`${process.env.PUBLIC_URL}/images/icon_cart_2.svg`}
+                          alt="장바구니에 담기"
                         />
-                        {/* 장바구니 버튼 */}
-                        <button onClick={e => showModal(item.productId, e)}>
-                          <img
-                            src={`${process.env.PUBLIC_URL}/images/icon_cart_2.svg`}
-                            alt="장바구니에 담기"
-                          />
-                        </button>
-                      </div>
-                      <div className="txt">
-                        <div className="title">{item.nmKor}</div>
-                        <ul className="price">
-                          <li>
-                            <span>
-                              {item.salePrice === null
-                                ? item.price.toLocaleString()
-                                : item.salePrice.toLocaleString()}
-                            </span>
-                            원
-                          </li>
-                          <li>
-                            <span>{item.price.toLocaleString()}원</span>
-                          </li>
-                        </ul>
-                      </div>
-                    </NavLink>
-                  </ProductListItem>
-                </SwiperSlide>
-              ))
-            ) : (
-              <NotRandomWine>
-                <ul>
-                  <li>
-                    <i>
-                      <FontAwesomeIcon icon={faCircleQuestion} />
-                    </i>
-                  </li>
-                  <li>
-                    선호하는 와인을 찾을 수 없습니다.
-                    <br />
-                    키워드를 다시 선택해주세요.
-                  </li>
-                  <li>
-                    <Link to="/keywordselect">선호 키워드 변경하기</Link>
-                    {/* <Link to="/keywordselectedit">선호 키워드 변경하기</Link> */}
-                  </li>
-                </ul>
-              </NotRandomWine>
-            )}
+                      </button>
+                    </div>
+                    <div className="txt">
+                      <div className="title">{item.nmKor}</div>
+                      <ul className="price">
+                        <li>
+                          <span>
+                            {item.salePrice === null
+                              ? item.price.toLocaleString()
+                              : item.salePrice.toLocaleString()}
+                          </span>
+                          원
+                        </li>
+                        <li>
+                          <span>{item.price.toLocaleString()}원</span>
+                        </li>
+                      </ul>
+                    </div>
+                  </NavLink>
+                </ProductListItem>
+              </SwiperSlide>
+            ))}
           </Swiper>
         </>
       ) : (

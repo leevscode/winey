@@ -5,26 +5,12 @@
 */
 import React, { useState } from "react";
 import { Outlet } from "react-router-dom";
-import ProductCartModal from "../../components/product/ProductCartModal";
 
 const ProductMain = () => {
-  // 장바구니 완료 모달 state
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const handleOk = () => {
-    setIsModalOpen(false);
-  };
-  const handleCancel = () => {
-    setIsModalOpen(false);
-  };
   return (
     <>
-      <Outlet setIsModalOpen={setIsModalOpen} />
-      {/* 장바구니 완료 모달창 */}
-      <ProductCartModal
-        isModalOpen={isModalOpen}
-        handleOk={handleOk}
-        handleCancel={handleCancel}
-      />
+      {/* 상품리스트 목록 */}
+      <Outlet />
     </>
   );
 };
