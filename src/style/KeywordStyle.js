@@ -10,7 +10,7 @@ import { ButtonOk, Maincolor, WidthPd, opacity } from "./GlobalStyle";
 // 회원가입완료 component
 export const WelcomeWrap = styled.div`
   padding: ${WidthPd.padding};
-  margin-top: 20rem;
+  margin-top: 30rem;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -30,6 +30,7 @@ export const WelcomeWrap = styled.div`
     margin-bottom: 2rem;
   }
   & button {
+    width: 50rem;
     margin-top: 5rem;
     & > a {
       font-weight: 600;
@@ -76,6 +77,33 @@ export const LetsChoice = styled.div`
   }
 `;
 
+// 선호 키워드 변경 임시wrap
+export const EditKeywordTemp = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: block;
+  background: #fff;
+  opacity: 0.8;
+  width: 100%;
+  height: 100%;
+  /* width: 56rem;
+  height: 112rem; */
+  z-index: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  & > p {
+    position: absolute;
+    top: 50rem;
+    left: 9rem;
+    opacity: 1;
+    color: ${Maincolor.black};
+    font-size: 2rem;
+    font-weight: 700;
+    z-index: 9999;
+  }
+`;
 // 선호키워드 선택 component
 export const KeywordWrap = styled.div`
   position: relative;

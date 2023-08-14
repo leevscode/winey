@@ -7,6 +7,7 @@
 import React, { useEffect, useState } from "react";
 import {
   EditKeywordConfirmBtn,
+  EditKeywordTemp,
   KeywordConfirmBtn,
   KeywordWrap,
 } from "../../style/KeywordStyle";
@@ -195,144 +196,149 @@ const KeywordSelectEdit = () => {
     // navigator("/main");
   };
   return (
-    <KeywordWrap>
-      <ConfigProvider
-        theme={{
-          token: {
-            colorPrimary: "#79213d",
-            fontFamily:
-              '"Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif',
-          },
-        }}
-      >
-        <ul>
-          <li>
-            <h3>와인종류</h3>
-            <div>
-              <Checkbox.Group
-                value={wineTypeCheckedList}
-                onChange={handleTypeOnChange}
-                defaultValue={selectedKeyword.cateId}
-              >
-                {wineOptions.cateId.map(option => (
-                  <Checkbox key={option.id} value={option.id}>
-                    {option.value}
-                  </Checkbox>
-                ))}
-              </Checkbox.Group>
-              <Checkbox
-                indeterminate={isTypeIndeterminate}
-                onChange={handleTypeCheckAllChange}
-                checked={isTypeCheckAll}
-              >
-                아무거나
-              </Checkbox>
-            </div>
-          </li>
-          <li>
-            <h3>가격대</h3>
+    <>
+      <EditKeywordTemp>
+        <p>선호키워드 변경은 3차 프로젝트에 업데이트 됩니다.</p>
+      </EditKeywordTemp>
+      <KeywordWrap>
+        <ConfigProvider
+          theme={{
+            token: {
+              colorPrimary: "#79213d",
+              fontFamily:
+                '"Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif',
+            },
+          }}
+        >
+          <ul>
+            <li>
+              <h3>와인종류</h3>
+              <div>
+                <Checkbox.Group
+                  value={wineTypeCheckedList}
+                  onChange={handleTypeOnChange}
+                  defaultValue={selectedKeyword.cateId}
+                >
+                  {wineOptions.cateId.map(option => (
+                    <Checkbox key={option.id} value={option.id}>
+                      {option.value}
+                    </Checkbox>
+                  ))}
+                </Checkbox.Group>
+                <Checkbox
+                  indeterminate={isTypeIndeterminate}
+                  onChange={handleTypeCheckAllChange}
+                  checked={isTypeCheckAll}
+                >
+                  아무거나
+                </Checkbox>
+              </div>
+            </li>
+            <li>
+              <h3>가격대</h3>
 
-            <div>
-              <Checkbox.Group
-                value={winePriceCheckedList}
-                onChange={handlePriceOnChange}
-                defaultValue={selectedKeyword.priceRange}
-              >
-                {wineOptions.priceRange.map(option => (
-                  <Checkbox key={option.id} value={option.id}>
-                    {option.value}
-                  </Checkbox>
-                ))}
-              </Checkbox.Group>
-              <Checkbox
-                indeterminate={isPriceIndeterminate}
-                onChange={handlePriceCheckAllChange}
-                checked={isPriceCheckAll}
-              >
-                아무거나
-              </Checkbox>
-            </div>
-          </li>
-          <li>
-            {" "}
-            <h3>페어링음식</h3>
-            <div>
-              <Checkbox.Group
-                value={wineWithFoodCheckedList}
-                onChange={handleWithFoodOnChange}
-                // defaultValue={selectedKeyword}
-              >
-                {wineOptions.smallcategoryId.map(option => (
-                  <Checkbox key={option.id} value={option.id}>
-                    {option.value}
-                  </Checkbox>
-                ))}
-              </Checkbox.Group>
-              <Checkbox
-                indeterminate={isWithFoodIndeterminate}
-                onChange={handleWithFoodCheckAllChange}
-                checked={isWithFoodCheckAll}
-              >
-                아무거나
-              </Checkbox>
-            </div>
-          </li>
-          <li>
-            <h3>향</h3>
-            <div>
-              <Checkbox.Group
-                value={wineFlavorCheckedList}
-                onChange={handleFlavorOnChange}
-                // defaultValue={selectedKeyword}
-              >
-                {wineOptions.aroma.map(option => (
-                  <Checkbox key={option.id} value={option.id}>
-                    {option.value}
-                  </Checkbox>
-                ))}
-              </Checkbox.Group>
-              <Checkbox
-                indeterminate={isFlavorIndeterminate}
-                onChange={handleFlavorCheckAllChange}
-                checked={isFlavorCheckAll}
-              >
-                아무거나
-              </Checkbox>
-            </div>
-          </li>
-          <li>
-            <h3>원산지</h3>
-            <div>
-              <Checkbox.Group
-                value={wineCountryCheckedList}
-                onChange={handleCountryOnChange}
-                // defaultValue={selectedKeyword}
-              >
-                {wineOptions.countryId.map(option => (
-                  <Checkbox key={option.id} value={option.id}>
-                    {option.value}
-                  </Checkbox>
-                ))}
-              </Checkbox.Group>
-              <Checkbox
-                value="all"
-                indeterminate={isCountryIndeterminate}
-                onChange={handleCountryCheckAllChange}
-                checked={isCountryCheckAll}
-              >
-                아무거나
-              </Checkbox>
-            </div>
-          </li>
-        </ul>
-      </ConfigProvider>
-      <EditKeywordConfirmBtn>
-        <ButtonOk onClick={handleEditKeywordChoice}>선택 변경완료</ButtonOk>
-        <ButtonCancel onClick={handleEditKeywordAll}>
-          아무거나 상관없어요
-        </ButtonCancel>
-      </EditKeywordConfirmBtn>
-    </KeywordWrap>
+              <div>
+                <Checkbox.Group
+                  value={winePriceCheckedList}
+                  onChange={handlePriceOnChange}
+                  defaultValue={selectedKeyword.priceRange}
+                >
+                  {wineOptions.priceRange.map(option => (
+                    <Checkbox key={option.id} value={option.id}>
+                      {option.value}
+                    </Checkbox>
+                  ))}
+                </Checkbox.Group>
+                <Checkbox
+                  indeterminate={isPriceIndeterminate}
+                  onChange={handlePriceCheckAllChange}
+                  checked={isPriceCheckAll}
+                >
+                  아무거나
+                </Checkbox>
+              </div>
+            </li>
+            <li>
+              {" "}
+              <h3>페어링음식</h3>
+              <div>
+                <Checkbox.Group
+                  value={wineWithFoodCheckedList}
+                  onChange={handleWithFoodOnChange}
+                  // defaultValue={selectedKeyword}
+                >
+                  {wineOptions.smallcategoryId.map(option => (
+                    <Checkbox key={option.id} value={option.id}>
+                      {option.value}
+                    </Checkbox>
+                  ))}
+                </Checkbox.Group>
+                <Checkbox
+                  indeterminate={isWithFoodIndeterminate}
+                  onChange={handleWithFoodCheckAllChange}
+                  checked={isWithFoodCheckAll}
+                >
+                  아무거나
+                </Checkbox>
+              </div>
+            </li>
+            <li>
+              <h3>원산지</h3>
+              <div>
+                <Checkbox.Group
+                  value={wineCountryCheckedList}
+                  onChange={handleCountryOnChange}
+                  // defaultValue={selectedKeyword}
+                >
+                  {wineOptions.countryId.map(option => (
+                    <Checkbox key={option.id} value={option.id}>
+                      {option.value}
+                    </Checkbox>
+                  ))}
+                </Checkbox.Group>
+                <Checkbox
+                  value="all"
+                  indeterminate={isCountryIndeterminate}
+                  onChange={handleCountryCheckAllChange}
+                  checked={isCountryCheckAll}
+                >
+                  아무거나
+                </Checkbox>
+              </div>
+            </li>
+            {/* <li>
+              <h3>향</h3>
+              <div>
+                <Checkbox.Group
+                  value={wineFlavorCheckedList}
+                  onChange={handleFlavorOnChange}
+                  // defaultValue={selectedKeyword}
+                >
+                  {wineOptions.aroma.map(option => (
+                    <Checkbox key={option.id} value={option.id}>
+                      {option.value}
+                    </Checkbox>
+                  ))}
+                </Checkbox.Group>
+                <Checkbox
+                  indeterminate={isFlavorIndeterminate}
+                  onChange={handleFlavorCheckAllChange}
+                  checked={isFlavorCheckAll}
+                >
+                  아무거나
+                </Checkbox>
+              </div>
+            </li> */}
+          </ul>
+        </ConfigProvider>
+        <EditKeywordConfirmBtn>
+          <ButtonOk onClick={handleEditKeywordChoice}>선택 변경완료</ButtonOk>
+          <ButtonCancel onClick={handleEditKeywordAll}>
+            아무거나 상관없어요
+          </ButtonCancel>
+        </EditKeywordConfirmBtn>
+      </KeywordWrap>
+    </>
   );
 };
 

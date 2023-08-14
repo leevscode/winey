@@ -35,9 +35,9 @@ const Welcome = () => {
         </h5>
       </LetsChoice>
 
-      <ButtonOk>
-        <Link to="/login">로그인 하러 가기</Link>
-      </ButtonOk>
+      <Link to="/login">
+        <ButtonOk>로그인 하러 가기</ButtonOk>
+      </Link>
     </WelcomeWrap>
   );
 };
