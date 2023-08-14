@@ -39,6 +39,7 @@ const ReviewModal = ({
       submitReview();
       console.log("평점 등록", submitReview);
       hideModal();
+
     } else {
       setShowWarning(true);
     }
