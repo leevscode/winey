@@ -9,7 +9,7 @@ import {
 } from "../../style/SellListDetailStyle";
 import { ReviewOk } from "../../style/SellListStyle";
 import ReviewModal from "../../components/selllist/ReviewModal";
-import { fetchdetailData, submitReview } from "../../api/patchselllist";
+import { getdetailData, submitReview } from "../../api/patchselllist";
 import { useParams } from "react-router";
 
 const SellListDetail = () => {
@@ -49,7 +49,7 @@ const SellListDetail = () => {
     const numberPart = parts[2];
     const numberValue = parseInt(numberPart);
     try {
-      const data = await fetchdetailData(numberValue);
+      const data = await getdetailData(numberValue);
       setDetailData(data);
       setProductInfo(data.vo1);
       setproductDes(data.vo2);
@@ -116,6 +116,20 @@ const SellListDetail = () => {
     submitReview(reviewData);
   };
 
+  const payment = {
+    0: "신용카드",
+    1: "신용카드",
+  };
+
+  const orderStatus = {
+    1: "결제 완료",
+    2: "배송중",
+    3: "배송완료",
+    4: "픽업대기",
+    5: "픽업완료",
+    6: "주문취소",
+  };
+
   return (
     <>
       <DetailDay>{orderData.orderDetailId}</DetailDay>
@@ -143,15 +157,14 @@ const SellListDetail = () => {
       ))}
 
       <DetailTotalPrice>
-        <p>결제 방법: {productDes.payment}</p>
+        <p>결제 방법: {payment[`${productDes.payment}`]}</p>
         <p>픽업 지점: {productDes.storeNm}</p>
         <p>픽업 시간: {productDes.pickupTime}</p>
-        <p>주문 상태: {productDes.orderStatus}</p>
+        <p>주문 상태: {orderStatus[`${productDes.orderStatus}`]}</p>
         <p>
           총 결제금액{" "}
           <strong>
-            {calculateTotalAmount() + parseInt(productDes.totalOrderPrice)}
-            원
+            {parseInt(productDes.totalOrderPrice).toLocaleString()}원
           </strong>
         </p>
       </DetailTotalPrice>

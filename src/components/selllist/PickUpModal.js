@@ -3,7 +3,6 @@ import { ButtonCancel, ButtonOk } from "../../style/GlobalStyle";
 import {
   OrderCancelContent,
   OrderCancelModal,
-  OrderCancelText,
 } from "../../style/SellListCancelStyle";
 import {finishSellListData} from "../../api/patchselllist"
 
@@ -23,7 +22,7 @@ const PickUpModal = ({
     <>
       <OrderCancelModal>
         <OrderCancelContent>
-          <OrderCancelText>픽업완료 확정을 하시겠습니까?</OrderCancelText>
+          <h1>픽업완료 확정을 하시겠습니까?</h1>
           <ButtonOk
             onClick={() => {
               // "픽업완료" 확인 처리를 위해 onConfirm 함수를 호출합니다

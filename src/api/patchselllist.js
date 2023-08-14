@@ -1,7 +1,7 @@
 import { client } from "./client";
 
 // 주문 내역 출력
-export const fetchSellListData = async () => {
+export const getSellListData = async () => {
   try {
     const response = await client.get(`/api/orderList/user`);
     const sellListData = response.data;
@@ -43,13 +43,12 @@ export const finishSellListData = async finishSellListData => {
 };
 
 // 주문 상세 내역
-export const fetchdetailData = async numberValue => {
+export const getdetailData = async numberValue => {
   try {
     const response = await client.get(
       `/api/orderList/detail?orderId=${numberValue}`,
     );
     const detailData = response.data;
-    console.log("detailData?", detailData);
     return detailData;
   } catch (error) {
     console.error("API 요청 중 오류 발생", error);

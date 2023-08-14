@@ -17,7 +17,7 @@ import SellListCancel from "../../components/selllist/SellListCancel";
 import { SellListButton } from "../../style/SellListReviewStyle";
 import { useNavigate } from "react-router";
 import PickUpModal from "../../components/selllist/PickUpModal";
-import { cancelSellListData, fetchSellListData } from "../../api/patchselllist";
+import { cancelSellListData, getSellListData } from "../../api/patchselllist";
 
 const SellList = () => {
   // 주문 내역 get
@@ -34,11 +34,10 @@ const SellList = () => {
   const [CancelModal, setCancelModal] = useState([]);
   const navigate = useNavigate();
 
+  // 주문취소
   const cancelSellList = async data => {
     try {
-      await cancelSellListData(data); // 취소 요청 보내기
-
-      // 취소를 반영하기 위해 상태를 업데이트합니다
+      await cancelSellListData(data);
       const updatedItems = orderId.filter(item => item.orderId !== data);
       setorderId(updatedItems);
       hideCancelModal(data);
@@ -51,7 +50,7 @@ const SellList = () => {
   // 주문내역 리스트 출력
   const filledSellListData = async () => {
     try {
-      const data = await fetchSellListData();
+      const data = await getSellListData();
       setSellListData(data);
       console.log("주문내역 출력", data);
     } catch (err) {
@@ -64,7 +63,7 @@ const SellList = () => {
     filledSellListData();
   }, []);
 
-  // 특정 경우에 주문취소가 보이게 하는 함수
+  // 주문상태에 따라 주문취소가 보이게 함
   const showCancelModal = index => {
     setorderCancelId(index);
     const updatedCancelModal = [...CancelModal];
@@ -131,6 +130,11 @@ const SellList = () => {
     });
   };
 
+  const payment = {
+    0: "신용카드",
+    1: "신용카드",
+  };
+
   const orderStatus = {
     1: "결제 완료",
     2: "배송중",
@@ -138,11 +142,6 @@ const SellList = () => {
     4: "픽업대기",
     5: "픽업완료",
     6: "주문취소",
-  };
-
-  const payment = {
-    0: "신용카드",
-    1: "신용카드",
   };
 
   return (
