@@ -15,6 +15,7 @@ import {
   SellListButton,
   SellListModal,
 } from "../../style/SellListReviewStyle";
+import { submitReview } from "../../api/patchselllist";
 
 const ReviewModal = ({
   reviewId,
@@ -25,7 +26,6 @@ const ReviewModal = ({
   const [selectedReview, setSelectedReview] = useState(null);
   const [showWarning, setShowWarning] = useState(false);
 
-  // DB연동 예정
   const handleReviewSubmit = () => {
     if (selectedReview) {
       console.log("평점이 등록될 orderDetailId :", reviewId);
@@ -36,6 +36,8 @@ const ReviewModal = ({
       reviewSubmitUpdate(selectedReview);
 
       // 평점 처리가 완료되면 모달을 닫습니다.
+      submitReview();
+      console.log("평점 등록", submitReview);
       hideModal();
     } else {
       setShowWarning(true);

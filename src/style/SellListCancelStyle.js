@@ -11,10 +11,7 @@ export const OrderCancelModal = styled.div`
   justify-content: center;
   align-items: center;
   background-color: rgba(0, 0, 0, 0.5);
-  z-index: 999;
-  transition:
-    visibility 0.3s,
-    opacity 0.3s;
+  z-index: 9999;
 `;
 
 export const OrderCancelContent = styled.div`
@@ -22,13 +19,11 @@ export const OrderCancelContent = styled.div`
   background-color: white;
   padding: 50px;
   border-radius: 5px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-`;
-
-export const OrderCancelText = styled.span`
-  color: #aaaaaa;
-  float: right;
-  font-size: 2rem;
-  font-weight: bold;
-  margin-bottom: 30px;
+  h1 {
+    color: #aaaaaa;
+    float: right;
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 30px;
+  }
 `;

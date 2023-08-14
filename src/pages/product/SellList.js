@@ -17,7 +17,7 @@ import SellListCancel from "../../components/selllist/SellListCancel";
 import { SellListButton } from "../../style/SellListReviewStyle";
 import { useNavigate } from "react-router";
 import PickUpModal from "../../components/selllist/PickUpModal";
-import { cancelSellListData, fetchSellListData } from "../../api/patchselllist";
+import { cancelSellListData, getSellListData } from "../../api/patchselllist";
 
 const SellList = () => {
   // 주문 내역 get
@@ -34,11 +34,10 @@ const SellList = () => {
   const [CancelModal, setCancelModal] = useState([]);
   const navigate = useNavigate();
 
+  // 주문취소
   const cancelSellList = async data => {
     try {
-      await cancelSellListData(data); // 취소 요청 보내기
-
-      // 취소를 반영하기 위해 상태를 업데이트합니다
+      await cancelSellListData(data);
       const updatedItems = orderId.filter(item => item.orderId !== data);
       setorderId(updatedItems);
       hideCancelModal(data);
@@ -51,7 +50,7 @@ const SellList = () => {
   // 주문내역 리스트 출력
   const filledSellListData = async () => {
     try {
-      const data = await fetchSellListData();
+      const data = await getSellListData();
       setSellListData(data);
       console.log("주문내역 출력", data);
     } catch (err) {
@@ -63,11 +62,8 @@ const SellList = () => {
   useEffect(() => {
     filledSellListData();
   }, []);
-  useEffect(() => {
-    console.log("SellListData:", SellListData);
-  }, [SellListData]);
 
-  // 특정 경우에 주문취소가 보이게 하는 함수
+  // 주문상태에 따라 주문취소가 보이게 함
   const showCancelModal = index => {
     setorderCancelId(index);
     const updatedCancelModal = [...CancelModal];
@@ -106,22 +102,17 @@ const SellList = () => {
       }
     });
 
-    // "픽업완료 확정을 하시겠습니까?" 모달을 표시합니다
+    // "픽업완료 확정을 하시겠습니까?" 모달을 표시
     setPickupModalVisible(true);
   };
 
-  // "픽업완료" 모달의 확인 버튼을 처리하는 함수
   const handleConfirmPickUp = index => {
-    // "픽업완료" 확인 처리를 위한 로직을 작성합니다
-    // 예를 들어, 백엔드에서 주문 상태를 "픽업완료"로 변경하는 등의 작업을 수행합니다
-
-    // 추가: 이미 픽업완료된 주문을 completedPickUpOrders에 추가합니다
     setCompletedPickUpOrders(prevCompletedOrders => [
       ...prevCompletedOrders,
       index,
     ]);
 
-    // 확인 후 모달을 숨깁니다
+    // 확인 후 모달을 숨김
     setPickupModalVisible(false);
 
     // 주문 상태를 "픽업완료"로 변경
@@ -139,9 +130,10 @@ const SellList = () => {
     });
   };
 
-  useEffect(() => {
-    console.log("selectedItem : ", selectedItem);
-  }, [selectedItem]);
+  const payment = {
+    0: "신용카드",
+    1: "신용카드",
+  };
 
   const orderStatus = {
     1: "결제 완료",
@@ -150,11 +142,6 @@ const SellList = () => {
     4: "픽업대기",
     5: "픽업완료",
     6: "주문취소",
-  };
-
-  const payment = {
-    0: "신용카드",
-    1: "신용카드",
   };
 
   return (
@@ -173,7 +160,9 @@ const SellList = () => {
           {SellListData.map(item => (
             <div key={item.orderId}>
               {/* 주문취소 모달 */}
-              {item.orderStatus === 4 || item.orderStatus === 5 || item.orderStatus === 6 ? (
+              {item.orderStatus === 4 ||
+              item.orderStatus === 5 ||
+              item.orderStatus === 6 ? (
                 // 주문취소 버튼이 사라졌을때 빈 공백을 유지하는 스타일
                 <div style={{ height: "28px" }} />
               ) : (
@@ -198,7 +187,7 @@ const SellList = () => {
               <SellListButton>
                 <ButtonCancel
                   onClick={() => {
-                    navigate(`/selllistdetail/:iselllist`);
+                    navigate(`/selllistdetail/:iselllist:${item.orderId}`);
                   }}
                 >
                   주문 내역
@@ -220,7 +209,7 @@ const SellList = () => {
                     </PickUpButton>
                   )
                 )}
-                {/* "픽업완료" 모달을 렌더링합니다 */}
+                {/* "픽업완료" 모달을 렌더링*/}
                 {pickupModalVisible && (
                   <PickUpModal
                     onCancel={() => setPickupModalVisible(false)}
