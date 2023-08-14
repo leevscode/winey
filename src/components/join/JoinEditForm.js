@@ -30,6 +30,7 @@ import { useDispatch, useSelector } from "react-redux";
 const JoinEditForm = () => {
   const dispatch = useDispatch();
   const editUserInfo = useSelector(state => state.user);
+  const navigate = useNavigate();
 
   // 지역옵션
   const regionOptions = [
@@ -51,8 +52,6 @@ const JoinEditForm = () => {
     { regionNmId: 16, value: "경남" },
     { regionNmId: 17, value: "제주" },
   ];
-
-  const navigate = useNavigate();
 
   // 아이디, 이름, 전화번호 변경 state
   const [editId] = useState(editUserInfo.email);
@@ -99,7 +98,6 @@ const JoinEditForm = () => {
 
   // 회원정보수정 확인 핸들러
   const onFinish = values => {
-    
     if (editpassword === passwordConfirm) {
       const update = {
         editId,
@@ -158,7 +156,7 @@ const JoinEditForm = () => {
   };
   //
   useEffect(() => {
-    // dispatch(getMemberInfo());
+    dispatch(getMemberInfo());
   }, []);
   return (
     <div>
@@ -176,7 +174,6 @@ const JoinEditForm = () => {
           // 디폴트 값
           initialValues={{
             userId: editId,
-            password: editpassword,
             userName: editUserName,
             phoneNumber: editUserTel,
             regionNmId: editUserCity,

@@ -107,7 +107,7 @@ const MypageList = () => {
             </NavLink>
           </li>
           <li>
-            <NavLink to={userData.userId ? "/keywordselect" : "/login"}>
+            <NavLink to={userData.userId ? "/keywordselectedit" : "/login"}>
               선호 키워드 변경
               <i>
                 <FontAwesomeIcon icon={faAngleRight} />
