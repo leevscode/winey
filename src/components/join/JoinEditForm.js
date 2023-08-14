@@ -132,10 +132,10 @@ const JoinEditForm = () => {
       console.log("Failed");
     }
   };
-
   const onFinishFailed = errorInfo => {
     console.log("Failed:", errorInfo);
   };
+
   // 회원탈퇴 핸들러
   const UserDropOut = () => {
     Modal.confirm({
@@ -327,11 +327,13 @@ const JoinEditForm = () => {
           <Form.Item>
             <JoinEditBtn>
               <ButtonOk>수정하기</ButtonOk>
-              <ButtonCancel onClick={UserDropOut}>회원탈퇴</ButtonCancel>
             </JoinEditBtn>
           </Form.Item>
         </Form>
       </ConfigProvider>
+      <JoinEditBtn>
+        <ButtonCancel onClick={UserDropOut}>회원탈퇴</ButtonCancel>
+      </JoinEditBtn>
     </div>
   );
 };

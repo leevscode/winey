@@ -81,7 +81,9 @@ const ProductCart = () => {
   const increaseItemQuantity = async cartId => {
     const arr = CartData.map(item => {
       if (item.cartId === cartId) {
-        item.quantity += 1;
+        if (item.quantity < 5) {
+          item.quantity += 1;
+        }
       }
       return item;
     });
@@ -200,14 +202,14 @@ const ProductCart = () => {
             </CartTotalPriceOne>
           </CartTotalPrice>
           <ButtonDiv>
-          <ButtonOk onClick={buyGood}>결제하기</ButtonOk>
+            <ButtonOk onClick={buyGood}>결제하기</ButtonOk>
           </ButtonDiv>
         </div>
       )}
       <ButtonDiv>
-      <ButtonCancel onClick={() => navigate("/main")}>
-        메인으로 돌아가기
-      </ButtonCancel>
+        <ButtonCancel onClick={() => navigate("/main")}>
+          메인으로 돌아가기
+        </ButtonCancel>
       </ButtonDiv>
     </>
   );

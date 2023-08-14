@@ -233,6 +233,6 @@ export const TermsInfoScroll = styled.div`
 
 export const JoinEditBtn = styled.div`
   & button {
-    margin: 0.8rem 0;
+    margin: -1rem 0;
   }
 `;
