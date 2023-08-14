@@ -200,6 +200,7 @@ const SellList = () => {
                 {item.orderStatus === 5 ? (
                   <PickUpButton disabled>픽업완료</PickUpButton>
                 ) : (
+                  // 테스트 끝나면 3, 4, 5 로 바꿔야됨
                   [3, 4, 5].includes(item.orderStatus) && (
                     <PickUpButton
                       onClick={() => handlePickUpComplete(item.orderId)}
@@ -216,6 +217,8 @@ const SellList = () => {
                     onConfirm={handleConfirmPickUp}
                     onClose={() => setPickupModalVisible(false)}
                     onPick={selectedItem}
+                    setPickupModalVisible={setPickupModalVisible}
+                    setSellListData={setSellListData}
                   />
                 )}
               </SellListButton>
@@ -224,6 +227,8 @@ const SellList = () => {
                 <SellListCancel
                   onCancel={() => handleCancel(item.orderId)}
                   onClose={() => hideCancelModal(item.orderId)}
+                  setPickupModalVisible={setPickupModalVisible}
+                  setSellListData={setSellListData}
                   orderCancelId={orderCancelId}
                 />
               )}
