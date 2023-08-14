@@ -29,9 +29,6 @@ import SellListDetail from "./pages/product/SellListDetail";
 import { useEffect, useState } from "react";
 import Welcome from "./components/join/Welcome";
 import ProductSellCart from "./pages/product/ProductSellCart";
-import Food from "./pages/productmain/Food";
-import Country from "./pages/productmain/Country";
-import Price from "./pages/productmain/Price";
 import ProductMain from "./pages/productmain/ProductMain";
 import Red from "./components/productlist/Red";
 import White from "./components/productlist/White";
@@ -39,6 +36,9 @@ import Spakling from "./components/productlist/Spakling";
 import Etc from "./components/productlist/Etc";
 import ProductList from "./pages/productlist/ProductList";
 import { Helmet } from "react-helmet-async";
+import Food from "./components/productmain/Food";
+import Country from "./components/productmain/Country";
+import Price from "./components/productmain/Price";
 
 function App() {
   // 페이지 이동 시 스크롤 최상단으로 올라가는 코드

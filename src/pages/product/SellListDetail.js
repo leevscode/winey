@@ -86,12 +86,6 @@ const SellListDetail = () => {
       return item;
     });
     setProductData(arr);
-
-    // hideModal();
-    // setReviewSubmit(prevReviewSubmit => {
-    //   console.log("");
-    //   return { ...prevReviewSubmit, [key]: true };
-    // });
   };
 
   // 상품에 해당하는 평점을 등록하는 함수
@@ -99,20 +93,6 @@ const SellListDetail = () => {
     const updatedReviewSubmit = { ...reviewSubmit };
     updatedReviewSubmit[key] = true; // 평점 등록 상태를 true로 표시
     setReviewSubmit(updatedReviewSubmit);
-
-    // // 평점을 포함하여 productData 상태를 업데이트
-    // const updatedProductData = [...productData];
-    // updatedProductData[key].rating = rating;
-    // setProductData(updatedProductData);
-
-    // // 리뷰 데이터를 생성하여 엔드포인트로 전송
-    // const reviewData = {
-    //   orderDetailId: updatedProductData[key].key,
-    //   reviewLevel: rating,
-    //   // 리뷰 평점 추가
-    // };
-
-    // submitReview(reviewData);
   };
 
   const payment = {
@@ -144,9 +124,12 @@ const SellListDetail = () => {
               <li>{parseInt(item.price).toLocaleString()}</li>
             </ul>
           </div>
-
           {item.review ? (
             <ReviewOk>평점등록이 완료되었습니다</ReviewOk>
+          ) : // 주문 상태에 따라 버튼을 렌더링
+          (productDes.orderStatus >= 1 && productDes.orderStatus <= 3) ||
+            productDes.orderStatus === 6 ? (
+            <DetailButtonOk disabled>평점등록</DetailButtonOk>
           ) : (
             <DetailButtonOk onClick={() => showModal(item.orderDetailId)}>
               평점등록

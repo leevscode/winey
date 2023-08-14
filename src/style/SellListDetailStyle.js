@@ -129,9 +129,13 @@ export const DetailButtonOk = styled.button`
   height: 5rem;
   border-radius: 0.5rem;
   transition: 0.2s ease-in-out;
-  &:hover {
-    background: ${Maincolor.redDeep};
+  &:disabled {
+    background-color: #e7e4e4;
+    color: #ffffff;
+    border: #e7e4e4;
+    cursor: not-allowed;
   }
+
 `;
 
 export const DetailTotalPrice = styled.div`
