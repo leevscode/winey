@@ -78,17 +78,17 @@ const ProductSellCart = () => {
   const handleFinalCharge = e => {
     // 에러처리
     if (
-      selectCollect.pickUpDate === undefined ||
-      selectCollect.pickUpDate === ""
-    ) {
-      setPaymentError("픽업 날짜를 선택해 주세요.");
-      return;
-    }
-    if (
       selectCollect.pickUpSpot === undefined ||
       selectCollect.pickUpSpot === ""
     ) {
       setPaymentError("픽업 장소를 선택해 주세요.");
+      return;
+    }
+    if (
+      selectCollect.pickUpDate === undefined ||
+      selectCollect.pickUpDate === ""
+    ) {
+      setPaymentError("픽업 날짜를 선택해 주세요.");
       return;
     }
     if (
