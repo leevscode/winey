@@ -32,7 +32,11 @@ const ProductCompleteCart = () => {
           alt="complete"
         />
         <p>결제가 완료되었습니다!</p>
-        <span>픽업예정일과 시간에 맞춰 상품을 수령해주세요.</span>
+        <span>
+          픽업예정일과 시간에 맞춰 상품을 수령해주세요.
+          <br />
+          신분증을 소지하고 방문해 주시기 바랍니다.
+        </span>
       </ProductCompleteText>
       {stateItem && (
         <ProductCompleteinfo>
@@ -50,7 +54,7 @@ const ProductCompleteCart = () => {
                 <li>{option.nmKor}</li>
                 <li>{option.nmEng}</li>
                 <li>
-                  {((option.price) * finalQuan(index)).toLocaleString()}원{" "}
+                  {(option.price * finalQuan(index)).toLocaleString()}원{" "}
                   <span>
                     {/* {option.finalQuantity} */}
                     {finalQuan(index)}개

@@ -61,7 +61,6 @@ export const fetchLogin = async (userid, password) => {
       email: userid,
       pw: password,
     });
-    console.log("login완료", res.data);
     const result = res.data;
     setCookie("refreshToken", result.refreshToken, {
       path: "/",
@@ -78,7 +77,6 @@ export const fetchLogin = async (userid, password) => {
     return result;
   } catch (error) {
     console.log(error);
-
     return error;
   }
 };
@@ -92,7 +90,6 @@ export const fetchRefreshToken = async () => {
       refreshToken: getCookie("refreshToken"),
     });
     const result = res.data;
-    console.log("갱신result", result);
     if (result.success) {
       setCookie("accessToken", result.accessToken, {
         path: "/",

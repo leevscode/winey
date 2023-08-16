@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { PickupPlaceClickWrap } from "../../style/ProductSellStyle";
-// import { ConfigProvider, Form, Radio } from "antd";
-// import Swiper from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css/navigation";
 
@@ -22,7 +20,6 @@ const PickupPlaceClick = ({ userStore, selectCollect, setSelectCollect }) => {
     return date.toISOString().toLocaleString("ko-KR").substring(0, 10);
   };
 
-  console.log("formatDate", formatDate);
   const formatWeek = date => {
     return date.toLocaleString("ko-KR", {
       weekday: "long",
@@ -74,9 +71,7 @@ const PickupPlaceClick = ({ userStore, selectCollect, setSelectCollect }) => {
     }));
 
     setSltDateButton(index);
-    console.log("sltDateButton", sltDateButton);
   };
-  console.log("selectCollect", selectCollect);
 
   // 픽업시간 이벤트 핸들러
   const handleChangePickTime = (option, e, index) => {
