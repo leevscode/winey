@@ -65,7 +65,7 @@ export const SellListDetailText = styled.div`
 export const SellListDetailWrap = styled.div`
   margin-bottom: 15px;
   position: relative;
-  padding-top: 135%;
+  padding-top: 30%;
   border: 0.05rem solid ${opacity.grayLight};
   overflow: hidden;
   isolation: isolate;
@@ -81,10 +81,14 @@ export const SellListDetailWrap = styled.div`
 `;
 
 export const SellListDetailinfo = styled.div`
-  padding: 20px;
+  display: flex;
+  padding: 0 20px;
   div {
+    margin-right: 30px;
     margin-bottom: 30px;
     display: flex;
+    width: 40%;
+    align-items: center;
   }
   img {
     padding: 0 20px;
@@ -128,6 +132,7 @@ export const DetailButtonOk = styled.button`
   width: 100%;
   height: 5rem;
   border-radius: 0.5rem;
+  margin-bottom: 20px;
   transition: 0.2s ease-in-out;
   &:disabled {
     background-color: #e7e4e4;

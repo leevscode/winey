@@ -12,7 +12,7 @@ export const getSellListData = async () => {
     const sellListData = response.data;
     return sellListData;
   } catch (error) {
-    console.error("API 요청 중 오류 발생", error);
+    // console.error("API 요청 중 오류 발생", error);
     return [];
   }
 };
@@ -23,12 +23,12 @@ export const cancelSellListData = async cancelSellListData => {
     const res = await client.put(
       `/api/orderList/cancel?orderId=${cancelSellListData}`,
     );
-    console.log("res", res);
+    // console.log("res", res);
     const result = await res.data;
-    console.log("주문이 취소 되었습니다", result);
+    // console.log("주문이 취소 되었습니다", result);
     return result;
   } catch (error) {
-    console.log(error);
+    // console.log(error);
   }
 };
 
@@ -38,12 +38,12 @@ export const finishSellListData = async finishSellListData => {
     const res = await client.put(
       `/api/orderList/pickupFinish?orderId=${finishSellListData}`,
     );
-    console.log("res", res);
+    // console.log("res", res);
     const result = await res.data;
-    console.log("픽업 완료 되었습니다", result);
+    // console.log("픽업 완료 되었습니다", result);
     return result;
   } catch (error) {
-    console.log(error);
+    // console.log(error);
   }
 };
 
@@ -56,7 +56,7 @@ export const getdetailData = async numberValue => {
     const detailData = response.data;
     return detailData;
   } catch (error) {
-    console.error("API 요청 중 오류 발생", error);
+    // console.error("API 요청 중 오류 발생", error);
     return [];
   }
 };
@@ -69,10 +69,10 @@ export const submitReview = async (orderDetailId, reviewLevel, userId) => {
       reviewLevel,
       userId,
     });
-    console.log("리뷰가 성공적으로 제출되었습니다:");
+    // console.log("리뷰가 성공적으로 제출되었습니다:");
     const result = await res.data;
     return result;
   } catch (error) {
-    console.log("리뷰 제출 중 에러 발생:", error);
+    // console.log("리뷰 제출 중 에러 발생:", error);
   }
 };

@@ -44,7 +44,6 @@ export const ProudctTotalItem = styled.div`
 
 export const ProductCartInfo = styled.div`
   padding: ${WidthPd.padding};
-  /* padding-top: 2rem; */
   padding: 2rem 1rem;
   border-bottom: 1px solid ${opacity.white};
   font-size: 2rem;

@@ -1,3 +1,8 @@
+/*
+    작업자 : 이동은
+    노션 : https://www.notion.so/leevscode/leevscode-5223e3d332604844a255a0c63113a284
+    깃허브 : https://github.com/leevscode
+*/
 import { totalItem } from "../reducers/cartSlice";
 import { client } from "./client";
 
@@ -37,11 +42,11 @@ export const removeCarts = async _removeCart => {
         cartId: _removeCart,
       },
     });
-    console.log("장바구니 삭제 성공");
+    // console.log("장바구니 삭제 성공");
     const removedItem = response.data;
     return removedItem; // 삭제된 상품 데이터를 반환
   } catch (error) {
-    console.error("API 요청 중 오류 발생:", error);
+    // console.error("API 요청 중 오류 발생:", error);
     return [];
   }
 };
@@ -57,6 +62,6 @@ export const addCart = async _productId => {
     // console.log("장바구니 추가 POST 성공", result);
     return result;
   } catch (error) {
-    console.error("API 요청 중 오류 발생:", error);
+    // console.error("API 요청 중 오류 발생:", error);
   }
 };

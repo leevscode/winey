@@ -46,9 +46,9 @@ const ProductCart = () => {
     try {
       const data = await fetchCartData();
       setCartData(data);
-      console.log("장바구니 리스트 출력", data);
+      // console.log("장바구니 리스트 출력", data);
     } catch (err) {
-      console.log(err);
+      // console.log(err);
     }
   };
 
@@ -62,9 +62,9 @@ const ProductCart = () => {
       const data = await removeCarts(removeCart);
       filledCartData(data);
       cartLengthData(dispatch);
-      console.log("장바구니 삭제 되야 함", data);
+      // console.log("장바구니 삭제 되야 함", data);
     } catch (error) {
-      console.log(error);
+      // console.log(error);
     }
   };
 
@@ -102,7 +102,7 @@ const ProductCart = () => {
   };
 
   const buyGood = async () => {
-    console.log("장바구니 내역을 서버로 전송함");
+    // console.log("장바구니 내역을 서버로 전송함");
 
     navigate("/productsellcart", {
       state: {
@@ -122,8 +122,8 @@ const ProductCart = () => {
     setTotalPrice(calcTotalSum);
   }, [calcTotalSum]);
 
-  console.log("CartData", CartData);
-  console.log("totalPrice", totalPrice);
+  // console.log("CartData", CartData);
+  // console.log("totalPrice", totalPrice);
   return (
     <>
       {CartData.length === 0 ? (

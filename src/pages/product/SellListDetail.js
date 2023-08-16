@@ -1,5 +1,9 @@
+/*
+    작업자 : 이동은
+    노션 : https://www.notion.so/leevscode/leevscode-5223e3d332604844a255a0c63113a284
+    깃허브 : https://github.com/leevscode
+*/
 import React, { useEffect, useState } from "react";
-
 import {
   DetailButtonOk,
   DetailDay,
@@ -51,12 +55,13 @@ const SellListDetail = () => {
       const data = await getdetailData(numberValue);
       setDetailData(data);
       setProductInfo(data.vo1);
+      data.vo1[0].price = data.vo2.totalOrderPrice;
       setproductDes(data.vo2);
-      console.log("vo1 데이터 ", data.vo1);
-      console.log("vo2 데이터 ", data.vo2);
-      console.log("주문 상세 내역 출력", data);
+      // console.log("vo1 데이터 ", data.vo1);
+      // console.log("vo2 데이터 ", data.vo2);
+      // console.log("주문 상세 내역 출력", data);
     } catch (err) {
-      console.log(err);
+      // console.log(err);
     }
   };
 
@@ -111,9 +116,10 @@ const SellListDetail = () => {
 
   return (
     <>
-      <DetailDay>{orderData.orderDetailId}</DetailDay>
-      {productInfo.map((item, idx) => (
-        <SellListDetailinfo key={idx}>
+    <DetailDay>{orderData.orderDetailId}</DetailDay>
+    {productInfo.map((item, idx) => (
+      <div key={idx}>
+        <SellListDetailinfo>
           <SellListDetailWrap>
             <img src={`/img/${item.pic}`} alt="와인사진" />
           </SellListDetailWrap>
@@ -124,51 +130,53 @@ const SellListDetail = () => {
               <li>{parseInt(item.price).toLocaleString()}원</li>
             </ul>
           </div>
-          {item.review ? (
-            <ReviewOk>평점등록이 완료되었습니다</ReviewOk>
-          ) : // 주문 상태에 따라 버튼을 렌더링
-          (productDes.orderStatus >= 1 && productDes.orderStatus <= 3) ||
-            productDes.orderStatus === 6 ? (
-            <DetailButtonOk disabled>평점등록</DetailButtonOk>
-          ) : (
-            <DetailButtonOk onClick={() => showModal(item.orderDetailId)}>
-              평점등록
-            </DetailButtonOk>
-          )}
         </SellListDetailinfo>
-      ))}
-
-      <DetailTotalPrice>
-        <p>
-          결제 방법 <span>{payment[`${productDes.payment}`]}</span>
-        </p>
-        <p>
-          픽업 지점 <span> {productDes.storeNm}</span>
-        </p>
-        <p>
-          픽업 시간 <span> {productDes.pickupTime}</span>
-        </p>
-        <p>
-          주문 상태 <span>{orderStatus[`${productDes.orderStatus}`]}</span>
-        </p>
-        <p>
-          총 결제금액
-          <strong>
-            {parseInt(productDes.totalOrderPrice).toLocaleString()}원
-          </strong>
-        </p>
-      </DetailTotalPrice>
-      <ReviewOk>평점등록이 완료되었습니다</ReviewOk>
-      {/* 리뷰 모달 내용 */}
-      <ReviewModal
-        reviewId={reviewId}
-        reviewReset={reviewReset}
-        hideModal={hideModal}
-        reviewSubmitUpdate={reviewSubmitUpdate}
-        submitRating={rating => submitRating(rating)}
-      />
-    </>
-  );
+        {item.review ? (
+          <ReviewOk>평점등록이 완료되었습니다</ReviewOk>
+        ) : (
+          <>
+            {(productDes.orderStatus >= 1 && productDes.orderStatus <= 3) ||
+            productDes.orderStatus === 6 ? (
+              <DetailButtonOk disabled>평점등록</DetailButtonOk>
+            ) : (
+              <DetailButtonOk onClick={() => showModal(item.orderDetailId)}>
+                평점등록
+              </DetailButtonOk>
+            )}
+          </>
+        )}
+      </div>
+    ))}
+    <DetailTotalPrice>
+      <p>
+        결제 방법 <span>{payment[`${productDes.payment}`]}</span>
+      </p>
+      <p>
+        픽업 지점 <span> {productDes.storeNm}</span>
+      </p>
+      <p>
+        픽업 시간 <span> {productDes.pickupTime}</span>
+      </p>
+      <p>
+        주문 상태 <span>{orderStatus[`${productDes.orderStatus}`]}</span>
+      </p>
+      <p>
+        총 결제금액
+        <strong>
+          {parseInt(productDes.totalOrderPrice).toLocaleString()}원
+        </strong>
+      </p>
+    </DetailTotalPrice>
+    <ReviewModal
+      reviewId={reviewId}
+      reviewReset={reviewReset}
+      hideModal={hideModal}
+      reviewSubmitUpdate={reviewSubmitUpdate}
+      submitRating={rating => submitRating(rating)}
+    />
+  </>
+);
+  
 };
 
 export default SellListDetail;
