@@ -39,7 +39,7 @@ const Item = ({ listScroll, setIsModalOpen }) => {
   return (
     <>
       {listScroll?.map((item, index) => (
-        <ProductListItem key={item.productId}>
+        <ProductListItem key={"uid" + index}>
           <Link to={`/productdetail/${item.productId}`}>
             <div className="img">
               <img

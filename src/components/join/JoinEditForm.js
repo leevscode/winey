@@ -127,7 +127,7 @@ const JoinEditForm = () => {
           },
         });
       }
-      dispatch(getMemberInfo());
+      // dispatch(getMemberInfo());
     } else {
       console.log("Failed");
     }

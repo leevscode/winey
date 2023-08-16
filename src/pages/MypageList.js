@@ -3,14 +3,14 @@
   노션 : https://kimaydev.notion.site/kimaydev/FE-7a53f9f631f146c88c39413cd175a9d0
   깃허브 : https://github.com/kimaydev
 */
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleExclamation } from "@fortawesome/free-solid-svg-icons";
 import { faAngleRight } from "@fortawesome/free-solid-svg-icons";
 import { MypageWrap } from "../style/MypageStyle";
 import { ButtonOk, SectionLine } from "../style/GlobalStyle";
-import { postLogout } from "../api/joinpatch";
+import { getMemberInfo, postLogout } from "../api/joinpatch";
 import { removeCookie } from "../api/cookie";
 import { NoticeModal } from "../style/GlobalComponents";
 import { useDispatch, useSelector } from "react-redux";
@@ -58,6 +58,9 @@ const MypageList = () => {
       },
     });
   };
+  useEffect(() => {
+    dispatch(getMemberInfo());
+  }, []);
   return (
     <>
       <MypageWrap>

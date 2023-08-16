@@ -3,7 +3,8 @@
   노션 : https://kimaydev.notion.site/kimaydev/FE-7a53f9f631f146c88c39413cd175a9d0
   깃허브 : https://github.com/kimaydev
 */
-import React, { useCallback } from "react";
+import React, { useCallback, useEffect } from "react";
+import { v4 as uuidv4 } from "uuid";
 import { ProductListItem } from "../../style/ProductStyle";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -36,10 +37,13 @@ const Item = ({ listScroll, setIsModalOpen }) => {
     },
     [setIsModalOpen],
   );
+  // useEffect(() => {
+
+  // }, []);
   return (
     <>
-      {listScroll?.map(item => (
-        <ProductListItem key={item.productId}>
+      {listScroll?.map((item, index) => (
+        <ProductListItem key={"uid" + index}>
           <Link to={`/productdetail/${item.productId}`}>
             <div className="img">
               <img

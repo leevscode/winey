@@ -28,7 +28,7 @@ export const postUserJoin = async userInfo => {
 // 회원정보 get redux toolkit
 export const getMemberInfo = () => async dispatch => {
   try {
-    const res = await client.get("/api");
+    const res = await client.get("/api/userinfo");
     const result = await res.data;
     // console.log("회원정보 get result", result);
     dispatch(getUser(result));
