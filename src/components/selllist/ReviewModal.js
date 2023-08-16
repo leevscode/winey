@@ -1,3 +1,8 @@
+/*
+    작업자 : 이동은
+    노션 : https://www.notion.so/leevscode/leevscode-5223e3d332604844a255a0c63113a284
+    깃허브 : https://github.com/leevscode
+*/
 import React, { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -32,8 +37,8 @@ const ReviewModal = ({
   const userData = useSelector(state => state.user);
   const handleReviewSubmit = async () => {
     if (selectedReview) {
-      console.log("평점이 등록될 orderDetailId :", reviewId);
-      console.log("평점이 등록되었습니다 평점 레벨 :", selectedReview);
+      // console.log("평점이 등록될 orderDetailId :", reviewId);
+      // console.log("평점이 등록되었습니다 평점 레벨 :", selectedReview);
       // DB연동 예정
       await submitReview(reviewId, selectedReview, userData.userId);
 
@@ -42,7 +47,7 @@ const ReviewModal = ({
 
       // 평점 처리가 완료되면 모달을 닫습니다.
 
-      console.log("평점 등록");
+      // console.log("평점 등록");
       hideModal();
     } else {
       setShowWarning(true);
@@ -52,7 +57,7 @@ const ReviewModal = ({
   const handleReviewSelection = reviewType => {
     setSelectedReview(prevReview => {
       const newReview = prevReview === reviewType ? null : reviewType;
-      console.log("선택된 평점:", newReview);
+      // console.log("선택된 평점:", newReview);
       // 선택한 평점을 다시 선택시 해제되도록 설정
       return newReview;
     });

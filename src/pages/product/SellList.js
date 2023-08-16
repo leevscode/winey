@@ -46,9 +46,9 @@ const SellList = () => {
       const updatedItems = orderId.filter(item => item.orderId !== data);
       setorderId(updatedItems);
       hideCancelModal(data);
-      console.log("주문취소 성공:", updatedItems);
+      // console.log("주문취소 성공:", updatedItems);
     } catch (error) {
-      console.log("주문취소 실패:", error);
+      // console.log("주문취소 실패:", error);
     }
   };
 
@@ -57,9 +57,9 @@ const SellList = () => {
     try {
       const data = await getSellListData();
       setSellListData(data);
-      console.log("주문내역 출력", data);
+      // console.log("주문내역 출력", data);
     } catch (err) {
-      console.log(err);
+      // console.log(err);
     }
   };
 
@@ -83,9 +83,9 @@ const SellList = () => {
       const updatedItems = orderId.filter(item => item.orderId !== orderId);
       setorderId(updatedItems);
       hideCancelModal(orderId);
-      console.log("주문취소 성공:", updatedItems);
+      // console.log("주문취소 성공:", updatedItems);
     } catch (error) {
-      console.log("주문취소 실패:", error);
+      // console.log("주문취소 실패:", error);
     }
   };
 
