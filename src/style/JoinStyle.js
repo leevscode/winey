@@ -8,12 +8,13 @@ import styled from "@emotion/styled";
 import { Maincolor, WidthPd, opacity } from "./GlobalStyle";
 
 export const JoinWrap = styled.div`
-  margin-top: 1rem;
-  margin-bottom: 7rem;
+  /* margin-top: 1rem; */
+  /* margin-bottom: 7rem; */
   padding: ${WidthPd.padding};
   display: flex;
   justify-content: center;
   flex-direction: column;
+  padding-bottom: 15rem;
   & form span {
     position: relative;
     font-size: 1.7rem;

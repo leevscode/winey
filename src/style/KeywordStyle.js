@@ -10,21 +10,31 @@ import { ButtonOk, Maincolor, WidthPd, opacity } from "./GlobalStyle";
 // 회원가입완료 component
 export const WelcomeWrap = styled.div`
   padding: ${WidthPd.padding};
-  margin-top: 30rem;
+  /* margin-top: 30rem; */
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  & svg {
+  position: absolute;
+  width: 100%;
+  top: 40%;
+  transform: translateY(-50%);
+  i {
+    text-align: center;
+    font-size: 3.5rem;
+    margin-bottom: 15px;
+  }
+  /* & svg {
     text-align: center;
     font-size: 2rem;
     font-weight: 900;
     line-height: 2.4rem;
     margin-bottom: 1rem;
-  }
+  } */
   & h3 {
     text-align: center;
-    font-size: 1.8rem;
+    /* font-size: 1.8rem; */
+    font-size: 2rem;
     font-weight: 700;
     line-height: 2rem;
     margin-bottom: 2rem;
@@ -113,16 +123,20 @@ export const KeywordWrap = styled.div`
   flex-direction: column;
   width: 100%;
   background: ${Maincolor.beige};
-  padding: 5rem 2rem;
+  /* padding: 5rem 2rem; */
+  padding: ${WidthPd.padding};
+  padding-top: 4rem;
+  padding-bottom: 13rem;
   & > ul {
     & li {
       margin-bottom: 3rem;
       & h3 {
         text-align: center;
-        font-size: 1.5rem;
+        font-size: 1.6rem;
         font-weight: 700;
-        line-height: 1.4rem;
-        margin: 1rem 0;
+        /* line-height: 1.4rem; */
+        /* margin: 1rem 0; */
+        margin-bottom: 15px;
       }
       div {
         text-align: center;

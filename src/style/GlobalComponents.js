@@ -381,7 +381,8 @@ export const ScrollTopBtn = styled.div`
 
 // 컨텐츠
 export const ContentsWrap = styled.div`
-  padding-top: 80px;
+  padding-top: ${props => (props.pageBgc ? "60px" : "80px")};
+  /* padding-top: 80px; */
   min-height: calc(100vh - 350px);
 `;
 // 상품 리스트 아이템 기본 스타일링

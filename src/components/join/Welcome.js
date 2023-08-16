@@ -14,7 +14,9 @@ import { Link } from "react-router-dom";
 const Welcome = () => {
   return (
     <WelcomeWrap>
-      <FontAwesomeIcon icon={faCircleCheck} />
+      <i>
+        <FontAwesomeIcon icon={faCircleCheck} />
+      </i>
       <h3>회원가입이 완료되었습니다!</h3>
 
       <LetsChoice>

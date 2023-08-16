@@ -21,7 +21,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { cartLengthData } from "../api/patchcart";
 
 const Header = ({ handleOpenNav, isActive }) => {
-  const { iproduct, isell } = useParams();
+  const { iproduct, isell, iselllist } = useParams();
   const location = useLocation();
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -84,6 +84,14 @@ const Header = ({ handleOpenNav, isActive }) => {
     {
       title: "주문내역",
       path: "/selllist",
+    },
+    {
+      title: "주문 상세내역",
+      path: `/selllistdetail/${iselllist}`,
+    },
+    {
+      title: "선호 키워드 선택",
+      path: "/keywordselect",
     },
     {
       title: "선호 키워드 변경",

@@ -55,7 +55,12 @@ const User = () => {
   return (
     <LayoutWrap>
       <Header handleOpenNav={handleOpenNav} isActive={isActive} />
-      <ContentsWrap>
+      <ContentsWrap
+        pageBgc={
+          location.pathname === "/keywordselect" ||
+          location.pathname === "/keywordselectedit"
+        }
+      >
         <Outlet />
       </ContentsWrap>
       {location.pathname === "/main" || location.pathname === "/windeguide" ? (
