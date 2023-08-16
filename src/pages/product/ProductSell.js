@@ -77,17 +77,17 @@ const ProductSell = () => {
   const handleFinalCharge = e => {
     // 에러처리
     if (
-      selectCollect.pickUpDate === undefined ||
-      selectCollect.pickUpDate === ""
-    ) {
-      setPaymentError("픽업 날짜를 선택해 주세요.");
-      return;
-    }
-    if (
       selectCollect.pickUpSpot === undefined ||
       selectCollect.pickUpSpot === ""
     ) {
       setPaymentError("픽업 장소를 선택해 주세요.");
+      return;
+    }
+    if (
+      selectCollect.pickUpDate === undefined ||
+      selectCollect.pickUpDate === ""
+    ) {
+      setPaymentError("픽업 날짜를 선택해 주세요.");
       return;
     }
     if (
@@ -107,8 +107,7 @@ const ProductSell = () => {
     }
     Modal.confirm({
       title: "최종결제확인",
-      content:
-        "주문을 완료하시겠습니까?",
+      content: "주문을 완료하시겠습니까?",
       onOk() {
         // 최종결제완료
         postOneItemPurchase({
