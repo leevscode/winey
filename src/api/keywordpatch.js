@@ -11,9 +11,7 @@ import { client } from "./client";
 export const getUserFavoriteKey = async () => {
   try {
     const res = await client.get("/api/recommend/getUserInfo");
-    console.log("res", res);
     const result = await res.data;
-    console.log("result", result);
     return result;
   } catch (error) {
     console.log(error);
@@ -36,9 +34,7 @@ export const postUserKeyword = async (favoriteKeyword, navigator) => {
       oak: favoriteKeyword.aroma[5].num,
       nuts: favoriteKeyword.aroma[6].num,
     });
-    console.log(res);
     const data = await res.data;
-    console.log(data);
     navigator("/main");
   } catch (error) {
     console.log(error);

@@ -29,7 +29,10 @@ const ProductComplete = () => {
           alt="complete"
         />
         <p>결제가 완료되었습니다!</p>
-        <span>픽업예정일과 시간에 맞춰 상품을 수령해주세요.</span>
+        <span>
+          픽업예정일과 시간에 맞춰 상품을 수령해주세요. <br />
+          신분증을 소지하고 방문해 주시기 바랍니다.
+        </span>
       </ProductCompleteText>
       {state && (
         <ProductCompleteinfo>

@@ -107,7 +107,8 @@ const ProductSell = () => {
     }
     Modal.confirm({
       title: "최종결제확인",
-      content: "주문을 완료하시겠습니까?",
+      content:
+        "주문을 완료하시겠습니까?",
       onOk() {
         // 최종결제완료
         postOneItemPurchase({
@@ -143,9 +144,6 @@ const ProductSell = () => {
     // 상품정보 get
     getBuyProductDetail(setProductCollect, productId);
   }, []);
-  console.log("productCollect", productCollect);
-  console.log("totalPrice", totalPrice);
-  console.log("editQuantity", editQuantity);
 
   // useEffect(() => {}, [productCollect, selectCollect]); // 값 변경될때마다 랜더링
   return (
