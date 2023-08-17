@@ -3,7 +3,8 @@ import { getCookie, removeCookie, setCookie } from "./cookie";
 import { useNavigate } from "react-router";
 
 export const client = axios.create({
-  baseURL: "http://192.168.0.144:5004",
+  baseURL: "http://localhost:3000",
+  // baseURL: "http://http://192.168.0.144:5004",
   // timeout: 50000,
   headers: {
     "Content-Type": "application/json;charset=UTF-8",

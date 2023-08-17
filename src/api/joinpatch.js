@@ -58,7 +58,7 @@ export const patchMemberInfo = async editUserInfo => {
 // 회원탈퇴 delete
 export const deleteMember = async () => {
   try {
-    const res = await client.delete("/api");
+    const res = await client.delete("/api/delUser");
     console.log("res", res);
     const result = await res.data;
     console.log("회원삭제성공", result);

@@ -105,7 +105,6 @@ const Join = () => {
   const onFinish = async values => {
     console.log("join values", values);
     // 인증메일 3차 때 진행 예정
-
     // if (emailCertifyOk === false) {
     //   Modal.warning({
     //     title: "메일인증확인",
