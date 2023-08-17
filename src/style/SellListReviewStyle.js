@@ -4,6 +4,7 @@
     깃허브 : https://github.com/leevscode
 */
 import styled from "@emotion/styled";
+import { WidthPd } from "./GlobalStyle";
 
 // ReviewModal 컴퍼넌트
 export const ModalColse = styled.i`
@@ -17,7 +18,8 @@ export const SellListButton = styled.div`
   font-size: 1.6rem;
   justify-content: space-around;
   gap: 10px;
-  padding: 20px;
+  padding: ${WidthPd.padding};
+  margin-bottom: 2rem;
 `;
 
 export const ModalText = styled.div`

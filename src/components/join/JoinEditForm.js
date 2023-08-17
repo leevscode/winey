@@ -26,6 +26,7 @@ import {
 } from "../../api/joinpatch";
 import { useNavigate } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
+import { logoutUser } from "../../reducers/userSlice";
 
 const JoinEditForm = () => {
   const dispatch = useDispatch();
@@ -142,10 +143,11 @@ const JoinEditForm = () => {
       title: "회원탈퇴",
       icon: <ExclamationCircleFilled />,
       content: "정말 탈퇴 하시겠습니까?",
-      onOk() {
-        deleteMember();
+      async onOk() {
+        await deleteMember();
         removeCookie("accessToken");
         removeCookie("refreshToken");
+        dispatch(logoutUser({}));
         navigate("/main");
         console.log("회원탈퇴");
       },

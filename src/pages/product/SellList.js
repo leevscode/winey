@@ -4,13 +4,14 @@
     깃허브 : https://github.com/leevscode
 */
 import React, { useEffect, useState } from "react";
-import { ButtonCancel } from "../../style/GlobalStyle";
+import { ButtonCancel, SectionLine } from "../../style/GlobalStyle";
 import {
   PickUpButton,
   OrdercancelBtn,
   SellListInfo,
   SellListProduct,
   SellListReady,
+  SellListBox,
 } from "../../style/SellListStyle";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -150,8 +151,8 @@ const SellList = () => {
   };
 
   return (
-    <>
-      {SellListData.length === 0 ? (
+    <SellListBox>
+      {orderId.length !== 0 ? (
         // 주문 목록이 없을 경우 출력하는 내용
         <ProductCartNone>
           <i>
@@ -163,85 +164,93 @@ const SellList = () => {
       ) : (
         <div>
           {SellListData.map(item => (
-            <div key={item.orderId}>
-              {/* 주문취소 모달 */}
-              {item.orderStatus === 4 ||
-              item.orderStatus === 5 ||
-              item.orderStatus === 6 ? (
-                // 주문취소 버튼이 사라졌을때 빈 공백을 유지하는 스타일
-                <div style={{ height: "28px" }} />
-              ) : (
-                <OrdercancelBtn>
-                  <button onClick={() => showCancelModal(item.orderId)}>
-                    주문취소 <FontAwesomeIcon icon={faChevronRight} />
-                  </button>
-                </OrdercancelBtn>
-              )}
-              <SellListInfo>
-                <SellListProduct>
-                  상품명 : {item.nmKor}
-                  {/* {item.nmKor.length > 1 && ` 외 ${item.nmKor.length - 1}건`}  */}
-                </SellListProduct>
-                <li>주문번호 : {item.orderId}</li>
-                <li>결제 방법 : {payment[`${item.payment}`]}</li>
-                <li>총 결제 금액 : {item.totalOrderPrice.toLocaleString()}</li>
-                <li>픽업 지점 : {item.storeNm}</li>
-                <li>픽업 시간 : {item.pickupTime}</li>
-                <li>주문 상태 : {orderStatus[`${item.orderStatus}`]}</li>
-              </SellListInfo>
-              <SellListButton>
-                <ButtonCancel
-                  onClick={() => {
-                    navigate(`/selllistdetail/${item.orderId}`);
-                  }}
-                >
-                  주문 내역
-                </ButtonCancel>
-                {/* 상태가 "결제완료"일 때에만 상품 준비중입니다 표시 */}
-                {item.orderStatus === 1 && (
-                  <SellListReady>상품 준비중입니다</SellListReady>
-                )}
-                {/* 픽업완료 버튼을 누르면 "픽업완료" 상태로 바뀌면서 버튼이 disabled */}
-                {item.orderStatus === 5 ? (
-                  <PickUpButton disabled>픽업완료</PickUpButton>
+            <>
+              <div key={item.orderId}>
+                {/* 주문취소 모달 */}
+                {item.orderStatus === 4 ||
+                item.orderStatus === 5 ||
+                item.orderStatus === 6 ? (
+                  // 주문취소 버튼이 사라졌을때 빈 공백을 유지하는 스타일
+                  <div style={{ height: "28px" }} />
                 ) : (
-                  // 테스트 끝나면 3, 4, 5 로 바꿔야됨
-                  [3, 4, 5].includes(item.orderStatus) && (
-                    <PickUpButton
-                      onClick={() => handlePickUpComplete(item.orderId)}
-                      disabled={completedPickUpOrders.includes(item.orderId)}
-                    >
-                      픽업완료
-                    </PickUpButton>
-                  )
+                  <OrdercancelBtn>
+                    <button onClick={() => showCancelModal(item.orderId)}>
+                      주문취소
+                      <i>
+                        <FontAwesomeIcon icon={faChevronRight} />
+                      </i>
+                    </button>
+                  </OrdercancelBtn>
                 )}
-                {/* "픽업완료" 모달을 렌더링*/}
-                {pickupModalVisible && (
-                  <PickUpModal
-                    onCancel={() => setPickupModalVisible(false)}
-                    onConfirm={handleConfirmPickUp}
-                    onClose={() => setPickupModalVisible(false)}
-                    onPick={selectedItem}
+                <SellListInfo>
+                  <SellListProduct>
+                    상품명 : {item.nmKor}
+                    {/* {item.nmKor.length > 1 && ` 외 ${item.nmKor.length - 1}건`}  */}
+                  </SellListProduct>
+                  <li>주문번호 : {item.orderId}</li>
+                  <li>결제 방법 : {payment[`${item.payment}`]}</li>
+                  <li>
+                    총 결제 금액 : {item.totalOrderPrice.toLocaleString()}
+                  </li>
+                  <li>픽업 지점 : {item.storeNm}</li>
+                  <li>픽업 시간 : {item.pickupTime}</li>
+                  <li>주문 상태 : {orderStatus[`${item.orderStatus}`]}</li>
+                </SellListInfo>
+                <SellListButton>
+                  <ButtonCancel
+                    onClick={() => {
+                      navigate(`/selllistdetail/${item.orderId}`);
+                    }}
+                  >
+                    주문 내역
+                  </ButtonCancel>
+                  {/* 상태가 "결제완료"일 때에만 상품 준비중입니다 표시 */}
+                  {item.orderStatus === 1 && (
+                    <SellListReady>상품 준비중입니다</SellListReady>
+                  )}
+                  {/* 픽업완료 버튼을 누르면 "픽업완료" 상태로 바뀌면서 버튼이 disabled */}
+                  {item.orderStatus === 5 ? (
+                    <PickUpButton disabled>픽업완료</PickUpButton>
+                  ) : (
+                    // 테스트 끝나면 3, 4, 5 로 바꿔야됨
+                    [3, 4, 5].includes(item.orderStatus) && (
+                      <PickUpButton
+                        onClick={() => handlePickUpComplete(item.orderId)}
+                        disabled={completedPickUpOrders.includes(item.orderId)}
+                      >
+                        픽업완료
+                      </PickUpButton>
+                    )
+                  )}
+                  {/* "픽업완료" 모달을 렌더링*/}
+                  {pickupModalVisible && (
+                    <PickUpModal
+                      onCancel={() => setPickupModalVisible(false)}
+                      onConfirm={handleConfirmPickUp}
+                      onClose={() => setPickupModalVisible(false)}
+                      onPick={selectedItem}
+                      setPickupModalVisible={setPickupModalVisible}
+                      setSellListData={setSellListData}
+                    />
+                  )}
+                </SellListButton>
+                {/* 주문취소 모달 */}
+                {CancelModal[item.orderId] && (
+                  <SellListCancel
+                    onCancel={() => handleCancel(item.orderId)}
+                    onClose={() => hideCancelModal(item.orderId)}
                     setPickupModalVisible={setPickupModalVisible}
                     setSellListData={setSellListData}
+                    orderCancelId={orderCancelId}
                   />
                 )}
-              </SellListButton>
-              {/* 주문취소 모달 */}
-              {CancelModal[item.orderId] && (
-                <SellListCancel
-                  onCancel={() => handleCancel(item.orderId)}
-                  onClose={() => hideCancelModal(item.orderId)}
-                  setPickupModalVisible={setPickupModalVisible}
-                  setSellListData={setSellListData}
-                  orderCancelId={orderCancelId}
-                />
-              )}
-            </div>
+              </div>
+              <SectionLine />
+            </>
           ))}
         </div>
       )}
-    </>
+    </SellListBox>
   );
 };
 

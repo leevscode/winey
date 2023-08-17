@@ -8,6 +8,7 @@ import {
   DetailButtonOk,
   DetailDay,
   DetailTotalPrice,
+  SellListDetailBox,
   SellListDetailWrap,
   SellListDetailinfo,
 } from "../../style/SellListDetailStyle";
@@ -29,7 +30,7 @@ const SellListDetail = () => {
   const [productData, setProductData] = useState([]);
 
   // 결제 총 금액
-  const orderData = {};
+  // const orderData = {};
 
   // 상품 가격 합산
   const calculateTotalAmount = () => {
@@ -115,68 +116,67 @@ const SellListDetail = () => {
   };
 
   return (
-    <>
-    <DetailDay>{orderData.orderDetailId}</DetailDay>
-    {productInfo.map((item, idx) => (
-      <div key={idx}>
-        <SellListDetailinfo>
-          <SellListDetailWrap>
-            <img src={`/img/${item.pic}`} alt="와인사진" />
-          </SellListDetailWrap>
-          <div>
-            <ul>
-              <li>{item.nmKor}</li>
-              <li>{item.nmEng}</li>
-              <li>{parseInt(item.price).toLocaleString()}원</li>
-            </ul>
-          </div>
-        </SellListDetailinfo>
-        {item.review ? (
-          <ReviewOk>평점등록이 완료되었습니다</ReviewOk>
-        ) : (
-          <>
-            {(productDes.orderStatus >= 1 && productDes.orderStatus <= 3) ||
-            productDes.orderStatus === 6 ? (
-              <DetailButtonOk disabled>평점등록</DetailButtonOk>
-            ) : (
-              <DetailButtonOk onClick={() => showModal(item.orderDetailId)}>
-                평점등록
-              </DetailButtonOk>
-            )}
-          </>
-        )}
-      </div>
-    ))}
-    <DetailTotalPrice>
-      <p>
-        결제 방법 <span>{payment[`${productDes.payment}`]}</span>
-      </p>
-      <p>
-        픽업 지점 <span> {productDes.storeNm}</span>
-      </p>
-      <p>
-        픽업 시간 <span> {productDes.pickupTime}</span>
-      </p>
-      <p>
-        주문 상태 <span>{orderStatus[`${productDes.orderStatus}`]}</span>
-      </p>
-      <p>
-        총 결제금액
-        <strong>
-          {parseInt(productDes.totalOrderPrice).toLocaleString()}원
-        </strong>
-      </p>
-    </DetailTotalPrice>
-    <ReviewModal
-      reviewId={reviewId}
-      reviewReset={reviewReset}
-      hideModal={hideModal}
-      reviewSubmitUpdate={reviewSubmitUpdate}
-      submitRating={rating => submitRating(rating)}
-    />
-  </>
-);
-  
+    <SellListDetailBox>
+      {/* <DetailDay>{orderData.orderDetailId}</DetailDay> */}
+      {productInfo?.map((item, idx) => (
+        <div className="box-list" key={idx}>
+          <SellListDetailinfo>
+            <SellListDetailWrap>
+              <img src={`/img/${item.pic}`} alt="와인사진" />
+            </SellListDetailWrap>
+            <div className="box-text">
+              <ul>
+                <li>{item.nmKor}</li>
+                <li>{item.nmEng}</li>
+                <li>{parseInt(item.price).toLocaleString()}원</li>
+              </ul>
+            </div>
+          </SellListDetailinfo>
+          {item.review ? (
+            <ReviewOk>평점등록이 완료되었습니다</ReviewOk>
+          ) : (
+            <>
+              {(productDes.orderStatus >= 1 && productDes.orderStatus <= 3) ||
+              productDes.orderStatus === 6 ? (
+                <DetailButtonOk disabled>평점등록</DetailButtonOk>
+              ) : (
+                <DetailButtonOk onClick={() => showModal(item.orderDetailId)}>
+                  평점등록
+                </DetailButtonOk>
+              )}
+            </>
+          )}
+        </div>
+      ))}
+      <DetailTotalPrice>
+        <p>
+          결제 방법 <span>{payment[`${productDes.payment}`]}</span>
+        </p>
+        <p>
+          픽업 지점 <span> {productDes.storeNm}</span>
+        </p>
+        <p>
+          픽업 시간 <span> {productDes.pickupTime}</span>
+        </p>
+        <p>
+          주문 상태 <span>{orderStatus[`${productDes.orderStatus}`]}</span>
+        </p>
+        <p>
+          총 결제금액
+          <strong>
+            {parseInt(productDes.totalOrderPrice).toLocaleString()}원
+          </strong>
+        </p>
+      </DetailTotalPrice>
+      <ReviewModal
+        reviewId={reviewId}
+        reviewReset={reviewReset}
+        hideModal={hideModal}
+        reviewSubmitUpdate={reviewSubmitUpdate}
+        submitRating={rating => submitRating(rating)}
+      />
+    </SellListDetailBox>
+  );
 };
 
 export default SellListDetail;
