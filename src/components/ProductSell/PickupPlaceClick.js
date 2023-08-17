@@ -99,7 +99,7 @@ const PickupPlaceClick = ({ userStore, selectCollect, setSelectCollect }) => {
         <span>픽업지점 선택</span>
         <p>원하시는 픽업지점을 선택해 주세요</p>
         <div className="store">
-          <Swiper spaceBetween={18} slidesPerView={"auto"} loop={true}>
+          <Swiper spaceBetween={15} slidesPerView={"auto"} loop={true}>
             {userStore.map(option => (
               <SwiperSlide key={option.storeId}>
                 <div onClick={e => handleChangePickSpot(option, e)}>
@@ -155,7 +155,7 @@ const PickupPlaceClick = ({ userStore, selectCollect, setSelectCollect }) => {
         <p>픽업시간을 선택해 주세요</p>
 
         <div className="time">
-          <Swiper spaceBetween={35} slidesPerView={"auto"} loop={false}>
+          <Swiper spaceBetween={15} slidesPerView={"auto"} loop={false}>
             {pickTime.map((option, index) => (
               <SwiperSlide key={index}>
                 <div onClick={e => handleChangePickTime(option, e, index)}>

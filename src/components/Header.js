@@ -62,8 +62,16 @@ const Header = ({ handleOpenNav, isActive }) => {
       path: `/productsell/${isell}`,
     },
     {
+      title: "구매하기",
+      path: "/productsellcart",
+    },
+    {
       title: "구매완료",
       path: "/productcomplete",
+    },
+    {
+      title: "구매완료",
+      path: "/ProductCompleteCart",
     },
     {
       title: "로그인",

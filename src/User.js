@@ -4,7 +4,7 @@
   깃허브 : https://github.com/kimaydev
 */
 import React, { useEffect, useState } from "react";
-import { Outlet, useLocation, useNavigate } from "react-router-dom";
+import { Outlet, useLocation, useNavigate, useParams } from "react-router-dom";
 import { LayoutWrap } from "./style/LayoutStyle";
 
 import { ContentsWrap, NavWrap } from "./style/GlobalComponents";
@@ -16,6 +16,7 @@ import NavList from "./pages/NavList";
 const User = () => {
   const navigate = useNavigate();
   const location = useLocation();
+  const { iselllist } = useParams();
   const [isNavActive, setIsNavActive] = useState(false);
   // 스크롤 감지 state
   const [scrollPosition, setScrollPosition] = useState(0);
@@ -58,7 +59,9 @@ const User = () => {
       <ContentsWrap
         pageBgc={
           location.pathname === "/keywordselect" ||
-          location.pathname === "/keywordselectedit"
+          location.pathname === "/keywordselectedit" ||
+          location.pathname === "/selllist" ||
+          location.pathname === `/selllistdetail/${iselllist}`
         }
       >
         <Outlet />
