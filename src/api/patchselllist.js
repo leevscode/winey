@@ -5,17 +5,21 @@
 */
 import { client } from "./client";
 
-// 주문 내역 출력
 export const getSellListData = async () => {
   try {
     const response = await client.get(`/api/orderList/user`);
     const sellListData = response.data;
-    return sellListData;
+
+    // 데이터를 원하는 순서로 정렬
+    const sortedSellListData = sellListData.sort((a, b) => a.orderNumber - b.orderNumber);
+
+    return sortedSellListData;
   } catch (error) {
     // console.error("API 요청 중 오류 발생", error);
     return [];
   }
 };
+
 
 // 주문 내역 취소
 export const cancelSellListData = async cancelSellListData => {
