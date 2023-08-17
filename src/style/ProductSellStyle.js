@@ -1,7 +1,9 @@
 import styled from "@emotion/styled";
 import { Maincolor, WidthPd, opacity } from "./GlobalStyle";
 
-export const PurchaseWrap = styled.div``;
+export const PurchaseWrap = styled.div`
+  padding-bottom: 80px;
+`;
 
 export const PickupPlaceClickWrap = styled.div`
   & > div {
@@ -28,6 +30,7 @@ export const PickupPlaceClickWrap = styled.div`
       position: relative;
       background: ${Maincolor.white};
       width: 18rem;
+      /* width: calc(100% / 3 - 15px); */
       height: 9rem;
       border: 0.1rem solid ${Maincolor.white};
       border-radius: 0.5rem;
@@ -156,20 +159,28 @@ export const PickupPlaceClickWrap = styled.div`
       position: relative;
       background: ${Maincolor.white};
       height: 4.2rem;
-      width: 6rem;
+      /* width: 6rem; */
+      width: calc(100% / 5);
+      /* margin-right: 10px; */
       /* margin: 0 2rem; */
       border: 0.1rem solid ${Maincolor.white};
       border-radius: 0.5rem;
-
+      & > div {
+        /* width: 100%; */
+        /* width: calc(100% / 5); */
+      }
       button {
-        position: absolute;
-        top: 0;
-        left: 0;
+        /* position: absolute; */
+        /* top: 0; */
+        /* left: 0; */
+        display: block;
+        /* width: 6rem; */
+        width: 100%;
         background: ${Maincolor.white};
         font-size: 1.5rem;
         font-weight: 800;
         color: ${Maincolor.black};
-        min-width: 8rem;
+        /* min-width: 8rem; */
         height: 4rem;
         /* padding: 9px 3px; */
         border-radius: 0.5rem;

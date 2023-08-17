@@ -37,6 +37,17 @@ export const DetailDay = styled.div`
   padding: 10px;
   font-size: 2rem;
 `;
+// 상품상세내역 감싸는 div
+export const SellListDetailBox = styled.div`
+  padding-top: ${WidthPd.paddingTopSmall};
+  padding-bottom: 140px;
+  .box-list {
+    margin: ${WidthPd.padding};
+    padding-bottom: 2rem;
+    margin-bottom: 2rem;
+    border-bottom: 0.05rem solid ${opacity.white};
+  }
+`;
 
 export const SellListDetailText = styled.div`
   display: flex;
@@ -49,13 +60,13 @@ export const SellListDetailText = styled.div`
   }
   p {
     font-weight: bold;
-    color: #3c2323;
+    color: ${Maincolor.black};
     text-align: center;
     font-size: 2.5rem;
     margin-bottom: 10px;
   }
   span {
-    color: #837575;
+    color: ${Maincolor.grayBold};
     text-align: center;
     font-size: 1.8rem;
     margin-bottom: 20px;
@@ -63,7 +74,7 @@ export const SellListDetailText = styled.div`
 `;
 
 export const SellListDetailWrap = styled.div`
-  margin-bottom: 15px;
+  /* margin-bottom: 15px; */
   position: relative;
   padding-top: 30%;
   border: 0.05rem solid ${opacity.grayLight};
@@ -77,21 +88,28 @@ export const SellListDetailWrap = styled.div`
     width: 100%;
     height: 100%;
     object-fit: contain;
+    padding: 10px;
   }
 `;
 
 export const SellListDetailinfo = styled.div`
   display: flex;
-  padding: 0 20px;
+  /* padding: 0 20px; */
+  margin-bottom: 2rem;
+  .box-text {
+    padding-left: 1.5rem;
+    width: calc(100% - 15rem - 1.5rem);
+  }
   div {
-    margin-right: 30px;
-    margin-bottom: 30px;
-    display: flex;
-    width: 40%;
-    align-items: center;
+    /* margin-right: 30px; */
+    /* margin-bottom: 30px; */
+    /* display: flex; */
+    /* width: 40%; */
+    width: 15rem;
+    /* align-items: center; */
   }
   img {
-    padding: 0 20px;
+    /* padding: 0 20px; */
   }
   ul {
     display: flex;
@@ -99,19 +117,19 @@ export const SellListDetailinfo = styled.div`
     margin-top: 20px;
   }
   li:nth-of-type(1) {
-    color: #3c2323;
-    font-size: 2.3rem;
-    font-weight: bold;
+    color: ${Maincolor.black};
+    font-size: 1.7rem;
+    font-weight: 800;
   }
   li:nth-of-type(2) {
-    font-size: 1.4rem;
-    margin-bottom: 20px;
+    color: ${Maincolor.grayBold};
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
   }
   li:nth-of-type(3) {
-    color: #7c1d34;
-    font-size: 2.7rem;
-    font-weight: bold;
-    margin-bottom: 20px;
+    color: ${Maincolor.redBold};
+    font-size: 2rem;
+    font-weight: 800;
   }
   li:nth-of-type(4) {
     font-size: 1.7rem;
@@ -132,12 +150,12 @@ export const DetailButtonOk = styled.button`
   width: 100%;
   height: 5rem;
   border-radius: 0.5rem;
-  margin-bottom: 20px;
+  /* margin-bottom: 20px; */
   transition: 0.2s ease-in-out;
   &:disabled {
-    background-color: #e7e4e4;
-    color: #ffffff;
-    border: #e7e4e4;
+    background-color: ${Maincolor.grayMedium};
+    color: ${Maincolor.white};
+    border-color: ${Maincolor.grayMedium};
     cursor: not-allowed;
   }
 `;
@@ -146,11 +164,17 @@ export const DetailTotalPrice = styled.div`
   background: ${Maincolor.beige};
   padding: ${WidthPd.padding};
   color: ${Maincolor.black};
+  padding-top: 2rem;
+  padding-bottom: 2rem;
   p {
     display: flex;
     justify-content: space-between;
     text-align: center;
-    font-size: 1.7rem;
-    padding: 10px;
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+    /* padding: 10px; */
+    &:last-of-type {
+      margin-bottom: 0;
+    }
   }
 `;
