@@ -10,6 +10,7 @@ import {
 } from "../../style/SellListCancelStyle";
 import { ButtonOk, ButtonCancel } from "../../style/GlobalStyle";
 import { cancelSellListData, getSellListData } from "../../api/patchselllist";
+import Modal from "antd/es/modal/Modal";
 
 const SellListCancel = ({
   onClose,
@@ -19,11 +20,14 @@ const SellListCancel = ({
 }) => {
   const handleCancel = async () => {
     await cancelSellListData(orderCancelId);
-    alert("주문이 취소되었습니다");
     const data = await getSellListData();
-    setSellListData(data)
+    setSellListData(data);
   };
   const handleCancelWait = async () => {
+    Modal.warning({
+      title: "주문취소 확인",
+      content: <p>주문이 취소 되었습니다</p>,
+    });
     await handleCancel();
   };
 

@@ -35,6 +35,7 @@ import {
 } from "../../../src/api/patchcart";
 import { useDispatch } from "react-redux";
 import NoImage from "../../assets/no_image.jpg";
+import Modal from "antd/es/modal/Modal";
 const ProductCart = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -57,7 +58,10 @@ const ProductCart = () => {
   }, []);
 
   const removeItemCart = async removeCart => {
-    alert("장바구니 상품이 삭제 되었습니다");
+    Modal.warning({
+      title: "장바구니 삭제 확인",
+      content: <p>장바구니 상품이 삭제 되었습니다</p>,
+    });
     try {
       const data = await removeCarts(removeCart);
       filledCartData(data);

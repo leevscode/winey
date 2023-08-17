@@ -151,7 +151,7 @@ const SellList = () => {
 
   return (
     <>
-      {orderId.length !== 0 ? (
+      {SellListData.length === 0 ? (
         // 주문 목록이 없을 경우 출력하는 내용
         <ProductCartNone>
           <i>
