@@ -401,7 +401,8 @@ export const SellQuickWrap = styled.nav`
     height: 100%;
     margin: 0 auto;
     & > li {
-      a {
+      a,
+      button {
         display: flex;
         align-items: center;
         justify-content: center;
@@ -426,7 +427,8 @@ export const SellQuickWrap = styled.nav`
       }
       &:nth-of-type(2) {
         width: 80px;
-        a {
+        a,
+        button {
           background: ${Maincolor.white};
           border: 0.05rem solid ${opacity.white};
           img {

@@ -15,6 +15,7 @@ import WineInfoTable from "../../components/productdetail/WineInfoTable";
 import WineLevel from "../../components/productdetail/WineLevel";
 import WineRecommend from "../../components/productdetail/WineRecommend";
 import WineSellQuick from "../../components/productdetail/WineSellQuick";
+import ProductCartModal from "../../components/product/ProductCartModal";
 
 const ProductDetail = () => {
   const { iproduct } = useParams();
@@ -22,6 +23,14 @@ const ProductDetail = () => {
   const [productDetail, setProductDetail] = useState({});
   const getData = async () => {
     await getProductDetail(setProductDetail, iproduct);
+  };
+  // 장바구니 완료 모달 state
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const handleOk = () => {
+    setIsModalOpen(false);
+  };
+  const handleCancel = () => {
+    setIsModalOpen(false);
   };
   useEffect(() => {
     getData();
@@ -46,7 +55,13 @@ const ProductDetail = () => {
       {/* 상품 정보 */}
       <WineInfoTable productDetail={productDetail} />
       {/* 구매하기 퀵메뉴 버튼 */}
-      <WineSellQuick iproduct={iproduct} />
+      <WineSellQuick iproduct={iproduct} setIsModalOpen={setIsModalOpen} />
+      {/* 장바구니 완료 모달창 */}
+      <ProductCartModal
+        isModalOpen={isModalOpen}
+        handleOk={handleOk}
+        handleCancel={handleCancel}
+      />
     </ProductDetailWrap>
   );
 };
