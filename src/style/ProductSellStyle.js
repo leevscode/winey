@@ -109,12 +109,19 @@ export const PickupPlaceClickWrap = styled.div`
     display: flex;
     justify-content: space-around;
     align-items: center;
-    gap: 0 1rem;
+    /* gap: 0 1rem; */
+    gap: 0 15px;
+    & > div {
+      width: calc(100% / 3);
+    }
     & button {
+      display: block;
+      width: 100%;
+      padding: 2rem 1rem;
       background: ${Maincolor.white};
       font-size: 1.4rem;
       color: ${Maincolor.black};
-      padding: 2rem 4.7rem;
+      /* padding: 2rem 4.7rem; */
       border-radius: 0.5rem;
       transition: 0.2s ease-in-out;
 

@@ -259,15 +259,16 @@ export const RecommWineTitle = styled.div`
       position: relative;
       display: flex;
       align-items: center;
+      justify-content: space-between;
       &::after {
         content: "";
-        width: calc(100% - 18rem);
+        width: calc(100% - 20rem);
         height: 0.1rem;
         background: ${Maincolor.black};
       }
       span {
         display: block;
-        width: 18rem;
+        width: 19rem;
         i {
           display: inline-block;
           vertical-align: -0.8rem;
