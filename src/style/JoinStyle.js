@@ -68,15 +68,21 @@ export const ConfirmArray = styled.div`
   display: flex;
   justify-content: space-between;
   flex-wrap: nowrap;
+  .ant-form-item {
+    width: calc(100% - 1rem - 110px);
+  }
   & div {
+    /* background: pink; */
     & input {
       /* width: 40rem; */
-      width: calc(40rem - 6rem);
+      /* width: calc(40rem - 6rem); */
+      width: 100%;
     }
   }
   & button {
-    min-width: 6rem;
-    margin: 0 auto;
+    /* min-width: 6rem; */
+    width: 110px;
+    /* margin: 0 auto; */
     margin-left: 1rem;
   }
 `;
@@ -109,12 +115,13 @@ export const RegionSelectWrap = styled.div`
     display: flex;
     justify-content: flex-start;
     flex-wrap: wrap;
-    gap: 0.3rem;
+    /* gap: 0.3rem; */
     & > label {
       position: relative;
       width: 6.5rem;
-      padding: 1.3rem;
-      margin: 0.4rem;
+      /* padding: 1.3rem; */
+      padding: 0;
+      margin: 0.3rem;
       border: 0.1rem solid ${Maincolor.grayMedium};
       border-radius: 0.8rem;
       & span {
@@ -196,24 +203,28 @@ export const TermsFlex = styled.div`
   // 약관보기
   & div {
     display: block;
-    display: flex;
-    justify-content: space-between;
+    /* display: flex; */
+    /* align-items: center; */
+    /* justify-content: space-between; */
     & > span {
       position: relative;
+      float: right;
       display: inline-block;
-      font-size: 1.4rem;
-      font-weight: 700;
+      /* font-size: 1.4rem; */
+      font-size: 1.2rem;
+      font-weight: 500;
       color: ${Maincolor.redDeep};
-      line-height: 1.7rem;
+      /* line-height: 1.7rem; */
       cursor: pointer;
-      margin-right: 1rem;
-      margin-left: 20rem;
-
+      margin-top: 2.4px;
+      /* margin-right: 1rem; */
+      /* margin-left: 20rem; */
       & svg {
         position: absolute;
         top: 0.5rem;
         font-weight: 700;
         font-size: 0.8rem;
+        margin-left: 3px;
       }
     }
   }

@@ -558,20 +558,24 @@ export const Terms = ({ checkAll, setCheckAll }) => {
           value={checkedList}
           onChange={onChange}
         >
-          <Checkbox value={plainOptions[0]}>
-            이용약관 동의 <strong>(필수)</strong>
-          </Checkbox>{" "}
-          <span onClick={() => handleCheckTerms()}>
-            약관보기
-            <FontAwesomeIcon icon={faChevronRight} />
-          </span>
-          <Checkbox value={plainOptions[1]}>
-            개인정보 수집·이용 동의 <strong>(필수)</strong>
-          </Checkbox>
-          <span onClick={() => handleCheckedPrivate()}>
-            약관보기
-            <FontAwesomeIcon icon={faChevronRight} />
-          </span>
+          <div>
+            <Checkbox value={plainOptions[0]}>
+              이용약관 동의 <strong>(필수)</strong>
+            </Checkbox>
+            <span onClick={() => handleCheckTerms()}>
+              약관보기
+              <FontAwesomeIcon icon={faChevronRight} />
+            </span>
+          </div>
+          <div>
+            <Checkbox value={plainOptions[1]}>
+              개인정보 수집·이용 동의 <strong>(필수)</strong>
+            </Checkbox>
+            <span onClick={() => handleCheckedPrivate()}>
+              약관보기
+              <FontAwesomeIcon icon={faChevronRight} />
+            </span>
+          </div>
         </Checkbox.Group>
       </TermsFlex>
     </TermsWarp>
