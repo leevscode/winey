@@ -181,8 +181,6 @@ const KeywordChooseCp = () => {
     setFavoriteKeyword(prev => ({ ...prev, aroma: clickFlavor }));
   };
 
-  console.log("favoriteKeyword", favoriteKeyword);
-
   // 이벤트핸들러 (저장하기)
   const [isError, setIsError] = useState(false);
   const handleKeywordChoice = () => {
@@ -203,26 +201,30 @@ const KeywordChooseCp = () => {
   };
 
   // 모두선택하기
-  const handleKeywordAll = () => {
-    const updatedAroma = wineOptions.aroma.map(option => ({
-      ...option,
-      num: 0,
-    }));
-    setFavoriteKeyword(prev => ({
-      categoryId: wineOptions.categoryId.map(option => option.id),
-      priceRange: wineOptions.priceRange.map(option => option.id),
-      countryId: wineOptions.countryId.map(option => option.id),
-      smallCategoryId: wineOptions.smallCategoryId.map(option => option.id),
-      aroma: updatedAroma,
-    }));
+  const handleKeywordAll = async () => {
     try {
-      postUserKeyword(favoriteKeyword, setGetError);
-      navigator("/main");
+      const updatedAroma = wineOptions.aroma.map(option => ({
+        ...option,
+        num: 0,
+      }));
+      console.log("updatedAroma", updatedAroma);
+
+      const allSelect = {
+        categoryId: wineOptions.categoryId.map(option => option.id),
+        priceRange: wineOptions.priceRange.map(option => option.id),
+        countryId: wineOptions.countryId.map(option => option.id),
+        smallCategoryId: wineOptions.smallCategoryId.map(option => option.id),
+        aroma: updatedAroma,
+      };
+      await setFavoriteKeyword(allSelect);
+      await postUserKeyword(favoriteKeyword, navigator);
+      // navigator("/main");
     } catch (error) {
       console.log(error);
     }
-    // setFavoriteKeyword({ });
   };
+  console.log("favoriteKeyword", favoriteKeyword);
+
   return (
     <KeywordWrap>
       <ConfigProvider
