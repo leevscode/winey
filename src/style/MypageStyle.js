@@ -7,6 +7,7 @@ import styled from "@emotion/styled";
 import { Maincolor, WidthPd, opacity } from "./GlobalStyle";
 
 export const MypageWrap = styled.div`
+  padding-bottom: 120px;
   .user-title {
     padding: ${WidthPd.padding};
     padding-bottom: 20px;

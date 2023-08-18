@@ -116,9 +116,10 @@ export const NavListWrap = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
+    gap: 0 6%;
     & > li {
       text-align: center;
-      margin: 0 20px;
+      /* margin: 0 20px; */
       a {
         display: block;
         img {

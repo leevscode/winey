@@ -22,7 +22,8 @@ export const IntroWrap = styled(motion.div)`
   }
   p {
     position: absolute;
-    bottom: 10vh;
+    /* bottom: 10vh; */
+    bottom: 15%;
     width: 100%;
     font-size: 1.4rem;
     color: ${opacity.grayDeep};
@@ -51,14 +52,17 @@ export const AdultChkWrap = styled(motion.div)`
     width: 80%;
     border-radius: 10px;
     backdrop-filter: blur(3px);
-    padding: 50px 30px;
+    padding: 50px 15px;
+    min-width: 310px;
     ul {
       width: 100%;
       font-size: 1.8rem;
       text-align: center;
       li {
         &:nth-of-type(1) {
+          line-height: 1.2;
           font-weight: 700;
+          word-break: keep-all;
           i {
             display: block;
             font-size: 1.8em;
@@ -68,13 +72,15 @@ export const AdultChkWrap = styled(motion.div)`
         &:nth-of-type(2) {
           display: flex;
           align-items: center;
-          margin: 20px 0 10px;
+          margin: 20px auto 10px;
+          width: 85%;
           button:nth-of-type(1) {
             margin-right: 5px;
           }
         }
         &:nth-of-type(3) {
           font-size: 0.8em;
+          word-break: keep-all;
         }
       }
     }
@@ -82,7 +88,7 @@ export const AdultChkWrap = styled(motion.div)`
   & > img {
     position: absolute;
     left: 50%;
-    bottom: 4vh;
+    bottom: 7%;
     transform: translateX(-50%);
     display: block;
     width: 100px;

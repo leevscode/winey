@@ -117,6 +117,7 @@ export const HeaderWrap = styled.header`
 // 서브페이지 헤더 뒤로가기 버튼
 export const BackBtn = styled.button`
   font-size: 1.8rem;
+  color: ${Maincolor.black};
 `;
 // 서브페이지 헤더 페이지 이름 출력
 export const HeaderTitle = styled.span`

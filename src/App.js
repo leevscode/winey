@@ -50,6 +50,7 @@ function App() {
     <>
       {/* 사이트 SEO 최적화 작업을 위한 컴포넌트 */}
       <Helmet>
+        <meta name="format-detection" content="telephone=no" />
         <meta
           name="description"
           content="와인이 처음인 당신을 위한 와인 픽업 서비스 Winey"
