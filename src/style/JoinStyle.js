@@ -66,16 +66,17 @@ export const ButtonConfirm = styled.button`
 
 export const ConfirmArray = styled.div`
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   flex-wrap: nowrap;
   & div {
     & input {
-      width: 40rem;
+      /* width: 40rem; */
+      width: calc(40rem - 6rem);
     }
   }
   & button {
+    min-width: 6rem;
     margin: 0 auto;
-    width: 15rem;
     margin-left: 1rem;
   }
 `;
