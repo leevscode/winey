@@ -14,7 +14,7 @@ const PurchaseListCart = ({
   setTotalPrice,
   productCollect,
   setProductCollect,
-  setEditQuantity,
+  setEditProductCollect,
 }) => {
   // 이미지 없을 때 error처리
   const onImgError = e => {
@@ -71,15 +71,33 @@ const PurchaseListCart = ({
     setTotalPrice(calcTotalSum);
   }, [calcTotalSum]);
 
+  // useEffect(() => {
+  //   const updatedProductCollect = productInfoArray.map((option, index) => {
+  //     return {
+  //       finalQuantity: itemCount[index],
+  //     };
+  //   });
+  //   setProductCollect({ ...productCollect, ...updatedProductCollect });
+  // }, [itemCount]);
+
   useEffect(() => {
-    const updatedProductCollect = productInfoArray.map((option, index) => {
-      return {
-        finalQuantity: itemCount[index],
-      };
-    });
-    setProductCollect({ ...productCollect, ...updatedProductCollect });
+    const updatedProductCollect = productInfoArray.map((option, index) => ({
+      cartId: option.cartId,
+      productId: option.productId,
+      pic: option.pic,
+      salePrice: option.salePrice,
+      price: option.price,
+      nmKor: option.nmKor,
+      nmEng: option.nmEng,
+      quantity: itemCount[index],
+    }));
+    setEditProductCollect(updatedProductCollect);
   }, [itemCount]);
+
+  // setProductCollect({ ...productCollect, ...updatedProductCollect });
+
   console.log("productCollect", productCollect);
+  console.log("productInfoArray", productInfoArray);
   return (
     <div>
       <PurchaseListWrap>

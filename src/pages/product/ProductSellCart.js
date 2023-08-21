@@ -25,7 +25,6 @@ import PurchaseListCart from "../../components/ProductSell/PurchaseListCart";
 const ProductSellCart = () => {
   const navigate = useNavigate();
   const state = useLocation();
-  console.log("state.state", state.state);
   const cartState = state.state;
 
   // user별 매장정보
@@ -36,13 +35,10 @@ const ProductSellCart = () => {
 
   // 상품 정보 값 담기
   const [productCollect, setProductCollect] = useState(cartState);
-  // const [productCollect, setProductCollect] = useState(cartState.CartData);
-  console.log("productCollect", productCollect);
+  const [editProductCollect, setEditProductCollect] = useState("");
+  console.log("editProductCollect", editProductCollect);
   // get한 아이템정보를 배열에 담자
   const productInfoArray = productCollect.CartData;
-
-  // 수량변경 state
-  const [editQuantity, setEditQuantity] = useState(cartState.CartData.quantity);
 
   // 합계값 담기 state
   const [totalPrice, setTotalPrice] = useState(cartState.totalPrice);
@@ -112,7 +108,7 @@ const ProductSellCart = () => {
       onOk() {
         // 최종결제완료
         postSomeItemPurchase({
-          productCollect,
+          editProductCollect,
           selectCollect,
           isPayment,
           totalPrice,
@@ -120,7 +116,7 @@ const ProductSellCart = () => {
         });
         navigate("/ProductCompleteCart", {
           state: {
-            productCollect,
+            editProductCollect,
             selectCollect,
             isPayment,
             totalPrice,
@@ -160,10 +156,9 @@ const ProductSellCart = () => {
           // 상품변경정보 담아오기
           productCollect={productCollect}
           setProductCollect={setProductCollect}
+          setEditProductCollect={setEditProductCollect}
           // 상품정보 보내기
           productInfoArray={productInfoArray}
-          // 수량변경값
-          setEditQuantity={setEditQuantity}
         />
       )}
       <PurchaseBtn>
