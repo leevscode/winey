@@ -101,15 +101,7 @@ export const SellListDetailinfo = styled.div`
     width: calc(100% - 15rem - 1.5rem);
   }
   div {
-    /* margin-right: 30px; */
-    /* margin-bottom: 30px; */
-    /* display: flex; */
-    /* width: 40%; */
     width: 15rem;
-    /* align-items: center; */
-  }
-  img {
-    /* padding: 0 20px; */
   }
   ul {
     display: flex;
@@ -133,7 +125,7 @@ export const SellListDetailinfo = styled.div`
   }
   li:nth-of-type(4) {
     font-size: 1.7rem;
-    margin-bottom: 5px;
+    margin-top: 8px;
   }
   li:nth-of-type(5) {
     font-size: 1.7rem;
