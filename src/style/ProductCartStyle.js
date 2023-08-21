@@ -144,6 +144,15 @@ export const GoodsEa = styled.div`
   }
 `;
 
+export const CartMax = styled.p`
+  height: 1rem;
+  font-size: 1.2rem;
+  font-weight: 500;
+  line-height: 1rem;
+  color: red;
+  margin: 0.3rem 0 0 0;
+`;
+
 export const CartTotalPrice = styled.ul`
   display: flex;
   justify-content: space-between;

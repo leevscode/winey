@@ -90,12 +90,12 @@ const ProductComplete = () => {
           )}
         </div>
         <div className="confirmButton">
-          <ButtonOk>
-            <Link to="/selllist">주문내역 확인 하기</Link>
-          </ButtonOk>
-          <ButtonCancel>
-            <Link to="/main">메인보기</Link>
-          </ButtonCancel>
+          <Link to="/selllist">
+            <ButtonOk>주문내역 확인 하기</ButtonOk>
+          </Link>
+          <Link to="/main">
+            <ButtonCancel>메인보기</ButtonCancel>
+          </Link>
         </div>
       </ProductCompleteBox>
     </ProductCompleteMain>
