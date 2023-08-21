@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { Maincolor, WidthPd, opacity } from "./GlobalStyle";
+import { Gradation, Maincolor, WidthPd, opacity } from "./GlobalStyle";
 
 export const PurchaseWrap = styled.div`
   padding-bottom: 80px;
@@ -292,6 +292,14 @@ export const PurchaseListWrap = styled.div`
           padding: 0.5rem;
           cursor: pointer;
         }
+      }
+      & > .maxitem-notice {
+        height: 1.5rem;
+        font-size: 1.2rem;
+        font-weight: 500;
+        line-height: 1rem;
+        color: red;
+        margin: 0.3rem 0 0 0;
       }
     }
   }
