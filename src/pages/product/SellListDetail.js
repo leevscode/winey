@@ -128,7 +128,7 @@ const SellListDetail = () => {
                 <li>{item.nmKor}</li>
                 <li>{item.nmEng}</li>
                 <li>{parseInt(item.price).toLocaleString()}원</li>
-                <li>{item.quantity}</li>
+                <li>{item.quantity}개</li>
               </ul>
             </div>
           </SellListDetailinfo>
