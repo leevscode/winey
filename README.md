@@ -6,7 +6,7 @@
   <h4 style="margin-bottom: -20px; color:#C1305D">
     초보자를 위한 와인 픽업 서비스
   </h4>
-  <h2 style="color:#690A21">
+  <h2 style="color:#690A21; border-bottom: 0;">
     Winey 와이니
   </h2>
 </div>
