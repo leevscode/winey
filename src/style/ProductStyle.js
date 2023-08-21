@@ -78,7 +78,7 @@ export const ProductListItem = styled.div`
         span {
           display: inline-block;
         }
-        &:first-of-type {
+        &.top {
           color: ${Maincolor.redBold};
           margin-bottom: 2px;
           span {
@@ -86,7 +86,7 @@ export const ProductListItem = styled.div`
             font-weight: 700;
           }
         }
-        &:last-of-type {
+        &.bottom {
           span {
             text-decoration: line-through;
             color: ${Maincolor.grayBold};
