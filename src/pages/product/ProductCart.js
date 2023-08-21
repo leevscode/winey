@@ -19,6 +19,7 @@ import {
   Cartnmkor,
   Cratprice,
   ButtonDiv,
+  CartMax,
 } from "../../style/ProductCartStyle";
 import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -164,6 +165,11 @@ const ProductCart = () => {
                         <FontAwesomeIcon icon={faPlus} />
                       </button>
                     </GoodsEa>
+                    {item.quantity == 5 ? (
+                      <CartMax>최대구매수량은 5개입니다</CartMax>
+                    ) : (
+                      <CartMax></CartMax>
+                    )}
                   </CartDetail>
                   <CartDetaiClose onClick={() => removeItemCart(item.cartId)}>
                     <FontAwesomeIcon icon={faX} />

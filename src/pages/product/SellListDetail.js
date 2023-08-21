@@ -6,7 +6,6 @@
 import React, { useEffect, useState } from "react";
 import {
   DetailButtonOk,
-  DetailDay,
   DetailTotalPrice,
   SellListDetailBox,
   SellListDetailWrap,
@@ -56,7 +55,7 @@ const SellListDetail = () => {
       const data = await getdetailData(numberValue);
       setDetailData(data);
       setProductInfo(data.vo1);
-      data.vo1[0].price = data.vo2.totalOrderPrice;
+      // data.vo1[0].price = data.vo2.totalOrderPrice;
       setproductDes(data.vo2);
       // console.log("vo1 데이터 ", data.vo1);
       // console.log("vo2 데이터 ", data.vo2);
