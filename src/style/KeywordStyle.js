@@ -132,11 +132,11 @@ export const KeywordWrap = styled.div`
       margin-bottom: 3rem;
       & h3 {
         text-align: center;
-        font-size: 1.6rem;
+        font-size: 1.7rem;
         font-weight: 700;
         /* line-height: 1.4rem; */
         /* margin: 1rem 0; */
-        margin-bottom: 15px;
+        margin-bottom: 1rem;
       }
       div {
         text-align: center;
@@ -147,7 +147,7 @@ export const KeywordWrap = styled.div`
         label {
           background: ${Maincolor.white};
           color: ${Maincolor.black};
-          width: 8rem;
+          width: 9rem;
           height: 4rem;
           border-radius: 0.7rem;
 
@@ -159,7 +159,7 @@ export const KeywordWrap = styled.div`
           border: 0.05rem solid ${opacity.white};
           span {
             text-align: center;
-            font-size: 1.2rem;
+            font-size: 1.4rem;
             font-weight: 700;
             /* line-height: 1.4rem; */
             color: ${Maincolor.redBold};

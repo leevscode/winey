@@ -22,16 +22,16 @@ const PurchaseList = ({
   };
 
   // 아이템 갯수 state
-  // const numberArray = productCollect.map(item => item.number);
-  // const [itemCount, setItemCount] = useState(numberArray);
   const [itemCount, setItemCount] = useState([1]);
-
+  const [maxItem, setMaxItem] = useState("");
   // 수량 변경 핸들러
   // 수량 마이너스
   const handleCountMinus = option => {
     setItemCount(prevCounts => {
       return prevCounts.map((count, index) => {
         if (productInfoArray[index].productId === option.productId) {
+          setMaxItem("");
+
           // 값이 0보다 작으면 0으로 제한
           return Math.max(parseInt(count) - 1, 1);
         } else {
@@ -45,6 +45,10 @@ const PurchaseList = ({
     setItemCount(prevCounts => {
       return prevCounts.map((count, index) => {
         if (productInfoArray[index].productId === option.productId) {
+          // 최대수량 도달 시 안내문구 출력
+          if (count === 5) {
+            setMaxItem("최대구매수량은 5개입니다");
+          }
           // 값이 5보다 크면 5으로 제한
           return Math.min(parseInt(count) + 1, 5);
         } else {
@@ -124,6 +128,11 @@ const PurchaseList = ({
                   onClick={() => handleCountPlus(option)}
                 />
               </div>
+              {maxItem ? (
+                <p className="maxitem-notice">{maxItem}</p>
+              ) : (
+                <p className="maxitem-notice"> </p>
+              )}
             </div>
           </div>
         ))}

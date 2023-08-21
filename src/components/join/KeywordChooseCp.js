@@ -14,7 +14,6 @@ import { postUserKeyword } from "../../api/keywordpatch";
 const KeywordChooseCp = () => {
   const navigator = useNavigate();
 
-  const [getError, setGetError] = useState("");
   const [favoriteKeyword, setFavoriteKeyword] = useState([]);
   const [wineTypeCheckedList, setWineTypeCheckedList] = useState([]);
   const [winePriceCheckedList, setWinePriceCheckedList] = useState([]);
@@ -217,7 +216,7 @@ const KeywordChooseCp = () => {
         aroma: updatedAroma,
       };
       await setFavoriteKeyword(allSelect);
-      await postUserKeyword(favoriteKeyword, navigator);
+      postUserKeyword(favoriteKeyword, navigator);
       // navigator("/main");
     } catch (error) {
       console.log(error);
