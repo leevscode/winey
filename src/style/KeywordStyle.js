@@ -160,7 +160,7 @@ export const KeywordWrap = styled.div`
           span {
             text-align: center;
             font-size: 1.4rem;
-            font-weight: 700;
+            font-weight: 600;
             /* line-height: 1.4rem; */
             color: ${Maincolor.redBold};
 

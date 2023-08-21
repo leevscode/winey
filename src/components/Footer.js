@@ -37,8 +37,8 @@ const Footer = () => {
             </ol>
           </li>
           <li>
-            {/* <Link to="/about" >만든 사람들</Link> */}
-            <button onClick={showModal}>만든 사람들</button>
+            <Link to="/about" >만든 사람들</Link>
+            {/* <button onClick={showModal}>만든 사람들</button> */}
           </li>
           <li>
             <p>

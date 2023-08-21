@@ -11,10 +11,11 @@ import NoImage from "../../assets/no_image.jpg";
 
 const ProductCompleteCart = () => {
   const location = useLocation();
-  const stateItem = location.state.productCollect;
+  console.log("location.state", location.state);
+  const stateItem = location.state.editProductCollect;
   const statePick = location.state;
   const finalQuan = index => {
-    return location.state.productCollect[index].finalQuantity;
+    return location.state.editProductCollect[index].quantity;
   };
   console.log("stateItem", stateItem);
   console.log("statePick", statePick);
@@ -40,7 +41,7 @@ const ProductCompleteCart = () => {
       </ProductCompleteText>
       {stateItem && (
         <ProductCompleteinfo>
-          {stateItem.CartData.map((option, index) => (
+          {stateItem.map((option, index) => (
             <div key={index}>
               <div className="imgWrap">
                 <img

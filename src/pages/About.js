@@ -25,7 +25,7 @@ const About = () => {
             리스트 페이지, 상품 상세 페이지, 와인가이드 페이지, Not found 페이지
           </li>
           <li>
-            <span>한마디</span> : 나름 최선을 다 했습니다!
+            <span>한마디</span> : 나름 최선을 다 했습니다!😀
           </li>
           <li>
             <Link to="https://kimaydev.notion.site/kimaydev/FE-7a53f9f631f146c88c39413cd175a9d0">
@@ -52,7 +52,7 @@ const About = () => {
             선택, 결제, 결제완료 페이지
           </li>
           <li>
-            <span>한마디</span> : 행복합니다^^{" "}
+            <span>한마디</span> : 🌻행복합니다^^🌼
           </li>
           <li>
             <Link to="https://www.notion.so/hyemdev/hyem-s-dev-STUDY-75ffe819c7534a049b59871e6fe17dd4">
@@ -79,7 +79,7 @@ const About = () => {
             리뷰등록
           </li>
           <li>
-            <span>한마디</span> : 버.튼.싫.어{" "}
+            <span>한마디</span> : 🐸 버.튼.싫.어 🐸
           </li>
           <li>
             <Link to="https://www.notion.so/leevscode/leevscode-5223e3d332604844a255a0c63113a284">
@@ -106,7 +106,7 @@ const About = () => {
             추천 회원정보 변경,출력 및 탈퇴 시큐리티, Token, 유효성 검사
           </li>
           <li>
-            <span>한마디</span> :{" "}
+            <span>한마디</span> : 그냥 아무거나 먹자...🍷
           </li>
           <li>
             <Link to="https://www.notion.so/40559df6ba0f462ba721584d4ec536ac?pvs=4">
