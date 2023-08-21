@@ -137,7 +137,7 @@ const MypageList = () => {
         <SectionLine />
         <ul>
           <li>
-            <NavLink to="/about" onClick={showModal}>
+            <NavLink to="/about">
               만든 사람들
               <i>
                 <FontAwesomeIcon icon={faAngleRight} />
