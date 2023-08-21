@@ -71,20 +71,20 @@ export const postOneItemPurchase = async ({
 
 // 장바구니에서 결제하기 post
 export const postSomeItemPurchase = async ({
-  productCollect,
+  editProductCollect,
   selectCollect,
   totalPrice,
   navigate,
 }) => {
-  const list = await productCollect.CartData.map(cartItem => ({
-    cartId: cartItem.cartId,
-    productId: cartItem.productId,
-    quantity: productCollect.finalQuantity,
-    pic: cartItem.pic,
-    salePrice: cartItem.salePrice,
-    price: cartItem.price,
-    nmKor: cartItem.nmKor,
-    nmEng: cartItem.nmEng,
+  const list = await editProductCollect.map(option => ({
+    cartId: option.cartId,
+    productId: option.productId,
+    pic: option.pic,
+    salePrice: option.salePrice,
+    price: option.price,
+    nmKor: option.nmKor,
+    nmEng: option.nmEng,
+    quantity: option.quantity,
   }));
 
   try {

@@ -448,10 +448,10 @@ export const CartCompleteModal = styled(Modal)`
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 75%;
+    width: 300px;
     height: auto;
     margin: 0 auto;
-    padding: 60px 25px;
+    padding: 60px 15px 40px;
   }
   .ant-modal-body {
     font-family:
@@ -472,11 +472,14 @@ export const CartCompleteModal = styled(Modal)`
       sans-serif;
     color: ${Maincolor.black};
     margin-top: 15px;
+    button:first-of-type {
+      margin-bottom: 5px;
+    }
     p {
       font-size: 1.8rem;
       font-weight: 700;
       text-align: center;
-      margin-bottom: 20px;
+      margin-bottom: 25px;
       i {
         display: block;
         position: relative;

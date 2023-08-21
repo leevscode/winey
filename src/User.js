@@ -69,10 +69,13 @@ const User = () => {
       {location.pathname === "/main" || location.pathname === "/windeguide" ? (
         <Footer />
       ) : null}
-      <QuickMenu
-        handleOpenNav={handleOpenNav}
-        // handleScrollTop={handleScrollTop}
-      />
+      {location.pathname === "/keywordselect" ||
+      location.pathname === "/mypageList" ? null : (
+        <QuickMenu
+          handleOpenNav={handleOpenNav}
+          // handleScrollTop={handleScrollTop}
+        />
+      )}
       {/* 네비게이션 메뉴 */}
       {isNavActive && (
         <NavWrap

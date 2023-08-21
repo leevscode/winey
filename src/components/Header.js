@@ -227,38 +227,40 @@ const Header = ({ handleOpenNav, isActive }) => {
               )}
             </h1>
           </li>
-          <li>
-            <ol>
-              <li>
-                <button className="search" onClick={showModal}>
-                  <img
-                    src={`${process.env.PUBLIC_URL}/images/icon_search_1.svg`}
-                    alt="검색"
-                  />
-                  <img
-                    src={`${process.env.PUBLIC_URL}/images/icon_search_2.svg`}
-                    alt="검색"
-                  />
-                </button>
-              </li>
-              <li>
-                <NavLink
-                  to={userData.userId ? "/cart" : "/login"}
-                  className="cart"
-                >
-                  <img
-                    src={`${process.env.PUBLIC_URL}/images/icon_cart_1.svg`}
-                    alt="장바구니"
-                  />
-                  <img
-                    src={`${process.env.PUBLIC_URL}/images/icon_cart_2.svg`}
-                    alt="장바구니"
-                  />
-                  <span>{cartData.cartLength}</span>
-                </NavLink>
-              </li>
-            </ol>
-          </li>
+          {location.pathname === "/keywordselect" ? null : (
+            <li>
+              <ol>
+                <li>
+                  <button className="search" onClick={showModal}>
+                    <img
+                      src={`${process.env.PUBLIC_URL}/images/icon_search_1.svg`}
+                      alt="검색"
+                    />
+                    <img
+                      src={`${process.env.PUBLIC_URL}/images/icon_search_2.svg`}
+                      alt="검색"
+                    />
+                  </button>
+                </li>
+                <li>
+                  <NavLink
+                    to={userData.userId ? "/cart" : "/login"}
+                    className="cart"
+                  >
+                    <img
+                      src={`${process.env.PUBLIC_URL}/images/icon_cart_1.svg`}
+                      alt="장바구니"
+                    />
+                    <img
+                      src={`${process.env.PUBLIC_URL}/images/icon_cart_2.svg`}
+                      alt="장바구니"
+                    />
+                    <span>{cartData.cartLength}</span>
+                  </NavLink>
+                </li>
+              </ol>
+            </li>
+          )}
         </ul>
       </HeaderWrap>
       {/* 준비중 모달창 */}

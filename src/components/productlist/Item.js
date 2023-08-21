@@ -76,17 +76,14 @@ const Item = ({ listScroll, setIsModalOpen }) => {
               </div>
               <div className="title">{item.nmKor}</div>
               <ul className="price">
-                <li>
-                  <span>
-                    {item.salePrice === null
-                      ? item.price.toLocaleString()
-                      : item.salePrice.toLocaleString()}
-                  </span>
-                  원
+                <li className="top">
+                  <span>{item.salePrice.toLocaleString()}</span>원
                 </li>
-                <li>
-                  <span>{item.price.toLocaleString()}원</span>
-                </li>
+                {item.saleYn === 1 ? (
+                  <li className="bottom">
+                    <span>{item.price.toLocaleString()}원</span>
+                  </li>
+                ) : null}
               </ul>
             </div>
           </Link>
