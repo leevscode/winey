@@ -61,7 +61,9 @@ const User = () => {
           location.pathname === "/keywordselect" ||
           location.pathname === "/keywordselectedit" ||
           location.pathname === "/selllist" ||
-          location.pathname === `/selllistdetail/${iselllist}`
+          location.pathname === `/selllistdetail/${iselllist}` ||
+          location.pathname === "/ProductComplete" ||
+          location.pathname === "/ProductCompleteCart"
         }
       >
         <Outlet />

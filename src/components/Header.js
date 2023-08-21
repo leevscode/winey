@@ -71,6 +71,10 @@ const Header = ({ handleOpenNav, isActive }) => {
     },
     {
       title: "구매완료",
+      path: "/ProductComplete",
+    },
+    {
+      title: "구매완료",
       path: "/ProductCompleteCart",
     },
     {

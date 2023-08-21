@@ -1,7 +1,9 @@
 import styled from "@emotion/styled";
 import { Maincolor, WidthPd, opacity } from "./GlobalStyle";
 
-export const ProductCompleteMain = styled.div``;
+export const ProductCompleteMain = styled.div`
+  padding-bottom: 100px;
+`;
 
 export const ProductCompleteText = styled.div`
   padding: ${WidthPd.padding};
@@ -9,7 +11,7 @@ export const ProductCompleteText = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin: 5rem 0;
+  margin: 6rem 0 3rem;
   img {
     margin-bottom: 2rem;
   }
@@ -18,13 +20,14 @@ export const ProductCompleteText = styled.div`
     color: ${Maincolor.black};
     text-align: center;
     font-size: 2.2rem;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
   }
   span {
     color: ${Maincolor.black};
     text-align: center;
     font-size: 1.5rem;
     margin-bottom: 20px;
+    line-height: 1.3;
   }
 `;
 
@@ -32,10 +35,9 @@ export const ProductCompleteinfo = styled.div`
   padding: ${WidthPd.padding};
   & > div {
     border-top: 1px solid ${opacity.white};
-    border-bottom: 1px solid ${opacity.white};
+    /* border-bottom: 1px solid ${opacity.white}; */
     display: flex;
     padding: 1.5rem 0;
-
     & .imgWrap {
       width: 15rem;
       height: 15rem;
@@ -126,11 +128,36 @@ export const ProductCompleteBox = styled.div`
   & > .confirmButton {
     padding: ${WidthPd.padding};
     background: ${Maincolor.white};
-    & > button {
+    /* & > button {
       margin: 1.5rem 0;
     }
     & > button:nth-of-type(1) > a {
       color: ${Maincolor.white};
+    } */
+    a {
+      display: block;
+      font-size: 1.6rem;
+      font-weight: 500;
+      width: 100%;
+      height: 5rem;
+      line-height: 5rem;
+      border-radius: 0.5rem;
+      text-align: center;
+    }
+    .ok-link {
+      background: ${Maincolor.redBold};
+      color: ${Maincolor.white};
+      border: 0.05rem solid ${Maincolor.redBold};
+      transition: 0.2s ease-in-out;
+      margin-bottom: 10px;
+      &:hover {
+        background: ${Maincolor.redDeep};
+      }
+    }
+    .cancel-link {
+      background: ${Maincolor.white};
+      color: ${Maincolor.black};
+      border: 0.05rem solid ${Maincolor.grayMedium};
     }
   }
 `;
