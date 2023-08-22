@@ -199,7 +199,7 @@ const About = () => {
             <span>담당파트</span> : 관리자 페이지
           </li>
           <li>
-            <span>한마디</span> :{" "}
+            <span>한마디</span> : 안녕하세요 🙂
           </li>
           <li>
             <Link to="https://github.com/wwwgggx3">
