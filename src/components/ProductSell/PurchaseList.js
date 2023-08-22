@@ -83,17 +83,7 @@ const PurchaseList = ({
     setEditQuantity(...updatedProductCollect);
     setProductCollect({ ...productCollect, ...updatedProductCollect });
   }, [itemCount]);
-  // useEffect(() => {
-  //   const updatedProductCollect = {};
 
-  //   productInfoArray.forEach((option, index) => {
-  //     updatedProductCollect[index] = {
-  //       quantity: itemCount[index],
-  //     };
-  //   });
-  //   setEditQuantity(updatedProductCollect);
-  //   setProductCollect({ ...productCollect, ...updatedProductCollect });
-  // }, [itemCount]);
   return (
     <div>
       <PurchaseListWrap>

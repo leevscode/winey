@@ -25,7 +25,7 @@ const About = () => {
             리스트 페이지, 상품 상세 페이지, 와인가이드 페이지, Not found 페이지
           </li>
           <li>
-            <span>한마디</span> : 나름 최선을 다 했습니다!😀
+            <span>한마디</span> : 😀나름 최선을 다 했습니다!😀
           </li>
           <li>
             <Link to="https://kimaydev.notion.site/kimaydev/FE-7a53f9f631f146c88c39413cd175a9d0">
