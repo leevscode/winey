@@ -69,7 +69,7 @@ const SellListDetail = () => {
   // 주문내역 출력 useEffect
   useEffect(() => {
     filleddetailData();
-  }, []);
+  }, [reviewReset]);
 
   // 리뷰 모달을 여는 함수
   const showModal = _orderDetailId => {
@@ -114,7 +114,8 @@ const SellListDetail = () => {
     5: "픽업완료",
     6: "주문취소",
   };
-  
+
+
   return (
     <SellListDetailBox>
       {/* <DetailDay>{orderData.orderDetailId}</DetailDay> */}
