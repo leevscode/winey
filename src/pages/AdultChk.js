@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router";
-import { faCircleExclamation } from "@fortawesome/free-solid-svg-icons";
+import {
+  faCircleExclamation,
+  faTriangleExclamation,
+} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { LayoutWrap } from "../style/LayoutStyle";
 import { AdultChkWrap } from "../style/IntroStyle";
@@ -44,7 +47,7 @@ const AdultChk = () => {
                 <ButtonOk onClick={handleMain}>예</ButtonOk>
                 <ButtonCancel onClick={showModal}>아니오</ButtonCancel>
               </li>
-              <li>* 이 사이트는 만 19세 이상만 입장 가능합니다.</li>
+              <li>* 이 사이트는 만 19세 이상만 이용 가능합니다.</li>
             </ul>
           </div>
           <img src={`${process.env.PUBLIC_URL}/images/logo_2.svg`} alt="로고" />
@@ -54,9 +57,11 @@ const AdultChk = () => {
       <NoticeModal open={isModalOpen} onCancel={handleCancel} footer={null}>
         <p>
           <i>
-            <FontAwesomeIcon icon={faCircleExclamation} />
+            <FontAwesomeIcon icon={faTriangleExclamation} />
           </i>
-          만 19세 미만은 이용하실 수 없습니다.
+          만 19세 미만은
+          <br />
+          이용하실 수 없습니다.
         </p>
       </NoticeModal>
     </>

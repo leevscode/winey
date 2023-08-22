@@ -56,16 +56,26 @@ const ProductSell = () => {
   const { info } = Modal;
   const handleCreditCard = () => {
     info({
-      title: "카드결제",
+      // title: "카드결제",
+      icon: (
+        <i>
+          <FontAwesomeIcon icon={faCircleCheck} />
+        </i>
+      ),
+      okText: "이해했습니다.",
+      wrapClassName: "info-modal-wrap",
+      maskClosable: true,
       content: (
-        <div>
-          결제가 완료처리 되었습니다.
-          <br />
-          <strong>
-            해당사이트는 스터디용으로 제작되었으므로 실제 결제가 이루어지지
-            않음을 알려드립니다.
-          </strong>
-        </div>
+        <ul>
+          <li>결제가 완료처리 되었습니다.</li>
+          <li>
+            <strong>
+              * 해당사이트는 스터디용으로 제작되었으므로
+              <br />
+              실제 결제가 이루어지지 않음을 알려드립니다.
+            </strong>
+          </li>
+        </ul>
       ),
       onOk() {},
     });
@@ -105,9 +115,23 @@ const ProductSell = () => {
       setPaymentError("결제를 진행해 주세요.");
       return;
     }
+    // 최종결제확인 모달
     Modal.confirm({
-      title: "최종결제확인",
-      content: "주문을 완료하시겠습니까?",
+      icon: (
+        <i>
+          <FontAwesomeIcon icon={faCircleCheck} />
+        </i>
+      ),
+      okText: "예",
+      cancelText: "아니오",
+      wrapClassName: "info-modal-wrap check-modal",
+      maskClosable: true,
+      // title: "최종결제확인",
+      content: (
+        <ul>
+          <li>주문을 완료하시겠습니까?</li>
+        </ul>
+      ),
       onOk() {
         // 최종결제완료
         postOneItemPurchase({

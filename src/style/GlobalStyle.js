@@ -54,6 +54,12 @@ export const badge = {
   pink: "#ff8888",
   green: "#a7ce81",
 };
+// 모달창 아이콘 색상
+export const ResultColor = {
+  success: "#3c2323",
+  error: "#ff5656",
+  warning: "#ffbe44",
+};
 
 // 버튼 ================
 // 확인

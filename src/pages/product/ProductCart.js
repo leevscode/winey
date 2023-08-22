@@ -28,6 +28,7 @@ import {
   faMinus,
   faPlus,
   faX,
+  faTriangleExclamation,
 } from "@fortawesome/free-solid-svg-icons";
 import {
   cartLengthData,
@@ -58,19 +59,37 @@ const ProductCart = () => {
     filledCartData();
   }, []);
 
-  const removeItemCart = async removeCart => {
-    Modal.warning({
-      title: "장바구니 삭제 확인",
-      content: <p>장바구니 상품이 삭제 되었습니다</p>,
+  // 장바구니 모달
+  const removeItemCart = removeCart => {
+    Modal.confirm({
+      icon: (
+        <i className="color_y">
+          <FontAwesomeIcon icon={faTriangleExclamation} />
+        </i>
+      ),
+      okText: "예",
+      cancelText: "아니오",
+      wrapClassName: "info-modal-wrap check-modal",
+      maskClosable: true,
+      // title: "장바구니 삭제 확인",
+      content: (
+        <ul>
+          <li>
+            장바구니에서
+            <br />
+            상품을 삭제하시겠습니까?
+          </li>
+        </ul>
+      ),
+      onOk() {
+        const data = removeCarts(removeCart);
+        filledCartData(data);
+        cartLengthData(dispatch);
+      },
+      onCancel() {
+        console.log("Cancel");
+      },
     });
-    try {
-      const data = await removeCarts(removeCart);
-      filledCartData(data);
-      cartLengthData(dispatch);
-      // console.log("장바구니 삭제 되야 함", data);
-    } catch (error) {
-      // console.log(error);
-    }
   };
 
   const calcTotalSum = () => {

@@ -6,3 +6,129 @@
     left: 110%;
   }
 }
+
+/* ant design 모달창 커스텀 */
+.info-modal-wrap .ant-modal {
+  top: 25vh;
+}
+.info-modal-wrap .ant-modal .ant-modal-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 300px;
+  height: auto;
+  margin: 0 auto;
+  padding: 60px 15px 40px;
+}
+.info-modal-wrap .ant-modal .ant-modal-content .ant-modal-body {
+  width: 100%;
+  margin-top: 15px;
+}
+.info-modal-wrap .ant-modal .ant-modal-content .ant-modal-confirm-body {
+  display: block;
+}
+.info-modal-wrap .ant-modal .ant-modal-content .ant-modal-confirm-body > i {
+  display: block;
+  font-size: 50px;
+  color: #3c2323;
+  line-height: 1;
+  text-align: center;
+  margin-bottom: 10px;
+}
+.info-modal-wrap
+  .ant-modal
+  .ant-modal-content
+  .ant-modal-confirm-body
+  > .color_y {
+  color: #ffbe44;
+}
+.info-modal-wrap .ant-modal .ant-modal-content ul {
+  font-family:
+    "Pretendard Variable",
+    Pretendard,
+    -apple-system,
+    BlinkMacSystemFont,
+    system-ui,
+    Roboto,
+    "Helvetica Neue",
+    "Segoe UI",
+    "Apple SD Gothic Neo",
+    "Noto Sans KR",
+    "Malgun Gothic",
+    "Apple Color Emoji",
+    "Segoe UI Emoji",
+    "Segoe UI Symbol",
+    sans-serif;
+  font-size: 1.8rem;
+  text-align: center;
+}
+.info-modal-wrap .ant-modal .ant-modal-content ul li {
+  font-weight: 700;
+  line-height: 1.2;
+  color: #3c2323;
+}
+.info-modal-wrap .ant-modal .ant-modal-content ul li:first-of-type {
+  margin-bottom: 10px;
+}
+.info-modal-wrap .ant-modal .ant-modal-content ul li strong {
+  font-size: 0.75em;
+  font-weight: 500;
+}
+.info-modal-wrap .ant-modal .ant-modal-confirm-btns {
+  margin-top: 25px;
+}
+.info-modal-wrap .ant-modal .ant-modal-confirm-btns .ant-btn {
+  display: block;
+  font-family:
+    "Pretendard Variable",
+    Pretendard,
+    -apple-system,
+    BlinkMacSystemFont,
+    system-ui,
+    Roboto,
+    "Helvetica Neue",
+    "Segoe UI",
+    "Apple SD Gothic Neo",
+    "Noto Sans KR",
+    "Malgun Gothic",
+    "Apple Color Emoji",
+    "Segoe UI Emoji",
+    "Segoe UI Symbol",
+    sans-serif;
+  font-size: 1.6rem;
+  font-weight: 500;
+  max-width: 200px;
+  width: 100%;
+  height: 5rem;
+  padding: 0;
+  border-radius: 0.5rem;
+  margin: 0 auto;
+}
+.info-modal-wrap .ant-modal .ant-modal-confirm-btns .ant-btn-primary {
+  background: #7c1d34;
+  color: #fff;
+  border: 0.05rem solid #7c1d34;
+  transition: 0.2s ease-in-out;
+}
+.info-modal-wrap .ant-modal .ant-modal-confirm-btns .ant-btn-primary:hover {
+  background: #690a21;
+}
+.info-modal-wrap .ant-modal .ant-modal-confirm-btns .ant-btn-default {
+  background: #fff;
+  color: #3c2323;
+  border: 0.05rem solid #e7e4e4;
+}
+/* 주문확인 모달창 커스텀 */
+.check-modal .ant-modal .ant-modal-confirm-btns {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column-reverse;
+  align-items: center;
+}
+.check-modal .ant-modal .ant-modal-confirm-btns .ant-btn {
+  margin-inline-start: 0;
+  margin: auto;
+}
+.check-modal .ant-modal .ant-modal-confirm-btns .ant-btn-primary {
+  margin-bottom: 5px;
+}

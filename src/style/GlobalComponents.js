@@ -5,7 +5,13 @@
 */
 import styled from "@emotion/styled";
 import { motion } from "framer-motion";
-import { Maincolor, WidthPd, ellipsis, opacity } from "./GlobalStyle";
+import {
+  Maincolor,
+  ResultColor,
+  WidthPd,
+  ellipsis,
+  opacity,
+} from "./GlobalStyle";
 import { Modal } from "antd";
 
 // 헤더
@@ -405,9 +411,10 @@ export const NoticeModal = styled(Modal)`
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 75%;
-    height: 200px;
+    width: 300px;
+    height: auto;
     margin: 0 auto;
+    padding: 60px 15px 40px;
   }
   .ant-modal-body {
     font-family:
@@ -434,14 +441,15 @@ export const NoticeModal = styled(Modal)`
       text-align: center;
       i {
         display: block;
-        font-size: 1.8em;
+        font-size: 50px;
+        color: ${ResultColor.warning};
         line-height: 1;
-        margin-bottom: 3px;
+        margin-bottom: 10px;
       }
     }
   }
 `;
-// 준비중 모달창
+// 장바구니 완료 모달창
 export const CartCompleteModal = styled(Modal)`
   top: 25vh;
   .ant-modal-content {
