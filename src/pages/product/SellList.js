@@ -203,7 +203,7 @@ const SellList = () => {
                       navigate(`/selllistdetail/${item.orderId}`);
                     }}
                   >
-                    주문 내역
+                    주문 상세내역
                   </ButtonCancel>
                   {/* 상태가 "결제완료"일 때에만 상품 준비중입니다 표시 */}
                   {item.orderStatus === 1 && (

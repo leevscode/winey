@@ -15,6 +15,7 @@ import { ReviewOk } from "../../style/SellListStyle";
 import ReviewModal from "../../components/selllist/ReviewModal";
 import { getdetailData } from "../../api/patchselllist";
 import { useParams } from "react-router";
+import { Link } from "react-router-dom";
 
 const SellListDetail = () => {
   // 주문 상세내역 get
@@ -121,11 +122,17 @@ const SellListDetail = () => {
         <div className="box-list" key={idx}>
           <SellListDetailinfo>
             <SellListDetailWrap>
-              <img src={`/img/${item.pic}`} alt="와인사진" />
+              <Link to={`/productdetail/${item.productId}`}>
+                <img src={`/img/${item.pic}`} alt="와인사진" />
+              </Link>
             </SellListDetailWrap>
             <div className="box-text">
               <ul>
-                <li>{item.nmKor}</li>
+                <li>
+                  <Link to={`/productdetail/${item.productId}`}>
+                    {item.nmKor}
+                  </Link>
+                </li>
                 <li>{item.nmEng}</li>
                 <li>{parseInt(item.price).toLocaleString()}원</li>
                 <li>{item.quantity}개</li>
