@@ -5,10 +5,7 @@
 */
 
 import React, { useEffect, useState } from "react";
-import {
-  EditKeywordConfirmBtn,
-  KeywordWrap,
-} from "../../style/KeywordStyle";
+import { EditKeywordConfirmBtn, KeywordWrap } from "../../style/KeywordStyle";
 import { Checkbox, ConfigProvider, Modal } from "antd";
 import { ButtonCancel, ButtonOk } from "../../style/GlobalStyle";
 import { useNavigate } from "react-router-dom";
@@ -18,41 +15,45 @@ const KeywordSelectEdit = () => {
   const navigator = useNavigate();
 
   // 선택값 임시데이터
-  const selectedKeyword = {
-    categoryId: [1, 3],
-    priceRange: [2, 4],
-    smallCategoryId: [2, 8, 10],
-    countryId: [2, 5],
-    // flower: 0,
-    // plant: 0,
-    // fruit: 0,
-    // spicy: 0,
-    // earth: 1,
-    // oak: 1,
-    // nuts: 1,
-  };
+  // const selectedKeyword = {
+  //   categoryId: [1, 3],
+  //   priceRange: [2, 4],
+  //   smallCategoryId: [2, 8, 10],
+  //   countryId: [2, 5],
+  //   // flower: 0,
+  //   // plant: 0,
+  //   // fruit: 0,
+  //   // spicy: 0,
+  //   // earth: 1,
+  //   // oak: 1,
+  //   // nuts: 1,
+  // };
   //수정된 선호키워드를 담는다(초기값에는 이전에 선택한 항목을 담자)
-  const [editFavoriteKeyword, setEditFavoriteKeyword] =
-    useState(selectedKeyword);
+  const [editFavoriteKeyword, setEditFavoriteKeyword] = useState([]);
 
   // 각 항목별로 키워드 관리 (초기값에는 기존에 선택한 항목이 담긴다.)
-  const [wineTypeCheckedList, setWineTypeCheckedList] = useState([]
+  const [wineTypeCheckedList, setWineTypeCheckedList] = useState(
+    [],
     // selectedKeyword.categoryId,
   );
-  const [winePriceCheckedList, setWinePriceCheckedList] = useState([]
+  const [winePriceCheckedList, setWinePriceCheckedList] = useState(
+    [],
     // selectedKeyword.priceRange,
   );
-  const [wineWithFoodCheckedList, setWineWithFoodCheckedList] = useState([]
+  const [wineWithFoodCheckedList, setWineWithFoodCheckedList] = useState(
+    [],
     // selectedKeyword.smallCategoryId,
   );
-  const [wineFlavorCheckedList, setWineFlavorCheckedList] = useState([]
+  const [wineFlavorCheckedList, setWineFlavorCheckedList] = useState(
+    [],
     // selectedKeyword.aroma,
   );
-  const [wineCountryCheckedList, setWineCountryCheckedList] = useState([]
+  const [wineCountryCheckedList, setWineCountryCheckedList] = useState(
+    [],
     // selectedKeyword.countryId,
   );
 
-  console.log("selectedKeyword", selectedKeyword);
+  console.log("editFavoriteKeyword", editFavoriteKeyword);
   const wineOptions = {
     categoryId: [
       { id: 1, value: "레드" },

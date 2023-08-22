@@ -14,7 +14,7 @@ import {
 } from "../../style/ProductSellStyle";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleCheck, faCreditCard } from "@fortawesome/free-solid-svg-icons";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { Modal } from "antd";
 import {
   getBuyProductDetail,
@@ -37,7 +37,6 @@ const ProductSell = () => {
 
   // 상품 정보 값 담기
   const [productCollect, setProductCollect] = useState("");
-  console.log("단품productCollect", productCollect);
   // get한 아이템정보를 배열에 담자
   const productInfoArray = [productCollect];
 
