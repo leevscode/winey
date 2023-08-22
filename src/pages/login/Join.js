@@ -82,7 +82,6 @@ const Join = () => {
   const handleCertifyPhone = e => {
     e.preventDefault();
     Modal.success({
-      // title: "카드결제",
       icon: (
         <i>
           <FontAwesomeIcon icon={faCircleCheck} />

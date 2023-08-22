@@ -185,8 +185,16 @@ const KeywordChooseCp = () => {
   const handleKeywordChoice = () => {
     try {
       Modal.confirm({
-        title: "선호 키워드",
-        content: "선택한 내용을 저장하시겠습니까?",
+        okText: "예",
+        cancelText: "아니오",
+        wrapClassName: "info-modal-wrap notice-modal",
+        maskClosable: true,
+        // title: "선호 키워드",
+        content: (
+          <ul>
+            <li>선택한 내용을 저장하시겠습니까?</li>
+          </ul>
+        ),
         onOk() {
           postUserKeyword(favoriteKeyword, navigator);
         },
