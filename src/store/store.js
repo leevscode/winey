@@ -17,6 +17,10 @@ const reducer = combineReducers({
 const persistedReducer = persistReducer(persistConfig, reducer);
 const store = configureStore({
   reducer: persistedReducer,
+  middleware: getDefaultMiddleware =>
+    getDefaultMiddleware({
+      serializableCheck: false, //직렬화 안하겠다 설정
+    }),
 });
 
 export default store;
