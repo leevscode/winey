@@ -114,7 +114,7 @@ const SellListDetail = () => {
     5: "픽업완료",
     6: "주문취소",
   };
-
+  
   return (
     <SellListDetailBox>
       {/* <DetailDay>{orderData.orderDetailId}</DetailDay> */}
@@ -136,10 +136,11 @@ const SellListDetail = () => {
                 <li>{item.nmEng}</li>
                 <li>{parseInt(item.price).toLocaleString()}원</li>
                 <li>{item.quantity}개</li>
+                {/* 리뷰 등록시 버튼 바뀜 <li>{item.reviewYn}</li> */}
               </ul>
             </div>
           </SellListDetailinfo>
-          {item.review ? (
+          {item.reviewYn ? (
             <ReviewOk>평점등록이 완료되었습니다</ReviewOk>
           ) : (
             <>
