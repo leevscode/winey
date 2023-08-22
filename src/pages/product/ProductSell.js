@@ -37,6 +37,7 @@ const ProductSell = () => {
 
   // 상품 정보 값 담기
   const [productCollect, setProductCollect] = useState("");
+  console.log("단품productCollect", productCollect);
   // get한 아이템정보를 배열에 담자
   const productInfoArray = [productCollect];
 

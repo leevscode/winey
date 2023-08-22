@@ -11,14 +11,11 @@ import NoImage from "../../assets/no_image.jpg";
 
 const ProductCompleteCart = () => {
   const location = useLocation();
-  console.log("location.state", location.state);
   const stateItem = location.state.editProductCollect;
   const statePick = location.state;
   const finalQuan = index => {
     return location.state.editProductCollect[index].quantity;
   };
-  console.log("stateItem", stateItem);
-  console.log("statePick", statePick);
 
   // 이미지 없을 때 error처리
   const onImgError = e => {

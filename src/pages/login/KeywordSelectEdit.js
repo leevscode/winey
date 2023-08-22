@@ -7,8 +7,6 @@
 import React, { useEffect, useState } from "react";
 import {
   EditKeywordConfirmBtn,
-  EditKeywordTemp,
-  KeywordConfirmBtn,
   KeywordWrap,
 } from "../../style/KeywordStyle";
 import { Checkbox, ConfigProvider, Modal } from "antd";
@@ -38,20 +36,20 @@ const KeywordSelectEdit = () => {
     useState(selectedKeyword);
 
   // 각 항목별로 키워드 관리 (초기값에는 기존에 선택한 항목이 담긴다.)
-  const [wineTypeCheckedList, setWineTypeCheckedList] = useState(
-    selectedKeyword.categoryId,
+  const [wineTypeCheckedList, setWineTypeCheckedList] = useState([]
+    // selectedKeyword.categoryId,
   );
-  const [winePriceCheckedList, setWinePriceCheckedList] = useState(
-    selectedKeyword.priceRange,
+  const [winePriceCheckedList, setWinePriceCheckedList] = useState([]
+    // selectedKeyword.priceRange,
   );
-  const [wineWithFoodCheckedList, setWineWithFoodCheckedList] = useState(
-    selectedKeyword.smallCategoryId,
+  const [wineWithFoodCheckedList, setWineWithFoodCheckedList] = useState([]
+    // selectedKeyword.smallCategoryId,
   );
-  const [wineFlavorCheckedList, setWineFlavorCheckedList] = useState(
-    selectedKeyword.aroma,
+  const [wineFlavorCheckedList, setWineFlavorCheckedList] = useState([]
+    // selectedKeyword.aroma,
   );
-  const [wineCountryCheckedList, setWineCountryCheckedList] = useState(
-    selectedKeyword.countryId,
+  const [wineCountryCheckedList, setWineCountryCheckedList] = useState([]
+    // selectedKeyword.countryId,
   );
 
   console.log("selectedKeyword", selectedKeyword);
@@ -103,7 +101,7 @@ const KeywordSelectEdit = () => {
 
   // 와인종류 핸들러
   const isTypeIndeterminate =
-    !!wineTypeCheckedList.length &&
+    wineTypeCheckedList.length &&
     wineTypeCheckedList.length < wineOptions.categoryId.length;
   const isTypeCheckAll =
     wineTypeCheckedList.length === wineOptions.categoryId.length;
@@ -124,7 +122,7 @@ const KeywordSelectEdit = () => {
 
   // 와인금액 핸들러
   const isPriceIndeterminate =
-    !!winePriceCheckedList.length &&
+    winePriceCheckedList.length &&
     winePriceCheckedList.length < wineOptions.priceRange.length;
   const isPriceCheckAll =
     winePriceCheckedList.length === wineOptions.priceRange.length;
@@ -144,7 +142,7 @@ const KeywordSelectEdit = () => {
 
   // 페어링 음식 핸들러
   const isWithFoodIndeterminate =
-    !!wineWithFoodCheckedList.length &&
+    wineWithFoodCheckedList.length &&
     wineWithFoodCheckedList.length < wineOptions.smallCategoryId.length;
   const isWithFoodCheckAll =
     wineWithFoodCheckedList.length === wineOptions.smallCategoryId.length;
@@ -166,7 +164,7 @@ const KeywordSelectEdit = () => {
 
   // 원산지 핸들러
   const isCountryIndeterminate =
-    !!wineCountryCheckedList.length &&
+    wineCountryCheckedList.length &&
     wineCountryCheckedList.length < wineOptions.countryId.length;
   const isCountryCheckAll =
     wineCountryCheckedList.length === wineOptions.countryId.length;
@@ -187,32 +185,33 @@ const KeywordSelectEdit = () => {
 
   // 향 선택 3차때 업데이트
   // // 향 핸들러
-  // const isFlavorIndeterminate =
-  //   !!wineFlavorCheckedList.length &&
-  //   wineFlavorCheckedList.length < wineOptions.aroma.length;
-  // const isFlavorCheckAll =
-  //   wineFlavorCheckedList.length === wineOptions.aroma.length;
-  // const handleFlavorCheckAllChange = e => {
-  //   const updatedAroma = wineOptions.aroma.map(option => ({
-  //     ...option,
-  //     num: 0,
-  //   }));
-  //   setWineFlavorCheckedList(
-  //     e.target.checked ? wineOptions.aroma.map(option => option.id) : [],
-  //   );
-  //   setEditFavoriteKeyword(prev => ({ ...prev, aroma: updatedAroma }));
-  //   // setEditFavoriteKeyword(prev => ({ aroma: updatedAroma }));
-  // };
+  const isFlavorIndeterminate =
+    wineFlavorCheckedList.length &&
+    wineFlavorCheckedList.length < wineOptions.aroma.length;
+  const isFlavorCheckAll =
+    wineFlavorCheckedList.length === wineOptions.aroma.length;
+  const handleFlavorCheckAllChange = e => {
+    const updatedAroma = wineOptions.aroma.map(option => ({
+      ...option,
+      num: 0,
+    }));
+    setWineFlavorCheckedList(
+      e.target.checked ? wineOptions.aroma.map(option => option.id) : [],
+    );
+    setEditFavoriteKeyword(prev => ({ ...prev, aroma: updatedAroma }));
+    // setEditFavoriteKeyword(prev => ({ aroma: updatedAroma }));
+  };
 
   // // 향 선택부분 데이터형식 변경함
-  // const handleChangeFlavorType = list => {
-  //   const clickFlavor = wineOptions.aroma.map(option => ({
-  //     ...option,
-  //     num: list.includes(option.id) ? 1 : 0,
-  //   }));
-  //   setWineFlavorCheckedList(list);
-  //   setEditFavoriteKeyword(prev => ({ ...prev, aroma: clickFlavor }));
-  // };
+  const handleChangeFlavorType = list => {
+    const clickFlavor = wineOptions.aroma.map(option => ({
+      ...option,
+      num: list.includes(option.id) ? 1 : 0,
+    }));
+    setWineFlavorCheckedList(list);
+    setEditFavoriteKeyword(prev => ({ ...prev, aroma: clickFlavor }));
+  };
+
   // 이벤트핸들러 (저장하기)
   const handleEditKeywordChoice = () => {
     try {
@@ -220,7 +219,7 @@ const KeywordSelectEdit = () => {
         title: "선호 키워드",
         content: "선택한 내용을 저장하시겠습니까?",
         onOk() {
-          postUserKeyword(editFavoriteKeyword, navigator);
+          // postUserKeyword(editFavoriteKeyword, navigator);
         },
         onCancel() {
           console.log("Cancel");
@@ -254,7 +253,6 @@ const KeywordSelectEdit = () => {
       console.log(error);
     }
   };
-  console.log("editFavoriteKeyword", editFavoriteKeyword);
 
   return (
     <>
@@ -364,7 +362,7 @@ const KeywordSelectEdit = () => {
                 </Checkbox>
               </div>
             </li>
-            {/* <li>
+            <li>
               <h3>향</h3>
               <div>
                 <Checkbox.Group
@@ -386,7 +384,7 @@ const KeywordSelectEdit = () => {
                   아무거나
                 </Checkbox>
               </div>
-            </li> */}
+            </li>
           </ul>
         </ConfigProvider>
         <EditKeywordConfirmBtn>
