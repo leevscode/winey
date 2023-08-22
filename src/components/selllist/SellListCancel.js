@@ -25,8 +25,15 @@ const SellListCancel = ({
   };
   const handleCancelWait = async () => {
     Modal.warning({
-      title: "주문취소 확인",
-      content: <p>주문이 취소 되었습니다</p>,
+      okText: "닫기",
+      wrapClassName: "info-modal-wrap notice-modal",
+      maskClosable: true,
+      // title: "주문취소 확인",
+      content: (
+        <ul>
+          <li>주문이 취소 되었습니다.</li>
+        </ul>
+      ),
     });
     await handleCancel();
   };
@@ -35,17 +42,17 @@ const SellListCancel = ({
     <>
       <OrderCancelModal>
         <OrderCancelContent>
-          <h1>정말로 취소 하시겠습니까?</h1>
-          <ButtonOk
-            onClick={() => {
-              handleCancelWait();
-              onClose();
-              setPickupModalVisible(false);
-            }}
-          >
-            네
-          </ButtonOk>
-          <div style={{ marginTop: "8px" }}>
+          <p>정말로 취소 하시겠습니까?</p>
+          <div>
+            <ButtonOk
+              onClick={() => {
+                handleCancelWait();
+                onClose();
+                setPickupModalVisible(false);
+              }}
+            >
+              예
+            </ButtonOk>
             <ButtonCancel onClick={() => onClose()}>아니요</ButtonCancel>
           </div>
         </OrderCancelContent>

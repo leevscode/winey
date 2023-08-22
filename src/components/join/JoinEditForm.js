@@ -27,6 +27,8 @@ import {
 import { useNavigate } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import { logoutUser } from "../../reducers/userSlice";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCircleCheck } from "@fortawesome/free-solid-svg-icons";
 
 const JoinEditForm = () => {
   const dispatch = useDispatch();
@@ -80,10 +82,23 @@ const JoinEditForm = () => {
   };
 
   // 본인 인증 핸들러
-  const handleCertifyPhone = () => {
+  const handleCertifyPhone = e => {
+    e.preventDefault();
     Modal.success({
-      title: "본인 인증",
-      content: <div>본인인증이 완료되었습니다.</div>,
+      icon: (
+        <i>
+          <FontAwesomeIcon icon={faCircleCheck} />
+        </i>
+      ),
+      okText: "확인",
+      wrapClassName: "info-modal-wrap",
+      maskClosable: true,
+      // title: "본인 인증",
+      content: (
+        <ul>
+          <li>본인인증이 완료되었습니다.</li>
+        </ul>
+      ),
       onOk() {},
     });
   };
@@ -115,8 +130,16 @@ const JoinEditForm = () => {
         console.log("비밀번호확인");
       } else {
         Modal.confirm({
-          title: "회원정보수정",
-          content: "수정내용을 저장하시겠습니까?",
+          okText: "예",
+          cancelText: "아니오",
+          wrapClassName: "info-modal-wrap notice-modal",
+          maskClosable: true,
+          // title: "회원정보수정",
+          content: (
+            <ul>
+              <li>회원 정보를 수정 하시겠습니까?</li>
+            </ul>
+          ),
           onOk() {
             patchMemberInfo(update);
             dispatch(getMemberInfo());
@@ -140,9 +163,17 @@ const JoinEditForm = () => {
   // 회원탈퇴 핸들러
   const UserDropOut = () => {
     Modal.confirm({
-      title: "회원탈퇴",
+      okText: "예",
+      cancelText: "아니오",
+      wrapClassName: "info-modal-wrap notice-modal",
+      maskClosable: true,
+      // title: "회원탈퇴",
       icon: <ExclamationCircleFilled />,
-      content: "정말 탈퇴 하시겠습니까?",
+      content: (
+        <ul>
+          <li>회원 탈퇴 하시겠습니까?</li>
+        </ul>
+      ),
       async onOk() {
         await deleteMember();
         removeCookie("accessToken");

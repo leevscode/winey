@@ -6,6 +6,8 @@
 
 import { Modal } from "antd";
 import { client } from "./client";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTriangleExclamation } from "@fortawesome/free-solid-svg-icons";
 // const nav = useNavigate();
 // 선호키워드리스트 유무 확인
 export const getUserFavoriteKey = async () => {
@@ -39,12 +41,20 @@ export const postUserKeyword = async (favoriteKeyword, navigator) => {
   } catch (error) {
     console.log(error);
     Modal.error({
+      icon: (
+        <i className="color_r">
+          <FontAwesomeIcon icon={faTriangleExclamation} />
+        </i>
+      ),
+      okText: "확인",
+      wrapClassName: "info-modal-wrap error-modal",
+      maskClosable: true,
       title: "키워드 재선택",
       content: (
-        <>
+        <p>
           선택 키워드에 대한 와인리스트가 없습니다. <br />
           키워드를 다시 선택해주세요.
-        </>
+        </p>
       ),
     });
     navigator("/keywordselect");

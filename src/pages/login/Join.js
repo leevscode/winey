@@ -18,6 +18,11 @@ import { Terms } from "../../components/join/Terms";
 import { useNavigate } from "react-router-dom";
 import CertifyEmail from "../../components/join/CertifyEmail";
 import { postUserJoin } from "../../api/joinpatch";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faCircleCheck,
+  faTriangleExclamation,
+} from "@fortawesome/free-solid-svg-icons";
 
 const Join = () => {
   const navigate = useNavigate();
@@ -77,8 +82,20 @@ const Join = () => {
   const handleCertifyPhone = e => {
     e.preventDefault();
     Modal.success({
-      title: "본인 인증",
-      content: <div>본인인증이 완료되었습니다.</div>,
+      icon: (
+        <i>
+          <FontAwesomeIcon icon={faCircleCheck} />
+        </i>
+      ),
+      okText: "확인",
+      wrapClassName: "info-modal-wrap",
+      maskClosable: true,
+      // title: "본인 인증",
+      content: (
+        <ul>
+          <li>본인인증이 완료되었습니다.</li>
+        </ul>
+      ),
       onOk() {},
     });
   };
@@ -129,8 +146,20 @@ const Join = () => {
       }
     } else {
       Modal.warning({
-        title: "이용약관동의",
-        content: <p>이용약관동의를 진행해 주세요</p>,
+        icon: (
+          <i className="color_y">
+            <FontAwesomeIcon icon={faTriangleExclamation} />
+          </i>
+        ),
+        okText: "확인",
+        wrapClassName: "info-modal-wrap",
+        maskClosable: true,
+        // title: "이용약관동의",
+        content: (
+          <ul>
+            <li>이용약관동의를 진행해 주세요.</li>
+          </ul>
+        ),
       });
     }
   };

@@ -21,4 +21,5 @@ const store = configureStore({
       serializableCheck: false, //직렬화 안하겠다 설정
     }),
 });
+
 export default store;
