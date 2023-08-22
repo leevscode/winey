@@ -14,7 +14,7 @@ import {
 } from "../../style/ProductSellStyle";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleCheck, faCreditCard } from "@fortawesome/free-solid-svg-icons";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { Modal } from "antd";
 import {
   getBuyProductDetail,

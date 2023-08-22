@@ -12,8 +12,6 @@ import NoImage from "../../assets/no_image.jpg";
 const PurchaseListCart = ({
   productInfoArray,
   setTotalPrice,
-  productCollect,
-  setProductCollect,
   setEditProductCollect,
 }) => {
   // 이미지 없을 때 error처리
@@ -71,15 +69,6 @@ const PurchaseListCart = ({
     setTotalPrice(calcTotalSum);
   }, [calcTotalSum]);
 
-  // useEffect(() => {
-  //   const updatedProductCollect = productInfoArray.map((option, index) => {
-  //     return {
-  //       finalQuantity: itemCount[index],
-  //     };
-  //   });
-  //   setProductCollect({ ...productCollect, ...updatedProductCollect });
-  // }, [itemCount]);
-
   useEffect(() => {
     const updatedProductCollect = productInfoArray.map((option, index) => ({
       cartId: option.cartId,
@@ -94,10 +83,6 @@ const PurchaseListCart = ({
     setEditProductCollect(updatedProductCollect);
   }, [itemCount]);
 
-  // setProductCollect({ ...productCollect, ...updatedProductCollect });
-
-  console.log("productCollect", productCollect);
-  console.log("productInfoArray", productInfoArray);
   return (
     <div>
       <PurchaseListWrap>

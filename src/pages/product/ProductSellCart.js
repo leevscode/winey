@@ -14,7 +14,7 @@ import {
 } from "../../style/ProductSellStyle";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleCheck, faCreditCard } from "@fortawesome/free-solid-svg-icons";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { Modal } from "antd";
 import {
   getUserStoreInfo,
@@ -157,11 +157,8 @@ const ProductSellCart = () => {
   useEffect(() => {
     // 유저 매장정보 get
     getUserStoreInfo(setUserStore);
-    // 상품정보 get
-    // getBuyProductDetail(setProductCollect, productId);
   }, []);
 
-  // useEffect(() => {}, [productCollect, selectCollect]); // 값 변경될때마다 랜더링
   return (
     <PurchaseWrap>
       <PickupPlaceClick
@@ -177,9 +174,6 @@ const ProductSellCart = () => {
           // 합계값 담아오기
           totalPrice={totalPrice}
           setTotalPrice={setTotalPrice}
-          // 상품변경정보 담아오기
-          productCollect={productCollect}
-          setProductCollect={setProductCollect}
           setEditProductCollect={setEditProductCollect}
           // 상품정보 보내기
           productInfoArray={productInfoArray}
