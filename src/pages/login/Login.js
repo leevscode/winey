@@ -65,7 +65,7 @@ const Login = () => {
       const login = await fetchLogin(userid, password);
       if (login.success == true) {
         // 로그인성공 후 cookie에 있는 accessToken을 확인하자
-        console.log("login.token", login.accessToken);
+        console.log("login.token", login.success);
         // 회원 정보 저장
         dispatch(getMemberInfo());
         cartLengthData(dispatch);
