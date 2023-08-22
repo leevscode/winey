@@ -24,6 +24,7 @@ import { SellListButton } from "../../style/SellListReviewStyle";
 import { useNavigate } from "react-router";
 import PickUpModal from "../../components/selllist/PickUpModal";
 import { cancelSellListData, getSellListData } from "../../api/patchselllist";
+import { v4 } from "uuid";
 
 const SellList = () => {
   // 주문 내역 get
