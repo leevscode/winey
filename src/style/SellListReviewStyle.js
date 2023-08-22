@@ -4,13 +4,23 @@
     깃허브 : https://github.com/leevscode
 */
 import styled from "@emotion/styled";
-import { WidthPd } from "./GlobalStyle";
+import { Maincolor, WidthPd } from "./GlobalStyle";
 
 // ReviewModal 컴퍼넌트
-export const ModalColse = styled.i`
-  display: flex;
-  justify-content: flex-end;
-  font-size: 2.8rem;
+export const ModalColse = styled.button`
+  /* display: flex; */
+  /* justify-content: flex-end; */
+  /* font-size: 2.8rem; */
+  position: absolute;
+  top: 18px;
+  right: 20px;
+  font-size: 2rem;
+  color: #8c8c8c;
+  width: 20px;
+  border-radius: 5px;
+  &:hover {
+    background: #f0f0f0;
+  }
 `;
 
 export const SellListButton = styled.div`
@@ -23,28 +33,36 @@ export const SellListButton = styled.div`
 `;
 
 export const ModalText = styled.div`
+  position: absolute;
+  top: 18vh;
+  left: 50%;
+  transform: translateX(-50%);
   display: flex;
   flex-direction: column;
-  width: 500px;
-  background-color: #fff;
-  padding: 50px 25px;
+  max-width: 440px;
+  width: 95%;
+  background-color: ${Maincolor.white};
+  padding: 50px 15px 40px;
   border-radius: 8px;
   text-align: center;
-  h1 {
-    font-size: 2.7rem;
-    margin-bottom: 30px;
+  h3 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin: 20px 0 10px;
   }
-  h2 {
-    font-size: 2rem;
+  p {
+    font-size: 1.6rem;
+    color: ${Maincolor.grayBold};
     margin-bottom: 30px;
   }
 `;
 export const ReviewIcon = styled.i`
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-  font-size: 3.5rem;
-  margin-bottom: 15px;
+  /* display: flex; */
+  /* align-items: center; */
+  /* justify-content: space-around; */
+  display: block;
+  font-size: 2.3em;
+  margin-bottom: 10px;
 `;
 
 export const ReviewModalbox = styled.ul`
@@ -52,24 +70,40 @@ export const ReviewModalbox = styled.ul`
   font-size: 1.7rem;
   align-items: center;
   justify-content: space-around;
+  gap: 0 10px;
+  margin-bottom: 40px;
+  li {
+    width: calc(100% / 3);
+  }
   button {
-    width: 27%;
-    height: 120px;
-    background: #fcf8f1;
-    border-radius: 20px;
+    display: block;
+    width: 100%;
+    /* width: 27%; */
+    /* height: 120px; */
+    background: ${Maincolor.beige};
+    border-radius: 10px;
+    padding: 35px 10px;
+    font-size: 1.4rem;
+    color: ${Maincolor.black};
+    border: 2px solid ${Maincolor.beige};
     &:hover {
-      color: #7c1d34;
+      color: ${Maincolor.redDeep};
       cursor: pointer;
-      border: 2px solid #7c1d34;
+      border-color: ${Maincolor.redDeep};
     }
     &.selected {
-      border: 2px solid #7c1d34;
-      color: #7c1d34;
+      border: 2px solid ${Maincolor.redDeep};
+      color: ${Maincolor.redDeep};
     }
     &:focus {
       outline: none;
     }
   }
+`;
+export const ReviewModalButton = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 0 5px;
 `;
 
 export const SellListModal = styled.div`
@@ -79,9 +113,9 @@ export const SellListModal = styled.div`
   transform: translate(-50%, -50%);
   width: 100%;
   height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  /* display: flex; */
+  /* justify-content: center; */
+  /* align-items: center; */
   background-color: rgba(0, 0, 0, 0.5);
   z-index: 999;
   visibility: ${({ reviewReset }) => (reviewReset ? "visible" : "hidden")};

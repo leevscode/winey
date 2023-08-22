@@ -62,14 +62,9 @@ const ProductCart = () => {
   // 장바구니 모달
   const removeItemCart = removeCart => {
     Modal.confirm({
-      icon: (
-        <i className="color_y">
-          <FontAwesomeIcon icon={faTriangleExclamation} />
-        </i>
-      ),
       okText: "예",
       cancelText: "아니오",
-      wrapClassName: "info-modal-wrap check-modal",
+      wrapClassName: "info-modal-wrap notice-modal",
       maskClosable: true,
       // title: "장바구니 삭제 확인",
       content: (
@@ -81,13 +76,13 @@ const ProductCart = () => {
           </li>
         </ul>
       ),
-      onOk() {
-        const data = removeCarts(removeCart);
+      async onOk() {
+        const data = await removeCarts(removeCart);
         filledCartData(data);
         cartLengthData(dispatch);
       },
       onCancel() {
-        console.log("Cancel");
+        // console.log("Cancel");
       },
     });
   };

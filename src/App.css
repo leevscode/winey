@@ -42,6 +42,13 @@
   > .color_y {
   color: #ffbe44;
 }
+.info-modal-wrap
+  .ant-modal
+  .ant-modal-content
+  .ant-modal-confirm-body
+  > .color_r {
+  color: #ff5656;
+}
 .info-modal-wrap .ant-modal .ant-modal-content ul {
   font-family:
     "Pretendard Variable",
@@ -131,4 +138,51 @@
 }
 .check-modal .ant-modal .ant-modal-confirm-btns .ant-btn-primary {
   margin-bottom: 5px;
+}
+
+.notice-modal .ant-modal .ant-modal-content .ant-modal-body {
+  margin-top: 0;
+}
+.notice-modal .ant-modal .ant-modal-content {
+  padding-bottom: 35px;
+}
+.notice-modal .ant-modal-confirm-body .anticon {
+  display: none;
+}
+.notice-modal .ant-modal .ant-modal-confirm-btns {
+  display: flex;
+  flex-direction: row-reverse;
+}
+.notice-modal .ant-modal .ant-modal-confirm-btns .ant-btn-default {
+  margin-left: 5px;
+}
+.error-modal .ant-modal .ant-modal-confirm-title,
+.error-modal .ant-modal .ant-modal-confirm-content {
+  font-family:
+    "Pretendard Variable",
+    Pretendard,
+    -apple-system,
+    BlinkMacSystemFont,
+    system-ui,
+    Roboto,
+    "Helvetica Neue",
+    "Segoe UI",
+    "Apple SD Gothic Neo",
+    "Noto Sans KR",
+    "Malgun Gothic",
+    "Apple Color Emoji",
+    "Segoe UI Emoji",
+    "Segoe UI Symbol",
+    sans-serif;
+  text-align: center;
+  color: #3c2323;
+}
+.error-modal .ant-modal .ant-modal-confirm-title {
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+.error-modal .ant-modal .ant-modal-confirm-content {
+  margin-block-start: 0 !important;
+  max-width: 100% !important;
 }

@@ -4,6 +4,7 @@
     깃허브 : https://github.com/leevscode
 */
 import styled from "@emotion/styled";
+import { Maincolor } from "./GlobalStyle";
 
 export const OrderCancelModal = styled.div`
   position: fixed;
@@ -12,23 +13,36 @@ export const OrderCancelModal = styled.div`
   transform: translate(-50%, -50%);
   width: 100%;
   height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: rgba(0, 0, 0, 0.5);
+  /* display: flex; */
+  /* justify-content: center; */
+  /* align-items: center; */
+  background-color: rgba(0, 0, 0, 0.1);
   z-index: 9999;
 `;
 
 export const OrderCancelContent = styled.div`
+  position: absolute;
+  top: 25vh;
+  left: 50%;
+  transform: translateX(-50%);
   font-size: 1.8rem;
-  background-color: white;
-  padding: 50px;
-  border-radius: 5px;
-  h1 {
-    color: #aaaaaa;
-    float: right;
-    font-size: 2rem;
-    font-weight: bold;
+  background-color: ${Maincolor.white};
+  width: 300px;
+  padding: 60px 15px 35px;
+  /* padding: 50px; */
+  border-radius: 8px;
+  p {
+    color: ${Maincolor.black};
+    /* float: right; */
+    font-size: 1.8rem;
+    font-weight: 700;
+    text-align: center;
     margin-bottom: 30px;
+  }
+  & > div {
+    display: flex;
+    & button:first-of-type {
+      margin-right: 5px;
+    }
   }
 `;

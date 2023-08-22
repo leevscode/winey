@@ -26,19 +26,19 @@ const PickUpModal = ({ onConfirm, onClose, onPick, setSellListData }) => {
     <>
       <OrderCancelModal>
         <OrderCancelContent>
-          <h1>픽업완료 확정을 하시겠습니까?</h1>
-          <ButtonOk
-            onClick={() => {
-              // "픽업완료" 확인 처리를 위해 onConfirm 함수를 호출합니다
-              onConfirm(onPick);
-              finishSellList();
-              onClose();
-              finishSellListWait();
-            }}
-          >
-            네
-          </ButtonOk>
-          <div style={{ marginTop: "8px" }}>
+          <p>픽업완료 확정을 하시겠습니까?</p>
+          <div>
+            <ButtonOk
+              onClick={() => {
+                // "픽업완료" 확인 처리를 위해 onConfirm 함수를 호출합니다
+                onConfirm(onPick);
+                finishSellList();
+                onClose();
+                finishSellListWait();
+              }}
+            >
+              예
+            </ButtonOk>
             <ButtonCancel onClick={() => onClose()}>아니요</ButtonCancel>
           </div>
         </OrderCancelContent>

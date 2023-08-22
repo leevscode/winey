@@ -16,6 +16,7 @@ import {
   ModalColse,
   ModalText,
   ReviewIcon,
+  ReviewModalButton,
   ReviewModalbox,
   SellListButton,
   SellListModal,
@@ -79,61 +80,59 @@ const ReviewModal = ({
   return (
     <SellListModal reviewReset={reviewReset}>
       {reviewReset && (
-        <div>
-          <ModalText>
-            <button onClick={() => hideModal()}>
-              <ModalColse>
-                <FontAwesomeIcon onClick={() => closeModal()} icon={faXmark} />
-              </ModalColse>
-            </button>
-            <h1>드신 와인은 어떠셨나요?</h1>
-            <h2>지금 바로 평점을 남겨보세요!</h2>
-            <ReviewModalbox>
+        <ModalText>
+          <ModalColse onClick={() => hideModal()}>
+            <i>
+              <FontAwesomeIcon onClick={() => closeModal()} icon={faXmark} />
+            </i>
+          </ModalColse>
+          <h3>드신 와인은 어떠셨나요?</h3>
+          <p>지금 바로 평점을 남겨보세요!</p>
+          <ReviewModalbox>
+            <li>
               <button
                 onClick={() => handleReviewSelection(1)}
                 className={selectedReview === 1 ? "selected" : ""}
               >
-                <li>
-                  <ReviewIcon>
-                    <FontAwesomeIcon icon={faFaceGrinSquint} />
-                  </ReviewIcon>
-                  좋아요
-                </li>
+                <ReviewIcon>
+                  <FontAwesomeIcon icon={faFaceGrinSquint} />
+                </ReviewIcon>
+                좋아요
               </button>
+            </li>
+            <li>
               <button
                 onClick={() => handleReviewSelection(2)}
                 className={selectedReview === 2 ? "selected" : ""}
               >
-                <li>
-                  <ReviewIcon>
-                    <FontAwesomeIcon icon={faFaceSmile} />
-                  </ReviewIcon>
-                  보통이에요
-                </li>
+                <ReviewIcon>
+                  <FontAwesomeIcon icon={faFaceSmile} />
+                </ReviewIcon>
+                보통이에요
               </button>
+            </li>
+            <li>
               <button
                 onClick={() => handleReviewSelection(3)}
                 className={selectedReview === 3 ? "selected" : ""}
               >
-                <li>
-                  <ReviewIcon>
-                    <FontAwesomeIcon icon={faFaceRollingEyes} />
-                  </ReviewIcon>
-                  취향이아니에요
-                </li>
+                <ReviewIcon>
+                  <FontAwesomeIcon icon={faFaceRollingEyes} />
+                </ReviewIcon>
+                취향이아니에요
               </button>
-            </ReviewModalbox>
-            <SellListButton>
-              <ButtonOk onClick={handleReviewSubmit}>평점등록</ButtonOk>{" "}
-              <ButtonCancel onClick={() => closeModal()}>취소</ButtonCancel>
-            </SellListButton>
-            {showWarning && (
-              <p style={{ color: "red", fontSize: "1.5rem" }}>
-                평점을 선택해주세요.
-              </p>
-            )}
-          </ModalText>
-        </div>
+            </li>
+          </ReviewModalbox>
+          <ReviewModalButton>
+            <ButtonOk onClick={handleReviewSubmit}>평점등록</ButtonOk>{" "}
+            <ButtonCancel onClick={() => closeModal()}>취소</ButtonCancel>
+          </ReviewModalButton>
+          {showWarning && (
+            <p style={{ color: "red", fontSize: "1.5rem" }}>
+              평점을 선택해주세요.
+            </p>
+          )}
+        </ModalText>
       )}
     </SellListModal>
   );

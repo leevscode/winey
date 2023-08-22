@@ -40,8 +40,16 @@ const MypageList = () => {
   };
   const handleLogout = async e => {
     Modal.confirm({
-      title: "로그아웃",
-      content: "로그아웃 하시겠습니까?",
+      okText: "예",
+      cancelText: "아니오",
+      wrapClassName: "info-modal-wrap notice-modal",
+      maskClosable: true,
+      // title: "로그아웃",
+      content: (
+        <ul>
+          <li>로그아웃 하시겠습니까?</li>
+        </ul>
+      ),
       async onOk() {
         e.preventDefault();
         await postLogout("");

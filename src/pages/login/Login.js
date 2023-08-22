@@ -16,6 +16,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { getMemberInfo } from "../../api/joinpatch";
 import { cartLengthData } from "../../api/patchcart";
 import { getUserFavoriteKey } from "../../api/keywordpatch";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faCircleCheck,
+  faTriangleExclamation,
+} from "@fortawesome/free-solid-svg-icons";
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -28,8 +33,22 @@ const Login = () => {
   const [password, setPassword] = useState("");
 
   const config = {
+    icon: (
+      <i className="color_r">
+        <FontAwesomeIcon icon={faTriangleExclamation} />
+      </i>
+    ),
+    okText: "확인",
+    wrapClassName: "info-modal-wrap error-modal",
+    maskClosable: true,
     title: "로그인 실패",
-    content: <p>아이디/패스워드를 다시 확인해 주세요.</p>,
+    content: (
+      <p>
+        아이디 혹은 패스워드를
+        <br />
+        다시 확인해 주세요.
+      </p>
+    ),
   };
 
   const navigate = useNavigate();
