@@ -21,6 +21,7 @@ import {
   getTotalMinusTwoNew,
 } from "../../api/patchproduct";
 import ProductCartModal from "../product/ProductCartModal";
+import QuickProductList from "../QuickProductList";
 
 const Price = () => {
   // 로딩 더미데이터
@@ -114,6 +115,21 @@ const Price = () => {
     },
     [setListScroll],
   );
+  // 카테고리 메뉴 리스트 옵션 설정
+  const categoryMenu = [
+    {
+      title: "2만원 미만",
+    },
+    {
+      title: "2~5만원",
+    },
+    {
+      title: "5~10만원",
+    },
+    {
+      title: "10만원 이상",
+    },
+  ];
   // 상품 총 갯수 불러옴
   useEffect(() => {
     setTotalCount(listScroll.length);
@@ -144,6 +160,8 @@ const Price = () => {
   return (
     <>
       <ProductListWrap>
+        {/* 상품리스트 퀵메뉴 버튼 */}
+        <QuickProductList categoryMenu={categoryMenu} />
         {/* 상품리스트 목록 */}
         <ProductMainItemWrap>
           <ul>

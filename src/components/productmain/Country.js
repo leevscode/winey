@@ -21,6 +21,7 @@ import {
   getTotalCountryNew,
 } from "../../api/patchproduct";
 import ProductCartModal from "../product/ProductCartModal";
+import QuickProductList from "../QuickProductList";
 
 const Country = () => {
   // 로딩 더미데이터
@@ -114,6 +115,24 @@ const Country = () => {
     },
     [setListScroll],
   );
+  // 카테고리 메뉴 리스트 옵션 설정
+  const categoryMenu = [
+    {
+      title: "프랑스",
+    },
+    {
+      title: "미국",
+    },
+    {
+      title: "이탈리아",
+    },
+    {
+      title: "칠레",
+    },
+    {
+      title: "기타",
+    },
+  ];
   // 상품 총 갯수 불러옴
   useEffect(() => {
     setTotalCount(listScroll.length);
@@ -144,6 +163,8 @@ const Country = () => {
   return (
     <>
       <ProductListWrap>
+        {/* 상품리스트 퀵메뉴 버튼 */}
+        <QuickProductList categoryMenu={categoryMenu} />
         {/* 상품리스트 목록 */}
         <ProductMainItemWrap>
           <ul>

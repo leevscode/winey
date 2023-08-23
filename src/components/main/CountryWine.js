@@ -86,8 +86,6 @@ const CountryWine = ({ setIsModalOpen }) => {
   const handleTabBtn = (_ibtn, e) => {
     e.preventDefault();
     setIsActive(_ibtn);
-    setCountryWines([]); // 기존 랜더링된 값 초기화
-    setIsLoading(true);
   };
   // 상품 더미 데이터
   // const countryItem = [

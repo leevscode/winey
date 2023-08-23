@@ -1,7 +1,7 @@
 import React from "react";
 import { LoadingProductListItem } from "../../style/SkeletonStyle";
 
-const ProductListSkeleton = test => {
+const ProductListSkeleton = () => {
   return (
     <LoadingProductListItem>
       <div className="img"></div>

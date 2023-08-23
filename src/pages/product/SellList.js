@@ -1,8 +1,3 @@
-/*
-    작업자 : 이동은
-    노션 : https://www.notion.so/leevscode/leevscode-5223e3d332604844a255a0c63113a284
-    깃허브 : https://github.com/leevscode
-*/
 import React, { useEffect, useState } from "react";
 import { ButtonCancel, SectionLine } from "../../style/GlobalStyle";
 import {
@@ -172,7 +167,7 @@ const SellList = () => {
                 item.orderStatus === 5 ||
                 item.orderStatus === 6 ? (
                   // 주문취소 버튼이 사라졌을때 빈 공백을 유지하는 스타일
-                  <div style={{ height: "28px" }} />
+                  <div style={{ height: "42px" }} />
                 ) : (
                   <OrdercancelBtn>
                     <button onClick={() => showCancelModal(item.orderId)}>
@@ -184,10 +179,8 @@ const SellList = () => {
                   </OrdercancelBtn>
                 )}
                 <SellListInfo>
-                  <SellListProduct>
-                    상품명 : {item.nmKor}
-                    {/* {item.nmKor.length > 1 && ` 외 ${item.nmKor.length - 1}건`}  */}
-                  </SellListProduct>
+                  <SellListProduct>{item.orderDate}</SellListProduct>
+                  상품명 : {item.nmKor}
                   <li>주문번호 : {item.orderId}</li>
                   <li>결제 방법 : {payment[`${item.payment}`]}</li>
                   <li>

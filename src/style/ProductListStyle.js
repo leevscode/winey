@@ -143,3 +143,52 @@ export const ProductMainItemWrap = styled.div`
     margin-right: -7px;
   }
 `;
+
+// 상품리스트 퀵메뉴 버튼
+export const QuickProductListWrap = styled.div`
+  position: relative;
+  padding: ${WidthPd.padding};
+  border-bottom: 0.05rem solid ${opacity.white};
+  margin-left: -12px;
+  &::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 1;
+    display: block;
+    width: 30px;
+    height: 100%;
+    background: linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0) 0%,
+      rgba(255, 255, 255, 1) 45%,
+      rgba(255, 255, 255, 1) 100%
+    );
+  }
+  .swiper-slide {
+    width: auto;
+    button {
+      position: relative;
+      font-size: 1.4rem;
+      text-align: center;
+      color: ${Maincolor.grayBold};
+      padding: 15px 20px;
+      &::after {
+        content: "";
+        position: absolute;
+        width: 100%;
+        height: 2px;
+        left: 0;
+        bottom: 0;
+      }
+      &.active {
+        color: ${Maincolor.redDeep};
+        font-weight: 700;
+        &::after {
+          background: ${Maincolor.redDeep};
+        }
+      }
+    }
+  }
+`;

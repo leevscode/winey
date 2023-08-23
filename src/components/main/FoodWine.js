@@ -70,8 +70,7 @@ const FoodWine = ({ setIsModalOpen }) => {
     e.preventDefault();
     // console.log("숫자 몇번이야", _ibtn);
     setIsActive(_ibtn);
-    setFoodWines([]); // 기존 랜더링된 값 초기화
-    setIsLoading(true);
+    // console.log("현재데이터", foodWines);
   };
   // 상품 더미 데이터
   // const foodItem = [
@@ -93,6 +92,7 @@ const FoodWine = ({ setIsModalOpen }) => {
   // ];
   useEffect(() => {
     getFoodWines(isActive, setFoodWines, setIsLoading);
+    // console.log("useEffect에서 로딩 컴포넌트", isLoading);
   }, [isActive]);
   return (
     <>

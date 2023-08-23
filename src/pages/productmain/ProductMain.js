@@ -3,7 +3,7 @@
   노션 : https://kimaydev.notion.site/kimaydev/FE-7a53f9f631f146c88c39413cd175a9d0
   깃허브 : https://github.com/kimaydev
 */
-import React, { useState } from "react";
+import React from "react";
 import { Outlet } from "react-router-dom";
 
 const ProductMain = () => {
