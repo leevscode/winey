@@ -23,6 +23,7 @@ import {
 } from "../../style/SellListReviewStyle";
 import { submitReview } from "../../api/patchselllist";
 import { useSelector } from "react-redux";
+import { Modal } from "antd";
 
 const ReviewModal = ({
   reviewId,
@@ -32,7 +33,6 @@ const ReviewModal = ({
 }) => {
   const [selectedReview, setSelectedReview] = useState(null);
   const [showWarning, setShowWarning] = useState(false);
-  //const [submitReview, setSubmitReview] = useState()
 
   // 사용자 정보
   const userData = useSelector(state => state.user);
@@ -40,15 +40,23 @@ const ReviewModal = ({
     if (selectedReview) {
       // console.log("평점이 등록될 orderDetailId :", reviewId);
       // console.log("평점이 등록되었습니다 평점 레벨 :", selectedReview);
-      // DB연동 예정
+
       await submitReview(reviewId, selectedReview, userData.userId);
 
       // 리뷰가 성공적으로 제출되면 reviewSubmit를 true로 설정
       reviewSubmitUpdate(selectedReview);
 
-      // 평점 처리가 완료되면 모달을 닫습니다.
-
-      // console.log("평점 등록");
+      // 평점 처리가 완료되면 메세지를 출력 후 모달 닫기.
+      Modal.warning({
+        wrapClassName: "info-modal-wrap notice-modal",
+        maskClosable: true,
+        content: (
+          <ul>
+            <li>평점등록이 완료 되었습니다.</li>
+          </ul>
+        ),
+      });
+      
       hideModal();
     } else {
       setShowWarning(true);

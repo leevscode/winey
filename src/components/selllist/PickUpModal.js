@@ -10,6 +10,7 @@ import {
   OrderCancelModal,
 } from "../../style/SellListCancelStyle";
 import { finishSellListData, getSellListData } from "../../api/patchselllist";
+import { Modal } from "antd";
 
 const PickUpModal = ({ onConfirm, onClose, onPick, setSellListData }) => {
   const finishSellList = async () => {
@@ -20,6 +21,15 @@ const PickUpModal = ({ onConfirm, onClose, onPick, setSellListData }) => {
   };
   const finishSellListWait = async () => {
     await finishSellList();
+    Modal.warning({
+      wrapClassName: "info-modal-wrap notice-modal",
+      maskClosable: true,
+      content: (
+        <ul>
+          <li>픽업이 완료 되었습니다.</li>
+        </ul>
+      ),
+    });
   };
 
   return (
