@@ -143,3 +143,15 @@ export const ProductMainItemWrap = styled.div`
     margin-right: -7px;
   }
 `;
+
+// 상품리스트 퀵메뉴 버튼
+export const QuickProductListWrap = styled.div`
+  ul {
+    display: flex;
+    li {
+      button {
+        font-size: 1.4rem;
+      }
+    }
+  }
+`;
