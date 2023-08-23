@@ -5,13 +5,10 @@
 */
 import React from "react";
 import { Outlet } from "react-router-dom";
-import QuickProductList from "../../components/QuickProductList";
 
 const ProductMain = () => {
   return (
     <>
-      {/* 상품리스트 퀵메뉴 버튼 */}
-      <QuickProductList />
       {/* 상품리스트 목록 */}
       <Outlet />
     </>

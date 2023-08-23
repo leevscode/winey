@@ -1,26 +1,21 @@
 import React from "react";
+import { v4 } from "uuid";
+// Import Swiper React components
+import { Swiper, SwiperSlide } from "swiper/react";
+// Import Swiper styles
+import "swiper/css";
 import { QuickProductListWrap } from "../style/ProductListStyle";
 
-const QuickProductList = () => {
+const QuickProductList = ({ categoryMenu }) => {
   return (
     <QuickProductListWrap>
-      <ul>
-        <li>
-          <button>육류</button>
-        </li>
-        <li>
-          <button>해산물</button>
-        </li>
-        <li>
-          <button>유제품</button>
-        </li>
-        <li>
-          <button>야채</button>
-        </li>
-        <li>
-          <button>디저트</button>
-        </li>
-      </ul>
+      <Swiper slidesPerView={"auto"}>
+        {categoryMenu.map((item, index) => (
+          <SwiperSlide key={v4()}>
+            <button>{item.title}</button>
+          </SwiperSlide>
+        ))}
+      </Swiper>
     </QuickProductListWrap>
   );
 };

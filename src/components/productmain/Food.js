@@ -21,6 +21,7 @@ import {
   getTotalFoodNew,
 } from "../../api/patchproduct";
 import ProductCartModal from "../product/ProductCartModal";
+import QuickProductList from "../QuickProductList";
 
 const Food = () => {
   // 로딩 더미데이터
@@ -114,6 +115,29 @@ const Food = () => {
     },
     [setListScroll],
   );
+  // 카테고리 메뉴 리스트 옵션 설정
+  const categoryMenu = [
+    {
+      ititle: 1,
+      title: "육류",
+    },
+    {
+      ititle: 2,
+      title: "해산물",
+    },
+    {
+      ititle: 3,
+      title: "유제품",
+    },
+    {
+      ititle: 4,
+      title: "야채",
+    },
+    {
+      ititle: 5,
+      title: "디저트",
+    },
+  ];
   // 상품 총 갯수 불러옴
   useEffect(() => {
     setTotalCount(listScroll.length);
@@ -144,6 +168,8 @@ const Food = () => {
   return (
     <>
       <ProductListWrap>
+        {/* 상품리스트 퀵메뉴 버튼 */}
+        <QuickProductList categoryMenu={categoryMenu} />
         {/* 상품리스트 목록 */}
         <ProductMainItemWrap>
           <ul>
