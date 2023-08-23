@@ -223,7 +223,7 @@ const KeywordSelectEdit = () => {
           // postUserKeyword(editFavoriteKeyword, navigator);
         },
         onCancel() {
-          console.log("Cancel");
+          // console.log("Cancel");
         },
       });
     } catch (error) {
