@@ -36,7 +36,6 @@ const SellListDetail = () => {
   const calculateTotalAmount = () => {
     let totalPrice = 0;
     productInfo.forEach(item => {
-      // item.salePrice가 문자열이 아닌 경우에 대한 처리 추가
       if (typeof item.salePrice === "string") {
         const price = parseInt(item.salePrice.replace(/[^0-9]/g, ""), 10);
         if (!isNaN(price)) {
@@ -115,7 +114,6 @@ const SellListDetail = () => {
     6: "주문취소",
   };
 
-
   return (
     <SellListDetailBox>
       {/* <DetailDay>{orderData.orderDetailId}</DetailDay> */}
@@ -135,7 +133,15 @@ const SellListDetail = () => {
                   </Link>
                 </li>
                 <li>{item.nmEng}</li>
-                <li>{parseInt(item.price).toLocaleString()}원</li>
+                {/* salePrice가 있으면 먼저 출력, 없으면 Price 출력 */}
+                {item.salePrice ? (
+                  <li>
+                    {parseInt(item.salePrice).toLocaleString()}원 (할인가)
+                  </li>
+                ) : (
+                  <li>{parseInt(item.price).toLocaleString()}원</li>
+                )}
+
                 <li>{item.quantity}개</li>
                 {/* 리뷰 등록시 버튼 바뀜 <li>{item.reviewYn}</li> */}
               </ul>

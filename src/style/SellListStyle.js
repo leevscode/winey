@@ -36,8 +36,12 @@ export const NotOrder = styled.div`
 `;
 
 export const SellListProduct = styled.li`
-  display: flex;
+  font-size: 2rem;
+  display: inline-block;
+  position: absolute;
+  margin-top: -30px;
   flex-direction: column;
+  color: black !important;
 `;
 
 export const PickUpButton = styled.button`
@@ -67,7 +71,7 @@ export const SellListInfo = styled.ul`
   flex-direction: column;
   font-size: 1.5rem;
   gap: 10px;
-  /* margin: 6px; */
+  color: #b8abab;
   margin: ${WidthPd.padding};
   margin-bottom: 2rem;
 `;
