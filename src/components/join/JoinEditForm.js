@@ -99,7 +99,9 @@ const JoinEditForm = () => {
           <li>본인인증이 완료되었습니다.</li>
         </ul>
       ),
-      onOk() {},
+      onOk() {
+        return;
+      },
     });
   };
   // password 유효성 관련 핸들러
