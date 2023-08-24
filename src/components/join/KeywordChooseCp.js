@@ -151,33 +151,6 @@ const KeywordChooseCp = () => {
     setFavoriteKeyword(prev => ({ ...prev, countryId: list }));
   };
 
-  // // 향 핸들러
-  // const isFlavorIndeterminate =
-  //   !!wineFlavorCheckedList.length &&
-  //   wineFlavorCheckedList.length < wineOptions.aroma.length;
-  // const isFlavorCheckAll =
-  //   wineFlavorCheckedList.length === wineOptions.aroma.length;
-  // const handleFlavorCheckAllChange = e => {
-  //   const updatedAroma = wineOptions.aroma.map(option => ({
-  //     ...option,
-  //     num: 0,
-  //   }));
-  //   setWineFlavorCheckedList(
-  //     e.target.checked ? wineOptions.aroma.map(option => option.id) : [],
-  //   );
-  //   setFavoriteKeyword(prev => ({ ...prev, aroma: updatedAroma }));
-  //   // setFavoriteKeyword(prev => ({ aroma: updatedAroma }));
-  // };
-
-  // // 향 선택부분 데이터형식 변경함
-  // const handleChangeFlavorType = list => {
-  //   const clickFlavor = wineOptions.aroma.map(option => ({
-  //     ...option,
-  //     num: list.includes(option.id) ? 1 : 0,
-  //   }));
-  //   setWineFlavorCheckedList(list);
-  //   setFavoriteKeyword(prev => ({ ...prev, aroma: clickFlavor }));
-  // };
   // 향 핸들러
   const isFlavorIndeterminate =
     !!wineFlavorCheckedList.length &&
@@ -227,26 +200,7 @@ const KeywordChooseCp = () => {
 
   // 모두선택하기
   const handleKeywordAll = async () => {
-    try {
-      const updatedAroma = wineOptions.aroma.map(option => ({
-        ...option,
-        num: 0,
-      }));
-      console.log("updatedAroma", updatedAroma);
-
-      const allSelect = {
-        categoryId: wineOptions.categoryId.map(option => option.id),
-        priceRange: wineOptions.priceRange.map(option => option.id),
-        countryId: wineOptions.countryId.map(option => option.id),
-        smallCategoryId: wineOptions.smallCategoryId.map(option => option.id),
-        aroma: updatedAroma,
-      };
-      await setFavoriteKeyword(allSelect);
-      postUserKeyword(favoriteKeyword, navigator);
-      // navigator("/main");
-    } catch (error) {
-      console.log(error);
-    }
+    setFavoriteKeyword({ ...wineOptions });
   };
   console.log("favoriteKeyword", favoriteKeyword);
 

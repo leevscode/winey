@@ -1,3 +1,9 @@
+/*
+    작업자 : 최혜미
+    노션 : https://hyemdev.notion.site/hyemdev/hyem-s-dev-STUDY-75ffe819c7534a049b59871e6fe17dd4
+    깃허브 : https://github.com/hyemdev
+*/
+
 import React from "react";
 import {
   LaptopOutlined,
@@ -9,6 +15,7 @@ import SubMenu from "antd/es/menu/SubMenu";
 import { LayoutSideMenuWrap } from "../style/AdminLayoutStyle";
 import { Link } from "react-router-dom";
 import { IMenu } from "../interface/LayoutInterface";
+import { Maincolor } from "../../style/GlobalStyle";
 const { Sider } = Layout;
 
 const AdminSideMenu = () => {
@@ -47,32 +54,29 @@ const AdminSideMenu = () => {
     },
   ];
   return (
-    <div>
-      <Sider style={{ background: "#fcf8f1" }} width={200}>
-        <LayoutSideMenuWrap>
-          <Menu
-            mode="inline"
-            defaultSelectedKeys={["1"]}
-            defaultOpenKeys={menuItems.map(item => item.key)}
-            style={{ height: "100%", background: "#fcf8f1" }}
-          >
-            {menuItems.map(menuItem => (
-              <SubMenu
-                key={menuItem.key}
-                icon={menuItem.icon}
-                title={menuItem.title}
-              >
-                {menuItem.items.map(item => (
-                  <Menu.Item key={item.key}>
-                    <Link to={item.link}>{item.label}</Link>
-                  </Menu.Item>
-                ))}
-              </SubMenu>
-            ))}
-          </Menu>
-        </LayoutSideMenuWrap>
-      </Sider>
-    </div>
+    <Sider style={{ background: "transparent" }}>
+      <LayoutSideMenuWrap>
+        <Menu
+          mode="inline"
+          defaultSelectedKeys={["1"]}
+          defaultOpenKeys={menuItems.map(item => item.key)}
+        >
+          {menuItems.map(menuItem => (
+            <SubMenu
+              key={menuItem.key}
+              icon={menuItem.icon}
+              title={menuItem.title}
+            >
+              {menuItem.items.map(item => (
+                <Menu.Item key={item.key}>
+                  <Link to={item.link}>{item.label}</Link>
+                </Menu.Item>
+              ))}
+            </SubMenu>
+          ))}
+        </Menu>
+      </LayoutSideMenuWrap>
+    </Sider>
   );
 };
 
