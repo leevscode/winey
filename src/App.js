@@ -2,7 +2,14 @@ import { Route, Routes, useLocation } from "react-router-dom";
 import "./App.css";
 // 관리자
 import Admin from "./Admin";
-import AdminHome from "./pages/admin/AdminHome";
+// import AdminHome from "./admin/pages/AdminHome";
+import AdminIntro from "./admin/components/AdminIntro";
+import MemberControl from "./admin/pages/member/MemberControlAdm";
+import MemberDetail from "./admin/pages/member/MemberDetailAdm";
+import OrderControl from "./admin/pages/order/OrderControlAdm";
+import OrderDetail from "./admin/pages/order/OrderDetailAdm";
+import ProductAdd from "./admin/pages/product/ProductAddAdm";
+import ProductEdit from "./admin/pages/product/ProductEditAdm";
 // 사용자
 import User from "./User";
 import Intro from "./pages/Intro";
@@ -79,8 +86,27 @@ function App() {
         <Routes>
           {/* 관리자 페이지 */}
           {/* -> 관리자 페이지 추후 별도 프로젝트 생성해서 작업 할 것 */}
-          <Route element={<Admin />}>
-            <Route path="/admin" element={<AdminHome />} />
+          <Route path="/admin" element={<Admin />}>
+            {/* 관리자페이지 초기화면 */}
+            <Route index element={<AdminIntro />} />
+            {/* 회원관리 리스트 */}
+            <Route path="membercontrol" element={<MemberControl />} />
+            {/* 회원상세내역 */}
+            <Route path="memberdetail" element={<MemberDetail />} />
+            {/* 주문내역관리 */}
+            <Route path="ordercontrol" element={<OrderControl />} />
+            {/* 주문상세리스트 */}
+            <Route path="orderdetail" element={<OrderDetail />} />
+            {/* 상품관리 */}
+            <Route path="productlist" element={<ProductList />} />
+            {/* 상품등록하기 */}
+            <Route path="productadd" element={<ProductAdd />} />
+            {/* 상품수정하기*/}
+            <Route path="productEdit" element={<ProductEdit />} />
+            {/* 기간별 할인상품 관리 */}
+            {/* 경로 외 접속 시 낫파운드 */}
+            <Route index path="*" element={<NotFound />} />
+
           </Route>
           {/* 인트로 */}
           <Route path="/" element={<Intro />} />
