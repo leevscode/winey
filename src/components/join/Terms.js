@@ -524,7 +524,9 @@ export const Terms = ({ checkAll, setCheckAll }) => {
           <TermsInfo />
         </div>
       ),
-      onOk() {},
+      onOk() {
+        return;
+      },
     });
   };
   const handleCheckedPrivate = () => {
@@ -535,7 +537,9 @@ export const Terms = ({ checkAll, setCheckAll }) => {
           <PrivateInfo />
         </div>
       ),
-      onOk() {},
+      onOk() {
+        return;
+      },
     });
   };
 

@@ -96,7 +96,9 @@ const Join = () => {
           <li>본인인증이 완료되었습니다.</li>
         </ul>
       ),
-      onOk() {},
+      onOk() {
+        return;
+      },
     });
   };
 
