@@ -30,8 +30,9 @@ export const postUserKeyword = async (favoriteKeyword, navigator) => {
       priceRange: favoriteKeyword.priceRange,
       aromaCategoryId: favoriteKeyword.aromaCategoryId,
     });
-    const data = await res.data;
+    const result = await res.data;
     navigator("/main");
+    return result;
   } catch (error) {
     console.log(error);
     Modal.error({
@@ -59,8 +60,11 @@ export const postUserKeyword = async (favoriteKeyword, navigator) => {
 export const getUserKeyword = async setYourKeyword => {
   try {
     const res = await client.get("/api/recommend/getrecommend");
+    console.log("res", res);
     const result = await res.data;
+    console.log("result", result);
     setYourKeyword(result);
+    return result;
   } catch (error) {
     console.log(error);
   }
@@ -69,15 +73,17 @@ export const getUserKeyword = async setYourKeyword => {
 // 선호키워드 수정 put
 export const putUserKeyword = async (editFavoriteKeyword, navigator) => {
   try {
-    const res = await client.post("/api/recommend/updrecommend", {
+    const res = await client.put("/api/recommend/updrecommend", {
       categoryId: editFavoriteKeyword.categoryId,
       countryId: editFavoriteKeyword.countryId,
       smallCategoryId: editFavoriteKeyword.smallCategoryId,
       priceRange: editFavoriteKeyword.priceRange,
       aromaCategoryId: editFavoriteKeyword.aromaCategoryId,
     });
-    const data = await res.data;
+    const result = await res.data;
     navigator("/main");
+    console.log("result", result);
+    return result;
   } catch (error) {
     console.log(error);
     Modal.error({

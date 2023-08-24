@@ -31,6 +31,8 @@ client.interceptors.request.use(
 //     return response;
 //   },
 //   async error => {
+//     console.log("response", response);
+//     console.log("response.statuss", response.status);
 //     const { config, response } = error;
 //     const refreshToken = getCookie("refreshToken");
 //     if (response.status === 401 && refreshToken) {
@@ -51,7 +53,7 @@ client.interceptors.request.use(
 //         console.log(error);
 //       }
 //     }
-// return Promise.reject(error);
+//     return Promise.reject(error);
 //   },
 // );
 
@@ -75,6 +77,8 @@ export const fetchLogin = async (userid, password) => {
       sameSite: "none",
       httpOnly: true,
     });
+    console.log("res", res);
+
     return result;
   } catch (error) {
     console.log(error);

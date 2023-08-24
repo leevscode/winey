@@ -4,12 +4,16 @@
     깃허브 : https://github.com/hyemdev
 */
 
-import React from 'react'
+import React from "react";
+import Paginate from "../../components/Paginate";
 
 const MemberControlAdm = () => {
   return (
-    <div>MemberControlAdm</div>
-  )
-}
+    <div>
+      MemberControlAdm
+      <Paginate />
+    </div>
+  );
+};
 
-export default MemberControlAdm
+export default MemberControlAdm;
