@@ -8,9 +8,6 @@ import { Maincolor, WidthPd } from "./GlobalStyle";
 
 // ReviewModal 컴퍼넌트
 export const ModalColse = styled.button`
-  /* display: flex; */
-  /* justify-content: flex-end; */
-  /* font-size: 2.8rem; */
   position: absolute;
   top: 18px;
   right: 20px;
@@ -57,9 +54,6 @@ export const ModalText = styled.div`
   }
 `;
 export const ReviewIcon = styled.i`
-  /* display: flex; */
-  /* align-items: center; */
-  /* justify-content: space-around; */
   display: block;
   font-size: 2.3em;
   margin-bottom: 10px;
@@ -78,8 +72,6 @@ export const ReviewModalbox = styled.ul`
   button {
     display: block;
     width: 100%;
-    /* width: 27%; */
-    /* height: 120px; */
     background: ${Maincolor.beige};
     border-radius: 10px;
     padding: 35px 10px;
@@ -113,9 +105,6 @@ export const SellListModal = styled.div`
   transform: translate(-50%, -50%);
   width: 100%;
   height: 100%;
-  /* display: flex; */
-  /* justify-content: center; */
-  /* align-items: center; */
   background-color: rgba(0, 0, 0, 0.5);
   z-index: 999;
   visibility: ${({ reviewReset }) => (reviewReset ? "visible" : "hidden")};

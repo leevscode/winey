@@ -4,33 +4,7 @@
     깃허브 : https://github.com/leevscode
 */
 import styled from "@emotion/styled";
-
-export const WidthPd = {
-  padding: "0 2%",
-  paddingTopSmall: "1.5rem",
-};
-
-export const opacity = {
-  wine: "rgba(124, 29, 52, 0.65)",
-  grayDeep: "rgba(60, 35, 35, 0.5)",
-  gray: "rgba(60, 35, 35, 0.3)",
-  grayLight: "rgba(60, 35, 35, 0.1)",
-  white: "rgba(60, 35, 35, 0.07)",
-  whiteB: "rgba(255, 255, 255, 0.3)",
-  whiteC: "rgba(60, 35, 35, 0.03)",
-};
-
-export const Maincolor = {
-  beige: "#fcf8f1",
-  white: "#fff",
-  black: "#3c2323",
-  redDeep: "#690a21",
-  redBold: "#7c1d34",
-  redMedium: "#9a6a6a",
-  grayBold: "#837575",
-  grayDeep: "#6b5b5b",
-  grayMedium: "#e7e4e4",
-};
+import { Maincolor, WidthPd, opacity } from "./GlobalStyle";
 
 export const DetailDay = styled.div`
   display: flex;

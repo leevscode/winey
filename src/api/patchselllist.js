@@ -10,7 +10,7 @@ export const getSellListData = async () => {
     const response = await client.get(`/api/orderList/user`);
     const sellListData = response.data;
 
-    // 데이터를 원하는 순서로 정렬
+    // 데이터를 순서 정렬
     const sortedSellListData = sellListData.sort((a, b) => a.orderNumber - b.orderNumber);
 
     return sortedSellListData;
