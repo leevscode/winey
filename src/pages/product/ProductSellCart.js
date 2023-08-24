@@ -74,7 +74,9 @@ const ProductSellCart = () => {
           </li>
         </ul>
       ),
-      onOk() {},
+      onOk() {
+        return;
+      },
     });
     setPaymentError(null);
     setIsPayment(1);

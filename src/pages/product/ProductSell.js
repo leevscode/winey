@@ -77,7 +77,9 @@ const ProductSell = () => {
           </li>
         </ul>
       ),
-      onOk() {},
+      onOk() {
+        return;
+      },
     });
     setPaymentError(null);
     setIsPayment(1);
