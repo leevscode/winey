@@ -170,6 +170,8 @@ const SellList = () => {
                   <div style={{ height: "42px" }} />
                 ) : (
                   <OrdercancelBtn>
+                    {/* 주문날짜 */}
+                    <span className="date">{item.orderDate}</span>
                     <button onClick={() => showCancelModal(item.orderId)}>
                       주문취소
                       <i>
@@ -179,16 +181,35 @@ const SellList = () => {
                   </OrdercancelBtn>
                 )}
                 <SellListInfo>
-                  <SellListProduct>{item.orderDate}</SellListProduct>
-                  상품명 : {item.nmKor}
-                  <li>주문번호 : {item.orderId}</li>
-                  <li>결제 방법 : {payment[`${item.payment}`]}</li>
+                  {/* <SellListProduct>{item.orderDate}</SellListProduct> */}
                   <li>
-                    총 결제 금액 : {item.totalOrderPrice.toLocaleString()}
+                    <span>상품명</span>
+                    {item.nmKor}
                   </li>
-                  <li>픽업 지점 : {item.storeNm}</li>
-                  <li>픽업 시간 : {item.pickupTime}</li>
-                  <li>주문 상태 : {orderStatus[`${item.orderStatus}`]}</li>
+                  <li>
+                    <span>주문번호</span>
+                    {item.orderId}
+                  </li>
+                  <li>
+                    <span>결제 방법</span>
+                    {payment[`${item.payment}`]}
+                  </li>
+                  <li>
+                    <span>총 결제 금액</span>
+                    {item.totalOrderPrice.toLocaleString()}원
+                  </li>
+                  <li>
+                    <span>픽업 지점</span>
+                    {item.storeNm}
+                  </li>
+                  <li>
+                    <span>픽업 시간</span>
+                    {item.pickupTime}
+                  </li>
+                  <li>
+                    <span>주문 상태</span>
+                    {orderStatus[`${item.orderStatus}`]}
+                  </li>
                 </SellListInfo>
                 <SellListButton>
                   <ButtonCancel

@@ -18,7 +18,12 @@ export const OrdercancelBtn = styled.div`
   margin: ${WidthPd.padding};
   margin-top: 2rem;
   margin-bottom: 1rem;
-  justify-content: flex-end;
+  /* justify-content: flex-end; */
+  justify-content: space-between;
+  .date {
+    font-size: 1.8rem;
+    font-weight: 700;
+  }
   button {
     font-size: 1.2rem;
     color: ${Maincolor.grayBold};
@@ -70,10 +75,17 @@ export const SellListInfo = styled.ul`
   display: flex;
   flex-direction: column;
   font-size: 1.5rem;
-  gap: 10px;
-  color: #b8abab;
+  gap: 13px 0;
   margin: ${WidthPd.padding};
   margin-bottom: 2rem;
+  li {
+    span {
+      display: inline-block;
+      min-width: 10rem;
+      margin-right: 10px;
+      color: ${Maincolor.grayBold};
+    }
+  }
 `;
 
 export const SellListReady = styled.div`
