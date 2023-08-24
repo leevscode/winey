@@ -36,13 +36,14 @@ export const getTotalFoodNew = async (
   _setListScroll,
   _setHasNextPage,
   _page,
+  _cate,
 ) => {
   try {
     const res = await axios.get(
-      `/api/main/food/new?bigCategoryId=1&page=${_page.current}&row=9`,
+      `/api/main/food/new?bigCategoryId=${_cate}&page=${_page.current}&row=9`,
     );
     const result = res.data;
-    // console.log("음식별 와인리스트 GET(최신등록순)", result);
+    console.log("음식별 와인리스트 GET(최신등록순)", result);
     _setListScroll(prevPosts => [...prevPosts, ...result]);
     _setHasNextPage(result.length === 9);
     if (result.length) {

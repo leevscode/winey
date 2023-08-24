@@ -118,18 +118,28 @@ const Country = () => {
   // 카테고리 메뉴 리스트 옵션 설정
   const categoryMenu = [
     {
+      ititle: 1,
+      icate: "country",
       title: "프랑스",
     },
     {
+      ititle: 2,
+      icate: "country",
       title: "미국",
     },
     {
+      ititle: 3,
+      icate: "country",
       title: "이탈리아",
     },
     {
+      ititle: 4,
+      icate: "country",
       title: "칠레",
     },
     {
+      ititle: 5,
+      icate: "country",
       title: "기타",
     },
   ];

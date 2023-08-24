@@ -223,7 +223,7 @@ const PriceWine = ({ setIsModalOpen }) => {
         )}
       </ContentsListItemWrap>
       {/* 가격별 추천 와인 전체보기 */}
-      <MainTabLink to="/productmain/price">
+      <MainTabLink to="/productmain/price/1">
         가격별 추천 와인 전체보기
         <i>
           <FontAwesomeIcon icon={faArrowRight} />

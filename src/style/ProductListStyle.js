@@ -168,8 +168,9 @@ export const QuickProductListWrap = styled.div`
   }
   .swiper-slide {
     width: auto;
-    button {
+    a {
       position: relative;
+      display: block;
       font-size: 1.4rem;
       text-align: center;
       color: ${Maincolor.grayBold};

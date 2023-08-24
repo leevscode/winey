@@ -3,7 +3,7 @@
   노션 : https://kimaydev.notion.site/kimaydev/FE-7a53f9f631f146c88c39413cd175a9d0
   깃허브 : https://github.com/kimaydev
 */
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { NavLink, useLocation, useNavigate, useParams } from "react-router-dom";
 import {
   BackBtn,
@@ -21,7 +21,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { cartLengthData } from "../api/patchcart";
 
 const Header = ({ handleOpenNav, isActive }) => {
-  const { iproduct, isell, iselllist } = useParams();
+  const { iproduct, isell, iselllist, icate } = useParams();
   const location = useLocation();
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -145,19 +145,21 @@ const Header = ({ handleOpenNav, isActive }) => {
     // 와인 전체보기 카테고리
     {
       title: "음식별 추천 와인",
-      path: "/productmain/food",
+      path: `/productmain/food/${icate}`,
     },
     {
       title: "국가별 추천 와인",
-      path: "/productmain/country",
+      path: `/productmain/country/${icate}`,
     },
     {
       title: "가격별 추천 와인",
-      path: "/productmain/price",
+      path: `/productmain/price/${icate}`,
     },
   ];
+  let findPath = pageName.find(item => item.path === location.pathname);
   useEffect(() => {
-    const findPath = pageName.find(item => item.path === location.pathname);
+    findPath;
+
     if (findPath) {
       setPageTitle(findPath.title);
       setPagePath(findPath.path);
