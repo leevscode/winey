@@ -1,17 +1,45 @@
 import styled from "@emotion/styled";
-import { Maincolor } from "../../style/GlobalStyle";
+import {
+  Gradation,
+  Maincolor,
+  WidthPd,
+  opacity,
+} from "../../style/GlobalStyle";
+
+// 관리자페이지 색상 설정
+export const AdminColor = {
+  headColorA: "#774954",
+  bodyColorA: "#f7f1f3",
+};
 
 // 관리자 헤더
 export const LayoutHeaderWrap = styled.div`
   width: 100%;
+  height: 100%;
   & div {
-    & h2 {
-      color: ${Maincolor.beige};
+    display: flex;
+    align-items: center;
+    height: 100%;
+    a {
+      display: inline-block;
+      h2 {
+        font-size: 2rem;
+        line-height: 1;
+        color: ${Maincolor.beige};
+        img {
+          width: 85px;
+          height: auto;
+        }
+      }
     }
   }
 `;
 // 관리자 사이드메뉴
 export const LayoutSideMenuWrap = styled.div`
+  height: 100%;
+  .ant-menu {
+    height: 100%;
+  }
   .ant-menu-sub.ant-menu-inline {
     background: ${Maincolor.beige} !important;
   }
@@ -47,14 +75,130 @@ export const LayoutIntroWrap = styled.div`
 `;
 // 관리자 내용
 export const LayoutContentWrap = styled.div`
-  min-height: 81rem;
+  /* min-height: 81rem; */
+  // 브라우저 높이에서 헤더, 푸터의 높이값을 뺌
+  height: calc(100vh - 65px - 49px);
   background: ${Maincolor.beige};
+  .ant-layout-content {
+    padding: ${WidthPd.padding};
+    height: 100%;
+    .ant-breadcrumb {
+      margin: 10px 0px;
+    }
+    .contents-box {
+      width: calc(100% - 200px);
+      padding-left: 1%;
+    }
+  }
+  .layout-box {
+    background: ${Maincolor.white};
+    border: 0.05rem solid ${opacity.white};
+    padding: 1%;
+    padding-left: 0;
+    border-radius: 20px;
+    height: 92%;
+    overflow: hidden;
+    isolation: isolate;
+    .ant-layout {
+      background: transparent;
+      height: 100%;
+      overflow: auto;
+      /* 스크롤바 커스텀 */
+      &::-webkit-scrollbar {
+        display: block;
+        width: 6px;
+        height: 6px;
+      }
+      &::-webkit-scrollbar-track {
+        background: transparent;
+      }
+      &::-webkit-scrollbar-thumb {
+        background: ${opacity.gray};
+        border-radius: 10px;
+      }
+    }
+  }
 `;
 
 // 관리자 푸터
 export const LayoutFooterWrap = styled.div`
-  width: 100%;
   position: absolute;
   bottom: 0;
   left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 50px;
+  border-top: 0.05rem solid ${opacity.white};
+  background: ${Maincolor.beige};
+  .ant-layout-footer {
+    font-size: 1.3rem;
+    background: transparent;
+    color: ${opacity.grayDeep};
+    text-align: center;
+    padding: 0;
+    b {
+      font-size: 1.2em;
+      font-weight: 700;
+    }
+  }
+`;
+// 테이블 감싸는 div
+export const TableWrap = styled.div`
+  /* background: pink; */
+  overflow: auto;
+  padding-bottom: 10px;
+  /* 스크롤바 커스텀 */
+  &::-webkit-scrollbar {
+    display: block;
+    width: 6px;
+    height: 6px;
+  }
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: ${opacity.gray};
+    border-radius: 10px;
+  }
+`;
+
+// 관리자 리스트 테이블 스타일 설정
+export const LayoutTable = styled.table`
+  width: 100%;
+  min-width: 1000px;
+  background: ${Maincolor.white};
+  border: 0.05rem solid ${opacity.white};
+  th,
+  td {
+    padding: 15px 5px;
+    border-right: 0.05rem solid ${opacity.white};
+    vertical-align: middle;
+    &:last-of-type {
+      border-right: 0;
+    }
+  }
+  thead {
+    tr {
+      background: ${AdminColor.headColorA};
+      th {
+        border-bottom: 0.2rem solid ${opacity.white};
+        font-weight: 700;
+        color: ${Maincolor.white};
+        min-width: 100px;
+      }
+    }
+  }
+  tbody {
+    tr {
+      transition: 0.1s ease-in-out background;
+      &:hover {
+        background: ${AdminColor.bodyColorA};
+      }
+      td {
+        border-bottom: 0.05rem solid ${opacity.white};
+      }
+    }
+  }
 `;

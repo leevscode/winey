@@ -1,7 +1,7 @@
 import React from "react";
 
-const ProductEdit = () => {
-  return <div>ProductEdit</div>;
+const ProductEditAdm = () => {
+  return <div>ProductEditAdm</div>;
 };
 
-export default ProductEdit;
+export default ProductEditAdm;

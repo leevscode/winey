@@ -1,9 +1,7 @@
-import React from 'react'
+import React from "react";
 
-const ProductAdd = () => {
-  return (
-    <div>ProductAdd</div>
-  )
-}
+const ProductAddAdm = () => {
+  return <div>ProductAddAdm</div>;
+};
 
-export default ProductAdd
+export default ProductAddAdm;

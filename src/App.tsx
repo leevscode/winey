@@ -8,8 +8,9 @@ import MemberControl from "./admin/pages/member/MemberControlAdm";
 import MemberDetail from "./admin/pages/member/MemberDetailAdm";
 import OrderControl from "./admin/pages/order/OrderControlAdm";
 import OrderDetail from "./admin/pages/order/OrderDetailAdm";
-import ProductAdd from "./admin/pages/product/ProductAddAdm";
-import ProductEdit from "./admin/pages/product/ProductEditAdm";
+import ProductListAdm from "./admin/pages/product/ProductListAdm";
+import ProductAddAdm from "./admin/pages/product/ProductAddAdm";
+import ProductEditAdm from "./admin/pages/product/ProductEditAdm";
 // 사용자
 import User from "./User";
 import Intro from "./pages/Intro";
@@ -98,15 +99,14 @@ function App() {
             {/* 주문상세리스트 */}
             <Route path="orderdetail" element={<OrderDetail />} />
             {/* 상품관리 */}
-            <Route path="productlist" element={<ProductList />} />
+            <Route path="productlist" element={<ProductListAdm />} />
             {/* 상품등록하기 */}
-            <Route path="productadd" element={<ProductAdd />} />
+            <Route path="productadd" element={<ProductAddAdm />} />
             {/* 상품수정하기*/}
-            <Route path="productEdit" element={<ProductEdit />} />
+            <Route path="productedit" element={<ProductEditAdm />} />
             {/* 기간별 할인상품 관리 */}
             {/* 경로 외 접속 시 낫파운드 */}
             <Route index path="*" element={<NotFound />} />
-
           </Route>
           {/* 인트로 */}
           <Route path="/" element={<Intro />} />

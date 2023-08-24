@@ -9,6 +9,7 @@ import AdminHeader from "./admin/components/AdminHeader";
 import AdminFooter from "./admin/components/AdminFooter";
 import AdminSideMenu from "./admin/components/AdminSideMenu";
 import { LayoutContentWrap } from "./admin/style/AdminLayoutStyle";
+import { Gradation } from "./style/GlobalStyle";
 const { Content } = Layout;
 
 const Admin: React.FC = () => {
@@ -16,7 +17,7 @@ const Admin: React.FC = () => {
     <ConfigProvider
       theme={{
         token: {
-          colorPrimary: "#79213d",
+          colorPrimary: `${Gradation.wineB}`,
           fontFamily:
             '"Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif',
         },
@@ -26,20 +27,19 @@ const Admin: React.FC = () => {
         {/* 관리자페이지 - 헤더 */}
         <AdminHeader />
         <LayoutContentWrap>
-          <Content
-            style={{
-              padding: "0 50px",
-              height: "810px",
-            }}
-          >
-            <Breadcrumb style={{ margin: "16px 0" }}></Breadcrumb>
-            <Layout style={{ padding: "24px 0", background: "#fcf8f1" }}>
-              {/* 관리자페이지 - 사이드메뉴 */}
-              <AdminSideMenu />
-              <Content style={{ padding: "0 24px", minHeight: 280 }}>
-                <Outlet />
-              </Content>
-            </Layout>
+          <Content>
+            {/* 관리자페이지 - 페이지 이름 표시 */}
+            <Breadcrumb>페이지 이름 표시되는 컴포넌트</Breadcrumb>
+            <div className="layout-box">
+              <Layout>
+                {/* 관리자페이지 - 사이드메뉴 */}
+                <AdminSideMenu />
+                {/* 관리자페이지 - 내용 */}
+                <div className="contents-box">
+                  <Outlet />
+                </div>
+              </Layout>
+            </div>
           </Content>
         </LayoutContentWrap>
         {/* 관리자페이지 - 푸터 */}
