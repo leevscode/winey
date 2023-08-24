@@ -1,9 +1,9 @@
 import React from 'react'
 
-const OrderControl = () => {
+const OrderControlAdm = () => {
   return (
-    <div>OrderControl</div>
+    <div>OrderControlAdm</div>
   )
 }
 
-export default OrderControl
+export default OrderControlAdm
