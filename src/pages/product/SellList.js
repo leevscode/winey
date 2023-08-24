@@ -181,75 +181,54 @@ const SellList = () => {
                   </button>
                 </OrdercancelBtn>
               )}
-                <SellListInfo>
-                  {/* <SellListProduct>{item.orderDate}</SellListProduct> */}
-                  <li>
-                    <span>상품명</span>
-                    {item.nmKor}
-                  </li>
-                  <li>
-                    <span>주문번호</span>
-                    {item.orderId}
-                  </li>
-                  <li>
-                    <span>결제 방법</span>
-                    {payment[`${item.payment}`]}
-                  </li>
-                  <li>
-                    <span>총 결제 금액</span>
-                    {item.totalOrderPrice.toLocaleString()}원
-                  </li>
-                  <li>
-                    <span>픽업 지점</span>
-                    {item.storeNm}
-                  </li>
-                  <li>
-                    <span>픽업 시간</span>
-                    {item.pickupTime}
-                  </li>
-                  <li>
-                    <span>주문 상태</span>
-                    {orderStatus[`${item.orderStatus}`]}
-                  </li>
-                </SellListInfo>
-                <SellListButton>
-                  <ButtonCancel
-                    onClick={() => {
-                      navigate(`/selllistdetail/${item.orderId}`);
-                    }}
-                  >
-                    주문 상세내역
-                  </ButtonCancel>
-                  {/* 상태가 "결제완료"일 때에만 상품 준비중입니다 표시 */}
-                  {item.orderStatus === 1 && (
-                    <SellListReady>상품 준비중입니다</SellListReady>
-                  )}
-                  {/* 픽업완료 버튼을 누르면 "픽업완료" 상태로 바뀌면서 버튼이 disabled */}
-                  {item.orderStatus === 5 ? (
-                    <PickUpButton disabled>픽업완료</PickUpButton>
-                  ) : (
-                    // 테스트 끝나면 3, 4, 5 로 바꿔야됨
-                    [3, 4, 5].includes(item.orderStatus) && (
-                      <PickUpButton
-                        onClick={() => handlePickUpComplete(item.orderId)}
-                        disabled={completedPickUpOrders.includes(item.orderId)}
-                      >
-                        픽업완료
-                      </PickUpButton>
-                    )
-                  )}
-                  {/* "픽업완료" 모달을 렌더링*/}
-                  {pickupModalVisible && (
-                    <PickUpModal
-                      onCancel={() => setPickupModalVisible(false)}
-                      onConfirm={handleConfirmPickUp}
-                      onClose={() => setPickupModalVisible(false)}
-                      onPick={selectedItem}
-                      setPickupModalVisible={setPickupModalVisible}
-                      setSellListData={setSellListData}
-                    />
-                  )}
-                </SellListButton>
+              <SellListInfo>
+                <SellListProduct>{item.orderDate}</SellListProduct>
+                상품명 : {item.nmKor}
+                <li>주문번호 : {item.orderId}</li>
+                <li>결제 방법 : {payment[`${item.payment}`]}</li>
+                <li>총 결제 금액 : {item.totalOrderPrice.toLocaleString()}</li>
+                <li>픽업 지점 : {item.storeNm}</li>
+                <li>픽업 시간 : {item.pickupTime}</li>
+                <li>주문 상태 : {orderStatus[`${item.orderStatus}`]}</li>
+              </SellListInfo>
+              <SellListButton>
+                <ButtonCancel
+                  onClick={() => {
+                    navigate(`/selllistdetail/${item.orderId}`);
+                  }}
+                >
+                  주문 상세내역
+                </ButtonCancel>
+                {/* 상태가 "결제완료"일 때에만 상품 준비중입니다 표시 */}
+                {item.orderStatus === 1 && (
+                  <SellListReady>상품 준비중입니다</SellListReady>
+                )}
+                {/* 픽업완료 버튼을 누르면 "픽업완료" 상태로 바뀌면서 버튼이 disabled */}
+                {item.orderStatus === 5 ? (
+                  <PickUpButton disabled>픽업완료</PickUpButton>
+                ) : (
+                  // 테스트 끝나면 3, 4, 5 로 바꿔야됨
+                  [3, 4, 5].includes(item.orderStatus) && (
+                    <PickUpButton
+                      onClick={() => handlePickUpComplete(item.orderId)}
+                      disabled={completedPickUpOrders.includes(item.orderId)}
+                    >
+                      픽업완료
+                    </PickUpButton>
+                  )
+                )}
+                {/* "픽업완료" 모달을 렌더링*/}
+                {pickupModalVisible && (
+                  <PickUpModal
+                    onCancel={() => setPickupModalVisible(false)}
+                    onConfirm={handleConfirmPickUp}
+                    onClose={() => setPickupModalVisible(false)}
+                    onPick={selectedItem}
+                    setPickupModalVisible={setPickupModalVisible}
+                    setSellListData={setSellListData}
+                  />
+                )}
+              </SellListButton>
               {/* 주문취소 모달 */}
               {CancelModal[item.orderId] && (
                 <SellListCancel
