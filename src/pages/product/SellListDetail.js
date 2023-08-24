@@ -29,22 +29,19 @@ const SellListDetail = () => {
   const [reviewId, setReviewId] = useState(null);
   const [productData, setProductData] = useState([]);
 
-  // 결제 총 금액
-  // const orderData = {};
-
   // 상품 가격 합산
-  const calculateTotalAmount = () => {
-    let totalPrice = 0;
-    productInfo.forEach(item => {
-      if (typeof item.salePrice === "string") {
-        const price = parseInt(item.salePrice.replace(/[^0-9]/g, ""), 10);
-        if (!isNaN(price)) {
-          totalPrice += price;
-        }
-      }
-    });
-    return totalPrice;
-  };
+  // const calculateTotalAmount = () => {
+  //   let totalPrice = 0;
+  //   productInfo.forEach(item => {
+  //     if (typeof item.salePrice === "string") {
+  //       const price = parseInt(item.salePrice.replace(/[^0-9]/g, ""), 10);
+  //       if (!isNaN(price)) {
+  //         totalPrice += price;
+  //       }
+  //     }
+  //   });
+  //   return totalPrice;
+  // };
 
   // 주문 상세 내역 출력
   const filleddetailData = async () => {
@@ -84,7 +81,6 @@ const SellListDetail = () => {
   // 평점 등록이 완료된 항목만 상태를 업데이트
   const reviewSubmitUpdate = () => {
     const arr = productData.map(item => {
-      // reviewId : 보관해둔 팝업창 전달한 orderDetailId
       if (item.orderDetailId === reviewId) {
         item.review = 1;
       }
@@ -96,7 +92,7 @@ const SellListDetail = () => {
   // 상품에 해당하는 평점을 등록하는 함수
   const submitRating = (key, rating) => {
     const updatedReviewSubmit = { ...reviewSubmit };
-    updatedReviewSubmit[key] = true; // 평점 등록 상태를 true로 표시
+    updatedReviewSubmit[key] = true;
     setReviewSubmit(updatedReviewSubmit);
   };
 

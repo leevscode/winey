@@ -13,9 +13,6 @@ export const OrderCancelModal = styled.div`
   transform: translate(-50%, -50%);
   width: 100%;
   height: 100%;
-  /* display: flex; */
-  /* justify-content: center; */
-  /* align-items: center; */
   background-color: rgba(0, 0, 0, 0.1);
   z-index: 9999;
 `;
@@ -29,11 +26,10 @@ export const OrderCancelContent = styled.div`
   background-color: ${Maincolor.white};
   width: 300px;
   padding: 60px 15px 35px;
-  /* padding: 50px; */
+
   border-radius: 8px;
   p {
     color: ${Maincolor.black};
-    /* float: right; */
     font-size: 1.8rem;
     font-weight: 700;
     text-align: center;

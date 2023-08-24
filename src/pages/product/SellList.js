@@ -1,3 +1,9 @@
+/*
+    작업자 : 이동은
+    노션 : https://www.notion.so/leevscode
+    깃허브 : https://github.com/leevscode
+*/
+
 import React, { useEffect, useState } from "react";
 import { ButtonCancel, SectionLine } from "../../style/GlobalStyle";
 import {
@@ -26,7 +32,6 @@ const SellList = () => {
   const [SellListData, setSellListData] = useState([]);
   // 선택된 번호 state
   const [selectedItem, setSelectedItem] = useState(null);
-  // const [reviewList, setReviewList] = useState([]);
   // 목록
   const [pickupModalVisible, setPickupModalVisible] = useState(false);
   const [selectedOrder, setSelectedOrder] = useState([]);

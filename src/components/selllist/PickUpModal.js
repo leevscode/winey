@@ -15,7 +15,6 @@ import { Modal } from "antd";
 const PickUpModal = ({ onConfirm, onClose, onPick, setSellListData }) => {
   const finishSellList = async () => {
     await finishSellListData(onPick);
-    // alert("픽업이 완료 되었습니다");
     const data = await getSellListData();
     setSellListData(data);
   };
@@ -40,7 +39,7 @@ const PickUpModal = ({ onConfirm, onClose, onPick, setSellListData }) => {
           <div>
             <ButtonOk
               onClick={() => {
-                // "픽업완료" 확인 처리를 위해 onConfirm 함수를 호출합니다
+                // "픽업완료" 확인 처리를 위해 onConfirm 함수를 호출
                 onConfirm(onPick);
                 finishSellList();
                 onClose();

@@ -40,13 +40,10 @@ const ReviewModal = ({
     if (selectedReview) {
       // console.log("평점이 등록될 orderDetailId :", reviewId);
       // console.log("평점이 등록되었습니다 평점 레벨 :", selectedReview);
-
       await submitReview(reviewId, selectedReview, userData.userId);
 
-      // 리뷰가 성공적으로 제출되면 reviewSubmit를 true로 설정
       reviewSubmitUpdate(selectedReview);
 
-      // 평점 처리가 완료되면 메세지를 출력 후 모달 닫기.
       Modal.warning({
         wrapClassName: "info-modal-wrap notice-modal",
         maskClosable: true,
