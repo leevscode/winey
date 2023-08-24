@@ -12,7 +12,9 @@ import { PersistGate } from "redux-persist/integration/react";
 // persist 적용
 let persistor = persistStore(store);
 
-const root = ReactDOM.createRoot(document.getElementById("root"));
+const root = ReactDOM.createRoot(
+  document.getElementById("root") as HTMLElement,
+);
 root.render(
   <HelmetProvider>
     <Provider store={store}>

@@ -27,6 +27,7 @@
     "redux": "^4.2.1",
     "redux-persist": "^6.0.0",
     "sass": "^1.64.1",
+    "styled-components": "^6.0.7",
     "swiper": "^10.0.4",
     "uuid": "^9.0.0"
   },
@@ -55,10 +56,15 @@
     ]
   },
   "devDependencies": {
+    "@types/jest": "^29.5.4",
+    "@types/node": "^20.5.3",
+    "@types/react": "^18.2.21",
+    "@types/react-dom": "^18.2.7",
     "eslint": "^8.45.0",
     "eslint-config-prettier": "^8.8.0",
     "eslint-plugin-react": "^7.33.0",
-    "prettier": "3.0.0"
+    "prettier": "3.0.0",
+    "typescript": "4.9"
   },
   "proxy": "http://192.168.0.144:5004"
 }
