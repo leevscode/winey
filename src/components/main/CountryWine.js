@@ -279,7 +279,7 @@ const CountryWine = ({ setIsModalOpen }) => {
         )}
       </ContentsListItemWrap>
       {/* 국가별 추천 와인 전체보기 */}
-      <MainTabLink to="/productmain/country">
+      <MainTabLink to="/productmain/country/1">
         국가별 추천 와인 전체보기
         <i>
           <FontAwesomeIcon icon={faArrowRight} />

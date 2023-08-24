@@ -4,6 +4,7 @@
   깃허브 : https://github.com/kimaydev
 */
 import React, { useCallback, useEffect, useRef, useState } from "react";
+import { useLocation, useParams } from "react-router-dom";
 import { v4 } from "uuid";
 import Item from "./Item";
 import {
@@ -24,6 +25,7 @@ import ProductCartModal from "../product/ProductCartModal";
 import QuickProductList from "../QuickProductList";
 
 const Food = () => {
+  const { icate } = useParams();
   // 로딩 더미데이터
   const productListSkeleton = [1, 2, 3, 4, 5, 6, 7, 8, 9];
   // 상품 더미 데이터
@@ -56,7 +58,7 @@ const Food = () => {
   const handleCancel = () => {
     setIsModalOpen(false);
   };
-  //react-intersection-observer state
+  // react-intersection-observer state
   const [ref, inView] = useInView();
   // 로딩 state
   const [isLoading, setIsLoading] = useState(true);
@@ -68,10 +70,12 @@ const Food = () => {
   // value 보관할 state
   const [optionValue, setOptionValue] = useState(1);
   const page = useRef(1);
+  // cate 보관할 state
+  const [cateid, setCateid] = useState(1);
   // value값에 따라 데이터 바뀜
   const getListData = useCallback(async value => {
     if (value === 1) {
-      await getTotalFoodNew(setListScroll, setHasNextPage, page);
+      await getTotalFoodNew(setListScroll, setHasNextPage, page, cateid);
     } else if (value === 2) {
       await getTotalFoodExpensive(setListScroll, setHasNextPage, page);
     } else if (value === 3) {
@@ -119,25 +123,36 @@ const Food = () => {
   const categoryMenu = [
     {
       ititle: 1,
+      icate: "food",
       title: "육류",
     },
     {
       ititle: 2,
+      icate: "food",
       title: "해산물",
     },
     {
       ititle: 3,
+      icate: "food",
       title: "유제품",
     },
     {
       ititle: 4,
+      icate: "food",
       title: "야채",
     },
     {
       ititle: 5,
+      icate: "food",
       title: "디저트",
     },
   ];
+  // 화면 버튼 처리
+  useEffect(() => {
+    setCateid(icate);
+    getListData(1);
+  }, [icate]);
+  console.log("글자출력해", cateid);
   // 상품 총 갯수 불러옴
   useEffect(() => {
     setTotalCount(listScroll.length);

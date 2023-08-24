@@ -147,7 +147,7 @@ const FoodWine = ({ setIsModalOpen }) => {
           )}
         </ContentsListItemWrap>
         {/* 음식별 추천 와인 전체보기 */}
-        <MainTabLink to="/productmain/food">
+        <MainTabLink to="/productmain/food/1">
           음식별 추천 와인 전체보기
           <i>
             <FontAwesomeIcon icon={faArrowRight} />

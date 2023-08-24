@@ -5,6 +5,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 // Import Swiper styles
 import "swiper/css";
 import { QuickProductListWrap } from "../style/ProductListStyle";
+import { NavLink } from "react-router-dom";
 
 const QuickProductList = ({ categoryMenu }) => {
   return (
@@ -12,7 +13,14 @@ const QuickProductList = ({ categoryMenu }) => {
       <Swiper slidesPerView={"auto"}>
         {categoryMenu.map((item, index) => (
           <SwiperSlide key={v4()}>
-            <button>{item.title}</button>
+            <NavLink
+              to={`/productmain/${item.icate}/${item.ititle}`}
+              className={({ isActive }) => {
+                return isActive ? "active" : "";
+              }}
+            >
+              {item.title}
+            </NavLink>
           </SwiperSlide>
         ))}
       </Swiper>
