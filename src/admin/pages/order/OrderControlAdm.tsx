@@ -2,8 +2,20 @@ import React, { useEffect, useState } from "react";
 import { fetchOrderControlData } from "../../api/admorderlist";
 import { OrderTableWrap, OrdertTable } from "../../style/AdminOrderControl";
 
+export interface fetchData {
+  id: number;
+  orderDate: number;
+  email?: number;
+  nmKor?: number;
+  quantity: number;
+  totalPrice: number;
+  payment?: number;
+  pickUpStore: string;
+  count: string;
+}
+
 const OrderControlAdm = () => {
-  const [orderControl, setOrderControl] = useState([]);
+  const [orderControl, setOrderControl] = useState<Array<fetchData>>();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -18,44 +30,7 @@ const OrderControlAdm = () => {
     fetchData();
   }, []);
 
-  const tableData = [
-    {
-      idata: 1,
-      data_a: "248",
-      data_b: "auth@naver.com",
-      data_c: "1862 까베르네",
-      data_d: "1",
-      data_e: "36,800원",
-      data_f: "신용카드",
-      data_g: "대구상인점",
-      data_h: "배송중",
-      data_i: "상세보기",
-    },
-    {
-      idata: 2,
-      data_a: "248",
-      data_b: "auth@naver.com",
-      data_c: "1862 까베르네",
-      data_d: "1",
-      data_e: "36,800원",
-      data_f: "신용카드",
-      data_g: "대구상인점",
-      data_h: "배송중",
-      data_i: "상세보기",
-    },
-    {
-      idata: 3,
-      data_a: "248",
-      data_b: "auth@naver.com",
-      data_c: "1862 까베르네",
-      data_d: "1",
-      data_e: "36,800원",
-      data_f: "신용카드",
-      data_g: "대구상인점",
-      data_h: "배송중",
-      data_i: "상세보기",
-    },
-  ];
+  const fetchData = [];
 
   return (
     <div>
@@ -76,19 +51,17 @@ const OrderControlAdm = () => {
             </tr>
           </thead>
           <tbody>
-            {tableData.map(item => (
-              <tr key={item.idata}>
-                <td>{item.data_a}</td>
-                <td>{item.data_b}</td>
-                <td>{item.data_c}</td>
-                <td>{item.data_d}</td>
-                <td>
-                  <p>{item.data_e}</p>
-                </td>
-                <td>{item.data_f}</td>
-                <td>{item.data_g}</td>
-                <td>{item.data_h}</td>
-                <td>{item.data_i}</td>
+            {orderControl?.map(item => (
+              <tr key={item.id}>
+                <td>{item.orderDate}</td>
+                <td>{item.email}</td>
+                <td>{item.nmKor}</td>
+                <td>{item.quantity}</td>
+                <td>{item.totalPrice}</td>
+                <td>{item.payment}</td>
+                <td>{item.pickUpStore}</td>
+                <td>{item.count}</td>
+                <td>상세보기</td>
               </tr>
             ))}
           </tbody>
@@ -98,8 +71,7 @@ const OrderControlAdm = () => {
   );
 };
 
-{
-  /* 주문내역관리
+/* 주문내역관리
       {/* <ul>
         {orderControl.map((item, key) => (
           <li key={key}>
@@ -116,5 +88,5 @@ const OrderControlAdm = () => {
           </li>
         ))}
       </ul> */
-}
+
 export default OrderControlAdm;
