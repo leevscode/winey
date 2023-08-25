@@ -16,3 +16,37 @@ export interface ISubMenu {
   label: string;
   link: string;
 }
+export interface IMemberState {
+  memberList: IMemberListObject[];
+  setMemberList: React.Dispatch<React.SetStateAction<Array<IMemberList>>>;
+}
+export interface IPage {
+  // paginate: number;
+  setPaginate: React.Dispatch<React.SetStateAction<number>>;
+}
+
+export interface IMemberList {
+  page: {
+    page: number;
+    row: number;
+    startIdx: number;
+    totalRecordCount: number;
+    totalPage: number;
+    pageSize: number;
+    prev: boolean;
+    next: boolean;
+    startPage: number;
+    endPage: number;
+  };
+  list: IMemberListObject[];
+}
+export interface IMemberListObject {
+  userId: number;
+  email: string;
+  nm: string;
+  regionNmId: number;
+}
+
+export interface ObjectType {
+  [key: string | number]: any;
+}

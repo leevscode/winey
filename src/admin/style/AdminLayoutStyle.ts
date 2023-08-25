@@ -119,6 +119,10 @@ export const LayoutContentWrap = styled.div`
     }
   }
 `;
+// 페이지네이션
+// export const PaginationWrap = styled.div`
+//   margin: 0 auto;
+// `;
 
 // 관리자 푸터
 export const LayoutFooterWrap = styled.div`
