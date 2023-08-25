@@ -4,16 +4,14 @@
   깃허브 : https://github.com/kimaydev
 */
 import React, { useCallback, useEffect, useRef, useState } from "react";
-import { v4 } from "uuid";
 import Item from "./Item";
 import {
   ProductListWrap,
   ProductMainItemWrap,
 } from "../../style/ProductListStyle";
 import { ConfigProvider, Select } from "antd";
-import { Gradation } from "../../style/GlobalStyle";
+import { Gradation, Maincolor } from "../../style/GlobalStyle";
 import { ContentsListItemWrap } from "../../style/GlobalComponents";
-import ProductListSkeleton from "../skeleton/ProductListSkeleton";
 import { useInView } from "react-intersection-observer";
 import {
   getTotalMinusTwoCheap,
@@ -22,10 +20,9 @@ import {
 } from "../../api/patchproduct";
 import ProductCartModal from "../product/ProductCartModal";
 import QuickProductList from "../QuickProductList";
+import { FadeLoader } from "react-spinners";
 
 const Price = () => {
-  // 로딩 더미데이터
-  const productListSkeleton = [1, 2, 3, 4, 5, 6, 7, 8, 9];
   // 상품 더미 데이터
   /*
   const foodItem = [
@@ -58,8 +55,6 @@ const Price = () => {
   };
   //react-intersection-observer state
   const [ref, inView] = useInView();
-  // 로딩 state
-  const [isLoading, setIsLoading] = useState(true);
   // 상품 총 갯수 카운트 state
   const [totalCount, setTotalCount] = useState("");
   // 화면 데이터 보관할 state
@@ -68,16 +63,39 @@ const Price = () => {
   // value 보관할 state
   const [optionValue, setOptionValue] = useState(1);
   const page = useRef(1);
+  // cate 보관할 state
+  const [cateid, setCateid] = useState(2);
   // value값에 따라 데이터 바뀜
-  const getListData = useCallback(async value => {
-    if (value === 1) {
-      await getTotalMinusTwoNew(setListScroll, setHasNextPage, page);
-    } else if (value === 2) {
-      await getTotalMinusTwoExpensive(setListScroll, setHasNextPage, page);
-    } else if (value === 3) {
-      await getTotalMinusTwoCheap(setListScroll, setHasNextPage, page);
-    }
-  }, []);
+  const getListData = useCallback(
+    async value => {
+      if (value === 1) {
+        const result = await getTotalMinusTwoNew(
+          setListScroll,
+          setHasNextPage,
+          page,
+          cateid,
+        );
+        setListScroll(prevPosts => [...prevPosts, ...result]);
+      } else if (value === 2) {
+        const result = await getTotalMinusTwoExpensive(
+          setListScroll,
+          setHasNextPage,
+          page,
+          cateid,
+        );
+        setListScroll(prevPosts => [...prevPosts, ...result]);
+      } else if (value === 3) {
+        const result = await getTotalMinusTwoCheap(
+          setListScroll,
+          setHasNextPage,
+          page,
+          cateid,
+        );
+        setListScroll(prevPosts => [...prevPosts, ...result]);
+      }
+    },
+    [cateid],
+  );
   // 상품 정렬 옵션
   const options = [
     {
@@ -95,10 +113,10 @@ const Price = () => {
   ];
   const handleChange = useCallback(
     value => {
-      page.current = 1;
-      getListData(value);
+      // getListData(value);
       setOptionValue(value);
       setListScroll([]);
+      page.current = 1;
       // setListData(value);
       // console.log("value 출력합니다", value);
       switch (value) {
@@ -118,15 +136,23 @@ const Price = () => {
   // 카테고리 메뉴 리스트 옵션 설정
   const categoryMenu = [
     {
+      ititle: 2,
+      icateName: "price",
       title: "2만원 미만",
     },
     {
+      ititle: 25,
+      icateName: "price",
       title: "2~5만원",
     },
     {
+      ititle: 510,
+      icateName: "price",
       title: "5~10만원",
     },
     {
+      ititle: 10,
+      icateName: "price",
       title: "10만원 이상",
     },
   ];
@@ -146,22 +172,26 @@ const Price = () => {
       getListData(optionValue);
     }
   }, [getListData, hasNextPage, inView, setOptionValue]);
-  // 화면 로딩 처리
+  // 화면 카테고리 버튼 처리
   useEffect(() => {
-    // 0.3초 뒤에 로딩 화면 사라짐
-    const introTimeout = setTimeout(() => {
-      setIsLoading(false);
-    }, 300);
-    // 최초 실행 시 value 1 실행
-    // console.log("버튼 클릭했을때 딱 한번 실행");
-    getListData(1);
-    return () => clearTimeout(introTimeout);
-  }, []);
+    console.log("cateid값 확인", cateid);
+    // 화면 데이터 초기화
+    setListScroll([]);
+    // 카테고리 버튼 클릭하면 hasNextPage 값을 true로 되돌림
+    setHasNextPage(true);
+    page.current = 1;
+    // getListData(1);
+    // console.log("현재 데이터는?", listScroll);
+  }, [cateid]);
   return (
     <>
       <ProductListWrap>
         {/* 상품리스트 퀵메뉴 버튼 */}
-        <QuickProductList categoryMenu={categoryMenu} />
+        <QuickProductList
+          categoryMenu={categoryMenu}
+          cateid={cateid}
+          setCateid={setCateid}
+        />
         {/* 상품리스트 목록 */}
         <ProductMainItemWrap>
           <ul>
@@ -193,19 +223,28 @@ const Price = () => {
             </li>
           </ul>
           <ContentsListItemWrap>
-            {isLoading ? (
-              // 로딩 화면 출력
-              productListSkeleton.map(index => (
-                <ProductListSkeleton key={v4()} />
-              ))
-            ) : (
-              // 상품 리스트
-              <>
-                <Item listScroll={listScroll} setIsModalOpen={setIsModalOpen} />
-                <div ref={ref}></div>
-              </>
-            )}
+            {/* 상품 리스트 */}
+            <Item
+              listScroll={listScroll}
+              setIsModalOpen={setIsModalOpen}
+              hasNextPage={hasNextPage}
+            />
           </ContentsListItemWrap>
+          {/* 로딩 컴포넌트 */}
+          {hasNextPage && (
+            <div ref={ref} className="loading-box">
+              <div>
+                <FadeLoader
+                  color={Maincolor.redBold}
+                  height={9}
+                  margin={0}
+                  radius={10}
+                  speedMultiplier={1}
+                  width={5}
+                />
+              </div>
+            </div>
+          )}
         </ProductMainItemWrap>
       </ProductListWrap>
       {/* 장바구니 완료 모달창 */}
