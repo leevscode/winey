@@ -177,17 +177,6 @@ const Country = () => {
       getListData(optionValue);
     }
   }, [getListData, hasNextPage, inView, setOptionValue]);
-  // 화면 로딩 처리
-  // useEffect(() => {
-  //   // 0.3초 뒤에 로딩 화면 사라짐
-  //   const introTimeout = setTimeout(() => {
-  //     setIsLoading(false);
-  //   }, 300);
-  //   // 최초 실행 시 value 1 실행
-  //   // console.log("버튼 클릭했을때 딱 한번 실행");
-  //   getListData(1);
-  //   return () => clearTimeout(introTimeout);
-  // }, []);
   // 화면 카테고리 버튼 처리
   useEffect(() => {
     // 화면 데이터 초기화
