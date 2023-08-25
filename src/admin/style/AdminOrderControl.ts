@@ -27,11 +27,12 @@ export const OrderTableWrap = styled.div`
   }
 `;
 
-export const OrdertTable = styled.table`
+export const OrderTable = styled.table`
   width: 100%;
   min-width: 1000px;
   background: ${Maincolor.white};
   border: 0.05rem solid ${opacity.white};
+  text-align: center;
   th,
   td {
     padding: 15px 5px;
