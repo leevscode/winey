@@ -11,3 +11,13 @@ export const fetchOrderData = async () => {
     return [];
   }
 };
+
+export const orderStatusData = async (orderStatusData: any) => {
+  try {
+    const res = await client.put(`/api/admin/order${orderStatusData}`);
+    const result = await res.data;
+    return result;
+  } catch (error) {
+    console.log(orderStatusData)
+  }
+};

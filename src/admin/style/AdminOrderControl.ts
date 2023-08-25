@@ -64,4 +64,9 @@ export const OrderTable = styled.table`
       }
     }
   }
+  button > td {
+    padding: 15px 5px;
+    border-right: 0.05rem solid ${opacity.white};
+    vertical-align: middle;
+  }
 `;
