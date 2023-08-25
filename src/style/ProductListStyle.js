@@ -106,6 +106,27 @@ export const ProductListItemWrap = styled.div`
     margin-right: -7px;
   }
 `;
+// 상품 리스트 없을때 나오는 컴포넌트
+export const ProductNoItem = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100% !important;
+  height: 50vh;
+  margin: 0 !important;
+  div {
+    font-size: 1.8rem;
+    color: ${Maincolor.grayBold};
+    text-align: center;
+    i {
+      display: block;
+      margin-bottom: 10px;
+      font-size: 2em;
+    }
+    p {
+    }
+  }
+`;
 // 상품 메인 추천별 상품리스트
 export const ProductMainItemWrap = styled.div`
   padding: ${WidthPd.padding};
@@ -142,6 +163,13 @@ export const ProductMainItemWrap = styled.div`
     margin-left: -7px;
     margin-right: -7px;
   }
+  /* 상품리스트 로딩 처리 */
+  .loading-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 20vh;
+  }
 `;
 
 // 상품리스트 퀵메뉴 버튼
@@ -168,7 +196,7 @@ export const QuickProductListWrap = styled.div`
   }
   .swiper-slide {
     width: auto;
-    a {
+    button {
       position: relative;
       display: block;
       font-size: 1.4rem;

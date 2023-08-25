@@ -5,22 +5,19 @@ import { Swiper, SwiperSlide } from "swiper/react";
 // Import Swiper styles
 import "swiper/css";
 import { QuickProductListWrap } from "../style/ProductListStyle";
-import { NavLink } from "react-router-dom";
 
-const QuickProductList = ({ categoryMenu }) => {
+const QuickProductList = ({ categoryMenu, cateid, setCateid }) => {
   return (
     <QuickProductListWrap>
       <Swiper slidesPerView={"auto"}>
         {categoryMenu.map((item, index) => (
-          <SwiperSlide key={v4()}>
-            <NavLink
-              to={`/productmain/${item.icate}/${item.ititle}`}
-              className={({ isActive }) => {
-                return isActive ? "active" : "";
-              }}
+          <SwiperSlide key={index + 1}>
+            <button
+              onClick={() => setCateid(item.ititle)}
+              className={index + 1 === cateid ? "active" : null}
             >
               {item.title}
-            </NavLink>
+            </button>
           </SwiperSlide>
         ))}
       </Swiper>

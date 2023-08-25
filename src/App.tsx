@@ -118,9 +118,9 @@ function App() {
             <Route path="/main" element={<Main />} />
             {/* 상품 메인 추천별 상품리스트  */}
             <Route path="/productmain" element={<ProductMain />}>
-              <Route path="food/:icate" element={<Food />} />
-              <Route path="country/:icate" element={<Country />} />
-              <Route path="price/:icate" element={<Price />} />
+              <Route path="food" element={<Food />} />
+              <Route path="country" element={<Country />} />
+              <Route path="price" element={<Price />} />
               <Route index path="*" element={<NotFound />} />
             </Route>
             {/* 상품리스트 */}

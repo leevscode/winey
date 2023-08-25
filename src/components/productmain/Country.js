@@ -4,16 +4,14 @@
   깃허브 : https://github.com/kimaydev
 */
 import React, { useCallback, useEffect, useRef, useState } from "react";
-import { v4 } from "uuid";
 import Item from "./Item";
 import {
   ProductListWrap,
   ProductMainItemWrap,
 } from "../../style/ProductListStyle";
 import { ConfigProvider, Select } from "antd";
-import { Gradation } from "../../style/GlobalStyle";
+import { Gradation, Maincolor } from "../../style/GlobalStyle";
 import { ContentsListItemWrap } from "../../style/GlobalComponents";
-import ProductListSkeleton from "../skeleton/ProductListSkeleton";
 import { useInView } from "react-intersection-observer";
 import {
   getTotalCountryCheap,
@@ -22,10 +20,9 @@ import {
 } from "../../api/patchproduct";
 import ProductCartModal from "../product/ProductCartModal";
 import QuickProductList from "../QuickProductList";
+import { FadeLoader } from "react-spinners";
 
 const Country = () => {
-  // 로딩 더미데이터
-  const productListSkeleton = [1, 2, 3, 4, 5, 6, 7, 8, 9];
   // 상품 더미 데이터
   /*
   const foodItem = [
@@ -58,8 +55,6 @@ const Country = () => {
   };
   //react-intersection-observer state
   const [ref, inView] = useInView();
-  // 로딩 state
-  const [isLoading, setIsLoading] = useState(true);
   // 상품 총 갯수 카운트 state
   const [totalCount, setTotalCount] = useState("");
   // 화면 데이터 보관할 state
@@ -68,16 +63,39 @@ const Country = () => {
   // value 보관할 state
   const [optionValue, setOptionValue] = useState(1);
   const page = useRef(1);
+  // cate 보관할 state
+  const [cateid, setCateid] = useState(1);
   // value값에 따라 데이터 바뀜
-  const getListData = useCallback(async value => {
-    if (value === 1) {
-      await getTotalCountryNew(setListScroll, setHasNextPage, page);
-    } else if (value === 2) {
-      await getTotalCountryExpensive(setListScroll, setHasNextPage, page);
-    } else if (value === 3) {
-      await getTotalCountryCheap(setListScroll, setHasNextPage, page);
-    }
-  }, []);
+  const getListData = useCallback(
+    async value => {
+      if (value === 1) {
+        const result = await getTotalCountryNew(
+          setListScroll,
+          setHasNextPage,
+          page,
+          cateid,
+        );
+        setListScroll(prevPosts => [...prevPosts, ...result]);
+      } else if (value === 2) {
+        const result = await getTotalCountryExpensive(
+          setListScroll,
+          setHasNextPage,
+          page,
+          cateid,
+        );
+        setListScroll(prevPosts => [...prevPosts, ...result]);
+      } else if (value === 3) {
+        const result = await getTotalCountryCheap(
+          setListScroll,
+          setHasNextPage,
+          page,
+          cateid,
+        );
+        setListScroll(prevPosts => [...prevPosts, ...result]);
+      }
+    },
+    [cateid],
+  );
   // 상품 정렬 옵션
   const options = [
     {
@@ -95,10 +113,10 @@ const Country = () => {
   ];
   const handleChange = useCallback(
     value => {
-      page.current = 1;
-      getListData(value);
+      // getListData(value);
       setOptionValue(value);
       setListScroll([]);
+      page.current = 1;
       // setListData(value);
       // console.log("value 출력합니다", value);
       switch (value) {
@@ -119,27 +137,27 @@ const Country = () => {
   const categoryMenu = [
     {
       ititle: 1,
-      icate: "country",
+      icateName: "country",
       title: "프랑스",
     },
     {
       ititle: 2,
-      icate: "country",
+      icateName: "country",
       title: "미국",
     },
     {
       ititle: 3,
-      icate: "country",
+      icateName: "country",
       title: "이탈리아",
     },
     {
       ititle: 4,
-      icate: "country",
+      icateName: "country",
       title: "칠레",
     },
     {
       ititle: 5,
-      icate: "country",
+      icateName: "country",
       title: "기타",
     },
   ];
@@ -160,21 +178,35 @@ const Country = () => {
     }
   }, [getListData, hasNextPage, inView, setOptionValue]);
   // 화면 로딩 처리
+  // useEffect(() => {
+  //   // 0.3초 뒤에 로딩 화면 사라짐
+  //   const introTimeout = setTimeout(() => {
+  //     setIsLoading(false);
+  //   }, 300);
+  //   // 최초 실행 시 value 1 실행
+  //   // console.log("버튼 클릭했을때 딱 한번 실행");
+  //   getListData(1);
+  //   return () => clearTimeout(introTimeout);
+  // }, []);
+  // 화면 카테고리 버튼 처리
   useEffect(() => {
-    // 0.3초 뒤에 로딩 화면 사라짐
-    const introTimeout = setTimeout(() => {
-      setIsLoading(false);
-    }, 300);
-    // 최초 실행 시 value 1 실행
-    // console.log("버튼 클릭했을때 딱 한번 실행");
-    getListData(1);
-    return () => clearTimeout(introTimeout);
-  }, []);
+    // 화면 데이터 초기화
+    setListScroll([]);
+    // 카테고리 버튼 클릭하면 hasNextPage 값을 true로 되돌림
+    setHasNextPage(true);
+    page.current = 1;
+    // getListData(1);
+    // console.log("현재 데이터는?", listScroll);
+  }, [cateid]);
   return (
     <>
       <ProductListWrap>
         {/* 상품리스트 퀵메뉴 버튼 */}
-        <QuickProductList categoryMenu={categoryMenu} />
+        <QuickProductList
+          categoryMenu={categoryMenu}
+          cateid={cateid}
+          setCateid={setCateid}
+        />
         {/* 상품리스트 목록 */}
         <ProductMainItemWrap>
           <ul>
@@ -206,19 +238,28 @@ const Country = () => {
             </li>
           </ul>
           <ContentsListItemWrap>
-            {isLoading ? (
-              // 로딩 화면 출력
-              productListSkeleton.map(index => (
-                <ProductListSkeleton key={v4()} />
-              ))
-            ) : (
-              // 상품 리스트
-              <>
-                <Item listScroll={listScroll} setIsModalOpen={setIsModalOpen} />
-                <div ref={ref}></div>
-              </>
-            )}
+            {/* 상품 리스트 */}
+            <Item
+              listScroll={listScroll}
+              setIsModalOpen={setIsModalOpen}
+              hasNextPage={hasNextPage}
+            />
           </ContentsListItemWrap>
+          {/* 로딩 컴포넌트 */}
+          {hasNextPage && (
+            <div ref={ref} className="loading-box">
+              <div>
+                <FadeLoader
+                  color={Maincolor.redBold}
+                  height={9}
+                  margin={0}
+                  radius={10}
+                  speedMultiplier={1}
+                  width={5}
+                />
+              </div>
+            </div>
+          )}
         </ProductMainItemWrap>
       </ProductListWrap>
       {/* 장바구니 완료 모달창 */}
