@@ -1,10 +1,39 @@
 import React from "react";
+import { OrderTable, OrderTableWrap } from "../../style/AdminOrderControl";
 
 const OrderDetailAdm = () => {
   return (
     <div>
-      주문상세리스트
-      {/* <ul>
+      <OrderTableWrap>
+        <OrderTable>
+          <caption>주문내역관리</caption>
+          <thead>
+            <tr>
+              <th>주문번호</th>
+              <th>주문날짜</th>
+              <th>아이디</th>
+              <th>주문상품</th>
+              <th>상품금액</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>테스트1</td>
+              <td>테스트2</td>
+              <td>테스트3</td>
+              <td>주문상품 리스트 출력</td>
+              <td>상품 금액 출력</td>
+            </tr>
+          </tbody>
+        </OrderTable>
+      </OrderTableWrap>
+    </div>
+  );
+};
+
+export default OrderDetailAdm;
+{
+  /* <ul>
         <li>주문번호:{orderId}</li>
         <li>주문날짜:{orderDate}</li>
         <li>아이디:{email}</li>
@@ -21,9 +50,5 @@ const OrderDetailAdm = () => {
         <li>픽업 날짜 : {pickUpDate}</li>
         <li>픽업 시간 : {pickUpTime} </li>
         <li>픽업완료 여부 : {orderStatus}</li>
-      </ul> */}
-    </div>
-  );
-};
-
-export default OrderDetailAdm;
+      </ul> */
+}
