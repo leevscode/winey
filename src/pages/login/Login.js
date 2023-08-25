@@ -60,7 +60,7 @@ const Login = () => {
     setPassword(e.target.value);
   };
 
-  const onFinish = async values => {
+  const onFinish = async () => {
     try {
       const login = await fetchLogin(userid, password);
       if (login.success == true) {

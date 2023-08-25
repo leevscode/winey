@@ -14,6 +14,7 @@ export const getUserFavoriteKey = async () => {
   try {
     const res = await client.get("/api/recommend/getUserInfo");
     const result = await res.data;
+    console.log("result", result);
     return result;
   } catch (error) {
     console.log(error);
@@ -81,8 +82,8 @@ export const putUserKeyword = async (editFavoriteKeyword, navigator) => {
       aromaCategoryId: editFavoriteKeyword.aromaCategoryId,
     });
     const result = await res.data;
-    navigator("/main");
     console.log("result", result);
+    navigator("/main");
     return result;
   } catch (error) {
     console.log(error);
