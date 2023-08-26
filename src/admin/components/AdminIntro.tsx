@@ -9,22 +9,35 @@ import { faFolderOpen } from "@fortawesome/free-regular-svg-icons";
 import { faUsersGear, faWineBottle } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { LayoutIntroWrap } from "../style/AdminLayoutStyle";
+import { Link } from "react-router-dom";
 
 function AdminIntro() {
   return (
     <LayoutIntroWrap>
       <ul>
         <li>
-          <FontAwesomeIcon icon={faUsersGear} />
-          <div>회원관리 바로가기</div>
+          <div>
+            <i>
+              <FontAwesomeIcon icon={faUsersGear} />
+            </i>
+            <Link to="/admin/membercontrol">회원관리</Link>
+          </div>
         </li>
         <li>
-          <FontAwesomeIcon icon={faFolderOpen} />
-          <div>주문관리 바로가기</div>
+          <div>
+            <i>
+              <FontAwesomeIcon icon={faFolderOpen} />
+            </i>
+            <Link to="/admin/membercontrol">주문관리</Link>
+          </div>
         </li>
         <li>
-          <FontAwesomeIcon icon={faWineBottle} />
-          <div>상품관리 바로가기</div>
+          <div>
+            <i>
+              <FontAwesomeIcon icon={faWineBottle} />
+            </i>
+            <Link to="/admin/membercontrol">상품관리</Link>
+          </div>
         </li>
       </ul>
     </LayoutIntroWrap>

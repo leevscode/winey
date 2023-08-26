@@ -117,9 +117,11 @@ const Admin: React.FC = () => {
             </div>
             <div className="layout-box">
               {/* 관리자페이지 - 페이지 이름 표시 */}
-              <div className="pg-title">
-                <h2>타이틀</h2>
-              </div>
+              {breadCrumbLnbTitle !== "" && (
+                <div className="pg-title">
+                  <h2>{breadCrumbLnbTitle}</h2>
+                </div>
+              )}
               <Layout>
                 {/* 관리자페이지 - 사이드메뉴 */}
                 <AdminSideMenu />

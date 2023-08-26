@@ -10,6 +10,9 @@ import {
 export const AdminColor = {
   headColorA: "#774954",
   bodyColorA: "#f7f1f3",
+  pink: "#d5adac",
+  gray: "#c4bfbf",
+  blue: "#afd0d2",
 };
 
 // 관리자 헤더
@@ -46,29 +49,67 @@ export const LayoutSideMenuWrap = styled.div`
 `;
 // 관리자 인트로(첫화면)
 export const LayoutIntroWrap = styled.div`
-  margin-top: 5rem;
-  min-width: 90rem;
+  /* margin-top: 5rem; */
+  /* min-width: 90rem; */
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 85%;
+  height: 50% !important;
+  margin: 0 auto;
   & > ul {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    list-style: none;
+    /* display: flex; */
+    /* justify-content: center; */
+    /* align-items: center; */
+    height: 100%;
+    /* gap: 0 2%; */
     & li {
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      width: calc(100% / 3 - 1.5%);
+      height: 100%;
       text-align: center;
-      margin: 0 1rem;
+      /* margin: 0 1rem; */
+      margin-right: 2%;
       padding: 2rem;
       border: 1rem solid ${Maincolor.grayMedium};
       border-radius: 2rem;
-      font-size: 10rem;
+      font-size: 2rem;
       color: ${Maincolor.black};
+      &:last-of-type {
+        margin-right: 0;
+      }
       & > div {
-        margin-top: 4rem;
+        width: 100%;
+        /* margin-top: 4rem;
         padding: 0.5rem 1rem;
         font-size: 2rem;
-        font-weight: 700;
         background: rgba(60, 35, 35, 0.7);
         border-radius: 1rem;
-        color: ${Maincolor.beige};
+        color: ${Maincolor.beige}; */
+        i {
+          display: inline-block;
+          font-size: 4.5em;
+          margin-bottom: 20px;
+        }
+        a {
+          display: block;
+          font-weight: 700;
+          border-radius: 1rem;
+          color: ${Maincolor.black};
+          padding: 15px 0;
+        }
+      }
+      &:nth-of-type(1) a {
+        background: ${AdminColor.pink};
+      }
+      &:nth-of-type(2) a {
+        background: ${AdminColor.gray};
+      }
+      &:nth-of-type(3) a {
+        background: ${AdminColor.blue};
       }
     }
   }
@@ -91,7 +132,6 @@ export const LayoutContentWrap = styled.div`
         }
       }
     }
-
     .contents-box {
       position: absolute;
       right: 0;
@@ -100,7 +140,21 @@ export const LayoutContentWrap = styled.div`
       height: calc(100% - 60px);
       padding: 1%;
       & > div {
+        overflow: auto;
         height: 100%;
+        /* 스크롤바 커스텀 */
+        &::-webkit-scrollbar {
+          display: block;
+          width: 6px;
+          height: 6px;
+        }
+        &::-webkit-scrollbar-track {
+          background: transparent;
+        }
+        &::-webkit-scrollbar-thumb {
+          background: ${opacity.gray};
+          border-radius: 10px;
+        }
       }
     }
   }
@@ -198,22 +252,9 @@ export const LayoutFooterWrap = styled.div`
 `;
 // 테이블 감싸는 div
 export const TableWrap = styled.div`
-  overflow: auto;
-  height: 100%;
-  padding-bottom: 10px;
-  /* 스크롤바 커스텀 */
-  &::-webkit-scrollbar {
-    display: block;
-    width: 6px;
-    height: 6px;
-  }
-  &::-webkit-scrollbar-track {
-    background: transparent;
-  }
-  &::-webkit-scrollbar-thumb {
-    background: ${opacity.gray};
-    border-radius: 10px;
-  }
+  /* overflow: auto; */
+  /* height: 100%; */
+  /* padding-bottom: 10px; */
 `;
 
 // 관리자 리스트 테이블 스타일 설정
