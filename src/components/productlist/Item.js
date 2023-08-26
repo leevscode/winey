@@ -3,15 +3,17 @@
   노션 : https://kimaydev.notion.site/kimaydev/FE-7a53f9f631f146c88c39413cd175a9d0
   깃허브 : https://github.com/kimaydev
 */
-import React, { useCallback, useEffect } from "react";
-import { v4 as uuidv4 } from "uuid";
+import React, { useCallback } from "react";
 import { ProductListItem } from "../../style/ProductStyle";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import NoImage from "../../assets/no_image.jpg";
 import { addCart, cartLengthData } from "../../api/patchcart";
+import { ProductNoItem } from "../../style/ProductListStyle";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faWineGlassEmpty } from "@fortawesome/free-solid-svg-icons";
 
-const Item = ({ listScroll, setIsModalOpen }) => {
+const Item = ({ listScroll, setIsModalOpen, hasNextPage }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const userData = useSelector(state => state.user);
@@ -89,6 +91,16 @@ const Item = ({ listScroll, setIsModalOpen }) => {
           </Link>
         </ProductListItem>
       ))}
+      {hasNextPage === false && (
+        <ProductNoItem>
+          <div>
+            <i>
+              <FontAwesomeIcon icon={faWineGlassEmpty} />
+            </i>
+            <p>상품이 존재하지 않습니다.</p>
+          </div>
+        </ProductNoItem>
+      )}
     </>
   );
 };

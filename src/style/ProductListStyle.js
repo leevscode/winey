@@ -105,6 +105,13 @@ export const ProductListItemWrap = styled.div`
     margin-left: -7px;
     margin-right: -7px;
   }
+  /* 상품리스트 로딩 처리 */
+  .loading-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 20vh;
+  }
 `;
 // 상품 리스트 없을때 나오는 컴포넌트
 export const ProductNoItem = styled.div`

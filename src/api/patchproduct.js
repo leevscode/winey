@@ -45,7 +45,7 @@ export const getTotalFoodNew = async (
     const result = await res.data;
     // console.log("카테고리 id", _cate);
     // console.log("현재페이지", _page.current);
-    console.log("음식별 와인리스트 GET(최신등록순)", result);
+    // console.log("음식별 와인리스트 GET(최신등록순)", result);
     _setHasNextPage(result.length === 9);
     if (result.length) {
       _page.current += 1;
@@ -188,7 +188,7 @@ export const getTotalMinusTwoNew = async (
       `/api/main/price${_cate}/new?page=${_page.current}&row=9`,
     );
     const result = res.data;
-    console.log(`${_cate} 미만 와인리스트 GET(최신등록순)`, result);
+    // console.log(`${_cate} 미만 와인리스트 GET(최신등록순)`, result);
     // _setListScroll(prevPosts => [...prevPosts, ...result]);
     _setHasNextPage(result.length === 9);
     if (result.length) {
@@ -212,7 +212,7 @@ export const getTotalMinusTwoExpensive = async (
       `/api/main/price${_cate}/expencive?page=${_page.current}&row=9`,
     );
     const result = res.data;
-    console.log("2만원 미만 와인리스트 GET(높은금액순)", result);
+    // console.log("2만원 미만 와인리스트 GET(높은금액순)", result);
     // _setListScroll(prevPosts => [...prevPosts, ...result]);
     _setHasNextPage(result.length === 9);
     if (result.length) {
@@ -236,7 +236,7 @@ export const getTotalMinusTwoCheap = async (
       `/api/main/price${_cate}/cheap?page=${_page.current}&row=9`,
     );
     const result = res.data;
-    console.log("2만원 미만 와인리스트 GET(낮은금액순)", result);
+    // console.log("2만원 미만 와인리스트 GET(낮은금액순)", result);
     // _setListScroll(prevPosts => [...prevPosts, ...result]);
     _setHasNextPage(result.length === 9);
     if (result.length) {

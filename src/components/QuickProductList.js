@@ -9,10 +9,10 @@ import { useLocation } from "react-router-dom";
 
 const QuickProductList = ({ categoryMenu, cateid, setCateid }) => {
   const { pathname } = useLocation();
-  console.log(pathname);
+  // console.log(pathname);
   // pathname에서 /productmain/ 는 제외처리
   const listPathName = pathname.slice(13);
-  console.log(listPathName);
+  // console.log(listPathName);
   return (
     <QuickProductListWrap>
       <Swiper slidesPerView={"auto"}>
