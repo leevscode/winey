@@ -1,5 +1,6 @@
 import React from "react";
 import { OrderTable, OrderTableWrap } from "../../style/AdminOrderControl";
+import { OrderSubTable, OrderSubTableWrap } from "../../style/AdminOrderDetail";
 
 const OrderDetailAdm = () => {
   return (
@@ -27,6 +28,39 @@ const OrderDetailAdm = () => {
           </tbody>
         </OrderTable>
       </OrderTableWrap>
+      <OrderSubTableWrap>
+        <OrderSubTable>
+          <caption>주문내역관리</caption>
+          <thead>
+            <tr>
+              <th>주문수량</th>
+              <th>주문날짜</th>
+              <th>픽업 장소</th>
+              <th>픽업 장소 데이타 넣을곳</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>총결제금액</td>
+              <td>총 결제금액 데이타 넣을곳</td>
+              <td>픽업 날짜</td>
+              <td>픽업 날짜 데이타 넣을곳</td>
+            </tr>
+            <tr>
+              <td>결제 수단</td>
+              <td>결제 수단 데이타 넣을곳</td>
+              <td>픽업 시간</td>
+              <td>픽업 시간 데이타 넣을곳</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td></td>
+              <td>픽업완료여부</td>
+              <td>픽업완료여부 데이타 넣을 곳</td>
+            </tr>
+          </tbody>
+        </OrderSubTable>
+      </OrderSubTableWrap>
     </div>
   );
 };
