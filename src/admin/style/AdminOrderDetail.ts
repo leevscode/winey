@@ -3,7 +3,6 @@
     노션 : https://www.notion.so/leevscode/leevscode-5223e3d332604844a255a0c63113a284
     깃허브 : https://github.com/leevscode
 */
-
 import styled from "@emotion/styled";
 import {
   Gradation,
@@ -14,8 +13,9 @@ import {
 import { AdminColor } from "./AdminLayoutStyle";
 
 // 테이블 감싸는 div
-export const OrderTableWrap = styled.div`
+export const OrderSubTableWrap = styled.div`
   overflow: auto;
+  margin-top: 50px;
   padding-bottom: 10px;
   /* 스크롤바 커스텀 */
   &::-webkit-scrollbar {
@@ -32,8 +32,8 @@ export const OrderTableWrap = styled.div`
   }
 `;
 
-export const OrderTable = styled.table`
-  width: 100%;
+export const OrderSubTable = styled.table`
+  width: 90%;
   min-width: 1000px;
   background: ${Maincolor.white};
   border: 0.05rem solid ${opacity.white};
@@ -48,31 +48,33 @@ export const OrderTable = styled.table`
     }
   }
   thead {
-    tr {
+    tr :nth-of-type(1) {
       background: ${AdminColor.headColorA};
+      color: ${Maincolor.white};
       th {
         border-bottom: 0.2rem solid ${opacity.white};
         font-weight: 700;
-        color: ${Maincolor.white};
         min-width: 100px;
       }
     }
   }
+  tr :nth-of-type(3) {
+    background: ${AdminColor.headColorA};
+    color: ${Maincolor.white};
+  }
   tbody {
-    tr {
+    tr :nth-of-type(1) {
       transition: 0.1s ease-in-out background;
-      &:hover {
-        background: ${AdminColor.bodyColorA};
-      }
+      background: ${AdminColor.headColorA};
+      color: ${Maincolor.white};
       td {
         border-bottom: 0.05rem solid ${opacity.white};
       }
-      button {
-        font-size: 1.5rem;
-      }
-      button: {
-        align-items: center;
-      }
     }
+  }
+  button > td {
+    padding: 15px 5px;
+    border-right: 0.05rem solid ${opacity.white};
+    vertical-align: middle;
   }
 `;

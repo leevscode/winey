@@ -14,11 +14,9 @@ export const SellListBox = styled.div`
 
 export const OrdercancelBtn = styled.div`
   display: flex;
-  /* margin: 0 6px; */
   margin: ${WidthPd.padding};
   margin-top: 2rem;
   margin-bottom: 1rem;
-  /* justify-content: flex-end; */
   justify-content: space-between;
   .date {
     font-size: 1.8rem;
