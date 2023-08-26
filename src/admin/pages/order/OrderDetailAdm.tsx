@@ -1,6 +1,47 @@
-import React from "react";
-import { OrderTable, OrderTableWrap } from "../../style/AdminOrderControl";
+/*
+    작업자 : 이동은
+    노션 : https://www.notion.so/leevscode/leevscode-5223e3d332604844a255a0c63113a284
+    깃허브 : https://github.com/leevscode
+*/
+
+import React, { useState } from "react";
+import {
+  OrderTable,
+  OrderTableWrap,
+} from "../../style/AdminOrderControl";
 import { OrderSubTable, OrderSubTableWrap } from "../../style/AdminOrderDetail";
+import { AdmOrderDetailData } from "../../api/admorderdetail";
+
+export interface OdData {
+  orderId: number;
+  orderDate: number;
+  email?: number;
+  nmKor?: number;
+  quantity: number;
+  totalPrice: number;
+  payment?: number;
+  pickUpStore: string;
+  storeNm: string;
+  pickUpDate: number;
+  pickUpTime: number;
+  // count : number;
+}
+
+// interface ObjectType {
+//   [key: string | number]: any;
+// }
+// const [orderDetail, setOrderDetail] = useState<Array<OdData>>([]);
+
+  // const getOdDetailData = async () => {
+  //   try {
+  //     const data: ObjectType = await AdmOrderDetailData();
+  //     console.log(data);
+  //     setOrderDetail(data.list);
+  //     console.log(data.list);
+  //   } catch (err) {
+  //     console.error("데이터 로드 중 오류 발생", err);
+  //   }
+  // };
 
 const OrderDetailAdm = () => {
   return (
@@ -34,7 +75,7 @@ const OrderDetailAdm = () => {
           <thead>
             <tr>
               <th>주문수량</th>
-              <th>주문날짜</th>
+              <th>주문 수량 데이타 넣을곳</th>
               <th>픽업 장소</th>
               <th>픽업 장소 데이타 넣을곳</th>
             </tr>
@@ -56,7 +97,7 @@ const OrderDetailAdm = () => {
               <td></td>
               <td></td>
               <td>픽업완료여부</td>
-              <td>픽업완료여부 데이타 넣을 곳</td>
+              <td>픽업완료여부 데이타 넣을곳</td>
             </tr>
           </tbody>
         </OrderSubTable>
@@ -66,23 +107,3 @@ const OrderDetailAdm = () => {
 };
 
 export default OrderDetailAdm;
-{
-  /* <ul>
-        <li>주문번호:{orderId}</li>
-        <li>주문날짜:{orderDate}</li>
-        <li>아이디:{email}</li>
-        <li>주문상품:{nmKor}</li>
-        <li>상품금액:{totalPrice}</li>
-      </ul>
-      <ul>
-        <li>주문수량 : {quantity}</li>
-        <li>총 결제 금액 : {totalPrice} </li>
-        <li>결제 수단 : {payment} </li>
-      </ul>
-      <ul>
-        <li>픽업 장소 : {storeNm}</li>
-        <li>픽업 날짜 : {pickUpDate}</li>
-        <li>픽업 시간 : {pickUpTime} </li>
-        <li>픽업완료 여부 : {orderStatus}</li>
-      </ul> */
-}

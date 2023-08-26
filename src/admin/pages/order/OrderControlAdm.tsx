@@ -1,5 +1,11 @@
+/*
+    작업자 : 이동은
+    노션 : https://www.notion.so/leevscode/leevscode-5223e3d332604844a255a0c63113a284
+    깃허브 : https://github.com/leevscode
+*/
+
 import React, { useEffect, useState } from "react";
-import { fetchOrderData, orderStatusData } from "../../api/admorderlist";
+import { AdmOrderData } from "../../api/admorderlist";
 import { OrderTableWrap, OrderTable } from "../../style/AdminOrderControl";
 import { Form, Select } from "antd";
 
@@ -15,20 +21,24 @@ export interface fetchData {
   // count: string;
 }
 
-interface ObjectType {
-  [key: string | number]: any;
-}
+// 수정예정
+// interface ObjectType {
+//   [key: string | number]: any;
+// }
 
-interface statusType {
-  [key: string | number]: any;
-}
+// 수정예정
+// interface statusType {
+//   [key: string | number]: any;
+// }
 
-interface statusData {
-  orderStatus: number;
-}
+// 수정예정
+// interface statusData {
+//   orderStatus: number;
+// }
+
 const OrderControlAdm = () => {
   const [orderControl, setOrderControl] = useState<Array<fetchData>>([]);
-  const [orderSt, setOrderSt] = useState<statusData>();
+  // const [orderSt, setOrderSt] = useState<statusData>();
   const option = [
     { value: "1", label: "결제완료" },
     { value: "2", label: "배송준비" },
@@ -40,9 +50,9 @@ const OrderControlAdm = () => {
 
   const { Option } = Select;
 
-  const fetchData = async () => {
+  const getOdData = async () => {
     try {
-      const data: ObjectType = await fetchOrderData();
+      const data = await AdmOrderData();
       console.log(data);
       setOrderControl(data.list);
       console.log(data.list);
@@ -51,20 +61,20 @@ const OrderControlAdm = () => {
     }
   };
 
-  const statusData = async () => {
-    try {
-      const data: statusType = await orderStatusData(statusData);
-      console.log(data);
-      setOrderSt(data.list);
-      console.log(data.list);
-    } catch (err) {
-      console.error("err:", err);
-    }
-  };
+  // 수정 예정
+  // const statusData = async () => {
+  //   try {
+  //     const data: statusType = await orderStatusData(statusData);
+  //     console.log(data);
+  //     setOrderSt(data.list);
+  //     console.log(data.list);
+  //   } catch (err) {
+  //     console.error("err:", err);
+  //   }
+  // };
 
   useEffect(() => {
-    fetchData();
-    statusData();
+    getOdData();
   }, []);
 
   return (
@@ -105,16 +115,21 @@ const OrderControlAdm = () => {
                 <td>{item.pickUpStore}</td>
                 <td>
                   {/* {item.orderStatus} */}
-                  <Form name="control-hooks" style={{ width: "250px" }}>
+                  <Form
+                    name="control-hooks"
+                    style={{ width: "250px", alignItems: "center" }}
+                  >
                     <Form.Item
                       style={{
                         display: "flex",
                         justifyContent: "center",
-                        width: "100%",
+                        width: "80%",
+                        // alignItems:"center",
+                        margin: "0",
                       }}
                     >
                       <Select
-                        style={{ width: "300px" }}
+                        style={{ width: "280px", textAlign: "center" }}
                         placeholder="배송상태를 지정해주세요"
                         // onChange={}
                         allowClear
@@ -128,11 +143,13 @@ const OrderControlAdm = () => {
                     </Form.Item>
                   </Form>
                 </td>
-                <td>
-                  상세
-                  <br />
-                  내역
-                </td>
+                <button>
+                  <td>
+                    상세
+                    <br />
+                    내역
+                  </td>
+                </button>
               </tr>
             ))}
           </tbody>

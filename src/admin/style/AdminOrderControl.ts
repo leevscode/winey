@@ -1,3 +1,9 @@
+/*
+    작업자 : 이동은
+    노션 : https://www.notion.so/leevscode/leevscode-5223e3d332604844a255a0c63113a284
+    깃허브 : https://github.com/leevscode
+*/
+
 import styled from "@emotion/styled";
 import {
   Gradation,
@@ -9,7 +15,6 @@ import { AdminColor } from "./AdminLayoutStyle";
 
 // 테이블 감싸는 div
 export const OrderTableWrap = styled.div`
-  /* background: pink; */
   overflow: auto;
   padding-bottom: 10px;
   /* 스크롤바 커스텀 */
@@ -62,11 +67,12 @@ export const OrderTable = styled.table`
       td {
         border-bottom: 0.05rem solid ${opacity.white};
       }
+      button {
+        font-size: 1.5rem;
+      }
+      button: {
+        align-items: center;
+      }
     }
-  }
-  button > td {
-    padding: 15px 5px;
-    border-right: 0.05rem solid ${opacity.white};
-    vertical-align: middle;
   }
 `;

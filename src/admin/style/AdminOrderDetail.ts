@@ -1,3 +1,8 @@
+/*
+    작업자 : 이동은
+    노션 : https://www.notion.so/leevscode/leevscode-5223e3d332604844a255a0c63113a284
+    깃허브 : https://github.com/leevscode
+*/
 import styled from "@emotion/styled";
 import {
   Gradation,
@@ -9,8 +14,8 @@ import { AdminColor } from "./AdminLayoutStyle";
 
 // 테이블 감싸는 div
 export const OrderSubTableWrap = styled.div`
-  /* background: pink; */
   overflow: auto;
+  margin-top: 50px;
   padding-bottom: 10px;
   /* 스크롤바 커스텀 */
   &::-webkit-scrollbar {
@@ -28,7 +33,7 @@ export const OrderSubTableWrap = styled.div`
 `;
 
 export const OrderSubTable = styled.table`
-  width: 100%;
+  width: 90%;
   min-width: 1000px;
   background: ${Maincolor.white};
   border: 0.05rem solid ${opacity.white};
@@ -60,9 +65,6 @@ export const OrderSubTable = styled.table`
   tbody {
     tr :nth-of-type(1) {
       transition: 0.1s ease-in-out background;
-      /* &:hover {
-        background: ${AdminColor.bodyColorA};
-      } */
       background: ${AdminColor.headColorA};
       color: ${Maincolor.white};
       td {
