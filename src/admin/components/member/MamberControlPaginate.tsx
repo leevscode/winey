@@ -6,29 +6,32 @@
 
 import React, { useEffect, useState } from "react";
 import { Pagination } from "antd";
-import { getMemberList } from "../api/patchAdmMember";
-import { PaginationWrap } from "../style/AdminLayoutStyle";
+import { getMemberList } from "../../api/patchAdmMember";
+import {
+  IMemControl,
+  IMemberState,
+  IinitialPg,
+} from "../../interface/MemberInterface";
 
-const Paginate = ({ memberList, setMemberList }) => {
+// 불러온 멤버리스트를 props로 전달받음
+const MamberControlPaginate = ({ memberList, setMemberList }: IMemberState) => {
   // 페이지 정보(page / row: 페이지 당 개수)
-  const [paginate, setPaginate] = useState({ page: 1, row: 12 });
-  const pageInfo = memberList.page;
+  const [paginate, setPaginate] = useState<IinitialPg>({ page: 1, row: 12 });
 
-  const onChange = async page => {
+  const pageInfo: IMemControl["page"] | null = memberList.page;
+
+  const onChange = async (page: number) => {
     setPaginate(prevPaginate => ({ ...prevPaginate, page }));
-    console.log("page", page);
   };
 
   const getPage = async () => {
     // 페이지 정보를 보내고(paginate) , list 정보를 받는다
-    const data = await getMemberList({ paginate, setMemberList });
+    const data: IMemControl = await getMemberList({ paginate, setMemberList });
   };
 
   useEffect(() => {
     getPage();
   }, [paginate.page]);
-  console.log("paginate", paginate);
-  console.log("pageInfo", pageInfo);
   return (
     <>
       {pageInfo && (
@@ -36,7 +39,7 @@ const Paginate = ({ memberList, setMemberList }) => {
           current={pageInfo.page}
           pageSize={pageInfo.pageSize}
           onChange={page => onChange(page)}
-          total={pageInfo.totalRecordCount}
+          total={Math.floor(pageInfo.totalRecordCount)}
           // size="small"
         />
       )}
@@ -44,4 +47,4 @@ const Paginate = ({ memberList, setMemberList }) => {
   );
 };
 
-export default Paginate;
+export default MamberControlPaginate;
