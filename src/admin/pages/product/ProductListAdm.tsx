@@ -52,7 +52,7 @@ const ProductListAdm = () => {
   const [page, setPage] = useState<number>(1);
   useEffect(() => {
     getAdmProductList(page, setAdmProductList);
-    console.log("뭐시기", ...admProductList);
+    // console.log("데이터 담았습니다", admProductList);
   }, []);
   return (
     <TableWrap>
@@ -72,7 +72,7 @@ const ProductListAdm = () => {
           </tr>
         </thead>
         <tbody>
-          {/* {productListData.map((item: IproductList) => (
+          {admProductList.map((item: IproductList) => (
             <tr key={item.productId}>
               <td>{item.nmKor}</td>
               <td>{item.price}</td>
@@ -84,7 +84,7 @@ const ProductListAdm = () => {
               <td>{item.price}</td>
               <td>{item.price}</td>
             </tr>
-          ))} */}
+          ))}
         </tbody>
       </LayoutTable>
     </TableWrap>

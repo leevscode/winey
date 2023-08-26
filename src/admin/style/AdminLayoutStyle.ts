@@ -82,15 +82,30 @@ export const LayoutContentWrap = styled.div`
   .ant-layout-content {
     padding: ${WidthPd.padding};
     height: 100%;
-    .ant-breadcrumb {
-      margin: 10px 0px;
+    .breadcrumb-wrap {
+      min-height: 2.4rem;
+      margin: 10px 0;
+      .ant-breadcrumb {
+        .ant-breadcrumb-link {
+          font-size: 1.3rem;
+        }
+      }
     }
+
     .contents-box {
+      position: absolute;
+      right: 0;
+      bottom: 0;
       width: calc(100% - 200px);
-      padding-left: 1%;
+      height: calc(100% - 60px);
+      padding: 1%;
+      & > div {
+        height: 100%;
+      }
     }
   }
   .layout-box {
+    position: relative;
     background: ${Maincolor.white};
     border: 0.05rem solid ${opacity.white};
     padding: 1%;
@@ -99,7 +114,33 @@ export const LayoutContentWrap = styled.div`
     height: 92%;
     overflow: hidden;
     isolation: isolate;
+    .pg-title {
+      position: absolute;
+      top: 0;
+      right: 0;
+      padding: 0 1%;
+      margin: 15px 0;
+      width: calc(100% - 200px);
+      h2 {
+        display: inline-block;
+        font-size: 1.8rem;
+        font-weight: 700;
+        position: relative;
+        &::before {
+          content: "";
+          display: inline-block;
+          width: 0.65rem;
+          height: 0.65rem;
+          background: ${Maincolor.black};
+          opacity: 0.35;
+          vertical-align: 0.4rem;
+          margin-right: 10px;
+          transform: rotate(45deg);
+        }
+      }
+    }
     .ant-layout {
+      display: block;
       background: transparent;
       height: 100%;
       overflow: auto;
@@ -115,6 +156,13 @@ export const LayoutContentWrap = styled.div`
       &::-webkit-scrollbar-thumb {
         background: ${opacity.gray};
         border-radius: 10px;
+      }
+      .ant-layout-sider {
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 1;
+        height: 100%;
       }
     }
   }
@@ -150,8 +198,8 @@ export const LayoutFooterWrap = styled.div`
 `;
 // 테이블 감싸는 div
 export const TableWrap = styled.div`
-  /* background: pink; */
   overflow: auto;
+  height: 100%;
   padding-bottom: 10px;
   /* 스크롤바 커스텀 */
   &::-webkit-scrollbar {

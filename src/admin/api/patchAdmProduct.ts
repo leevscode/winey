@@ -15,11 +15,10 @@ export const getAdmProductList = async (
   try {
     const res = await axios.get(`/api/admin/product/list?page=${_page}&row=20`);
     const result = res.data;
-    const test = result.productList;
-    // _setAdmProductList(result);
-    _setAdmProductList(test);
-    console.log("등록된 상품 리스트 GET", result);
-    console.log("asdf", test);
+    const data = result.productList;
+    _setAdmProductList(data);
+    // console.log("등록된 상품 리스트 GET", result);
+    console.log("productlist 값만 사용합니다", data);
     return result;
   } catch (err) {
     console.log("등록된 상품 리스트 GET 에러 발생", err);
