@@ -5,11 +5,13 @@
 */
 
 import React, { useEffect, useState } from "react";
-import Paginate from "../../components/Paginate";
-
 import MemberControlListItem from "../../components/member/MemberControlListItem";
 import { MemberWrap } from "../../style/AdminMemberStyle";
-import { IMemControl, IMemberListUser } from "../../interface/MemberInterface";
+import {
+  IMemControl,
+  IMemberListUser,
+} from "../../interface/MemberInterface";
+import MamberControlPaginate from "../../components/member/MamberControlPaginate";
 
 const MemberControlAdm = () => {
   const [memberList, setMemberList] = useState<IMemControl>({
@@ -47,24 +49,23 @@ const MemberControlAdm = () => {
     { regionNmId: 17, value: "제주" },
   ];
 
-  const regionConvert = memberList.list.map(item => {
-    const changeList = regionOptions.filter(
-      option => item.regionNmId === option.regionNmId,
-    );
+  const regionConvert: Array<IMemberListUser> = memberList.list.map(item => {
+    const changeList: {
+      regionNmId: number;
+      value: string;
+    }[] = regionOptions.filter(option => item.regionNmId === option.regionNmId);
     if (changeList.length > 0) {
       return { ...item, textRegion: changeList[0].value };
     }
     return item;
   });
-  // setMemberList(prev => ({
-  //   ...prev,
-  //   textRegion: regionConvert,
-  // }));
+
+  console.log("regionConvert", regionConvert);
 
   return (
     <MemberWrap>
       <MemberControlListItem regionConvert={regionConvert} />
-      <Paginate memberList={memberList} setMemberList={setMemberList} />
+      <MamberControlPaginate memberList={memberList} setMemberList={setMemberList} />
     </MemberWrap>
   );
 };

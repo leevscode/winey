@@ -4,17 +4,24 @@
     깃허브 : https://github.com/hyemdev
 */
 
-import React from "react";
+import React, { useState } from "react";
 import { LayoutTable, TableWrap } from "../../style/AdminLayoutStyle";
+import MemberDetailAdm from "../../pages/member/MemberDetailAdm";
+import { useNavigate } from "react-router";
+import { IMemberListUser, IUserIdState } from "../../interface/MemberInterface";
 
-const MemberControlListItem = ({ regionConvert }) => {
-  console.log("memberList", regionConvert);
-
-  const handleMemberOrder = e => {
-    e.preventDefault();
+const MemberControlListItem = ({
+  regionConvert,
+}: {
+  regionConvert: IMemberListUser[];
+}) => {
+  const navigate = useNavigate();
+  const handleMemberOrder = (item: IMemberListUser) => {
+    console.log("item.userId", item.userId);
+    navigate("/admin/memberdetail", { state: item.userId });
   };
-  const handleMemberOut = e => {
-    e.preventDefault();
+  const handleMemberOut = (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault();
   };
 
   return (
@@ -45,17 +52,14 @@ const MemberControlListItem = ({ regionConvert }) => {
                   </td>
                   <td>
                     <button
-                      onClick={e => handleMemberOrder(e)}
+                      onClick={() => handleMemberOrder(item)}
                       className="detailBt"
                     >
                       주문상세보기
                     </button>
                   </td>
                   <td>
-                    <button
-                      onClick={e => handleMemberOut(e)}
-                      className="memberOutBt"
-                    >
+                    <button onClick={handleMemberOut} className="memberOutBt">
                       탈퇴
                     </button>
                   </td>

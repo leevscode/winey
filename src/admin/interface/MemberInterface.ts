@@ -4,14 +4,15 @@
     깃허브 : https://github.com/hyemdev
 */
 
-export interface IMemberState {
-  memberList: IMemControl;
-  setMemberList: React.Dispatch<React.SetStateAction<IMemControl>>;
-}
-
+// 페이지네이션
 export interface IinitialPg {
   page: number;
   row: number;
+}
+
+export interface IMemberState {
+  memberList: IMemControl;
+  setMemberList: React.Dispatch<React.SetStateAction<IMemControl>>;
 }
 
 export interface IMemControl {
@@ -37,4 +38,46 @@ export interface IMemberListUser {
   regionNmId: number;
   textRegion?: string;
   value?: string;
+}
+
+export interface IUserDetailState {
+  userInfomation: IUserDetail;
+  setUserInfomation: React.Dispatch<React.SetStateAction<IUserDetail>>;
+  clickUserId?: number;
+}
+export interface IUserIdState {
+  clickUserId: number;
+  setClickUserID?: React.Dispatch<React.SetStateAction<number>>;
+}
+
+export interface IUserDetail {
+  page: {
+    page: number;
+    row: number;
+    startIdx: number;
+    totalRecordCount: number;
+    totalPage: number;
+    pageSize: number;
+    prev: boolean;
+    next: boolean;
+    startPage: number;
+    endPage: number;
+  };
+  userInfo: {
+    userId: number;
+    email: string;
+    nm: string;
+  };
+  userOrderList: IUserOrderList[];
+  clickUserId?: number;
+}
+
+export interface IUserOrderList {
+  orderId: number;
+  orderDate: string;
+  nmKor: string;
+  price: number;
+  storeNm: string;
+  orderStatus: number;
+  count: number;
 }
