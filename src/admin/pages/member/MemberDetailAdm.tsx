@@ -15,11 +15,12 @@ import {
   IUserOrderList,
 } from "../../interface/MemberInterface";
 import MamberDetailPaginate from "../../components/member/MamberDetailPaginate";
+import MemberDetailUpper from "../../components/member/MemberDetailUpper";
 
 const MemberDetailAdm = () => {
   const location = useLocation();
   const [clickUserId, setClickUserId] = useState<IUserIdState>({
-    clickUserId: 1,
+    clickUserId: 0,
   });
   const [userInfomation, setUserInfomation] = useState<IUserDetail>({
     page: {
@@ -35,7 +36,7 @@ const MemberDetailAdm = () => {
       endPage: 1,
     },
     userInfo: {
-      userId: 1,
+      userId: 0,
       email: "",
       nm: "",
     },
@@ -43,13 +44,21 @@ const MemberDetailAdm = () => {
     userOrderList: [] as IUserOrderList[],
   });
 
-  console.log("location", location);
+  console.log("location", location.state);
+
   useEffect(() => {
     setClickUserId(location.state);
   }, [location.state]);
+  console.log("userInfomation", userInfomation);
+
   return (
     <div>
-      {/* <MemberDetailListItem userInfomation={userInfomation} /> */}
+      {userInfomation.userInfo && (
+        <MemberDetailUpper userInfomation={userInfomation.userInfo} />
+      )}
+      {userInfomation.userOrderList && (
+        <MemberDetailListItem userInfomation={userInfomation.userOrderList} />
+      )}
       <MamberDetailPaginate
         userInfomation={userInfomation}
         setUserInfomation={setUserInfomation}

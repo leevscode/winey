@@ -26,7 +26,7 @@ const MamberControlPaginate = ({ memberList, setMemberList }: IMemberState) => {
 
   const getPage = async () => {
     // 페이지 정보를 보내고(paginate) , list 정보를 받는다
-    const data: IMemControl = await getMemberList({ paginate, setMemberList });
+    const data = await getMemberList(paginate, setMemberList);
   };
 
   useEffect(() => {

@@ -30,11 +30,11 @@ const MamberDetailPaginate = ({
 
   const getPage = async () => {
     // 페이지 정보를 보내고(paginate) , list 정보를 받는다
-    const data: IUserDetail = await getMemberDetail({
+    const data = await getMemberDetail(
       paginate,
       setUserInfomation,
       clickUserId,
-    });
+    );
   };
 
   useEffect(() => {

@@ -45,6 +45,7 @@ export interface IUserDetailState {
   setUserInfomation: React.Dispatch<React.SetStateAction<IUserDetail>>;
   clickUserId?: number;
 }
+
 export interface IUserIdState {
   clickUserId: number;
   setClickUserID?: React.Dispatch<React.SetStateAction<number>>;
