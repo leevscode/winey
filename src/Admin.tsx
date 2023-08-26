@@ -16,7 +16,7 @@ const Admin: React.FC = () => {
   const { pathname } = useLocation();
   // pathname에서 /admin/ 는 제외처리
   const listPathName = pathname.slice(7);
-  console.log(listPathName);
+  // console.log(listPathName);
   // 네비게이션 gnb state
   const [breadCrumbGnb, setBreadCrumbGnb] = useState("");
   // 네비게이션 lnb title state
@@ -88,8 +88,8 @@ const Admin: React.FC = () => {
     if (findPath) {
       setBreadCrumbLnbTitle(findPath.title);
       setBreadCrumbLnbPath(findPath.path);
-      console.log("제목", breadCrumbLnbTitle);
-      console.log("path이름", breadCrumbLnbPath);
+      // console.log("제목", breadCrumbLnbTitle);
+      // console.log("path이름", breadCrumbLnbPath);
     } else {
       setBreadCrumbLnbTitle("");
     }

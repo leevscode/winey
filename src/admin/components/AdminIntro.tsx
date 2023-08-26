@@ -28,7 +28,7 @@ function AdminIntro() {
             <i>
               <FontAwesomeIcon icon={faFolderOpen} />
             </i>
-            <Link to="/admin/membercontrol">주문관리</Link>
+            <Link to="/admin/ordercontrol">주문관리</Link>
           </div>
         </li>
         <li>
@@ -36,7 +36,7 @@ function AdminIntro() {
             <i>
               <FontAwesomeIcon icon={faWineBottle} />
             </i>
-            <Link to="/admin/membercontrol">상품관리</Link>
+            <Link to="/admin/productlist">상품관리</Link>
           </div>
         </li>
       </ul>
