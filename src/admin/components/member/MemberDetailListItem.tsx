@@ -41,7 +41,7 @@ const MemberDetailListItem = ({
               <th>결제금액</th>
               <th>픽업매장</th>
               <th>주문상태</th>
-              <th>개수</th>
+              <th>주문수량</th>
             </tr>
           </thead>
           {orderConvert.length === 0 ? (
