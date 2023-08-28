@@ -7,7 +7,7 @@
 import React, { useEffect, useState } from "react";
 import { AdmOrderData } from "../../api/admorderlist";
 import { OrderTableWrap, OrderTable } from "../../style/AdminOrderControl";
-import { Form, Select } from "antd";
+import { Form, Pagination, PaginationProps, Select } from "antd";
 
 export interface fetchData {
   id: number;
@@ -49,6 +49,12 @@ const OrderControlAdm = () => {
   ];
 
   const { Option } = Select;
+  const [current, setCurrent] = useState(3);
+
+  const onChange: PaginationProps["onChange"] = page => {
+    console.log(page);
+    setCurrent(page);
+  };
 
   const getOdData = async () => {
     try {
@@ -155,6 +161,8 @@ const OrderControlAdm = () => {
           </tbody>
         </OrderTable>
       </OrderTableWrap>
+      <Pagination current={current} onChange={onChange} total={50} />
+
     </div>
   );
 };
