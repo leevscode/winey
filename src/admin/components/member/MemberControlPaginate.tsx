@@ -6,23 +6,19 @@
 
 import React, { useEffect, useState } from "react";
 import { Pagination } from "antd";
-import { getMemberDetail } from "../../api/patchAdmMember";
+import { getMemberList } from "../../api/patchAdmMember";
 import {
-  IUserDetail,
-  IUserDetailState,
+  IMemControl,
+  IMemberState,
   IinitialPg,
 } from "../../interface/MemberInterface";
 
 // 불러온 멤버리스트를 props로 전달받음
-const MamberDetailPaginate = ({
-  userInfomation,
-  setUserInfomation,
-  clickUserId,
-}: IUserDetailState) => {
+const MemberControlPaginate = ({ memberList, setMemberList }: IMemberState) => {
   // 페이지 정보(page / row: 페이지 당 개수)
   const [paginate, setPaginate] = useState<IinitialPg>({ page: 1, row: 12 });
 
-  const pageInfo: IUserDetail["page"] | null = userInfomation.page;
+  const pageInfo: IMemControl["page"] | null = memberList.page;
 
   const onChange = async (page: number) => {
     setPaginate(prevPaginate => ({ ...prevPaginate, page }));
@@ -30,11 +26,7 @@ const MamberDetailPaginate = ({
 
   const getPage = async () => {
     // 페이지 정보를 보내고(paginate) , list 정보를 받는다
-    const data: IUserDetail = await getMemberDetail({
-      paginate,
-      setUserInfomation,
-      clickUserId,
-    });
+    const data = await getMemberList(paginate, setMemberList);
   };
 
   useEffect(() => {
@@ -55,4 +47,4 @@ const MamberDetailPaginate = ({
   );
 };
 
-export default MamberDetailPaginate;
+export default MemberControlPaginate;

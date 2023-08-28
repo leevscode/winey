@@ -11,7 +11,7 @@ import {
   IMemControl,
   IMemberListUser,
 } from "../../interface/MemberInterface";
-import MamberControlPaginate from "../../components/member/MamberControlPaginate";
+import MemberControlPaginate from "../../components/member/MemberControlPaginate";
 
 const MemberControlAdm = () => {
   const [memberList, setMemberList] = useState<IMemControl>({
@@ -65,7 +65,7 @@ const MemberControlAdm = () => {
   return (
     <MemberWrap>
       <MemberControlListItem regionConvert={regionConvert} />
-      <MamberControlPaginate memberList={memberList} setMemberList={setMemberList} />
+      <MemberControlPaginate memberList={memberList} setMemberList={setMemberList} />
     </MemberWrap>
   );
 };

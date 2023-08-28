@@ -30,7 +30,7 @@ const AdminSideMenu = () => {
           link: "/admin/membercontrol",
           label: "가입회원리스트",
         },
-        { key: "2", link: "/admin/memberdetail", label: "회원상세내역" },
+        // { key: "2", link: "/admin/memberdetail", label: "회원상세내역" },
       ],
     },
     {

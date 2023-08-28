@@ -14,7 +14,8 @@ import {
   IUserIdState,
   IUserOrderList,
 } from "../../interface/MemberInterface";
-import MamberDetailPaginate from "../../components/member/MamberDetailPaginate";
+import MemberDetailUpper from "../../components/member/MemberDetailUpper";
+import MemberDetailPaginate from "../../components/member/MemberDetailPaginate";
 
 const MemberDetailAdm = () => {
   const location = useLocation();
@@ -35,7 +36,7 @@ const MemberDetailAdm = () => {
       endPage: 1,
     },
     userInfo: {
-      userId: 1,
+      userId: 0,
       email: "",
       nm: "",
     },
@@ -43,18 +44,29 @@ const MemberDetailAdm = () => {
     userOrderList: [] as IUserOrderList[],
   });
 
-  console.log("location", location);
+  console.log("location", location.state);
+  console.log("clickUserId", clickUserId);
+
   useEffect(() => {
     setClickUserId(location.state);
-  }, [location.state]);
+  }, []);
+  console.log("userInfomation", userInfomation);
+
   return (
     <div>
-      {/* <MemberDetailListItem userInfomation={userInfomation} /> */}
-      <MamberDetailPaginate
-        userInfomation={userInfomation}
-        setUserInfomation={setUserInfomation}
-        clickUserId={clickUserId.clickUserId}
-      />
+      {userInfomation.userInfo && (
+        <MemberDetailUpper userInfomation={userInfomation.userInfo} />
+      )}
+      {userInfomation.userOrderList && (
+        <MemberDetailListItem userInfomation={userInfomation.userOrderList} />
+      )}
+      {clickUserId && (
+        <MemberDetailPaginate
+          userInfomation={userInfomation}
+          setUserInfomation={setUserInfomation}
+          clickUserId={clickUserId.clickUserId}
+        />
+      )}
     </div>
   );
 };

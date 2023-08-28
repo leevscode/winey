@@ -1,13 +1,15 @@
 import React from "react";
 import { LayoutTable, TableWrap } from "../../style/AdminLayoutStyle";
-import { IUserDetail } from "../../interface/MemberInterface";
+import { IUserDetail, IUserOrderList } from "../../interface/MemberInterface";
 
-const MemberDetailListItem: React.FC<IUserDetail> = (
-  // { userInfomation }
-  ) => {
+const MemberDetailListItem = ({
+  userInfomation,
+}: {
+  userInfomation: IUserOrderList[];
+}) => {
   return (
     <div>
-      {/* <TableWrap>
+      <TableWrap>
         <LayoutTable>
           <caption>테이블</caption>
           <thead>
@@ -37,7 +39,7 @@ const MemberDetailListItem: React.FC<IUserDetail> = (
             </tbody>
           )}
         </LayoutTable>
-      </TableWrap> */}
+      </TableWrap>
     </div>
   );
 };
