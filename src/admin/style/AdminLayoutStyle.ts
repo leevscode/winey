@@ -1,18 +1,23 @@
 import styled from "@emotion/styled";
 import { css } from "@emotion/react";
 import { Maincolor, WidthPd, opacity } from "../../style/GlobalStyle";
+import { ItableLayoutColor } from "../interface/LayoutInterface";
 
 // 관리자페이지 색상 설정
 export const AdminColor = {
   // 테이블 제목 컬러 설정
   headColorA: "rgba(181, 129, 127, 0.95)",
-  headColorB: "#774954",
-  headColorC: "#774954",
+  headColorB: "rgba(158,152,152,0.95)",
+  headColorC: "rgb(149, 182, 184 , 0.95)",
   bodyColorA: "#f7f1f3",
   // 테이블 내용 컬러 설정
   contentsColorA: "rgba(248, 241, 241, 0.5)",
+  contentsColorB: "rgba(245, 244, 244, 0.5)",
+  contentsColorC: "rgb(228, 239, 240 , 0.5)",
   // 테이블 내용 hover 컬러 설정
   contentsColorHoverA: "rgba(248, 241, 241, 1)",
+  contentsColorHoverB: "rgba(245, 244, 244, 1)",
+  contentsColorHoverC: "rgb(228, 239, 240 , 1)",
   // 버튼 컬러 설정
   pinkA: "#d5adac",
   pinkB: "#c9a1a0",
@@ -173,6 +178,8 @@ export const LayoutContentWrap = styled.div`
       & > div {
         overflow: auto;
         height: 100%;
+        padding-right: 1%;
+        padding-bottom: 1%;
         /* 스크롤바 커스텀 */
         &::-webkit-scrollbar {
           display: block;
@@ -283,28 +290,90 @@ export const LayoutFooterWrap = styled.div`
 `;
 // 테이블 감싸는 div
 export const TableWrap = styled.div`
-  /* overflow: auto; */
-  /* height: 100%; */
-  /* padding-bottom: 10px; */
+  & > div {
+    margin-bottom: 20px;
+    &:last-of-type {
+      margin-bottom: 0;
+    }
+  }
 `;
-// 관리자페이지 데이터 테이블 스타일 설정 (new) - 색상
-// const TableLayoutTitleColor = props => {
-//   if (props.listPathName === "red") {
-//     return css`
-//       background: linear-gradient(
-//         90deg,
-//         ${Gradation.wineA} 35%,
-//         ${Gradation.wineC} 100%
-//       );
-//       color: ${Maincolor.white};
-//     `;
-//   }
-// };
-// 관리자페이지 데이터 테이블 스타일 설정 (new) - 레이아웃
+// 관리자페이지 데이터 테이블 스타일 설정 (new) - 헤더색상
+const TableLayoutTitleColor = (props: ItableLayoutColor) => {
+  // 회원관리
+  if (
+    props.listPathName === "membercontrol" ||
+    props.listPathName === "memberdetail"
+  ) {
+    return css`
+      background: ${AdminColor.headColorA};
+    `;
+    // 주문관리
+  } else if (
+    props.listPathName === "ordercontrol" ||
+    props.listPathName === "orderdetail"
+  ) {
+    return css`
+      background: ${AdminColor.headColorB};
+    `;
+    // 상품관리
+  } else if (
+    props.listPathName === "productlist" ||
+    props.listPathName === "productadd" ||
+    props.listPathName === "productedit"
+  ) {
+    return css`
+      background: ${AdminColor.headColorC};
+    `;
+  }
+};
+// 관리자페이지 데이터 테이블 스타일 설정 (new) - 내용색상
+const TableLayoutContentsColor = (props: ItableLayoutColor) => {
+  // 회원관리
+  if (
+    props.listPathName === "membercontrol" ||
+    props.listPathName === "memberdetail"
+  ) {
+    return css`
+      &:nth-of-type(odd) > li {
+        background: ${AdminColor.contentsColorA};
+      }
+      &:hover {
+        background: ${AdminColor.contentsColorHoverA};
+      }
+    `;
+    // 주문관리
+  } else if (
+    props.listPathName === "ordercontrol" ||
+    props.listPathName === "orderdetail"
+  ) {
+    return css`
+      &:nth-of-type(odd) > li {
+        background: ${AdminColor.contentsColorB};
+      }
+      &:hover {
+        background: ${AdminColor.contentsColorHoverB};
+      }
+    `;
+    // 상품관리
+  } else if (
+    props.listPathName === "productlist" ||
+    props.listPathName === "productadd" ||
+    props.listPathName === "productedit"
+  ) {
+    return css`
+      &:nth-of-type(odd) > li {
+        background: ${AdminColor.contentsColorC};
+      }
+      &:hover {
+        background: ${AdminColor.contentsColorHoverC};
+      }
+    `;
+  }
+};
+// 관리자페이지 데이터 테이블 스타일 설정 (new) - 레이아웃 (안씀)
 export const TableLayout = styled.div`
   min-width: 1000px;
   background: ${Maincolor.white};
-  /* border: 0.05rem solid ${opacity.white}; */
   & > ul {
     display: grid;
     & > li {
@@ -316,8 +385,60 @@ export const TableLayout = styled.div`
     }
   }
 `;
+// 관리자페이지 테이블 레이아웃 세로형
+export const TableVertical = styled.div`
+  min-width: 1000px;
+  background: ${Maincolor.white};
+  & > ul {
+    display: grid;
+    & > li {
+      border-right: 0.05rem solid ${opacity.white};
+      text-align: center;
+      &:last-of-type {
+        border-right: 0;
+      }
+    }
+  }
+`;
+// 관리자페이지 테이블 레이아웃 가로형
+export const TableHorizontal = styled.div<ItableLayoutColor>`
+  min-width: 1000px;
+  border: 0.05rem solid ${opacity.white};
+  background: ${Maincolor.white};
+  border-right: 0;
+  border-left: 0;
+  & > table {
+    width: 100%;
+    text-align: center;
+    tr {
+      th,
+      td {
+        width: calc(100% / 4);
+        vertical-align: middle;
+        border-bottom: 0.05rem solid ${opacity.white};
+        padding: 14.25px 5px;
+      }
+      &:last-of-type {
+        border-bottom: 0;
+        th,
+        td {
+          border-bottom: 0;
+        }
+      }
+    }
+  }
+  /* 타이틀 */
+  .table-title {
+    font-weight: 700;
+    ${TableLayoutTitleColor};
+    color: ${Maincolor.white};
+    border-bottom-color: ${opacity.whiteB};
+  }
+  /* 내용 */
+`;
+
 /* 관리자페이지 데이터 테이블 스타일 설정 (new) - 타이틀 */
-export const TableLayoutTitle = styled.ul`
+export const TableLayoutTitle = styled.ul<ItableLayoutColor>`
   position: sticky;
   top: 0;
   left: 0;
@@ -325,14 +446,16 @@ export const TableLayoutTitle = styled.ul`
   font-weight: 700;
   color: ${Maincolor.white};
   min-width: 100px;
+  // 테이블 색상
+  ${TableLayoutTitleColor}
   & > li {
     padding: 15px 5px;
   }
 `;
 /* 관리자페이지 데이터 테이블 스타일 설정 (new) - 내용 */
-export const TableLayoutContents = styled.ul`
+export const TableLayoutContents = styled.ul<ItableLayoutColor>`
+  ${TableLayoutContentsColor}
   &:nth-of-type(odd) > li {
-    background-color: pink;
   }
   & > li {
     display: flex;

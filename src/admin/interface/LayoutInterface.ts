@@ -17,9 +17,13 @@ export interface ISubMenu {
   link: string;
 }
 
-export interface ISetDefaultSide {
-  setDefaultSide: React.Dispatch<React.SetStateAction<string>>;
-}
-export interface IDefaultSide {
-  defaultSide: string;
+/*
+  작업자 : 김아영
+  노션 : https://kimaydev.notion.site/kimaydev/FE-7a53f9f631f146c88c39413cd175a9d0
+  깃허브 : https://github.com/kimaydev
+*/
+
+// listPathName에 따라 테이블 색상 변경
+export interface ItableLayoutColor {
+  listPathName: string;
 }

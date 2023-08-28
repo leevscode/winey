@@ -6,10 +6,10 @@
 import React, { useEffect, useState } from "react";
 import {
   DetailBt,
-  LayoutTable,
-  TableLayout,
+  TableHorizontal,
   TableLayoutContents,
   TableLayoutTitle,
+  TableVertical,
   TableWrap,
 } from "../../style/AdminLayoutStyle";
 import {
@@ -20,8 +20,8 @@ import { getAdmProductList } from "../../api/patchAdmProduct";
 import { useOutletContext } from "react-router-dom";
 
 const ProductListAdm = () => {
-  const listPathName = useOutletContext();
-  console.log("listPathName 불러옵니다.", listPathName);
+  const { listPathName } = useOutletContext() as { listPathName: string };
+  // console.log("listPathName 불러옵니다.", listPathName);
   /* 
   [ 테이블 넓이 비율 설정 ]
   · 테이블의 열(columns) 값을 설정할 수 있습니다. 
@@ -43,10 +43,11 @@ const ProductListAdm = () => {
   }, []);
   return (
     <TableWrap>
-      {/* 데이터 테이블 - 레이아웃 */}
-      <TableLayout>
+      {/* 데이터 테이블 - 세로형 */}
+      <TableVertical>
         {/* 데이터 테이블 - 타이틀 */}
         <TableLayoutTitle
+          listPathName={listPathName}
           style={{
             gridTemplateColumns: gridTemplateColumns.columns,
           }}
@@ -64,6 +65,7 @@ const ProductListAdm = () => {
         {/* 데이터 테이블 - 내용 */}
         {admProductList.map((item: IproductList) => (
           <TableLayoutContents
+            listPathName={listPathName}
             key={item.productId}
             style={{
               gridTemplateColumns: gridTemplateColumns.columns,
@@ -87,7 +89,40 @@ const ProductListAdm = () => {
             </li>
           </TableLayoutContents>
         ))}
-      </TableLayout>
+      </TableVertical>
+      {/* 데이터 테이블 - 가로형 */}
+      <TableHorizontal listPathName={listPathName}>
+        {/* 데이터 테이블 - 타이틀 */}
+        <table>
+          <caption>데이터테이블</caption>
+          <tbody>
+            <tr>
+              <th className="table-title">주문수량</th>
+              <td className="table-content">3</td>
+              <th className="table-title">픽업 장소</th>
+              <td className="table-content">서울 목동점</td>
+            </tr>
+            <tr>
+              <th className="table-title">총 결제 금액</th>
+              <td className="table-content">39800 원</td>
+              <th className="table-title">픽업 날짜</th>
+              <td className="table-content">23-07-11</td>
+            </tr>
+            <tr>
+              <th className="table-title">결제 수단</th>
+              <td className="table-content">카드결제</td>
+              <th className="table-title">픽업 시간</th>
+              <td className="table-content">13:00</td>
+            </tr>
+            <tr>
+              <th className="table-title">픽업 완료 여부</th>
+              <td className="table-content">Y</td>
+              <th className="table-title">픽업 완료 여부</th>
+              <td className="table-content">Y</td>
+            </tr>
+          </tbody>
+        </table>
+      </TableHorizontal>
     </TableWrap>
   );
 };
