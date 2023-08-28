@@ -43,11 +43,11 @@ export interface IMemberListUser {
 export interface IUserDetailState {
   userInfomation: IUserDetail;
   setUserInfomation: React.Dispatch<React.SetStateAction<IUserDetail>>;
-  clickUserId?: number | undefined;
+  clickUserId?: number;
 }
 
 export interface IUserIdState {
-  clickUserId: number | undefined;
+  clickUserId: number;
   setClickUserID?: React.Dispatch<React.SetStateAction<number>>;
 }
 
@@ -79,6 +79,7 @@ export interface IUserOrderList {
   nmKor: string;
   price: number;
   storeNm: string;
-  orderStatus: number;
   count: number;
+  orderStatus: number;
+  textOrder?: string;
 }

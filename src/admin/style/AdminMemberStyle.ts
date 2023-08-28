@@ -32,3 +32,25 @@ export const MemberWrap = styled.div`
     }
   }
 `;
+export const MemberDetailUpperWrap = styled.div`
+  & ul {
+    margin-bottom: 2rem;
+    li {
+      b {
+        font-weight: 700;
+      }
+      font-size: 1.6rem;
+      line-height: 2rem;
+    }
+  }
+`;
+
+export const MemberDetailWrap = styled.div`
+  & h3 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    line-height: 3rem;
+    text-align: center;
+    color: ${Maincolor.grayBold};
+  }
+`;
