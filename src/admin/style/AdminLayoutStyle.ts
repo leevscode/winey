@@ -527,3 +527,16 @@ export const LayoutTable = styled.table`
     }
   }
 `;
+
+export const PaginationWrap = styled.div`
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+
+  & .ant-select-selector {
+    display: none;
+  }
+  & .ant-pagination-options {
+    display: none;
+  }
+`;

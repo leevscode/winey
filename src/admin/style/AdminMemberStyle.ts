@@ -46,10 +46,11 @@ export const MemberDetailUpperWrap = styled.div`
 `;
 
 export const MemberDetailWrap = styled.div`
-  & h3 {
+
+  & .noItem {
     font-size: 1.5rem;
     font-weight: 600;
-    line-height: 3rem;
+    line-height: 7rem;
     text-align: center;
     color: ${Maincolor.grayBold};
   }

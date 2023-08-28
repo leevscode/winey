@@ -63,7 +63,7 @@ const MemberDetailListItem = ({
             <li>주문상태</li>
             <li>주문수량</li>
           </TableLayoutTitle>
-          {orderConvert.length ? (
+          {orderConvert.length !== 0 ? (
             orderConvert.map(item => (
               <TableLayoutContents
                 listPathName={listPathName}
@@ -82,7 +82,7 @@ const MemberDetailListItem = ({
               </TableLayoutContents>
             ))
           ) : (
-            <p>주문내역이 없습니다</p>
+            <p className="noItem"> 해당 회원의 주문내역이 없습니다</p>
           )}
         </TableVertical>
       </TableWrap>
