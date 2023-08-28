@@ -9,7 +9,6 @@ import { LayoutHeaderWrap } from "../style/AdminLayoutStyle";
 import { Layout } from "antd";
 import { Link, useNavigate } from "react-router-dom";
 import { Maincolor } from "../../style/GlobalStyle";
-import { IDefaultSide, ISetDefaultSide } from "../interface/LayoutInterface";
 const { Header } = Layout;
 
 const AdminHeader: React.FC = () => {
