@@ -8,6 +8,8 @@ import {
   DetailBt,
   LayoutTable,
   TableLayout,
+  TableLayoutContents,
+  TableLayoutTitle,
   TableWrap,
 } from "../../style/AdminLayoutStyle";
 import {
@@ -15,51 +17,21 @@ import {
   IproductListPage,
 } from "../../interface/ProductInterface";
 import { getAdmProductList } from "../../api/patchAdmProduct";
+import { useOutletContext } from "react-router-dom";
 
 const ProductListAdm = () => {
-  // 테이블 넓이 비율 설정
+  const listPathName = useOutletContext();
+  console.log("listPathName 불러옵니다.", listPathName);
   /* 
+  [ 테이블 넓이 비율 설정 ]
   · 테이블의 열(columns) 값을 설정할 수 있습니다. 
-  · 예를들어, 9개의 데이터를 출력해야 한다면 columns도 9개를 작성해주셔야 합니다.
+  · 예를들어, 9개의 데이터를 출력해야 한다면 column도 9개를 작성해주셔야 합니다.
   · 1fr은 정사이즈이며, 기본값입니다.
-  · 정사이즈보다 좁게 설정하고싶다면 1보다 작은 값을, 넓게 설정하고싶다면 1보다 큰 값을 설정하면 되는데 되도록이면 소숫점으로 설정해주시면 미세하게 넓이 조절이 가능합니다!
+  · 정사이즈보다 좁게 설정하고싶다면 1보다 작은 값을, 넓게 설정하고싶다면 1보다 큰 값을 설정하면 되는데 소숫점으로 설정해주시면 미세하게 넓이 조절이 가능합니다!
   */
   const gridTemplateColumns = {
-    columns: "0.4fr 1.8fr 0.8fr 0.6fr 0.8fr 0.6fr 0.6fr 0.45fr 0.45fr",
+    columns: "0.4fr 1.8fr 0.8fr 0.6fr 0.8fr 0.55fr 0.5fr 0.4fr 0.45fr",
   };
-  // 테이블 샘플 데이터
-  // const tableData = [
-  //   {
-  //     idata: 1,
-  //     data_a: "회원번호 1",
-  //     data_b: "아이디 1",
-  //     data_c: "이름 1",
-  //     data_d: "생년월일 1",
-  //     data_e: "주 픽업지역 1",
-  //     data_f: "주문내역 1",
-  //     data_g: "회원삭제 1",
-  //   },
-  //   {
-  //     idata: 2,
-  //     data_a: "회원번호 2",
-  //     data_b: "아이디 2",
-  //     data_c: "이름 2",
-  //     data_d: "생년월일 2",
-  //     data_e: "주 픽업지역 2",
-  //     data_f: "주문내역 2",
-  //     data_g: "회원삭제 2",
-  //   },
-  //   {
-  //     idata: 3,
-  //     data_a: "회원번호 3",
-  //     data_b: "아이디 3",
-  //     data_c: "이름 3",
-  //     data_d: "생년월일 3",
-  //     data_e: "주 픽업지역 3",
-  //     data_f: "주문내역 3",
-  //     data_g: "회원삭제 3",
-  //   },
-  // ];
   // 등록된 상품 리스트 GET한 데이터 보관할 state
   const [admProductList, setAdmProductList] = useState<Array<IproductList>>([]);
 
@@ -71,52 +43,10 @@ const ProductListAdm = () => {
   }, []);
   return (
     <TableWrap>
-      {/* <LayoutTable>
-        <caption>등록상품 리스트</caption>
-        <thead>
-          <tr>
-            <th>상품번호</th>
-            <th>상품명</th>
-            <th>정상가</th>
-            <th>할인율</th>
-            <th>판매가격</th>
-            <th>행사상품</th>
-            <th>재고수량</th>
-            <th>품절여부</th>
-            <th>수정</th>
-          </tr>
-        </thead>
-        <tbody>
-          {admProductList.map((item: IproductList) => (
-            <tr key={item.productId}>
-              <td>{item.productId}</td>
-              <td>
-                <p>{item.nmKor}</p>
-              </td>
-              <td>{item.price.toLocaleString()}원</td>
-              <td>확인필요</td>
-              <td>확인필요</td>
-              <td>
-                {item.promotion === 1 && (
-                  <span className="icon">· 추천상품</span>
-                )}
-                {item.beginner === 1 && (
-                  <span className="icon">· 입문자추천</span>
-                )}
-              </td>
-              <td>{item.quantity}개</td>
-              <td>{item.quantity === 0 ? "Y" : "N"}</td>
-              <td>
-                <DetailBt>수정</DetailBt>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </LayoutTable> */}
-      {/* 테이블 디자인 ul로 변경 */}
+      {/* 데이터 테이블 - 레이아웃 */}
       <TableLayout>
-        <ul
-          className="table-title"
+        {/* 데이터 테이블 - 타이틀 */}
+        <TableLayoutTitle
           style={{
             gridTemplateColumns: gridTemplateColumns.columns,
           }}
@@ -130,11 +60,11 @@ const ProductListAdm = () => {
           <li>재고수량</li>
           <li>품절여부</li>
           <li>수정</li>
-        </ul>
+        </TableLayoutTitle>
+        {/* 데이터 테이블 - 내용 */}
         {admProductList.map((item: IproductList) => (
-          <ul
+          <TableLayoutContents
             key={item.productId}
-            className="table-contents"
             style={{
               gridTemplateColumns: gridTemplateColumns.columns,
             }}
@@ -155,7 +85,7 @@ const ProductListAdm = () => {
             <li>
               <DetailBt>수정</DetailBt>
             </li>
-          </ul>
+          </TableLayoutContents>
         ))}
       </TableLayout>
     </TableWrap>

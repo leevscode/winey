@@ -1,10 +1,19 @@
 import styled from "@emotion/styled";
+import { css } from "@emotion/react";
 import { Maincolor, WidthPd, opacity } from "../../style/GlobalStyle";
 
 // 관리자페이지 색상 설정
 export const AdminColor = {
-  headColorA: "#774954",
+  // 테이블 제목 컬러 설정
+  headColorA: "rgba(181, 129, 127, 0.95)",
+  headColorB: "#774954",
+  headColorC: "#774954",
   bodyColorA: "#f7f1f3",
+  // 테이블 내용 컬러 설정
+  contentsColorA: "rgba(248, 241, 241, 0.5)",
+  // 테이블 내용 hover 컬러 설정
+  contentsColorHoverA: "rgba(248, 241, 241, 1)",
+  // 버튼 컬러 설정
   pinkA: "#d5adac",
   pinkB: "#c9a1a0",
   grayA: "#c4bfbf",
@@ -277,23 +286,21 @@ export const TableWrap = styled.div`
   /* overflow: auto; */
   /* height: 100%; */
   /* padding-bottom: 10px; */
-  .test {
-    width: 100%;
-    .ul_a {
-      display: grid;
-      grid-template-columns: 0.6fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
-      & > li {
-        border: 1px solid pink;
-      }
-    }
-    .ul_b {
-      & > li {
-        border: 1px solid #c14b76;
-      }
-    }
-  }
 `;
-// 관리자페이지 데이터 테이블 스타일 설정 (new)
+// 관리자페이지 데이터 테이블 스타일 설정 (new) - 색상
+// const TableLayoutTitleColor = props => {
+//   if (props.listPathName === "red") {
+//     return css`
+//       background: linear-gradient(
+//         90deg,
+//         ${Gradation.wineA} 35%,
+//         ${Gradation.wineC} 100%
+//       );
+//       color: ${Maincolor.white};
+//     `;
+//   }
+// };
+// 관리자페이지 데이터 테이블 스타일 설정 (new) - 레이아웃
 export const TableLayout = styled.div`
   min-width: 1000px;
   background: ${Maincolor.white};
@@ -301,7 +308,6 @@ export const TableLayout = styled.div`
   & > ul {
     display: grid;
     & > li {
-      padding: 15px 5px;
       border-right: 0.05rem solid ${opacity.white};
       text-align: center;
       &:last-of-type {
@@ -309,35 +315,38 @@ export const TableLayout = styled.div`
       }
     }
   }
-  /* 제목 */
-  .table-title {
-    position: sticky;
-    top: 0;
-    left: 0;
-    background: ${AdminColor.headColorA};
-    border-bottom: 0.2rem solid ${opacity.white};
-    font-weight: 700;
-    color: ${Maincolor.white};
-    min-width: 100px;
-    & > li {
-      /* border: 1px solid pink; */
-    }
+`;
+/* 관리자페이지 데이터 테이블 스타일 설정 (new) - 타이틀 */
+export const TableLayoutTitle = styled.ul`
+  position: sticky;
+  top: 0;
+  left: 0;
+  background: ${AdminColor.headColorA};
+  font-weight: 700;
+  color: ${Maincolor.white};
+  min-width: 100px;
+  & > li {
+    padding: 15px 5px;
   }
-  /* 내용 */
-  .table-contents {
-    & > li {
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      align-items: center;
-      border-bottom: 0.05rem solid ${opacity.white};
-      /* 추천상품 / 입문자 추천 데이터 정렬 */
-      .icon {
-        display: block;
-        width: 100%;
-        line-height: 1.2;
-        text-align: left;
-      }
+`;
+/* 관리자페이지 데이터 테이블 스타일 설정 (new) - 내용 */
+export const TableLayoutContents = styled.ul`
+  &:nth-of-type(odd) > li {
+    background-color: pink;
+  }
+  & > li {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    align-items: center;
+    padding: 10px 5px;
+    border-bottom: 0.05rem solid ${opacity.white};
+    /* 추천상품 / 입문자 추천 데이터 정렬 */
+    .icon {
+      display: block;
+      width: 100%;
+      line-height: 1.2;
+      text-align: left;
     }
   }
   /* 글자 내용 왼쪽정렬 필요할 때 */

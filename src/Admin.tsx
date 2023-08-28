@@ -127,7 +127,7 @@ const Admin: React.FC = () => {
                 <AdminSideMenu />
                 {/* 관리자페이지 - 내용 */}
                 <div className="contents-box">
-                  <Outlet />
+                  <Outlet context={{ listPathName }} />
                 </div>
               </Layout>
             </div>

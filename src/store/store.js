@@ -7,7 +7,7 @@ import { persistReducer } from "redux-persist";
 const persistConfig = {
   key: "root", // localStorage key
   storage, // localStorage
-  whitelist: ["user", "cart"], // target (reducer name)
+  whitelist: ["user", "cart", "adminPathName"], // target (reducer name)
 };
 const reducer = combineReducers({
   cart: cartReducer,
