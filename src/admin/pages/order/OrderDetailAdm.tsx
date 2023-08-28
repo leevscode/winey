@@ -4,7 +4,7 @@
     깃허브 : https://github.com/leevscode
 */
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { OrderTable, OrderTableWrap } from "../../style/AdminOrderControl";
 import { OrderSubTable, OrderSubTableWrap } from "../../style/AdminOrderDetail";
 import { AdmOrderDetailData } from "../../api/admorderdetail";
@@ -14,6 +14,7 @@ export interface OdData {
   orderDate: number;
   email?: number;
   nmKor?: number;
+  salePrice: number;
   quantity: number;
   totalPrice: number;
   payment?: number;
@@ -21,26 +22,26 @@ export interface OdData {
   storeNm: string;
   pickUpDate: number;
   pickUpTime: number;
-  // count : number;
+  orderStatus: number;
 }
 
-// interface ObjectType {
-//   [key: string | number]: any;
-// }
-// const [orderDetail, setOrderDetail] = useState<Array<OdData>>([]);
-
-// const getOdDetailData = async () => {
-//   try {
-//     const data: ObjectType = await AdmOrderDetailData();
-//     console.log(data);
-//     setOrderDetail(data.list);
-//     console.log(data.list);
-//   } catch (err) {
-//     console.error("데이터 로드 중 오류 발생", err);
-//   }
-// };
-
 const OrderDetailAdm = () => {
+  const [orderDetail, setOrderDetail] = useState<Array<OdData>>([]);
+  const getOdDetailData = async () => {
+    try {
+      const data = await AdmOrderDetailData();
+      console.log(data);
+      setOrderDetail(data.list);
+      console.log(data.list);
+    } catch (err) {
+      console.error("데이터 로드 중 오류 발생", err);
+    }
+  };
+  
+  useEffect(() => {
+    getOdDetailData();
+  }, []);
+
   return (
     <div>
       <div>

@@ -49,7 +49,7 @@ const OrderControlAdm = () => {
   ];
 
   const { Option } = Select;
-  const [current, setCurrent] = useState(3);
+  const [current, setCurrent] = useState(1);
 
   const onChange: PaginationProps["onChange"] = page => {
     console.log(page);
