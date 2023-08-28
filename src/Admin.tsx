@@ -15,7 +15,7 @@ const { Content } = Layout;
 const Admin: React.FC = () => {
   const { pathname } = useLocation();
   // pathname에서 /admin/ 는 제외처리
-  const listPathName = pathname.slice(7);
+  const listPathName: string = pathname.slice(7);
   // console.log(listPathName);
   // 네비게이션 gnb state
   const [breadCrumbGnb, setBreadCrumbGnb] = useState("");
