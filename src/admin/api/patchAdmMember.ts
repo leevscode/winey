@@ -42,6 +42,7 @@ export const getMemberDetail = async (
     );
     console.log("res", res);
     const result = await res.data;
+    console.log("result", result);
     setUserInfomation(result);
     return result;
   } catch (error) {

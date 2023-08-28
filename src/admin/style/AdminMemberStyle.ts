@@ -10,7 +10,7 @@ export const MemberWrap = styled.div`
   }
   .detailBt {
     padding: 0.5rem 1rem;
-    font-size: 1.2rem;
+    font-size: 1.4rem;
     background: ${Maincolor.grayDeep};
     color: ${Maincolor.beige};
     border-radius: 0.6rem;
@@ -22,7 +22,7 @@ export const MemberWrap = styled.div`
   .memberOutBt {
     width: 4rem;
     padding: 0.5rem;
-    font-size: 1.2rem;
+    font-size: 1.4rem;
     background: ${Maincolor.redDeep};
     color: ${Maincolor.beige};
     border-radius: 0.6rem;

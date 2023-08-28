@@ -14,13 +14,13 @@ import {
   IUserIdState,
   IUserOrderList,
 } from "../../interface/MemberInterface";
-import MamberDetailPaginate from "../../components/member/MamberDetailPaginate";
 import MemberDetailUpper from "../../components/member/MemberDetailUpper";
+import MemberDetailPaginate from "../../components/member/MemberDetailPaginate";
 
 const MemberDetailAdm = () => {
   const location = useLocation();
   const [clickUserId, setClickUserId] = useState<IUserIdState>({
-    clickUserId: 0,
+    clickUserId: 1,
   });
   const [userInfomation, setUserInfomation] = useState<IUserDetail>({
     page: {
@@ -45,10 +45,11 @@ const MemberDetailAdm = () => {
   });
 
   console.log("location", location.state);
+  console.log("clickUserId", clickUserId);
 
   useEffect(() => {
     setClickUserId(location.state);
-  }, [location.state]);
+  }, []);
   console.log("userInfomation", userInfomation);
 
   return (
@@ -59,11 +60,13 @@ const MemberDetailAdm = () => {
       {userInfomation.userOrderList && (
         <MemberDetailListItem userInfomation={userInfomation.userOrderList} />
       )}
-      <MamberDetailPaginate
-        userInfomation={userInfomation}
-        setUserInfomation={setUserInfomation}
-        clickUserId={clickUserId.clickUserId}
-      />
+      {clickUserId && (
+        <MemberDetailPaginate
+          userInfomation={userInfomation}
+          setUserInfomation={setUserInfomation}
+          clickUserId={clickUserId.clickUserId}
+        />
+      )}
     </div>
   );
 };

@@ -16,6 +16,7 @@ const MemberControlListItem = ({
   regionConvert: IMemberListUser[];
 }) => {
   const navigate = useNavigate();
+
   const handleMemberOrder = (item: IMemberListUser) => {
     console.log("item.userId", item.userId);
     navigate("/admin/memberdetail", { state: item.userId });
@@ -47,7 +48,6 @@ const MemberControlListItem = ({
                   <td>{item.email}</td>
                   <td>{item.nm}</td>
                   <td>
-                    {/* {item.regionNmId} */}
                     {item.textRegion}
                   </td>
                   <td>

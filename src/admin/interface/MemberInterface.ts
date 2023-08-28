@@ -43,11 +43,11 @@ export interface IMemberListUser {
 export interface IUserDetailState {
   userInfomation: IUserDetail;
   setUserInfomation: React.Dispatch<React.SetStateAction<IUserDetail>>;
-  clickUserId?: number;
+  clickUserId?: number | undefined;
 }
 
 export interface IUserIdState {
-  clickUserId: number;
+  clickUserId: number | undefined;
   setClickUserID?: React.Dispatch<React.SetStateAction<number>>;
 }
 
