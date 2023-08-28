@@ -10,6 +10,7 @@ import AdminFooter from "./admin/components/AdminFooter";
 import AdminSideMenu from "./admin/components/AdminSideMenu";
 import { LayoutContentWrap } from "./admin/style/AdminLayoutStyle";
 import { Gradation } from "./style/GlobalStyle";
+import { IDefaultSide } from "./admin/interface/LayoutInterface";
 const { Content } = Layout;
 
 const Admin: React.FC = () => {

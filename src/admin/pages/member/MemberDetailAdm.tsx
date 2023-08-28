@@ -19,9 +19,10 @@ import MemberDetailPaginate from "../../components/member/MemberDetailPaginate";
 
 const MemberDetailAdm = () => {
   const location = useLocation();
-  const [clickUserId, setClickUserId] = useState<IUserIdState>({
-    clickUserId: 1,
-  });
+  // const [clickUserId, setClickUserId] = useState<IUserIdState>({
+  //   clickUserId: 1,
+  // });
+  const [clickUserId, setClickUserId] = useState<number|undefined>(undefined);
   const [userInfomation, setUserInfomation] = useState<IUserDetail>({
     page: {
       page: 1,
@@ -44,7 +45,7 @@ const MemberDetailAdm = () => {
     userOrderList: [] as IUserOrderList[],
   });
 
-  console.log("location", location.state);
+  console.log("location.state", location.state);
   console.log("clickUserId", clickUserId);
 
   useEffect(() => {
@@ -64,7 +65,7 @@ const MemberDetailAdm = () => {
         <MemberDetailPaginate
           userInfomation={userInfomation}
           setUserInfomation={setUserInfomation}
-          clickUserId={clickUserId.clickUserId}
+          clickUserId={clickUserId}
         />
       )}
     </div>

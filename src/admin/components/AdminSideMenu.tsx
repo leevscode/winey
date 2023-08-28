@@ -4,7 +4,7 @@
     깃허브 : https://github.com/hyemdev
 */
 
-import React from "react";
+import React, { useState } from "react";
 import {
   LaptopOutlined,
   NotificationOutlined,
@@ -14,11 +14,10 @@ import { Layout, Menu } from "antd";
 import SubMenu from "antd/es/menu/SubMenu";
 import { LayoutSideMenuWrap } from "../style/AdminLayoutStyle";
 import { Link } from "react-router-dom";
-import { IMenu } from "../interface/LayoutInterface";
-import { Maincolor } from "../../style/GlobalStyle";
+import { IDefaultSide, IMenu } from "../interface/LayoutInterface";
 const { Sider } = Layout;
 
-const AdminSideMenu = () => {
+const AdminSideMenu: React.FC = () => {
   const menuItems: IMenu[] = [
     {
       key: "sub1",
@@ -58,7 +57,8 @@ const AdminSideMenu = () => {
       <LayoutSideMenuWrap>
         <Menu
           mode="inline"
-          defaultSelectedKeys={["1"]}
+          inlineCollapsed={true}
+          // defaultSelectedKeys={[defaultSide]}
           defaultOpenKeys={menuItems.map(item => item.key)}
         >
           {menuItems.map(menuItem => (

@@ -41,17 +41,16 @@ const MemberDetailPaginate = ({
   useEffect(() => {
     getPage();
   }, []);
-  console.log("userInfomation", userInfomation);
-  console.log("clickUserId", clickUserId);
 
+  console.log("paginate", paginate);
   return (
     <>
       {pageInfo && (
         <Pagination
-          current={pageInfo.page}
-          pageSize={pageInfo.pageSize}
+          current={paginate.page}
+          pageSize={paginate.row}
           onChange={page => onChange(page)}
-          total={Math.floor(pageInfo.totalRecordCount)}
+          total={pageInfo.totalRecordCount}
           // size="small"
         />
       )}

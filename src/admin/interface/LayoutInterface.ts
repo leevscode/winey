@@ -16,3 +16,10 @@ export interface ISubMenu {
   label: string;
   link: string;
 }
+
+export interface ISetDefaultSide {
+  setDefaultSide: React.Dispatch<React.SetStateAction<string>>;
+}
+export interface IDefaultSide {
+  defaultSide: string;
+}

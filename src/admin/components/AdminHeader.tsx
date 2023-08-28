@@ -7,11 +7,15 @@
 import React from "react";
 import { LayoutHeaderWrap } from "../style/AdminLayoutStyle";
 import { Layout } from "antd";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Maincolor } from "../../style/GlobalStyle";
+import { IDefaultSide, ISetDefaultSide } from "../interface/LayoutInterface";
 const { Header } = Layout;
 
-const AdminHeader = () => {
+const AdminHeader: React.FC = () => {
+  const handleClick = () => {
+    return;
+  };
   return (
     <Layout>
       <Header
@@ -21,7 +25,7 @@ const AdminHeader = () => {
       >
         <LayoutHeaderWrap>
           <div>
-            <Link to="/admin">
+            <Link to="/admin" onClick={handleClick}>
               <h2>
                 <img
                   src={`${process.env.PUBLIC_URL}/images/logo_2.svg`}
