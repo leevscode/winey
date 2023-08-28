@@ -1,13 +1,8 @@
-/*
-    작업자 : 이동은
-    노션 : https://www.notion.so/leevscode/leevscode-5223e3d332604844a255a0c63113a284
-    깃허브 : https://github.com/leevscode
-*/
-
 import React, { useEffect, useState } from "react";
 import { AdmOrderData } from "../../api/admorderlist";
 import { OrderTableWrap, OrderTable } from "../../style/AdminOrderControl";
 import { Form, Pagination, PaginationProps, Select } from "antd";
+import { Navigate, useNavigate } from "react-router";
 
 export interface fetchData {
   id: number;
@@ -18,7 +13,9 @@ export interface fetchData {
   totalPrice: number;
   payment?: number;
   pickUpStore: string;
-  // count: string;
+  orderStatus: number;
+  Navigate: string;
+  orderId: number;
 }
 
 // 수정예정
@@ -41,16 +38,16 @@ const OrderControlAdm = () => {
   // const [orderSt, setOrderSt] = useState<statusData>();
   const option = [
     { value: "1", label: "결제완료" },
-    { value: "2", label: "배송준비" },
     { value: "3", label: "배송중" },
+    { value: "2", label: "배송완료" },
     { value: "4", label: "픽업대기" },
     { value: "5", label: "픽업완료" },
     { value: "6", label: "주문취소" },
   ];
 
   const { Option } = Select;
-  const [current, setCurrent] = useState(3);
-
+  const [current, setCurrent] = useState(1);
+  const navigate = useNavigate();
   const onChange: PaginationProps["onChange"] = page => {
     console.log(page);
     setCurrent(page);
@@ -138,6 +135,7 @@ const OrderControlAdm = () => {
                         style={{ width: "280px", textAlign: "center" }}
                         placeholder="배송상태를 지정해주세요"
                         // onChange={}
+                        defaultValue={item.orderStatus.toString()}
                         allowClear
                       >
                         {option.map(option => (
@@ -149,7 +147,11 @@ const OrderControlAdm = () => {
                     </Form.Item>
                   </Form>
                 </td>
-                <button>
+                <button
+                  onClick={() => {
+                    navigate(`/order/${item.orderId}`);
+                  }}
+                >
                   <td>
                     상세
                     <br />
@@ -162,7 +164,6 @@ const OrderControlAdm = () => {
         </OrderTable>
       </OrderTableWrap>
       <Pagination current={current} onChange={onChange} total={50} />
-
     </div>
   );
 };
