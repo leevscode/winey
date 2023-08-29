@@ -2,7 +2,13 @@ import React, { useEffect, useState } from "react";
 import { AdmOrderData } from "../../api/admorderlist";
 import { OrderTableWrap, OrderTable } from "../../style/AdminOrderControl";
 import { Form, Pagination, PaginationProps, Select } from "antd";
-import { Navigate, useNavigate } from "react-router";
+import { Navigate, useNavigate, useOutletContext } from "react-router";
+import {
+  TableHorizontal,
+  TableLayoutContents,
+  TableLayoutTitle,
+  TableVertical,
+} from "../../style/AdminLayoutStyle";
 
 export interface fetchData {
   id: number;
@@ -48,12 +54,13 @@ const OrderControlAdm = () => {
   const { Option } = Select;
   const [current, setCurrent] = useState(1);
   const navigate = useNavigate();
+  const { listPathName } = useOutletContext() as { listPathName: string };
   const onChange: PaginationProps["onChange"] = page => {
     console.log(page);
     setCurrent(page);
   };
 
-  const getOdData = async () => {
+  const getOrderData = async () => {
     try {
       const data = await AdmOrderData();
       console.log(data);
@@ -77,64 +84,72 @@ const OrderControlAdm = () => {
   // };
 
   useEffect(() => {
-    getOdData();
+    getOrderData();
   }, []);
 
+  const gridTemplateColumns = {
+    columns: "0.4fr 0.8fr 1.6fr 0.5fr 0.5fr 0.55fr 0.55fr 0.55fr 0.55fr",
+  };
+
   return (
-    <div>
-      <OrderTableWrap>
-        <OrderTable>
-          <caption>주문내역관리</caption>
-          <thead>
-            <tr>
-              <th>주문날짜</th>
-              <th>아이디</th>
-              <th>주문상품</th>
-              <th>주문수량</th>
-              <th>결제금액</th>
-              <th>결제수단</th>
-              <th>픽업장소</th>
-              <th>픽업배송상태</th>
-              <th>상세보기</th>
-            </tr>
-          </thead>
-          <tbody>
+    <>
+      {/* {orderControl.map(item => (
+        <div key={item.id}> */}
+      <div>
+        <TableVertical>
+          <TableLayoutTitle
+            listPathName={listPathName}
+            style={{
+              gridTemplateColumns: gridTemplateColumns.columns,
+            }}
+          >
+            <li>주문날짜</li>
+            <li>아이디</li>
+            <li>주문상품</li>
+            <li>주문수량</li>
+            <li>결제금액</li>
+            <li>결제수단</li>
+            <li>픽업장소</li>
+            <li>픽업배송상태</li>
+            <li>상세보기</li>
+          </TableLayoutTitle>
+          {/* 데이터 테이블 - 내용 */}
+          <TableLayoutContents
+            listPathName={listPathName}
+            style={{
+              gridTemplateColumns: gridTemplateColumns.columns,
+            }}
+          >
             {orderControl.map(item => (
-              <tr key={item.id}>
-                <td>{item.orderDate}</td>
-                <td>{item.email}</td>
-                <td>{item.nmKor}</td>
-                <td>{item.quantity}</td>
-                <td>
+              <React.Fragment key={item.id}>
+                <li>{item.orderDate}</li>
+                <li>{item.email}</li>
+                <li>{item.nmKor}</li>
+                <li>{item.quantity}</li>
+                <li>
                   {item.totalPrice.toLocaleString(undefined, {
                     maximumFractionDigits: 0,
                   })}
-                </td>
-                <td>
+                </li>
+                <li>
                   {item.payment === 0 || item.payment === 1
                     ? "신용카드"
                     : item.payment}
-                </td>
-                <td>{item.pickUpStore}</td>
-                <td>
-                  {/* {item.orderStatus} */}
-                  <Form
-                    name="control-hooks"
-                    style={{ width: "250px", alignItems: "center" }}
-                  >
+                </li>
+                <li>{item.pickUpStore}</li>
+                <li>
+                  <Form name="control-hooks" style={{ width: "100px" }}>
                     <Form.Item
                       style={{
                         display: "flex",
                         justifyContent: "center",
                         width: "80%",
-                        // alignItems:"center",
                         margin: "0",
                       }}
                     >
                       <Select
-                        style={{ width: "280px", textAlign: "center" }}
+                        style={{ width: "100px", textAlign: "center" }}
                         placeholder="배송상태를 지정해주세요"
-                        // onChange={}
                         defaultValue={item.orderStatus.toString()}
                         allowClear
                       >
@@ -146,25 +161,26 @@ const OrderControlAdm = () => {
                       </Select>
                     </Form.Item>
                   </Form>
-                </td>
-                <button
-                  onClick={() => {
-                    navigate(`/order/${item.orderId}`);
-                  }}
-                >
-                  <td>
+                </li>
+                <li>
+                  <button
+                    style={{ fontSize: "1.8rem" }}
+                    onClick={() => {
+                      navigate(`/order/${item.orderId}`);
+                    }}
+                  >
                     상세
                     <br />
                     내역
-                  </td>
-                </button>
-              </tr>
+                  </button>
+                </li>
+              </React.Fragment>
             ))}
-          </tbody>
-        </OrderTable>
-      </OrderTableWrap>
-      <Pagination current={current} onChange={onChange} total={50} />
-    </div>
+          </TableLayoutContents>
+        </TableVertical>
+        <Pagination current={current} onChange={onChange} total={50} />
+      </div>
+    </>
   );
 };
 

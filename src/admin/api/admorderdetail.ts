@@ -2,7 +2,7 @@ import { client } from "../../api/client";
 
 export const AdmOrderDetailData = async () => {
   try {
-    const res = await client.get(`/api/admin/1/order?page=1&row=15`);
+    const res = await client.get(`/api/admin/order/1`);
     const orderDetailData = await res.data;
     console.log(orderDetailData);
     return orderDetailData;
