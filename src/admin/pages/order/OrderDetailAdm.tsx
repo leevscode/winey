@@ -44,22 +44,15 @@ export interface CommonObj {
   [key: string | number]: any;
 }
 
-const orderSt = {
-  1: "결제 완료",
-  2: "배송중",
-  3: "배송완료",
-  4: "픽업대기",
-  5: "픽업완료",
-  6: "주문취소",
-};
-
 const OrderDetailAdm = () => {
   const { listPathName } = useOutletContext() as { listPathName: string };
+  const orderId = listPathName.split("/")[1];
+
   const [orderDetail, setOrderDetail] = useState<Array<OdData>>([]);
   const [orderDetail2, setOrderDetail2] = useState<Array<OdData2>>([]);
   const getOdDetailData = async () => {
     try {
-      const data = await AdmOrderDetailData();
+      const data = await AdmOrderDetailData(parseInt(orderId));
       console.log(data);
       setOrderDetail(data.list1);
       setOrderDetail2(data.list2);

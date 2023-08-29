@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { AdmOrderData } from "../../api/admorderlist";
-import { OrderTableWrap, OrderTable } from "../../style/AdminOrderControl";
 import { Form, Pagination, PaginationProps, Select } from "antd";
 import { Navigate, useNavigate, useOutletContext } from "react-router";
 import {
+  MemberOutBt,
   TableHorizontal,
   TableLayoutContents,
   TableLayoutTitle,
@@ -62,7 +62,7 @@ const OrderControlAdm = () => {
 
   const getOrderData = async () => {
     try {
-      const data = await AdmOrderData();
+      const data = await AdmOrderData(current);
       console.log(data);
       setOrderControl(data.list);
       console.log(data.list);
@@ -85,7 +85,7 @@ const OrderControlAdm = () => {
 
   useEffect(() => {
     getOrderData();
-  }, []);
+  }, [current]);
 
   const gridTemplateColumns = {
     columns: "0.4fr 0.8fr 1.6fr 0.5fr 0.5fr 0.55fr 0.55fr 0.55fr 0.55fr",
@@ -93,8 +93,6 @@ const OrderControlAdm = () => {
 
   return (
     <>
-      {/* {orderControl.map(item => (
-        <div key={item.id}> */}
       <div>
         <TableVertical>
           <TableLayoutTitle
@@ -163,22 +161,23 @@ const OrderControlAdm = () => {
                   </Form>
                 </li>
                 <li>
-                  <button
-                    style={{ fontSize: "1.8rem" }}
+                  <MemberOutBt
+                    style={{ fontSize: "1.3rem" }}
                     onClick={() => {
-                      navigate(`/order/${item.orderId}`);
+                      // navigate(`/order/${item.orderId}`);
+                      navigate(`/admin/orderdetail/${item.orderId}`);
                     }}
                   >
                     상세
                     <br />
                     내역
-                  </button>
+                  </MemberOutBt>
                 </li>
               </React.Fragment>
             ))}
           </TableLayoutContents>
         </TableVertical>
-        <Pagination current={current} onChange={onChange} total={50} />
+        <Pagination current={current} pageSize={15} onChange={onChange} total={500} />
       </div>
     </>
   );
