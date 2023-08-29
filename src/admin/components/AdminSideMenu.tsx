@@ -38,7 +38,7 @@ const AdminSideMenu: React.FC = () => {
       title: "주문관리",
       items: [
         { key: "5", link: "/admin/ordercontrol", label: "주문내역관리" },
-        { key: "6", link: "/admin/orderdetail", label: "주문상세리스트" },
+        // { key: "6", link: "/admin/orderdetail", label: "주문상세리스트" },
       ],
     },
     {

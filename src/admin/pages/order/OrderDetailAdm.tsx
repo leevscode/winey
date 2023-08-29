@@ -1,3 +1,8 @@
+/*
+    작업자 : 이동은
+    노션 : https://www.notion.so/leevscode/leevscode-5223e3d332604844a255a0c63113a284
+    깃허브 : https://github.com/leevscode
+*/
 import React, { useEffect, useState } from "react";
 import { AdmOrderDetailData } from "../../api/admorderdetail";
 import {
@@ -47,7 +52,6 @@ export interface CommonObj {
 const OrderDetailAdm = () => {
   const orderId = useLocation();
   const { listPathName } = useOutletContext() as { listPathName: string };
-
   const [orderDetail, setOrderDetail] = useState<Array<OdData>>([]);
   const [orderDetail2, setOrderDetail2] = useState<Array<OdData2>>([]);
   const getOdDetailData = async () => {
@@ -108,14 +112,28 @@ const OrderDetailAdm = () => {
             gridTemplateColumns: gridTemplateColumns.columns,
           }}
         >
-          {orderDetail?.map(item => (
+          {orderDetail?.map((item, index) => (
             <React.Fragment key={item.orderId}>
-              <li>{item.orderId}</li>
-              <li>{item.orderDate}</li>
-              <li>{item.email}</li>
-              <li>{item.nmKor}</li>
-              <li>{item.salePrice}</li>
-              <li>{item.quantity}</li>
+              {index === 0 ||
+              orderDetail[index - 1].orderId !== item.orderId ? (
+                <>
+                  <li>{item.orderId}</li>
+                  <li>{item.orderDate}</li>
+                  <li>{item.email}</li>
+                  <li>{item.nmKor}</li>
+                  <li>{item.salePrice}</li>
+                  <li>{item.quantity}</li>
+                </>
+              ) : (
+                <>
+                  <li>{null}</li>
+                  <li>{null}</li>
+                  <li>{null}</li>
+                  <li>{item.nmKor}</li>
+                  <li>{item.salePrice}</li>
+                  <li>{item.quantity}</li>
+                </>
+              )}
             </React.Fragment>
           ))}
         </TableLayoutContents>
