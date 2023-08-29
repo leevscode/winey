@@ -4,20 +4,16 @@
   깃허브 : https://github.com/kimaydev
 */
 import React, { useEffect, useState } from "react";
+import { Link, useOutletContext } from "react-router-dom";
 import {
   DetailBt,
-  TableHorizontal,
   TableLayoutContents,
   TableLayoutTitle,
   TableVertical,
   TableWrap,
 } from "../../style/AdminLayoutStyle";
-import {
-  IproductList,
-  IproductListPage,
-} from "../../interface/ProductInterface";
+import { IproductList } from "../../interface/ProductInterface";
 import { getAdmProductList } from "../../api/patchAdmProduct";
-import { useOutletContext } from "react-router-dom";
 import ProductControlPaginate from "../../components/product/ProductControlPaginate";
 import { AdmProductWrap } from "../../style/product/AdminProductStyle";
 
@@ -32,7 +28,7 @@ const ProductListAdm = () => {
   · 정사이즈보다 좁게 설정하고싶다면 1보다 작은 값을, 넓게 설정하고싶다면 1보다 큰 값을 설정하면 되는데 소숫점으로 설정해주시면 미세하게 넓이 조절이 가능합니다!
   */
   const gridTemplateColumns = {
-    columns: "0.4fr 2fr 0.7fr 0.4fr 0.7fr 0.55fr 0.5fr 0.35fr 0.45fr",
+    columns: "0.4fr 2fr 0.7fr 0.4fr 0.7fr 0.55fr 0.5fr 0.4fr 0.45fr",
   };
   // 등록된 상품 리스트 GET한 데이터 보관할 state
   const [admProductList, setAdmProductList] = useState<Array<IproductList>>([]);
@@ -46,8 +42,12 @@ const ProductListAdm = () => {
   }, [page]);
   return (
     <AdmProductWrap>
+      {/* 상품 총 갯수 표시, 상품 등록 링크 */}
+      <div className="table-top">
+        <p className="total-count">총 {totalPage}개</p>
+        <Link to="/admin/productadd">상품 등록하기</Link>
+      </div>
       <TableWrap>
-        <p className="total-text">총 {totalPage}개</p>
         {/* 데이터 테이블 - 세로형 */}
         <TableVertical>
           {/* 데이터 테이블 - 타이틀 */}

@@ -33,3 +33,24 @@ export interface IproductList {
   sale: number;
   salePrice: number;
 }
+// [관리자] 상품 등록 데이터 타입 정의
+export interface Iproduct {
+  nmKor: string;
+  nmEng: string;
+  price: 0;
+  promotion: 0;
+  beginner: 0;
+  alcohol: 0;
+  quantity: 0;
+  country: 0;
+  sweety: 0;
+  acidity: 0;
+  body: 0;
+  category: 0;
+  aroma: number[];
+  sale: 0;
+  salePrice: 0;
+  startSale: string;
+  endSale: string;
+  smallCategoryId: number[];
+}

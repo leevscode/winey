@@ -48,7 +48,7 @@ const AdminSideMenu: React.FC = () => {
       items: [
         { key: "9", link: "/admin/productlist", label: "등록된 상품" },
         { key: "10", link: "/admin/productadd", label: "상품등록하기" },
-        { key: "11", link: "/admin/productedit", label: "상품수정하기" },
+        // { key: "11", link: "/admin/productedit", label: "상품수정하기" },
       ],
     },
   ];
