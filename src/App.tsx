@@ -32,6 +32,7 @@ import About from "./pages/About";
 import OpenSource from "./pages/OpenSource";
 import SellList from "./pages/product/SellList";
 import NotFound from "./pages/NotFound";
+import SearchItem from "./pages/search/SearchItem";
 import { AnimatePresence } from "framer-motion";
 import SellListDetail from "./pages/product/SellListDetail";
 import { useEffect, useState } from "react";
@@ -146,6 +147,11 @@ function App() {
             <Route
               path="/ProductCompleteCart"
               element={<ProductCompleteCart />}
+            />
+            {/* 상품 검색 페이지 */}
+            <Route
+              path="/searchitem"
+              element={<SearchItem />}
             />
             {/* 로그인 */}
             <Route path="/login" element={<Login />} />

@@ -50,7 +50,7 @@ const MemberDetailPaginate = ({
       {pageInfo && (
         <Pagination
           current={pageInfo.page}
-          // pageSize={paginate.row}
+          pageSize={12}
           onChange={page => onChange(page)}
           total={pageInfo.totalRecordCount}
           // size="small"

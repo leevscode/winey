@@ -38,7 +38,7 @@ const MemberControlPaginate = ({ memberList, setMemberList }: IMemberState) => {
       {pageInfo && (
         <Pagination
           current={pageInfo.page}
-          // pageSize={pageInfo.pageSize}
+          pageSize={12}
           onChange={page => onChange(page)}
           total={pageInfo.totalRecordCount}
           // size="small"

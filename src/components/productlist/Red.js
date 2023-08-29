@@ -71,6 +71,7 @@ const Red = () => {
       await getRedWineCheap(setListScroll, setHasNextPage, page);
     }
   }, []);
+  
   // 상품 정렬 옵션
   const options = [
     {

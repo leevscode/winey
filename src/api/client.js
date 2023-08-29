@@ -32,7 +32,7 @@ client.interceptors.response.use(
   },
   async error => {
     console.log("error response", error);
-    console.log("response.statuss", response.status);
+    console.log("err.response.statuss", error.response.status);
     const { config, response } = error;
     const refreshToken = getCookie("refreshToken");
     if (response.status === 401 && refreshToken) {
