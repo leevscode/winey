@@ -1,8 +1,20 @@
+/*
+    작업자 : 이동은
+    노션 : https://www.notion.so/leevscode/leevscode-5223e3d332604844a255a0c63113a284
+    깃허브 : https://github.com/leevscode
+*/
 import React, { useEffect, useState } from "react";
-import { AdmOrderData } from "../../api/admorderlist";
-import { OrderTableWrap, OrderTable } from "../../style/AdminOrderControl";
+import { AdmOrderData, orderStatusData } from "../../api/admorderlist";
 import { Form, Pagination, PaginationProps, Select } from "antd";
-import { Navigate, useNavigate } from "react-router";
+import { Navigate, useNavigate, useOutletContext } from "react-router";
+import {
+  MemberOutBt,
+  TableHorizontal,
+  TableLayoutContents,
+  TableLayoutTitle,
+  TableVertical,
+} from "../../style/AdminLayoutStyle";
+import { client } from "../../../api/client";
 
 export interface fetchData {
   id: number;
@@ -23,19 +35,17 @@ export interface fetchData {
 //   [key: string | number]: any;
 // }
 
-// 수정예정
-// interface statusType {
-//   [key: string | number]: any;
-// }
+interface statusType {
+  [key: string | number]: any;
+}
 
-// 수정예정
-// interface statusData {
-//   orderStatus: number;
-// }
+interface statusData {
+  orderStatus: number;
+}
 
 const OrderControlAdm = () => {
   const [orderControl, setOrderControl] = useState<Array<fetchData>>([]);
-  // const [orderSt, setOrderSt] = useState<statusData>();
+  const [orderSt, setOrderSt] = useState<statusData>();
   const option = [
     { value: "1", label: "결제완료" },
     { value: "3", label: "배송중" },
@@ -48,14 +58,15 @@ const OrderControlAdm = () => {
   const { Option } = Select;
   const [current, setCurrent] = useState(1);
   const navigate = useNavigate();
+  const { listPathName } = useOutletContext() as { listPathName: string };
   const onChange: PaginationProps["onChange"] = page => {
     console.log(page);
     setCurrent(page);
   };
 
-  const getOdData = async () => {
+  const getOrderData = async () => {
     try {
-      const data = await AdmOrderData();
+      const data = await AdmOrderData(current);
       console.log(data);
       setOrderControl(data.list);
       console.log(data.list);
@@ -64,79 +75,98 @@ const OrderControlAdm = () => {
     }
   };
 
-  // 수정 예정
-  // const statusData = async () => {
-  //   try {
-  //     const data: statusType = await orderStatusData(statusData);
-  //     console.log(data);
-  //     setOrderSt(data.list);
-  //     console.log(data.list);
-  //   } catch (err) {
-  //     console.error("err:", err);
-  //   }
-  // };
+  const statusData = async () => {
+    try {
+      const data: statusType = await orderStatusData();
+      console.log(data);
+      setOrderSt(data.list);
+      console.log(data.list);
+    } catch (err) {
+      console.error("err:", err);
+    }
+  };
 
   useEffect(() => {
-    getOdData();
-  }, []);
+    statusData();
+    getOrderData();
+  }, [current]);
+
+  const gridTemplateColumns = {
+    columns: "0.4fr 0.8fr 1.6fr 0.5fr 0.5fr 0.55fr 0.55fr 0.55fr 0.55fr",
+  };
 
   return (
-    <div>
-      <OrderTableWrap>
-        <OrderTable>
-          <caption>주문내역관리</caption>
-          <thead>
-            <tr>
-              <th>주문날짜</th>
-              <th>아이디</th>
-              <th>주문상품</th>
-              <th>주문수량</th>
-              <th>결제금액</th>
-              <th>결제수단</th>
-              <th>픽업장소</th>
-              <th>픽업배송상태</th>
-              <th>상세보기</th>
-            </tr>
-          </thead>
-          <tbody>
+    <>
+      <div>
+        <TableVertical>
+          <TableLayoutTitle
+            listPathName={listPathName}
+            style={{
+              gridTemplateColumns: gridTemplateColumns.columns,
+            }}
+          >
+            <li>주문날짜</li>
+            <li>아이디</li>
+            <li>주문상품</li>
+            <li>주문수량</li>
+            <li>결제금액</li>
+            <li>결제수단</li>
+            <li>픽업장소</li>
+            <li>픽업배송상태</li>
+            <li>상세보기</li>
+          </TableLayoutTitle>
+          {/* 데이터 테이블 - 내용 */}
+          <TableLayoutContents
+            listPathName={listPathName}
+            style={{
+              gridTemplateColumns: gridTemplateColumns.columns,
+            }}
+          >
             {orderControl.map(item => (
-              <tr key={item.id}>
-                <td>{item.orderDate}</td>
-                <td>{item.email}</td>
-                <td>{item.nmKor}</td>
-                <td>{item.quantity}</td>
-                <td>
+              <React.Fragment key={item.id}>
+                <li>{item.orderDate}</li>
+                <li>{item.email}</li>
+                <li>{item.nmKor}</li>
+                <li>{item.quantity}</li>
+                <li>
                   {item.totalPrice.toLocaleString(undefined, {
                     maximumFractionDigits: 0,
                   })}
-                </td>
-                <td>
+                </li>
+                <li>
                   {item.payment === 0 || item.payment === 1
                     ? "신용카드"
                     : item.payment}
-                </td>
-                <td>{item.pickUpStore}</td>
-                <td>
-                  {/* {item.orderStatus} */}
-                  <Form
-                    name="control-hooks"
-                    style={{ width: "250px", alignItems: "center" }}
-                  >
+                </li>
+                <li>{item.pickUpStore}</li>
+                <li>
+                  <Form name="control-hooks" style={{ width: "100px" }}>
                     <Form.Item
                       style={{
                         display: "flex",
                         justifyContent: "center",
                         width: "80%",
-                        // alignItems:"center",
                         margin: "0",
                       }}
                     >
                       <Select
-                        style={{ width: "280px", textAlign: "center" }}
+                        style={{ width: "100px", textAlign: "center" }}
                         placeholder="배송상태를 지정해주세요"
-                        // onChange={}
                         defaultValue={item.orderStatus.toString()}
-                        allowClear
+                        onChange={async newStatus => {
+                          try {
+                            await client.put(
+                              `/api/admin/order/${item.orderId}`,
+                              {
+                                orderStatus: newStatus,
+                              },
+                            );
+                            console.log("상태변경 성공:", item.orderStatus);
+                            getOrderData();
+                          } catch (error) {
+                            console.error("상태변경 실패:", error);
+                          }
+                        }}
                       >
                         {option.map(option => (
                           <Option key={option.value} value={option.value}>
@@ -146,25 +176,32 @@ const OrderControlAdm = () => {
                       </Select>
                     </Form.Item>
                   </Form>
-                </td>
-                <button
-                  onClick={() => {
-                    navigate(`/order/${item.orderId}`);
-                  }}
-                >
-                  <td>
+                </li>
+                <li>
+                  <MemberOutBt
+                    style={{ fontSize: "1.3rem" }}
+                    onClick={() => {
+                      // navigate(`/order/${item.orderId}`);
+                      navigate(`/admin/orderdetail`, {state : item.orderId});
+                    }}
+                  >
                     상세
                     <br />
                     내역
-                  </td>
-                </button>
-              </tr>
+                  </MemberOutBt>
+                </li>
+              </React.Fragment>
             ))}
-          </tbody>
-        </OrderTable>
-      </OrderTableWrap>
-      <Pagination current={current} onChange={onChange} total={50} />
-    </div>
+          </TableLayoutContents>
+        </TableVertical>
+        <Pagination
+          current={current}
+          pageSize={15}
+          onChange={onChange}
+          total={500}
+        />
+      </div>
+    </>
   );
 };
 

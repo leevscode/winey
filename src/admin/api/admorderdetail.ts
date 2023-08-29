@@ -1,8 +1,8 @@
 import { client } from "../../api/client";
 
-export const AdmOrderDetailData = async () => {
+export const AdmOrderDetailData = async (orderId: number) => {
   try {
-    const res = await client.get(`/api/admin/1/order?page=1&row=15`);
+    const res = await client.get(`/api/admin/order/${orderId}`);
     const orderDetailData = await res.data;
     console.log(orderDetailData);
     return orderDetailData;

@@ -1,7 +1,17 @@
+/*
+    작업자 : 이동은
+    노션 : https://www.notion.so/leevscode/leevscode-5223e3d332604844a255a0c63113a284
+    깃허브 : https://github.com/leevscode
+*/
 import React, { useEffect, useState } from "react";
-import { OrderTable, OrderTableWrap } from "../../style/AdminOrderControl";
-import { OrderSubTable, OrderSubTableWrap } from "../../style/AdminOrderDetail";
 import { AdmOrderDetailData } from "../../api/admorderdetail";
+import {
+  TableHorizontal,
+  TableLayoutContents,
+  TableLayoutTitle,
+  TableVertical,
+} from "../../style/AdminLayoutStyle";
+import { useLocation, useOutletContext } from "react-router";
 
 export interface OdData {
   orderId: number;
@@ -19,14 +29,39 @@ export interface OdData {
   orderStatus: number;
 }
 
+export interface OdData2 {
+  orderId: number;
+  orderDate: number;
+  email?: number;
+  nmKor?: number;
+  salePrice: number;
+  quantity: number;
+  totalPrice: number;
+  payment?: number;
+  pickUpStore: string;
+  storeNm: string;
+  pickUpDate: number;
+  pickUpTime: number;
+  orderStatus: number;
+}
+
+export interface CommonObj {
+  [key: string | number]: any;
+}
+
 const OrderDetailAdm = () => {
+  const orderId = useLocation();
+  const { listPathName } = useOutletContext() as { listPathName: string };
   const [orderDetail, setOrderDetail] = useState<Array<OdData>>([]);
+  const [orderDetail2, setOrderDetail2] = useState<Array<OdData2>>([]);
   const getOdDetailData = async () => {
     try {
-      const data = await AdmOrderDetailData();
+      const data = await AdmOrderDetailData(parseInt(orderId.state));
       console.log(data);
-      setOrderDetail(data.list);
-      console.log(data.list);
+      setOrderDetail(data.list1);
+      setOrderDetail2(data.list2);
+      console.log(data.list1);
+      console.log(data.list2);
     } catch (err) {
       console.error("데이터 로드 중 오류 발생", err);
     }
@@ -36,76 +71,113 @@ const OrderDetailAdm = () => {
     getOdDetailData();
   }, []);
 
+  const gridTemplateColumns = {
+    columns: "0.4fr 0.8fr 0.6fr 1.8fr 0.8fr 0.55fr",
+  };
+
+  interface OrderSt {
+    [key: number]: string;
+  }
+
+  const orderSt: OrderSt = {
+    1: "결제 완료",
+    2: "배송중",
+    3: "배송완료",
+    4: "픽업대기",
+    5: "픽업완료",
+    6: "주문취소",
+  };
+
   return (
     <div>
-      <div>
-        <OrderTableWrap>
-          <OrderTable>
-            <caption>주문내역관리</caption>
-            <thead>
-              <tr>
-                <th>주문번호</th>
-                <th>주문날짜</th>
-                <th>아이디</th>
-                <th>주문상품</th>
-                <th>상품금액</th>
-                <th>주문수량</th>
-              </tr>
-            </thead>
-            <tbody>
-              {orderDetail?.map((item, index) => (
-                <tr key={index}>
-                  <td>{item.orderId}</td>
-                  <td>{item.orderDate}</td>
-                  <td>{item.email}</td>
-                  <td>{item.nmKor}</td>
-                  <td>{item.salePrice}</td>
-                  <th>{item.quantity}</th>
-                </tr>
-              ))}
-            </tbody>
-          </OrderTable>
-        </OrderTableWrap>
-      </div>
-      <OrderSubTableWrap>
-        <OrderSubTable>
-          <div>
-            <caption>주문내역관리</caption>
-            <thead>
-              {orderDetail?.map((item, index) => (
-                <tr key={index}>
-                  <th>주문수량</th>
-                  <th>{item.quantity}</th>
-                  <th>픽업 장소</th>
-                  <th>{item.storeNm}</th>
-                </tr>
-              ))}
-            </thead>
-            {orderDetail?.map((item, index) => (
-              <tbody key={index}>
+      <TableVertical>
+        {/* 데이터 테이블 - 타이틀 */}
+        <TableLayoutTitle
+          listPathName={listPathName}
+          style={{
+            gridTemplateColumns: gridTemplateColumns.columns,
+          }}
+        >
+          <li>주문번호</li>
+          <li>주문 날짜</li>
+          <li>아이디</li>
+          <li>주문상품</li>
+          <li>상품금액</li>
+          <li>주문수량</li>
+        </TableLayoutTitle>
+        {/* 데이터 테이블 - 내용 */}
+        <TableLayoutContents
+          listPathName={listPathName}
+          style={{
+            gridTemplateColumns: gridTemplateColumns.columns,
+          }}
+        >
+          {orderDetail?.map((item, index) => (
+            <React.Fragment key={item.orderId}>
+              {index === 0 ||
+              orderDetail[index - 1].orderId !== item.orderId ? (
+                <>
+                  <li>{item.orderId}</li>
+                  <li>{item.orderDate}</li>
+                  <li>{item.email}</li>
+                  <li>{item.nmKor}</li>
+                  <li>{item.salePrice}</li>
+                  <li>{item.quantity}</li>
+                </>
+              ) : (
+                <>
+                  <li>{null}</li>
+                  <li>{null}</li>
+                  <li>{null}</li>
+                  <li>{item.nmKor}</li>
+                  <li>{item.salePrice}</li>
+                  <li>{item.quantity}</li>
+                </>
+              )}
+            </React.Fragment>
+          ))}
+        </TableLayoutContents>
+      </TableVertical>
+      <TableHorizontal listPathName={listPathName}>
+        {/* 데이터 테이블 - 타이틀 */}
+        <table>
+          <tbody>
+            {orderDetail2?.map(item => (
+              <React.Fragment key={item.orderId}>
                 <tr>
-                  <td>총결제금액</td>
-                  <td>{item.totalPrice}</td>
-                  <td>픽업 날짜</td>
-                  <td>{item.pickUpDate}</td>
+                  <th className="table-title">주문수량</th>
+                  <td className="table-content">{item.quantity}</td>
+                  <th className="table-title">픽업 장소</th>
+                  <td className="table-content">{item.storeNm}</td>
                 </tr>
                 <tr>
-                  <td>결제 수단</td>
-                  <td>{item.payment}</td>
-                  <td>픽업 시간</td>
-                  <td>{item.pickUpTime}</td>
+                  <th className="table-title">총 결제 금액</th>
+                  <td className="table-content">{item.totalPrice}</td>
+                  <th className="table-title">픽업 날짜</th>
+                  <td className="table-content">{item.pickUpDate}</td>
                 </tr>
                 <tr>
-                  <td></td>
-                  <td></td>
-                  <td>픽업완료여부</td>
-                  <td>{item.orderStatus}</td>
+                  <th className="table-title">결제 수단</th>
+                  <td className="table-content">
+                    {" "}
+                    {item.payment === 0 || item.payment === 1
+                      ? "신용카드"
+                      : item.payment}
+                  </td>
+                  <th className="table-title">픽업 시간</th>
+                  <td className="table-content">{item.pickUpTime}</td>
                 </tr>
-              </tbody>
+                <tr>
+                  <th className="table-title">픽업 완료 여부</th>
+                  <td className="table-content">{orderSt[item.orderStatus]}</td>
+                  {/* <th className="table-title">픽업 완료 여부</th>
+              <td className="table-content">Y</td> */}
+                </tr>
+              </React.Fragment>
             ))}
-          </div>
-        </OrderSubTable>
-      </OrderSubTableWrap>
+          </tbody>
+        </table>
+      </TableHorizontal>
     </div>
   );
 };

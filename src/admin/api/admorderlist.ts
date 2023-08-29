@@ -6,9 +6,9 @@
 
 import { client } from "../../api/client";
 
-export const AdmOrderData = async () => {
+export const AdmOrderData = async (page: number) => {
   try {
-    const res = await client.get(`/api/admin/order?page=1&row=15`);
+    const res = await client.get(`/api/admin/order?page=${page}&row=15`);
     const orderData = await res.data;
     console.log(orderData);
     return orderData;
@@ -18,13 +18,12 @@ export const AdmOrderData = async () => {
   }
 };
 
-// 수정 예정
-// export const orderStatusData = async () => {
-//   try {
-//     const res = await client.put(`/api/admin/order${orderStatusData}`);
-//     const result = await res.data;
-//     return result;
-//   } catch (error) {
-//     console.log(orderStatusData)
-//   }
-// };
+export const orderStatusData = async () => {
+  try {
+    const res = await client.put(`/api/admin/order${orderStatusData}`);
+    const result = await res.data;
+    return result;
+  } catch (error) {
+    console.log(orderStatusData)
+  }
+};
