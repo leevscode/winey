@@ -5,21 +5,24 @@
 */
 
 // [관리자] 상품 리스트 데이터 타입 정의
+// 상품 리스트 페이징
 export interface IproductListPage {
-  page: {
-    page: number;
-    row: number;
-    startIdx: number;
-    totalRecordCount: number;
-    totalPage: number;
-    pageSize: number;
-    prev: boolean;
-    next: boolean;
-    startPage: number;
-    endPage: number;
-  };
-  productList: Array<IproductList>;
+  page: number;
+  row: number;
+  startIdx: number;
+  totalRecordCount: number;
+  totalPage: number;
+  pageSize: number;
+  prev: boolean;
+  next: boolean;
+  startPage: number;
+  endPage: number;
 }
+// 상품 리스트 페이징 state
+export interface IproductListPageState {
+  admProductListPage: IproductListPage;
+}
+// 상품 리스트
 export interface IproductList {
   productId: number;
   nmKor: string;
@@ -27,4 +30,6 @@ export interface IproductList {
   promotion: number;
   beginner: number;
   quantity: number;
+  sale: number;
+  salePrice: number;
 }

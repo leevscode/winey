@@ -14,7 +14,7 @@ import { Layout, Menu } from "antd";
 import SubMenu from "antd/es/menu/SubMenu";
 import { LayoutSideMenuWrap } from "../style/AdminLayoutStyle";
 import { Link } from "react-router-dom";
-import { IDefaultSide, IMenu } from "../interface/LayoutInterface";
+import { IMenu } from "../interface/LayoutInterface";
 const { Sider } = Layout;
 
 const AdminSideMenu: React.FC = () => {

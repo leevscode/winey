@@ -442,6 +442,7 @@ export const TableLayoutTitle = styled.ul<ItableLayoutColor>`
   position: sticky;
   top: 0;
   left: 0;
+  z-index: 100;
   background: ${AdminColor.headColorA};
   font-weight: 700;
   color: ${Maincolor.white};
