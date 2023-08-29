@@ -9,7 +9,6 @@ import { AdminColor } from "../AdminLayoutStyle";
 
 // ok 버튼
 export const AdmProductBtnOk = styled.button`
-  background: pink;
   font-size: 1.4rem;
   width: 100px;
   padding: 10px 0;
@@ -41,17 +40,14 @@ export const AdmProductWrap = styled.div`
       color: ${Maincolor.grayDeep};
     }
     a {
-      display: inline-block;
-      width: 85px;
-      text-align: center;
-      padding: 8px 0 7px;
-      background: ${AdminColor.blueB};
-      color: ${Maincolor.white};
+      font-size: 1.4rem;
+      width: 100px;
+      padding: 10px 0;
       border-radius: 5px;
-      transition: 0.2s ease-in-out;
-      &:hover {
-        background: ${AdminColor.blueA};
-      }
+      text-align: center;
+      background: ${Gradation.wineE};
+      color: ${Maincolor.white};
+      border: 0.05rem solid ${opacity.grayLight};
     }
   }
 `;
@@ -64,9 +60,9 @@ export const ProductControlPaginateWrap = styled.div`
 `;
 // 상품 등록하기
 export const ProductAddAdmWrap = styled.div`
-  min-width: 800px;
   // 공통
   .box {
+    min-width: 900px;
     border-bottom: 0.05rem solid ${opacity.white};
     & > ul {
       & > li {
@@ -123,6 +119,7 @@ export const ProductAddAdmWrap = styled.div`
       & > ul {
         display: flex;
         justify-content: flex-end;
+        gap: 0 5px;
       }
     }
   }

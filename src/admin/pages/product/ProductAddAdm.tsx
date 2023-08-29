@@ -103,8 +103,8 @@ const ProductAddAdm = () => {
               <li>
                 <div className="title">할인기간설정</div>
                 <div className="content">
-                  <Form.Item label="할인기간설정">
-                    <RangePicker />
+                  <Form.Item>
+                    <RangePicker picker="month" />
                   </Form.Item>
                 </div>
               </li>
@@ -278,25 +278,25 @@ const ProductAddAdm = () => {
                     <Checkbox.Group>
                       <ul>
                         <li>
-                          <Checkbox>꽃</Checkbox>
+                          <Checkbox value={1}>꽃</Checkbox>
                         </li>
                         <li>
-                          <Checkbox>과일</Checkbox>
+                          <Checkbox value={2}>과일</Checkbox>
                         </li>
                         <li>
-                          <Checkbox>식물</Checkbox>
+                          <Checkbox value={3}>식물</Checkbox>
                         </li>
                         <li>
-                          <Checkbox>향신료</Checkbox>
+                          <Checkbox value={4}>향신료</Checkbox>
                         </li>
                         <li>
-                          <Checkbox>흙냄새</Checkbox>
+                          <Checkbox value={5}>흙냄새</Checkbox>
                         </li>
                         <li>
-                          <Checkbox>탄향</Checkbox>
+                          <Checkbox value={6}>탄향</Checkbox>
                         </li>
                         <li>
-                          <Checkbox>견과류</Checkbox>
+                          <Checkbox value={7}>견과류</Checkbox>
                         </li>
                       </ul>
                     </Checkbox.Group>
@@ -315,40 +315,40 @@ const ProductAddAdm = () => {
                     <Checkbox.Group>
                       <ul>
                         <li>
-                          <Checkbox>스테이크</Checkbox>
+                          <Checkbox value={1}>스테이크</Checkbox>
                         </li>
                         <li>
-                          <Checkbox>삼겹살</Checkbox>
+                          <Checkbox value={2}>삼겹살</Checkbox>
                         </li>
                         <li>
-                          <Checkbox>치킨</Checkbox>
+                          <Checkbox value={3}>치킨</Checkbox>
                         </li>
                         <li>
-                          <Checkbox>생선</Checkbox>
+                          <Checkbox value={4}>생선</Checkbox>
                         </li>
                         <li>
-                          <Checkbox>해산물</Checkbox>
+                          <Checkbox value={5}>해산물</Checkbox>
                         </li>
                         <li>
-                          <Checkbox>샐러드</Checkbox>
+                          <Checkbox value={6}>샐러드</Checkbox>
                         </li>
                         <li>
-                          <Checkbox>튀김</Checkbox>
+                          <Checkbox value={7}>튀김</Checkbox>
                         </li>
                         <li>
-                          <Checkbox>치즈</Checkbox>
+                          <Checkbox value={8}>치즈</Checkbox>
                         </li>
                         <li>
-                          <Checkbox>과일</Checkbox>
+                          <Checkbox value={9}>과일</Checkbox>
                         </li>
                         <li>
-                          <Checkbox>한식</Checkbox>
+                          <Checkbox value={10}>한식</Checkbox>
                         </li>
                         <li>
-                          <Checkbox>양식</Checkbox>
+                          <Checkbox value={11}>양식</Checkbox>
                         </li>
                         <li>
-                          <Checkbox>디저트</Checkbox>
+                          <Checkbox value={12}>디저트</Checkbox>
                         </li>
                       </ul>
                     </Checkbox.Group>
@@ -367,10 +367,10 @@ const ProductAddAdm = () => {
                     <Checkbox.Group>
                       <ul>
                         <li>
-                          <Checkbox>추천상품</Checkbox>
+                          <Checkbox value={"추천상품"}>추천상품</Checkbox>
                         </li>
                         <li>
-                          <Checkbox>입문자 추천</Checkbox>
+                          <Checkbox value={"입문자 추천"}>입문자 추천</Checkbox>
                         </li>
                       </ul>
                     </Checkbox.Group>

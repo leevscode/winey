@@ -51,6 +51,10 @@ const Header = ({ handleOpenNav, isActive }) => {
   const handleCancel = () => {
     setIsModalOpen(false);
   };
+  // 검색 컴포넌트 오픈
+  const navigateSearch = () => {
+    navigate("");
+  };
   // 페이지별 타이틀
   const pageName = [
     {
@@ -237,7 +241,7 @@ const Header = ({ handleOpenNav, isActive }) => {
             <li>
               <ol>
                 <li>
-                  <button className="search" onClick={showModal}>
+                  <button className="search" onClick={navigateSearch}>
                     <img
                       src={`${process.env.PUBLIC_URL}/images/icon_search_1.svg`}
                       alt="검색"
