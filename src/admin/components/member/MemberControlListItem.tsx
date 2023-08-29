@@ -5,9 +5,15 @@
 */
 
 import React, { useState } from "react";
-import { LayoutTable, TableWrap } from "../../style/AdminLayoutStyle";
+import {
+  LayoutTable,
+  TableLayoutContents,
+  TableLayoutTitle,
+  TableVertical,
+  TableWrap,
+} from "../../style/AdminLayoutStyle";
 import MemberDetailAdm from "../../pages/member/MemberDetailAdm";
-import { useNavigate } from "react-router";
+import { useNavigate, useOutletContext } from "react-router";
 import { IMemberListUser, IUserIdState } from "../../interface/MemberInterface";
 
 const MemberControlListItem = ({
@@ -16,6 +22,10 @@ const MemberControlListItem = ({
   regionConvert: IMemberListUser[];
 }) => {
   const navigate = useNavigate();
+  const { listPathName } = useOutletContext() as { listPathName: string };
+  const gridTemplateColumns = {
+    columns: "0.4fr 1.2fr 0.8fr 0.6fr 0.8fr 0.55fr",
+  };
 
   const handleMemberOrder = (item: IMemberListUser) => {
     console.log("item.userId", item.userId);
@@ -28,46 +38,49 @@ const MemberControlListItem = ({
   return (
     <>
       <TableWrap>
-        <LayoutTable>
-          <caption>테이블</caption>
-          <thead>
-            <tr>
-              <th>회원번호</th>
-              <th>아이디</th>
-              <th>이름</th>
-              <th>주 픽업지역</th>
-              <th>주문내역</th>
-              <th>회원삭제</th>
-            </tr>
-          </thead>
-          {regionConvert && (
-            <tbody>
-              {regionConvert.map(item => (
-                <tr key={item.userId}>
-                  <td>{item.userId}</td>
-                  <td>{item.email}</td>
-                  <td>{item.nm}</td>
-                  <td>
-                    {item.textRegion}
-                  </td>
-                  <td>
-                    <button
-                      onClick={() => handleMemberOrder(item)}
-                      className="detailBt"
-                    >
-                      주문상세보기
-                    </button>
-                  </td>
-                  <td>
-                    <button onClick={handleMemberOut} className="memberOutBt">
-                      탈퇴
-                    </button>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          )}
-        </LayoutTable>
+        <TableVertical>
+          <TableLayoutTitle
+            listPathName={listPathName}
+            style={{
+              gridTemplateColumns: gridTemplateColumns.columns,
+            }}
+          >
+            <li>회원번호</li>
+            <li>아이디</li>
+            <li>이름</li>
+            <li>주 픽업지역</li>
+            <li>주문내역</li>
+            <li>회원삭제</li>
+          </TableLayoutTitle>
+          {regionConvert &&
+            regionConvert.map(item => (
+              <TableLayoutContents
+                listPathName={listPathName}
+                key={item.userId}
+                style={{
+                  gridTemplateColumns: gridTemplateColumns.columns,
+                }}
+              >
+                <li>{item.userId}</li>
+                <li>{item.email}</li>
+                <li>{item.nm}</li>
+                <li>{item.textRegion}</li>
+                <li>
+                  <button
+                    onClick={() => handleMemberOrder(item)}
+                    className="detailBt"
+                  >
+                    주문상세보기
+                  </button>
+                </li>
+                <li>
+                  <button onClick={handleMemberOut} className="memberOutBt">
+                    탈퇴
+                  </button>
+                </li>
+              </TableLayoutContents>
+            ))}
+        </TableVertical>
       </TableWrap>
     </>
   );

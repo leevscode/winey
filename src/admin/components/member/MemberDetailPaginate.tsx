@@ -12,6 +12,7 @@ import {
   IUserDetailState,
   IinitialPg,
 } from "../../interface/MemberInterface";
+import { PaginationWrap } from "../../style/AdminLayoutStyle";
 
 // 불러온 멤버리스트를 props로 전달받음
 const MemberDetailPaginate = ({
@@ -43,18 +44,19 @@ const MemberDetailPaginate = ({
   }, [paginate.page]);
 
   console.log("paginate", paginate);
+  console.log("pageInfo", pageInfo);
   return (
-    <>
+    <PaginationWrap>
       {pageInfo && (
         <Pagination
-          current={paginate.page}
-          // pageSize={paginate.row}
+          current={pageInfo.page}
+          pageSize={12}
           onChange={page => onChange(page)}
           total={pageInfo.totalRecordCount}
           // size="small"
         />
       )}
-    </>
+    </PaginationWrap>
   );
 };
 

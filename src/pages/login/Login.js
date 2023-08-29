@@ -169,6 +169,20 @@ const Login = () => {
           <ButtonCancel>회원가입</ButtonCancel>
         </Link>
       </div>
+      <div>
+        <Link to="/">
+          {/* <img
+            src={`${process.env.PUBLIC_URL}/images/kakao_login_large_wide.png`}
+            alt="소셜로그인"
+          /> */}
+          <div className="socialLogin">
+            <img
+              src={`${process.env.PUBLIC_URL}/images/kakao_login_medium_narrow.png`}
+              alt="소셜로그인"
+            />
+          </div>
+        </Link>
+      </div>
     </LoginWrap>
   );
 };

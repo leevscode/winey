@@ -17,6 +17,7 @@ export const getMemberList = async (
   try {
     const res = await axios.get(
       `/api/admin/user/list?page=${paginate.page}&row=${paginate.row}`,
+      // `/api/admin/user/list?page=${paginate.page}&row=12`,
     );
     console.log("res", res);
     const result = await res.data;

@@ -12,6 +12,17 @@ export const LoginWrap = styled.div`
   display: flex;
   justify-content: center;
   flex-direction: column;
+  .socialLogin {
+    width: 100%;
+    background: #fee500;
+    border-radius: 6px;
+    margin-top: 2rem;
+    & > img {
+      transform: translateX(100%);
+      margin: 0 auto;
+      height: 100%;
+    }
+  }
 `;
 
 export const LogoDiv = styled.div`
