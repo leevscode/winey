@@ -97,7 +97,7 @@ function App() {
             {/* 주문내역관리 */}
             <Route path="ordercontrol" element={<OrderControl />} />
             {/* 주문상세리스트 */}
-            <Route path="orderdetail/:id" element={<OrderDetail />} />
+            <Route path="orderdetail" element={<OrderDetail />} />
             {/* 상품관리 */}
             <Route path="productlist" element={<ProductListAdm />} />
             {/* 상품등록하기 */}

@@ -6,7 +6,7 @@ import {
   TableLayoutTitle,
   TableVertical,
 } from "../../style/AdminLayoutStyle";
-import { useOutletContext } from "react-router";
+import { useLocation, useOutletContext } from "react-router";
 
 export interface OdData {
   orderId: number;
@@ -45,14 +45,14 @@ export interface CommonObj {
 }
 
 const OrderDetailAdm = () => {
+  const orderId = useLocation();
   const { listPathName } = useOutletContext() as { listPathName: string };
-  const orderId = listPathName.split("/")[1];
 
   const [orderDetail, setOrderDetail] = useState<Array<OdData>>([]);
   const [orderDetail2, setOrderDetail2] = useState<Array<OdData2>>([]);
   const getOdDetailData = async () => {
     try {
-      const data = await AdmOrderDetailData(parseInt(orderId));
+      const data = await AdmOrderDetailData(parseInt(orderId.state));
       console.log(data);
       setOrderDetail(data.list1);
       setOrderDetail2(data.list2);

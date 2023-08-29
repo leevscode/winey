@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { AdmOrderData } from "../../api/admorderlist";
+import { AdmOrderData, orderStatusData } from "../../api/admorderlist";
 import { Form, Pagination, PaginationProps, Select } from "antd";
 import { Navigate, useNavigate, useOutletContext } from "react-router";
 import {
@@ -9,6 +9,7 @@ import {
   TableLayoutTitle,
   TableVertical,
 } from "../../style/AdminLayoutStyle";
+import { client } from "../../../api/client";
 
 export interface fetchData {
   id: number;
@@ -29,19 +30,17 @@ export interface fetchData {
 //   [key: string | number]: any;
 // }
 
-// 수정예정
-// interface statusType {
-//   [key: string | number]: any;
-// }
+interface statusType {
+  [key: string | number]: any;
+}
 
-// 수정예정
-// interface statusData {
-//   orderStatus: number;
-// }
+interface statusData {
+  orderStatus: number;
+}
 
 const OrderControlAdm = () => {
   const [orderControl, setOrderControl] = useState<Array<fetchData>>([]);
-  // const [orderSt, setOrderSt] = useState<statusData>();
+  const [orderSt, setOrderSt] = useState<statusData>();
   const option = [
     { value: "1", label: "결제완료" },
     { value: "3", label: "배송중" },
@@ -71,19 +70,19 @@ const OrderControlAdm = () => {
     }
   };
 
-  // 수정 예정
-  // const statusData = async () => {
-  //   try {
-  //     const data: statusType = await orderStatusData(statusData);
-  //     console.log(data);
-  //     setOrderSt(data.list);
-  //     console.log(data.list);
-  //   } catch (err) {
-  //     console.error("err:", err);
-  //   }
-  // };
+  const statusData = async () => {
+    try {
+      const data: statusType = await orderStatusData();
+      console.log(data);
+      setOrderSt(data.list);
+      console.log(data.list);
+    } catch (err) {
+      console.error("err:", err);
+    }
+  };
 
   useEffect(() => {
+    statusData();
     getOrderData();
   }, [current]);
 
@@ -149,7 +148,20 @@ const OrderControlAdm = () => {
                         style={{ width: "100px", textAlign: "center" }}
                         placeholder="배송상태를 지정해주세요"
                         defaultValue={item.orderStatus.toString()}
-                        allowClear
+                        onChange={async newStatus => {
+                          try {
+                            await client.put(
+                              `/api/admin/order/${item.orderId}`,
+                              {
+                                orderStatus: newStatus,
+                              },
+                            );
+                            console.log("상태변경 성공:", item.orderStatus);
+                            getOrderData();
+                          } catch (error) {
+                            console.error("상태변경 실패:", error);
+                          }
+                        }}
                       >
                         {option.map(option => (
                           <Option key={option.value} value={option.value}>
@@ -165,7 +177,7 @@ const OrderControlAdm = () => {
                     style={{ fontSize: "1.3rem" }}
                     onClick={() => {
                       // navigate(`/order/${item.orderId}`);
-                      navigate(`/admin/orderdetail/${item.orderId}`);
+                      navigate(`/admin/orderdetail`, {state : item.orderId});
                     }}
                   >
                     상세
@@ -177,7 +189,12 @@ const OrderControlAdm = () => {
             ))}
           </TableLayoutContents>
         </TableVertical>
-        <Pagination current={current} pageSize={15} onChange={onChange} total={500} />
+        <Pagination
+          current={current}
+          pageSize={15}
+          onChange={onChange}
+          total={500}
+        />
       </div>
     </>
   );
