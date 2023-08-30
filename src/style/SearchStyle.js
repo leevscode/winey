@@ -1,3 +1,8 @@
+/*
+    작업자 : 최혜미
+    노션 : https://hyemdev.notion.site/hyemdev/hyem-s-dev-STUDY-75ffe819c7534a049b59871e6fe17dd4
+    깃허브 : https://github.com/hyemdev
+*/
 import { styled } from "styled-components";
 import { Maincolor, WidthPd, opacity } from "./GlobalStyle";
 import { motion } from "framer-motion";
@@ -6,8 +11,8 @@ export const SearchBarWrap = styled.div`
   padding: ${WidthPd.padding};
   display: flex;
   justify-content: center;
-  padding-bottom: 2rem;
-  border-bottom: 0.05rem solid rgba(60, 35, 35, 0.1);
+  /* padding-bottom: 1rem; */
+  /* border-bottom: 0.05rem solid rgba(60, 35, 35, 0.1); */
   & > span {
     width: 400px;
   }

@@ -1,3 +1,8 @@
+/*
+    작업자 : 최혜미
+    노션 : https://hyemdev.notion.site/hyemdev/hyem-s-dev-STUDY-75ffe819c7534a049b59871e6fe17dd4
+    깃허브 : https://github.com/hyemdev
+*/
 import { Button, Checkbox, ConfigProvider, Radio } from "antd";
 import React, { useState } from "react";
 import { KeywordWrap } from "../../style/KeywordStyle";
@@ -12,8 +17,16 @@ import {
   faWineGlass,
 } from "@fortawesome/free-solid-svg-icons";
 import { faMoneyBill1 } from "@fortawesome/free-regular-svg-icons";
+import { atom, useSetRecoilState } from "recoil";
 
-const SearchFilter = ({ selectFilter, setSelectFilter }) => {
+export const searchFilterRecoil = atom({
+  key: "searchFilterRecoil",
+  default: [],
+});
+
+const SearchFilter = () => {
+  const setExplorefilter = useSetRecoilState(searchFilterRecoil);
+
   const wineOptions = {
     cate: [
       { id: 1, value: "레드", icon: <FontAwesomeIcon icon={faWineGlass} /> },
@@ -61,29 +74,32 @@ const SearchFilter = ({ selectFilter, setSelectFilter }) => {
     ],
   };
   // const [selectFilter, setSelectFilter] = useState("");
-  const [wineTypeCheck, setWineTypeCheck] = useState("");
-  const [wineFoodCheck, setWineFoodCheck] = useState("");
+  const [wineTypeCheck, setWineTypeCheck] = useState(0);
+  const [wineFoodCheck, setWineFoodCheck] = useState(0);
   const [winePriceCheck, setWinePriceCheck] = useState("");
-  const [wineCountryCheck, setWineCountryCheck] = useState("");
+  const [wineCountryCheck, setWineCountryCheck] = useState(0);
 
   const handleTypeChange = e => {
     setWineTypeCheck(e.target.value);
-    setSelectFilter(prev => ({ ...prev, cate: e.target.value }));
+    // setSelectFilter(prev => ({ ...prev, cate: e.target.value }));
+    setExplorefilter(prev => ({ ...prev, cate: e.target.value }));
   };
   const handleFoodChange = e => {
     setWineFoodCheck(e.target.value);
-    setSelectFilter(prev => ({ ...prev, bigCate: e.target.value }));
+    // setSelectFilter(prev => ({ ...prev, bigCate: e.target.value }));
+    setExplorefilter(prev => ({ ...prev, bigCate: e.target.value }));
   };
 
   const handlePriceChange = e => {
     setWinePriceCheck(e.target.value);
-    setSelectFilter(prev => ({ ...prev, price: e.target.value }));
+    // setSelectFilter(prev => ({ ...prev, price: e.target.value }));
+    setExplorefilter(prev => ({ ...prev, price: e.target.value }));
   };
   const handleCountryChange = e => {
     setWineCountryCheck(e.target.value);
-    setSelectFilter(prev => ({ ...prev, country: e.target.value }));
+    // setSelectFilter(prev => ({ ...prev, country: e.target.value }));
+    setExplorefilter(prev => ({ ...prev, country: e.target.value }));
   };
-  console.log("selectFilter", selectFilter);
 
   // 선택값 초기화
   const handleReset = () => {
@@ -91,7 +107,7 @@ const SearchFilter = ({ selectFilter, setSelectFilter }) => {
     setWineFoodCheck("");
     setWinePriceCheck("");
     setWineCountryCheck("");
-    setSelectFilter("");
+    setExplorefilter("");
   };
   return (
     <SearchFilterWrap>

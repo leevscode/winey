@@ -1,17 +1,48 @@
+/*
+    작업자 : 최혜미
+    노션 : https://hyemdev.notion.site/hyemdev/hyem-s-dev-STUDY-75ffe819c7534a049b59871e6fe17dd4
+    깃허브 : https://github.com/hyemdev
+*/
 import React, { useState } from "react";
 import Search from "antd/es/input/Search";
 import { ConfigProvider } from "antd";
 import { FilterButtonWrap, SearchBarWrap } from "../../style/SearchStyle";
 import SearchFilter from "./SearchFilter";
 import { useNavigate } from "react-router";
+import { getSearchItem } from "../../api/searchpatch";
+import { atom, selector, useRecoilState, useRecoilValue } from "recoil";
+import { queryUrlRecoil } from "../../pages/search/SearchProduct";
+import { searchSortRecoil } from "./SearchList";
+
+// recoil
+export const searchTextRecoil = atom({
+  key: "searchTextRecoil",
+  default: [],
+});
+export const searchResultRecoil = atom({
+  key: "searchResultRecoil",
+  default: [],
+});
+const getQueryRecoil = selector({
+  key: "getQueryRecoil",
+  // 값을 읽겠다
+  get: ({ get }) => {
+    const url = get(queryUrlRecoil);
+    return { url };
+  },
+});
+
 const SearchBar = () => {
+  // recoil get을 저장하자
+  const urlData = useRecoilValue(getQueryRecoil);
+  // recoil
+  const [exploreSort, setExploreSort] = useRecoilState(searchSortRecoil);
+  const [exploreText, setExploreText] = useRecoilState(searchTextRecoil);
+  const [exploreResult, setExploreResult] = useRecoilState(searchResultRecoil);
+
   const navigate = useNavigate();
   // filter component
   const [isFilterActive, setIsFilterActive] = useState(false);
-  // 필터선택값state
-  const [selectFilter, setSelectFilter] = useState("");
-  const [textSearch, setTextSearch] = useState("");
-  const [searchResult, setSearchResult] = useState()
 
   // filters 버튼 핸들러
   const handleOpenfilter = e => {
@@ -22,11 +53,21 @@ const SearchBar = () => {
     setIsFilterActive(false);
     // navigate();
   };
-
-  const onSearch = e => {
-    selectFilter;
-    textSearch;
+  const handleTextSearch = e => {
+    console.log(e.target.value);
+    setExploreText(e.target.value);
   };
+  const onSearch = e => {
+    getSearchItem({ urlData, setExploreResult });
+    setIsFilterActive(false);
+    setExploreSort({
+      value: 0,
+      label: "최신등록순",
+    });
+    return;
+  };
+  console.log("urlData", urlData);
+  console.log("exploreSort", exploreSort);
 
   return (
     <SearchBarWrap>
@@ -38,12 +79,7 @@ const SearchBar = () => {
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
       >
-        {isFilterActive ? (
-          <SearchFilter
-            setSelectFilter={setSelectFilter}
-            selectFilter={selectFilter}
-          />
-        ) : null}
+        {isFilterActive ? <SearchFilter /> : null}
       </FilterButtonWrap>
       <ConfigProvider
         theme={{
@@ -57,7 +93,8 @@ const SearchBar = () => {
         <Search
           placeholder="검색할 단어를 입력해 주세요."
           allowClear
-          value={textSearch}
+          value={exploreText}
+          onChange={handleTextSearch}
           onSearch={onSearch}
           size="large"
         />

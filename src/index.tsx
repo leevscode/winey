@@ -8,6 +8,7 @@ import store from "./store/store";
 import { HelmetProvider } from "react-helmet-async";
 import { persistStore } from "redux-persist";
 import { PersistGate } from "redux-persist/integration/react";
+import { RecoilRoot } from "recoil";
 
 // persist 적용
 const persistor = persistStore(store);
@@ -19,9 +20,11 @@ root.render(
   <HelmetProvider>
     <Provider store={store}>
       <PersistGate persistor={persistor}>
+      <RecoilRoot>
         <BrowserRouter>
           <App />
         </BrowserRouter>
+        </RecoilRoot>
       </PersistGate>
     </Provider>
   </HelmetProvider>,

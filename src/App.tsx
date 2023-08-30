@@ -32,7 +32,6 @@ import About from "./pages/About";
 import OpenSource from "./pages/OpenSource";
 import SellList from "./pages/product/SellList";
 import NotFound from "./pages/NotFound";
-import SearchItem from "./pages/search/SearchItem";
 import { AnimatePresence } from "framer-motion";
 import SellListDetail from "./pages/product/SellListDetail";
 import { useEffect, useState } from "react";
@@ -48,6 +47,7 @@ import { Helmet } from "react-helmet-async";
 import Food from "./components/productmain/Food";
 import Country from "./components/productmain/Country";
 import Price from "./components/productmain/Price";
+import SearchProduct from "./pages/search/SearchProduct";
 
 function App() {
   // 페이지 이동 시 스크롤 최상단으로 올라가는 코드
@@ -150,8 +150,8 @@ function App() {
             />
             {/* 상품 검색 페이지 */}
             <Route
-              path="/searchitem"
-              element={<SearchItem />}
+              path="/searchproduct"
+              element={<SearchProduct />}
             />
             {/* 로그인 */}
             <Route path="/login" element={<Login />} />

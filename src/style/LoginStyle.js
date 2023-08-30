@@ -14,13 +14,14 @@ export const LoginWrap = styled.div`
   flex-direction: column;
   .socialLogin {
     width: 100%;
+    height: 5rem;
     background: #fee500;
     border-radius: 6px;
     margin-top: 2rem;
     & > img {
       transform: translateX(100%);
       margin: 0 auto;
-      height: 100%;
+      height: 45px;
     }
   }
 `;

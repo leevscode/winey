@@ -53,7 +53,7 @@ const Header = ({ handleOpenNav, isActive }) => {
   };
   // 검색 컴포넌트 오픈
   const navigateSearch = () => {
-    navigate("");
+    navigate("/searchproduct");
   };
   // 페이지별 타이틀
   const pageName = [
@@ -158,6 +158,11 @@ const Header = ({ handleOpenNav, isActive }) => {
     {
       title: "가격별 추천 와인",
       path: "/productmain/price",
+    },
+    // 검색창
+    {
+      title: "상품 검색",
+      path: "/searchproduct",
     },
   ];
   let findPath = pageName.find(item => item.path === location.pathname);
