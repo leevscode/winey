@@ -28,7 +28,7 @@ const ProductControlPaginate = ({ page, setPage, totalPage }: Iprops) => {
         current={page}
         onChange={handleOnChange}
         total={totalPage}
-        pageSize={12}
+        pageSize={10}
       />
     </ProductControlPaginateWrap>
   );

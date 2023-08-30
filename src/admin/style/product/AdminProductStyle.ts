@@ -138,7 +138,7 @@ export const ProductAddAdmWrap = styled.div`
             }
             label {
               /* display: inline-flex; */
-              width: 100px;
+              width: 55px;
             }
           }
         }

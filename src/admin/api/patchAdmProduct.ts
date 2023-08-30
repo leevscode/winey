@@ -14,7 +14,7 @@ export const getAdmProductList = async (
   _setTotalPage: Dispatch<React.SetStateAction<number>>,
 ) => {
   try {
-    const res = await axios.get(`/api/admin/product/list?page=${_page}&row=12`);
+    const res = await axios.get(`/api/admin/product/list?page=${_page}&row=10`);
     const result = res.data;
     const data = result.productList;
     const pageData = result.page.totalRecordCount;
