@@ -61,7 +61,7 @@ export const ProductControlPaginateWrap = styled.div`
 // 상품 등록하기
 export const ProductAddAdmWrap = styled.div`
   // 공통
-  .box {
+  & > form > div {
     min-width: 900px;
     border-bottom: 0.05rem solid ${opacity.white};
     & > ul {
@@ -106,115 +106,162 @@ export const ProductAddAdmWrap = styled.div`
       }
     }
   }
-  // 상품 등록 버튼
-  .product-submit-wrap {
-    position: sticky;
-    top: 0;
-    right: 0;
-    width: 100%;
-    z-index: 100;
-    background: ${Maincolor.white};
-    padding-bottom: 10px;
-    .ant-form-item-control-input-content {
-      & > ul {
-        display: flex;
-        justify-content: flex-end;
-        gap: 0 5px;
-      }
+`;
+
+// 상품 등록하기 폼 내부 버튼
+export const ProductFormBtn = styled.button`
+  background: pink;
+  display: block;
+  font-size: 1.4rem;
+  height: 30px;
+  padding: 0 10px;
+  background: ${Maincolor.white};
+  border: 0.05rem solid rgb(217, 217, 217, 0.95);
+  color: ${Maincolor.black};
+  border-radius: 5px;
+  margin-left: 5px;
+  transition: 0.2s ease-in-out background;
+  &:hover {
+    background: ${AdminColor.contentsColorHoverC};
+  }
+`;
+
+// 상품 등록하기 - 상품 등록 버튼
+// 상품 등록 버튼
+export const ProductSubmitWrap = styled.div`
+  position: sticky;
+  top: 0;
+  right: 0;
+  width: 100%;
+  z-index: 100;
+  background: ${Maincolor.white};
+  padding-bottom: 10px;
+  .ant-form-item-control-input-content {
+    & > ul {
+      display: flex;
+      justify-content: flex-end;
+      gap: 0 5px;
     }
   }
-  // 상품명
-  .product-name-wrap {
-    & > ul {
-      & > li {
-        .content {
-          display: flex;
-          gap: 0 10px;
-          width: calc(100% - 130px - 20px);
-          .ant-form-item {
-            width: calc(100% / 2);
-            input {
-              /* background: pink; */
-            }
-            label {
-              /* display: inline-flex; */
-              width: 55px;
-            }
-          }
-        }
-      }
-    }
-  }
-  // 가격
-  .product-price-wrap {
-    & > ul {
-      display: grid;
-      grid-template-columns: 1.4fr 0.8fr 0.8fr;
-      & > li {
+`;
+
+// 상품 등록하기 - 상품명
+export const ProductNameWrap = styled.div`
+  & > ul {
+    & > li {
+      .content {
         display: flex;
-        align-items: center;
         gap: 0 10px;
-        .content {
-          /* display: flex; */
-          /* gap: 0 10px; */
-          width: calc(100% - 130px - 20px);
-          .ant-form-item {
-            /* width: calc(100% / 2); */
-            label {
-              display: none;
+        width: calc(100% - 130px - 20px);
+        .ant-form-item {
+          width: calc(100% / 2);
+          input {
+            /* background: pink; */
+          }
+          label {
+            /* display: inline-flex; */
+            width: 55px;
+          }
+        }
+      }
+    }
+  }
+`;
+// 상품 등록하기 - 가격
+export const ProductPriceWrap = styled.div`
+  & > ul {
+    display: grid;
+    grid-template-columns: 1fr 310px 0.6fr;
+    & > li {
+      display: flex;
+      align-items: center;
+      gap: 0 10px;
+      .content {
+        /* display: flex; */
+        /* gap: 0 10px; */
+        width: calc(100% - 130px - 20px);
+        .ant-form-item {
+          /* width: calc(100% / 2); */
+          label {
+            display: none;
+          }
+          .ant-form-item-control-input-content {
+            display: flex;
+            align-items: center;
+            .ant-input-number {
+              width: 100%;
+              margin-right: 5px;
             }
-            .ant-form-item-control-input-content {
-              display: flex;
-              align-items: center;
-              .ant-input {
-                margin-right: 5px;
-              }
+          }
+        }
+      }
+      // 할인율 영역
+      .sale-price-content {
+        .ant-form-item-control-input-content {
+        }
+        .input-wrap {
+          .ant-input-number {
+            max-width: 55px;
+          }
+        }
+      }
+    }
+  }
+`;
+// 상품 등록하기 - 할인기간설정
+export const ProductSaleDateWrap = styled.div`
+  & > ul {
+    & > li {
+      .content {
+        width: calc(100% - 130px - 20px);
+        .ant-form-item {
+          /* width: calc(100% / 2); */
+          label {
+            display: none;
+          }
+          .ant-form-item-control-input-content {
+            display: flex;
+            align-items: center;
+            .ant-input {
+              margin-right: 5px;
             }
           }
         }
       }
     }
   }
-  // 할인기간설정
-  .product-sale-wrap {
-    & > ul {
-      & > li {
-        .content {
-          width: calc(100% - 130px - 20px);
-          .ant-form-item {
-            /* width: calc(100% / 2); */
-            label {
-              display: none;
-            }
-            .ant-form-item-control-input-content {
-              display: flex;
-              align-items: center;
-              .ant-input {
-                margin-right: 5px;
-              }
-            }
-          }
-        }
-      }
-    }
-    /* 할인기간설정 달력 팝업 */
-    .custom-popup {
-      background: pink;
-    }
+  /* 할인기간설정 달력 팝업 */
+  .custom-popup {
   }
-  // 재고수량설정
-  .product-quantity-wrap {
-    & > ul {
-      & > li {
-        .content {
-          width: 150px;
-          .ant-form-item {
-            .ant-form-item-control-input-content {
-              display: flex;
-              align-items: center;
-              .ant-input {
-                margin-right: 5px;
-              }
+`;
+// 상품 등록하기 - 원산지
+export const ProductCountryWrap = styled.div``;
+// 상품 등록하기 - 와인 종류
+export const ProductWineWrap = styled.div``;
+// 상품 등록하기 - 당도
+export const ProductSweetyWrap = styled.div``;
+// 상품 등록하기 - 산도
+export const ProductAcidityWrap = styled.div``;
+// 상품 등록하기 - 바디
+export const ProductBodyWrap = styled.div``;
+// 상품 등록하기 - 향(아로마)
+export const ProductAromaWrap = styled.div``;
+// 상품 등록하기 - 페어링음식
+export const ProductFairingWrap = styled.div``;
+// 상품 등록하기 - 추천유무
+export const ProductPromotionWrap = styled.div``;
+// 상품 등록하기 - 재고수량
+export const ProductQuantityWrap = styled.div`
+  & > ul {
+    & > li {
+      .content {
+        width: 150px;
+        .ant-form-item {
+          .ant-form-item-control-input-content {
+            display: flex;
+            align-items: center;
+            .ant-input {
+              margin-right: 5px;
             }
           }
         }
@@ -222,3 +269,5 @@ export const ProductAddAdmWrap = styled.div`
     }
   }
 `;
+// 상품 등록하기 - 상품이미지업로드
+export const ProductImageWrap = styled.div``;
