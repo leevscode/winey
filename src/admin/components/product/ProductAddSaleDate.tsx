@@ -1,7 +1,12 @@
+/*
+  작업자 : 김아영
+  노션 : https://kimaydev.notion.site/kimaydev/FE-7a53f9f631f146c88c39413cd175a9d0
+  깃허브 : https://github.com/kimaydev
+*/
 import React, { useState } from "react";
 import dayjs from "dayjs";
 import type { Dayjs } from "dayjs";
-import type { DatePickerProps, RangePickerProps } from "antd/es/date-picker";
+import type { RangePickerProps } from "antd/es/date-picker";
 import { ProductSaleDateWrap } from "../../style/product/AdminProductStyle";
 import { DatePicker, Form } from "antd";
 

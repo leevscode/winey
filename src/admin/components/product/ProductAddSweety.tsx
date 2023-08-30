@@ -1,8 +1,20 @@
+/*
+  작업자 : 김아영
+  노션 : https://kimaydev.notion.site/kimaydev/FE-7a53f9f631f146c88c39413cd175a9d0
+  깃허브 : https://github.com/kimaydev
+*/
+import React, { useState } from "react";
 import { Form, Radio } from "antd";
-import React from "react";
+import type { RadioChangeEvent } from "antd";
 import { ProductSweetyWrap } from "../../style/product/AdminProductStyle";
 
 const ProductAddSweety = () => {
+  // 당도 value 보관되는 state
+  const [sweetyValue, setSweetyValue] = useState(1);
+  const changeSweety = (e: RadioChangeEvent) => {
+    console.log("당도 클릭했습니다.", e.target.value);
+    setSweetyValue(e.target.value);
+  };
   return (
     <ProductSweetyWrap>
       <ul>
@@ -10,7 +22,7 @@ const ProductAddSweety = () => {
           <div className="title">당도</div>
           <div className="content">
             <Form.Item>
-              <Radio.Group>
+              <Radio.Group onChange={changeSweety} value={sweetyValue}>
                 <ul>
                   <li>
                     <Radio value="1">1</Radio>

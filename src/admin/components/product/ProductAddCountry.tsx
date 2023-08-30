@@ -1,8 +1,20 @@
+/*
+  작업자 : 김아영
+  노션 : https://kimaydev.notion.site/kimaydev/FE-7a53f9f631f146c88c39413cd175a9d0
+  깃허브 : https://github.com/kimaydev
+*/
+import React, { useState } from "react";
 import { Form, Radio } from "antd";
-import React from "react";
+import type { RadioChangeEvent } from "antd";
 import { ProductCountryWrap } from "../../style/product/AdminProductStyle";
 
 const ProductAddCountry = () => {
+  // 원산지 value 보관되는 state
+  const [countryValue, setCountryValue] = useState(1);
+  const changeCountry = (e: RadioChangeEvent) => {
+    console.log("원산지 클릭했습니다.", e.target.value);
+    setCountryValue(e.target.value);
+  };
   return (
     <ProductCountryWrap>
       <ul>
@@ -10,28 +22,28 @@ const ProductAddCountry = () => {
           <div className="title">원산지</div>
           <div className="content">
             <Form.Item>
-              <Radio.Group>
+              <Radio.Group onChange={changeCountry} value={countryValue}>
                 <ul>
                   <li>
-                    <Radio value="프랑스">프랑스</Radio>
+                    <Radio value="1">프랑스</Radio>
                   </li>
                   <li>
-                    <Radio value="이탈리아">이탈리아</Radio>
+                    <Radio value="2">이탈리아</Radio>
                   </li>
                   <li>
-                    <Radio value="칠레">칠레</Radio>
+                    <Radio value="3">칠레</Radio>
                   </li>
                   <li>
-                    <Radio value="스페인">스페인</Radio>
+                    <Radio value="4">스페인</Radio>
                   </li>
                   <li>
-                    <Radio value="호주">호주</Radio>
+                    <Radio value="5">호주</Radio>
                   </li>
                   <li>
-                    <Radio value="미국">미국</Radio>
+                    <Radio value="6">미국</Radio>
                   </li>
                   <li>
-                    <Radio value="기타">기타</Radio>
+                    <Radio value="7">기타</Radio>
                   </li>
                 </ul>
               </Radio.Group>
