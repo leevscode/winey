@@ -1,22 +1,6 @@
 import React, { useEffect, useState } from "react";
-import {
-  AdmProductBtnCancel,
-  AdmProductBtnOk,
-  ProductAddAdmWrap,
-  ProductFormBtn,
-} from "../../style/product/AdminProductStyle";
-import { UploadOutlined } from "@ant-design/icons";
-import {
-  Button,
-  Checkbox,
-  ConfigProvider,
-  DatePicker,
-  Form,
-  Input,
-  InputNumber,
-  Radio,
-  Upload,
-} from "antd";
+import { ProductAddAdmWrap } from "../../style/product/AdminProductStyle";
+import { ConfigProvider, Form } from "antd";
 import { AdminColor } from "../../style/AdminLayoutStyle";
 import ProductAddName from "../../components/product/ProductAddName";
 import ProductAddPrice from "../../components/product/ProductAddPrice";
@@ -34,29 +18,6 @@ import ProductAddImage from "../../components/product/ProductAddImage";
 import ProductAddSubmit from "../../components/product/ProductAddSubmit";
 
 const ProductAddAdm = () => {
-  // 안트디자인 기본 코드
-  const { RangePicker } = DatePicker;
-
-  // 상품명 한글 state
-  const [productNameKr, setProductNameKr] = useState<string>("");
-  console.log("1. 상품명 한글", productNameKr);
-  // 상품명 한글 입력창 핸들러
-  const handleKr = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const target = e.target.value;
-    // 한글, 숫자, 공백만 사용하는 정규표현식
-    const targetFilter = target.replace(/[^\d가-힣ㄱ-ㅎㅏ-ㅣ\s]/g, "");
-    setProductNameKr(targetFilter);
-  };
-  // 상품명 영문 state
-  const [productNameEn, setProductNameEn] = useState<string>("");
-  console.log("2. 상품명 영문", productNameEn);
-  // 상품명 영문 입력창 핸들러
-  const handleEn = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const target = e.target.value;
-    // 영문, 숫자, 공백만 사용하는 정규표현식
-    const targetFilter = target.replace(/[^\da-zA-Z\s]/g, "");
-    setProductNameEn(targetFilter);
-  };
   // 상품 등록 성공
   const onFinish = () => {
     console.log("상품 등록 완료");

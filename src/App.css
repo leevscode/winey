@@ -192,3 +192,12 @@
 .ant-picker-range-wrapper .ant-picker-body .ant-picker-cell::after {
   top: 28% !important;
 }
+/* Popover 컴포넌트 커스텀 */
+.popover-content {
+  display: flex;
+  align-items: center;
+  gap: 0 5px;
+}
+.popover-content i {
+  color: #ffbe44;
+}
