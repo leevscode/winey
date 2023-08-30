@@ -41,7 +41,7 @@ import Modal from "antd/es/modal/Modal";
 const ProductCart = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [CartData, setCartData] = useState([]);
+  const [cartData, setCartData] = useState([]);
   // 변하는 값(수량,총합) 담는 state
   const [totalPrice, setTotalPrice] = useState(0);
 
@@ -89,14 +89,14 @@ const ProductCart = () => {
 
   const calcTotalSum = () => {
     let itemTotal = 0;
-    CartData.map((item, index) => {
+    cartData?.map((item, index) => {
       itemTotal += item.price * item.quantity;
     });
     return itemTotal;
   };
 
   const increaseItemQuantity = async cartId => {
-    const arr = CartData.map(item => {
+    const arr = cartData?.map(item => {
       if (item.cartId === cartId) {
         if (item.quantity < 5) {
           item.quantity += 1;
@@ -108,7 +108,7 @@ const ProductCart = () => {
   };
 
   const decreaseItemQuantity = async cartId => {
-    const arr = CartData.map(item => {
+    const arr = cartData?.map(item => {
       if (item.cartId === cartId) {
         item.quantity -= 1;
         if (item.quantity < 1) {
@@ -125,7 +125,7 @@ const ProductCart = () => {
 
     navigate("/productsellcart", {
       state: {
-        CartData,
+        cartData,
         totalPrice,
       },
     });
@@ -145,7 +145,7 @@ const ProductCart = () => {
   // console.log("totalPrice", totalPrice);
   return (
     <>
-      {CartData.length === 0 ? (
+      {cartData?.length === 0 ? (
         <ProductCartNone>
           <div>
             <i>
@@ -157,11 +157,11 @@ const ProductCart = () => {
       ) : (
         <div>
           <ProudctTotalItem>
-            장바구니에 총 {CartData.length}개의 상품이 있습니다.
+            장바구니에 총 {cartData?.length}개의 상품이 있습니다.
           </ProudctTotalItem>
           <ul>
-            {CartData &&
-              CartData.map(item => (
+            {cartData &&
+              cartData?.map(item => (
                 <ProductCartInfo key={item.cartId} onError={onImgError}>
                   <CartDetailWrap>
                     <img src={`/img/${item.pic}`} alt="와인사진" />
