@@ -7,6 +7,7 @@ import React, { useEffect, useState } from "react";
 import { Link, useOutletContext } from "react-router-dom";
 import {
   DetailBt,
+  PaginationWrap,
   TableLayoutContents,
   TableLayoutTitle,
   TableVertical,
@@ -99,11 +100,13 @@ const ProductListAdm = () => {
         </TableVertical>
       </TableWrap>
       {/* 페이지네이션 */}
-      <ProductControlPaginate
-        page={page}
-        setPage={setPage}
-        totalPage={totalPage}
-      />
+      <PaginationWrap>
+        <ProductControlPaginate
+          page={page}
+          setPage={setPage}
+          totalPage={totalPage}
+        />
+      </PaginationWrap>
     </AdmProductWrap>
   );
 };

@@ -370,21 +370,6 @@ const TableLayoutContentsColor = (props: ItableLayoutColor) => {
     `;
   }
 };
-// 관리자페이지 데이터 테이블 스타일 설정 (new) - 레이아웃 (안씀)
-export const TableLayout = styled.div`
-  min-width: 1000px;
-  background: ${Maincolor.white};
-  & > ul {
-    display: grid;
-    & > li {
-      border-right: 0.05rem solid ${opacity.white};
-      text-align: center;
-      &:last-of-type {
-        border-right: 0;
-      }
-    }
-  }
-`;
 // 관리자페이지 테이블 레이아웃 세로형
 export const TableVertical = styled.div`
   min-width: 1000px;

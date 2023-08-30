@@ -20,12 +20,25 @@ import { AdminColor } from "../../style/AdminLayoutStyle";
 const ProductAddAdm = () => {
   // 안트디자인 기본 코드
   const { RangePicker } = DatePicker;
-
   const normFile = (e: any) => {
     if (Array.isArray(e)) {
       return e;
     }
     return e?.fileList;
+  };
+  // 상품명 한글 state
+  const [productNameKr, setProductNameKr] = useState<string>("");
+  console.log("상품명 한글", productNameKr);
+  // 상품명 영문 state
+  const [productNameEn, setProductNameEn] = useState<string>("");
+  console.log("상품명 영문", productNameEn);
+  // 상품 등록 성공
+  const onFinish = () => {
+    console.log("상품 등록 완료");
+  };
+  // 상품 등록 실패
+  const onFinishFailed = (errorInfo: any) => {
+    console.log("상품 등록 실패", errorInfo);
   };
   return (
     <ProductAddAdmWrap>
@@ -36,17 +49,19 @@ const ProductAddAdm = () => {
           },
         }}
       >
-        <Form>
+        <Form onFinish={onFinish} onFinishFailed={onFinishFailed}>
           {/* 상품 등록 버튼 */}
           <div className="box product-submit-wrap">
             <div className="content">
               <Form.Item>
                 <ul>
                   <li>
-                    <AdmProductBtnOk>상품 등록</AdmProductBtnOk>
+                    <AdmProductBtnOk type="submit">상품 등록</AdmProductBtnOk>
                   </li>
                   <li>
-                    <AdmProductBtnCancel>취소</AdmProductBtnCancel>
+                    <AdmProductBtnCancel type="submit">
+                      취소
+                    </AdmProductBtnCancel>
                   </li>
                 </ul>
               </Form.Item>
@@ -59,10 +74,18 @@ const ProductAddAdm = () => {
                 <div className="title">상품명</div>
                 <div className="content">
                   <Form.Item label="한글">
-                    <Input />
+                    <Input
+                      placeholder="상품 한글명을 입력해주세요."
+                      value={productNameKr}
+                      onChange={e => setProductNameKr(e.target.value)}
+                    />
                   </Form.Item>
                   <Form.Item label="영문">
-                    <Input />
+                    <Input
+                      placeholder="상품 영문명을 입력해주세요."
+                      value={productNameEn}
+                      onChange={e => setProductNameEn(e.target.value)}
+                    />
                   </Form.Item>
                 </div>
               </li>

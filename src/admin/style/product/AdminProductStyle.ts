@@ -133,6 +133,9 @@ export const ProductAddAdmWrap = styled.div`
           width: calc(100% - 130px - 20px);
           .ant-form-item {
             width: calc(100% / 2);
+            input {
+              /* background: pink; */
+            }
             label {
               /* display: inline-flex; */
               width: 100px;
@@ -193,6 +196,10 @@ export const ProductAddAdmWrap = styled.div`
           }
         }
       }
+    }
+    /* 할인기간설정 달력 팝업 */
+    .custom-popup {
+      background: pink;
     }
   }
   // 재고수량설정
