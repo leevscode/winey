@@ -4,22 +4,18 @@
     깃허브 : https://github.com/hyemdev
 */
 import { ConfigProvider, Select } from "antd";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { ContentsListItemWrap } from "../../style/GlobalComponents";
 import SearchListItem from "./SearchListItem";
 import ProductCartModal from "../product/ProductCartModal";
 import { ProductListItemWrap } from "../../style/ProductListStyle";
-import { Gradation } from "../../style/GlobalStyle";
-import {
-  atom,
-  selector,
-  useRecoilState,
-  useRecoilValue,
-  useSetRecoilState,
-} from "recoil";
+import { Gradation, Maincolor } from "../../style/GlobalStyle";
+import { atom, selector, useRecoilState, useRecoilValue } from "recoil";
 import { searchResultRecoil } from "./SearchBar";
 import { queryUrlRecoil } from "../../pages/search/SearchProduct";
 import { getSearchItem } from "../../api/searchpatch";
+import { FadeLoader } from "react-spinners";
+import { useInView } from "react-intersection-observer";
 
 export const searchSortRecoil = atom({
   key: "searchSortRecoil",
@@ -29,6 +25,10 @@ export const searchSortRecoil = atom({
       label: "최신등록순",
     },
   ],
+});
+export const itemScrollRecoil = atom({
+  key: "itemScrollRecoil",
+  default: [],
 });
 // recoil get
 export const searchGetResult = selector({
@@ -47,6 +47,7 @@ const SearchList = () => {
   console.log("finalItem", finalItem);
   const [exploreSort, setExploreSort] = useRecoilState(searchSortRecoil);
   const [exploreResult, setExploreResult] = useRecoilState(searchResultRecoil);
+  const [scrollPage, setScrollPage] = useRecoilState(itemScrollRecoil);
 
   const sortingOptions = [
     {
@@ -66,10 +67,12 @@ const SearchList = () => {
       label: "낮은가격순",
     },
   ];
+
   // 화면 데이터 state
   const [hasNextPage, setHasNextPage] = useState(true);
+  console.log("hasNextPage", hasNextPage);
 
-  // 장바구니 완료 모달 state
+  // 검색어 없음 모달
   const [isModalOpen, setIsModalOpen] = useState(false);
   const handleOk = () => {
     setIsModalOpen(false);
@@ -80,9 +83,25 @@ const SearchList = () => {
   const handleSortChange = e => {
     setExploreSort(e);
   };
+
+  //react-intersection-observer state
+  const [ref, inView] = useInView();
+  const page = useRef(1);
+
   useEffect(() => {
-    getSearchItem({ urlData, setExploreResult });
-  }, [exploreSort]);
+    if (inView && hasNextPage) {
+      getSearchItem({
+        urlData,
+        page,
+        setExploreResult,
+        setHasNextPage,
+        setScrollPage,
+      });
+    }
+  }, [exploreSort, hasNextPage, inView, scrollPage]);
+  console.log("scrollPage", scrollPage);
+  console.log("page", page);
+
   return (
     <div>
       <ProductListItemWrap>
@@ -124,6 +143,19 @@ const SearchList = () => {
             finalItem={finalItem}
           />
         </ContentsListItemWrap>
+        {/* 로딩 컴포넌트 */}
+        <div ref={ref} className="loading-box">
+          <div>
+            <FadeLoader
+              color={Maincolor.redBold}
+              height={9}
+              margin={0}
+              radius={10}
+              speedMultiplier={1}
+              width={5}
+            />
+          </div>
+        </div>
       </ProductListItemWrap>
       {/* 장바구니 완료 모달창 */}
       <ProductCartModal

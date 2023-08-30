@@ -7,12 +7,18 @@ import React, { useState } from "react";
 import Search from "antd/es/input/Search";
 import { ConfigProvider } from "antd";
 import { FilterButtonWrap, SearchBarWrap } from "../../style/SearchStyle";
-import SearchFilter from "./SearchFilter";
+import SearchFilter, { searchFilterRecoil } from "./SearchFilter";
 import { useNavigate } from "react-router";
 import { getSearchItem } from "../../api/searchpatch";
 import { atom, selector, useRecoilState, useRecoilValue } from "recoil";
 import { queryUrlRecoil } from "../../pages/search/SearchProduct";
-import { searchSortRecoil } from "./SearchList";
+import { itemScrollRecoil, searchSortRecoil } from "./SearchList";
+import { NoticeModal } from "../../style/GlobalComponents";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faCircleExclamation,
+  faFilter,
+} from "@fortawesome/free-solid-svg-icons";
 
 // recoil
 export const searchTextRecoil = atom({
@@ -31,10 +37,21 @@ const getQueryRecoil = selector({
     return { url };
   },
 });
+export const searchButtonActive = selector({
+  key: "searchButtonActive",
+  // 값을 읽겠다
+  get: ({ get }) => {
+    const filter = get(searchFilterRecoil);
+    const text = get(searchTextRecoil);
+    return { filter, text };
+  },
+});
 
 const SearchBar = () => {
   // recoil get을 저장하자
   const urlData = useRecoilValue(getQueryRecoil);
+  const isButton = useRecoilValue(searchButtonActive);
+  console.log("isButton", isButton);
   // recoil
   const [exploreSort, setExploreSort] = useRecoilState(searchSortRecoil);
   const [exploreText, setExploreText] = useRecoilState(searchTextRecoil);
@@ -57,21 +74,37 @@ const SearchBar = () => {
     console.log(e.target.value);
     setExploreText(e.target.value);
   };
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleOk = () => {
+    setIsModalOpen(false);
+  };
+  const handleCancel = () => {
+    setIsModalOpen(false);
+  };
   const onSearch = e => {
-    getSearchItem({ urlData, setExploreResult });
-    setIsFilterActive(false);
-    setExploreSort({
-      value: 0,
-      label: "최신등록순",
-    });
-    return;
+    if (isButton.filter.length === 0 && isButton.text.length === 0) {
+      console.log("선택값없음");
+      setIsModalOpen(true);
+      return;
+    } else {
+      getSearchItem({ urlData, setExploreResult });
+      setIsFilterActive(false);
+      setExploreSort({
+        value: 0,
+        label: "최신등록순",
+      });
+      return;
+    }
   };
   console.log("urlData", urlData);
   console.log("exploreSort", exploreSort);
+  console.log("exploreResult", exploreResult);
 
   return (
     <SearchBarWrap>
       <button className="filterbutton" onClick={handleOpenfilter}>
+        <FontAwesomeIcon icon={faFilter} />
         상세검색
       </button>
       <FilterButtonWrap
@@ -79,7 +112,9 @@ const SearchBar = () => {
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
       >
-        {isFilterActive ? <SearchFilter /> : null}
+        {isFilterActive ? (
+          <SearchFilter setIsFilterActive={setIsFilterActive} />
+        ) : null}
       </FilterButtonWrap>
       <ConfigProvider
         theme={{
@@ -99,6 +134,20 @@ const SearchBar = () => {
           size="large"
         />
       </ConfigProvider>
+      <NoticeModal
+        open={isModalOpen}
+        onOk={handleOk}
+        onCancel={handleCancel}
+        footer={null}
+      >
+        <p>
+          <i>
+            <FontAwesomeIcon icon={faCircleExclamation} />
+          </i>
+          검색어를 입력해 주세요.
+        </p>{" "}
+      </NoticeModal>
+
       <div className="SearchUnderbar"></div>
     </SearchBarWrap>
   );
