@@ -15,34 +15,7 @@ import {
   TableVertical,
 } from "../../style/AdminLayoutStyle";
 import { client } from "../../../api/client";
-
-export interface fetchData {
-  id: number;
-  orderDate: number;
-  email?: number;
-  nmKor?: number;
-  quantity: number;
-  totalPrice: number;
-  payment?: number;
-  pickUpStore: string;
-  orderStatus: number;
-  Navigate: string;
-  orderId: number;
-  totalRecordCount: number;
-}
-
-export interface fetchData2 {
-  endPage: number;
-  next: boolean;
-  page: number;
-  pageSize: number;
-  prev: boolean;
-  row: number;
-  startIdx: number;
-  startPage: number;
-  totalPage: number;
-  totalRecordCount: number;
-}
+import { fetchData, fetchData2 } from "../../interface/ControlInterface";
 
 // interface statusType {
 //   [key: string | number]: any;
@@ -55,7 +28,6 @@ interface statusData {
 const OrderControlAdm = () => {
   const [orderControl, setOrderControl] = useState<Array<fetchData>>([]);
   const [orderControl2, setOrderControl2] = useState<fetchData2>();
-  const [orderSt, setOrderSt] = useState<statusData>();
   const option = [
     { value: "1", label: "결제완료" },
     { value: "3", label: "배송중" },
@@ -74,6 +46,7 @@ const OrderControlAdm = () => {
     setCurrent(page);
   };
 
+  // 전체 주문내역 출력
   const getOrderData = async () => {
     try {
       const data = await AdmOrderData(current);
@@ -155,11 +128,10 @@ const OrderControlAdm = () => {
                         placeholder="배송상태를 지정해주세요"
                         defaultValue={item.orderStatus.toString()}
                         onChange={async newStatus => {
-                          // console.log("주문 내역 변경", newStatus);
                           try {
                             await client.put(`/api/admin/order`, {
                               orderId: item.orderId,
-                              orderStatus: parseInt(newStatus),
+                              orderStatus: newStatus,
                             });
                             console.log("상태변경 성공:", item.orderStatus);
                             getOrderData();

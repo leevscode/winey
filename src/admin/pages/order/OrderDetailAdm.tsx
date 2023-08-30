@@ -12,42 +12,7 @@ import {
   TableVertical,
 } from "../../style/AdminLayoutStyle";
 import { useLocation, useOutletContext } from "react-router";
-
-export interface OdData {
-  orderId: number;
-  orderDate: number;
-  email?: number;
-  nmKor?: number;
-  salePrice: number;
-  quantity: number;
-  totalPrice: number;
-  payment?: number;
-  pickUpStore: string;
-  storeNm: string;
-  pickUpDate: number;
-  pickUpTime: number;
-  orderStatus: number;
-}
-
-export interface OdData2 {
-  orderId: number;
-  orderDate: number;
-  email?: string;
-  nmKor?: number;
-  salePrice: number;
-  quantity: number;
-  totalPrice: number;
-  payment?: number;
-  pickUpStore: string;
-  storeNm: string;
-  pickUpDate: number;
-  pickUpTime: number;
-  orderStatus: number;
-}
-
-export interface CommonObj {
-  [key: string | number]: any;
-}
+import { OdData, OdData2 } from "../../interface/DetailInterface";
 
 const OrderDetailAdm = () => {
   const orderId = useLocation();
@@ -79,6 +44,7 @@ const OrderDetailAdm = () => {
     [key: number]: string;
   }
 
+  // 주문상태 셀렉트 버튼
   const orderSt: OrderSt = {
     1: "결제 완료",
     2: "배송중",
@@ -113,7 +79,7 @@ const OrderDetailAdm = () => {
           }}
         >
           {orderDetail?.map((item, index) => (
-            <React.Fragment key={item.orderId}>
+            <React.Fragment key={item.uniqueId}>
               {index === 0 ||
               orderDetail[index - 1].orderId !== item.orderId ? (
                 <>
@@ -121,7 +87,7 @@ const OrderDetailAdm = () => {
                   <li>{item.orderDate}</li>
                   <li>{item.email}</li>
                   <li>{item.nmKor}</li>
-                  <li>{item.salePrice}</li>
+                  <li>{item.salePrice.toLocaleString()}</li>
                   <li>{item.quantity}</li>
                 </>
               ) : (
@@ -130,7 +96,7 @@ const OrderDetailAdm = () => {
                   <li>{null}</li>
                   <li>{null}</li>
                   <li>{item.nmKor}</li>
-                  <li>{item.salePrice}</li>
+                  <li>{item.salePrice.toLocaleString()}</li>
                   <li>{item.quantity}</li>
                 </>
               )}
@@ -152,7 +118,9 @@ const OrderDetailAdm = () => {
                 </tr>
                 <tr>
                   <th className="table-title">총 결제 금액</th>
-                  <td className="table-content">{item.totalPrice}</td>
+                  <td className="table-content">
+                    {item.totalPrice.toLocaleString()}
+                  </td>
                   <th className="table-title">픽업 날짜</th>
                   <td className="table-content">{item.pickUpDate}</td>
                 </tr>
@@ -170,8 +138,6 @@ const OrderDetailAdm = () => {
                 <tr>
                   <th className="table-title">픽업 완료 여부</th>
                   <td className="table-content">{orderSt[item.orderStatus]}</td>
-                  {/* <th className="table-title">픽업 완료 여부</th>
-              <td className="table-content">Y</td> */}
                 </tr>
               </React.Fragment>
             ))}
