@@ -188,6 +188,9 @@
 }
 
 /* 할인기간설정 달력 팝업창 커스텀 */
+.ant-picker-range-wrapper .ant-picker-year-btn {
+  pointer-events: none;
+}
 .ant-picker-range-wrapper .ant-picker-body .ant-picker-cell::before,
 .ant-picker-range-wrapper .ant-picker-body .ant-picker-cell::after {
   top: 28% !important;
