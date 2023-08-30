@@ -32,7 +32,7 @@ export interface OdData {
 export interface OdData2 {
   orderId: number;
   orderDate: number;
-  email?: number;
+  email?: string;
   nmKor?: number;
   salePrice: number;
   quantity: number;

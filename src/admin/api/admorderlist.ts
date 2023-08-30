@@ -3,9 +3,9 @@
     노션 : https://www.notion.so/leevscode/leevscode-5223e3d332604844a255a0c63113a284
     깃허브 : https://github.com/leevscode
 */
-
 import { client } from "../../api/client";
 
+// 주문 내역 출력
 export const AdmOrderData = async (page: number) => {
   try {
     const res = await client.get(`/api/admin/order?page=${page}&row=15`);
@@ -15,15 +15,5 @@ export const AdmOrderData = async (page: number) => {
   } catch (error) {
     console.error("API 요청 중 오류 발생", error);
     return [];
-  }
-};
-
-export const orderStatusData = async () => {
-  try {
-    const res = await client.put(`/api/admin/order${orderStatusData}`);
-    const result = await res.data;
-    return result;
-  } catch (error) {
-    console.log(orderStatusData)
   }
 };
