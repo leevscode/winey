@@ -61,17 +61,14 @@ const SearchProduct = () => {
     }
     // 페이지
     if (searchContent.page.current !== undefined) {
-      queryString += `page=${searchContent.page.current}&`;
-    } else {
-      queryString += `page=1&`;
+      queryString += `page=${searchContent.page?.current || 1}&`;
     }
     // 페이지당 개수
     queryString += `row=9&`;
+
     // 정렬
     if (searchContent.sort.value !== undefined) {
-      queryString += `sort=${searchContent.sort.value}&`;
-    } else {
-      queryString += `sort=0&`;
+      queryString += `sort=${searchContent.sort?.value || 0}&`;
     }
 
     // 가격대

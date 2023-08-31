@@ -30,7 +30,7 @@ export const getMemberInfo = () => async dispatch => {
   try {
     const res = await client.get("/api/mypage/userinfo");
     const result = await res.data;
-    // console.log("회원정보 get result", result);
+    console.log("회원정보 get result", result);
     dispatch(getUser(result));
     return result;
   } catch (error) {

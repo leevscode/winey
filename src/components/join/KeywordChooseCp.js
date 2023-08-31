@@ -10,6 +10,7 @@ import { Checkbox, ConfigProvider, Modal, Radio, Select } from "antd";
 import { ButtonCancel, ButtonOk } from "../../style/GlobalStyle";
 import { useNavigate } from "react-router-dom";
 import { postUserKeyword } from "../../api/keywordpatch";
+import { wineOptions } from "../../pages/login/KeywordSelect";
 
 const KeywordChooseCp = () => {
   const navigator = useNavigate();
@@ -20,52 +21,6 @@ const KeywordChooseCp = () => {
   const [wineWithFoodCheckedList, setWineWithFoodCheckedList] = useState([]);
   const [wineFlavorCheckedList, setWineFlavorCheckedList] = useState([]);
   const [wineCountryCheckedList, setWineCountryCheckedList] = useState([]);
-
-  const wineOptions = {
-    categoryId: [
-      { id: 1, value: "레드" },
-      { id: 2, value: "화이트" },
-      { id: 3, value: "스파클링" },
-      { id: 4, value: "기타" },
-    ],
-    priceRange: [
-      { id: 1, value: "2만원미만" },
-      { id: 2, value: "2~5만원" },
-      { id: 3, value: "5~10만원" },
-      { id: 4, value: "10만원이상" },
-    ],
-    smallCategoryId: [
-      { id: 1, value: "스테이크" },
-      { id: 2, value: "돼지고기" },
-      { id: 3, value: "치킨" },
-      { id: 4, value: "해산물" },
-      { id: 5, value: "어패류" },
-      { id: 6, value: "샐러드" },
-      { id: 7, value: "튀김" },
-      { id: 8, value: "치즈" },
-      { id: 9, value: "과일" },
-      { id: 10, value: "한식" },
-      { id: 11, value: "피자" },
-      { id: 12, value: "디저트" },
-    ],
-    aromaCategoryId: [
-      { id: 1, value: "꽃" },
-      { id: 2, value: "식물" },
-      { id: 3, value: "과일" },
-      { id: 4, value: "향신료" },
-      { id: 5, value: "흙냄새" },
-      { id: 6, value: "오크" },
-      { id: 7, value: "견과류" },
-    ],
-    countryId: [
-      { id: 1, value: "미국" },
-      { id: 2, value: "스페인" },
-      { id: 3, value: "이탈리아" },
-      { id: 4, value: "칠레" },
-      { id: 5, value: "포르투갈" },
-      { id: 6, value: "프랑스" },
-    ],
-  };
 
   // 와인종류 핸들러
   const isTypeIndeterminate =
@@ -156,7 +111,7 @@ const KeywordChooseCp = () => {
     wineFlavorCheckedList.length &&
     wineFlavorCheckedList.length < wineOptions.aromaCategoryId.length;
   const isFlavorCheckAll =
-    wineCountryCheckedList.length === wineOptions.aromaCategoryId.length;
+    wineFlavorCheckedList.length === wineOptions.aromaCategoryId.length;
 
   const handleFlavorCheckAllChange = e => {
     setWineFlavorCheckedList(
@@ -172,6 +127,21 @@ const KeywordChooseCp = () => {
   const handleAromaOnChange = list => {
     setWineFlavorCheckedList(list);
     setFavoriteKeyword(prev => ({ ...prev, aromaCategoryId: list }));
+  };
+
+  const allSelect = () => {
+    const categoryId = wineOptions.categoryId.map(item => item.id);
+    const priceRange = wineOptions.priceRange.map(item => item.id);
+    const countryId = wineOptions.countryId.map(item => item.id);
+    const smallCategoryId = wineOptions.smallCategoryId.map(item => item.id);
+    const aromaCategoryId = wineOptions.aromaCategoryId.map(item => item.id);
+    return {
+      categoryId,
+      priceRange,
+      countryId,
+      smallCategoryId,
+      aromaCategoryId,
+    };
   };
 
   // 이벤트핸들러 (저장하기)
@@ -202,8 +172,33 @@ const KeywordChooseCp = () => {
 
   // 모두선택하기
   const handleKeywordAll = async () => {
-    setFavoriteKeyword({ ...wineOptions });
+    Modal.confirm({
+      okText: "예",
+      cancelText: "아니오",
+      wrapClassName: "info-modal-wrap notice-modal",
+      maskClosable: true,
+      // title: "선호 키워드",
+      content: (
+        <ul>
+          <li>모두 선택을 저장 하시겠습니까? </li>
+          <p style={{ fontSize: "1.4rem" }}>
+            모두 선택 시 데이터 로딩이 길어질 수 있습니다.{" "}
+          </p>
+        </ul>
+      ),
+      async onOk() {
+        try {
+          await postUserKeyword(allSelect(), navigator);
+        } catch (error) {
+          console.log(error);
+        }
+      },
+      onCancel() {
+        console.log("Cancel");
+      },
+    });
   };
+
   console.log("favoriteKeyword", favoriteKeyword);
 
   return (
@@ -300,7 +295,6 @@ const KeywordChooseCp = () => {
                 ))}
               </Checkbox.Group>
               <Checkbox
-                value="all"
                 indeterminate={isCountryIndeterminate}
                 onChange={handleCountryCheckAllChange}
                 checked={isCountryCheckAll}

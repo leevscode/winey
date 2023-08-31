@@ -38,7 +38,7 @@ export const cartLengthData = async dispatch => {
 // 상품을 장바구니에서 삭제
 export const removeCarts = async _removeCart => {
   try {
-    const response = await client.delete("/api/wine/delete", {
+    const response = await client.delete("/api/wine/cartdelete", {
       data: {
         cartId: _removeCart,
       },
@@ -55,7 +55,7 @@ export const removeCarts = async _removeCart => {
 // 장바구니 추가 POST
 export const addCart = async _productId => {
   try {
-    const res = await client.post("/api/wine/cart", {
+    const res = await client.post("/api/wine/cartadd", {
       quantity: 1,
       productId: _productId,
     });

@@ -9,6 +9,7 @@ import { client } from "./client";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTriangleExclamation } from "@fortawesome/free-solid-svg-icons";
 // const nav = useNavigate();
+
 // 선호키워드리스트 유무 확인
 export const getUserFavoriteKey = async () => {
   try {
@@ -74,6 +75,7 @@ export const getUserKeyword = async setYourKeyword => {
 // 선호키워드 수정 put
 export const putUserKeyword = async (editFavoriteKeyword, navigator) => {
   try {
+    console.log("editFavoriteKeyword", editFavoriteKeyword);
     const res = await client.put("/api/recommend/updrecommend", {
       categoryId: editFavoriteKeyword.categoryId,
       countryId: editFavoriteKeyword.countryId,
