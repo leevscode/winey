@@ -4,40 +4,22 @@
     깃허브 : https://github.com/leevscode
 */
 import React, { useEffect, useState } from "react";
-import { AdmOrderData, orderStatusData } from "../../api/admorderlist";
+import { AdmOrderData } from "../../api/admorderlist";
 import { Form, Pagination, PaginationProps, Select } from "antd";
-import { Navigate, useNavigate, useOutletContext } from "react-router";
+import { useNavigate, useOutletContext } from "react-router";
 import {
   MemberOutBt,
-  TableHorizontal,
+  PaginationWrap,
   TableLayoutContents,
   TableLayoutTitle,
   TableVertical,
 } from "../../style/AdminLayoutStyle";
 import { client } from "../../../api/client";
+import { fetchData, fetchData2 } from "../../interface/ControlInterface";
 
-export interface fetchData {
-  id: number;
-  orderDate: number;
-  email?: number;
-  nmKor?: number;
-  quantity: number;
-  totalPrice: number;
-  payment?: number;
-  pickUpStore: string;
-  orderStatus: number;
-  Navigate: string;
-  orderId: number;
-}
-
-// 수정예정
-// interface ObjectType {
+// interface statusType {
 //   [key: string | number]: any;
 // }
-
-interface statusType {
-  [key: string | number]: any;
-}
 
 interface statusData {
   orderStatus: number;
@@ -45,7 +27,7 @@ interface statusData {
 
 const OrderControlAdm = () => {
   const [orderControl, setOrderControl] = useState<Array<fetchData>>([]);
-  const [orderSt, setOrderSt] = useState<statusData>();
+  const [orderControl2, setOrderControl2] = useState<fetchData2>();
   const option = [
     { value: "1", label: "결제완료" },
     { value: "3", label: "배송중" },
@@ -64,35 +46,26 @@ const OrderControlAdm = () => {
     setCurrent(page);
   };
 
+  // 전체 주문내역 출력
   const getOrderData = async () => {
     try {
       const data = await AdmOrderData(current);
       console.log(data);
       setOrderControl(data.list);
+      setOrderControl2(data.page);
       console.log(data.list);
+      console.log(data.page);
     } catch (err) {
       console.error("데이터 로드 중 오류 발생", err);
     }
   };
 
-  const statusData = async () => {
-    try {
-      const data: statusType = await orderStatusData();
-      console.log(data);
-      setOrderSt(data.list);
-      console.log(data.list);
-    } catch (err) {
-      console.error("err:", err);
-    }
-  };
-
   useEffect(() => {
-    statusData();
     getOrderData();
   }, [current]);
 
   const gridTemplateColumns = {
-    columns: "0.4fr 0.8fr 1.6fr 0.5fr 0.5fr 0.55fr 0.55fr 0.55fr 0.55fr",
+    columns: "0.5fr 0.9fr 1.8fr 0.4fr 0.5fr 0.55fr 0.55fr 0.55fr 0.55fr",
   };
 
   return (
@@ -123,7 +96,7 @@ const OrderControlAdm = () => {
             }}
           >
             {orderControl.map(item => (
-              <React.Fragment key={item.id}>
+              <React.Fragment key={item.orderId}>
                 <li>{item.orderDate}</li>
                 <li>{item.email}</li>
                 <li>{item.nmKor}</li>
@@ -140,7 +113,7 @@ const OrderControlAdm = () => {
                 </li>
                 <li>{item.pickUpStore}</li>
                 <li>
-                  <Form name="control-hooks" style={{ width: "100px" }}>
+                  <Form style={{ width: "100px" }}>
                     <Form.Item
                       style={{
                         display: "flex",
@@ -149,18 +122,17 @@ const OrderControlAdm = () => {
                         margin: "0",
                       }}
                     >
+                      {/* 주문상태 변경 셀렉트 버튼 */}
                       <Select
                         style={{ width: "100px", textAlign: "center" }}
                         placeholder="배송상태를 지정해주세요"
                         defaultValue={item.orderStatus.toString()}
                         onChange={async newStatus => {
                           try {
-                            await client.put(
-                              `/api/admin/order/${item.orderId}`,
-                              {
-                                orderStatus: newStatus,
-                              },
-                            );
+                            await client.put(`/api/admin/order`, {
+                              orderId: item.orderId,
+                              orderStatus: newStatus,
+                            });
                             console.log("상태변경 성공:", item.orderStatus);
                             getOrderData();
                           } catch (error) {
@@ -181,8 +153,7 @@ const OrderControlAdm = () => {
                   <MemberOutBt
                     style={{ fontSize: "1.3rem" }}
                     onClick={() => {
-                      // navigate(`/order/${item.orderId}`);
-                      navigate(`/admin/orderdetail`, {state : item.orderId});
+                      navigate(`/admin/orderdetail`, { state: item.orderId });
                     }}
                   >
                     상세
@@ -194,12 +165,14 @@ const OrderControlAdm = () => {
             ))}
           </TableLayoutContents>
         </TableVertical>
-        <Pagination
-          current={current}
-          pageSize={15}
-          onChange={onChange}
-          total={500}
-        />
+        <PaginationWrap>
+          <Pagination
+            current={current}
+            pageSize={15}
+            onChange={onChange}
+            total={orderControl2?.totalRecordCount || 0}
+          />
+        </PaginationWrap>
       </div>
     </>
   );

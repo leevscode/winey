@@ -38,7 +38,7 @@ const ProductSellCart = () => {
   const [editProductCollect, setEditProductCollect] = useState("");
   console.log("editProductCollect", editProductCollect);
   // get한 아이템정보를 배열에 담자
-  const productInfoArray = productCollect.CartData;
+  const productInfoArray = productCollect.cartData;
 
   // 합계값 담기 state
   const [totalPrice, setTotalPrice] = useState(cartState.totalPrice);
