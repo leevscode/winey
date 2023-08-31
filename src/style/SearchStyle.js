@@ -1,23 +1,57 @@
+/*
+    작업자 : 최혜미
+    노션 : https://hyemdev.notion.site/hyemdev/hyem-s-dev-STUDY-75ffe819c7534a049b59871e6fe17dd4
+    깃허브 : https://github.com/hyemdev
+*/
 import { styled } from "styled-components";
-import { Maincolor, WidthPd, opacity } from "./GlobalStyle";
+import { Gradation, Maincolor, WidthPd, opacity } from "./GlobalStyle";
 import { motion } from "framer-motion";
+
+export const SearchPageWrap = styled.div`
+  padding: ${WidthPd.padding};
+  .noSearchItem {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    height: 70rem;
+    opacity: 0.7;
+    & i {
+      margin: 3rem 0;
+      font-size: 10rem;
+      text-align: center;
+      color: ${Maincolor.redMedium};
+    }
+    & p {
+      font-size: 1.6rem;
+      font-weight: 700;
+      line-height: 2rem;
+      text-align: center;
+      color: ${Maincolor.grayDeep};
+    }
+  }
+`;
 
 export const SearchBarWrap = styled.div`
   padding: ${WidthPd.padding};
   display: flex;
   justify-content: center;
-  padding-bottom: 2rem;
-  border-bottom: 0.05rem solid rgba(60, 35, 35, 0.1);
+  /* padding-bottom: 1rem; */
+  /* border-bottom: 0.05rem solid rgba(60, 35, 35, 0.1); */
   & > span {
     width: 400px;
   }
   .filterbutton {
+    width: 10rem;
     border: 0.2rem solid ${opacity.wine};
     border-radius: 0.5rem;
-    padding: 0 2rem;
+    padding: 0 1rem;
     font-size: 1.4rem;
     font-weight: 600;
     margin: 0 1rem;
+    & svg {
+      color: ${Gradation.wineA};
+      margin-right: 0.5rem;
+    }
   }
 `;
 
@@ -34,7 +68,7 @@ export const SearchFilterWrap = styled.div`
     align-items: center;
     flex-direction: column;
     & li {
-      margin-bottom: 3rem;
+      margin-bottom: 2rem;
       div {
         text-align: center;
         /* 체크박스 그룹 인라인 속성 추가 */

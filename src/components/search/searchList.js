@@ -1,122 +1,52 @@
+/*
+    작업자 : 최혜미
+    노션 : https://hyemdev.notion.site/hyemdev/hyem-s-dev-STUDY-75ffe819c7534a049b59871e6fe17dd4
+    깃허브 : https://github.com/hyemdev
+*/
 import { ConfigProvider, Select } from "antd";
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { ContentsListItemWrap } from "../../style/GlobalComponents";
+import SearchListItem from "./SearchListItem";
+import ProductCartModal from "../product/ProductCartModal";
+import { ProductListItemWrap } from "../../style/ProductListStyle";
+import { Gradation, Maincolor } from "../../style/GlobalStyle";
+import { atom, selector, useRecoilState, useRecoilValue } from "recoil";
+import { searchResultRecoil } from "./SearchBar";
+import { queryUrlRecoil } from "../../pages/search/SearchProduct";
+import { getSearchItem } from "../../api/searchpatch";
+import { FadeLoader } from "react-spinners";
+import { useInView } from "react-intersection-observer";
+
+export const searchSortRecoil = atom({
+  key: "searchSortRecoil",
+  default: {
+    value: 0,
+    label: "최신등록순",
+  },
+});
+export const itemScrollRecoil = atom({
+  key: "itemScrollRecoil",
+  default: [],
+});
+// recoil get
+export const searchGetResult = selector({
+  key: "searchGetResult",
+  // 값을 읽겠다
+  get: ({ get }) => {
+    const url = get(queryUrlRecoil);
+    const result = get(searchResultRecoil);
+    return { result, url };
+  },
+});
 
 const SearchList = () => {
-  // 더미데이터
-  const dummyData = {
-    wineList: [
-      {
-        productId: 30,
-        nmKor: "레 프뢰즈 샤블리 그랑 크뤼",
-        nmEng: "Les Preuses Chablis Grand Cru",
-        price: 17200,
-        pic: "wine/30/zu2U7U1QQoCVpHW7RoEfOQ_pb_x960.png",
-        promotion: 1,
-        beginner: 0,
-        sale: 10,
-        salePrice: 15400,
-        saleYn: 1,
-      },
-      {
-        productId: 27,
-        nmKor: "알바레다 스포르자토 디 발텔리나",
-        nmEng: "Albareda Sforzato di Valtellina",
-        price: 16200,
-        pic: "wine/27/i2nDqii1TeaD84F1HOB0mA_pb_x960.png",
-        promotion: 0,
-        beginner: 0,
-        sale: 11,
-        salePrice: 14700,
-        saleYn: 1,
-      },
-      {
-        productId: 24,
-        nmKor: "컬멘 레저 바 리오하",
-        nmEng: "Culmen Reserva Rioja",
-        price: 15900,
-        pic: "wine/24/eyzAu-aCSJuV69OKW4mgEw_pb_x960.png",
-        promotion: 0,
-        beginner: 0,
-        sale: 11,
-        salePrice: 14400,
-        saleYn: 0,
-      },
-      {
-        productId: 22,
-        nmKor: "슈샤르조프버거 리슬링 스패틀레스",
-        nmEng: "Scharzhofberger Riesling Spätlese",
-        price: 15600,
-        pic: "wine/22/NwRt7c2oQF6-mdBgs9gSLQ_pb_x960.png",
-        promotion: 0,
-        beginner: 0,
-        sale: 10,
-        salePrice: 14000,
-        saleYn: 1,
-      },
-      {
-        productId: 20,
-        nmKor: "부르봉 바렐 에이지드 레드 블렌드",
-        nmEng: "Bourbon Barrels Aged Red blend",
-        price: 15000,
-        pic: "wine/20/3IZf5taHRHimHaLvSkNABw_pb_x960.png",
-        promotion: 0,
-        beginner: 0,
-        sale: 11,
-        salePrice: 13600,
-        saleYn: 1,
-      },
-      {
-        productId: 16,
-        nmKor: "콜리 델라 토스카나 센트랄 일 소렐 디 알레산드로",
-        nmEng: "Colli Della Toscana Centrale Il Sole di Alessandro",
-        price: 14600,
-        pic: "wine/16/b6bdHil1SQO31xJ5KI32-g_pb_x960.png",
-        promotion: 0,
-        beginner: 0,
-        sale: 10,
-        salePrice: 13100,
-        saleYn: 1,
-      },
-      {
-        productId: 10,
-        nmKor: "바디아 파시그나노 그란 셀레지온 치안티 클라시코",
-        nmEng: "Badia a Passignano Gran Selezione Chianti Classico",
-        price: 14000,
-        pic: "wine/10/hxzM5LQaQEmv24npsUIXfQ_pb_x960.png",
-        promotion: 0,
-        beginner: 0,
-        sale: 11,
-        salePrice: 12700,
-        saleYn: 0,
-      },
-      {
-        productId: 8,
-        nmKor: "테라스 레드 블렌드는",
-        nmEng: "The Terraces Red Blend",
-        price: 13800,
-        pic: "wine/8/gMGknrylTxawxuMg4mYaQA_pb_x960.png",
-        promotion: 0,
-        beginner: 0,
-        sale: 11,
-        salePrice: 12500,
-        saleYn: 0,
-      },
-      {
-        productId: 3,
-        nmKor: "프레스티지 브뤼 샴페인",
-        nmEng: "Prestige Brut Champagne",
-        price: 12000,
-        pic: "wine/3/6pFwX3A_RJODoWCd8NCKAg_pb_x960.png",
-        promotion: 0,
-        beginner: 0,
-        sale: 11,
-        salePrice: 10900,
-        saleYn: 0,
-      },
-    ],
-  };
-  // 상품 정렬 옵션
+  const urlData = useRecoilValue(searchGetResult);
+  const finalItem = useRecoilValue(searchGetResult);
+  console.log("finalItem", finalItem);
+  const [exploreSort, setExploreSort] = useRecoilState(searchSortRecoil);
+  const [exploreResult, setExploreResult] = useRecoilState(searchResultRecoil);
+  const [scrollPage, setScrollPage] = useRecoilState(itemScrollRecoil);
+
   const sortingOptions = [
     {
       value: 0,
@@ -136,12 +66,49 @@ const SearchList = () => {
     },
   ];
 
+  // 화면 데이터 state
+  const [hasNextPage, setHasNextPage] = useState(true);
+  console.log("hasNextPage", hasNextPage);
+
+  // 검색어 없음 모달
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const handleOk = () => {
+    setIsModalOpen(false);
+  };
+  const handleCancel = () => {
+    setIsModalOpen(false);
+  };
+  const handleSortChange = e => {
+    setExploreSort(e);
+  };
+
+  //react-intersection-observer state
+  const [ref, inView] = useInView();
+  const page = useRef(1);
+
+  useEffect(() => {
+    if (inView && hasNextPage) {
+      getSearchItem({
+        urlData,
+        page,
+        setExploreResult,
+        setHasNextPage,
+        // setScrollPage,
+      });
+    }
+    setScrollPage(page);
+  }, [exploreSort, hasNextPage, inView]);
+  console.log("scrollPage", scrollPage);
+  console.log("page", page);
+
   return (
     <div>
       <ProductListItemWrap>
         {/* 상품목록 */}
         <ul>
-          <li></li>
+          <li>
+            검색 상품 총 <span>{finalItem.result.count}</span>개
+          </li>
           <li>
             {/* 상품정렬 */}
             <ConfigProvider
@@ -159,15 +126,42 @@ const SearchList = () => {
               }}
             >
               <Select
-                defaultValue={options[0]}
-                onChange={handleChange}
-                options={options}
+                // defaultValue={sortingOptions[0]}
+                value={exploreSort}
+                onChange={e => handleSortChange(e)}
+                options={sortingOptions}
               />
             </ConfigProvider>
           </li>
         </ul>
-        <ContentsListItemWrap>{/* 상품 리스트 */}</ContentsListItemWrap>
+        <ContentsListItemWrap>
+          {/* 상품 리스트 */}
+          <SearchListItem
+            setIsModalOpen={setIsModalOpen}
+            hasNextPage={hasNextPage}
+            finalItem={finalItem}
+          />
+        </ContentsListItemWrap>
+        {/* 로딩 컴포넌트 */}
+        <div ref={ref} className="loading-box">
+          <div>
+            <FadeLoader
+              color={Maincolor.redBold}
+              height={9}
+              margin={0}
+              radius={10}
+              speedMultiplier={1}
+              width={5}
+            />
+          </div>
+        </div>
       </ProductListItemWrap>
+      {/* 장바구니 완료 모달창 */}
+      <ProductCartModal
+        isModalOpen={isModalOpen}
+        handleOk={handleOk}
+        handleCancel={handleCancel}
+      />
     </div>
   );
 };
