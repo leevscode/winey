@@ -102,7 +102,7 @@ export const LayoutIntroWrap = styled.div`
       display: inline-flex;
       justify-content: center;
       align-items: center;
-      width: calc(100% / 3 - 1.5%);
+      width: calc(100% / 4 - 1.5%);
       height: 100%;
       text-align: center;
       margin-right: 2%;
@@ -136,13 +136,13 @@ export const LayoutIntroWrap = styled.div`
           background: ${AdminColor.pinkB};
         }
       }
-      &:nth-of-type(2) a {
+      &:nth-of-type(3) a {
         background: ${AdminColor.grayA};
         &:hover {
           background: ${AdminColor.grayB};
         }
       }
-      &:nth-of-type(3) a {
+      &:nth-of-type(4) a {
         background: ${AdminColor.blueA};
         &:hover {
           background: ${AdminColor.blueB};

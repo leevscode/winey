@@ -3,7 +3,7 @@
     노션 : https://hyemdev.notion.site/hyemdev/hyem-s-dev-STUDY-75ffe819c7534a049b59871e6fe17dd4
     깃허브 : https://github.com/hyemdev
 */
-import { styled } from "styled-components";
+import styled from "@emotion/styled";
 import { Gradation, Maincolor, WidthPd, opacity } from "./GlobalStyle";
 import { motion } from "framer-motion";
 

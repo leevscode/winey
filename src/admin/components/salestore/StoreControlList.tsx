@@ -1,6 +1,8 @@
 import React from "react";
 import { IStoreDetailList, IStoreInfo } from "../../interface/StoreInterface";
 import {
+  DetailBt,
+  MemberOutBt,
   TableLayoutContents,
   TableLayoutTitle,
   TableVertical,
@@ -16,9 +18,19 @@ const StoreControlList = ({
 }) => {
   const { listPathName } = useOutletContext() as { listPathName: string };
   const gridTemplateColumns = {
-    columns: "0.4fr 0.7fr 1fr 0.6fr 0.6fr",
+    columns: "0.4fr 0.7fr 1fr 0.6fr 0.4fr 0.4fr",
   };
   console.log("regionConvert", regionConvert);
+
+  // 매장정보 수정
+  const handleStoreEdit = () => {
+    console.log("");
+  };
+
+  // 매장삭제
+  const handleStoreDel = () => {
+    console.log("");
+  };
   return (
     <MemberDetailWrap>
       <TableWrap>
@@ -33,7 +45,8 @@ const StoreControlList = ({
             <li>지역</li>
             <li>매장이름</li>
             <li>연락처</li>
-            <li>기타</li>
+            <li></li>
+            <li></li>
           </TableLayoutTitle>
           {regionConvert.length !== 0 ? (
             regionConvert.map(item => (
@@ -48,7 +61,16 @@ const StoreControlList = ({
                 <li>{item.textRegion}</li>
                 <li>{item.nm}</li>
                 <li>{item.tel}</li>
-                <li>기타</li>
+                <li>
+                  <DetailBt onClick={handleStoreEdit}>
+                    수정
+                  </DetailBt>
+                </li>
+                <li>
+                  <MemberOutBt onClick={handleStoreDel}>
+                    삭제
+                  </MemberOutBt>
+                </li>
               </TableLayoutContents>
             ))
           ) : (

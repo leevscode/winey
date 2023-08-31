@@ -82,7 +82,7 @@ const Admin: React.FC = () => {
     if (pathname.includes("member")) {
       // console.log("member 포함되었어요");
       setBreadCrumbGnb("회원관리");
-    } else if (pathname.includes("salestore")) {
+    } else if (pathname.includes("store")) {
       setBreadCrumbGnb("매장관리");
     } else if (pathname.includes("order")) {
       // console.log("order 포함되었어요");

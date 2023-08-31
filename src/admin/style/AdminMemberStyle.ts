@@ -1,4 +1,4 @@
-import { styled } from "styled-components";
+import styled from "@emotion/styled";
 import { Maincolor } from "../../style/GlobalStyle";
 
 export const MemberWrap = styled.div`

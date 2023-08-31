@@ -6,7 +6,11 @@
 
 import React from "react";
 import { faFolderOpen } from "@fortawesome/free-regular-svg-icons";
-import { faUsersGear, faWineBottle } from "@fortawesome/free-solid-svg-icons";
+import {
+  faStore,
+  faUsersGear,
+  faWineBottle,
+} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { LayoutIntroWrap } from "../style/AdminLayoutStyle";
 import { Link, useOutletContext } from "react-router-dom";
@@ -23,6 +27,14 @@ function AdminIntro() {
               <FontAwesomeIcon icon={faUsersGear} />
             </i>
             <Link to="/admin/membercontrol">회원관리</Link>
+          </div>
+        </li>
+        <li>
+          <div>
+            <i>
+              <FontAwesomeIcon icon={faStore} />
+            </i>
+            <Link to="/admin/storecontrol">매장관리</Link>
           </div>
         </li>
         <li>
