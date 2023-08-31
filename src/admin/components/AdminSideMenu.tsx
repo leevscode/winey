@@ -34,6 +34,23 @@ const AdminSideMenu: React.FC = () => {
     },
     {
       key: "sub2",
+      icon: <UserOutlined />,
+      title: "매장관리",
+      items: [
+        {
+          key: "3",
+          link: "/admin/storecontrol",
+          label: "매장리스트",
+        },
+        {
+          key: "4",
+          link: "/admin/storeadd",
+          label: "매장등록하기",
+        },
+      ],
+    },
+    {
+      key: "sub3",
       icon: <LaptopOutlined />,
       title: "주문관리",
       items: [
@@ -42,7 +59,7 @@ const AdminSideMenu: React.FC = () => {
       ],
     },
     {
-      key: "sub3",
+      key: "sub4",
       icon: <NotificationOutlined />,
       title: "상품관리",
       items: [

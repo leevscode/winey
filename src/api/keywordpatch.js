@@ -75,7 +75,6 @@ export const getUserKeyword = async setYourKeyword => {
 // 선호키워드 수정 put
 export const putUserKeyword = async (editFavoriteKeyword, navigator) => {
   try {
-    console.log("editFavoriteKeyword", editFavoriteKeyword);
     const res = await client.put("/api/recommend/updrecommend", {
       categoryId: editFavoriteKeyword.categoryId,
       countryId: editFavoriteKeyword.countryId,
@@ -84,7 +83,6 @@ export const putUserKeyword = async (editFavoriteKeyword, navigator) => {
       aromaCategoryId: editFavoriteKeyword.aromaCategoryId,
     });
     const result = await res.data;
-    console.log("result", result);
     navigator("/main");
     return result;
   } catch (error) {

@@ -24,10 +24,10 @@ export const searchSortRecoil = atom({
     label: "최신등록순",
   },
 });
-export const itemScrollRecoil = atom({
-  key: "itemScrollRecoil",
-  default: [],
-});
+// export const itemScrollRecoil = atom({
+//   key: "itemScrollRecoil",
+//   default: [],
+// });
 // recoil get
 export const searchGetResult = selector({
   key: "searchGetResult",
@@ -39,14 +39,14 @@ export const searchGetResult = selector({
   },
 });
 
-const SearchList = () => {
+const SearchList = ({ scrollPage, setScrollPage }) => {
   const urlData = useRecoilValue(searchGetResult);
   const finalItem = useRecoilValue(searchGetResult);
   console.log("finalItem", finalItem);
   const [exploreSort, setExploreSort] = useRecoilState(searchSortRecoil);
   const [exploreResult, setExploreResult] = useRecoilState(searchResultRecoil);
-  const [scrollPage, setScrollPage] = useRecoilState(itemScrollRecoil);
-
+  // const [scrollPage, setScrollPage] = useRecoilState(itemScrollRecoil);
+  // const [scrollPage, setScrollPage] = useState(1);
   const sortingOptions = [
     {
       value: 0,
@@ -88,16 +88,20 @@ const SearchList = () => {
 
   useEffect(() => {
     if (inView && hasNextPage) {
-      getSearchItem({
-        urlData,
-        page,
-        setExploreResult,
-        setHasNextPage,
-        // setScrollPage,
-      });
+      try {
+        getSearchItem({
+          urlData,
+          page,
+          setExploreResult,
+          setHasNextPage,
+        });
+      } catch (err) {
+        console.log(err);
+      }
+      setScrollPage(page);
     }
-    setScrollPage(page);
-  }, [exploreSort, hasNextPage, inView]);
+  }, [exploreSort, hasNextPage, inView, scrollPage]);
+  console.log("exploreResult", exploreResult);
   console.log("scrollPage", scrollPage);
   console.log("page", page);
 

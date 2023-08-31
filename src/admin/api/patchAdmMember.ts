@@ -50,3 +50,4 @@ export const getMemberDetail = async (
     console.log(error);
   }
 };
+// 

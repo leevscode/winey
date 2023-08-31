@@ -4,10 +4,10 @@ import "./App.css";
 import Admin from "./Admin";
 // import AdminHome from "./admin/pages/AdminHome";
 import AdminIntro from "./admin/components/AdminIntro";
-import MemberControl from "./admin/pages/member/MemberControlAdm";
-import MemberDetail from "./admin/pages/member/MemberDetailAdm";
-import OrderControl from "./admin/pages/order/OrderControlAdm";
-import OrderDetail from "./admin/pages/order/OrderDetailAdm";
+import MemberControlAdm from "./admin/pages/member/MemberControlAdm";
+import MemberDetailAdm from "./admin/pages/member/MemberDetailAdm";
+import OrderControlAdm from "./admin/pages/order/OrderControlAdm";
+import OrderDetailAdm from "./admin/pages/order/OrderDetailAdm";
 import ProductListAdm from "./admin/pages/product/ProductListAdm";
 import ProductAddAdm from "./admin/pages/product/ProductAddAdm";
 import ProductEditAdm from "./admin/pages/product/ProductEditAdm";
@@ -48,6 +48,8 @@ import Food from "./components/productmain/Food";
 import Country from "./components/productmain/Country";
 import Price from "./components/productmain/Price";
 import SearchProduct from "./pages/search/SearchProduct";
+import StoreControlAdm from "./admin/pages/salestore/StoreControlAdm";
+import StoreAddAdm from "./admin/pages/salestore/StoreAddAdm";
 
 function App() {
   // 페이지 이동 시 스크롤 최상단으로 올라가는 코드
@@ -92,13 +94,17 @@ function App() {
             {/* 관리자페이지 초기화면 */}
             <Route index element={<AdminIntro />} />
             {/* 회원관리 리스트 */}
-            <Route path="membercontrol" element={<MemberControl />} />
+            <Route path="membercontrol" element={<MemberControlAdm />} />
             {/* 회원상세내역 */}
-            <Route path="memberdetail" element={<MemberDetail />} />
+            <Route path="memberdetail" element={<MemberDetailAdm />} />
+            {/* 등록매장리스트 */}
+            <Route path="storecontrol" element={<StoreControlAdm />} />
+            {/* 매장등록하기 */}
+            <Route path="storeadd" element={<StoreAddAdm />} />
             {/* 주문내역관리 */}
-            <Route path="ordercontrol" element={<OrderControl />} />
+            <Route path="ordercontrol" element={<OrderControlAdm />} />
             {/* 주문상세리스트 */}
-            <Route path="orderdetail" element={<OrderDetail />} />
+            <Route path="orderdetail" element={<OrderDetailAdm />} />
             {/* 상품관리 */}
             <Route path="productlist" element={<ProductListAdm />} />
             {/* 상품등록하기 */}
@@ -149,10 +155,7 @@ function App() {
               element={<ProductCompleteCart />}
             />
             {/* 상품 검색 페이지 */}
-            <Route
-              path="/searchproduct"
-              element={<SearchProduct />}
-            />
+            <Route path="/searchproduct" element={<SearchProduct />} />
             {/* 로그인 */}
             <Route path="/login" element={<Login />} />
             {/* 회원가입 */}

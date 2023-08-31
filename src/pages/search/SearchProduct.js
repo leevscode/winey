@@ -9,7 +9,6 @@ import SearchBar, {
   searchTextRecoil,
 } from "../../components/search/SearchBar";
 import SearchList, {
-  itemScrollRecoil,
   searchSortRecoil,
 } from "../../components/search/SearchList";
 import { searchFilterRecoil } from "../../components/search/SearchFilter";
@@ -27,8 +26,8 @@ export const searchReadRecoil = selector({
     const filter = get(searchFilterRecoil);
     const text = get(searchTextRecoil);
     const sort = get(searchSortRecoil);
-    const page = get(itemScrollRecoil);
-    return { filter, text, sort, page };
+    // const page = get(itemScrollRecoil);
+    return { filter, text, sort };
   },
 });
 
@@ -38,7 +37,11 @@ const SearchProduct = () => {
   // recoil state
   const [urlState, setUrlState] = useRecoilState(queryUrlRecoil);
 
+  // 페이지
+  const [scrollPage, setScrollPage] = useState(1);
+
   console.log("searchContent", searchContent);
+  console.log("scrollPage.current", scrollPage.current);
 
   // 담은 필터값을 쿼리로 풀어서 담자
   const convertQueryFilter = () => {
@@ -60,8 +63,8 @@ const SearchProduct = () => {
       queryString += `text=${searchContent.text}&`;
     }
     // 페이지
-    if (searchContent.page.current !== undefined) {
-      queryString += `page=${searchContent.page?.current || 1}&`;
+    if (scrollPage.current !== undefined) {
+      queryString += `page=${scrollPage?.current || 1}&`;
     }
     // 페이지당 개수
     queryString += `row=9&`;
@@ -86,7 +89,10 @@ const SearchProduct = () => {
 
   useEffect(() => {
     setUrlState(convertQueryFilter());
-  }, [searchContent, urlState]);
+  }, [searchContent, urlState, scrollPage]);
+
+  console.log("urlState", urlState);
+
   return (
     <SearchPageWrap>
       <SearchBar />
@@ -99,7 +105,7 @@ const SearchProduct = () => {
           <p>검색어를 입력해 주세요.</p>
         </div>
       ) : (
-        <SearchList />
+        <SearchList scrollPage={scrollPage} setScrollPage={setScrollPage} />
       )}
     </SearchPageWrap>
   );

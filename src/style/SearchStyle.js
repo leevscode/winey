@@ -35,13 +35,13 @@ export const SearchBarWrap = styled.div`
   padding: ${WidthPd.padding};
   display: flex;
   justify-content: center;
-  /* padding-bottom: 1rem; */
-  /* border-bottom: 0.05rem solid rgba(60, 35, 35, 0.1); */
+  /* height: 8rem; */
   & > span {
     width: 400px;
   }
   .filterbutton {
     width: 10rem;
+    height: 4rem;
     border: 0.2rem solid ${opacity.wine};
     border-radius: 0.5rem;
     padding: 0 1rem;
@@ -57,7 +57,6 @@ export const SearchBarWrap = styled.div`
 
 export const SearchFilterWrap = styled.div`
   position: relative;
-
   width: 100%;
   height: 100%;
   padding-top: 3rem;
@@ -69,6 +68,14 @@ export const SearchFilterWrap = styled.div`
     flex-direction: column;
     & li {
       margin-bottom: 2rem;
+      & > button {
+        margin: 0 1rem;
+        transition: 0.2s ease-in-out;
+        font-weight: 700;
+        &:hover {
+          background: ${Maincolor.grayMedium};
+        }
+      }
       div {
         text-align: center;
         /* 체크박스 그룹 인라인 속성 추가 */

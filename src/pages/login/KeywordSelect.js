@@ -6,6 +6,7 @@
 
 import React from "react";
 import KeywordChooseCp from "../../components/join/KeywordChooseCp";
+// 선호키워드 선택옵션
 export const wineOptions = {
   categoryId: [
     { id: 1, value: "레드" },
