@@ -10,7 +10,7 @@ import { client } from "./client";
 // 유저 매장정보 get
 export const getUserStoreInfo = async setUserStore => {
   try {
-    const res = await client.get("/api/payment/region");
+    const res = await client.get("/api/payment/pickregion");
     const result = await res.data;
     setUserStore(result);
     console.log("result", result);
@@ -88,7 +88,7 @@ export const postSomeItemPurchase = async ({
   }));
 
   try {
-    const res = await client.post("/api/payment/payment", {
+    const res = await client.post("/api/payment/cartpayment", {
       storeId: selectCollect.pickUpSpot.storeId,
       pickupTime: selectCollect.changeDate,
       totalOrderPrice: totalPrice,

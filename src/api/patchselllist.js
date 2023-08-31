@@ -68,7 +68,7 @@ export const getdetailData = async numberValue => {
 // 리뷰 등록
 export const submitReview = async (orderDetailId, reviewLevel, userId) => {
   try {
-    const res = await client.post(`/api/payment/review`, {
+    const res = await client.post(`/api/payment/userreview`, {
       orderDetailId,
       reviewLevel,
       userId,
