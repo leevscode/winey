@@ -7,8 +7,9 @@
 import React, { useState } from "react";
 import {
   LaptopOutlined,
-  NotificationOutlined,
+  ShopOutlined,
   UserOutlined,
+  ShoppingOutlined,
 } from "@ant-design/icons";
 import { Layout, Menu } from "antd";
 import SubMenu from "antd/es/menu/SubMenu";
@@ -34,7 +35,7 @@ const AdminSideMenu: React.FC = () => {
     },
     {
       key: "sub2",
-      icon: <UserOutlined />,
+      icon: <ShopOutlined />,
       title: "매장관리",
       items: [
         {
@@ -60,7 +61,7 @@ const AdminSideMenu: React.FC = () => {
     },
     {
       key: "sub4",
-      icon: <NotificationOutlined />,
+      icon: <ShoppingOutlined />,
       title: "상품관리",
       items: [
         { key: "9", link: "/admin/productlist", label: "등록된 상품" },
