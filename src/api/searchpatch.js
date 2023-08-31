@@ -12,7 +12,7 @@ export const getSearchItem = async ({
   page,
   setExploreResult,
   setHasNextPage,
-  setScrollPage,
+  // setScrollPage,
 }) => {
   try {
     const res = await client.get(`/search?${urlData.url}`);
@@ -24,7 +24,7 @@ export const getSearchItem = async ({
     if (result.wineList) {
       page.current += 1;
     }
-    setScrollPage(page);
+    // setScrollPage(page);
     return;
   } catch (error) {
     console.log(error);

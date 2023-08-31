@@ -19,12 +19,10 @@ import { useInView } from "react-intersection-observer";
 
 export const searchSortRecoil = atom({
   key: "searchSortRecoil",
-  default: [
-    {
-      value: 0,
-      label: "최신등록순",
-    },
-  ],
+  default: {
+    value: 0,
+    label: "최신등록순",
+  },
 });
 export const itemScrollRecoil = atom({
   key: "itemScrollRecoil",
@@ -95,10 +93,11 @@ const SearchList = () => {
         page,
         setExploreResult,
         setHasNextPage,
-        setScrollPage,
+        // setScrollPage,
       });
     }
-  }, [exploreSort, hasNextPage, inView, scrollPage]);
+    setScrollPage(page);
+  }, [exploreSort, hasNextPage, inView]);
   console.log("scrollPage", scrollPage);
   console.log("page", page);
 
