@@ -5,9 +5,13 @@
 */
 import React from "react";
 import { Checkbox, Form } from "antd";
+import type { CheckboxValueType } from "antd/es/checkbox/Group";
 import { ProductAromaWrap } from "../../style/product/AdminProductStyle";
 
 const ProductAddAroma = () => {
+  const changeAroma = (checkedValues: CheckboxValueType[]) => {
+    console.log("아로마 데이터 출력합니다.", checkedValues.sort());
+  };
   return (
     <ProductAromaWrap>
       <ul>
@@ -15,16 +19,16 @@ const ProductAddAroma = () => {
           <div className="title">향(아로마)</div>
           <div className="content">
             <Form.Item>
-              <Checkbox.Group>
+              <Checkbox.Group onChange={changeAroma}>
                 <ul>
                   <li>
                     <Checkbox value={1}>꽃</Checkbox>
                   </li>
                   <li>
-                    <Checkbox value={2}>과일</Checkbox>
+                    <Checkbox value={2}>식물</Checkbox>
                   </li>
                   <li>
-                    <Checkbox value={3}>식물</Checkbox>
+                    <Checkbox value={3}>과일</Checkbox>
                   </li>
                   <li>
                     <Checkbox value={4}>향신료</Checkbox>
