@@ -223,8 +223,15 @@ export const ProductSaleDateWrap = styled.div`
             padding: 10px 0;
             padding-left: 10px;
             gap: 0 20px;
-            &:first-of-type {
-              border-bottom: 0.05rem solid ${opacity.white};
+            border-bottom: 0.05rem solid ${opacity.white};
+            &:nth-of-type(1) {
+              .ant-form-item-control {
+                label {
+                  width: auto;
+                }
+              }
+            }
+            &:nth-of-type(2) {
               .ant-form-item {
                 &:first-of-type {
                   .ant-input-number {
@@ -237,6 +244,9 @@ export const ProductSaleDateWrap = styled.div`
                   }
                 }
               }
+            }
+            &:last-of-type {
+              border-bottom: 0;
             }
             .ant-form-item {
               label {

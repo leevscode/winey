@@ -4,7 +4,14 @@
   깃허브 : https://github.com/kimaydev
 */
 import React, { useState } from "react";
-import { DatePicker, Form, InputNumber, Popover } from "antd";
+import {
+  DatePicker,
+  Form,
+  InputNumber,
+  Popover,
+  Radio,
+  RadioChangeEvent,
+} from "antd";
 import type { RangePickerProps } from "antd/es/date-picker";
 import dayjs from "dayjs";
 import type { Dayjs } from "dayjs";
@@ -46,6 +53,32 @@ const ProductAddSale = ({
   endSale,
   setEndSale,
 }: IProductSaleDate) => {
+  // 오늘 날짜
+  const today = new Date();
+  console.log("오늘", today);
+  // 할인 유무 설정에 따른 컴포넌트 활성화, 비활성화 state
+  const [saleDisabled, setSaleDisabled] = useState<boolean>(true);
+  // 할인 유무를 선택하는 state
+  const [saleYnCheck, setSaleYnCheck] = useState<number>(1);
+  const selectSaleDate = (e: RadioChangeEvent) => {
+    console.log(e.target.value);
+    if (e.target.value === 1) {
+      // 할인하지않음 선택
+      // console.log("값이 1입니다.");
+      setSaleYnCheck(1);
+      setSaleDisabled(true);
+    } else if (e.target.value === 2) {
+      // 상시 할인 선택
+      console.log("값이 2입니다.");
+      setSaleYnCheck(2);
+      setSaleDisabled(true);
+    } else if (e.target.value === 3) {
+      // 기간별 할인 선택
+      console.log("값이 3입니다.");
+      setSaleYnCheck(3);
+      setSaleDisabled(false);
+    }
+  };
   // 할인율적용 버튼 에러메세지 출력 state (Popover 컴포넌트)
   const [open, setOpen] = useState(false);
   // 할인율 입력창 이벤트
@@ -110,6 +143,7 @@ const ProductAddSale = ({
   };
   console.log("할인 시작날짜 담았습니다.", startSale);
   console.log("할인 종료날짜 담았습니다.", endSale);
+
   return (
     <ProductSaleDateWrap>
       <ul>
@@ -117,6 +151,19 @@ const ProductAddSale = ({
           <div className="title">할인설정</div>
           <div className="content">
             <ol>
+              <li>
+                <Form.Item label="할인 여부 설정 :">
+                  <Radio.Group
+                    buttonStyle="solid"
+                    onChange={selectSaleDate}
+                    value={saleYnCheck}
+                  >
+                    <Radio.Button value={1}>할인하지않음</Radio.Button>
+                    <Radio.Button value={2}>상시 할인</Radio.Button>
+                    <Radio.Button value={3}>기간별 할인</Radio.Button>
+                  </Radio.Group>
+                </Form.Item>
+              </li>
               <li>
                 <Form.Item label="할인율 :">
                   <div className="input-wrap">
@@ -126,6 +173,7 @@ const ProductAddSale = ({
                       controls={false}
                       value={salePer}
                       onChange={changeSalePer}
+                      disabled={saleDisabled}
                     />
                     %
                   </div>
@@ -152,6 +200,7 @@ const ProductAddSale = ({
                     controls={false}
                     value={saleProductPrice}
                     readOnly={true}
+                    disabled={saleDisabled}
                   />
                   원
                 </Form.Item>
@@ -163,6 +212,7 @@ const ProductAddSale = ({
                     picker="month"
                     disabledDate={disabledDate}
                     onChange={onRangeChange}
+                    disabled={saleDisabled}
                   />
                 </Form.Item>
               </li>

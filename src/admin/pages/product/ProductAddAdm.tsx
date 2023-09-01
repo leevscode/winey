@@ -112,7 +112,7 @@ const ProductAddAdm = () => {
         type: "application/json",
       }),
     );
-    getAdmProductPost(formData);
+    // getAdmProductPost(formData);
     console.log("전송완료", formData);
   };
   // 상품 등록 실패
