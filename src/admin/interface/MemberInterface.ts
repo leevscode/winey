@@ -68,6 +68,8 @@ export interface IUserDetail {
     userId: number;
     email: string;
     nm: string;
+    sumOrderPrice: number;
+    orderCount: number;
   };
   userOrderList: IUserOrderList[];
   clickUserId?: number;

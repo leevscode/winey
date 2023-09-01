@@ -41,6 +41,8 @@ const MemberDetailAdm = () => {
       userId: 0,
       email: "",
       nm: "",
+      sumOrderPrice: 0,
+      orderCount: 0,
     },
     clickUserId: 1,
     userOrderList: [] as IUserOrderList[],
