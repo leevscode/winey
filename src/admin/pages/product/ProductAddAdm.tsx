@@ -29,9 +29,9 @@ import ProductAddAlcohol from "../../components/product/ProductAddAlcohol";
 const ProductAddAdm = () => {
   // 상품명 =========================
   // 상품명 한글 state
-  const [productNameKr, setProductNameKr] = useState<string>("");
+  // const [productNameKr, setProductNameKr] = useState<string>("");
   // 상품명 영문 state
-  const [productNameEn, setProductNameEn] = useState<string>("");
+  // const [productNameEn, setProductNameEn] = useState<string>("");
   // 가격 =========================
   // 정상가 state
   const [productPrice, setProductPrice] = useState<number | null>(0);
@@ -81,9 +81,10 @@ const ProductAddAdm = () => {
   const [selectImage, setSelectImage] = useState<UploadFile[]>([]);
 
   // 상품 등록 POST
+  /*
   const productParam: Iproduct = {
-    nmKor: productNameKr,
-    nmEng: productNameEn,
+    // nmKor: productNameKr,
+    // nmEng: productNameEn,
     price: productPrice,
     promotion: promotionValue,
     beginner: beginnerValue,
@@ -100,15 +101,12 @@ const ProductAddAdm = () => {
     startSale: startSale,
     endSale: endSale,
     smallCategoryId: fairingArr,
-  };
-
-  console.log("결과", productParam);
+  };  
+  */
 
   // 상품 등록 성공
-  const onFinish = () => {
-    console.log("결과 : 상품 등록 완료");
-
-    const formData = new FormData();
+  const onFinish = (values: any) => {
+    console.log("values : ", values);
   };
   // 상품 등록 실패
   const onFinishFailed = (errorInfo: any) => {
@@ -127,12 +125,7 @@ const ProductAddAdm = () => {
           {/* 상품 등록 버튼 */}
           <ProductAddSubmit />
           {/* 상품명 */}
-          <ProductAddName
-            productNameKr={productNameKr}
-            setProductNameKr={setProductNameKr}
-            productNameEn={productNameEn}
-            setProductNameEn={setProductNameEn}
-          />
+          <ProductAddName />
           {/* 가격 */}
           <ProductAddPrice
             productPrice={productPrice}

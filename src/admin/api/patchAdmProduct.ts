@@ -29,17 +29,17 @@ export const getAdmProductList = async (
   }
 };
 // 상품 등록 POST
-// export const getAdmProductPost = async _data => {
-//   try {
-//     const res = await axios.post("/api/admin", _data, {
-//       headers: {
-//         "Content-Type": "multipart/form-data",
-//       },
-//     });
-//     const result = res.data;
-//     console.log("전송되는 데이터", result);
-//     return result;
-//   } catch (err) {
-//     console.log("상품 등록 실패", err);
-//   }
-// };
+export const getAdmProductPost = async (_data: any) => {
+  try {
+    const res = await axios.post("/api/admin", _data, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
+    const result = res.data;
+    console.log("전송되는 데이터", result);
+    return result;
+  } catch (err) {
+    console.log("상품 등록 실패", err);
+  }
+};
