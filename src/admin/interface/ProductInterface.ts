@@ -55,4 +55,5 @@ export interface Iproduct {
   startSale: string | undefined;
   endSale: string | undefined;
   smallCategoryId: CheckboxValueType[];
+  saleYn: number;
 }

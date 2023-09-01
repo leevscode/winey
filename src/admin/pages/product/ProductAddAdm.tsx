@@ -35,11 +35,13 @@ const ProductAddAdm = () => {
   // 가격 =========================
   // 정상가 state
   const [productPrice, setProductPrice] = useState<number | null>(0);
+  // 할인설정 =========================
+  // 할인 유무 설정 state
+  const [saleYn, setSaleYn] = useState<number>(0);
   // 할인율 state
   const [salePer, setSalePer] = useState<number | null>(0);
   // 할인적용금액 state
   const [saleProductPrice, setSaleProductPrice] = useState<number>(0);
-  // 할인기간설정 =========================
   // 할인 시작 state
   const [startSale, setStartSale] = useState<string | undefined>("0000-00-01");
   // 할인 끝 state
@@ -99,10 +101,12 @@ const ProductAddAdm = () => {
     startSale: startSale,
     endSale: endSale,
     smallCategoryId: fairingArr,
+    saleYn: saleYn,
   };
   // 상품 등록 성공
   const onFinish = () => {
     console.log("productParam 보냅니다. ", param);
+
     const formData = new FormData();
     formData.append("pic", selectImage[0]?.originFileObj || "");
     formData.append(
@@ -111,8 +115,8 @@ const ProductAddAdm = () => {
         type: "application/json",
       }),
     );
-    // getAdmProductPost(formData);
     console.log("전송완료", formData);
+    getAdmProductPost(formData);
   };
   // 상품 등록 실패
   const onFinishFailed = (errorInfo: any) => {
@@ -144,6 +148,8 @@ const ProductAddAdm = () => {
           />
           {/* 할인 설정 */}
           <ProductAddSale
+            saleYn={saleYn}
+            setSaleYn={setSaleYn}
             productPrice={productPrice}
             salePer={salePer}
             setSalePer={setSalePer}
