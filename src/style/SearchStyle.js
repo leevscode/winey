@@ -35,6 +35,7 @@ export const SearchBarWrap = styled.div`
   padding: ${WidthPd.padding};
   display: flex;
   justify-content: center;
+  margin-bottom: 3rem;
   /* height: 8rem; */
   & > span {
     width: 400px;
@@ -59,7 +60,7 @@ export const SearchFilterWrap = styled.div`
   position: relative;
   width: 100%;
   height: 100%;
-  padding-top: 3rem;
+  /* padding-top: 3rem; */
   background: ${Maincolor.beige};
   & > ul {
     display: flex;
@@ -148,11 +149,25 @@ export const SearchFilterWrap = styled.div`
 
 export const FilterButtonWrap = styled(motion.div)`
   position: fixed;
-  top: 14rem;
+  top: 12rem;
   left: 50%;
   transform: translateX(-50%);
   z-index: 999;
   max-width: 560px;
   width: 100%;
   /* background: ${Maincolor.beige}; */
+  .clickFilterItem {
+    width: 100%;
+    height: 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    & li {
+      margin: 0 1rem;
+      background: ${opacity.grayLight};
+      border: 0.5px solid ${Maincolor.grayMedium};
+      border-radius: 0.5rem;
+      padding: 0.5rem;
+    }
+  }
 `;
