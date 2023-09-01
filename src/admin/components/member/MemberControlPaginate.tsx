@@ -15,7 +15,11 @@ import {
 import { PaginationWrap } from "../../style/AdminLayoutStyle";
 
 // 불러온 멤버리스트를 props로 전달받음
-const MemberControlPaginate = ({ memberList, setMemberList }: IMemberState) => {
+const MemberControlPaginate = ({
+  memberList,
+  setMemberList,
+  sortOption,
+}: IMemberState) => {
   // 페이지 정보(page / row: 페이지 당 개수)
   const [paginate, setPaginate] = useState<IinitialPg>({ page: 1, row: 12 });
 
@@ -27,12 +31,12 @@ const MemberControlPaginate = ({ memberList, setMemberList }: IMemberState) => {
 
   const getPage = async () => {
     // 페이지 정보를 보내고(paginate) , list 정보를 받는다
-    const data = await getMemberList(paginate, setMemberList);
+    const data = await getMemberList(paginate, setMemberList, sortOption);
   };
 
   useEffect(() => {
     getPage();
-  }, [paginate.page]);
+  }, [paginate.page, sortOption]);
   return (
     <PaginationWrap>
       {pageInfo && (

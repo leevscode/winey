@@ -13,6 +13,7 @@ export interface IinitialPg {
 export interface IMemberState {
   memberList: IMemControl;
   setMemberList: React.Dispatch<React.SetStateAction<IMemControl>>;
+  sortOption: IMemberSortOption;
 }
 
 export interface IMemControl {
@@ -36,6 +37,7 @@ export interface IMemberListUser {
   email: string;
   nm: string;
   regionNmId: number;
+  createdAt: string;
   textRegion?: string;
   value?: string;
 }
@@ -44,6 +46,7 @@ export interface IUserDetailState {
   userInfomation: IUserDetail;
   setUserInfomation: React.Dispatch<React.SetStateAction<IUserDetail>>;
   clickUserId?: number;
+  sortOption: IMemberSortOption;
 }
 
 export interface IUserIdState {
@@ -84,4 +87,8 @@ export interface IUserOrderList {
   count: number;
   orderStatus: number;
   textOrder?: string;
+}
+export interface IMemberSortOption {
+  type: string;
+  sort: string;
 }

@@ -9,6 +9,7 @@ import { useLocation } from "react-router";
 import MemberDetailListItem from "../../components/member/MemberDetailListItem";
 // import { getMemberDetail } from "../../api/patchAdmMember";
 import {
+  IMemberSortOption,
   IUserDetail,
   IUserDetailState,
   IUserIdState,
@@ -17,12 +18,16 @@ import {
 import MemberDetailUpper from "../../components/member/MemberDetailUpper";
 import MemberDetailPaginate from "../../components/member/MemberDetailPaginate";
 import { MemberDetailWrap } from "../../style/AdminMemberStyle";
+import MemberDetailSort from "../../components/member/MemberDetailSort";
+import { initialSortOption } from "../../components/member/MemberControlSort";
 
 const MemberDetailAdm = () => {
   const location = useLocation();
-  // const [clickUserId, setClickUserId] = useState<IUserIdState>({
-  //   clickUserId: 1,
-  // });
+
+  // 정렬 state
+  const [sortOption, setSortOption] =
+    useState<IMemberSortOption>(initialSortOption);
+
   const [clickUserId, setClickUserId] = useState<number | undefined>(undefined);
   const [userInfomation, setUserInfomation] = useState<IUserDetail>({
     page: {
@@ -61,6 +66,7 @@ const MemberDetailAdm = () => {
       {userInfomation.userInfo && (
         <MemberDetailUpper userInfomation={userInfomation.userInfo} />
       )}
+      <MemberDetailSort setSortOption={setSortOption}/>
       {userInfomation.userOrderList && (
         <MemberDetailListItem userInfomation={userInfomation.userOrderList} />
       )}
@@ -69,6 +75,7 @@ const MemberDetailAdm = () => {
           userInfomation={userInfomation}
           setUserInfomation={setUserInfomation}
           clickUserId={clickUserId}
+          sortOption={sortOption}
         />
       )}
     </MemberDetailWrap>
