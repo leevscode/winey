@@ -15,7 +15,11 @@ import {
   TableVertical,
 } from "../../style/AdminLayoutStyle";
 import { client } from "../../../api/client";
-import { fetchData, fetchData2 } from "../../interface/ControlInterface";
+import {
+  ControllSortOption,
+  fetchData,
+  fetchData2,
+} from "../../interface/ControlInterface";
 
 // interface statusType {
 //   [key: string | number]: any;
@@ -41,6 +45,18 @@ const OrderControlAdm = () => {
   const [current, setCurrent] = useState(1);
   const navigate = useNavigate();
   const { listPathName } = useOutletContext() as { listPathName: string };
+
+  // 정렬 state
+  const initialSortOption: ControllSortOption = { type: "0", sort: "0" };
+  const [sortOption, setSortOption] =
+    useState<ControllSortOption>(initialSortOption);
+  const sortValue: Record<string, ControllSortOption> = {
+    1: { type: "storeNm", sort: "asc" },
+    2: { type: "storeNm", sort: "desc" },
+    3: { type: "orderStatus", sort: "asc" },
+    4: { type: "orderStatus", sort: "desc" },
+  };
+
   const onChange: PaginationProps["onChange"] = page => {
     console.log(page);
     setCurrent(page);
@@ -49,7 +65,7 @@ const OrderControlAdm = () => {
   // 전체 주문내역 출력
   const getOrderData = async () => {
     try {
-      const data = await AdmOrderData(current);
+      const data = await AdmOrderData(current, sortOption);
       console.log(data);
       setOrderControl(data.list);
       setOrderControl2(data.page);
@@ -62,7 +78,17 @@ const OrderControlAdm = () => {
 
   useEffect(() => {
     getOrderData();
-  }, [current]);
+  }, [current, sortOption]);
+
+  // 정렬
+  const handleSortChange = (value: string) => {
+    if (sortValue[value]) {
+      const { type, sort } = sortValue[value];
+      setSortOption({ type, sort });
+    } else {
+      setSortOption(initialSortOption);
+    }
+  };
 
   const gridTemplateColumns = {
     columns: "0.5fr 0.9fr 1.8fr 0.4fr 0.5fr 0.55fr 0.55fr 0.55fr 0.55fr",
@@ -71,6 +97,29 @@ const OrderControlAdm = () => {
   return (
     <>
       <div>
+        <Select
+          defaultValue="정렬"
+          style={{
+            width: 200,
+          }}
+          onChange={handleSortChange}
+          options={[
+            {
+              label: "픽업장소",
+              options: [
+                { label: "오름차순", value: "1" },
+                { label: "내림차순", value: "2" },
+              ],
+            },
+            {
+              label: "픽업배송상태",
+              options: [
+                { label: "오름차순", value: "3" },
+                { label: "내림차순", value: "4" },
+              ],
+            },
+          ]}
+        />
         <TableVertical>
           <TableLayoutTitle
             listPathName={listPathName}

@@ -6,9 +6,14 @@
 import { client } from "../../api/client";
 
 // 주문 내역 출력
-export const AdmOrderData = async (page: number) => {
+export const AdmOrderData = async (
+  page: number,
+  sortOption: { type: string; sort: string },
+) => {
   try {
-    const res = await client.get(`/api/admin/order?page=${page}&row=15`);
+    const res = await client.get(
+      `/api/admin/order?page=${page}&row=15&type=${sortOption.type}&sort=${sortOption.sort}`,
+    );
     const orderData = await res.data;
     console.log(orderData);
     return orderData;
