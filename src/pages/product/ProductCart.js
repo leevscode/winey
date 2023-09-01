@@ -121,8 +121,33 @@ const ProductCart = () => {
   };
 
   const buyGood = async () => {
-    // console.log("장바구니 내역을 서버로 전송함");
+    // 카트에 있는 상품 ID 중복 확인
+    const productIds = new Set();
+    let hasDuplicate = false;
+    for (const item of cartData) {
+      if (productIds.has(item.productId)) {
+        hasDuplicate = true;
+        break;
+      }
+      productIds.add(item.productId);
+    }
 
+    if (hasDuplicate) {
+      // 중복 상품이 있는 경우 모달 표시
+      Modal.warning({
+        wrapClassName: "info-modal-wrap notice-modal",
+        maskClosable: true,
+        content: (
+          <ul>
+            <li>장바구니에 중복된 상품이 있습니다.</li>
+          </ul>
+        ),
+      });
+      // 중복된 상품이 있으면 결제 페이지로 이동하지 않도록 중단
+      return;
+    }
+
+    // 결제 페이지로 이동
     navigate("/productsellcart", {
       state: {
         cartData,
