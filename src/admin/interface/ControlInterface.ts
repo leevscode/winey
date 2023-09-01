@@ -30,3 +30,8 @@ export interface fetchData2 {
   totalPage: number;
   totalRecordCount: number;
 }
+
+export interface ControllSortOption {
+  type: string;
+  sort: string;
+}

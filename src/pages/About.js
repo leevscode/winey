@@ -85,7 +85,7 @@ const About = () => {
             <Link to="https://www.notion.so/leevscode/leevscode-5223e3d332604844a255a0c63113a284">
               <img src="https://img.shields.io/badge/notion-ffffff?style=for-the-badge&logo=notion&logoColor=000000" />
             </Link>
-            <Link to=" https://github.com/leevscode">
+            <Link to="https://github.com/leevscode">
               <img src="https://img.shields.io/badge/github-181717?style=for-the-badge&logo=github&logoColor=white" />
             </Link>
           </li>

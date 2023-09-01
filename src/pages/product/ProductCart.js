@@ -21,7 +21,7 @@ import {
   ButtonDiv,
   CartMax,
 } from "../../style/ProductCartStyle";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faExclamation,
@@ -189,10 +189,16 @@ const ProductCart = () => {
               cartData?.map(item => (
                 <ProductCartInfo key={item.cartId} onError={onImgError}>
                   <CartDetailWrap>
-                    <img src={`/img/${item.pic}`} alt="와인사진" />
+                    <Link to={`/productdetail/${item.productId}`}>
+                      <img src={`/img/${item.pic}`} alt="와인사진" />
+                    </Link>
                   </CartDetailWrap>
                   <CartDetail>
-                    <Cartnmkor>{item.nmKor}</Cartnmkor>
+                    <Cartnmkor>
+                      <Link to={`/productdetail/${item.productId}`}>
+                        {item.nmKor}
+                      </Link>
+                    </Cartnmkor>
                     <CartnmEng>{item.nmEng}</CartnmEng>
                     <Cratprice>{item.price.toLocaleString()}원</Cratprice>
                     <GoodsEa>

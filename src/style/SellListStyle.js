@@ -17,7 +17,7 @@ export const OrdercancelBtn = styled.div`
   margin: ${WidthPd.padding};
   margin-top: 2rem;
   margin-bottom: 1rem;
-  justify-content: space-between;
+  justify-content: flex-end;
   .date {
     font-size: 1.8rem;
     font-weight: 700;

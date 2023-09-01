@@ -173,8 +173,6 @@ const SellList = () => {
                 <div style={{ height: "42px" }} />
               ) : (
                 <OrdercancelBtn>
-                  {/* 주문날짜 */}
-                  <span className="date">{item.orderDate}</span>
                   <button onClick={() => showCancelModal(item.orderId)}>
                     주문취소
                     <i>
@@ -184,7 +182,7 @@ const SellList = () => {
                 </OrdercancelBtn>
               )}
               <SellListInfo>
-                {/* <SellListProduct>{item.orderDate}</SellListProduct> */}
+                <SellListProduct>{item.orderDate}</SellListProduct>
                 <li>
                   <span>상품명</span>
                   {item.nmKor}
