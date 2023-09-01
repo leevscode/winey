@@ -320,4 +320,21 @@ export const ProductQuantityWrap = styled.div`
   }
 `;
 // 상품 등록하기 - 상품이미지업로드
-export const ProductImageWrap = styled.div``;
+export const ProductImageWrap = styled.div`
+  & > ul {
+    & > li {
+      .content {
+        position: relative;
+        width: calc(100% - 130px - 10px);
+        .ant-upload-list {
+          position: absolute;
+          left: 105px;
+          overflow: hidden;
+          .ant-upload-list-item-container {
+            transition: all 0.3s;
+          }
+        }
+      }
+    }
+  }
+`;

@@ -7,36 +7,54 @@ import React, { useState } from "react";
 import { Form, Input } from "antd";
 import { ProductNameWrap } from "../../style/product/AdminProductStyle";
 
-const ProductAddName = () => {
+export interface IProductName {
+  productNameKr: string;
+  setProductNameKr: React.Dispatch<React.SetStateAction<string>>;
+  productNameEn: string;
+  setProductNameEn: React.Dispatch<React.SetStateAction<string>>;
+}
+
+const ProductAddName = ({
+  productNameKr,
+  setProductNameKr,
+  productNameEn,
+  setProductNameEn,
+}: IProductName) => {
+  console.log("1. 상품명 한글 : ", productNameKr);
+  console.log("2. 상품명 영문 : ", productNameEn);
+  // 상품명 한글 입력창 이벤트
+  const checkKr = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const target = e.target.value;
+    // 한글, 숫자, 공백만 사용하는 정규표현식
+    const targetFilter = target.replace(/[^\d가-힣ㄱ-ㅎㅏ-ㅣ\s]/g, "");
+    setProductNameKr(targetFilter);
+  };
+  // 상품명 영문 입력창 이벤트
+  const checkEn = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const target = e.target.value;
+    // 영문, 숫자, 공백만 사용하는 정규표현식
+    const targetFilter = target.replace(/[^\da-zA-Z\s]/g, "");
+    setProductNameEn(targetFilter);
+  };
   return (
     <ProductNameWrap>
       <ul>
         <li>
           <div className="title">상품명</div>
           <div className="content">
-            <Form.Item
-              label="한글"
-              name="nmKor"
-              rules={[
-                {
-                  pattern: /^[ㄱ-ㅎ가-힣0-9\s]+$/,
-                  message: "상품명을 한글로 입력해주세요.",
-                },
-              ]}
-            >
-              <Input placeholder="상품명을 한글로 입력해주세요." />
+            <Form.Item label="한글">
+              <Input
+                placeholder="상품명을 한글로 입력해주세요."
+                value={productNameKr}
+                onChange={checkKr}
+              />
             </Form.Item>
-            <Form.Item
-              label="영문"
-              name="nmEng"
-              rules={[
-                {
-                  pattern: /^[a-zA-Z0-9\s]+$/,
-                  message: "상품명을 영문으로 입력해주세요.",
-                },
-              ]}
-            >
-              <Input placeholder="상품명을 영문으로 입력해주세요." />
+            <Form.Item label="영문">
+              <Input
+                placeholder="상품명을 영문으로 입력해주세요."
+                value={productNameEn}
+                onChange={checkEn}
+              />
             </Form.Item>
           </div>
         </li>

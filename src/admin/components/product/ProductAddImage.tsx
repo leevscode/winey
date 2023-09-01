@@ -4,36 +4,42 @@
   깃허브 : https://github.com/kimaydev
 */
 import React from "react";
-import { Button, Form, Upload, UploadFile, UploadProps } from "antd";
+import { Button, Form, Upload, UploadFile } from "antd";
 import { UploadOutlined } from "@ant-design/icons";
-import { UploadChangeParam } from "antd/es/upload";
+import { UploadChangeParam, UploadProps } from "antd/es/upload";
+import { ProductImageWrap } from "../../style/product/AdminProductStyle";
 
 export interface IProductImage {
-  selectImage: any;
-  setSelectImage: any;
+  selectImage: UploadFile<any>[];
+  setSelectImage: React.Dispatch<React.SetStateAction<UploadFile<any>[]>>;
 }
 const ProductAddImage = ({ selectImage, setSelectImage }: IProductImage) => {
   // 상품 이미지 업로드 핸들러
-  const handleImageChange = (e: UploadChangeParam<UploadFile<any>>) => {
-    const file = e.fileList[0];
-    setSelectImage(file);
+  const handleImageChange: UploadProps["onChange"] = ({
+    fileList: newFileList,
+  }) => {
+    setSelectImage(newFileList);
   };
   console.log("이미지 업로드 했습니다.", selectImage);
   return (
-    <div>
+    <ProductImageWrap>
       <ul>
         <li>
           <div className="title">상품이미지업로드</div>
           <div className="content">
             <Form.Item>
-              <Upload onChange={handleImageChange}>
+              <Upload
+                onChange={handleImageChange}
+                fileList={selectImage}
+                maxCount={1}
+              >
                 <Button icon={<UploadOutlined />}>Upload</Button>
               </Upload>
             </Form.Item>
           </div>
         </li>
       </ul>
-    </div>
+    </ProductImageWrap>
   );
 };
 

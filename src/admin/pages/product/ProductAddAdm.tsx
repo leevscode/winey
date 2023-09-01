@@ -25,13 +25,14 @@ import { CheckboxValueType } from "antd/es/checkbox/Group";
 import ProductAddSale from "../../components/product/ProductAddSale";
 import { Iproduct } from "../../interface/ProductInterface";
 import ProductAddAlcohol from "../../components/product/ProductAddAlcohol";
+import { getAdmProductPost } from "../../api/patchAdmProduct";
 
 const ProductAddAdm = () => {
   // 상품명 =========================
   // 상품명 한글 state
-  // const [productNameKr, setProductNameKr] = useState<string>("");
+  const [productNameKr, setProductNameKr] = useState<string>("");
   // 상품명 영문 state
-  // const [productNameEn, setProductNameEn] = useState<string>("");
+  const [productNameEn, setProductNameEn] = useState<string>("");
   // 가격 =========================
   // 정상가 state
   const [productPrice, setProductPrice] = useState<number | null>(0);
@@ -78,13 +79,11 @@ const ProductAddAdm = () => {
   const [quantityValue, setQuantityValue] = useState<number | null>(1);
   // 상품 이미지 업로드 =========================
   // 상품 이미지 보관되는 state
-  const [selectImage, setSelectImage] = useState<UploadFile[]>([]);
-
+  const [selectImage, setSelectImage] = useState<UploadFile<any>[]>([]);
   // 상품 등록 POST
-  /*
-  const productParam: Iproduct = {
-    // nmKor: productNameKr,
-    // nmEng: productNameEn,
+  const param: Iproduct = {
+    nmKor: productNameKr,
+    nmEng: productNameEn,
     price: productPrice,
     promotion: promotionValue,
     beginner: beginnerValue,
@@ -101,12 +100,20 @@ const ProductAddAdm = () => {
     startSale: startSale,
     endSale: endSale,
     smallCategoryId: fairingArr,
-  };  
-  */
-
+  };
   // 상품 등록 성공
-  const onFinish = (values: any) => {
-    console.log("values : ", values);
+  const onFinish = () => {
+    console.log("productParam 보냅니다. ", param);
+    const formData = new FormData();
+    formData.append("pic", selectImage[0]?.originFileObj || "");
+    formData.append(
+      "param", //data pk명
+      new Blob([JSON.stringify(param)], {
+        type: "application/json",
+      }),
+    );
+    getAdmProductPost(formData);
+    console.log("전송완료", formData);
   };
   // 상품 등록 실패
   const onFinishFailed = (errorInfo: any) => {
@@ -125,7 +132,12 @@ const ProductAddAdm = () => {
           {/* 상품 등록 버튼 */}
           <ProductAddSubmit />
           {/* 상품명 */}
-          <ProductAddName />
+          <ProductAddName
+            productNameKr={productNameKr}
+            setProductNameKr={setProductNameKr}
+            productNameEn={productNameEn}
+            setProductNameEn={setProductNameEn}
+          />
           {/* 가격 */}
           <ProductAddPrice
             productPrice={productPrice}
