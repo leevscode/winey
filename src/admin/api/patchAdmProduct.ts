@@ -28,3 +28,18 @@ export const getAdmProductList = async (
     console.log("등록된 상품 리스트 GET 에러 발생", err);
   }
 };
+// 상품 등록 POST
+// export const getAdmProductPost = async _data => {
+//   try {
+//     const res = await axios.post("/api/admin", _data, {
+//       headers: {
+//         "Content-Type": "multipart/form-data",
+//       },
+//     });
+//     const result = res.data;
+//     console.log("전송되는 데이터", result);
+//     return result;
+//   } catch (err) {
+//     console.log("상품 등록 실패", err);
+//   }
+// };

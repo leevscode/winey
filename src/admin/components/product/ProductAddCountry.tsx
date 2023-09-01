@@ -8,13 +8,19 @@ import { Form, Radio } from "antd";
 import type { RadioChangeEvent } from "antd";
 import { ProductCountryWrap } from "../../style/product/AdminProductStyle";
 
-const ProductAddCountry = () => {
-  // 원산지 value 보관되는 state
-  const [countryValue, setCountryValue] = useState(1);
-  const changeCountry = (e: RadioChangeEvent) => {
-    console.log("원산지 클릭했습니다.", e.target.value);
+export interface IProductCountry {
+  countryValue: number;
+  setCountryValue: React.Dispatch<React.SetStateAction<number>>;
+}
+
+const ProductAddCountry = ({
+  countryValue,
+  setCountryValue,
+}: IProductCountry) => {
+  const selectCountry = (e: RadioChangeEvent) => {
     setCountryValue(e.target.value);
   };
+  console.log("원산지 클릭했습니다.", countryValue);
   return (
     <ProductCountryWrap>
       <ul>
@@ -22,28 +28,28 @@ const ProductAddCountry = () => {
           <div className="title">원산지</div>
           <div className="content">
             <Form.Item>
-              <Radio.Group onChange={changeCountry} value={countryValue}>
+              <Radio.Group onChange={selectCountry} value={countryValue}>
                 <ul>
                   <li>
-                    <Radio value="1">프랑스</Radio>
+                    <Radio value={1}>프랑스</Radio>
                   </li>
                   <li>
-                    <Radio value="2">이탈리아</Radio>
+                    <Radio value={2}>이탈리아</Radio>
                   </li>
                   <li>
-                    <Radio value="3">칠레</Radio>
+                    <Radio value={3}>칠레</Radio>
                   </li>
                   <li>
-                    <Radio value="4">스페인</Radio>
+                    <Radio value={4}>스페인</Radio>
                   </li>
                   <li>
-                    <Radio value="5">호주</Radio>
+                    <Radio value={5}>호주</Radio>
                   </li>
                   <li>
-                    <Radio value="6">미국</Radio>
+                    <Radio value={6}>미국</Radio>
                   </li>
                   <li>
-                    <Radio value="7">기타</Radio>
+                    <Radio value={7}>기타</Radio>
                   </li>
                 </ul>
               </Radio.Group>
@@ -55,4 +61,4 @@ const ProductAddCountry = () => {
   );
 };
 
-export default ProductAddCountry;
+export default React.memo(ProductAddCountry);

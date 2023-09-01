@@ -8,10 +8,21 @@ import { Checkbox, Form } from "antd";
 import type { CheckboxValueType } from "antd/es/checkbox/Group";
 import { ProductFairingWrap } from "../../style/product/AdminProductStyle";
 
-const ProductAddFairing = () => {
+export interface IProductFairing {
+  fairingArr: CheckboxValueType[];
+  setFairingArr: React.Dispatch<React.SetStateAction<CheckboxValueType[]>>;
+}
+
+const ProductAddFairing = ({ fairingArr, setFairingArr }: IProductFairing) => {
   const changeFairing = (checkedValues: CheckboxValueType[]) => {
-    console.log("페어링 출력합니다.", checkedValues);
+    // 배열을 오름차순으로 정렬함
+    setFairingArr(
+      checkedValues.sort(
+        (a: CheckboxValueType, b: CheckboxValueType) => +a - +b,
+      ),
+    );
   };
+  console.log("페어링 출력합니다.", fairingArr);
 
   return (
     <ProductFairingWrap>
@@ -68,4 +79,4 @@ const ProductAddFairing = () => {
   );
 };
 
-export default ProductAddFairing;
+export default React.memo(ProductAddFairing);

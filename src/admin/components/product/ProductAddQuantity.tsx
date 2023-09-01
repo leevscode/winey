@@ -4,10 +4,27 @@
   깃허브 : https://github.com/kimaydev
 */
 import React from "react";
-import { Form, Input } from "antd";
+import { Form, Input, InputNumber } from "antd";
 import { ProductQuantityWrap } from "../../style/product/AdminProductStyle";
 
-const ProductAddQuantity = () => {
+export interface IProductQuantity {
+  quantityValue: number | null;
+  setQuantityValue: React.Dispatch<React.SetStateAction<number | null>>;
+}
+
+const ProductAddQuantity = ({
+  quantityValue,
+  setQuantityValue,
+}: IProductQuantity) => {
+  // 재고수량 입력창 이벤트
+  const changeQuantity = (value: number | null) => {
+    if (value?.toString().includes(".")) {
+      return;
+    }
+    setQuantityValue(value);
+  };
+  console.log("재고수량", quantityValue);
+
   return (
     <ProductQuantityWrap>
       <ul>
@@ -15,7 +32,14 @@ const ProductAddQuantity = () => {
           <div className="title">재고수량</div>
           <div className="content">
             <Form.Item>
-              <Input />개
+              <InputNumber
+                min={0}
+                max={999}
+                controls={false}
+                value={quantityValue}
+                onChange={changeQuantity}
+              />
+              개
             </Form.Item>
           </div>
         </li>
@@ -24,4 +48,4 @@ const ProductAddQuantity = () => {
   );
 };
 
-export default ProductAddQuantity;
+export default React.memo(ProductAddQuantity);

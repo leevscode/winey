@@ -4,24 +4,29 @@
   깃허브 : https://github.com/kimaydev
 */
 import React from "react";
-import { Button, Form, Upload } from "antd";
+import { Button, Form, Upload, UploadFile, UploadProps } from "antd";
 import { UploadOutlined } from "@ant-design/icons";
+import { UploadChangeParam } from "antd/es/upload";
 
-const ProductAddImage = () => {
-  const normFile = (e: any) => {
-    if (Array.isArray(e)) {
-      return e;
-    }
-    return e?.fileList;
+export interface IProductImage {
+  selectImage: any;
+  setSelectImage: any;
+}
+const ProductAddImage = ({ selectImage, setSelectImage }: IProductImage) => {
+  // 상품 이미지 업로드 핸들러
+  const handleImageChange = (e: UploadChangeParam<UploadFile<any>>) => {
+    const file = e.fileList[0];
+    setSelectImage(file);
   };
+  console.log("이미지 업로드 했습니다.", selectImage);
   return (
     <div>
       <ul>
         <li>
           <div className="title">상품이미지업로드</div>
           <div className="content">
-            <Form.Item getValueFromEvent={normFile}>
-              <Upload>
+            <Form.Item>
+              <Upload onChange={handleImageChange}>
                 <Button icon={<UploadOutlined />}>Upload</Button>
               </Upload>
             </Form.Item>
@@ -32,4 +37,4 @@ const ProductAddImage = () => {
   );
 };
 
-export default ProductAddImage;
+export default React.memo(ProductAddImage);

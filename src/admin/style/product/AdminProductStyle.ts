@@ -170,18 +170,13 @@ export const ProductNameWrap = styled.div`
 // 상품 등록하기 - 가격
 export const ProductPriceWrap = styled.div`
   & > ul {
-    display: grid;
-    grid-template-columns: 1fr 310px 0.6fr;
     & > li {
       display: flex;
       align-items: center;
       gap: 0 10px;
       .content {
-        /* display: flex; */
-        /* gap: 0 10px; */
-        width: calc(100% - 130px - 20px);
+        width: 250px;
         .ant-form-item {
-          /* width: calc(100% / 2); */
           label {
             display: none;
           }
@@ -189,7 +184,7 @@ export const ProductPriceWrap = styled.div`
             display: flex;
             align-items: center;
             .ant-input-number {
-              width: 100%;
+              width: 150px;
               margin-right: 5px;
             }
           }
@@ -212,13 +207,49 @@ export const ProductPriceWrap = styled.div`
 export const ProductSaleDateWrap = styled.div`
   & > ul {
     & > li {
+      align-items: normal !important;
+      gap: 0 !important;
+      .title {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
       .content {
-        width: calc(100% - 130px - 20px);
+        width: calc(100% - 130px);
+        padding: 0;
+        ol {
+          & > li {
+            display: flex;
+            padding: 10px 0;
+            padding-left: 10px;
+            gap: 0 20px;
+            &:first-of-type {
+              border-bottom: 0.05rem solid ${opacity.white};
+              .ant-form-item {
+                &:first-of-type {
+                  .ant-input-number {
+                    width: 50px;
+                  }
+                }
+                &:last-of-type {
+                  .ant-input-number {
+                    width: 150px;
+                  }
+                }
+              }
+            }
+            .ant-form-item {
+              label {
+                width: 100px;
+              }
+              .ant-input-number {
+                margin-right: 5px;
+              }
+            }
+          }
+        }
         .ant-form-item {
           /* width: calc(100% / 2); */
-          label {
-            display: none;
-          }
           .ant-form-item-control-input-content {
             display: flex;
             align-items: center;
@@ -238,6 +269,25 @@ export const ProductSaleDateWrap = styled.div`
 export const ProductCountryWrap = styled.div``;
 // 상품 등록하기 - 와인 종류
 export const ProductWineWrap = styled.div``;
+// 상품 등록하기 - 도수
+export const ProductAddAlcoholWrap = styled.div`
+  & > ul {
+    & > li {
+      .content {
+        .ant-form-item {
+          .ant-form-item-control-input-content {
+            display: flex;
+            align-items: center;
+            .ant-input-number {
+              width: 60px;
+              margin: 0 5px;
+            }
+          }
+        }
+      }
+    }
+  }
+`;
 // 상품 등록하기 - 당도
 export const ProductSweetyWrap = styled.div``;
 // 상품 등록하기 - 산도
@@ -255,12 +305,12 @@ export const ProductQuantityWrap = styled.div`
   & > ul {
     & > li {
       .content {
-        width: 150px;
         .ant-form-item {
           .ant-form-item-control-input-content {
             display: flex;
             align-items: center;
-            .ant-input {
+            .ant-input-number {
+              width: 80px;
               margin-right: 5px;
             }
           }

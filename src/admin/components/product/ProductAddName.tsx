@@ -7,10 +7,21 @@ import React, { useState } from "react";
 import { Form, Input } from "antd";
 import { ProductNameWrap } from "../../style/product/AdminProductStyle";
 
-const ProductAddName = () => {
-  // 상품명 한글 state
-  const [productNameKr, setProductNameKr] = useState<string>("");
+export interface IProductName {
+  productNameKr: string;
+  setProductNameKr: React.Dispatch<React.SetStateAction<string>>;
+  productNameEn: string;
+  setProductNameEn: React.Dispatch<React.SetStateAction<string>>;
+}
+
+const ProductAddName = ({
+  productNameKr,
+  setProductNameKr,
+  productNameEn,
+  setProductNameEn,
+}: IProductName) => {
   console.log("1. 상품명 한글 : ", productNameKr);
+  console.log("2. 상품명 영문 : ", productNameEn);
   // 상품명 한글 입력창 이벤트
   const checkKr = (e: React.ChangeEvent<HTMLInputElement>) => {
     const target = e.target.value;
@@ -18,9 +29,6 @@ const ProductAddName = () => {
     const targetFilter = target.replace(/[^\d가-힣ㄱ-ㅎㅏ-ㅣ\s]/g, "");
     setProductNameKr(targetFilter);
   };
-  // 상품명 영문 state
-  const [productNameEn, setProductNameEn] = useState<string>("");
-  console.log("2. 상품명 영문 : ", productNameEn);
   // 상품명 영문 입력창 이벤트
   const checkEn = (e: React.ChangeEvent<HTMLInputElement>) => {
     const target = e.target.value;
@@ -55,4 +63,4 @@ const ProductAddName = () => {
   );
 };
 
-export default ProductAddName;
+export default React.memo(ProductAddName);

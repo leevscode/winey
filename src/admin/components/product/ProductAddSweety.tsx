@@ -8,13 +8,16 @@ import { Form, Radio } from "antd";
 import type { RadioChangeEvent } from "antd";
 import { ProductSweetyWrap } from "../../style/product/AdminProductStyle";
 
-const ProductAddSweety = () => {
-  // 당도 value 보관되는 state
-  const [sweetyValue, setSweetyValue] = useState(1);
+export interface IProductSweety {
+  sweetyValue: number;
+  setSweetyValue: React.Dispatch<React.SetStateAction<number>>;
+}
+
+const ProductAddSweety = ({ sweetyValue, setSweetyValue }: IProductSweety) => {
   const changeSweety = (e: RadioChangeEvent) => {
-    console.log("당도 클릭했습니다.", e.target.value);
     setSweetyValue(e.target.value);
   };
+  console.log("당도 클릭했습니다.", sweetyValue);
   return (
     <ProductSweetyWrap>
       <ul>
@@ -25,19 +28,19 @@ const ProductAddSweety = () => {
               <Radio.Group onChange={changeSweety} value={sweetyValue}>
                 <ul>
                   <li>
-                    <Radio value="1">1</Radio>
+                    <Radio value={1}>1</Radio>
                   </li>
                   <li>
-                    <Radio value="2">2</Radio>
+                    <Radio value={2}>2</Radio>
                   </li>
                   <li>
-                    <Radio value="3">3</Radio>
+                    <Radio value={3}>3</Radio>
                   </li>
                   <li>
-                    <Radio value="4">4</Radio>
+                    <Radio value={4}>4</Radio>
                   </li>
                   <li>
-                    <Radio value="5">5</Radio>
+                    <Radio value={5}>5</Radio>
                   </li>
                 </ul>
               </Radio.Group>
@@ -49,4 +52,4 @@ const ProductAddSweety = () => {
   );
 };
 
-export default ProductAddSweety;
+export default React.memo(ProductAddSweety);

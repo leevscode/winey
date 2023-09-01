@@ -8,13 +8,16 @@ import { Form, Radio } from "antd";
 import type { RadioChangeEvent } from "antd";
 import { ProductBodyWrap } from "../../style/product/AdminProductStyle";
 
-const ProductAddBody = () => {
-  // 바디 value 보관되는 state
-  const [bodyValue, setBodyValue] = useState(1);
-  const changeBody = (e: RadioChangeEvent) => {
-    console.log("바디 클릭했습니다.", e.target.value);
+export interface IProductBody {
+  bodyValue: number;
+  setBodyValue: React.Dispatch<React.SetStateAction<number>>;
+}
+
+const ProductAddBody = ({ bodyValue, setBodyValue }: IProductBody) => {
+  const selectBody = (e: RadioChangeEvent) => {
     setBodyValue(e.target.value);
   };
+  console.log("바디 클릭했습니다.", bodyValue);
   return (
     <ProductBodyWrap>
       <ul>
@@ -22,22 +25,22 @@ const ProductAddBody = () => {
           <div className="title">바디</div>
           <div className="content">
             <Form.Item>
-              <Radio.Group onChange={changeBody} value={bodyValue}>
+              <Radio.Group onChange={selectBody} value={bodyValue}>
                 <ul>
                   <li>
-                    <Radio value="1">1</Radio>
+                    <Radio value={1}>1</Radio>
                   </li>
                   <li>
-                    <Radio value="2">2</Radio>
+                    <Radio value={2}>2</Radio>
                   </li>
                   <li>
-                    <Radio value="3">3</Radio>
+                    <Radio value={3}>3</Radio>
                   </li>
                   <li>
-                    <Radio value="4">4</Radio>
+                    <Radio value={4}>4</Radio>
                   </li>
                   <li>
-                    <Radio value="5">5</Radio>
+                    <Radio value={5}>5</Radio>
                   </li>
                 </ul>
               </Radio.Group>
@@ -49,4 +52,4 @@ const ProductAddBody = () => {
   );
 };
 
-export default ProductAddBody;
+export default React.memo(ProductAddBody);

@@ -8,13 +8,16 @@ import { Form, Radio } from "antd";
 import type { RadioChangeEvent } from "antd";
 import { ProductWineWrap } from "../../style/product/AdminProductStyle";
 
-const ProductAddWine = () => {
-  // 와인 종류 value 보관되는 state
-  const [wineValue, setWineValue] = useState(1);
-  const changeWine = (e: RadioChangeEvent) => {
-    console.log("와인 종류 클릭했습니다.", e.target.value);
+export interface IProductWine {
+  wineValue: number;
+  setWineValue: React.Dispatch<React.SetStateAction<number>>;
+}
+
+const ProductAddWine = ({ wineValue, setWineValue }: IProductWine) => {
+  const selectWine = (e: RadioChangeEvent) => {
     setWineValue(e.target.value);
   };
+  console.log("와인 종류 클릭했습니다.", wineValue);
   return (
     <ProductWineWrap>
       <ul>
@@ -22,19 +25,19 @@ const ProductAddWine = () => {
           <div className="title">와인 종류</div>
           <div className="content">
             <Form.Item>
-              <Radio.Group onChange={changeWine} value={wineValue}>
+              <Radio.Group onChange={selectWine} value={wineValue}>
                 <ul>
                   <li>
-                    <Radio value="1">레드</Radio>
+                    <Radio value={1}>레드</Radio>
                   </li>
                   <li>
-                    <Radio value="2">화이트</Radio>
+                    <Radio value={2}>화이트</Radio>
                   </li>
                   <li>
-                    <Radio value="3">스파클링</Radio>
+                    <Radio value={3}>스파클링</Radio>
                   </li>
                   <li>
-                    <Radio value="4">기타</Radio>
+                    <Radio value={4}>기타</Radio>
                   </li>
                 </ul>
               </Radio.Group>
@@ -46,4 +49,4 @@ const ProductAddWine = () => {
   );
 };
 
-export default ProductAddWine;
+export default React.memo(ProductAddWine);

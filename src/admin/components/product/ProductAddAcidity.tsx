@@ -8,13 +8,19 @@ import { Form, Radio } from "antd";
 import type { RadioChangeEvent } from "antd";
 import { ProductAcidityWrap } from "../../style/product/AdminProductStyle";
 
-const ProductAddAcidity = () => {
-  // 산도 value 보관되는 state
-  const [acidityValue, setAcidityValue] = useState(1);
-  const changeAcidity = (e: RadioChangeEvent) => {
-    console.log("산도 클릭했습니다.", e.target.value);
+export interface IProductAcidity {
+  acidityValue: number;
+  setAcidityValue: React.Dispatch<React.SetStateAction<number>>;
+}
+
+const ProductAddAcidity = ({
+  acidityValue,
+  setAcidityValue,
+}: IProductAcidity) => {
+  const selectAcidity = (e: RadioChangeEvent) => {
     setAcidityValue(e.target.value);
   };
+  console.log("산도 클릭했습니다.", acidityValue);
   return (
     <ProductAcidityWrap>
       <ul>
@@ -22,22 +28,22 @@ const ProductAddAcidity = () => {
           <div className="title">산도</div>
           <div className="content">
             <Form.Item>
-              <Radio.Group onChange={changeAcidity} value={acidityValue}>
+              <Radio.Group onChange={selectAcidity} value={acidityValue}>
                 <ul>
                   <li>
-                    <Radio value="1">1</Radio>
+                    <Radio value={1}>1</Radio>
                   </li>
                   <li>
-                    <Radio value="2">2</Radio>
+                    <Radio value={2}>2</Radio>
                   </li>
                   <li>
-                    <Radio value="3">3</Radio>
+                    <Radio value={3}>3</Radio>
                   </li>
                   <li>
-                    <Radio value="4">4</Radio>
+                    <Radio value={4}>4</Radio>
                   </li>
                   <li>
-                    <Radio value="5">5</Radio>
+                    <Radio value={5}>5</Radio>
                   </li>
                 </ul>
               </Radio.Group>
@@ -49,4 +55,4 @@ const ProductAddAcidity = () => {
   );
 };
 
-export default ProductAddAcidity;
+export default React.memo(ProductAddAcidity);
