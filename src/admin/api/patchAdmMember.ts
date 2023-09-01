@@ -3,7 +3,6 @@
     노션 : https://hyemdev.notion.site/hyemdev/hyem-s-dev-STUDY-75ffe819c7534a049b59871e6fe17dd4
     깃허브 : https://github.com/hyemdev
 */
-import axios from "axios";
 import {
   IMemControl,
   IMemberSortOption,
