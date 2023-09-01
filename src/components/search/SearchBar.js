@@ -51,7 +51,6 @@ const SearchBar = () => {
   // recoil get을 저장하자
   const urlData = useRecoilValue(getQueryRecoil);
   const isButton = useRecoilValue(searchButtonActive);
-  console.log("isButton", isButton);
   // recoil
   const [exploreSort, setExploreSort] = useRecoilState(searchSortRecoil);
   const [exploreText, setExploreText] = useRecoilState(searchTextRecoil);
@@ -97,7 +96,6 @@ const SearchBar = () => {
       return;
     }
   };
-  console.log("urlData", urlData);
   console.log("exploreSort", exploreSort);
   console.log("exploreResult", exploreResult);
 

@@ -74,8 +74,8 @@ const MemberDetailListItem = ({
               >
                 <li>{item.orderId}</li>
                 <li>{item.orderDate}</li>
-                <li>{item.nmKor}</li>
-                <li>{item.price.toLocaleString()}원</li>
+                <li>{item.nmKor}건</li>
+                <li>{item.price.toLocaleString()} 원</li>
                 <li>이마트 {item.storeNm}</li>
                 <li>{item.textOrder}</li>
                 <li>{item.count}</li>

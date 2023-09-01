@@ -16,13 +16,14 @@ import {
 } from "../../interface/MemberInterface";
 import MemberDetailUpper from "../../components/member/MemberDetailUpper";
 import MemberDetailPaginate from "../../components/member/MemberDetailPaginate";
+import { MemberDetailWrap } from "../../style/AdminMemberStyle";
 
 const MemberDetailAdm = () => {
   const location = useLocation();
   // const [clickUserId, setClickUserId] = useState<IUserIdState>({
   //   clickUserId: 1,
   // });
-  const [clickUserId, setClickUserId] = useState<number|undefined>(undefined);
+  const [clickUserId, setClickUserId] = useState<number | undefined>(undefined);
   const [userInfomation, setUserInfomation] = useState<IUserDetail>({
     page: {
       page: 1,
@@ -40,6 +41,8 @@ const MemberDetailAdm = () => {
       userId: 0,
       email: "",
       nm: "",
+      sumOrderPrice: 0,
+      orderCount: 0,
     },
     clickUserId: 1,
     userOrderList: [] as IUserOrderList[],
@@ -54,7 +57,7 @@ const MemberDetailAdm = () => {
   console.log("userInfomation", userInfomation);
 
   return (
-    <div>
+    <MemberDetailWrap>
       {userInfomation.userInfo && (
         <MemberDetailUpper userInfomation={userInfomation.userInfo} />
       )}
@@ -68,7 +71,7 @@ const MemberDetailAdm = () => {
           clickUserId={clickUserId}
         />
       )}
-    </div>
+    </MemberDetailWrap>
   );
 };
 

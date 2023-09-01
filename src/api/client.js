@@ -25,37 +25,37 @@ client.interceptors.request.use(
 );
 
 // Response 처리
-client.interceptors.response.use(
-  response => {
-    console.log("response", response);
-    return response;
-  },
-  async error => {
-    console.log("error response", error);
-    console.log("err.response.statuss", error.response.status);
-    const { config, response } = error;
-    const refreshToken = getCookie("refreshToken");
-    if (response.status === 401 && refreshToken) {
-      console.log("토큰만료, 갱신시도");
-      try {
-        const { data } = await client.post(`/sign-api/refresh-token`, {
-          refreshToken,
-        });
-        const accessToken = data;
-        setCookie("accessToken", accessToken);
-        console.log(accessToken);
-        config.headers.Authorization = `Bearer ${accessToken}`;
+// client.interceptors.response.use(
+//   response => {
+//     console.log("response", response);
+//     return response;
+//   },
+//   async error => {
+//     console.log("error response", error);
+//     console.log("err.response.statuss", error.response.status);
+//     const { config, response } = error;
+//     const refreshToken = getCookie("refreshToken");
+//     if (response.status === 401 && refreshToken) {
+//       console.log("토큰만료, 갱신시도");
+//       try {
+//         const { data } = await client.post(`/sign-api/refresh-token`, {
+//           refreshToken,
+//         });
+//         const accessToken = data;
+//         setCookie("accessToken", accessToken);
+//         console.log(accessToken);
+//         config.headers.Authorization = `Bearer ${accessToken}`;
 
-        // 토큰 갱신 후 재시도
-        const reTryResponse = await client(config);
-        return reTryResponse;
-      } catch (error) {
-        console.log(error);
-      }
-    }
-    return Promise.reject(error);
-  },
-);
+//         // 토큰 갱신 후 재시도
+//         const reTryResponse = await client(config);
+//         return reTryResponse;
+//       } catch (error) {
+//         console.log(error);
+//       }
+//     }
+//     return Promise.reject(error);
+//   },
+// );
 
 // 쿠키 set 하기
 export const fetchLogin = async (userid, password) => {

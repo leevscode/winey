@@ -9,6 +9,7 @@ import { client } from "./client";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTriangleExclamation } from "@fortawesome/free-solid-svg-icons";
 // const nav = useNavigate();
+
 // 선호키워드리스트 유무 확인
 export const getUserFavoriteKey = async () => {
   try {
@@ -82,7 +83,6 @@ export const putUserKeyword = async (editFavoriteKeyword, navigator) => {
       aromaCategoryId: editFavoriteKeyword.aromaCategoryId,
     });
     const result = await res.data;
-    console.log("result", result);
     navigator("/main");
     return result;
   } catch (error) {

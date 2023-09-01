@@ -34,6 +34,14 @@ const Admin: React.FC = () => {
       path: "memberdetail",
     },
     {
+      title: "매장리스트",
+      path: "storecontrol",
+    },
+    {
+      title: "매장등록하기",
+      path: "storeadd",
+    },
+    {
       title: "주문내역관리",
       path: "ordercontrol",
     },
@@ -74,6 +82,8 @@ const Admin: React.FC = () => {
     if (pathname.includes("member")) {
       // console.log("member 포함되었어요");
       setBreadCrumbGnb("회원관리");
+    } else if (pathname.includes("store")) {
+      setBreadCrumbGnb("매장관리");
     } else if (pathname.includes("order")) {
       // console.log("order 포함되었어요");
       setBreadCrumbGnb("주문관리");

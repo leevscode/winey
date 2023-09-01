@@ -1,4 +1,4 @@
-import { styled } from "styled-components";
+import styled from "@emotion/styled";
 import { Maincolor } from "../../style/GlobalStyle";
 
 export const MemberWrap = styled.div`
@@ -46,7 +46,7 @@ export const MemberDetailUpperWrap = styled.div`
 `;
 
 export const MemberDetailWrap = styled.div`
-
+  margin-top: 3rem;
   & .noItem {
     font-size: 1.5rem;
     font-weight: 600;

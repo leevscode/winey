@@ -5,6 +5,7 @@
 */
 import axios from "axios";
 import { IMemControl, IUserDetail } from "../interface/MemberInterface";
+import { client } from "../../api/client";
 
 // 멤버리스트 get
 export const getMemberList = async (
@@ -15,7 +16,7 @@ export const getMemberList = async (
   setMemberList: React.Dispatch<React.SetStateAction<IMemControl>>,
 ) => {
   try {
-    const res = await axios.get(
+    const res = await client.get(
       `/api/admin/user/list?page=${paginate.page}&row=${paginate.row}`,
       // `/api/admin/user/list?page=${paginate.page}&row=12`,
     );
@@ -38,7 +39,7 @@ export const getMemberDetail = async (
   clickUserId: number | undefined,
 ) => {
   try {
-    const res = await axios.get(
+    const res = await client.get(
       `/api/admin/${clickUserId}/order?page=${paginate.page}&row=${paginate.row}`,
     );
     console.log("res", res);
@@ -50,3 +51,4 @@ export const getMemberDetail = async (
     console.log(error);
   }
 };
+// 

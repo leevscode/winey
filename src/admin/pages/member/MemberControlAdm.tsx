@@ -7,12 +7,27 @@
 import React, { useEffect, useState } from "react";
 import MemberControlListItem from "../../components/member/MemberControlListItem";
 import { MemberWrap } from "../../style/AdminMemberStyle";
-import {
-  IMemControl,
-  IMemberListUser,
-} from "../../interface/MemberInterface";
+import { IMemControl, IMemberListUser } from "../../interface/MemberInterface";
 import MemberControlPaginate from "../../components/member/MemberControlPaginate";
-
+export const regionOptions = [
+  { regionNmId: 1, value: "서울" },
+  { regionNmId: 2, value: "부산" },
+  { regionNmId: 3, value: "대구" },
+  { regionNmId: 4, value: "인천" },
+  { regionNmId: 5, value: "광주" },
+  { regionNmId: 6, value: "대전" },
+  { regionNmId: 7, value: "울산" },
+  { regionNmId: 8, value: "세종" },
+  { regionNmId: 9, value: "경기" },
+  { regionNmId: 10, value: "강원" },
+  { regionNmId: 11, value: "충북" },
+  { regionNmId: 12, value: "충남" },
+  { regionNmId: 13, value: "전북" },
+  { regionNmId: 14, value: "전남" },
+  { regionNmId: 15, value: "경북" },
+  { regionNmId: 16, value: "경남" },
+  { regionNmId: 17, value: "제주" },
+];
 const MemberControlAdm = () => {
   const [memberList, setMemberList] = useState<IMemControl>({
     page: {
@@ -29,25 +44,6 @@ const MemberControlAdm = () => {
     },
     list: [] as IMemberListUser[],
   });
-  const regionOptions = [
-    { regionNmId: 1, value: "서울" },
-    { regionNmId: 2, value: "부산" },
-    { regionNmId: 3, value: "대구" },
-    { regionNmId: 4, value: "인천" },
-    { regionNmId: 5, value: "광주" },
-    { regionNmId: 6, value: "대전" },
-    { regionNmId: 7, value: "울산" },
-    { regionNmId: 8, value: "세종" },
-    { regionNmId: 9, value: "경기" },
-    { regionNmId: 10, value: "강원" },
-    { regionNmId: 11, value: "충북" },
-    { regionNmId: 12, value: "충남" },
-    { regionNmId: 13, value: "전북" },
-    { regionNmId: 14, value: "전남" },
-    { regionNmId: 15, value: "경북" },
-    { regionNmId: 16, value: "경남" },
-    { regionNmId: 17, value: "제주" },
-  ];
 
   const regionConvert: Array<IMemberListUser> = memberList.list.map(item => {
     const changeList: {
@@ -65,7 +61,10 @@ const MemberControlAdm = () => {
   return (
     <MemberWrap>
       <MemberControlListItem regionConvert={regionConvert} />
-      <MemberControlPaginate memberList={memberList} setMemberList={setMemberList} />
+      <MemberControlPaginate
+        memberList={memberList}
+        setMemberList={setMemberList}
+      />
     </MemberWrap>
   );
 };
