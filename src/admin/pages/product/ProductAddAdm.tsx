@@ -9,7 +9,6 @@ import { ConfigProvider, Form, UploadFile } from "antd";
 import { AdminColor } from "../../style/AdminLayoutStyle";
 import ProductAddName from "../../components/product/ProductAddName";
 import ProductAddPrice from "../../components/product/ProductAddPrice";
-import ProductAddSaleDate from "../../components/product/ProductAddSaleDate";
 import ProductAddCountry from "../../components/product/ProductAddCountry";
 import ProductAddWine from "../../components/product/ProductAddWine";
 import ProductAddSweety from "../../components/product/ProductAddSweety";

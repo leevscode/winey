@@ -21,6 +21,7 @@ import {
   ProductFormBtn,
   ProductSaleDateWrap,
 } from "../../style/product/AdminProductStyle";
+import moment from "moment";
 
 // RangePicker 범위 타입 지정
 export type RangeValue = [Dayjs | null, Dayjs | null] | null;
@@ -55,7 +56,9 @@ const ProductAddSale = ({
 }: IProductSaleDate) => {
   // 오늘 날짜
   const today = new Date();
-  console.log("오늘", today);
+  // 오늘 날짜를 YYYY-MM 형식으로 변환
+  const todayMoment = moment(today).format("YYYY-MM");
+  // console.log("오늘", todayMoment);
   // 할인 유무 설정에 따른 컴포넌트 활성화, 비활성화 state
   const [saleDisabled, setSaleDisabled] = useState<boolean>(true);
   // 할인 유무를 선택하는 state
@@ -67,16 +70,25 @@ const ProductAddSale = ({
       // console.log("값이 1입니다.");
       setSaleYnCheck(1);
       setSaleDisabled(true);
+      // 날짜 초기화
+      setStartSale("0000-00-01");
+      setEndSale("0000-00-01");
     } else if (e.target.value === 2) {
       // 상시 할인 선택
       console.log("값이 2입니다.");
       setSaleYnCheck(2);
       setSaleDisabled(true);
+      // 상시 할인 선택 시 시작 날짜 : 오늘 ~ 2999년 12월 01까지
+      setStartSale(todayMoment + "-01");
+      setEndSale("2999-12-01");
     } else if (e.target.value === 3) {
       // 기간별 할인 선택
       console.log("값이 3입니다.");
       setSaleYnCheck(3);
       setSaleDisabled(false);
+      // 날짜 초기화
+      setStartSale("0000-00-01");
+      setEndSale("0000-00-01");
     }
   };
   // 할인율적용 버튼 에러메세지 출력 state (Popover 컴포넌트)
