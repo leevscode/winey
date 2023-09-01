@@ -24,7 +24,7 @@ const MemberControlListItem = ({
   const navigate = useNavigate();
   const { listPathName } = useOutletContext() as { listPathName: string };
   const gridTemplateColumns = {
-    columns: "0.4fr 1.2fr 0.8fr 0.6fr 0.8fr 0.55fr",
+    columns: "0.4fr 1.2fr 0.8fr 0.6fr 0.6fr 0.6fr 0.6fr",
   };
 
   const handleMemberOrder = (item: IMemberListUser) => {
@@ -48,6 +48,7 @@ const MemberControlListItem = ({
             <li>회원번호</li>
             <li>아이디</li>
             <li>이름</li>
+            <li>가입일자</li>
             <li>주 픽업지역</li>
             <li>주문내역</li>
             <li>회원삭제</li>
@@ -64,6 +65,7 @@ const MemberControlListItem = ({
                 <li>{item.userId}</li>
                 <li>{item.email}</li>
                 <li>{item.nm}</li>
+                <li>{item.createdAt}</li>
                 <li>{item.textRegion}</li>
                 <li>
                   <button

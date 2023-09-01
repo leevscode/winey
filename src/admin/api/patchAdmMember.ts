@@ -4,7 +4,11 @@
     깃허브 : https://github.com/hyemdev
 */
 import axios from "axios";
-import { IMemControl, IUserDetail } from "../interface/MemberInterface";
+import {
+  IMemControl,
+  IMemberSortOption,
+  IUserDetail,
+} from "../interface/MemberInterface";
 import { client } from "../../api/client";
 
 // 멤버리스트 get
@@ -14,14 +18,17 @@ export const getMemberList = async (
     row: number;
   },
   setMemberList: React.Dispatch<React.SetStateAction<IMemControl>>,
+  sortOption: {
+    type: string;
+    sort: string;
+  },
 ) => {
   try {
     const res = await client.get(
-      `/api/admin/user/list?page=${paginate.page}&row=${paginate.row}`,
-      // `/api/admin/user/list?page=${paginate.page}&row=12`,
+      `/api/admin/user/list?page=${paginate.page}&row=${paginate.row}&type=${sortOption.type}&sort=${sortOption.sort}`,
     );
     console.log("res", res);
-    const result = await res.data;
+    const result: IMemControl = await res.data;
     setMemberList(result);
     return result;
   } catch (error) {
@@ -37,10 +44,14 @@ export const getMemberDetail = async (
   },
   setUserInfomation: React.Dispatch<React.SetStateAction<IUserDetail>>,
   clickUserId: number | undefined,
+  sortOption: {
+    type: string;
+    sort: string;
+  },
 ) => {
   try {
     const res = await client.get(
-      `/api/admin/${clickUserId}/order?page=${paginate.page}&row=${paginate.row}`,
+      `/api/admin/${clickUserId}/order?page=${paginate.page}&row=${paginate.row}&type=${sortOption.type}&sort=${sortOption.sort}`,
     );
     console.log("res", res);
     const result = await res.data;
@@ -51,4 +62,4 @@ export const getMemberDetail = async (
     console.log(error);
   }
 };
-// 
+//

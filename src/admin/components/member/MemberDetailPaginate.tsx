@@ -19,6 +19,7 @@ const MemberDetailPaginate = ({
   userInfomation,
   setUserInfomation,
   clickUserId,
+  sortOption,
 }: IUserDetailState) => {
   // 페이지 정보(page / row: 페이지 당 개수)
   const [paginate, setPaginate] = useState<IinitialPg>({ page: 1, row: 10 });
@@ -35,16 +36,15 @@ const MemberDetailPaginate = ({
       paginate,
       setUserInfomation,
       clickUserId,
+      sortOption,
     );
     return data;
   };
 
   useEffect(() => {
     getPage();
-  }, [paginate.page]);
+  }, [paginate.page, sortOption]);
 
-  console.log("paginate", paginate);
-  console.log("pageInfo", pageInfo);
   return (
     <PaginationWrap>
       {pageInfo && (

@@ -7,8 +7,15 @@
 import React, { useEffect, useState } from "react";
 import MemberControlListItem from "../../components/member/MemberControlListItem";
 import { MemberWrap } from "../../style/AdminMemberStyle";
-import { IMemControl, IMemberListUser } from "../../interface/MemberInterface";
+import {
+  IMemControl,
+  IMemberListUser,
+  IMemberSortOption,
+} from "../../interface/MemberInterface";
 import MemberControlPaginate from "../../components/member/MemberControlPaginate";
+import MemberControlSort, {
+  initialSortOption,
+} from "../../components/member/MemberControlSort";
 export const regionOptions = [
   { regionNmId: 1, value: "서울" },
   { regionNmId: 2, value: "부산" },
@@ -29,6 +36,10 @@ export const regionOptions = [
   { regionNmId: 17, value: "제주" },
 ];
 const MemberControlAdm = () => {
+  // 정렬 state
+  const [sortOption, setSortOption] =
+    useState<IMemberSortOption>(initialSortOption);
+  // 회원정보state
   const [memberList, setMemberList] = useState<IMemControl>({
     page: {
       page: 1,
@@ -45,6 +56,7 @@ const MemberControlAdm = () => {
     list: [] as IMemberListUser[],
   });
 
+  // 지역변환
   const regionConvert: Array<IMemberListUser> = memberList.list.map(item => {
     const changeList: {
       regionNmId: number;
@@ -56,14 +68,17 @@ const MemberControlAdm = () => {
     return item;
   });
 
+  console.log("sortOption", sortOption);
   console.log("regionConvert", regionConvert);
 
   return (
     <MemberWrap>
+      <MemberControlSort setSortOption={setSortOption} />
       <MemberControlListItem regionConvert={regionConvert} />
       <MemberControlPaginate
         memberList={memberList}
         setMemberList={setMemberList}
+        sortOption={sortOption}
       />
     </MemberWrap>
   );

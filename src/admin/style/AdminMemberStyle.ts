@@ -46,7 +46,7 @@ export const MemberDetailUpperWrap = styled.div`
 `;
 
 export const MemberDetailWrap = styled.div`
-  margin-top: 3rem;
+  /* margin-top: 3rem; */
   & .noItem {
     font-size: 1.5rem;
     font-weight: 600;
@@ -55,3 +55,8 @@ export const MemberDetailWrap = styled.div`
     color: ${Maincolor.grayBold};
   }
 `;
+
+// 정렬 컴포넌트
+export const SortSelectWrap = styled.div`
+margin: 1rem 0;
+`

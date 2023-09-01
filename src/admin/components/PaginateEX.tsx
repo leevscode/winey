@@ -28,7 +28,7 @@ const PaginateEX = ({ memberList, setMemberList }: IMemberState) => {
   // axios연결
   const getPageData = async () => {
     // 페이지 정보를 보내고(paginate) , list데이터 정보를 받는다
-    const data = await getMemberList(paginate, setMemberList);
+    // const data = await getMemberList(paginate, setMemberList);
   };
 
   useEffect(() => {
