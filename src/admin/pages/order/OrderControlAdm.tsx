@@ -5,7 +5,7 @@
 */
 import React, { useEffect, useState } from "react";
 import { AdmOrderData } from "../../api/admorderlist";
-import { Form, Pagination, PaginationProps, Select } from "antd";
+import { Form, Modal, Pagination, PaginationProps, Select } from "antd";
 import { useNavigate, useOutletContext } from "react-router";
 import {
   MemberOutBt,
@@ -94,6 +94,40 @@ const OrderControlAdm = () => {
     columns: "0.5fr 0.9fr 1.8fr 0.4fr 0.5fr 0.55fr 0.55fr 0.55fr 0.55fr",
   };
 
+  const orderModal = (newStatus: any, item: any) => {
+    Modal.confirm({
+      okText: "예",
+      cancelText: "아니오",
+      wrapClassName: "info-modal-wrap notice-modal",
+      maskClosable: true,
+      content: (
+        <ul>
+          <li>
+            주문 상태를
+            <br />
+            바꾸시겠습니까?
+          </li>
+        </ul>
+      ),
+      onOk: async () => {
+        try {
+          // 데이터를 서버로 전송
+          await client.put(`/api/admin/order`, {
+            orderId: item.orderId,
+            orderStatus: newStatus,
+          });
+          console.log("상태변경 성공:", newStatus);
+          getOrderData();
+        } catch (error) {
+          console.error("상태변경 실패:", error);
+        }
+      },
+      onCancel: () => {
+        getOrderData();
+      },
+    });
+  };
+
   return (
     <>
       <div>
@@ -178,12 +212,7 @@ const OrderControlAdm = () => {
                         defaultValue={item.orderStatus.toString()}
                         onChange={async newStatus => {
                           try {
-                            await client.put(`/api/admin/order`, {
-                              orderId: item.orderId,
-                              orderStatus: newStatus,
-                            });
-                            console.log("상태변경 성공:", item.orderStatus);
-                            getOrderData();
+                            orderModal(newStatus, item);
                           } catch (error) {
                             console.error("상태변경 실패:", error);
                           }
