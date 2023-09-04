@@ -61,4 +61,17 @@ export const getMemberDetail = async (
     console.log(error);
   }
 };
-//
+
+// 회원삭제
+export const putMemberOut = async (item: number) => {
+  console.log("patch item", item);
+  try {
+    const res = await client.put(`/api/admin/withdrawal?userId=${item}`);
+    console.log("res", res);
+    const result = await res.data;
+    console.log("result", result);
+    return result;
+  } catch (error) {
+    console.log(error);
+  }
+};

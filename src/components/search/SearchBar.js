@@ -3,16 +3,18 @@
     노션 : https://hyemdev.notion.site/hyemdev/hyem-s-dev-STUDY-75ffe819c7534a049b59871e6fe17dd4
     깃허브 : https://github.com/hyemdev
 */
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Search from "antd/es/input/Search";
 import { ConfigProvider } from "antd";
 import { FilterButtonWrap, SearchBarWrap } from "../../style/SearchStyle";
-import SearchFilter, { searchFilterRecoil } from "./SearchFilter";
+import SearchFilter, {
+  searchFilterRecoil,
+} from "./SearchFilter";
 import { useNavigate } from "react-router";
 import { getSearchItem } from "../../api/searchpatch";
 import { atom, selector, useRecoilState, useRecoilValue } from "recoil";
 import { queryUrlRecoil } from "../../pages/search/SearchProduct";
-import { itemScrollRecoil, searchSortRecoil } from "./SearchList";
+import { searchSortRecoil } from "./SearchList";
 import { NoticeModal } from "../../style/GlobalComponents";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -57,7 +59,8 @@ const SearchBar = () => {
   const [exploreResult, setExploreResult] = useRecoilState(searchResultRecoil);
 
   const navigate = useNavigate();
-  // filter component
+
+  // filter component 열고닫는 state
   const [isFilterActive, setIsFilterActive] = useState(false);
 
   // filters 버튼 핸들러
@@ -70,7 +73,6 @@ const SearchBar = () => {
     // navigate();
   };
   const handleTextSearch = e => {
-    console.log(e.target.value);
     setExploreText(e.target.value);
   };
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -96,8 +98,6 @@ const SearchBar = () => {
       return;
     }
   };
-  console.log("exploreSort", exploreSort);
-  console.log("exploreResult", exploreResult);
 
   return (
     <SearchBarWrap>
@@ -110,9 +110,7 @@ const SearchBar = () => {
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
       >
-        {isFilterActive ? (
-          <SearchFilter setIsFilterActive={setIsFilterActive} />
-        ) : null}
+        <SearchFilter setIsFilterActive={setIsFilterActive} isFilterActive={isFilterActive}/>
       </FilterButtonWrap>
       <ConfigProvider
         theme={{

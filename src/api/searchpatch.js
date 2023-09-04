@@ -8,20 +8,28 @@ import { client } from "./client";
 export const getSearchItem = async ({
   urlData,
   page,
+  exploreSort,
   setExploreResult,
   setHasNextPage,
+  setTotalCount,
 }) => {
   try {
-    const res = await client.get(`/api/search?${urlData.url}`);
+    const res = await client.get(
+      `/api/search?page=${page.current || 1}&sort=${exploreSort || 0}&${
+        urlData.url
+      }`,
+    );
     console.log("res", res);
     const result = res.data;
-    console.log("result", result);
-    setExploreResult(result);
+    console.log("결과보여줘result", result);
+    // setExploreResult(result.wineList);
+    setTotalCount(result);
+    setExploreResult(prev => [...prev, ...result.wineList]);
     setHasNextPage(result.wineList.length === 9);
-    if (result.wineList.length === 9) {
+    if (result.wineList.length) {
       page.current += 1;
     }
-    return;
+    return result;
   } catch (error) {
     console.log(error);
   }

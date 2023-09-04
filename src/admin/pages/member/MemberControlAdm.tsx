@@ -70,6 +70,9 @@ const MemberControlAdm = () => {
 
   console.log("sortOption", sortOption);
   console.log("regionConvert", regionConvert);
+  useEffect(() => {
+    console.log("화면 리랜더링");
+  }, [regionConvert]);
 
   return (
     <MemberWrap>

@@ -39,14 +39,14 @@ export const searchGetResult = selector({
   },
 });
 
-const SearchList = ({ scrollPage, setScrollPage }) => {
+const SearchList = () => {
+  // recoil
   const urlData = useRecoilValue(searchGetResult);
   const finalItem = useRecoilValue(searchGetResult);
   console.log("finalItem", finalItem);
   const [exploreSort, setExploreSort] = useRecoilState(searchSortRecoil);
   const [exploreResult, setExploreResult] = useRecoilState(searchResultRecoil);
-  // const [scrollPage, setScrollPage] = useRecoilState(itemScrollRecoil);
-  // const [scrollPage, setScrollPage] = useState(1);
+
   const sortingOptions = [
     {
       value: 0,
@@ -68,10 +68,11 @@ const SearchList = ({ scrollPage, setScrollPage }) => {
 
   // 화면 데이터 state
   const [hasNextPage, setHasNextPage] = useState(true);
-  console.log("hasNextPage", hasNextPage);
-
+  // 토탈 데이터 count
+  const [totalCount, setTotalCount] = useState(0);
   // 검색어 없음 모달
   const [isModalOpen, setIsModalOpen] = useState(false);
+
   const handleOk = () => {
     setIsModalOpen(false);
   };
@@ -85,6 +86,7 @@ const SearchList = ({ scrollPage, setScrollPage }) => {
   //react-intersection-observer state
   const [ref, inView] = useInView();
   const page = useRef(1);
+  console.log("page", page);
 
   useEffect(() => {
     if (inView && hasNextPage) {
@@ -92,18 +94,18 @@ const SearchList = ({ scrollPage, setScrollPage }) => {
         getSearchItem({
           urlData,
           page,
+          exploreSort,
           setExploreResult,
           setHasNextPage,
+          setTotalCount,
         });
       } catch (err) {
         console.log(err);
       }
-      setScrollPage(page);
     }
-  }, [exploreSort, hasNextPage, inView, scrollPage]);
+  }, [exploreSort, hasNextPage, exploreSort, inView, page]);
   console.log("exploreResult", exploreResult);
-  console.log("scrollPage", scrollPage);
-  console.log("page", page);
+  console.log("exploreSort", exploreSort);
 
   return (
     <div>
@@ -111,7 +113,7 @@ const SearchList = ({ scrollPage, setScrollPage }) => {
         {/* 상품목록 */}
         <ul>
           <li>
-            검색 상품 총 <span>{finalItem.result.count}</span>개
+            검색 상품 총 <span>{totalCount.count}</span>개
           </li>
           <li>
             {/* 상품정렬 */}
