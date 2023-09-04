@@ -10,11 +10,16 @@ import { Dispatch } from "react";
 // 등록된 상품 리스트 GET
 export const getAdmProductList = async (
   _page: number,
+  _type: string,
+  _sort: string,
   _setAdmProductList: Dispatch<React.SetStateAction<IproductList[]>>,
   _setTotalPage: Dispatch<React.SetStateAction<number>>,
 ) => {
   try {
-    const res = await axios.get(`/api/admin/product/list?page=${_page}&row=10`);
+    // const res = await axios.get(`/api/admin/product/list?page=${_page}&row=10`);
+    const res = await axios.get(
+      `/api/admin/product/list?page=${_page}&row=10&type=${_type}&sort=${_sort}`,
+    );
     const result = res.data;
     const data = result.productList;
     const pageData = result.page.totalRecordCount;

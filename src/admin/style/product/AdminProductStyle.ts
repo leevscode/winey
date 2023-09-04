@@ -38,6 +38,11 @@ export const AdmProductWrap = styled.div`
     font-size: 1.25rem;
     .total-count {
       color: ${Maincolor.grayDeep};
+      span {
+        font-size: 1.25em;
+        font-weight: 700;
+        color: ${Gradation.wineE};
+      }
     }
     a {
       font-size: 1.4rem;
@@ -48,6 +53,12 @@ export const AdmProductWrap = styled.div`
       background: ${Gradation.wineE};
       color: ${Maincolor.white};
       border: 0.05rem solid ${opacity.grayLight};
+    }
+    & > div {
+      margin: 0;
+      .ant-select {
+        width: 180px;
+      }
     }
   }
 `;
