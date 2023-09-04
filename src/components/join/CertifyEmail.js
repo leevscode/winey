@@ -10,15 +10,18 @@ import { ButtonOk } from "../../style/GlobalStyle";
 
 const CertifyEmail = ({ setEmailCertifyOk }) => {
   const onFinish = values => {
+    // 응답값 받아서 확인하기
     setEmailCertifyOk(true);
   };
   const onFinishFailed = errorInfo => {
+    // 인증실패
     console.log("Failed:", errorInfo);
   };
 
   return (
     <CertifyWrap>
-      <p> 인증을 위해 이메일로 전송한 코드를 입력해 주세요.</p>
+      <p> 입력하신 메일로 인증코드가 발송 되었습니다.</p>
+      <p> 이메일로 전송한 코드를 정확하게 입력해 주세요.</p>
       <ConfigProvider
         theme={{
           token: {
