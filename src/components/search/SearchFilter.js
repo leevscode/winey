@@ -4,7 +4,7 @@
     깃허브 : https://github.com/hyemdev
 */
 import { Button, ConfigProvider, Radio } from "antd";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { SearchFilterWrap } from "../../style/SearchStyle";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -15,7 +15,7 @@ import {
   faWineGlass,
 } from "@fortawesome/free-solid-svg-icons";
 import { faMoneyBill1 } from "@fortawesome/free-regular-svg-icons";
-import { atom, useSetRecoilState } from "recoil";
+import { atom, useRecoilState, useSetRecoilState } from "recoil";
 
 export const searchFilterRecoil = atom({
   key: "searchFilterRecoil",
@@ -68,15 +68,15 @@ export const wineSearchOptions = {
   ],
 };
 
-const SearchFilter = ({ setIsFilterActive }) => {
-  const setExplorefilter = useSetRecoilState(searchFilterRecoil);
+const SearchFilter = ({ setIsFilterActive, isFilterActive }) => {
+  const [explorefilter, setExplorefilter] = useRecoilState(searchFilterRecoil);
 
   const [selectFilter, setSelectFilter] = useState("");
-  const [wineTypeCheck, setWineTypeCheck] = useState(0);
-  const [wineFoodCheck, setWineFoodCheck] = useState(0);
-  const [winePriceCheck, setWinePriceCheck] = useState(0);
-  const [wineCountryCheck, setWineCountryCheck] = useState(0);
-  console.log("selectFilter", selectFilter);
+  const [wineTypeCheck, setWineTypeCheck] = useState("");
+  const [wineFoodCheck, setWineFoodCheck] = useState("");
+  const [winePriceCheck, setWinePriceCheck] = useState("");
+  const [wineCountryCheck, setWineCountryCheck] = useState("");
+
   const handleTypeChange = e => {
     setWineTypeCheck(e.target.value);
     // setSelectFilter(prev => ({ ...prev, cate: e.target.value }));
@@ -103,6 +103,74 @@ const SearchFilter = ({ setIsFilterActive }) => {
     // setExplorefilter(selectFilter);
     setIsFilterActive(false);
   };
+  const getCategory = categoryId => {
+    switch (categoryId) {
+      case 1:
+        return "레드";
+      case 2:
+        return "화이트";
+      case 3:
+        return "스파클링";
+      case 4:
+        return "기타";
+      default:
+        return "";
+    }
+  };
+
+  const getFood = bigCategoryId => {
+    switch (bigCategoryId) {
+      case 1:
+        return "육류";
+      case 2:
+        return "해산물";
+      case 3:
+        return "기타";
+      default:
+        return "";
+    }
+  };
+  const getPrice = priceId => {
+    switch (priceId) {
+      case 1:
+        return "2만원미만";
+      case 2:
+        return "2~5만원";
+      case 3:
+        return "5만원~10만원";
+      case 4:
+        return "10만원이상";
+      default:
+        return "";
+    }
+  };
+  const getCountry = countryId => {
+    switch (countryId) {
+      case 1:
+        return "미국";
+      case 2:
+        return "기타";
+      case 3:
+        return "프랑스";
+      case 4:
+        return "이탈리아";
+      case 5:
+        return "기타";
+      case 6:
+        return "칠레";
+      default:
+        return "";
+    }
+  };
+  const wineCate = getCategory(wineTypeCheck);
+  const wineFood = getFood(wineFoodCheck);
+  const winePrice = getPrice(winePriceCheck);
+  const wineCountry = getCountry(wineCountryCheck);
+
+  useEffect(() => {
+    console.log("필터변경 화면 리랜더링");
+  }, [explorefilter]);
+
   // 선택값 초기화
   const handleReset = () => {
     setWineTypeCheck("");
@@ -111,67 +179,97 @@ const SearchFilter = ({ setIsFilterActive }) => {
     setWineCountryCheck("");
     setExplorefilter("");
   };
+  console.log("explorefilter", explorefilter);
   return (
     <SearchFilterWrap>
-      <ul>
-        <li>
-          {/* 와인종류 */}
-          <Radio.Group value={wineTypeCheck} onChange={handleTypeChange}>
-            {wineSearchOptions.cate.map(option => (
-              <Radio key={option.id} value={option.id}>
-                <b>{option.icon}</b>
-                {option.value}
-              </Radio>
-            ))}
-          </Radio.Group>
-        </li>
-        <li>
-          {/* 페어링음식 */}
-          <Radio.Group value={wineFoodCheck} onChange={handleFoodChange}>
-            {wineSearchOptions.bigCate.map(option => (
-              <Radio key={option.id} value={option.id}>
-                <b>{option.icon}</b> {option.value}
-              </Radio>
-            ))}
-          </Radio.Group>
-        </li>
-        <li>
-          {/* 가격대 */}
-          <Radio.Group value={winePriceCheck} onChange={handlePriceChange}>
-            {wineSearchOptions.price.map(option => (
-              <Radio key={option.id} value={option.id}>
-                <b>{option.icon}</b>
-                {option.value}
-              </Radio>
-            ))}
-          </Radio.Group>
-        </li>
-        <li>
-          {/* 나라종류 */}
-          <Radio.Group value={wineCountryCheck} onChange={handleCountryChange}>
-            {wineSearchOptions.country.map(option => (
-              <Radio key={option.id} value={option.id}>
-                <b>{option.icon}</b>
-                {option.value}
-              </Radio>
-            ))}
-          </Radio.Group>
-        </li>
-        <li>
-          <ConfigProvider
-            theme={{
-              token: {
-                colorPrimary: "#79213d",
-                fontFamily:
-                  '"Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif',
-              },
-            }}
-          >
-            <Button onClick={handleConfirm}>선택값 저장하기</Button>
-            <Button onClick={handleReset}>선택값 초기화</Button>
-          </ConfigProvider>
-        </li>
+      {/* 선택값 띄우기 */}
+      <ul className="clickFilterItem">
+        {wineCate && <li>{wineCate}</li>}
+        {wineFood && <li>{wineFood}</li>}
+        {winePrice && <li>{winePrice}</li>}
+        {wineCountry && <li>{wineCountry}</li>}
+        {explorefilter.length !== 0 ? (
+          <li className="clickFilterBtn">
+            <ConfigProvider
+              theme={{
+                token: {
+                  colorPrimary: "#79213d",
+                  fontFamily:
+                    '"Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif',
+                },
+              }}
+            >
+              <Button onClick={handleConfirm}>선택값 저장하기</Button>
+              <Button onClick={handleReset}>선택값 초기화</Button>
+            </ConfigProvider>
+          </li>
+        ) : null}
       </ul>
+
+      {isFilterActive ? (
+        <ul className="selFilter">
+          <li>
+            {/* 와인종류 */}
+            <Radio.Group value={wineTypeCheck} onChange={handleTypeChange}>
+              {wineSearchOptions.cate.map(option => (
+                <Radio key={option.id} value={option.id}>
+                  <b>{option.icon}</b>
+                  {option.value}
+                </Radio>
+              ))}
+            </Radio.Group>
+          </li>
+          <li>
+            {/* 페어링음식 */}
+            <Radio.Group value={wineFoodCheck} onChange={handleFoodChange}>
+              {wineSearchOptions.bigCate.map(option => (
+                <Radio key={option.id} value={option.id}>
+                  <b>{option.icon}</b> {option.value}
+                </Radio>
+              ))}
+            </Radio.Group>
+          </li>
+          <li>
+            {/* 가격대 */}
+            <Radio.Group value={winePriceCheck} onChange={handlePriceChange}>
+              {wineSearchOptions.price.map(option => (
+                <Radio key={option.id} value={option.id}>
+                  <b>{option.icon}</b>
+                  {option.value}
+                </Radio>
+              ))}
+            </Radio.Group>
+          </li>
+          <li>
+            {/* 나라종류 */}
+            <Radio.Group
+              value={wineCountryCheck}
+              onChange={handleCountryChange}
+            >
+              {wineSearchOptions.country.map(option => (
+                <Radio key={option.id} value={option.id}>
+                  <b>{option.icon}</b>
+                  {option.value}
+                </Radio>
+              ))}
+            </Radio.Group>
+          </li>
+          {/* <li>
+            <ConfigProvider
+              theme={{
+                token: {
+                  colorPrimary: "#79213d",
+                  fontFamily:
+                    '"Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif',
+                },
+              }}
+            >
+              <Button onClick={handleConfirm}>선택값 저장하기</Button>
+              <Button onClick={handleReset}>선택값 초기화</Button>
+            </ConfigProvider>
+          </li> */}
+        </ul>
+      ) : null}
     </SearchFilterWrap>
   );
 };

@@ -60,16 +60,30 @@ export const SearchFilterWrap = styled.div`
   position: relative;
   width: 100%;
   height: 100%;
-  /* padding-top: 3rem; */
   background: ${Maincolor.beige};
-  & > ul {
+  .clickFilterItem {
+    background: ${Maincolor.white};
+    width: 100%;
+    height: 4rem;
+    font-size: 1.2rem;
     display: flex;
-    justify-content: center;
+    flex-direction: row;
     align-items: center;
-    flex-direction: column;
-    & li {
-      margin-bottom: 2rem;
-      & > button {
+    justify-content: center;
+    & > li {
+      margin: 0 1rem;
+      background: ${opacity.grayLight};
+      border: 0.5px solid ${Maincolor.grayMedium};
+      border-radius: 0.5rem;
+      padding: 0.5rem;
+    }
+    .clickFilterBtn {
+      background: none;
+      border: 0;
+      button {
+        height: 2.4rem;
+        padding: 0 1rem;
+        font-size: 1.2rem;
         margin: 0 1rem;
         transition: 0.2s ease-in-out;
         font-weight: 700;
@@ -77,6 +91,16 @@ export const SearchFilterWrap = styled.div`
           background: ${Maincolor.grayMedium};
         }
       }
+    }
+  }
+  .selFilter {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding-top: 1rem;
+    & li {
+      margin-bottom: 1rem;
       div {
         text-align: center;
         /* 체크박스 그룹 인라인 속성 추가 */
@@ -135,7 +159,7 @@ export const SearchFilterWrap = styled.div`
         }
       }
     }
-    & li:nth-child(3) {
+    & li:nth-of-type(3) {
       & div > label {
         width: 10rem;
         span {
@@ -148,7 +172,7 @@ export const SearchFilterWrap = styled.div`
 `;
 
 export const FilterButtonWrap = styled(motion.div)`
-  position: fixed;
+  position: absolute;
   top: 12rem;
   left: 50%;
   transform: translateX(-50%);
@@ -156,7 +180,7 @@ export const FilterButtonWrap = styled(motion.div)`
   max-width: 560px;
   width: 100%;
   /* background: ${Maincolor.beige}; */
-  .clickFilterItem {
+  /* .clickFilterItem {
     width: 100%;
     height: 3rem;
     display: flex;
@@ -169,5 +193,5 @@ export const FilterButtonWrap = styled(motion.div)`
       border-radius: 0.5rem;
       padding: 0.5rem;
     }
-  }
+  } */
 `;

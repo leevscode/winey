@@ -28,8 +28,8 @@ export const postUserJoin = async userInfo => {
 // 회원정보 get redux toolkit
 export const getMemberInfo = () => async dispatch => {
   try {
-    // const res = await client.get("/api/mypage/user-info");
-    const res = await client.get("/api/mypage/userinfo");
+    const res = await client.get("/api/mypage/user-info");
+    // const res = await client.get("/api/mypage/userinfo");
     const result = await res.data;
     console.log("회원정보 get result", result);
     dispatch(getUser(result));
@@ -42,8 +42,8 @@ export const getMemberInfo = () => async dispatch => {
 // 회원정보수정 patch
 export const patchMemberInfo = async editUserInfo => {
   try {
-    // const res = await client.patch("/api/mypage/user-correction", {
-    const res = await client.patch("/api/mypage/upduser", {
+    const res = await client.patch("/api/mypage/user-correction", {
+    // const res = await client.patch("/api/mypage/upduser", {
       pw: editUserInfo.editpassword,
       name: editUserInfo.editUserName,
       tel: editUserInfo.editUserTel,
@@ -60,8 +60,8 @@ export const patchMemberInfo = async editUserInfo => {
 // 회원탈퇴 delete
 export const deleteMember = async () => {
   try {
-    // const res = await client.delete("/api/mypage/user-secession");
-    const res = await client.delete("/api/mypage/delUser");
+    const res = await client.delete("/api/mypage/user-secession");
+    // const res = await client.delete("/api/mypage/delUser");
     console.log("res", res);
     const result = await res.data;
     console.log("회원삭제성공", result);

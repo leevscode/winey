@@ -37,11 +37,7 @@ const SearchProduct = () => {
   // recoil state
   const [urlState, setUrlState] = useRecoilState(queryUrlRecoil);
 
-  // 페이지
-  const [scrollPage, setScrollPage] = useState(1);
-
   console.log("searchContent", searchContent);
-  console.log("scrollPage.current", scrollPage.current);
 
   // 담은 필터값을 쿼리로 풀어서 담자
   const convertQueryFilter = () => {
@@ -63,16 +59,16 @@ const SearchProduct = () => {
       queryString += `text=${searchContent.text}&`;
     }
     // 페이지
-    if (scrollPage.current !== undefined) {
-      queryString += `page=${scrollPage?.current || 1}&`;
-    }
+    // if (scrollPage.current !== undefined) {
+    //   queryString += `page=${scrollPage.current || 1}&`;
+    // }
     // 페이지당 개수
     queryString += `row=9&`;
 
     // 정렬
-    if (searchContent.sort.value !== undefined) {
-      queryString += `sort=${searchContent.sort?.value || 0}&`;
-    }
+    // if (searchContent.sort.value !== undefined) {
+    //   queryString += `sort=${searchContent.sort.value || 0}&`;
+    // }
 
     // 가격대
     if (searchContent.filter.price !== undefined) {
@@ -89,9 +85,10 @@ const SearchProduct = () => {
 
   useEffect(() => {
     setUrlState(convertQueryFilter());
-  }, [searchContent, urlState, scrollPage]);
+  }, [searchContent, urlState]);
 
   console.log("urlState", urlState);
+  console.log("searchContent.sort.value", searchContent.sort.value);
 
   return (
     <SearchPageWrap>
@@ -105,7 +102,7 @@ const SearchProduct = () => {
           <p>검색어를 입력해 주세요.</p>
         </div>
       ) : (
-        <SearchList scrollPage={scrollPage} setScrollPage={setScrollPage} />
+        <SearchList />
       )}
     </SearchPageWrap>
   );
