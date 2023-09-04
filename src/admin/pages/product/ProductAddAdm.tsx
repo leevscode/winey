@@ -110,7 +110,7 @@ const ProductAddAdm = () => {
   // 상품 등록 성공
   const onFinish = () => {
     console.log("productParam 보냅니다. ", param);
-    // 예외처리
+    // 상품명 미입력에 대한 예외처리
     if (param.nmKor.length === 0) {
       setNameNoKr(true);
       return;
@@ -118,6 +118,7 @@ const ProductAddAdm = () => {
       setNameNoEn(true);
       return;
     }
+    // 정상가 미입력에 대한 예외처리
 
     const formData = new FormData();
     formData.append("pic", selectImage[0]?.originFileObj || "");
@@ -129,7 +130,7 @@ const ProductAddAdm = () => {
     );
     // 데이터 전송
     getAdmProductPost(formData);
-    console.log(formData);
+    console.log("전송완료");
   };
   // 상품 등록 실패
   const onFinishFailed = (errorInfo: any) => {
