@@ -21,21 +21,13 @@ import {
   fetchData2,
 } from "../../interface/ControlInterface";
 
-// interface statusType {
-//   [key: string | number]: any;
-// }
-
-interface statusData {
-  orderStatus: number;
-}
-
 const OrderControlAdm = () => {
   const [orderControl, setOrderControl] = useState<Array<fetchData>>([]);
   const [orderControl2, setOrderControl2] = useState<fetchData2>();
   const option = [
     { value: "1", label: "결제완료" },
-    { value: "3", label: "배송중" },
     { value: "2", label: "배송완료" },
+    { value: "3", label: "배송중" },
     { value: "4", label: "픽업대기" },
     { value: "5", label: "픽업완료" },
     { value: "6", label: "주문취소" },
@@ -90,11 +82,20 @@ const OrderControlAdm = () => {
     }
   };
 
+  // 그리드 레이아웃
   const gridTemplateColumns = {
     columns: "0.5fr 0.9fr 1.8fr 0.4fr 0.5fr 0.55fr 0.55fr 0.55fr 0.55fr",
   };
 
-  const orderModal = (newStatus: any, item: any) => {
+  // 배송상태 변경 모달
+  const getStatusLabel = (value: string) => {
+    const statusOption = option.find(opt => opt.value === value);
+    return statusOption ? statusOption.label : "";
+  };
+
+  // 주문상태 변경 모달
+  const orderModal = (newStatusValue: string, item: any) => {
+    const newStatusLabel = getStatusLabel(newStatusValue);
     Modal.confirm({
       okText: "예",
       cancelText: "아니오",
@@ -103,7 +104,7 @@ const OrderControlAdm = () => {
       content: (
         <ul>
           <li>
-            주문 상태를
+            배송 상태를 {newStatusLabel}(으)로
             <br />
             바꾸시겠습니까?
           </li>
@@ -114,9 +115,18 @@ const OrderControlAdm = () => {
           // 데이터를 서버로 전송
           await client.put(`/api/admin/order`, {
             orderId: item.orderId,
-            orderStatus: newStatus,
+            orderStatus: newStatusValue,
           });
-          console.log("상태변경 성공:", newStatus);
+          Modal.warning({
+            wrapClassName: "info-modal-wrap notice-modal",
+            maskClosable: true,
+            content: (
+              <ul>
+                <li>배송 상태가 변경 되었습니다</li>
+              </ul>
+            ),
+          });
+          console.log("상태변경 성공:", newStatusLabel);
           getOrderData();
         } catch (error) {
           console.error("상태변경 실패:", error);
@@ -209,7 +219,7 @@ const OrderControlAdm = () => {
                       <Select
                         style={{ width: "100px", textAlign: "center" }}
                         placeholder="배송상태를 지정해주세요"
-                        defaultValue={item.orderStatus.toString()}
+                        value={item.orderStatus.toString()} // 현재 상태로 지정합니다.
                         onChange={async newStatus => {
                           try {
                             orderModal(newStatus, item);
