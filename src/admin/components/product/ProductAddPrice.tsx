@@ -6,13 +6,19 @@
 import React, { useState } from "react";
 import { Form, InputNumber } from "antd";
 import { ProductPriceWrap } from "../../style/product/AdminProductStyle";
+import { AnimatePresence, motion } from "framer-motion";
 
 export interface IProductPrice {
   productPrice: number | null;
   setProductPrice: React.Dispatch<React.SetStateAction<number | null>>;
+  priceNo: boolean;
 }
 
-const ProductAddPrice = ({ productPrice, setProductPrice }: IProductPrice) => {
+const ProductAddPrice = ({
+  productPrice,
+  setProductPrice,
+  priceNo,
+}: IProductPrice) => {
   // 정상가 입력창 이벤트
   const changePrice = (value: number | null) => {
     if (value?.toString().includes(".")) {
@@ -37,6 +43,18 @@ const ProductAddPrice = ({ productPrice, setProductPrice }: IProductPrice) => {
               />
               원
             </Form.Item>
+            <AnimatePresence>
+              {priceNo === true && (
+                <motion.p
+                  className="notice"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                >
+                  * 상품 정상가를 입력해주세요.
+                </motion.p>
+              )}
+            </AnimatePresence>
           </div>
         </li>
       </ul>

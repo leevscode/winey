@@ -194,9 +194,13 @@ export const ProductNameWrap = styled.div`
 export const ProductPriceWrap = styled.div`
   & > ul {
     & > li {
-      display: flex;
-      align-items: center;
+      align-items: inherit !important;
       gap: 0 10px;
+      .title {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
       .content {
         width: 250px;
         .ant-form-item {
@@ -211,6 +215,12 @@ export const ProductPriceWrap = styled.div`
               margin-right: 5px;
             }
           }
+        }
+        .notice {
+          font-size: 1.3rem;
+          line-height: 1;
+          color: red;
+          margin-top: 5px;
         }
       }
       // 할인율 영역

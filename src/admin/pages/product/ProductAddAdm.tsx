@@ -39,6 +39,8 @@ const ProductAddAdm = () => {
   // 가격 =========================
   // 정상가 state
   const [productPrice, setProductPrice] = useState<number | null>(0);
+  // 정상가 금액 0일 경우에 대한 예외처리
+  const [priceNo, setPriceNo] = useState<boolean>(false);
   // 할인설정 =========================
   // 할인 유무 설정 state
   const [saleYn, setSaleYn] = useState<number>(0);
@@ -119,6 +121,10 @@ const ProductAddAdm = () => {
       return;
     }
     // 정상가 미입력에 대한 예외처리
+    if (param.price === 0) {
+      setPriceNo(true);
+      return;
+    }
 
     const formData = new FormData();
     formData.append("pic", selectImage[0]?.originFileObj || "");
@@ -161,6 +167,7 @@ const ProductAddAdm = () => {
           <ProductAddPrice
             productPrice={productPrice}
             setProductPrice={setProductPrice}
+            priceNo={priceNo}
           />
           {/* 할인 설정 */}
           <ProductAddSale
