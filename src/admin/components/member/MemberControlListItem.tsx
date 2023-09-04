@@ -6,15 +6,15 @@
 
 import React, { useState } from "react";
 import {
-  LayoutTable,
   TableLayoutContents,
   TableLayoutTitle,
   TableVertical,
   TableWrap,
 } from "../../style/AdminLayoutStyle";
-import MemberDetailAdm from "../../pages/member/MemberDetailAdm";
 import { useNavigate, useOutletContext } from "react-router";
-import { IMemberListUser, IUserIdState } from "../../interface/MemberInterface";
+import { IMemberListUser } from "../../interface/MemberInterface";
+import { Modal } from "antd";
+import { putMemberOut } from "../../api/patchAdmMember";
 
 const MemberControlListItem = ({
   regionConvert,
@@ -31,8 +31,32 @@ const MemberControlListItem = ({
     console.log("item.userId", item.userId);
     navigate("/admin/memberdetail", { state: item.userId });
   };
-  const handleMemberOut = (event: React.MouseEvent<HTMLButtonElement>) => {
-    event.preventDefault();
+  const handleMemberOut = (
+    item: IMemberListUser,
+    // event: React.MouseEvent<HTMLButtonElement>
+  ) => {
+    console.log("item.userId", item.userId);
+
+    // event.preventDefault();
+    Modal.confirm({
+      okText: "예",
+      cancelText: "아니오",
+      wrapClassName: "info-modal-wrap notice-modal",
+      maskClosable: true,
+      content: (
+        <ul>
+          <li>해당 회원의 정보를 삭제하시겠습니까?</li>
+          <li>삭제된 회원은 복구가 불가능 합니다.</li>
+        </ul>
+      ),
+      onOk() {
+        putMemberOut(item.userId);
+        console.log("회원탈퇴");
+      },
+      onCancel() {
+        console.log("회원탈퇴실패");
+      },
+    });
   };
 
   return (
@@ -76,7 +100,10 @@ const MemberControlListItem = ({
                   </button>
                 </li>
                 <li>
-                  <button onClick={handleMemberOut} className="memberOutBt">
+                  <button
+                    onClick={() => handleMemberOut(item)}
+                    className="memberOutBt"
+                  >
                     탈퇴
                   </button>
                 </li>

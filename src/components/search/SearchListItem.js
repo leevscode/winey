@@ -39,7 +39,7 @@ const SearchListItem = ({ setIsModalOpen, hasNextPage, finalItem }) => {
   };
   return (
     <>
-      {finalItem.result.wineList?.map((item, index) => (
+      {finalItem.result?.map((item, index) => (
         <ProductListItem key={"uid" + index}>
           <Link to={`/productdetail/${item.productId}`}>
             <div className="img">

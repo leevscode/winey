@@ -17,6 +17,7 @@ import { IproductList } from "../../interface/ProductInterface";
 import { getAdmProductList } from "../../api/patchAdmProduct";
 import ProductControlPaginate from "../../components/product/ProductControlPaginate";
 import { AdmProductWrap } from "../../style/product/AdminProductStyle";
+import ProductControlSort from "../../components/product/ProductControlSort";
 
 const ProductListAdm = () => {
   const { listPathName } = useOutletContext() as { listPathName: string };
@@ -36,17 +37,23 @@ const ProductListAdm = () => {
   // 상품 페이징 숫자 보관할 state
   const [page, setPage] = useState<number>(1);
   // 총 상품 갯수 보관할 state
-  const [totalPage, setTotalPage] = useState<number>(1);
+  const [totalPage, setTotalPage] = useState<number>(0);
+  // 상품 정렬 보관할 state
+  const [type, setType] = useState<string>("0");
+  // 오름차순, 내림차순 보관할 state
+  const [sort, setSort] = useState<string>("0");
   useEffect(() => {
     // console.log("화면 전환합니다");
-    getAdmProductList(page, setAdmProductList, setTotalPage);
-  }, [page]);
+    getAdmProductList(page, type, sort, setAdmProductList, setTotalPage);
+  }, [page, type, sort]);
   return (
     <AdmProductWrap>
       {/* 상품 총 갯수 표시, 상품 등록 링크 */}
       <div className="table-top">
-        <p className="total-count">총 {totalPage}개</p>
-        <Link to="/admin/productadd">상품 등록하기</Link>
+        <p className="total-count">
+          총 <span>{totalPage}</span>개
+        </p>
+        <ProductControlSort setType={setType} setSort={setSort} />
       </div>
       <TableWrap>
         {/* 데이터 테이블 - 세로형 */}

@@ -30,16 +30,22 @@ const ProductAddAdm = () => {
   // 상품명 =========================
   // 상품명 한글 state
   const [productNameKr, setProductNameKr] = useState<string>("");
+  // 상품명 한글 미입력에 대한 예외처리
+  const [nameNoKr, setNameNoKr] = useState<boolean>(false);
   // 상품명 영문 state
   const [productNameEn, setProductNameEn] = useState<string>("");
+  // 상품명 한글 미입력에 대한 예외처리
+  const [nameNoEn, setNameNoEn] = useState<boolean>(false);
   // 가격 =========================
   // 정상가 state
   const [productPrice, setProductPrice] = useState<number | null>(0);
+  // 할인설정 =========================
+  // 할인 유무 설정 state
+  const [saleYn, setSaleYn] = useState<number>(0);
   // 할인율 state
   const [salePer, setSalePer] = useState<number | null>(0);
   // 할인적용금액 state
   const [saleProductPrice, setSaleProductPrice] = useState<number>(0);
-  // 할인기간설정 =========================
   // 할인 시작 state
   const [startSale, setStartSale] = useState<string | undefined>("0000-00-01");
   // 할인 끝 state
@@ -99,10 +105,21 @@ const ProductAddAdm = () => {
     startSale: startSale,
     endSale: endSale,
     smallCategoryId: fairingArr,
+    saleYn: saleYn,
   };
   // 상품 등록 성공
   const onFinish = () => {
     console.log("productParam 보냅니다. ", param);
+    // 상품명 미입력에 대한 예외처리
+    if (param.nmKor.length === 0) {
+      setNameNoKr(true);
+      return;
+    } else if (param.nmEng.length === 0) {
+      setNameNoEn(true);
+      return;
+    }
+    // 정상가 미입력에 대한 예외처리
+
     const formData = new FormData();
     formData.append("pic", selectImage[0]?.originFileObj || "");
     formData.append(
@@ -111,8 +128,9 @@ const ProductAddAdm = () => {
         type: "application/json",
       }),
     );
-    // getAdmProductPost(formData);
-    console.log("전송완료", formData);
+    // 데이터 전송
+    getAdmProductPost(formData);
+    console.log("전송완료");
   };
   // 상품 등록 실패
   const onFinishFailed = (errorInfo: any) => {
@@ -136,6 +154,8 @@ const ProductAddAdm = () => {
             setProductNameKr={setProductNameKr}
             productNameEn={productNameEn}
             setProductNameEn={setProductNameEn}
+            nameNoKr={nameNoKr}
+            nameNoEn={nameNoEn}
           />
           {/* 가격 */}
           <ProductAddPrice
@@ -144,6 +164,8 @@ const ProductAddAdm = () => {
           />
           {/* 할인 설정 */}
           <ProductAddSale
+            saleYn={saleYn}
+            setSaleYn={setSaleYn}
             productPrice={productPrice}
             salePer={salePer}
             setSalePer={setSalePer}

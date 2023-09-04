@@ -21,7 +21,7 @@ const MemberControlPaginate = ({
   sortOption,
 }: IMemberState) => {
   // 페이지 정보(page / row: 페이지 당 개수)
-  const [paginate, setPaginate] = useState<IinitialPg>({ page: 1, row: 12 });
+  const [paginate, setPaginate] = useState<IinitialPg>({ page: 1, row: 10 });
 
   const pageInfo: IMemControl["page"] | null = memberList.page;
 
@@ -42,7 +42,7 @@ const MemberControlPaginate = ({
       {pageInfo && (
         <Pagination
           current={pageInfo.page}
-          pageSize={12}
+          pageSize={paginate.row}
           onChange={page => onChange(page)}
           total={pageInfo.totalRecordCount}
           // size="small"

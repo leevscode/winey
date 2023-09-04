@@ -38,6 +38,11 @@ export const AdmProductWrap = styled.div`
     font-size: 1.25rem;
     .total-count {
       color: ${Maincolor.grayDeep};
+      span {
+        font-size: 1.25em;
+        font-weight: 700;
+        color: ${Gradation.wineE};
+      }
     }
     a {
       font-size: 1.4rem;
@@ -48,6 +53,12 @@ export const AdmProductWrap = styled.div`
       background: ${Gradation.wineE};
       color: ${Maincolor.white};
       border: 0.05rem solid ${opacity.grayLight};
+    }
+    & > div {
+      margin: 0;
+      .ant-select {
+        width: 180px;
+      }
     }
   }
 `;
@@ -149,6 +160,12 @@ export const ProductSubmitWrap = styled.div`
 export const ProductNameWrap = styled.div`
   & > ul {
     & > li {
+      align-items: inherit !important;
+      .title {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
       .content {
         display: flex;
         gap: 0 10px;
@@ -162,6 +179,12 @@ export const ProductNameWrap = styled.div`
             /* display: inline-flex; */
             width: 55px;
           }
+        }
+        .notice {
+          font-size: 1.3rem;
+          line-height: 1;
+          color: red;
+          margin-top: 5px;
         }
       }
     }

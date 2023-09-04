@@ -6,12 +6,15 @@
 import React, { useState } from "react";
 import { Form, Input } from "antd";
 import { ProductNameWrap } from "../../style/product/AdminProductStyle";
+import { AnimatePresence, motion } from "framer-motion";
 
 export interface IProductName {
   productNameKr: string;
   setProductNameKr: React.Dispatch<React.SetStateAction<string>>;
   productNameEn: string;
   setProductNameEn: React.Dispatch<React.SetStateAction<string>>;
+  nameNoKr: boolean;
+  nameNoEn: boolean;
 }
 
 const ProductAddName = ({
@@ -19,6 +22,8 @@ const ProductAddName = ({
   setProductNameKr,
   productNameEn,
   setProductNameEn,
+  nameNoKr,
+  nameNoEn,
 }: IProductName) => {
   console.log("1. 상품명 한글 : ", productNameKr);
   console.log("2. 상품명 영문 : ", productNameEn);
@@ -26,15 +31,15 @@ const ProductAddName = ({
   const checkKr = (e: React.ChangeEvent<HTMLInputElement>) => {
     const target = e.target.value;
     // 한글, 숫자, 공백만 사용하는 정규표현식
-    const targetFilter = target.replace(/[^\d가-힣ㄱ-ㅎㅏ-ㅣ\s]/g, "");
-    setProductNameKr(targetFilter);
+    // const targetFilter = target.replace(/[^\d가-힣ㄱ-ㅎㅏ-ㅣ\s]/g, "");
+    setProductNameKr(target);
   };
   // 상품명 영문 입력창 이벤트
   const checkEn = (e: React.ChangeEvent<HTMLInputElement>) => {
     const target = e.target.value;
     // 영문, 숫자, 공백만 사용하는 정규표현식
-    const targetFilter = target.replace(/[^\da-zA-Z\s]/g, "");
-    setProductNameEn(targetFilter);
+    // const targetFilter = target.replace(/[^\da-zA-Z\s]/g, "");
+    setProductNameEn(target);
   };
   return (
     <ProductNameWrap>
@@ -48,6 +53,18 @@ const ProductAddName = ({
                 value={productNameKr}
                 onChange={checkKr}
               />
+              <AnimatePresence>
+                {nameNoKr === true && (
+                  <motion.p
+                    className="notice"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                  >
+                    * 한글 상품명을 입력해주세요.
+                  </motion.p>
+                )}
+              </AnimatePresence>
             </Form.Item>
             <Form.Item label="영문">
               <Input
@@ -55,6 +72,18 @@ const ProductAddName = ({
                 value={productNameEn}
                 onChange={checkEn}
               />
+              <AnimatePresence>
+                {nameNoEn === true && (
+                  <motion.p
+                    className="notice"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                  >
+                    * 영문 상품명을 입력해주세요.
+                  </motion.p>
+                )}
+              </AnimatePresence>
             </Form.Item>
           </div>
         </li>

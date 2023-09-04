@@ -60,3 +60,4 @@ export const MemberDetailWrap = styled.div`
 export const SortSelectWrap = styled.div`
 margin: 1rem 0;
 `
+// 멤버 검색 form 
