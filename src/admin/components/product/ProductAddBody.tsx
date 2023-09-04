@@ -17,7 +17,7 @@ const ProductAddBody = ({ bodyValue, setBodyValue }: IProductBody) => {
   const selectBody = (e: RadioChangeEvent) => {
     setBodyValue(e.target.value);
   };
-  console.log("바디 클릭했습니다.", bodyValue);
+  // console.log("바디 클릭했습니다.", bodyValue);
   return (
     <ProductBodyWrap>
       <ul>

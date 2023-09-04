@@ -4,8 +4,9 @@
   깃허브 : https://github.com/kimaydev
 */
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { ProductAddAdmWrap } from "../../style/product/AdminProductStyle";
-import { ConfigProvider, Form, UploadFile } from "antd";
+import { ConfigProvider, Form, Modal, UploadFile } from "antd";
 import { AdminColor } from "../../style/AdminLayoutStyle";
 import ProductAddName from "../../components/product/ProductAddName";
 import ProductAddPrice from "../../components/product/ProductAddPrice";
@@ -27,6 +28,7 @@ import ProductAddAlcohol from "../../components/product/ProductAddAlcohol";
 import { getAdmProductPost } from "../../api/patchAdmProduct";
 
 const ProductAddAdm = () => {
+  const navigate = useNavigate();
   // 상품명 =========================
   // 상품명 한글 state
   const [productNameKr, setProductNameKr] = useState<string>("");
@@ -111,7 +113,7 @@ const ProductAddAdm = () => {
   };
   // 상품 등록 성공
   const onFinish = () => {
-    console.log("productParam 보냅니다. ", param);
+    // console.log("productParam 보냅니다. ", param);
     // 상품명 미입력에 대한 예외처리
     if (param.nmKor.length === 0) {
       setNameNoKr(true);
@@ -134,9 +136,31 @@ const ProductAddAdm = () => {
         type: "application/json",
       }),
     );
+    // 모달
+    const handleEditKeywordChoice = () => {
+      Modal.confirm({
+        okText: "예",
+        cancelText: "아니오",
+        wrapClassName: "info-modal-wrap notice-modal",
+        maskClosable: true,
+        content: (
+          <ul>
+            <li>선택한 내용을 저장하시겠습니까?</li>
+          </ul>
+        ),
+        onOk() {
+          getAdmProductPost(formData);
+          navigate("../productlist");
+        },
+        onCancel() {
+          // console.log("Cancel");
+        },
+      });
+    };
+    handleEditKeywordChoice();
     // 데이터 전송
-    getAdmProductPost(formData);
-    console.log("전송완료");
+    // getAdmProductPost(formData);
+    // console.log("전송완료");
   };
   // 상품 등록 실패
   const onFinishFailed = (errorInfo: any) => {

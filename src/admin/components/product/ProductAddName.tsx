@@ -25,8 +25,8 @@ const ProductAddName = ({
   nameNoKr,
   nameNoEn,
 }: IProductName) => {
-  console.log("1. 상품명 한글 : ", productNameKr);
-  console.log("2. 상품명 영문 : ", productNameEn);
+  // console.log("1. 상품명 한글 : ", productNameKr);
+  // console.log("2. 상품명 영문 : ", productNameEn);
   // 상품명 한글 입력창 이벤트
   const checkKr = (e: React.ChangeEvent<HTMLInputElement>) => {
     const target = e.target.value;

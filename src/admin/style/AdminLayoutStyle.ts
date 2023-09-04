@@ -9,15 +9,18 @@ export const AdminColor = {
   headColorA: "rgba(181, 129, 127, 0.95)",
   headColorB: "rgba(158,152,152,0.95)",
   headColorC: "rgb(149, 182, 184 , 0.95)",
+  headColorD: "rgb(250, 235, 213 , 0.95)",
   bodyColorA: "#f7f1f3",
   // 테이블 내용 컬러 설정
   contentsColorA: "rgba(248, 241, 241, 0.5)",
   contentsColorB: "rgba(245, 244, 244, 0.5)",
   contentsColorC: "rgb(228, 239, 240 , 0.5)",
+  contentsColorD: "rgb(253, 245, 233 , 0.5)",
   // 테이블 내용 hover 컬러 설정
   contentsColorHoverA: "rgba(248, 241, 241, 1)",
   contentsColorHoverB: "rgba(245, 244, 244, 1)",
   contentsColorHoverC: "rgb(228, 239, 240 , 1)",
+  contentsColorHoverD: "rgb(253, 245, 233 , 1)",
   // 버튼 컬러 설정
   pinkA: "#d5adac",
   pinkB: "#c9a1a0",
@@ -25,6 +28,8 @@ export const AdminColor = {
   grayB: "#b8b3b3",
   blueA: "#afd0d2",
   blueB: "#a2c3c5",
+  yellowA: "#f2ddc2",
+  yellowB: "#e8cdaf",
 };
 // 테이블 버튼 스타일 설정
 // (button 태그에만 사용 가능합니다!! Link 컴포넌트 사용 X!!)
@@ -134,6 +139,12 @@ export const LayoutIntroWrap = styled.div`
         background: ${AdminColor.pinkA};
         &:hover {
           background: ${AdminColor.pinkB};
+        }
+      }
+      &:nth-of-type(2) a {
+        background: ${AdminColor.yellowA};
+        &:hover {
+          background: ${AdminColor.yellowB};
         }
       }
       &:nth-of-type(3) a {
@@ -324,6 +335,15 @@ const TableLayoutTitleColor = (props: ItableLayoutColor) => {
     return css`
       background: ${AdminColor.headColorC};
     `;
+    // 매장관리
+  } else if (
+    props.listPathName === "storecontrol" ||
+    props.listPathName === "storeadd"
+  ) {
+    return css`
+      background: ${AdminColor.headColorD};
+      color: ${Maincolor.black};
+    `;
   }
 };
 // 관리자페이지 데이터 테이블 스타일 설정 (new) - 내용색상
@@ -366,6 +386,18 @@ const TableLayoutContentsColor = (props: ItableLayoutColor) => {
       }
       &:hover {
         background: ${AdminColor.contentsColorHoverC};
+      }
+    `;
+  } else if (
+    props.listPathName === "storecontrol" ||
+    props.listPathName === "storeadd"
+  ) {
+    return css`
+      &:nth-of-type(odd) > li {
+        background: ${AdminColor.contentsColorD};
+      }
+      &:hover {
+        background: ${AdminColor.contentsColorHoverD};
       }
     `;
   }

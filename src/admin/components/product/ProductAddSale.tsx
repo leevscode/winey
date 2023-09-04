@@ -71,7 +71,7 @@ const ProductAddSale = ({
   const [saleYnCheck, setSaleYnCheck] = useState<number>(1);
   // 할인 여부 설정
   const selectSaleDate = (e: RadioChangeEvent) => {
-    console.log(e.target.value);
+    // console.log(e.target.value);
     if (e.target.value === 1) {
       // 할인하지않음 선택
       setSaleYn(0);
@@ -137,9 +137,9 @@ const ProductAddSale = ({
   //   console.log("할인율 적용 버튼 눌렀습니다.");
   // };
 
-  console.log("3. 정상가", productPrice);
-  console.log("4. 할인율", salePer);
-  console.log("5. 최종할인금액", saleProductPrice);
+  // console.log("3. 정상가", productPrice);
+  // console.log("4. 할인율", salePer);
+  // console.log("5. 최종할인금액", saleProductPrice);
   // ant design RangePicker 사용
   const { RangePicker } = DatePicker;
   // eslint-disable-next-line arrow-body-style
@@ -163,11 +163,11 @@ const ProductAddSale = ({
       setEndSale(dateStrings[1] + "-01");
     } else {
       // 날짜 초기화
-      console.log("Clear");
+      // console.log("Clear");
     }
   };
-  console.log("할인 시작날짜 담았습니다.", startSale);
-  console.log("할인 종료날짜 담았습니다.", endSale);
+  // console.log("할인 시작날짜 담았습니다.", startSale);
+  // console.log("할인 종료날짜 담았습니다.", endSale);
 
   // 정상가 or 할인율 변할 때 할인적용금액 계산됨
   useEffect(() => {
@@ -207,23 +207,6 @@ const ProductAddSale = ({
                     />
                     %
                   </div>
-                  {/* <Popover
-                    content={
-                      <div className="popover-content">
-                        <i>
-                          <FontAwesomeIcon icon={faTriangleExclamation} />
-                        </i>
-                        <p>정상가 또는 할인율을 입력해주세요.</p>
-                      </div>
-                    }
-                    placement="bottom"
-                    trigger="click"
-                    open={open}
-                  >
-                    <ProductFormBtn onClick={perCalc}>
-                      할인율적용
-                    </ProductFormBtn>
-                  </Popover> */}
                 </Form.Item>
                 <Form.Item label="할인적용금액 :">
                   <InputNumber

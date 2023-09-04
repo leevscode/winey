@@ -22,7 +22,7 @@ const ProductAddAroma = ({ aromaArr, setAromaArr }: IProductAroma) => {
       ),
     );
   };
-  console.log("아로마 데이터 출력합니다.", aromaArr);
+  // console.log("아로마 데이터 출력합니다.", aromaArr);
   return (
     <ProductAromaWrap>
       <ul>

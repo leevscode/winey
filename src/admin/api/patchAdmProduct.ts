@@ -17,7 +17,6 @@ export const getAdmProductList = async (
   _setTotalPage: Dispatch<React.SetStateAction<number>>,
 ) => {
   try {
-    // const res = await axios.get(`/api/admin/product/list?page=${_page}&row=10`);
     const res = await client.get(
       `/api/admin/product/list?page=${_page}&row=10&type=${_type}&sort=${_sort}`,
     );
@@ -47,5 +46,17 @@ export const getAdmProductPost = async (_data: any) => {
     return result;
   } catch (err) {
     console.log("상품 등록 실패", err);
+  }
+};
+// 상품 수정을 위한 각각의 상품별 GET
+export const getAdmProductDetail = async (_iproduct: number) => {
+  try {
+    const res = await client.get(
+      `/api/admin/product/detail?productId=${_iproduct}`,
+    );
+    const result = res.data;
+    console.log("전송받는 데이터", result);
+  } catch (err) {
+    console.log("상품 수정을 위한 각각의 상품별 GET 실패", err);
   }
 };

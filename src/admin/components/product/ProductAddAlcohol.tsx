@@ -23,7 +23,7 @@ const ProductAddAlcohol = ({
     }
     setProductAlcohol(value);
   };
-  console.log("도수", productAlcohol);
+  // console.log("도수", productAlcohol);
   return (
     <ProductAddAlcoholWrap>
       <ul>

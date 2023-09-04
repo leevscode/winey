@@ -4,7 +4,7 @@
   깃허브 : https://github.com/kimaydev
 */
 import React, { useEffect, useState } from "react";
-import { Link, useOutletContext } from "react-router-dom";
+import { Link, useNavigate, useOutletContext } from "react-router-dom";
 import {
   DetailBt,
   PaginationWrap,
@@ -20,6 +20,7 @@ import { AdmProductWrap } from "../../style/product/AdminProductStyle";
 import ProductControlSort from "../../components/product/ProductControlSort";
 
 const ProductListAdm = () => {
+  const navigate = useNavigate();
   const { listPathName } = useOutletContext() as { listPathName: string };
   // console.log("listPathName 불러옵니다.", listPathName);
   /* 
@@ -42,6 +43,7 @@ const ProductListAdm = () => {
   const [type, setType] = useState<string>("0");
   // 오름차순, 내림차순 보관할 state
   const [sort, setSort] = useState<string>("0");
+  // 수정 버튼 클릭 시 상품 정보 수정페이지 이동
   useEffect(() => {
     // console.log("화면 전환합니다");
     getAdmProductList(page, type, sort, setAdmProductList, setTotalPage);
@@ -100,7 +102,11 @@ const ProductListAdm = () => {
               <li>{item.quantity}개</li>
               <li>{item.quantity === 0 ? "Y" : "N"}</li>
               <li>
-                <DetailBt>수정</DetailBt>
+                <DetailBt
+                  onClick={() => navigate(`../productedit/${item.productId}`)}
+                >
+                  수정
+                </DetailBt>
               </li>
             </TableLayoutContents>
           ))}

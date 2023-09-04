@@ -23,7 +23,7 @@ const ProductAddQuantity = ({
     }
     setQuantityValue(value);
   };
-  console.log("재고수량", quantityValue);
+  // console.log("재고수량", quantityValue);
 
   return (
     <ProductQuantityWrap>

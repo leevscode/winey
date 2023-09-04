@@ -20,7 +20,7 @@ const ProductAddAcidity = ({
   const selectAcidity = (e: RadioChangeEvent) => {
     setAcidityValue(e.target.value);
   };
-  console.log("산도 클릭했습니다.", acidityValue);
+  // console.log("산도 클릭했습니다.", acidityValue);
   return (
     <ProductAcidityWrap>
       <ul>

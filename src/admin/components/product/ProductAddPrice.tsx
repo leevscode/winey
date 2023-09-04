@@ -26,7 +26,7 @@ const ProductAddPrice = ({
     }
     setProductPrice(value);
   };
-  console.log("정상가", productPrice);
+  // console.log("정상가", productPrice);
   return (
     <ProductPriceWrap>
       <ul>

@@ -38,8 +38,8 @@ const ProductAddPromotion = ({
       setBeginnerValue(0);
     }
   };
-  console.log("promotionValue의 값은?", promotionValue);
-  console.log("beginnerValue의 값은?", beginnerValue);
+  // console.log("promotionValue의 값은?", promotionValue);
+  // console.log("beginnerValue의 값은?", beginnerValue);
   return (
     <ProductPromotionWrap>
       <ul>

@@ -20,7 +20,7 @@ const ProductAddImage = ({ selectImage, setSelectImage }: IProductImage) => {
   }) => {
     setSelectImage(newFileList);
   };
-  console.log("이미지 업로드 했습니다.", selectImage);
+  // console.log("이미지 업로드 했습니다.", selectImage);
   return (
     <ProductImageWrap>
       <ul>

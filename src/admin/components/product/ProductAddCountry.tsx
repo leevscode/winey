@@ -20,7 +20,7 @@ const ProductAddCountry = ({
   const selectCountry = (e: RadioChangeEvent) => {
     setCountryValue(e.target.value);
   };
-  console.log("원산지 클릭했습니다.", countryValue);
+  // console.log("원산지 클릭했습니다.", countryValue);
   return (
     <ProductCountryWrap>
       <ul>

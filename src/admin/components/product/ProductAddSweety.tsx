@@ -17,7 +17,7 @@ const ProductAddSweety = ({ sweetyValue, setSweetyValue }: IProductSweety) => {
   const changeSweety = (e: RadioChangeEvent) => {
     setSweetyValue(e.target.value);
   };
-  console.log("당도 클릭했습니다.", sweetyValue);
+  // console.log("당도 클릭했습니다.", sweetyValue);
   return (
     <ProductSweetyWrap>
       <ul>

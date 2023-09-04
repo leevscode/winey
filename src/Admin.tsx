@@ -4,7 +4,7 @@
 import React, { useEffect, useState } from "react";
 
 import { Breadcrumb, Layout, Menu, theme, ConfigProvider } from "antd";
-import { Link, Outlet, useLocation } from "react-router-dom";
+import { Link, Outlet, useLocation, useParams } from "react-router-dom";
 import AdminHeader from "./admin/components/AdminHeader";
 import AdminFooter from "./admin/components/AdminFooter";
 import AdminSideMenu from "./admin/components/AdminSideMenu";
@@ -14,6 +14,7 @@ const { Content } = Layout;
 
 const Admin: React.FC = () => {
   const { pathname } = useLocation();
+  const { iproduct } = useParams();
   // pathname에서 /admin/ 는 제외처리
   const listPathName: string = pathname.slice(7);
   // console.log(listPathName);
@@ -59,7 +60,7 @@ const Admin: React.FC = () => {
     },
     {
       title: "상품수정하기",
-      path: "productedit",
+      path: `productedit/${iproduct}`,
     },
   ];
   // 관리자페이지 - 네비게이션 데이터

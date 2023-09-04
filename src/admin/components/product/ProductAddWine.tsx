@@ -17,7 +17,7 @@ const ProductAddWine = ({ wineValue, setWineValue }: IProductWine) => {
   const selectWine = (e: RadioChangeEvent) => {
     setWineValue(e.target.value);
   };
-  console.log("와인 종류 클릭했습니다.", wineValue);
+  // console.log("와인 종류 클릭했습니다.", wineValue);
   return (
     <ProductWineWrap>
       <ul>

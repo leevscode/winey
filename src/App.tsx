@@ -89,7 +89,6 @@ function App() {
       <AnimatePresence>
         <Routes>
           {/* 관리자 페이지 */}
-          {/* -> 관리자 페이지 추후 별도 프로젝트 생성해서 작업 할 것 */}
           <Route path="/admin" element={<Admin />}>
             {/* 관리자페이지 초기화면 */}
             <Route index element={<AdminIntro />} />
@@ -110,7 +109,7 @@ function App() {
             {/* 상품등록하기 */}
             <Route path="productadd" element={<ProductAddAdm />} />
             {/* 상품수정하기*/}
-            <Route path="productedit" element={<ProductEditAdm />} />
+            <Route path="productedit/:iproduct" element={<ProductEditAdm />} />
             {/* 기간별 할인상품 관리 */}
             {/* 경로 외 접속 시 낫파운드 */}
             <Route index path="*" element={<NotFound />} />

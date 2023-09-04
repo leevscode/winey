@@ -22,7 +22,7 @@ const ProductAddFairing = ({ fairingArr, setFairingArr }: IProductFairing) => {
       ),
     );
   };
-  console.log("페어링 출력합니다.", fairingArr);
+  // console.log("페어링 출력합니다.", fairingArr);
 
   return (
     <ProductFairingWrap>
