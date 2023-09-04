@@ -6,6 +6,7 @@
 import axios from "axios";
 import { IproductList, IproductListPage } from "../interface/ProductInterface";
 import { Dispatch } from "react";
+import { client } from "../../api/client";
 
 // 등록된 상품 리스트 GET
 export const getAdmProductList = async (
@@ -17,7 +18,7 @@ export const getAdmProductList = async (
 ) => {
   try {
     // const res = await axios.get(`/api/admin/product/list?page=${_page}&row=10`);
-    const res = await axios.get(
+    const res = await client.get(
       `/api/admin/product/list?page=${_page}&row=10&type=${_type}&sort=${_sort}`,
     );
     const result = res.data;
@@ -36,7 +37,7 @@ export const getAdmProductList = async (
 // 상품 등록 POST
 export const getAdmProductPost = async (_data: any) => {
   try {
-    const res = await axios.post("/api/admin", _data, {
+    const res = await client.post("/api/admin", _data, {
       headers: {
         "Content-Type": "multipart/form-data",
       },

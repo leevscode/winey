@@ -37,7 +37,7 @@ const ProductListAdm = () => {
   // 상품 페이징 숫자 보관할 state
   const [page, setPage] = useState<number>(1);
   // 총 상품 갯수 보관할 state
-  const [totalPage, setTotalPage] = useState<number>(1);
+  const [totalPage, setTotalPage] = useState<number>(0);
   // 상품 정렬 보관할 state
   const [type, setType] = useState<string>("0");
   // 오름차순, 내림차순 보관할 state

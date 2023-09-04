@@ -160,6 +160,12 @@ export const ProductSubmitWrap = styled.div`
 export const ProductNameWrap = styled.div`
   & > ul {
     & > li {
+      align-items: inherit !important;
+      .title {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
       .content {
         display: flex;
         gap: 0 10px;
@@ -173,6 +179,12 @@ export const ProductNameWrap = styled.div`
             /* display: inline-flex; */
             width: 55px;
           }
+        }
+        .notice {
+          font-size: 1.3rem;
+          line-height: 1;
+          color: red;
+          margin-top: 5px;
         }
       }
     }

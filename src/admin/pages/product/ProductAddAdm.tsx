@@ -30,8 +30,12 @@ const ProductAddAdm = () => {
   // 상품명 =========================
   // 상품명 한글 state
   const [productNameKr, setProductNameKr] = useState<string>("");
+  // 상품명 한글 미입력에 대한 예외처리
+  const [nameNoKr, setNameNoKr] = useState<boolean>(false);
   // 상품명 영문 state
   const [productNameEn, setProductNameEn] = useState<string>("");
+  // 상품명 한글 미입력에 대한 예외처리
+  const [nameNoEn, setNameNoEn] = useState<boolean>(false);
   // 가격 =========================
   // 정상가 state
   const [productPrice, setProductPrice] = useState<number | null>(0);
@@ -106,6 +110,14 @@ const ProductAddAdm = () => {
   // 상품 등록 성공
   const onFinish = () => {
     console.log("productParam 보냅니다. ", param);
+    // 예외처리
+    if (param.nmKor.length === 0) {
+      setNameNoKr(true);
+      return;
+    } else if (param.nmEng.length === 0) {
+      setNameNoEn(true);
+      return;
+    }
 
     const formData = new FormData();
     formData.append("pic", selectImage[0]?.originFileObj || "");
@@ -115,8 +127,9 @@ const ProductAddAdm = () => {
         type: "application/json",
       }),
     );
-    console.log("전송완료", formData);
+    // 데이터 전송
     getAdmProductPost(formData);
+    console.log(formData);
   };
   // 상품 등록 실패
   const onFinishFailed = (errorInfo: any) => {
@@ -140,6 +153,8 @@ const ProductAddAdm = () => {
             setProductNameKr={setProductNameKr}
             productNameEn={productNameEn}
             setProductNameEn={setProductNameEn}
+            nameNoKr={nameNoKr}
+            nameNoEn={nameNoEn}
           />
           {/* 가격 */}
           <ProductAddPrice
