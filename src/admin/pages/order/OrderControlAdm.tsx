@@ -24,19 +24,9 @@ import {
 const OrderControlAdm = () => {
   const [orderControl, setOrderControl] = useState<Array<fetchData>>([]);
   const [orderControl2, setOrderControl2] = useState<fetchData2>();
-  const option = [
-    { value: "1", label: "결제완료" },
-    { value: "2", label: "배송완료" },
-    { value: "3", label: "배송중" },
-    { value: "4", label: "픽업대기" },
-    { value: "5", label: "픽업완료" },
-    { value: "6", label: "주문취소" },
-  ];
-
-  const { Option } = Select;
   const [current, setCurrent] = useState(1);
-  const navigate = useNavigate();
   const { listPathName } = useOutletContext() as { listPathName: string };
+  const navigate = useNavigate();
 
   // 정렬 state
   const initialSortOption: ControllSortOption = { type: "0", sort: "0" };
@@ -82,10 +72,17 @@ const OrderControlAdm = () => {
     }
   };
 
-  // 그리드 레이아웃
-  const gridTemplateColumns = {
-    columns: "0.5fr 0.9fr 1.8fr 0.4fr 0.5fr 0.55fr 0.55fr 0.55fr 0.55fr",
-  };
+  // 배송상태 셀렉트 버튼
+  const { Option } = Select;
+  
+  const option = [
+    { value: "1", label: "결제완료" },
+    { value: "2", label: "배송완료" },
+    { value: "3", label: "배송중" },
+    { value: "4", label: "픽업대기" },
+    { value: "5", label: "픽업완료" },
+    { value: "6", label: "주문취소" },
+  ];
 
   // 배송상태 변경 모달
   const getStatusLabel = (value: string) => {
@@ -136,6 +133,11 @@ const OrderControlAdm = () => {
         getOrderData();
       },
     });
+  };
+
+  // 그리드 레이아웃
+  const gridTemplateColumns = {
+    columns: "0.5fr 0.9fr 1.8fr 0.4fr 0.5fr 0.55fr 0.55fr 0.55fr 0.55fr",
   };
 
   return (
