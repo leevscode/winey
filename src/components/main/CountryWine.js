@@ -43,12 +43,14 @@ const CountryWine = ({ setIsModalOpen }) => {
   const [isActive, setIsActive] = useState(1);
   // 장바구니 버튼 클릭 이벤트
   const showModal = useCallback(
-    (_iproduct, e) => {
+    async (_iproduct, e) => {
       e.preventDefault();
-      // 비회원인 상태에서 장바구니 버튼 클릭했을 때
-      addCart(_iproduct);
-      cartLengthData(dispatch);
-      setIsModalOpen(true);
+      const result = await addCart(_iproduct);
+      if (result !== null) {
+        // 에러가 발생하지 않았을 경우에만 모달 열기
+        cartLengthData(dispatch);
+        setIsModalOpen(true);
+      }
     },
     [setIsModalOpen],
   );

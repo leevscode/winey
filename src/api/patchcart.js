@@ -3,6 +3,7 @@
     노션 : https://www.notion.so/leevscode/leevscode-5223e3d332604844a255a0c63113a284
     깃허브 : https://github.com/leevscode
 */
+import { Modal } from "antd";
 import { totalItem } from "../reducers/cartSlice";
 import { client } from "./client";
 
@@ -60,9 +61,21 @@ export const addCart = async _productId => {
       productId: _productId,
     });
     const result = res.data;
-    // console.log("장바구니 추가 POST 성공", result);
+    console.log("장바구니 추가 POST 성공", result);
     return result;
   } catch (error) {
-    // console.error("API 요청 중 오류 발생:", error);
+    console.error("API 요청 중 오류 발생:", error);
+    Modal.warning({
+      wrapClassName: "info-modal-wrap notice-modal",
+      maskClosable: true,
+      content: (
+        <ul>
+          <li>
+            장바구니에 담을수 있는 수량은 <br /> 최대 5개를 초과 할 수 없습니다.
+          </li>
+        </ul>
+      ),
+    });
+    return null;
   }
 };

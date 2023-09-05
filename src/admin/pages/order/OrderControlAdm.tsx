@@ -20,12 +20,14 @@ import {
   fetchData,
   fetchData2,
 } from "../../interface/ControlInterface";
+import { AdmProductWrap } from "../../style/product/AdminProductStyle";
 
 const OrderControlAdm = () => {
   const [orderControl, setOrderControl] = useState<Array<fetchData>>([]);
   const [orderControl2, setOrderControl2] = useState<fetchData2>();
   const [current, setCurrent] = useState(1);
   const { listPathName } = useOutletContext() as { listPathName: string };
+  const [totalRecordCount, setTotalRecordCount] = useState<number>(0);
   const navigate = useNavigate();
 
   // 정렬 state
@@ -37,6 +39,16 @@ const OrderControlAdm = () => {
     2: { type: "storeNm", sort: "desc" },
     3: { type: "orderStatus", sort: "asc" },
     4: { type: "orderStatus", sort: "desc" },
+  };
+
+  // 정렬
+  const handleSortChange = (value: string) => {
+    if (sortValue[value]) {
+      const { type, sort } = sortValue[value];
+      setSortOption({ type, sort });
+    } else {
+      setSortOption(initialSortOption);
+    }
   };
 
   const onChange: PaginationProps["onChange"] = page => {
@@ -53,6 +65,8 @@ const OrderControlAdm = () => {
       setOrderControl2(data.page);
       console.log(data.list);
       console.log(data.page);
+      setTotalRecordCount(data.page.totalRecordCount);
+      console.log(totalRecordCount);
     } catch (err) {
       console.error("데이터 로드 중 오류 발생", err);
     }
@@ -61,16 +75,6 @@ const OrderControlAdm = () => {
   useEffect(() => {
     getOrderData();
   }, [current, sortOption]);
-
-  // 정렬
-  const handleSortChange = (value: string) => {
-    if (sortValue[value]) {
-      const { type, sort } = sortValue[value];
-      setSortOption({ type, sort });
-    } else {
-      setSortOption(initialSortOption);
-    }
-  };
 
   // 배송상태 셀렉트 버튼
   const { Option } = Select;
@@ -142,31 +146,36 @@ const OrderControlAdm = () => {
 
   return (
     <>
-      <div>
-        <Select
-          defaultValue="정렬"
-          style={{
-            width: 100,
-            marginBottom: "1rem",
-          }}
-          onChange={handleSortChange}
-          options={[
-            {
-              label: "픽업장소",
-              options: [
-                { label: "오름차순", value: "1" },
-                { label: "내림차순", value: "2" },
-              ],
-            },
-            {
-              label: "픽업배송상태",
-              options: [
-                { label: "오름차순", value: "3" },
-                { label: "내림차순", value: "4" },
-              ],
-            },
-          ]}
-        />
+      <AdmProductWrap>
+        <div className="table-top">
+          <p className="total-count">
+            총 <span>{totalRecordCount}</span>건
+          </p>
+          <Select
+            defaultValue="기본정렬"
+            style={{
+              width: 100,
+            }}
+            onChange={handleSortChange}
+            options={[
+              {
+                label: "픽업장소",
+                options: [
+                  { label: "오름차순", value: "1" },
+                  { label: "내림차순", value: "2" },
+                ],
+              },
+              {
+                label: "픽업배송상태",
+                options: [
+                  { label: "오름차순", value: "3" },
+                  { label: "내림차순", value: "4" },
+                ],
+              },
+            ]}
+          />
+        </div>
+
         <TableVertical>
           <TableLayoutTitle
             listPathName={listPathName}
@@ -265,7 +274,7 @@ const OrderControlAdm = () => {
             total={orderControl2?.totalRecordCount || 0}
           />
         </PaginationWrap>
-      </div>
+      </AdmProductWrap>
     </>
   );
 };
