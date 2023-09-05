@@ -77,7 +77,7 @@ const MypageList = () => {
             {userData.userId ? (
               <>
                 <p>반갑습니다.</p>
-                <span>{userData.nm}</span>님
+                <span>{userData.unm}</span>님
               </>
             ) : (
               <div>

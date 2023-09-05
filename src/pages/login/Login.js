@@ -11,7 +11,7 @@ import { LockOutlined, UserOutlined } from "@ant-design/icons";
 import { FormWrap, LoginWrap, LogoDiv } from "../../style/LoginStyle";
 import { Link, useNavigate } from "react-router-dom";
 import { ButtonCancel, ButtonOk } from "../../style/GlobalStyle";
-import { fetchLogin, fetchRefreshToken } from "../../api/client";
+import { fetchLogin } from "../../api/client";
 import { useDispatch, useSelector } from "react-redux";
 import { getMemberInfo, postLogin } from "../../api/joinpatch";
 import { cartLengthData } from "../../api/patchcart";
@@ -62,7 +62,7 @@ const Login = () => {
 
   const onFinish = async () => {
     try {
-      const login = await postLogin(userid, password);
+      const login = await fetchLogin(userid, password);
       console.log("login", login);
       console.log("login.roleType", login.roleType);
       if (login.roleType == "USER") {

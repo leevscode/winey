@@ -66,13 +66,13 @@ export const fetchLogin = async (userid, password) => {
       upw: password,
     });
     const result = res.data;
-    setCookie("refresh_token", result.refreshToken, {
+    setCookie("refresh_token", result.authResVo.refreshToken, {
       path: "/",
       secure: true,
       sameSite: "none",
       httpOnly: true,
     });
-    setCookie("accessToken", result.accessToken, {
+    setCookie("accessToken", result.authResVo.accessToken, {
       path: "/",
       secure: true,
       sameSite: "none",

@@ -4,7 +4,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   userId: null,
   email: "",
-  nm: "",
+  unm: "",
   tel: "",
   regionNmId: null,
 };
@@ -17,14 +17,14 @@ const userSlice = createSlice({
     getUser: (state, action) => {
       state.userId = action.payload.userId;
       state.email = action.payload.email;
-      state.nm = action.payload.nm;
+      state.unm = action.payload.unm;
       state.tel = action.payload.tel;
       state.regionNmId = action.payload.regionNmId;
     },
     logoutUser: state => {
       state.userId = null;
       state.email = "";
-      state.nm = "";
+      state.unm = "";
       state.tel = "";
       state.regionNmId = null;
     },
