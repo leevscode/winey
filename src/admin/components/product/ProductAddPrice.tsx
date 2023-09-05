@@ -7,26 +7,24 @@ import React, { useState } from "react";
 import { Form, InputNumber } from "antd";
 import { ProductPriceWrap } from "../../style/product/AdminProductStyle";
 import { AnimatePresence, motion } from "framer-motion";
-
-export interface IProductPrice {
-  productPrice: number | null;
-  setProductPrice: React.Dispatch<React.SetStateAction<number | null>>;
-  priceNo: boolean;
-}
+import { IProductPost } from "../../interface/ProductInterface";
 
 const ProductAddPrice = ({
-  productPrice,
-  setProductPrice,
+  postProductData,
+  setPostProductData,
   priceNo,
-}: IProductPrice) => {
+}: IProductPost) => {
   // 정상가 입력창 이벤트
   const changePrice = (value: number | null) => {
+    // 소숫점 예외처리
     if (value?.toString().includes(".")) {
       return;
     }
-    setProductPrice(value);
+    setPostProductData(prevState => {
+      return { ...prevState, price: value };
+    });
   };
-  // console.log("정상가", productPrice);
+  console.log("정상가", postProductData.price);
   return (
     <ProductPriceWrap>
       <ul>
@@ -38,7 +36,7 @@ const ProductAddPrice = ({
                 min={0}
                 max={10000000}
                 controls={false}
-                value={productPrice}
+                value={postProductData.price}
                 onChange={changePrice}
               />
               원

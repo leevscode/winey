@@ -37,8 +37,9 @@ export interface IproductList {
 }
 // [관리자] 상품 등록 데이터 타입 정의
 export interface Iproduct {
-  nmKor: string;
-  nmEng: string;
+  productId?: number;
+  nmKor: string | undefined;
+  nmEng: string | undefined;
   price: number | null;
   promotion: number;
   beginner: number;
@@ -56,4 +57,12 @@ export interface Iproduct {
   endSale: string | undefined;
   smallCategoryId: CheckboxValueType[];
   saleYn: number;
+}
+// 상품 등록 POST 데이터 타입 정의
+export interface IProductPost {
+  postProductData: Iproduct;
+  setPostProductData: React.Dispatch<React.SetStateAction<Iproduct>>;
+  nameNoKr?: boolean;
+  nameNoEn?: boolean;
+  priceNo?: boolean;
 }

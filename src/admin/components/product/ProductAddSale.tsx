@@ -4,60 +4,21 @@
   깃허브 : https://github.com/kimaydev
 */
 import React, { useEffect, useState } from "react";
-import {
-  DatePicker,
-  Form,
-  InputNumber,
-  Popover,
-  Radio,
-  RadioChangeEvent,
-} from "antd";
+import { DatePicker, Form, InputNumber, Radio, RadioChangeEvent } from "antd";
 import type { RangePickerProps } from "antd/es/date-picker";
 import dayjs from "dayjs";
 import type { Dayjs } from "dayjs";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTriangleExclamation } from "@fortawesome/free-solid-svg-icons";
-import {
-  ProductFormBtn,
-  ProductSaleDateWrap,
-} from "../../style/product/AdminProductStyle";
+import { ProductSaleDateWrap } from "../../style/product/AdminProductStyle";
 import moment from "moment";
+import { IProductPost } from "../../interface/ProductInterface";
 
 // RangePicker 범위 타입 지정
 export type RangeValue = [Dayjs | null, Dayjs | null] | null;
 
-export interface IProductSaleDate {
-  // 할인여부 타입 설정
-  saleYn: number;
-  setSaleYn: React.Dispatch<React.SetStateAction<number>>;
-  // 정상가 타입 설정
-  productPrice: number | null;
-  // 할인율 타입 설정
-  salePer: number | null;
-  setSalePer: React.Dispatch<React.SetStateAction<number | null>>;
-  // 할인적용금액 타입 설정
-  saleProductPrice: number;
-  setSaleProductPrice: React.Dispatch<React.SetStateAction<number>>;
-  // 할인기간 타입 설정
-  startSale: string | undefined;
-  setStartSale: React.Dispatch<React.SetStateAction<string | undefined>>;
-  endSale: string | undefined;
-  setEndSale: React.Dispatch<React.SetStateAction<string | undefined>>;
-}
-
 const ProductAddSale = ({
-  saleYn,
-  setSaleYn,
-  productPrice,
-  salePer,
-  setSalePer,
-  saleProductPrice,
-  setSaleProductPrice,
-  startSale,
-  setStartSale,
-  endSale,
-  setEndSale,
-}: IProductSaleDate) => {
+  postProductData,
+  setPostProductData,
+}: IProductPost) => {
   // 오늘 날짜
   const today = new Date();
   // 오늘 날짜를 YYYY-MM 형식으로 변환
@@ -71,47 +32,68 @@ const ProductAddSale = ({
   const [saleYnCheck, setSaleYnCheck] = useState<number>(1);
   // 할인 여부 설정
   const selectSaleDate = (e: RadioChangeEvent) => {
-    // console.log(e.target.value);
     if (e.target.value === 1) {
       // 할인하지않음 선택
-      setSaleYn(0);
       setSaleYnCheck(1);
       setSaleDisabled(true);
       setDateDisabled(true);
       // 날짜 초기화
-      setStartSale("0000-00-01");
-      setEndSale("0000-00-01");
+      setPostProductData(prevState => {
+        return {
+          ...prevState,
+          saleYn: 0,
+          startSale: "0000-00-01",
+          endSale: "0000-00-01",
+        };
+      });
     } else if (e.target.value === 2) {
       // 상시 할인 선택
       // console.log("값이 2입니다.");
-      setSaleYn(1);
       setSaleYnCheck(2);
       setSaleDisabled(false);
       setDateDisabled(true);
       // 상시 할인 선택 시 시작 날짜 : 오늘 ~ 2999년 12월 01까지
-      setStartSale(todayMoment + "-01");
-      setEndSale("2999-12-01");
+      setPostProductData(prevState => {
+        return {
+          ...prevState,
+          saleYn: 1,
+          startSale: todayMoment + "-01",
+          endSale: "2999-12-01",
+        };
+      });
     } else if (e.target.value === 3) {
       // 기간별 할인 선택
       // console.log("값이 3입니다.");
-      setSaleYn(1);
       setSaleYnCheck(3);
       setSaleDisabled(false);
       setDateDisabled(false);
       // 날짜 초기화
-      setStartSale("0000-00-01");
-      setEndSale("0000-00-01");
+      setPostProductData(prevState => {
+        return {
+          ...prevState,
+          saleYn: 1,
+          startSale: "0000-00-01",
+          endSale: "0000-00-01",
+        };
+      });
     }
   };
-  // 할인율적용 버튼 에러메세지 출력 state (Popover 컴포넌트)
-  const [open, setOpen] = useState(false);
   // 할인율 입력창 이벤트
   const changeSalePer = (value: number | null) => {
     if (value?.toString().includes(".")) {
       return;
     }
-    setSalePer(value);
+    // setSalePer(value);
+
+    setPostProductData(prevState => {
+      return {
+        ...prevState,
+        sale: value,
+      };
+    });
   };
+  const productPrice = postProductData.price;
+  const salePer = postProductData.sale;
   // 할인율 계산
   const per = () => {
     // 정상가, 할인율의 값이 truthy 할 때 실행
@@ -121,22 +103,21 @@ const ProductAddSale = ({
       // console.log("할인된 금액은", res);
       // console.log("최종 할인 금액은", Math.floor(result));
       // 최종 할인 금액에서 소숫점을 내림 처리
-      setSaleProductPrice(Math.floor(result));
+      setPostProductData(prevState => {
+        return {
+          ...prevState,
+          salePrice: Math.floor(result),
+        };
+      });
     } else {
-      // 정상가, 할인율의 값이 falsy 할 때 실행
-      setOpen(true);
-      setSaleProductPrice(0);
-      // 2.5초 뒤 Popover 컴포넌트 숨김
-      const closeOpen = setTimeout(() => setOpen(false), 2500);
-      return () => clearTimeout(closeOpen);
+      setPostProductData(prevState => {
+        return {
+          ...prevState,
+          salePrice: 0,
+        };
+      });
     }
   };
-  // const perCalc: React.MouseEventHandler<HTMLButtonElement> = e => {
-  //   e.preventDefault();
-  //   per();
-  //   console.log("할인율 적용 버튼 눌렀습니다.");
-  // };
-
   // console.log("3. 정상가", productPrice);
   // console.log("4. 할인율", salePer);
   // console.log("5. 최종할인금액", saleProductPrice);
@@ -159,8 +140,13 @@ const ProductAddSale = ({
       // console.log("From: ", dateStrings[0], ", to: ", dateStrings[1]);
       // console.log("할인시작날짜:", dateStrings[0] + "-01");
       // console.log("할인종료날짜:", dateStrings[1] + "-01");
-      setStartSale(dateStrings[0] + "-01");
-      setEndSale(dateStrings[1] + "-01");
+      setPostProductData(prevState => {
+        return {
+          ...prevState,
+          startSale: dateStrings[0] + "-01",
+          endSale: dateStrings[1] + "-01",
+        };
+      });
     } else {
       // 날짜 초기화
       // console.log("Clear");
@@ -211,7 +197,7 @@ const ProductAddSale = ({
                 <Form.Item label="할인적용금액 :">
                   <InputNumber
                     controls={false}
-                    value={saleProductPrice}
+                    value={postProductData.salePrice}
                     readOnly={true}
                     disabled={saleDisabled}
                   />

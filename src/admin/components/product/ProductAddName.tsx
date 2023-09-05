@@ -7,40 +7,28 @@ import React, { useState } from "react";
 import { Form, Input } from "antd";
 import { ProductNameWrap } from "../../style/product/AdminProductStyle";
 import { AnimatePresence, motion } from "framer-motion";
-
-export interface IProductName {
-  productNameKr: string;
-  setProductNameKr: React.Dispatch<React.SetStateAction<string>>;
-  productNameEn: string;
-  setProductNameEn: React.Dispatch<React.SetStateAction<string>>;
-  nameNoKr: boolean;
-  nameNoEn: boolean;
-}
+import { IProductPost } from "../../interface/ProductInterface";
 
 const ProductAddName = ({
-  productNameKr,
-  setProductNameKr,
-  productNameEn,
-  setProductNameEn,
+  postProductData,
+  setPostProductData,
   nameNoKr,
   nameNoEn,
-}: IProductName) => {
-  // console.log("1. 상품명 한글 : ", productNameKr);
+}: IProductPost) => {
   // console.log("2. 상품명 영문 : ", productNameEn);
   // 상품명 한글 입력창 이벤트
   const checkKr = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const target = e.target.value;
-    // 한글, 숫자, 공백만 사용하는 정규표현식
-    // const targetFilter = target.replace(/[^\d가-힣ㄱ-ㅎㅏ-ㅣ\s]/g, "");
-    setProductNameKr(target);
+    setPostProductData(prevState => {
+      return { ...prevState, nmKor: e.target.value };
+    });
   };
   // 상품명 영문 입력창 이벤트
   const checkEn = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const target = e.target.value;
-    // 영문, 숫자, 공백만 사용하는 정규표현식
-    // const targetFilter = target.replace(/[^\da-zA-Z\s]/g, "");
-    setProductNameEn(target);
+    setPostProductData(prevState => {
+      return { ...prevState, nmEng: e.target.value };
+    });
   };
+  console.log("1. 상품명 한글 : ", postProductData.nmKor);
   return (
     <ProductNameWrap>
       <ul>
@@ -50,7 +38,7 @@ const ProductAddName = ({
             <Form.Item label="한글">
               <Input
                 placeholder="상품명을 한글로 입력해주세요."
-                value={productNameKr}
+                value={postProductData.nmKor}
                 onChange={checkKr}
               />
               <AnimatePresence>
@@ -69,7 +57,7 @@ const ProductAddName = ({
             <Form.Item label="영문">
               <Input
                 placeholder="상품명을 영문으로 입력해주세요."
-                value={productNameEn}
+                value={postProductData.nmEng}
                 onChange={checkEn}
               />
               <AnimatePresence>

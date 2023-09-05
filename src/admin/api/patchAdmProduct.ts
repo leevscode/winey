@@ -4,7 +4,11 @@
   깃허브 : https://github.com/kimaydev
 */
 import axios from "axios";
-import { IproductList, IproductListPage } from "../interface/ProductInterface";
+import {
+  Iproduct,
+  IproductList,
+  IproductListPage,
+} from "../interface/ProductInterface";
 import { Dispatch } from "react";
 import { client } from "../../api/client";
 
@@ -49,13 +53,19 @@ export const getAdmProductPost = async (_data: any) => {
   }
 };
 // 상품 수정을 위한 각각의 상품별 GET
-export const getAdmProductDetail = async (_iproduct: number) => {
+export const getAdmProductDetail = async (
+  _iproduct: string | undefined,
+  _setProductNameKr: Dispatch<React.SetStateAction<string | undefined>>,
+) => {
   try {
     const res = await client.get(
       `/api/admin/product/detail?productId=${_iproduct}`,
     );
     const result = res.data;
-    console.log("전송받는 데이터", result);
+    // console.log("전송받는 데이터", result);
+    // console.log(result.nmKor);
+    _setProductNameKr(result.nmKor);
+    return result;
   } catch (err) {
     console.log("상품 수정을 위한 각각의 상품별 GET 실패", err);
   }

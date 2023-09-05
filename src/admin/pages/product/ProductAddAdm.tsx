@@ -31,7 +31,7 @@ const ProductAddAdm = () => {
   const navigate = useNavigate();
   // 상품명 =========================
   // 상품명 한글 state
-  const [productNameKr, setProductNameKr] = useState<string>("");
+  const [productNameKr, setProductNameKr] = useState<string | undefined>("");
   // 상품명 한글 미입력에 대한 예외처리
   const [nameNoKr, setNameNoKr] = useState<boolean>(false);
   // 상품명 영문 state
@@ -89,6 +89,29 @@ const ProductAddAdm = () => {
   // 상품 이미지 업로드 =========================
   // 상품 이미지 보관되는 state
   const [selectImage, setSelectImage] = useState<UploadFile<any>[]>([]);
+  // ========================================================================
+  // 상품 등록 POST 데이터를 보관할 state
+  const [postProductData, setPostProductData] = useState<Iproduct>({
+    nmKor: "",
+    nmEng: "",
+    price: 0,
+    promotion: 0,
+    beginner: 0,
+    alcohol: 0,
+    quantity: 0,
+    country: 0,
+    sweety: 0,
+    acidity: 0,
+    body: 0,
+    category: 0,
+    aroma: [],
+    sale: 0,
+    salePrice: 0,
+    startSale: "",
+    endSale: "",
+    smallCategoryId: [],
+    saleYn: 0,
+  });
   // 상품 등록 POST
   const param: Iproduct = {
     nmKor: productNameKr,
@@ -113,12 +136,12 @@ const ProductAddAdm = () => {
   };
   // 상품 등록 성공
   const onFinish = () => {
-    // console.log("productParam 보냅니다. ", param);
+    console.log("productParam 보냅니다. ", postProductData);
     // 상품명 미입력에 대한 예외처리
-    if (param.nmKor.length === 0) {
+    if (postProductData.nmKor?.length === 0) {
       setNameNoKr(true);
       return;
-    } else if (param.nmEng.length === 0) {
+    } else if (postProductData.nmEng?.length === 0) {
       setNameNoEn(true);
       return;
     }
@@ -180,32 +203,32 @@ const ProductAddAdm = () => {
           <ProductAddSubmit />
           {/* 상품명 */}
           <ProductAddName
-            productNameKr={productNameKr}
-            setProductNameKr={setProductNameKr}
-            productNameEn={productNameEn}
-            setProductNameEn={setProductNameEn}
+            postProductData={postProductData}
+            setPostProductData={setPostProductData}
             nameNoKr={nameNoKr}
             nameNoEn={nameNoEn}
           />
           {/* 가격 */}
           <ProductAddPrice
-            productPrice={productPrice}
-            setProductPrice={setProductPrice}
+            postProductData={postProductData}
+            setPostProductData={setPostProductData}
             priceNo={priceNo}
           />
           {/* 할인 설정 */}
           <ProductAddSale
-            saleYn={saleYn}
-            setSaleYn={setSaleYn}
-            productPrice={productPrice}
-            salePer={salePer}
-            setSalePer={setSalePer}
-            saleProductPrice={saleProductPrice}
-            setSaleProductPrice={setSaleProductPrice}
-            startSale={startSale}
-            setStartSale={setStartSale}
-            endSale={endSale}
-            setEndSale={setEndSale}
+            // saleYn={saleYn}
+            // setSaleYn={setSaleYn}
+            // productPrice={productPrice}
+            // salePer={salePer}
+            // setSalePer={setSalePer}
+            // saleProductPrice={saleProductPrice}
+            // setSaleProductPrice={setSaleProductPrice}
+            // startSale={startSale}
+            // setStartSale={setStartSale}
+            // endSale={endSale}
+            // setEndSale={setEndSale}
+            postProductData={postProductData}
+            setPostProductData={setPostProductData}
           />
           {/* 원산지 */}
           <ProductAddCountry
