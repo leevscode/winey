@@ -20,7 +20,7 @@ const ProductAddSubmit = () => {
         <Form.Item>
           <ul>
             <li>
-              <AdmProductBtnOk type="submit">상품 등록</AdmProductBtnOk>
+              <AdmProductBtnOk type="submit">상품 수정</AdmProductBtnOk>
             </li>
             <li>
               <AdmProductBtnCancel onClick={() => navigate("../productlist")}>

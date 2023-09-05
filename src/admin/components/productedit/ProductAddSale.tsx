@@ -10,7 +10,7 @@ import dayjs from "dayjs";
 import type { Dayjs } from "dayjs";
 import { ProductSaleDateWrap } from "../../style/product/AdminProductStyle";
 import moment from "moment";
-import { IProductPost } from "../../interface/ProductInterface";
+import { IProductPut } from "../../interface/ProductInterface";
 
 // RangePicker 범위 타입 지정
 export type RangeValue = [Dayjs | null, Dayjs | null] | null;
@@ -18,25 +18,29 @@ export type RangeValue = [Dayjs | null, Dayjs | null] | null;
 const ProductAddSale = ({
   postProductData,
   setPostProductData,
-}: IProductPost) => {
+  saleYnCheck,
+  setSaleYnCheck,
+  saleDisabled,
+  setSaleDisabled,
+  dateDisabled,
+  setDateDisabled,
+}: IProductPut) => {
   // 오늘 날짜
   const today = new Date();
   // 오늘 날짜를 YYYY-MM 형식으로 변환
   const todayMoment = moment(today).format("YYYY-MM");
   // console.log("오늘", todayMoment);
-  // 할인 여부를 선택하는 state
-  const [saleYnCheck, setSaleYnCheck] = useState<number | undefined>(1);
   // // 할인 여부 설정에 따른 할인율 컴포넌트 활성화, 비활성화 state
-  const [saleDisabled, setSaleDisabled] = useState<boolean>(true);
+  // const [saleDisabled, setSaleDisabled] = useState<boolean>(true);
   // // 할인 여부 설정에 따른 할인 기간 컴포넌트 활성화, 비활성화 state
-  const [dateDisabled, setDateDisabled] = useState<boolean>(true);
+  // const [dateDisabled, setDateDisabled] = useState<boolean>(true);
   // 할인 여부 설정
   const selectSaleDate = (e: RadioChangeEvent) => {
     if (e.target.value === 1) {
       // 할인하지않음 선택
-      setSaleYnCheck(1);
-      setSaleDisabled(true);
-      setDateDisabled(true);
+      setSaleYnCheck!(1);
+      setSaleDisabled!(true);
+      setDateDisabled!(true);
       // 날짜 초기화
       setPostProductData(prevState => {
         return {
@@ -49,9 +53,9 @@ const ProductAddSale = ({
     } else if (e.target.value === 2) {
       // 상시 할인 선택
       // console.log("값이 2입니다.");
-      setSaleYnCheck(2);
-      setSaleDisabled(false);
-      setDateDisabled(true);
+      setSaleYnCheck!(2);
+      setSaleDisabled!(false);
+      setDateDisabled!(true);
       // 상시 할인 선택 시 시작 날짜 : 오늘 ~ 2999년 12월 01까지
       setPostProductData(prevState => {
         return {
@@ -64,9 +68,9 @@ const ProductAddSale = ({
     } else if (e.target.value === 3) {
       // 기간별 할인 선택
       // console.log("값이 3입니다.");
-      setSaleYnCheck(3);
-      setSaleDisabled(false);
-      setDateDisabled(false);
+      setSaleYnCheck!(3);
+      setSaleDisabled!(false);
+      setDateDisabled!(false);
       // 날짜 초기화
       setPostProductData(prevState => {
         return {

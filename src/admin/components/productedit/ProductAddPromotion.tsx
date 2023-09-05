@@ -7,12 +7,12 @@ import React from "react";
 import { Checkbox, Form } from "antd";
 import { CheckboxValueType } from "antd/es/checkbox/Group";
 import { ProductPromotionWrap } from "../../style/product/AdminProductStyle";
-import { IProductPost } from "../../interface/ProductInterface";
+import { IProductPut } from "../../interface/ProductInterface";
 
 const ProductAddPromotion = ({
   postProductData,
   setPostProductData,
-}: IProductPost) => {
+}: IProductPut) => {
   const checkPromotion = (checkedValues: CheckboxValueType[]) => {
     // console.log(checkedValues);
     // checkedValues에 "추천상품" 포함되어 있으면 promotionValue에 1을 전달

@@ -7,12 +7,12 @@ import React, { useState } from "react";
 import { Checkbox, Form } from "antd";
 import type { CheckboxValueType } from "antd/es/checkbox/Group";
 import { ProductFairingWrap } from "../../style/product/AdminProductStyle";
-import { IProductPost } from "../../interface/ProductInterface";
+import { IProductPut } from "../../interface/ProductInterface";
 
 const ProductAddFairing = ({
   postProductData,
   setPostProductData,
-}: IProductPost) => {
+}: IProductPut) => {
   const changeFairing = (checkedValues: CheckboxValueType[]) => {
     // 배열을 오름차순으로 정렬함
     setPostProductData(prevState => {

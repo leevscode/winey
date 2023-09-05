@@ -21,7 +21,6 @@ import ProductAddPromotion from "../../components/product/ProductAddPromotion";
 import ProductAddQuantity from "../../components/product/ProductAddQuantity";
 import ProductAddImage from "../../components/product/ProductAddImage";
 import ProductAddSubmit from "../../components/product/ProductAddSubmit";
-import { CheckboxValueType } from "antd/es/checkbox/Group";
 import ProductAddSale from "../../components/product/ProductAddSale";
 import { Iproduct } from "../../interface/ProductInterface";
 import ProductAddAlcohol from "../../components/product/ProductAddAlcohol";
@@ -93,7 +92,7 @@ const ProductAddAdm = () => {
         maskClosable: true,
         content: (
           <ul>
-            <li>선택한 내용을 저장하시겠습니까?</li>
+            <li>상품을 등록하시겠습니까?</li>
           </ul>
         ),
         onOk() {

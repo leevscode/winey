@@ -55,7 +55,10 @@ export const getAdmProductPost = async (_data: any) => {
 // 상품 수정을 위한 각각의 상품별 GET
 export const getAdmProductDetail = async (
   _iproduct: string | undefined,
-  _setProductNameKr: Dispatch<React.SetStateAction<string | undefined>>,
+  _setPostProductData: React.Dispatch<React.SetStateAction<Iproduct>>,
+  _setSaleYnCheck: React.Dispatch<React.SetStateAction<number | undefined>>,
+  _setSaleDisabled: React.Dispatch<React.SetStateAction<boolean>>,
+  _setDateDisabled: React.Dispatch<React.SetStateAction<boolean>>,
 ) => {
   try {
     const res = await client.get(
@@ -63,10 +66,83 @@ export const getAdmProductDetail = async (
     );
     const result = res.data;
     // console.log("전송받는 데이터", result);
-    // console.log(result.nmKor);
-    _setProductNameKr(result.nmKor);
+    _setPostProductData({
+      productId: result.productId,
+      nmKor: result.nmKor,
+      nmEng: result.nmEng,
+      price: result.price,
+      promotion: result.promotion,
+      beginner: result.beginner,
+      alcohol: result.alcohol,
+      quantity: result.quantity,
+      pic: result.pic,
+      country: result.country,
+      sweety: result.sweety,
+      acidity: result.acidity,
+      body: result.body,
+      category: result.category,
+      aroma: result.aroma,
+      sale: result.sale,
+      salePrice: result.salePrice,
+      startSale: result.startSale,
+      endSale: result.endSale,
+      smallCategoryId: result.smallCategoryId,
+      saleYn: result.saleYn,
+    });
+    // 수정 페이지 할인 여부 설정 버튼 이벤트
+    const productEdit = () => {
+      if (result.saleYn === 0) {
+        // console.log("할인하지 않음");
+        _setSaleYnCheck(1);
+        _setSaleDisabled(true);
+        _setDateDisabled(true);
+      } else if (result.endSale.includes("2999")) {
+        // console.log("상시 할인");
+        _setSaleYnCheck(2);
+        _setSaleDisabled(false);
+        _setDateDisabled(true);
+      } else if (result.saleYn === 1) {
+        // console.log("기간별 할인");
+        _setSaleYnCheck(3);
+        _setSaleDisabled(false);
+        _setDateDisabled(false);
+      }
+    };
+    productEdit();
     return result;
   } catch (err) {
     console.log("상품 수정을 위한 각각의 상품별 GET 실패", err);
+  }
+};
+// 상품 등록 PUT
+export const getAdmProductPut = async (_data: any) => {
+  try {
+    const res = await client.put("/api/admin", _data, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
+    const result = res.data;
+    console.log("데이터 수정합니다.", result);
+    return result;
+  } catch (err) {
+    console.log("상품 수정 실패", err);
+  }
+};
+// 상품 이미지 DELETE
+export const getProductImgDel = async (_iproduct: string | undefined) => {
+  try {
+    // const res = await client.delete("/api/admin", {
+    const res = await client.delete(
+      `/api/admin/product/pic?productId=${_iproduct}`,
+      {
+        data: _iproduct,
+      },
+    );
+    const result = res.data;
+    console.log("이미지 DELETE", result);
+    return result;
+  } catch (err) {
+    console.log("이미지 DELETE 실패", err);
   }
 };

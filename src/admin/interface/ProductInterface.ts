@@ -5,6 +5,7 @@
 */
 
 import { CheckboxValueType } from "antd/es/checkbox/Group";
+import { UploadFile } from "antd";
 
 // [관리자] 상품 리스트 데이터 타입 정의
 // 상품 리스트 페이징
@@ -37,7 +38,7 @@ export interface IproductList {
 }
 // [관리자] 상품 등록 데이터 타입 정의
 export interface Iproduct {
-  productId?: number;
+  productId?: string;
   nmKor: string | undefined;
   nmEng: string | undefined;
   price: number | null;
@@ -45,6 +46,7 @@ export interface Iproduct {
   beginner: number;
   alcohol: number | null;
   quantity: number | null;
+  pic?: string | undefined;
   country: number;
   sweety: number;
   acidity: number;
@@ -65,4 +67,17 @@ export interface IProductPost {
   nameNoKr?: boolean;
   nameNoEn?: boolean;
   priceNo?: boolean;
+}
+export interface IProductPut {
+  postProductData: Iproduct;
+  setPostProductData: React.Dispatch<React.SetStateAction<Iproduct>>;
+  nameNoKr?: boolean;
+  nameNoEn?: boolean;
+  priceNo?: boolean;
+  saleYnCheck?: number;
+  setSaleYnCheck?: React.Dispatch<React.SetStateAction<number | undefined>>;
+  saleDisabled?: boolean;
+  setSaleDisabled?: React.Dispatch<React.SetStateAction<boolean>>;
+  dateDisabled?: boolean;
+  setDateDisabled?: React.Dispatch<React.SetStateAction<boolean>>;
 }

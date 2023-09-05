@@ -7,12 +7,12 @@ import React from "react";
 import { Checkbox, Form } from "antd";
 import type { CheckboxValueType } from "antd/es/checkbox/Group";
 import { ProductAromaWrap } from "../../style/product/AdminProductStyle";
-import { IProductPost } from "../../interface/ProductInterface";
+import { IProductPut } from "../../interface/ProductInterface";
 
 const ProductAddAroma = ({
   postProductData,
   setPostProductData,
-}: IProductPost) => {
+}: IProductPut) => {
   const changeAroma = (checkedValues: CheckboxValueType[]) => {
     // 배열을 오름차순으로 정렬함
     setPostProductData(prevState => {
