@@ -74,7 +74,7 @@ const OrderControlAdm = () => {
 
   // 배송상태 셀렉트 버튼
   const { Option } = Select;
-  
+
   const option = [
     { value: "1", label: "결제완료" },
     { value: "2", label: "배송완료" },
@@ -146,7 +146,8 @@ const OrderControlAdm = () => {
         <Select
           defaultValue="정렬"
           style={{
-            width: 200,
+            width: 100,
+            marginBottom: "1rem",
           }}
           onChange={handleSortChange}
           options={[
@@ -184,14 +185,15 @@ const OrderControlAdm = () => {
             <li>상세보기</li>
           </TableLayoutTitle>
           {/* 데이터 테이블 - 내용 */}
-          <TableLayoutContents
-            listPathName={listPathName}
-            style={{
-              gridTemplateColumns: gridTemplateColumns.columns,
-            }}
-          >
-            {orderControl.map(item => (
-              <React.Fragment key={item.orderId}>
+          {orderControl.map(item => (
+            <TableLayoutContents
+              key={item.orderId}
+              listPathName={listPathName}
+              style={{
+                gridTemplateColumns: gridTemplateColumns.columns,
+              }}
+            >
+              <React.Fragment>
                 <li>{item.orderDate}</li>
                 <li>{item.email}</li>
                 <li>{item.nmKor}</li>
@@ -252,13 +254,13 @@ const OrderControlAdm = () => {
                   </MemberOutBt>
                 </li>
               </React.Fragment>
-            ))}
-          </TableLayoutContents>
+            </TableLayoutContents>
+          ))}
         </TableVertical>
         <PaginationWrap>
           <Pagination
             current={current}
-            pageSize={15}
+            pageSize={8}
             onChange={onChange}
             total={orderControl2?.totalRecordCount || 0}
           />
