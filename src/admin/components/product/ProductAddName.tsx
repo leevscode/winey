@@ -15,7 +15,6 @@ const ProductAddName = ({
   nameNoKr,
   nameNoEn,
 }: IProductPost) => {
-  // console.log("2. 상품명 영문 : ", productNameEn);
   // 상품명 한글 입력창 이벤트
   const checkKr = (e: React.ChangeEvent<HTMLInputElement>) => {
     setPostProductData(prevState => {
@@ -28,7 +27,8 @@ const ProductAddName = ({
       return { ...prevState, nmEng: e.target.value };
     });
   };
-  console.log("1. 상품명 한글 : ", postProductData.nmKor);
+  // console.log("1. 상품명 한글 : ", postProductData.nmKor);
+  // console.log("2. 상품명 영문 : ", postProductData.nmEng);
   return (
     <ProductNameWrap>
       <ul>

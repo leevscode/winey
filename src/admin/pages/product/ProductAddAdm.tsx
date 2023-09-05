@@ -29,67 +29,14 @@ import { getAdmProductPost } from "../../api/patchAdmProduct";
 
 const ProductAddAdm = () => {
   const navigate = useNavigate();
-  // 상품명 =========================
-  // 상품명 한글 state
-  const [productNameKr, setProductNameKr] = useState<string | undefined>("");
-  // 상품명 한글 미입력에 대한 예외처리
+  // 상품명 한글 미입력에 대한 예외처리 state
   const [nameNoKr, setNameNoKr] = useState<boolean>(false);
-  // 상품명 영문 state
-  const [productNameEn, setProductNameEn] = useState<string>("");
-  // 상품명 한글 미입력에 대한 예외처리
+  // 상품명 한글 미입력에 대한 예외처리 state
   const [nameNoEn, setNameNoEn] = useState<boolean>(false);
-  // 가격 =========================
-  // 정상가 state
-  const [productPrice, setProductPrice] = useState<number | null>(0);
-  // 정상가 금액 0일 경우에 대한 예외처리
+  // 정상가 금액 0일 경우에 대한 예외처리 state
   const [priceNo, setPriceNo] = useState<boolean>(false);
-  // 할인설정 =========================
-  // 할인 유무 설정 state
-  const [saleYn, setSaleYn] = useState<number>(0);
-  // 할인율 state
-  const [salePer, setSalePer] = useState<number | null>(0);
-  // 할인적용금액 state
-  const [saleProductPrice, setSaleProductPrice] = useState<number>(0);
-  // 할인 시작 state
-  const [startSale, setStartSale] = useState<string | undefined>("0000-00-01");
-  // 할인 끝 state
-  const [endSale, setEndSale] = useState<string | undefined>("0000-00-01");
-  // 원산지 =========================
-  // 원산지 value 보관되는 state
-  const [countryValue, setCountryValue] = useState<number>(1);
-  // 와인종류 =========================
-  // 와인 종류 value 보관되는 state
-  const [wineValue, setWineValue] = useState<number>(1);
-  // 도수 =========================
-  // 도수 value 보관되는 state
-  const [productAlcohol, setProductAlcohol] = useState<number | null>(0);
-  // 당도 =========================
-  // 당도 value 보관되는 state
-  const [sweetyValue, setSweetyValue] = useState<number>(1);
-  // 산도 =========================
-  // 산도 value 보관되는 state
-  const [acidityValue, setAcidityValue] = useState<number>(1);
-  // 바디 =========================
-  // 바디 value 보관되는 state
-  const [bodyValue, setBodyValue] = useState<number>(1);
-  // 향(아로마) =========================
-  // 향(아로마) value 보관되는 state
-  const [aromaArr, setAromaArr] = useState<CheckboxValueType[]>([]);
-  // 페어링음식 =========================
-  // 페어링음식 value 보관되는 state
-  const [fairingArr, setFairingArr] = useState<CheckboxValueType[]>([]);
-  // 추천유무 =========================
-  // 추천상품 value 보관되는 state
-  const [promotionValue, setPromotionValue] = useState<number>(0);
-  // 입문자추천 value 보관되는 state
-  const [beginnerValue, setBeginnerValue] = useState<number>(0);
-  // 재고수량 =========================
-  // 재고수량 value 보관되는 state
-  const [quantityValue, setQuantityValue] = useState<number | null>(1);
-  // 상품 이미지 업로드 =========================
   // 상품 이미지 보관되는 state
   const [selectImage, setSelectImage] = useState<UploadFile<any>[]>([]);
-  // ========================================================================
   // 상품 등록 POST 데이터를 보관할 state
   const [postProductData, setPostProductData] = useState<Iproduct>({
     nmKor: "",
@@ -99,41 +46,19 @@ const ProductAddAdm = () => {
     beginner: 0,
     alcohol: 0,
     quantity: 0,
-    country: 0,
-    sweety: 0,
-    acidity: 0,
-    body: 0,
-    category: 0,
+    country: 1,
+    sweety: 1,
+    acidity: 1,
+    body: 1,
+    category: 1,
     aroma: [],
     sale: 0,
     salePrice: 0,
-    startSale: "",
-    endSale: "",
+    startSale: "0000-00-01",
+    endSale: "0000-00-01",
     smallCategoryId: [],
     saleYn: 0,
   });
-  // 상품 등록 POST
-  const param: Iproduct = {
-    nmKor: productNameKr,
-    nmEng: productNameEn,
-    price: productPrice,
-    promotion: promotionValue,
-    beginner: beginnerValue,
-    alcohol: productAlcohol,
-    quantity: quantityValue,
-    country: countryValue,
-    sweety: sweetyValue,
-    acidity: acidityValue,
-    body: bodyValue,
-    category: wineValue,
-    aroma: aromaArr,
-    sale: salePer,
-    salePrice: saleProductPrice,
-    startSale: startSale,
-    endSale: endSale,
-    smallCategoryId: fairingArr,
-    saleYn: saleYn,
-  };
   // 상품 등록 성공
   const onFinish = () => {
     console.log("productParam 보냅니다. ", postProductData);
@@ -146,7 +71,7 @@ const ProductAddAdm = () => {
       return;
     }
     // 정상가 미입력에 대한 예외처리
-    if (param.price === 0) {
+    if (postProductData.price === 0) {
       setPriceNo(true);
       return;
     }
@@ -155,12 +80,12 @@ const ProductAddAdm = () => {
     formData.append("pic", selectImage[0]?.originFileObj || "");
     formData.append(
       "param", //data pk명
-      new Blob([JSON.stringify(param)], {
+      new Blob([JSON.stringify(postProductData)], {
         type: "application/json",
       }),
     );
     // 모달
-    const handleEditKeywordChoice = () => {
+    const handleProductUpload = () => {
       Modal.confirm({
         okText: "예",
         cancelText: "아니오",
@@ -180,10 +105,7 @@ const ProductAddAdm = () => {
         },
       });
     };
-    handleEditKeywordChoice();
-    // 데이터 전송
-    // getAdmProductPost(formData);
-    // console.log("전송완료");
+    handleProductUpload();
   };
   // 상품 등록 실패
   const onFinishFailed = (errorInfo: any) => {
@@ -216,62 +138,58 @@ const ProductAddAdm = () => {
           />
           {/* 할인 설정 */}
           <ProductAddSale
-            // saleYn={saleYn}
-            // setSaleYn={setSaleYn}
-            // productPrice={productPrice}
-            // salePer={salePer}
-            // setSalePer={setSalePer}
-            // saleProductPrice={saleProductPrice}
-            // setSaleProductPrice={setSaleProductPrice}
-            // startSale={startSale}
-            // setStartSale={setStartSale}
-            // endSale={endSale}
-            // setEndSale={setEndSale}
             postProductData={postProductData}
             setPostProductData={setPostProductData}
           />
           {/* 원산지 */}
           <ProductAddCountry
-            countryValue={countryValue}
-            setCountryValue={setCountryValue}
+            postProductData={postProductData}
+            setPostProductData={setPostProductData}
           />
           {/* 와인 종류 */}
-          <ProductAddWine wineValue={wineValue} setWineValue={setWineValue} />
+          <ProductAddWine
+            postProductData={postProductData}
+            setPostProductData={setPostProductData}
+          />
           {/* 도수 */}
           <ProductAddAlcohol
-            productAlcohol={productAlcohol}
-            setProductAlcohol={setProductAlcohol}
+            postProductData={postProductData}
+            setPostProductData={setPostProductData}
           />
           {/* 당도 */}
           <ProductAddSweety
-            sweetyValue={sweetyValue}
-            setSweetyValue={setSweetyValue}
+            postProductData={postProductData}
+            setPostProductData={setPostProductData}
           />
           {/* 산도 */}
           <ProductAddAcidity
-            acidityValue={acidityValue}
-            setAcidityValue={setAcidityValue}
+            postProductData={postProductData}
+            setPostProductData={setPostProductData}
           />
           {/* 바디 */}
-          <ProductAddBody bodyValue={bodyValue} setBodyValue={setBodyValue} />
+          <ProductAddBody
+            postProductData={postProductData}
+            setPostProductData={setPostProductData}
+          />
           {/* 향(아로마) */}
-          <ProductAddAroma aromaArr={aromaArr} setAromaArr={setAromaArr} />
+          <ProductAddAroma
+            postProductData={postProductData}
+            setPostProductData={setPostProductData}
+          />
           {/* 페어링음식 */}
           <ProductAddFairing
-            fairingArr={fairingArr}
-            setFairingArr={setFairingArr}
+            postProductData={postProductData}
+            setPostProductData={setPostProductData}
           />
           {/* 추천유무 */}
           <ProductAddPromotion
-            promotionValue={promotionValue}
-            setPromotionValue={setPromotionValue}
-            beginnerValue={beginnerValue}
-            setBeginnerValue={setBeginnerValue}
+            postProductData={postProductData}
+            setPostProductData={setPostProductData}
           />
           {/* 재고수량 */}
           <ProductAddQuantity
-            quantityValue={quantityValue}
-            setQuantityValue={setQuantityValue}
+            postProductData={postProductData}
+            setPostProductData={setPostProductData}
           />
           {/* 상품이미지업로드 */}
           <ProductAddImage

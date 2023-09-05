@@ -24,7 +24,7 @@ const ProductAddPrice = ({
       return { ...prevState, price: value };
     });
   };
-  console.log("정상가", postProductData.price);
+  // console.log("정상가", postProductData.price);
   return (
     <ProductPriceWrap>
       <ul>

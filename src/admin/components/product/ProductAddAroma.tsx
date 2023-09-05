@@ -7,22 +7,24 @@ import React from "react";
 import { Checkbox, Form } from "antd";
 import type { CheckboxValueType } from "antd/es/checkbox/Group";
 import { ProductAromaWrap } from "../../style/product/AdminProductStyle";
+import { IProductPost } from "../../interface/ProductInterface";
 
-export interface IProductAroma {
-  aromaArr: CheckboxValueType[];
-  setAromaArr: React.Dispatch<React.SetStateAction<CheckboxValueType[]>>;
-}
-
-const ProductAddAroma = ({ aromaArr, setAromaArr }: IProductAroma) => {
+const ProductAddAroma = ({
+  postProductData,
+  setPostProductData,
+}: IProductPost) => {
   const changeAroma = (checkedValues: CheckboxValueType[]) => {
     // 배열을 오름차순으로 정렬함
-    setAromaArr(
-      checkedValues.sort(
-        (a: CheckboxValueType, b: CheckboxValueType) => +a - +b,
-      ),
-    );
+    setPostProductData(prevState => {
+      return {
+        ...prevState,
+        aroma: checkedValues.sort(
+          (a: CheckboxValueType, b: CheckboxValueType) => +a - +b,
+        ),
+      };
+    });
   };
-  // console.log("아로마 데이터 출력합니다.", aromaArr);
+  // console.log("아로마 데이터 출력합니다.", postProductData.aroma);
   return (
     <ProductAromaWrap>
       <ul>

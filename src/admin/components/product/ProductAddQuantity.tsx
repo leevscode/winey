@@ -6,24 +6,25 @@
 import React from "react";
 import { Form, Input, InputNumber } from "antd";
 import { ProductQuantityWrap } from "../../style/product/AdminProductStyle";
-
-export interface IProductQuantity {
-  quantityValue: number | null;
-  setQuantityValue: React.Dispatch<React.SetStateAction<number | null>>;
-}
+import { IProductPost } from "../../interface/ProductInterface";
 
 const ProductAddQuantity = ({
-  quantityValue,
-  setQuantityValue,
-}: IProductQuantity) => {
+  postProductData,
+  setPostProductData,
+}: IProductPost) => {
   // 재고수량 입력창 이벤트
   const changeQuantity = (value: number | null) => {
     if (value?.toString().includes(".")) {
       return;
     }
-    setQuantityValue(value);
+    setPostProductData(prevState => {
+      return {
+        ...prevState,
+        quantity: value,
+      };
+    });
   };
-  // console.log("재고수량", quantityValue);
+  // console.log("재고수량", postProductData.quantity);
 
   return (
     <ProductQuantityWrap>
@@ -36,7 +37,7 @@ const ProductAddQuantity = ({
                 min={0}
                 max={999}
                 controls={false}
-                value={quantityValue}
+                value={postProductData.quantity}
                 onChange={changeQuantity}
               />
               개

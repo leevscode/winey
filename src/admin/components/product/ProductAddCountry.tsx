@@ -7,18 +7,16 @@ import React, { useState } from "react";
 import { Form, Radio } from "antd";
 import type { RadioChangeEvent } from "antd";
 import { ProductCountryWrap } from "../../style/product/AdminProductStyle";
-
-export interface IProductCountry {
-  countryValue: number;
-  setCountryValue: React.Dispatch<React.SetStateAction<number>>;
-}
+import { IProductPost } from "../../interface/ProductInterface";
 
 const ProductAddCountry = ({
-  countryValue,
-  setCountryValue,
-}: IProductCountry) => {
+  postProductData,
+  setPostProductData,
+}: IProductPost) => {
   const selectCountry = (e: RadioChangeEvent) => {
-    setCountryValue(e.target.value);
+    setPostProductData(prevState => {
+      return { ...prevState, country: e.target.value };
+    });
   };
   // console.log("원산지 클릭했습니다.", countryValue);
   return (
@@ -28,7 +26,10 @@ const ProductAddCountry = ({
           <div className="title">원산지</div>
           <div className="content">
             <Form.Item>
-              <Radio.Group onChange={selectCountry} value={countryValue}>
+              <Radio.Group
+                onChange={selectCountry}
+                value={postProductData.country}
+              >
                 <ul>
                   <li>
                     <Radio value={1}>프랑스</Radio>

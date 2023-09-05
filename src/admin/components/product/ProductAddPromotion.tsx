@@ -7,39 +7,51 @@ import React from "react";
 import { Checkbox, Form } from "antd";
 import { CheckboxValueType } from "antd/es/checkbox/Group";
 import { ProductPromotionWrap } from "../../style/product/AdminProductStyle";
-
-export interface IProductPromotion {
-  promotionValue: number;
-  setPromotionValue: React.Dispatch<React.SetStateAction<number>>;
-  beginnerValue: number;
-  setBeginnerValue: React.Dispatch<React.SetStateAction<number>>;
-}
+import { IProductPost } from "../../interface/ProductInterface";
 
 const ProductAddPromotion = ({
-  promotionValue,
-  setPromotionValue,
-  beginnerValue,
-  setBeginnerValue,
-}: IProductPromotion) => {
+  postProductData,
+  setPostProductData,
+}: IProductPost) => {
   const checkPromotion = (checkedValues: CheckboxValueType[]) => {
     // console.log(checkedValues);
     // checkedValues에 "추천상품" 포함되어 있으면 promotionValue에 1을 전달
     if (checkedValues.includes("추천상품")) {
       // console.log("추천상품입니다.");
-      setPromotionValue(1);
+      setPostProductData(prevState => {
+        return {
+          ...prevState,
+          promotion: 1,
+        };
+      });
     } else {
-      setPromotionValue(0);
+      setPostProductData(prevState => {
+        return {
+          ...prevState,
+          promotion: 0,
+        };
+      });
     }
     // checkedValues에 "입문자추천" 포함되어 있으면 beginnerValue에 1을 전달
     if (checkedValues.includes("입문자추천")) {
       // console.log("입문자추천입니다.");
-      setBeginnerValue(1);
+      setPostProductData(prevState => {
+        return {
+          ...prevState,
+          beginner: 1,
+        };
+      });
     } else {
-      setBeginnerValue(0);
+      setPostProductData(prevState => {
+        return {
+          ...prevState,
+          beginner: 0,
+        };
+      });
     }
   };
-  // console.log("promotionValue의 값은?", promotionValue);
-  // console.log("beginnerValue의 값은?", beginnerValue);
+  // console.log("promotionValue의 값은?", postProductData.promotion);
+  // console.log("beginnerValue의 값은?", postProductData.beginner);
   return (
     <ProductPromotionWrap>
       <ul>

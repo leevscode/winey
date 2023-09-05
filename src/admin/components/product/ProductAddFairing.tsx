@@ -7,22 +7,24 @@ import React, { useState } from "react";
 import { Checkbox, Form } from "antd";
 import type { CheckboxValueType } from "antd/es/checkbox/Group";
 import { ProductFairingWrap } from "../../style/product/AdminProductStyle";
+import { IProductPost } from "../../interface/ProductInterface";
 
-export interface IProductFairing {
-  fairingArr: CheckboxValueType[];
-  setFairingArr: React.Dispatch<React.SetStateAction<CheckboxValueType[]>>;
-}
-
-const ProductAddFairing = ({ fairingArr, setFairingArr }: IProductFairing) => {
+const ProductAddFairing = ({
+  postProductData,
+  setPostProductData,
+}: IProductPost) => {
   const changeFairing = (checkedValues: CheckboxValueType[]) => {
     // 배열을 오름차순으로 정렬함
-    setFairingArr(
-      checkedValues.sort(
-        (a: CheckboxValueType, b: CheckboxValueType) => +a - +b,
-      ),
-    );
+    setPostProductData(prevState => {
+      return {
+        ...prevState,
+        smallCategoryId: checkedValues.sort(
+          (a: CheckboxValueType, b: CheckboxValueType) => +a - +b,
+        ),
+      };
+    });
   };
-  // console.log("페어링 출력합니다.", fairingArr);
+  // console.log("페어링 출력합니다.", postProductData.smallCategoryId);
 
   return (
     <ProductFairingWrap>

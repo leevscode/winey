@@ -6,22 +6,20 @@
 import React from "react";
 import { Form, InputNumber } from "antd";
 import { ProductAddAlcoholWrap } from "../../style/product/AdminProductStyle";
-
-export interface IProductAlcohol {
-  productAlcohol: number | null;
-  setProductAlcohol: React.Dispatch<React.SetStateAction<number | null>>;
-}
+import { IProductPost } from "../../interface/ProductInterface";
 
 const ProductAddAlcohol = ({
-  productAlcohol,
-  setProductAlcohol,
-}: IProductAlcohol) => {
+  postProductData,
+  setPostProductData,
+}: IProductPost) => {
   // 도수 입력창 이벤트
   const changeAlcohol = (value: number | null) => {
     if (value?.toString().includes(".")) {
       return;
     }
-    setProductAlcohol(value);
+    setPostProductData(prevState => {
+      return { ...prevState, alcohol: value };
+    });
   };
   // console.log("도수", productAlcohol);
   return (
@@ -36,7 +34,7 @@ const ProductAddAlcohol = ({
                 min={0}
                 max={50}
                 controls={false}
-                value={productAlcohol}
+                value={postProductData.alcohol}
                 onChange={changeAlcohol}
               />
               %

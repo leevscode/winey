@@ -7,15 +7,16 @@ import React, { useState } from "react";
 import { Form, Radio } from "antd";
 import type { RadioChangeEvent } from "antd";
 import { ProductWineWrap } from "../../style/product/AdminProductStyle";
+import { IProductPost } from "../../interface/ProductInterface";
 
-export interface IProductWine {
-  wineValue: number;
-  setWineValue: React.Dispatch<React.SetStateAction<number>>;
-}
-
-const ProductAddWine = ({ wineValue, setWineValue }: IProductWine) => {
+const ProductAddWine = ({
+  postProductData,
+  setPostProductData,
+}: IProductPost) => {
   const selectWine = (e: RadioChangeEvent) => {
-    setWineValue(e.target.value);
+    setPostProductData(prevState => {
+      return { ...prevState, category: e.target.value };
+    });
   };
   // console.log("와인 종류 클릭했습니다.", wineValue);
   return (
@@ -25,7 +26,10 @@ const ProductAddWine = ({ wineValue, setWineValue }: IProductWine) => {
           <div className="title">와인 종류</div>
           <div className="content">
             <Form.Item>
-              <Radio.Group onChange={selectWine} value={wineValue}>
+              <Radio.Group
+                onChange={selectWine}
+                value={postProductData.category}
+              >
                 <ul>
                   <li>
                     <Radio value={1}>레드</Radio>

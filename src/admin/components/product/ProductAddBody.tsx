@@ -7,15 +7,16 @@ import React, { useState } from "react";
 import { Form, Radio } from "antd";
 import type { RadioChangeEvent } from "antd";
 import { ProductBodyWrap } from "../../style/product/AdminProductStyle";
+import { IProductPost } from "../../interface/ProductInterface";
 
-export interface IProductBody {
-  bodyValue: number;
-  setBodyValue: React.Dispatch<React.SetStateAction<number>>;
-}
-
-const ProductAddBody = ({ bodyValue, setBodyValue }: IProductBody) => {
+const ProductAddBody = ({
+  postProductData,
+  setPostProductData,
+}: IProductPost) => {
   const selectBody = (e: RadioChangeEvent) => {
-    setBodyValue(e.target.value);
+    setPostProductData(prevState => {
+      return { ...prevState, body: e.target.value };
+    });
   };
   // console.log("바디 클릭했습니다.", bodyValue);
   return (
@@ -25,7 +26,7 @@ const ProductAddBody = ({ bodyValue, setBodyValue }: IProductBody) => {
           <div className="title">바디</div>
           <div className="content">
             <Form.Item>
-              <Radio.Group onChange={selectBody} value={bodyValue}>
+              <Radio.Group onChange={selectBody} value={postProductData.body}>
                 <ul>
                   <li>
                     <Radio value={1}>1</Radio>

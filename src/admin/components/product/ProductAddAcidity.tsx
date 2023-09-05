@@ -7,18 +7,16 @@ import React, { useState } from "react";
 import { Form, Radio } from "antd";
 import type { RadioChangeEvent } from "antd";
 import { ProductAcidityWrap } from "../../style/product/AdminProductStyle";
-
-export interface IProductAcidity {
-  acidityValue: number;
-  setAcidityValue: React.Dispatch<React.SetStateAction<number>>;
-}
+import { IProductPost } from "../../interface/ProductInterface";
 
 const ProductAddAcidity = ({
-  acidityValue,
-  setAcidityValue,
-}: IProductAcidity) => {
+  postProductData,
+  setPostProductData,
+}: IProductPost) => {
   const selectAcidity = (e: RadioChangeEvent) => {
-    setAcidityValue(e.target.value);
+    setPostProductData(prevState => {
+      return { ...prevState, acidity: e.target.value };
+    });
   };
   // console.log("산도 클릭했습니다.", acidityValue);
   return (
@@ -28,7 +26,10 @@ const ProductAddAcidity = ({
           <div className="title">산도</div>
           <div className="content">
             <Form.Item>
-              <Radio.Group onChange={selectAcidity} value={acidityValue}>
+              <Radio.Group
+                onChange={selectAcidity}
+                value={postProductData.acidity}
+              >
                 <ul>
                   <li>
                     <Radio value={1}>1</Radio>

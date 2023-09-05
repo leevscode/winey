@@ -7,15 +7,16 @@ import React, { useState } from "react";
 import { Form, Radio } from "antd";
 import type { RadioChangeEvent } from "antd";
 import { ProductSweetyWrap } from "../../style/product/AdminProductStyle";
+import { IProductPost } from "../../interface/ProductInterface";
 
-export interface IProductSweety {
-  sweetyValue: number;
-  setSweetyValue: React.Dispatch<React.SetStateAction<number>>;
-}
-
-const ProductAddSweety = ({ sweetyValue, setSweetyValue }: IProductSweety) => {
+const ProductAddSweety = ({
+  postProductData,
+  setPostProductData,
+}: IProductPost) => {
   const changeSweety = (e: RadioChangeEvent) => {
-    setSweetyValue(e.target.value);
+    setPostProductData(prevState => {
+      return { ...prevState, sweety: e.target.value };
+    });
   };
   // console.log("당도 클릭했습니다.", sweetyValue);
   return (
@@ -25,7 +26,10 @@ const ProductAddSweety = ({ sweetyValue, setSweetyValue }: IProductSweety) => {
           <div className="title">당도</div>
           <div className="content">
             <Form.Item>
-              <Radio.Group onChange={changeSweety} value={sweetyValue}>
+              <Radio.Group
+                onChange={changeSweety}
+                value={postProductData.sweety}
+              >
                 <ul>
                   <li>
                     <Radio value={1}>1</Radio>
