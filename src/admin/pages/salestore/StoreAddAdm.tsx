@@ -14,6 +14,7 @@ const StoreAddAdm: React.FC = () => {
     regionNmId: 0,
     nm: "0",
     tel: "0",
+    address: "0",
   });
   // 매장 도시
   const handleCity = (e: RadioChangeEvent) => {

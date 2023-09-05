@@ -17,7 +17,7 @@ import { ButtonOk } from "../../style/GlobalStyle";
 import { Terms } from "../../components/join/Terms";
 import { useNavigate } from "react-router-dom";
 import CertifyEmail from "../../components/join/CertifyEmail";
-import { postUserJoin } from "../../api/joinpatch";
+import { postCertifyMail, postUserJoin } from "../../api/joinpatch";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faCircleCheck,
@@ -33,6 +33,8 @@ const Join = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [emailCertifyOk, setEmailCertifyOk] = useState(false);
 
+  // 이메일 저장 state
+  const [inputEmail, setInputEmail] = useState("");
   //password 유효성 검증 state
   const [password, setPassword] = useState("");
   const [passwordConfirm, setPasswordConfirm] = useState("");
@@ -66,10 +68,16 @@ const Join = () => {
     { regionNmId: 17, value: "제주" },
   ];
 
+  // 이메일 입력폼 value 담기
+  const handleEmailValue = e => {
+    setInputEmail(e.target.value);
+  };
   // 이메일 인증 모달
-  const showModalEmail = e => {
+  const showModalEmail = async e => {
     e.preventDefault();
-    // 메일 인증 post 
+    console.log("inputEmail", inputEmail);
+    const temp = await postCertifyMail(inputEmail);
+    // 메일 인증 post
     setIsModalOpen(true);
   };
   const handleOk = () => {
@@ -209,15 +217,15 @@ const Join = () => {
               ]}
             >
               <Input
+                value={inputEmail}
+                onChange={e => handleEmailValue(e)}
                 size="large"
                 // 글자수 제한
                 maxLength={20}
                 placeholder="아이디를 입력해 주세요."
               />
             </Form.Item>
-            <ButtonConfirm onClick={e => showModalEmail(e)}>
-              인증메일발송
-            </ButtonConfirm>
+            <ButtonConfirm onClick={showModalEmail}>인증메일발송</ButtonConfirm>
             <Modal
               title="이메일 인증 확인"
               open={isModalOpen}

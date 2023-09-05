@@ -61,7 +61,7 @@ const StoreControlList = ({
                 <li>{item.storeId}</li>
                 <li>{item.textRegion}</li>
                 <li>{item.nm}</li>
-                <li> 매장주소 어쩌고저쩌고 위치 </li>
+                <li>{item.address}</li>
                 <li>{item.tel}</li>
                 <li>
                   <DetailBt onClick={handleStoreEdit}>수정</DetailBt>

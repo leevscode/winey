@@ -98,3 +98,28 @@ export const getLogout = async () => {
     console.log(error);
   }
 };
+
+// 인증메일발송
+export const postCertifyMail = async inputEmail => {
+  try {
+    const res = await client.post(`/api/login/mailConfirm?email=${inputEmail}`);
+    // console.log(res);
+    const result = await res.data;
+    // console.log(result);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+// 인증번호 확인하기
+export const postConfirmCode = async inputCode => {
+  try {
+    const res = await client.post(`/api/login/codeConfirm?key=${inputCode}`);
+    console.log(res);
+    const result = await res.data;
+    console.log(result);
+    return result;
+  } catch (error) {
+    console.log(error);
+  }
+};
