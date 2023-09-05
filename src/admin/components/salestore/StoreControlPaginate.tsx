@@ -9,7 +9,7 @@ const StoreControlPaginate = ({
   storeInfomation,
   setStoreInfomation,
 }: IStoreInfoState) => {
-  const [paginate, setPaginate] = useState<IinitialPg>({ page: 1, row: 10 });
+  const [paginate, setPaginate] = useState<IinitialPg>({ page: 1, row: 12 });
   const pageInfo: IStoreInfo["page"] | null = storeInfomation.page;
 
   const onChange = async (page: number) => {
@@ -32,7 +32,7 @@ const StoreControlPaginate = ({
         {pageInfo && (
           <Pagination
             current={pageInfo.page}
-            pageSize={10}
+            pageSize={paginate.row}
             onChange={page => onChange(page)}
             total={pageInfo.totalRecordCount}
             // size="small"

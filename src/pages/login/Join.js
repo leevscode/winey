@@ -66,9 +66,10 @@ const Join = () => {
     { regionNmId: 17, value: "제주" },
   ];
 
-  // 아이디 중복 확인 모달창 핸들러
-  const showModal = e => {
+  // 이메일 인증 모달
+  const showModalEmail = e => {
     e.preventDefault();
+    // 메일 인증 post 
     setIsModalOpen(true);
   };
   const handleOk = () => {
@@ -124,13 +125,13 @@ const Join = () => {
   const onFinish = async values => {
     console.log("join values", values);
     // 인증메일 3차 때 진행 예정
-    // if (emailCertifyOk === false) {
-    //   Modal.warning({
-    //     title: "메일인증확인",
-    //     content: <p>이메일 인증을 진행해 주세요.</p>,
-    //   });
-    //   return;
-    // }
+    if (emailCertifyOk === false) {
+      Modal.warning({
+        title: "메일인증확인",
+        content: <p>이메일 인증을 진행해 주세요.</p>,
+      });
+      return;
+    }
     if (regionClick === undefined || regionClick === "") {
       setRegionError("지역을 선택해 주세요.");
       return;
@@ -214,7 +215,7 @@ const Join = () => {
                 placeholder="아이디를 입력해 주세요."
               />
             </Form.Item>
-            <ButtonConfirm onClick={e => showModal(e)}>
+            <ButtonConfirm onClick={e => showModalEmail(e)}>
               인증메일발송
             </ButtonConfirm>
             <Modal
@@ -229,10 +230,9 @@ const Join = () => {
                 </Button>,
               ]}
             >
-              {" "}
-              이메일 인증은 프로젝트 3차에 진행예정입니다.
+              {/* 이메일 인증은 프로젝트 3차에 진행예정입니다. */}
               {/* 메일 인증 3차 때 진행 예정 */}
-              {/* <CertifyEmail setEmailCertifyOk={setEmailCertifyOk} /> */}
+              <CertifyEmail setEmailCertifyOk={setEmailCertifyOk} />
             </Modal>
           </ConfirmArray>
 

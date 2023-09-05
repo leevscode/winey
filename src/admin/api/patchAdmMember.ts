@@ -5,7 +5,6 @@
 */
 import {
   IMemControl,
-  IMemberSortOption,
   IUserDetail,
 } from "../interface/MemberInterface";
 import { client } from "../../api/client";

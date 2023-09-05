@@ -80,6 +80,7 @@ export const ConfirmArray = styled.div`
     }
   }
   & button {
+    margin-top: 0.4rem;
     /* min-width: 6rem; */
     width: 110px;
     /* margin: 0 auto; */
@@ -89,20 +90,24 @@ export const ConfirmArray = styled.div`
 
 // 이메일 인증 component styled
 export const CertifyWrap = styled.div`
-  margin: 0 auto;
+  margin: 2rem 0%;
+  height: 100%;
   & > p {
     text-align: center;
-    margin: 1rem 0 0.5rem 0;
   }
   & > form {
     display: flex;
     margin: 0 auto;
     width: 25rem;
+    height: 3rem;
+    line-height: 4rem;
     & button {
+      margin-top: 1rem;
       font-size: 1.4rem;
       width: 7rem;
-      height: 3.2rem;
+      height: 3rem;
     }
+
     & .ant-form-item-explain-error {
       margin-left: 0.4rem;
     }

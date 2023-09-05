@@ -118,7 +118,7 @@ export const ProductCompleteBox = styled.div`
         line-height: 2rem;
         margin-top: 0.7rem;
       }
-      & > li:last-child {
+      & > li:last-of-type {
         font-size: 1.9rem;
         margin-top: 2rem;
         font-weight: 700;

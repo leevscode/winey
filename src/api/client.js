@@ -16,6 +16,7 @@ client.interceptors.request.use(
   config => {
     // cookie를 활용 한 경우
     const token = getCookie("accessToken");
+    // const token = getCookie("refresh_token");
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
     }
@@ -62,23 +63,22 @@ export const fetchLogin = async (userid, password) => {
   try {
     const res = await client.post(`/sign-api/sign-in`, {
       email: userid,
-      pw: password,
+      upw: password,
     });
     const result = res.data;
-    setCookie("refreshToken", result.refreshToken, {
+    setCookie("refresh_token", result.authResVo.refreshToken, {
       path: "/",
       secure: true,
       sameSite: "none",
       httpOnly: true,
     });
-    setCookie("accessToken", result.accessToken, {
+    setCookie("accessToken", result.authResVo.accessToken, {
       path: "/",
       secure: true,
       sameSite: "none",
       httpOnly: true,
     });
     console.log("res", res);
-
     return result;
   } catch (error) {
     console.log(error);

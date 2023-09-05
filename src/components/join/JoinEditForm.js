@@ -59,7 +59,7 @@ const JoinEditForm = () => {
   // 아이디, 이름, 전화번호 변경 state
   const [editId] = useState(editUserInfo.email);
 
-  const [editUserName, setEditUserName] = useState(editUserInfo.nm);
+  const [editUserName, setEditUserName] = useState(editUserInfo.unm);
   const [editUserTel, setEditUserTel] = useState(editUserInfo.tel);
   const [editUserCity, setEditUserCity] = useState(editUserInfo.regionNmId);
 

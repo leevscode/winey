@@ -10,7 +10,7 @@ import { faCircleExclamation } from "@fortawesome/free-solid-svg-icons";
 import { faAngleRight } from "@fortawesome/free-solid-svg-icons";
 import { MypageWrap } from "../style/MypageStyle";
 import { ButtonOk, SectionLine } from "../style/GlobalStyle";
-import { getMemberInfo, postLogout } from "../api/joinpatch";
+import { getLogout, getMemberInfo } from "../api/joinpatch";
 import { removeCookie } from "../api/cookie";
 import { NoticeModal } from "../style/GlobalComponents";
 import { useDispatch, useSelector } from "react-redux";
@@ -52,7 +52,7 @@ const MypageList = () => {
       ),
       async onOk() {
         e.preventDefault();
-        await postLogout("");
+        await getLogout("");
         dispatch(logoutUser({}));
         dispatch(totalItem(0));
         removeCookie("accessToken");
@@ -77,7 +77,7 @@ const MypageList = () => {
             {userData.userId ? (
               <>
                 <p>반갑습니다.</p>
-                <span>{userData.nm}</span>님
+                <span>{userData.unm}</span>님
               </>
             ) : (
               <div>

@@ -6,14 +6,30 @@
 import { client } from "./client";
 import { getUser } from "../reducers/userSlice";
 
+// 로그인
+export const postLogin = async (userid, password) => {
+  try {
+    const res = await client.post(`/sign-api/sign-in`, {
+      email: userid,
+      upw: password,
+    });
+    console.log("res", res);
+    const result = res.data;
+    console.log("Login Result", result);
+    return result;
+  } catch (error) {
+    console.log(error);
+    return error;
+  }
+};
 // 회원가입
 export const postUserJoin = async userInfo => {
   try {
     const res = await client.post("/sign-api/sign-up", {
       email: userInfo.email,
-      pw: userInfo.password,
-      role: "USER",
-      nm: userInfo.nm,
+      upw: userInfo.password,
+      // role: "USER",
+      unm: userInfo.nm,
       tel: userInfo.tel,
       regionNmId: userInfo.regionNmId,
     });
@@ -28,8 +44,8 @@ export const postUserJoin = async userInfo => {
 // 회원정보 get redux toolkit
 export const getMemberInfo = () => async dispatch => {
   try {
-    const res = await client.get("/api/mypage/user-info");
-    // const res = await client.get("/api/mypage/userinfo");
+    // const res = await client.get("/api/mypage/user-info");
+    const res = await client.get("/api/mypage/userinfo");
     const result = await res.data;
     console.log("회원정보 get result", result);
     dispatch(getUser(result));
@@ -42,10 +58,10 @@ export const getMemberInfo = () => async dispatch => {
 // 회원정보수정 patch
 export const patchMemberInfo = async editUserInfo => {
   try {
-    const res = await client.patch("/api/mypage/user-correction", {
-    // const res = await client.patch("/api/mypage/upduser", {
-      pw: editUserInfo.editpassword,
-      name: editUserInfo.editUserName,
+    // const res = await client.patch("/api/mypage/user-correction", {
+    const res = await client.put("/api/mypage/upduser", {
+      // pw: editUserInfo.editpassword,
+      unm: editUserInfo.editUserName,
       tel: editUserInfo.editUserTel,
       regionNmId: editUserInfo.editUserCity,
     });
@@ -60,8 +76,8 @@ export const patchMemberInfo = async editUserInfo => {
 // 회원탈퇴 delete
 export const deleteMember = async () => {
   try {
-    const res = await client.delete("/api/mypage/user-secession");
-    // const res = await client.delete("/api/mypage/delUser");
+    // const res = await client.delete("/api/mypage/user-secession");
+    const res = await client.put("/api/mypage/delUser");
     console.log("res", res);
     const result = await res.data;
     console.log("회원삭제성공", result);
@@ -70,9 +86,10 @@ export const deleteMember = async () => {
   }
 };
 
-export const postLogout = async () => {
+// 로그아웃
+export const getLogout = async () => {
   try {
-    const res = await client.post("/sign-api/logout");
+    const res = await client.get("/sign-api/logout");
     // console.log(res);
     const result = await res.data;
     // console.log(result);

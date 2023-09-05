@@ -204,3 +204,14 @@
 .popover-content i {
   color: #ffbe44;
 }
+
+/* 주소입력 모달커스텀 */
+.store-address-modal .ant-modal .ant-modal-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 500px;
+  height: auto;
+  margin: 0 auto;
+  padding: 30px 15px 40px;
+}
