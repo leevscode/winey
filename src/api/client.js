@@ -59,7 +59,7 @@ client.interceptors.request.use(
 // );
 
 // 쿠키 set 하기
-export const fetchLogin = async (userid, password, setErrorMsg) => {
+export const fetchLogin = async (userid, password) => {
   try {
     const res = await client.post(`/sign-api/sign-in`, {
       email: userid,

@@ -39,6 +39,10 @@ const MemberControlAdm = () => {
   // 정렬 state
   const [sortOption, setSortOption] =
     useState<IMemberSortOption>(initialSortOption);
+  // 검색 state
+  const [textSearch, setTextSearch] = useState<string>("");
+  const [sortSearch, setSortSearch] = useState<string>("serchUserName");
+  console.log("sortSearch", sortSearch);
   // 회원정보state
   const [memberList, setMemberList] = useState<IMemControl>({
     page: {
@@ -70,18 +74,28 @@ const MemberControlAdm = () => {
 
   console.log("sortOption", sortOption);
   console.log("regionConvert", regionConvert);
+  console.log("memberList", memberList);
   useEffect(() => {
     console.log("화면 리랜더링");
   }, [regionConvert]);
 
   return (
     <MemberWrap>
-      <MemberControlSort setSortOption={setSortOption} />
+      <MemberControlSort
+        memberList={memberList.page}
+        setSortOption={setSortOption}
+        textSearch={textSearch}
+        setTextSearch={setTextSearch}
+        sortSearch={sortSearch}
+        setSortSearch={setSortSearch}
+      />
       <MemberControlListItem regionConvert={regionConvert} />
       <MemberControlPaginate
         memberList={memberList}
         setMemberList={setMemberList}
         sortOption={sortOption}
+        sortSearch={sortSearch}
+        textSearch={textSearch}
       />
     </MemberWrap>
   );

@@ -19,18 +19,19 @@ import {
   faCircleExclamation,
   faFilter,
 } from "@fortawesome/free-solid-svg-icons";
+import { v4 } from "uuid";
 
 // recoil
 export const searchTextRecoil = atom({
-  key: "searchTextRecoil1",
+  key: `searchTextRecoil/${v4()}`,
   default: [],
 });
 export const searchResultRecoil = atom({
-  key: "searchResultRecoil1",
+  key: `searchResultRecoil/${v4()}`,
   default: [],
 });
 const getQueryRecoil = selector({
-  key: "getQueryRecoil1",
+  key: `getQueryRecoil/${v4()}`,
   // 값을 읽겠다
   get: ({ get }) => {
     const url = get(queryUrlRecoil);
@@ -38,7 +39,7 @@ const getQueryRecoil = selector({
   },
 });
 export const searchButtonActive = selector({
-  key: "searchButtonActive1",
+  key: `searchButtonActive/${v4()}`,
   // 값을 읽겠다
   get: ({ get }) => {
     const filter = get(searchFilterRecoil);
@@ -87,7 +88,7 @@ const SearchBar = () => {
       setIsModalOpen(true);
       return;
     } else {
-      getSearchItem({ urlData, setExploreResult });
+      getSearchItem({ urlData, exploreSort, setExploreResult });
       setIsFilterActive(false);
       setExploreSort({
         value: 0,
@@ -142,7 +143,7 @@ const SearchBar = () => {
             <FontAwesomeIcon icon={faCircleExclamation} />
           </i>
           검색어를 입력해 주세요.
-        </p>{" "}
+        </p>
       </NoticeModal>
 
       <div className="SearchUnderbar"></div>

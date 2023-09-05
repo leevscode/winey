@@ -5,11 +5,12 @@
 */
 import { client } from "./client";
 import { getUser } from "../reducers/userSlice";
+import axios from "axios";
 
 // 로그인
 export const postLogin = async (userid, password) => {
   try {
-    const res = await client.post(`/sign-api/sign-in`, {
+    const res = await axios.post(`/sign-api/sign-in`, {
       email: userid,
       upw: password,
     });

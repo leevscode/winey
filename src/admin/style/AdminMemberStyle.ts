@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { Maincolor } from "../../style/GlobalStyle";
+import { Gradation, Maincolor, opacity } from "../../style/GlobalStyle";
 
 export const MemberWrap = styled.div`
   margin: 0 auto;
@@ -33,20 +33,10 @@ export const MemberWrap = styled.div`
   }
 `;
 export const MemberDetailUpperWrap = styled.div`
-  & ul {
-    margin-bottom: 2rem;
-    li {
-      b {
-        font-weight: 700;
-      }
-      font-size: 1.6rem;
-      line-height: 2rem;
-    }
-  }
+  margin-bottom: 2rem;
 `;
 
 export const MemberDetailWrap = styled.div`
-  /* margin-top: 3rem; */
   & .noItem {
     font-size: 1.5rem;
     font-weight: 600;
@@ -58,6 +48,41 @@ export const MemberDetailWrap = styled.div`
 
 // 정렬 컴포넌트
 export const SortSelectWrap = styled.div`
-  margin: 1rem 0;
+  .table-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 5px;
+    font-size: 1.25rem;
+    .total-count {
+      color: ${Maincolor.grayDeep};
+      span {
+        font-size: 1.25em;
+        font-weight: 700;
+        color: ${Gradation.wineE};
+      }
+    }
+    .searchSort {
+      & > div {
+        margin-left: 1rem;
+      }
+    }
+    a {
+      font-size: 1.4rem;
+      width: 100px;
+      padding: 10px 0;
+      border-radius: 5px;
+      text-align: center;
+      background: ${Gradation.wineE};
+      color: ${Maincolor.white};
+      border: 0.05rem solid ${opacity.grayLight};
+    }
+    & > div {
+      margin: 0;
+      .ant-select {
+        width: 180px;
+      }
+    }
+  }
 `;
 // 멤버 검색 form

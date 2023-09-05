@@ -16,9 +16,10 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { faMoneyBill1 } from "@fortawesome/free-regular-svg-icons";
 import { atom, useRecoilState, useSetRecoilState } from "recoil";
+import { v4 } from "uuid";
 
 export const searchFilterRecoil = atom({
-  key: "searchFilterRecoil",
+  key: `searchFilterRecoil/${v4()}`,
   default: [],
 });
 export const wineSearchOptions = {
@@ -79,28 +80,28 @@ const SearchFilter = ({ setIsFilterActive, isFilterActive }) => {
 
   const handleTypeChange = e => {
     setWineTypeCheck(e.target.value);
-    // setSelectFilter(prev => ({ ...prev, cate: e.target.value }));
-    setExplorefilter(prev => ({ ...prev, cate: e.target.value }));
+    setSelectFilter(prev => ({ ...prev, cate: e.target.value }));
+    // setExplorefilter(prev => ({ ...prev, cate: e.target.value }));
   };
   const handleFoodChange = e => {
     setWineFoodCheck(e.target.value);
-    // setSelectFilter(prev => ({ ...prev, bigCate: e.target.value }));
-    setExplorefilter(prev => ({ ...prev, bigCate: e.target.value }));
+    setSelectFilter(prev => ({ ...prev, bigCate: e.target.value }));
+    // setExplorefilter(prev => ({ ...prev, bigCate: e.target.value }));
   };
 
   const handlePriceChange = e => {
     setWinePriceCheck(e.target.value);
-    // setSelectFilter(prev => ({ ...prev, price: e.target.value }));
-    setExplorefilter(prev => ({ ...prev, price: e.target.value }));
+    setSelectFilter(prev => ({ ...prev, price: e.target.value }));
+    // setExplorefilter(prev => ({ ...prev, price: e.target.value }));
   };
   const handleCountryChange = e => {
     setWineCountryCheck(e.target.value);
-    // setSelectFilter(prev => ({ ...prev, country: e.target.value }));
-    setExplorefilter(prev => ({ ...prev, country: e.target.value }));
+    setSelectFilter(prev => ({ ...prev, country: e.target.value }));
+    // setExplorefilter(prev => ({ ...prev, country: e.target.value }));
   };
 
   const handleConfirm = () => {
-    // setExplorefilter(selectFilter);
+    setExplorefilter(selectFilter);
     setIsFilterActive(false);
   };
   const getCategory = categoryId => {
@@ -169,7 +170,8 @@ const SearchFilter = ({ setIsFilterActive, isFilterActive }) => {
 
   useEffect(() => {
     console.log("필터변경 화면 리랜더링");
-  }, [explorefilter]);
+  }, [selectFilter]);
+  console.log("selectFilter", selectFilter);
 
   // 선택값 초기화
   const handleReset = () => {
@@ -179,7 +181,6 @@ const SearchFilter = ({ setIsFilterActive, isFilterActive }) => {
     setWineCountryCheck("");
     setExplorefilter("");
   };
-  console.log("explorefilter", explorefilter);
   return (
     <SearchFilterWrap>
       {/* 선택값 띄우기 */}
@@ -188,7 +189,7 @@ const SearchFilter = ({ setIsFilterActive, isFilterActive }) => {
         {wineFood && <li>{wineFood}</li>}
         {winePrice && <li>{winePrice}</li>}
         {wineCountry && <li>{wineCountry}</li>}
-        {explorefilter.length !== 0 ? (
+        {selectFilter !== "" ? (
           <li className="clickFilterBtn">
             <ConfigProvider
               theme={{

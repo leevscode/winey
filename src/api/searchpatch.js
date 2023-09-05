@@ -5,6 +5,7 @@
 */
 import { client } from "./client";
 
+// 검색결과 get
 export const getSearchItem = async ({
   urlData,
   page,
@@ -13,13 +14,15 @@ export const getSearchItem = async ({
   setHasNextPage,
   setTotalCount,
 }) => {
+  console.log("**page.current", page.current || 1);
+  console.log("**exploreSort.value", exploreSort.value || 0);
   try {
     const res = await client.get(
-      `/api/search?page=${page.current || 1}&sort=${exploreSort || 0}&${
+      `/api/search?page=${page.current || 1}&sort=${exploreSort.value || 0}&${
         urlData.url
       }`,
     );
-    console.log("res", res);
+    console.log("서치res", res);
     const result = res.data;
     console.log("결과보여줘result", result);
     // setExploreResult(result.wineList);

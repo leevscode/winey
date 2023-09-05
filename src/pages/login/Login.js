@@ -59,8 +59,8 @@ const Login = () => {
 
   const onFinish = async () => {
     try {
+      // const login = await fetchLogin(userid, password);
       const login = await fetchLogin(userid, password);
-      console.log("login", login);
       console.log("login.roleType", login.roleType);
       if (login.roleType == "USER") {
         // 로그인성공 후 cookie에 있는 accessToken을 확인하자

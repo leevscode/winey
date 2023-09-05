@@ -8,7 +8,7 @@ import { IMemberSortOption } from "../../interface/MemberInterface";
 import { SortSelectWrap } from "../../style/AdminMemberStyle";
 import { initialSortOption } from "./MemberControlSort";
 
-const MemberDetailSort = ({ setSortOption }: any) => {
+const MemberDetailSort = ({ setSortOption, userInfomation }: any) => {
   const sortValue: Record<string, IMemberSortOption> = {
     1: { type: "orderDate", sort: "asc" },
     2: { type: "orderDate", sort: "desc" },
@@ -31,34 +31,39 @@ const MemberDetailSort = ({ setSortOption }: any) => {
     <div>
       {/* 정렬 */}
       <SortSelectWrap>
-        <Select
-          defaultValue="기본정렬"
-          style={{ width: 120 }}
-          onChange={handleSortChange}
-          options={[
-            {
-              label: "주문날짜",
-              options: [
-                { label: "주문날짜↑", value: "1" },
-                { label: "주문날짜↓", value: "2" },
-              ],
-            },
-            {
-              label: "픽업매장",
-              options: [
-                { label: "픽업매장↑", value: "3" },
-                { label: "픽업매장↓", value: "4" },
-              ],
-            },
-            {
-              label: "주문상태",
-              options: [
-                { label: "주문상태↑", value: "5" },
-                { label: "주문상태↓", value: "6" },
-              ],
-            },
-          ]}
-        />
+        <div className="table-top">
+          <p className="total-count">
+            총 <span>{userInfomation.totalRecordCount}</span>개
+          </p>
+          <Select
+            defaultValue="기본정렬"
+            style={{ width: 120 }}
+            onChange={handleSortChange}
+            options={[
+              {
+                label: "주문날짜",
+                options: [
+                  { label: "주문날짜↑", value: "1" },
+                  { label: "주문날짜↓", value: "2" },
+                ],
+              },
+              {
+                label: "픽업매장",
+                options: [
+                  { label: "픽업매장↑", value: "3" },
+                  { label: "픽업매장↓", value: "4" },
+                ],
+              },
+              {
+                label: "주문상태",
+                options: [
+                  { label: "주문상태↑", value: "5" },
+                  { label: "주문상태↓", value: "6" },
+                ],
+              },
+            ]}
+          />
+        </div>
       </SortSelectWrap>
     </div>
   );
