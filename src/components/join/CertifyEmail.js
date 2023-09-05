@@ -12,63 +12,67 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTriangleExclamation } from "@fortawesome/free-solid-svg-icons";
 import { faCircleCheck } from "@fortawesome/free-regular-svg-icons";
 
-const CertifyEmail = ({ setEmailCertifyOk }) => {
+const CertifyEmail = ({ setEmailCertifyOk, setIsModalOpen }) => {
   const [inputCode, setInputCode] = useState("");
 
   // 인증번호 저장
   const handleCodeValue = e => {
     setInputCode(e.target.value);
   };
-  const onFinish = values => {
-    postConfirmCode(inputCode);
-    // console.log("result", result);
-    // if (result === 1) {
-    //   Modal.success({
-    //     icon: (
-    //       <i>
-    //         <FontAwesomeIcon icon={faCircleCheck} />
-    //       </i>
-    //     ),
-    //     okText: "확인",
-    //     wrapClassName: "info-modal-wrap",
-    //     maskClosable: true,
-    //     content: (
-    //       <ul>
-    //         <li>이메일 인증이 완료되었습니다.</li>
-    //       </ul>
-    //     ),
-    //     onOk() {
-    //       // 응답값 받아서 확인하기
-    //       setEmailCertifyOk(true);
-    //       return;
-    //     },
-    //   });
-    // }
-    // if (result === 0) {
-    //   Modal.error({
-    //     icon: (
-    //       <i className="color_r">
-    //         <FontAwesomeIcon icon={faTriangleExclamation} />
-    //       </i>
-    //     ),
-    //     okText: "확인",
-    //     wrapClassName: "info-modal-wrap",
-    //     maskClosable: true,
-    //     content: (
-    //       <ul>
-    //         <li>이메일 인증 실패.</li>
-    //       </ul>
-    //     ),
-    //     onOk() {
-    //       // 응답값 받아서 확인하기
-    //       setEmailCertifyOk(true);
-    //       return;
-    //     },
-    //   });
-    // }
+  const onFinish = async values => {
+    const result = await postConfirmCode(inputCode);
+    console.log("result", result);
+    if (result === 1) {
+      Modal.success({
+        icon: (
+          <i>
+            <FontAwesomeIcon icon={faCircleCheck} />
+          </i>
+        ),
+        okText: "확인",
+        wrapClassName: "info-modal-wrap",
+        maskClosable: true,
+        content: (
+          <ul>
+            <li>이메일 인증이 완료되었습니다.</li>
+          </ul>
+        ),
+        onOk() {
+          // 응답값 받아서 확인하기
+          setEmailCertifyOk(true);
+          setIsModalOpen(false);
+          setInputCode("");
+          return;
+        },
+      });
+    }
+    if (result === 0) {
+      Modal.error({
+        icon: (
+          <i className="color_r">
+            <FontAwesomeIcon icon={faTriangleExclamation} />
+          </i>
+        ),
+        okText: "확인",
+        wrapClassName: "info-modal-wrap",
+        maskClosable: true,
+        content: (
+          <ul>
+            <li>이메일 인증 실패.</li>
+            <li>인증번호를 다시 확인해주세요.</li>
+          </ul>
+        ),
+        onOk() {
+          // 응답값 받아서 확인하기
+          setEmailCertifyOk(false);
+          return;
+        },
+      });
+    }
   };
   const onFinishFailed = errorInfo => {
     // 인증실패
+    setEmailCertifyOk(false);
     console.log("Failed:", errorInfo);
   };
 
@@ -102,6 +106,7 @@ const CertifyEmail = ({ setEmailCertifyOk }) => {
             ]}
           >
             <Input
+              value={inputCode}
               onChange={e => handleCodeValue(e)}
               placeholder="인증번호를 입력하세요."
               maxLength={6}

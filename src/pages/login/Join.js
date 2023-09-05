@@ -32,7 +32,7 @@ const Join = () => {
   // 이메일 인증 모달
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [emailCertifyOk, setEmailCertifyOk] = useState(false);
-
+  console.log("emailCertifyOk", emailCertifyOk);
   // 이메일 저장 state
   const [inputEmail, setInputEmail] = useState("");
   //password 유효성 검증 state
@@ -136,7 +136,7 @@ const Join = () => {
     if (emailCertifyOk === false) {
       Modal.warning({
         title: "메일인증확인",
-        content: <p>이메일 인증을 진행해 주세요.</p>,
+        content: <p>메일인증을 진행해 주세요.</p>,
       });
       return;
     }
@@ -238,9 +238,10 @@ const Join = () => {
                 </Button>,
               ]}
             >
-              {/* 이메일 인증은 프로젝트 3차에 진행예정입니다. */}
-              {/* 메일 인증 3차 때 진행 예정 */}
-              <CertifyEmail setEmailCertifyOk={setEmailCertifyOk} />
+              <CertifyEmail
+                setEmailCertifyOk={setEmailCertifyOk}
+                setIsModalOpen={setIsModalOpen}
+              />
             </Modal>
           </ConfirmArray>
 
