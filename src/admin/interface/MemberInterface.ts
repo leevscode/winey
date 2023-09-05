@@ -14,6 +14,8 @@ export interface IMemberState {
   memberList: IMemControl;
   setMemberList: React.Dispatch<React.SetStateAction<IMemControl>>;
   sortOption: IMemberSortOption;
+  sortSearch: string;
+  textSearch: string;
 }
 
 export interface IMemControl {
@@ -92,3 +94,11 @@ export interface IMemberSortOption {
   type: string;
   sort: string;
 }
+// export interface ITextSearchState {
+//   textSearch: string;
+//   setTextSearch?: React.Dispatch<React.SetStateAction<string>>;
+// }
+// export interface ISortSearchState {
+//   sortSearch: string;
+//   setSortSearch?: React.Dispatch<React.SetStateAction<string>>;
+// }

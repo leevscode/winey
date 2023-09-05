@@ -16,11 +16,15 @@ import { atom, selector, useRecoilValue, useRecoilState } from "recoil";
 import { SearchPageWrap } from "../../style/SearchStyle";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faWineGlassEmpty } from "@fortawesome/free-solid-svg-icons";
+import { v4 } from "uuid";
 
 // recoil
-export const queryUrlRecoil = atom({ key: "queryUrlRecoil", default: [] });
+export const queryUrlRecoil = atom({
+  key: `queryUrlRecoil/${v4()}`,
+  default: [],
+});
 export const searchReadRecoil = selector({
-  key: "searchReadRecoil",
+  key: `searchReadRecoil/${v4()}`,
   // 값을 읽겠다
   get: ({ get }) => {
     const filter = get(searchFilterRecoil);
@@ -88,7 +92,6 @@ const SearchProduct = () => {
   }, [searchContent, urlState]);
 
   console.log("urlState", urlState);
-  console.log("searchContent.sort.value", searchContent.sort.value);
 
   return (
     <SearchPageWrap>

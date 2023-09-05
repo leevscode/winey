@@ -81,7 +81,7 @@ export const fetchLogin = async (userid, password) => {
     console.log("res", res);
     return result;
   } catch (error) {
-    console.log(error);
+    console.log("login error", error.response);
     return error;
   }
 };

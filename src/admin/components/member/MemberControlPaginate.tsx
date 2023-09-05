@@ -19,6 +19,8 @@ const MemberControlPaginate = ({
   memberList,
   setMemberList,
   sortOption,
+  sortSearch,
+  textSearch,
 }: IMemberState) => {
   // 페이지 정보(page / row: 페이지 당 개수)
   const [paginate, setPaginate] = useState<IinitialPg>({ page: 1, row: 10 });
@@ -31,7 +33,13 @@ const MemberControlPaginate = ({
 
   const getPage = async () => {
     // 페이지 정보를 보내고(paginate) , list 정보를 받는다
-    const data = await getMemberList(paginate, setMemberList, sortOption);
+    const data = await getMemberList(
+      paginate,
+      setMemberList,
+      sortOption,
+      sortSearch,
+      textSearch,
+    );
   };
 
   useEffect(() => {

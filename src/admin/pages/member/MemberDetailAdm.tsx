@@ -66,7 +66,7 @@ const MemberDetailAdm = () => {
       {userInfomation.userInfo && (
         <MemberDetailUpper userInfomation={userInfomation.userInfo} />
       )}
-      <MemberDetailSort setSortOption={setSortOption}/>
+      <MemberDetailSort userInfomation={userInfomation.page} setSortOption={setSortOption}/>
       {userInfomation.userOrderList && (
         <MemberDetailListItem userInfomation={userInfomation.userOrderList} />
       )}

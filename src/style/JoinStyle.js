@@ -80,10 +80,7 @@ export const ConfirmArray = styled.div`
     }
   }
   & button {
-    margin-top: 0.4rem;
-    /* min-width: 6rem; */
     width: 110px;
-    /* margin: 0 auto; */
     margin-left: 1rem;
   }
 `;
@@ -94,15 +91,16 @@ export const CertifyWrap = styled.div`
   height: 100%;
   & > p {
     text-align: center;
+    font-size: 1.6rem;
   }
   & > form {
     display: flex;
-    margin: 0 auto;
+    margin: 2rem auto;
     width: 25rem;
     height: 3rem;
     line-height: 4rem;
     & button {
-      margin-top: 1rem;
+      /* margin-top: 1rem; */
       font-size: 1.4rem;
       width: 7rem;
       height: 3rem;

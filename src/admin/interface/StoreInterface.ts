@@ -23,6 +23,7 @@ export interface IStoreDetailList {
   regionNmId: number;
   nm: string;
   tel: string;
+  address: string;
   storeId?: number;
   textRegion?: string;
 }

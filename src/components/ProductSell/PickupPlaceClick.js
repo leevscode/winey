@@ -89,6 +89,7 @@ const PickupPlaceClick = ({ userStore, selectCollect, setSelectCollect }) => {
   useEffect(() => {
     // 날짜형식바꿔서 보내기
     const changeDate = `${pickUpDate} ${pickUpTime}`;
+    console.log(":changeDate", changeDate);
     setSelectCollect({ ...selectCollect, changeDate });
   }, [pickUpSpot, pickUpDate, pickUpTime]); // totalPayList 값이 변경될 때마다 실행
 

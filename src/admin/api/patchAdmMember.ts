@@ -20,10 +20,13 @@ export const getMemberList = async (
     type: string;
     sort: string;
   },
+  sortSearch: string,
+  textSearch: string,
 ) => {
   try {
     const res = await client.get(
-      `/api/admin/user/list?page=${paginate.page}&row=${paginate.row}&type=${sortOption.type}&sort=${sortOption.sort}`,
+      `/api/admin/user/list?page=${paginate.page}&row=${paginate.row}&type=${sortSearch}&sort=${sortOption.sort}&str=${textSearch}`,
+      // `/api/admin/user/list?page=${paginate.page}&row=${paginate.row}&type=${sortOption.type}&sort=${sortOption.sort}`,
     );
     console.log("res", res);
     const result: IMemControl = await res.data;

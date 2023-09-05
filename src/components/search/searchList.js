@@ -16,21 +16,17 @@ import { queryUrlRecoil } from "../../pages/search/SearchProduct";
 import { getSearchItem } from "../../api/searchpatch";
 import { FadeLoader } from "react-spinners";
 import { useInView } from "react-intersection-observer";
+import { v4 } from "uuid";
 
 export const searchSortRecoil = atom({
-  key: "searchSortRecoil1",
+  key: `searchSortRecoil/${v4()}`,
   default: {
     value: 0,
     label: "최신등록순",
   },
 });
-// export const itemScrollRecoil = atom({
-//   key: "itemScrollRecoil",
-//   default: [],
-// });
-// recoil get
 export const searchGetResult = selector({
-  key: "searchGetResult1",
+  key: `searchGetResult/${v4()}`,
   // 값을 읽겠다
   get: ({ get }) => {
     const url = get(queryUrlRecoil);
@@ -42,8 +38,7 @@ export const searchGetResult = selector({
 const SearchList = () => {
   // recoil
   const urlData = useRecoilValue(searchGetResult);
-  const finalItem = useRecoilValue(searchGetResult);
-  console.log("finalItem", finalItem);
+  // console.log("finalItem", finalItem);
   const [exploreSort, setExploreSort] = useRecoilState(searchSortRecoil);
   const [exploreResult, setExploreResult] = useRecoilState(searchResultRecoil);
 
@@ -103,7 +98,7 @@ const SearchList = () => {
         console.log(err);
       }
     }
-  }, [exploreSort, hasNextPage, exploreSort, inView, page]);
+  }, [exploreSort, hasNextPage, inView, page]);
   console.log("exploreResult", exploreResult);
   console.log("exploreSort", exploreSort);
 
@@ -145,7 +140,7 @@ const SearchList = () => {
           <SearchListItem
             setIsModalOpen={setIsModalOpen}
             hasNextPage={hasNextPage}
-            finalItem={finalItem}
+            urlData={urlData}
           />
         </ContentsListItemWrap>
         {/* 로딩 컴포넌트 */}
