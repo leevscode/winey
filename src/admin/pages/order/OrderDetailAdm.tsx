@@ -72,14 +72,15 @@ const OrderDetailAdm = () => {
           <li>주문수량</li>
         </TableLayoutTitle>
         {/* 데이터 테이블 - 내용 */}
-        <TableLayoutContents
-          listPathName={listPathName}
-          style={{
-            gridTemplateColumns: gridTemplateColumns.columns,
-          }}
-        >
-          {orderDetail?.map((item, index) => (
-            <React.Fragment key={item.uniqueId}>
+        {orderDetail?.map((item, index) => (
+          <TableLayoutContents
+            key={item.uniqueId}
+            listPathName={listPathName}
+            style={{
+              gridTemplateColumns: gridTemplateColumns.columns,
+            }}
+          >
+            <React.Fragment>
               {index === 0 ||
               orderDetail[index - 1].orderId !== item.orderId ? (
                 <>
@@ -101,8 +102,8 @@ const OrderDetailAdm = () => {
                 </>
               )}
             </React.Fragment>
-          ))}
-        </TableLayoutContents>
+          </TableLayoutContents>
+        ))}
       </TableVertical>
       <TableHorizontal listPathName={listPathName}>
         {/* 데이터 테이블 - 타이틀 */}

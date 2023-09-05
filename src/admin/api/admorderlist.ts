@@ -12,7 +12,9 @@ export const AdmOrderData = async (
 ) => {
   try {
     const res = await client.get(
-      `/api/admin/order?page=${page}&row=15&type=${sortOption.type}&sort=${sortOption.sort}`,
+      `/api/admin/order?page=${page}&row=${8}&type=${sortOption.type}&sort=${
+        sortOption.sort
+      }`,
     );
     const orderData = await res.data;
     console.log(orderData);
