@@ -18,7 +18,7 @@ import { FadeLoader } from "react-spinners";
 import { useInView } from "react-intersection-observer";
 
 export const searchSortRecoil = atom({
-  key: "searchSortRecoil",
+  key: "searchSortRecoil1",
   default: {
     value: 0,
     label: "최신등록순",
@@ -30,7 +30,7 @@ export const searchSortRecoil = atom({
 // });
 // recoil get
 export const searchGetResult = selector({
-  key: "searchGetResult",
+  key: "searchGetResult1",
   // 값을 읽겠다
   get: ({ get }) => {
     const url = get(queryUrlRecoil);

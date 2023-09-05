@@ -6,7 +6,7 @@
 import React from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { postLogout } from "../api/joinpatch";
+import { getLogout } from "../api/joinpatch";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import { removeCookie } from "../api/cookie";
@@ -26,7 +26,7 @@ const NavList = ({ handleOpenNav, closeNav }) => {
       content: "로그아웃 하시겠습니까?",
       async onOk() {
         e.preventDefault();
-        await postLogout("");
+        await getLogout("");
         dispatch(logoutUser({}));
         dispatch(totalItem(0));
         removeCookie("accessToken");

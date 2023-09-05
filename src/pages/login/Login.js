@@ -13,7 +13,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { ButtonCancel, ButtonOk } from "../../style/GlobalStyle";
 import { fetchLogin, fetchRefreshToken } from "../../api/client";
 import { useDispatch, useSelector } from "react-redux";
-import { getMemberInfo } from "../../api/joinpatch";
+import { getMemberInfo, postLogin } from "../../api/joinpatch";
 import { cartLengthData } from "../../api/patchcart";
 import { getUserFavoriteKey } from "../../api/keywordpatch";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -62,15 +62,15 @@ const Login = () => {
 
   const onFinish = async () => {
     try {
-      const login = await fetchLogin(userid, password);
-      if (login.success == true) {
+      const login = await postLogin(userid, password);
+      console.log("login", login);
+      console.log("login.roleType", login.roleType);
+      if (login.roleType == "USER") {
         // 로그인성공 후 cookie에 있는 accessToken을 확인하자
-        console.log("login.token", login.success);
+        console.log("login", login.roleType);
         // 회원 정보 저장
         dispatch(getMemberInfo());
         cartLengthData(dispatch);
-        // 리프레쉬 토큰 요청_3차때 업데이트 예정
-        // fetchRefreshToken()
 
         // 선호키워드 정보 유무를 받아오자
         const favoriteKeyInfo = await getUserFavoriteKey();
@@ -80,6 +80,9 @@ const Login = () => {
         } else {
           navigate("/keywordselect");
         }
+      }
+      if (login.roleType == "ADMIN") {
+        navigate("/admin");
       } else {
         Modal.warning(config);
       }
@@ -171,10 +174,6 @@ const Login = () => {
       </div>
       <div>
         <Link to="/">
-          {/* <img
-            src={`${process.env.PUBLIC_URL}/images/kakao_login_large_wide.png`}
-            alt="소셜로그인"
-          /> */}
           <div className="socialLogin">
             <img
               src={`${process.env.PUBLIC_URL}/images/kakao_login_medium_narrow.png`}

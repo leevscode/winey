@@ -18,7 +18,7 @@ const StoreControlList = ({
 }) => {
   const { listPathName } = useOutletContext() as { listPathName: string };
   const gridTemplateColumns = {
-    columns: "0.4fr 0.7fr 1fr 0.6fr 0.4fr 0.4fr",
+    columns: "0.4fr 0.5fr 0.7fr 1.2fr 0.6fr 0.5fr 0.5fr",
   };
   console.log("regionConvert", regionConvert);
 
@@ -44,6 +44,7 @@ const StoreControlList = ({
             <li>매장번호</li>
             <li>지역</li>
             <li>매장이름</li>
+            <li>매장주소</li>
             <li>연락처</li>
             <li></li>
             <li></li>
@@ -60,16 +61,13 @@ const StoreControlList = ({
                 <li>{item.storeId}</li>
                 <li>{item.textRegion}</li>
                 <li>{item.nm}</li>
+                <li> 매장주소 어쩌고저쩌고 위치 </li>
                 <li>{item.tel}</li>
                 <li>
-                  <DetailBt onClick={handleStoreEdit}>
-                    수정
-                  </DetailBt>
+                  <DetailBt onClick={handleStoreEdit}>수정</DetailBt>
                 </li>
                 <li>
-                  <MemberOutBt onClick={handleStoreDel}>
-                    삭제
-                  </MemberOutBt>
+                  <MemberOutBt onClick={handleStoreDel}>삭제</MemberOutBt>
                 </li>
               </TableLayoutContents>
             ))

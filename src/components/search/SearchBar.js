@@ -7,9 +7,7 @@ import React, { useEffect, useState } from "react";
 import Search from "antd/es/input/Search";
 import { ConfigProvider } from "antd";
 import { FilterButtonWrap, SearchBarWrap } from "../../style/SearchStyle";
-import SearchFilter, {
-  searchFilterRecoil,
-} from "./SearchFilter";
+import SearchFilter, { searchFilterRecoil } from "./SearchFilter";
 import { useNavigate } from "react-router";
 import { getSearchItem } from "../../api/searchpatch";
 import { atom, selector, useRecoilState, useRecoilValue } from "recoil";
@@ -24,15 +22,15 @@ import {
 
 // recoil
 export const searchTextRecoil = atom({
-  key: "searchTextRecoil",
+  key: "searchTextRecoil1",
   default: [],
 });
 export const searchResultRecoil = atom({
-  key: "searchResultRecoil",
+  key: "searchResultRecoil1",
   default: [],
 });
 const getQueryRecoil = selector({
-  key: "getQueryRecoil",
+  key: "getQueryRecoil1",
   // 값을 읽겠다
   get: ({ get }) => {
     const url = get(queryUrlRecoil);
@@ -40,7 +38,7 @@ const getQueryRecoil = selector({
   },
 });
 export const searchButtonActive = selector({
-  key: "searchButtonActive",
+  key: "searchButtonActive1",
   // 값을 읽겠다
   get: ({ get }) => {
     const filter = get(searchFilterRecoil);
@@ -110,7 +108,10 @@ const SearchBar = () => {
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
       >
-        <SearchFilter setIsFilterActive={setIsFilterActive} isFilterActive={isFilterActive}/>
+        <SearchFilter
+          setIsFilterActive={setIsFilterActive}
+          isFilterActive={isFilterActive}
+        />
       </FilterButtonWrap>
       <ConfigProvider
         theme={{

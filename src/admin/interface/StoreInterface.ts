@@ -34,3 +34,7 @@ export interface INewStoreState {
   newStoreInfo: IStoreDetailList;
   setNewStoreInfo: React.Dispatch<React.SetStateAction<IStoreDetailList>>;
 }
+export interface IStoreAddressState {
+  calendarlocation: string;
+  setCalendarLocation: React.Dispatch<React.SetStateAction<string>>;
+}
