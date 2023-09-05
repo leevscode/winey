@@ -32,23 +32,20 @@ const Login = () => {
   const [userid, setUserId] = useState("");
   const [password, setPassword] = useState("");
 
-  const config = {
-    icon: (
-      <i className="color_r">
-        <FontAwesomeIcon icon={faTriangleExclamation} />
-      </i>
-    ),
-    okText: "확인",
-    wrapClassName: "info-modal-wrap error-modal",
-    maskClosable: true,
-    title: "로그인 실패",
-    content: (
-      <p>
-        아이디 혹은 패스워드를
-        <br />
-        다시 확인해 주세요.
-      </p>
-    ),
+  // 에러 모달
+  const viewErrorModal = error => {
+    return {
+      icon: (
+        <i className="color_r">
+          <FontAwesomeIcon icon={faTriangleExclamation} />
+        </i>
+      ),
+      okText: "확인",
+      wrapClassName: "info-modal-wrap error-modal",
+      maskClosable: true,
+      title: "로그인 실패",
+      content: error ? <p>{error}</p> : <p>네트워크 오류입니다.</p>,
+    };
   };
 
   const navigate = useNavigate();
@@ -67,7 +64,6 @@ const Login = () => {
       console.log("login.roleType", login.roleType);
       if (login.roleType == "USER") {
         // 로그인성공 후 cookie에 있는 accessToken을 확인하자
-        console.log("login", login.roleType);
         // 회원 정보 저장
         dispatch(getMemberInfo());
         cartLengthData(dispatch);
@@ -84,10 +80,11 @@ const Login = () => {
       if (login.roleType == "ADMIN") {
         navigate("/admin");
       } else {
-        Modal.warning(config);
+        console.log("로그인에러메세지else", login.response.data.message);
+        const errorConfig = viewErrorModal(login.response.data.message);
+        Modal.warning(errorConfig);
       }
     } catch (error) {
-      Modal.warning(config);
       return;
     }
   };
