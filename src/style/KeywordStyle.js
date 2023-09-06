@@ -6,6 +6,7 @@
 
 import styled from "@emotion/styled";
 import { ButtonOk, Maincolor, WidthPd, opacity } from "./GlobalStyle";
+import Swiper from "swiper";
 
 // 회원가입완료 component
 export const WelcomeWrap = styled.div`
@@ -117,16 +118,10 @@ export const EditKeywordTemp = styled.div`
 // 선호키워드 선택 component
 export const KeywordWrap = styled.div`
   position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
   width: 100%;
+  height: ${props =>
+    props.keywordBgc ? "calc(100vh - 60px)" : "calc(100vh - 60px - 60px)"};
   background: ${Maincolor.beige};
-  /* padding: 5rem 2rem; */
-  padding: ${WidthPd.padding};
-  padding-top: 4rem;
-  padding-bottom: 13rem;
   & > ul {
     & li {
       margin-bottom: 3rem;
@@ -196,17 +191,139 @@ export const KeywordWrap = styled.div`
   }
 `;
 
+// 키워드 선택 완료 버튼 감싸는 영역
 export const KeywordConfirmBtn = styled.div`
-  margin: 2rem 0 1rem 0;
+  position: absolute;
+  bottom: 0;
+  z-index: 1;
+  width: 100%;
+  /* margin: 3rem 0 4rem 0; */
+  padding: ${WidthPd.padding};
   & button {
-    width: 51rem;
-    margin: 1rem 0;
+    width: 100%;
+    margin: 0.5rem auto;
   }
 `;
+// 키워드 수정 완료 버튼 감싸는 영역
 export const EditKeywordConfirmBtn = styled.div`
-  margin: 3rem 0 4rem 0;
+  position: absolute;
+  bottom: 0;
+  z-index: 1;
+  width: 100%;
+  /* margin: 3rem 0 4rem 0; */
+  padding: ${WidthPd.padding};
   & button {
-    width: 51rem;
-    margin: 0.5rem 0;
+    width: 100%;
+    margin: 0.5rem auto;
+  }
+`;
+
+// 선호 키워드 화면 디자인 구조 변경
+export const KeywordSwiperWrap = styled.div`
+  position: relative;
+  width: 100%;
+  height: calc(100% - 115px);
+  padding: 2rem 2%;
+  /* 슬라이드 */
+  .swiper {
+    height: 100%;
+    overflow-y: auto;
+    .title {
+      font-size: 1.8rem;
+      text-align: center;
+      font-weight: 700;
+      margin: 3.5rem 0 2.5rem;
+      p {
+        font-size: 0.8em;
+        font-weight: 400;
+        margin-top: 5px;
+      }
+    }
+    .ant-checkbox-group {
+      display: inline;
+    }
+    /* 키워드 버튼 */
+    .ant-checkbox-wrapper {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      font-weight: 700;
+      text-align: center;
+      background: ${Maincolor.white};
+      color: ${Maincolor.black};
+      width: calc(100% / 3 - 10px);
+      height: 5rem;
+      border-radius: 3rem;
+      margin: 5px !important;
+      border: 0.05rem solid ${opacity.white};
+      .ant-checkbox {
+        & > div:first-of-type {
+          display: none;
+        }
+        .ant-checkbox-inner {
+          display: none;
+        }
+      }
+      & > span:last-of-type {
+        padding-inline-start: 0;
+        padding-inline-end: 0;
+        font-size: 1.6rem;
+        i {
+          margin-right: 5px;
+        }
+      }
+    }
+    /* 키워드 버튼 - 체크함 */
+    .ant-checkbox-wrapper-checked {
+      background: ${opacity.wine};
+      color: ${Maincolor.white};
+      & > span:last-of-type {
+        i {
+          color: ${Maincolor.white}!important;
+        }
+      }
+    }
+  }
+  /* 슬라이드 버튼 */
+  .btn-wrap {
+    position: absolute;
+    top: 8%;
+    left: 50%;
+    z-index: 5;
+    transform: translateX(-50%);
+    width: 96%;
+    button {
+      display: block;
+      position: absolute;
+      z-index: 5;
+      font-size: 2rem;
+      color: ${Maincolor.redBold};
+      &.keyword-button-prev {
+        left: 0;
+      }
+      &.keyword-button-next {
+        right: 0;
+      }
+      &.swiper-button-disabled {
+        opacity: 0.4;
+      }
+    }
+  }
+  /* 슬라이드 페이지네이션 */
+  .swiper-pagination {
+    position: absolute;
+    top: 0 !important;
+    bottom: auto !important;
+    .swiper-pagination-bullet {
+      width: 7px;
+      height: 7px;
+      background: ${Maincolor.redBold};
+      margin: 0 5px;
+      border-radius: 0;
+      transform: rotate(45deg);
+      &.swiper-pagination-bullet-active {
+      }
+    }
   }
 `;

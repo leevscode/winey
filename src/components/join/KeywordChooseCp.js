@@ -4,16 +4,36 @@
     깃허브 : https://github.com/hyemdev
 */
 
-import React, { useState } from "react";
-import { KeywordConfirmBtn, KeywordWrap } from "../../style/KeywordStyle";
+import React, { useRef, useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faArrowLeft,
+  faArrowRight,
+  faQuestion,
+} from "@fortawesome/free-solid-svg-icons";
 import { Checkbox, ConfigProvider, Modal, Radio, Select } from "antd";
+// Import Swiper React components
+import { useSwiper, Swiper, SwiperSlide } from "swiper/react";
+// Import Swiper styles
+import "swiper/css";
+import "swiper/css/pagination";
+// import required modules
+import { Navigation, Pagination } from "swiper/modules";
+import {
+  KeywordConfirmBtn,
+  KeywordSwiperWrap,
+  KeywordWrap,
+} from "../../style/KeywordStyle";
 import { ButtonCancel, ButtonOk } from "../../style/GlobalStyle";
-import { useNavigate } from "react-router-dom";
 import { postUserKeyword } from "../../api/keywordpatch";
 import { wineOptions } from "../../pages/login/KeywordSelect";
 
 const KeywordChooseCp = () => {
   const navigator = useNavigate();
+  const location = useLocation();
+  // swiper DOM 선택
+  const swiperRef = useRef();
 
   const [favoriteKeyword, setFavoriteKeyword] = useState([]);
   const [wineTypeCheckedList, setWineTypeCheckedList] = useState([]);
@@ -37,6 +57,8 @@ const KeywordChooseCp = () => {
       ...prev,
       categoryId: wineOptions.categoryId.map(option => option.id),
     }));
+    // 아무거나 버튼 클릭 시 다음 슬라이드로 이동
+    swiperRef.current.slideNext();
   };
   const handleTypeOnChange = list => {
     setWineTypeCheckedList(list);
@@ -57,6 +79,8 @@ const KeywordChooseCp = () => {
       ...prev,
       priceRange: wineOptions.priceRange.map(option => option.id),
     }));
+    // 아무거나 버튼 클릭 시 다음 슬라이드로 이동
+    swiperRef.current.slideNext();
   };
   const handlePriceOnChange = list => {
     setWinePriceCheckedList(list);
@@ -79,6 +103,8 @@ const KeywordChooseCp = () => {
       ...prev,
       smallCategoryId: wineOptions.smallCategoryId.map(option => option.id),
     }));
+    // 아무거나 버튼 클릭 시 다음 슬라이드로 이동
+    swiperRef.current.slideNext();
   };
   const handleWithFoodOnChange = list => {
     setWineWithFoodCheckedList(list);
@@ -100,6 +126,8 @@ const KeywordChooseCp = () => {
       ...prev,
       countryId: wineOptions.countryId.map(option => option.id),
     }));
+    // 아무거나 버튼 클릭 시 다음 슬라이드로 이동
+    swiperRef.current.slideNext();
   };
   const handleCountryOnChange = list => {
     setWineCountryCheckedList(list);
@@ -162,7 +190,7 @@ const KeywordChooseCp = () => {
           postUserKeyword(favoriteKeyword, navigator);
         },
         onCancel() {
-          console.log("Cancel");
+          // console.log("Cancel");
         },
       });
     } catch (error) {
@@ -199,10 +227,10 @@ const KeywordChooseCp = () => {
     });
   };
 
-  console.log("favoriteKeyword", favoriteKeyword);
+  // console.log("favoriteKeyword", favoriteKeyword);
 
   return (
-    <KeywordWrap>
+    <KeywordWrap keywordBgc={location.pathname === "/keywordselect"}>
       <ConfigProvider
         theme={{
           token: {
@@ -212,124 +240,179 @@ const KeywordChooseCp = () => {
           },
         }}
       >
-        <ul>
-          <li>
-            <h3>와인종류</h3>
-            <div>
-              <Checkbox.Group
-                value={wineTypeCheckedList}
-                onChange={handleTypeOnChange}
-              >
-                {wineOptions.categoryId.map(option => (
-                  <Checkbox key={option.id} value={option.id}>
-                    {option.value}
-                  </Checkbox>
-                ))}
-              </Checkbox.Group>
-              <Checkbox
-                indeterminate={isTypeIndeterminate}
-                onChange={handleTypeCheckAllChange}
-                checked={isTypeCheckAll}
-              >
-                아무거나
-              </Checkbox>
-            </div>
-          </li>
-          <li>
-            <h3>가격대</h3>
-
-            <div>
-              <Checkbox.Group
-                value={winePriceCheckedList}
-                onChange={handlePriceOnChange}
-              >
-                {wineOptions.priceRange.map(option => (
-                  <Checkbox key={option.id} value={option.id}>
-                    {option.value}
-                  </Checkbox>
-                ))}
-              </Checkbox.Group>
-              <Checkbox
-                indeterminate={isPriceIndeterminate}
-                onChange={handlePriceCheckAllChange}
-                checked={isPriceCheckAll}
-              >
-                아무거나
-              </Checkbox>
-            </div>
-          </li>
-          <li>
-            {" "}
-            <h3>페어링음식</h3>
-            <div>
-              <Checkbox.Group
-                value={wineWithFoodCheckedList}
-                onChange={handleWithFoodOnChange}
-              >
-                {wineOptions.smallCategoryId.map(option => (
-                  <Checkbox key={option.id} value={option.id}>
-                    {option.value}
-                  </Checkbox>
-                ))}
-              </Checkbox.Group>
-              <Checkbox
-                indeterminate={isWithFoodIndeterminate}
-                onChange={handleWithFoodCheckAllChange}
-                checked={isWithFoodCheckAll}
-              >
-                아무거나
-              </Checkbox>
-            </div>
-          </li>
-          <li>
-            <h3>원산지</h3>
-            <div>
-              <Checkbox.Group
-                value={wineCountryCheckedList}
-                onChange={handleCountryOnChange}
-              >
-                {wineOptions.countryId.map(option => (
-                  <Checkbox key={option.id} value={option.id}>
-                    {option.value}
-                  </Checkbox>
-                ))}
-              </Checkbox.Group>
-              <Checkbox
-                indeterminate={isCountryIndeterminate}
-                onChange={handleCountryCheckAllChange}
-                checked={isCountryCheckAll}
-              >
-                아무거나
-              </Checkbox>
-            </div>
-          </li>
-          {/* 향 취향선택 3차에 업데이트 예정 */}
-          <li>
-            <h3>향</h3>
-            <div>
-              <Checkbox.Group
-                value={wineFlavorCheckedList}
-                onChange={handleAromaOnChange}
-              >
-                {wineOptions.aromaCategoryId.map(option => (
-                  <Checkbox key={option.id} value={option.id}>
-                    {option.value}
-                  </Checkbox>
-                ))}
-              </Checkbox.Group>
-              <Checkbox
-                indeterminate={isFlavorIndeterminate}
-                onChange={handleFlavorCheckAllChange}
-                checked={isFlavorCheckAll}
-              >
-                아무거나
-              </Checkbox>
-            </div>
-          </li>
-        </ul>
+        <KeywordSwiperWrap>
+          <Swiper
+            modules={[Navigation, Pagination]}
+            navigation={{
+              prevEl: ".keyword-button-prev",
+              nextEl: ".keyword-button-next",
+            }}
+            pagination={true}
+            speed={700}
+            onSwiper={swiper => {
+              swiperRef.current = swiper;
+            }}
+          >
+            {/* 와인종류 */}
+            <SwiperSlide>
+              <div className="title">
+                <h3>와인종류</h3>
+                <p>원하시는 와인의 종류를 선택해주세요.</p>
+              </div>
+              <div>
+                <Checkbox.Group
+                  value={wineTypeCheckedList}
+                  onChange={handleTypeOnChange}
+                >
+                  {wineOptions.categoryId.map(option => (
+                    <Checkbox key={option.id} value={option.id}>
+                      {option.value}
+                    </Checkbox>
+                  ))}
+                </Checkbox.Group>
+                <Checkbox
+                  indeterminate={isTypeIndeterminate}
+                  onChange={handleTypeCheckAllChange}
+                  checked={isTypeCheckAll}
+                >
+                  <i>
+                    <FontAwesomeIcon icon={faQuestion} />
+                  </i>
+                  아무거나
+                </Checkbox>
+              </div>
+            </SwiperSlide>
+            {/* 가격대 */}
+            <SwiperSlide>
+              <div className="title">
+                <h3>가격대</h3>
+                <p>원하시는 가격대를 선택해주세요.</p>
+              </div>
+              <div>
+                <Checkbox.Group
+                  value={winePriceCheckedList}
+                  onChange={handlePriceOnChange}
+                >
+                  {wineOptions.priceRange.map(option => (
+                    <Checkbox key={option.id} value={option.id}>
+                      {option.value}
+                    </Checkbox>
+                  ))}
+                </Checkbox.Group>
+                <Checkbox
+                  indeterminate={isPriceIndeterminate}
+                  onChange={handlePriceCheckAllChange}
+                  checked={isPriceCheckAll}
+                >
+                  <i>
+                    <FontAwesomeIcon icon={faQuestion} />
+                  </i>
+                  아무거나
+                </Checkbox>
+              </div>
+            </SwiperSlide>
+            {/* 페어링음식 */}
+            <SwiperSlide>
+              <div className="title">
+                <h3>페어링음식</h3>
+                <p>원하시는 페어링 음식을 선택해주세요.</p>
+              </div>
+              <div>
+                <Checkbox.Group
+                  value={wineWithFoodCheckedList}
+                  onChange={handleWithFoodOnChange}
+                >
+                  {wineOptions.smallCategoryId.map(option => (
+                    <Checkbox key={option.id} value={option.id}>
+                      {option.value}
+                    </Checkbox>
+                  ))}
+                </Checkbox.Group>
+                <Checkbox
+                  indeterminate={isWithFoodIndeterminate}
+                  onChange={handleWithFoodCheckAllChange}
+                  checked={isWithFoodCheckAll}
+                >
+                  <i>
+                    <FontAwesomeIcon icon={faQuestion} />
+                  </i>
+                  아무거나
+                </Checkbox>
+              </div>
+            </SwiperSlide>
+            {/* 원산지 */}
+            <SwiperSlide>
+              <div className="title">
+                <h3>원산지</h3>
+                <p>원하시는 원산지를 선택해주세요.</p>
+              </div>
+              <div>
+                <Checkbox.Group
+                  value={wineCountryCheckedList}
+                  onChange={handleCountryOnChange}
+                >
+                  {wineOptions.countryId.map(option => (
+                    <Checkbox key={option.id} value={option.id}>
+                      {option.value}
+                    </Checkbox>
+                  ))}
+                </Checkbox.Group>
+                <Checkbox
+                  indeterminate={isCountryIndeterminate}
+                  onChange={handleCountryCheckAllChange}
+                  checked={isCountryCheckAll}
+                >
+                  <i>
+                    <FontAwesomeIcon icon={faQuestion} />
+                  </i>
+                  아무거나
+                </Checkbox>
+              </div>
+            </SwiperSlide>
+            {/* 향 */}
+            {/* 향 취향선택 3차에 업데이트 예정 */}
+            <SwiperSlide>
+              <div className="title">
+                <h3>향(아로마)</h3>
+                <p>원하시는 향을 선택해주세요.</p>
+              </div>
+              <div>
+                <Checkbox.Group
+                  value={wineFlavorCheckedList}
+                  onChange={handleAromaOnChange}
+                >
+                  {wineOptions.aromaCategoryId.map(option => (
+                    <Checkbox key={option.id} value={option.id}>
+                      {option.value}
+                    </Checkbox>
+                  ))}
+                </Checkbox.Group>
+                <Checkbox
+                  indeterminate={isFlavorIndeterminate}
+                  onChange={handleFlavorCheckAllChange}
+                  checked={isFlavorCheckAll}
+                >
+                  <i>
+                    <FontAwesomeIcon icon={faQuestion} />
+                  </i>
+                  아무거나
+                </Checkbox>
+              </div>
+            </SwiperSlide>
+          </Swiper>
+          {/* 슬라이드 버튼 */}
+          <div className="btn-wrap">
+            <button className="keyword-button-prev">
+              <FontAwesomeIcon icon={faArrowLeft} />
+            </button>
+            <button className="keyword-button-next">
+              <FontAwesomeIcon icon={faArrowRight} />
+            </button>
+          </div>
+        </KeywordSwiperWrap>
       </ConfigProvider>
       <KeywordConfirmBtn>
-        <ButtonOk onClick={handleKeywordChoice}>선택완료</ButtonOk>
+        <ButtonOk onClick={handleKeywordChoice}>키워드 선택완료</ButtonOk>
         <ButtonCancel onClick={handleKeywordAll}>
           아무거나 상관없어요
         </ButtonCancel>

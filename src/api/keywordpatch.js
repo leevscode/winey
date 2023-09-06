@@ -15,7 +15,7 @@ export const getUserFavoriteKey = async () => {
   try {
     const res = await client.get("/api/recommend/getUserInfo");
     const result = await res.data;
-    console.log("result", result);
+    // console.log("result", result);
     return result;
   } catch (error) {
     console.log(error);
@@ -62,9 +62,9 @@ export const postUserKeyword = async (favoriteKeyword, navigator) => {
 export const getUserKeyword = async setYourKeyword => {
   try {
     const res = await client.get("/api/recommend/getrecommend");
-    console.log("res", res);
+    // console.log("res", res);
     const result = await res.data;
-    console.log("result", result);
+    // console.log("result", result);
     setYourKeyword(result);
     return result;
   } catch (error) {

@@ -19,7 +19,7 @@ const KeywordSelectEdit = () => {
     beforeKeyInfo();
     // getUserKeyword(setYourKeyword);
   }, []);
-  console.log("yourKeyword", yourKeyword);
+  // console.log("yourKeyword", yourKeyword);
 
   return (
     <>{yourKeyword ? <KeywordEditCp yourKeyword={yourKeyword} /> : null} </>

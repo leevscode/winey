@@ -31,13 +31,15 @@ const QuickMenu = ({ handleOpenNav }) => {
   };
   return (
     <>
-      <ScrollTopBtn>
-        <button onClick={handleScrollTop}>
-          <i>
-            <FontAwesomeIcon icon={faArrowUp} />
-          </i>
-        </button>
-      </ScrollTopBtn>
+      {location.pathname !== "/keywordselectedit" && (
+        <ScrollTopBtn>
+          <button onClick={handleScrollTop}>
+            <i>
+              <FontAwesomeIcon icon={faArrowUp} />
+            </i>
+          </button>
+        </ScrollTopBtn>
+      )}
       {location.pathname !== `/productdetail/${iproduct}` && (
         <QuickWrap>
           <ul>

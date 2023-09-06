@@ -9,16 +9,19 @@ import { UploadOutlined } from "@ant-design/icons";
 import { UploadChangeParam, UploadProps } from "antd/es/upload";
 import { ProductImageWrap } from "../../style/product/AdminProductStyle";
 import { Iproduct } from "../../interface/ProductInterface";
+import { getProductImgDel } from "../../api/patchAdmProduct";
 
 export interface IProductImage {
   selectImage: UploadFile<any>[];
   setSelectImage: React.Dispatch<React.SetStateAction<UploadFile<any>[]>>;
   postProductData: Iproduct;
+  iproduct: string | undefined;
 }
 const ProductAddImage = ({
   selectImage,
   setSelectImage,
   postProductData,
+  iproduct,
 }: IProductImage) => {
   // 상품 이미지 업로드 핸들러
   const handleImageChange: UploadProps["onChange"] = ({
@@ -28,6 +31,7 @@ const ProductAddImage = ({
   };
   // 업로드된 이미지 삭제 버튼 클릭했을 경우 실행
   const handleRemoveImg = () => {
+    getProductImgDel(iproduct);
     setSelectImage([]);
   };
   // console.log("이미지 업로드 했습니다.", selectImage);

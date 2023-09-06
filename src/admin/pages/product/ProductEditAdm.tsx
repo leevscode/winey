@@ -28,7 +28,6 @@ import {
   getAdmProductDetail,
   getAdmProductPost,
   getAdmProductPut,
-  getProductImgDel,
 } from "../../api/patchAdmProduct";
 
 const ProductEditAdm = () => {
@@ -128,7 +127,6 @@ const ProductEditAdm = () => {
         ),
         onOk() {
           getAdmProductPut(formData);
-          getProductImgDel(iproduct);
           navigate("../productlist");
         },
         onCancel() {
@@ -233,6 +231,7 @@ const ProductEditAdm = () => {
             postProductData={postProductData}
             selectImage={selectImage}
             setSelectImage={setSelectImage}
+            iproduct={iproduct}
           />
         </Form>
       </ConfigProvider>
