@@ -12,7 +12,6 @@ import { MypageWrap } from "../style/MypageStyle";
 import { ButtonOk, SectionLine } from "../style/GlobalStyle";
 import { getLogout, getMemberInfo } from "../api/joinpatch";
 import { removeCookie } from "../api/cookie";
-import { NoticeModal } from "../style/GlobalComponents";
 import { useDispatch, useSelector } from "react-redux";
 import { logoutUser } from "../reducers/userSlice";
 import { Modal } from "antd";
@@ -23,20 +22,8 @@ const MypageList = () => {
   const dispatch = useDispatch();
   // 회원정보 불러오기
   const userData = useSelector(state => state.user);
-  // 검색 모달 state
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const showModal = e => {
-    e.preventDefault();
-    setIsModalOpen(true);
-  };
   const closeNav = path => {
     navigate(path);
-  };
-  const handleOk = () => {
-    setIsModalOpen(false);
-  };
-  const handleCancel = () => {
-    setIsModalOpen(false);
   };
   const handleLogout = async e => {
     Modal.confirm({
@@ -153,7 +140,7 @@ const MypageList = () => {
             </NavLink>
           </li>
           <li>
-            <NavLink to="/opensource" onClick={showModal}>
+            <NavLink to="/opensource">
               오픈소스
               <i>
                 <FontAwesomeIcon icon={faAngleRight} />
@@ -167,20 +154,6 @@ const MypageList = () => {
           )}
         </ul>
       </MypageWrap>
-      {/* 준비중 모달창 */}
-      <NoticeModal
-        open={isModalOpen}
-        onOk={handleOk}
-        onCancel={handleCancel}
-        footer={null}
-      >
-        <p>
-          <i>
-            <FontAwesomeIcon icon={faCircleExclamation} />
-          </i>
-          준비중입니다.
-        </p>
-      </NoticeModal>
     </>
   );
 };
