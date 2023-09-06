@@ -170,14 +170,14 @@ const Login = () => {
         </Link>
       </div>
       <div>
-        <Link to="/">
+        <a href="http://localhost:8080/oauth2/authorization/kakao?redirect_uri=http://localhost:8080/test.html">
           <div className="socialLogin">
             <img
               src={`${process.env.PUBLIC_URL}/images/kakao_login_medium_narrow.png`}
               alt="소셜로그인"
             />
           </div>
-        </Link>
+        </a>
       </div>
     </LoginWrap>
   );
