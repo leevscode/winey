@@ -1,8 +1,11 @@
-import React from "react";
-import { IStoreDetailList, IStoreInfo } from "../../interface/StoreInterface";
+/*
+    작업자 : 최혜미
+    노션 : https://hyemdev.notion.site/hyemdev/hyem-s-dev-STUDY-75ffe819c7534a049b59871e6fe17dd4
+    깃허브 : https://github.com/hyemdev
+*/
+import React, { useState } from "react";
+import { IStoreDetailList } from "../../interface/StoreInterface";
 import {
-  DetailBt,
-  MemberOutBt,
   TableLayoutContents,
   TableLayoutTitle,
   TableVertical,
@@ -10,7 +13,7 @@ import {
 } from "../../style/AdminLayoutStyle";
 import { MemberDetailWrap } from "../../style/AdminMemberStyle";
 import { useOutletContext } from "react-router";
-import { deleteStore } from "../../api/patchAdmStore";
+import StoreControlListItem from "./StoreControlListItem";
 
 const StoreControlList = ({
   regionConvert,
@@ -23,15 +26,6 @@ const StoreControlList = ({
   };
   console.log("regionConvert", regionConvert);
 
-  // 매장정보 수정
-  const handleStoreEdit = () => {
-    console.log("");
-  };
-
-  // 매장삭제
-  const handleStoreDel: React.MouseEventHandler<HTMLButtonElement> = e => {
-    deleteStore(e.currentTarget.value);
-  };
   return (
     <MemberDetailWrap>
       <TableWrap>
@@ -50,33 +44,23 @@ const StoreControlList = ({
             <li></li>
             <li></li>
           </TableLayoutTitle>
-          {regionConvert.length !== 0 ? (
-            regionConvert.map(item => (
-              <TableLayoutContents
-                listPathName={listPathName}
-                key={item.storeId}
-                style={{
-                  gridTemplateColumns: gridTemplateColumns.columns,
-                }}
-              >
-                <li>{item.storeId}</li>
-                <li>{item.textRegion}</li>
-                <li>{item.nm}</li>
-                <li>{item.address}</li>
-                <li>{item.tel}</li>
-                <li>
-                  <DetailBt onClick={handleStoreEdit}>수정</DetailBt>
-                </li>
-                <li>
-                  <MemberOutBt value={item.storeId} onClick={handleStoreDel}>
-                    삭제
-                  </MemberOutBt>
-                </li>
-              </TableLayoutContents>
-            ))
-          ) : (
-            <p className="noItem"> 등록된 매장이 없습니다</p>
-          )}
+          <>
+            {regionConvert.length !== 0 ? (
+              regionConvert.map(item => (
+                <TableLayoutContents
+                  listPathName={listPathName}
+                  key={item.storeId}
+                  style={{
+                    gridTemplateColumns: gridTemplateColumns.columns,
+                  }}
+                >
+                  <StoreControlListItem key={item.storeId} item={item} />
+                </TableLayoutContents>
+              ))
+            ) : (
+              <p className="noItem"> 등록된 매장이 없습니다</p>
+            )}
+          </>
         </TableVertical>
       </TableWrap>
     </MemberDetailWrap>

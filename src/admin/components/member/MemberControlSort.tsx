@@ -3,11 +3,10 @@
     노션 : https://hyemdev.notion.site/hyemdev/hyem-s-dev-STUDY-75ffe819c7534a049b59871e6fe17dd4
     깃허브 : https://github.com/hyemdev
 */
-import { Input, Select, Space } from "antd";
+import { Select, Space } from "antd";
 import { IMemberSortOption } from "../../interface/MemberInterface";
 import { SortSelectWrap } from "../../style/AdminMemberStyle";
 import Search from "antd/es/input/Search";
-import { useEffect } from "react";
 
 export const initialSortOption: IMemberSortOption = { type: "0", sort: "0" };
 const MemberControlSort = ({
