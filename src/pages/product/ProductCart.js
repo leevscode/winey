@@ -28,7 +28,6 @@ import {
   faMinus,
   faPlus,
   faX,
-  faTriangleExclamation,
 } from "@fortawesome/free-solid-svg-icons";
 import {
   cartLengthData,
@@ -45,6 +44,7 @@ const ProductCart = () => {
   // 변하는 값(수량,총합) 담는 state
   const [totalPrice, setTotalPrice] = useState(0);
 
+  // 장바구니 출력 get
   const filledCartData = async () => {
     try {
       const data = await fetchCartData();
@@ -89,13 +89,14 @@ const ProductCart = () => {
 
   const calcTotalSum = () => {
     let itemTotal = 0;
-    cartData?.map((item, index) => {
+    cartData?.map((item) => {
       itemTotal += item.price * item.quantity;
     });
     return itemTotal;
   };
 
-  const increaseItemQuantity = async cartId => {
+  // 장바구니 수량 + , 최대 5개까지만
+  const removeQuantity = async cartId => {
     const arr = cartData?.map(item => {
       if (item.cartId === cartId) {
         if (item.quantity < 5) {
@@ -107,7 +108,8 @@ const ProductCart = () => {
     setCartData(arr);
   };
 
-  const decreaseItemQuantity = async cartId => {
+  // 장바구니 수량 -
+  const addQuantity = async cartId => {
     const arr = cartData?.map(item => {
       if (item.cartId === cartId) {
         item.quantity -= 1;
@@ -120,6 +122,7 @@ const ProductCart = () => {
     setCartData(arr);
   };
 
+  // 장바구니에서 결제
   const buyGood = async () => {
     // 카트에 있는 상품 ID 중복 확인
     const productIds = new Set();
@@ -161,13 +164,14 @@ const ProductCart = () => {
     e.target.src = NoImage;
   };
 
-  // 토탈값 바뀔때마다 갱신되는 useEffect
+  // 토탈값 바뀔때마다 갱신되는 useEffect (calcTotalSum)
   useEffect(() => {
     setTotalPrice(calcTotalSum);
   }, [calcTotalSum]);
 
   // console.log("CartData", CartData);
   // console.log("totalPrice", totalPrice);
+
   return (
     <>
       {cartData?.length === 0 ? (
@@ -202,11 +206,11 @@ const ProductCart = () => {
                     <CartnmEng>{item.nmEng}</CartnmEng>
                     <Cratprice>{item.price.toLocaleString()}원</Cratprice>
                     <GoodsEa>
-                      <button onClick={() => decreaseItemQuantity(item.cartId)}>
+                      <button onClick={() => addQuantity(item.cartId)}>
                         <FontAwesomeIcon icon={faMinus} />
                       </button>
                       <span>{item.quantity}</span>
-                      <button onClick={() => increaseItemQuantity(item.cartId)}>
+                      <button onClick={() => removeQuantity(item.cartId)}>
                         <FontAwesomeIcon icon={faPlus} />
                       </button>
                     </GoodsEa>

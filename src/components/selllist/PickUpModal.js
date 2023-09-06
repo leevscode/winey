@@ -39,7 +39,7 @@ const PickUpModal = ({ onConfirm, onClose, onPick, setSellListData }) => {
           <div>
             <ButtonOk
               onClick={() => {
-                // "픽업완료" 확인 처리를 위해 onConfirm 함수를 호출
+                // "픽업완료" 확인 처리를 위해 onConfirm 호출
                 onConfirm(onPick);
                 finishSellList();
                 onClose();

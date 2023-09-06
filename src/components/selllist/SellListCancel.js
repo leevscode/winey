@@ -3,7 +3,6 @@
     노션 : https://www.notion.so/leevscode/leevscode-5223e3d332604844a255a0c63113a284
     깃허브 : https://github.com/leevscode
 */
-import React from "react";
 import {
   OrderCancelContent,
   OrderCancelModal,
@@ -28,7 +27,6 @@ const SellListCancel = ({
       okText: "닫기",
       wrapClassName: "info-modal-wrap notice-modal",
       maskClosable: true,
-      // title: "주문취소 확인",
       content: (
         <ul>
           <li>주문이 취소 되었습니다.</li>

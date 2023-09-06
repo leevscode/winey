@@ -29,20 +29,6 @@ const SellListDetail = () => {
   const [reviewId, setReviewId] = useState(null);
   const [productData, setProductData] = useState([]);
 
-  // 상품 가격 합산
-  // const calculateTotalAmount = () => {
-  //   let totalPrice = 0;
-  //   productInfo.forEach(item => {
-  //     if (typeof item.salePrice === "string") {
-  //       const price = parseInt(item.salePrice.replace(/[^0-9]/g, ""), 10);
-  //       if (!isNaN(price)) {
-  //         totalPrice += price;
-  //       }
-  //     }
-  //   });
-  //   return totalPrice;
-  // };
-
   // 주문 상세 내역 출력
   const filleddetailData = async () => {
     const parts = iselllist.split(":");
@@ -112,7 +98,6 @@ const SellListDetail = () => {
 
   return (
     <SellListDetailBox>
-      {/* <DetailDay>{orderData.orderDetailId}</DetailDay> */}
       {productInfo?.map((item, idx) => (
         <div className="box-list" key={idx}>
           <SellListDetailinfo>
