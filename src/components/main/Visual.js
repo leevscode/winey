@@ -12,7 +12,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 // Import Swiper styles
 import "swiper/css";
 // import required modules
-import { Pagination } from "swiper/modules";
+import { Pagination, Autoplay } from "swiper/modules";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 
@@ -30,37 +30,50 @@ const Visual = () => {
       );
     },
   };
-  //
-  const visualSlide = [
-    {
-      subtitle: "와인이 처음인 당신을 위한",
-      title: "와인 가이드",
-      link: "/windeguide",
-      image: "/images/visual_img_1.jpg",
-    },
-  ];
   return (
     <VisualWrap>
-      <Swiper pagination={pagination} modules={[Pagination]}>
-        {visualSlide.map((item, index) => (
-          <SwiperSlide
-            key={v4()}
-            style={{ backgroundImage: `url(${item.image})` }}
-          >
-            <VisualText>
-              <div>
-                <span>{item.subtitle}</span>
-                <p>{item.title}</p>
-                <Link to={item.link}>
-                  자세히 보기
-                  <i>
-                    <FontAwesomeIcon icon={faArrowRight} />
-                  </i>
-                </Link>
-              </div>
-            </VisualText>
-          </SwiperSlide>
-        ))}
+      <Swiper
+        pagination={pagination}
+        modules={[Pagination, Autoplay]}
+        speed={800}
+        autoplay={{ delay: 3500 }}
+      >
+        <SwiperSlide
+          style={{ backgroundImage: "url(/images/visual_img_1.jpg)" }}
+        >
+          <VisualText>
+            <div>
+              <span>와인이 처음인 당신을 위한</span>
+              <p>와인 가이드</p>
+              <Link to="/windeguide">
+                자세히 보기
+                <i>
+                  <FontAwesomeIcon icon={faArrowRight} />
+                </i>
+              </Link>
+            </div>
+          </VisualText>
+        </SwiperSlide>
+        <SwiperSlide
+          style={{ backgroundImage: "url(/images/visual_img_2.jpg)" }}
+        >
+          <VisualText>
+            <div>
+              <span>
+                가을의 매력을
+                <br />
+                와인 한 잔과 함께 느껴보세요.
+              </span>
+              <p>9월의 할인 상품</p>
+              <Link to="/">
+                자세히 보기
+                <i>
+                  <FontAwesomeIcon icon={faArrowRight} />
+                </i>
+              </Link>
+            </div>
+          </VisualText>
+        </SwiperSlide>
       </Swiper>
     </VisualWrap>
   );

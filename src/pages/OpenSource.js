@@ -235,6 +235,18 @@ const OpenSource = () => {
             </li>
             <li>
               <a
+                href="https://kr.freepik.com/free-photo/front-view-of-delicious-thanksgiving-meal_9465748.htm#page=3&query=%EA%B0%80%EC%9D%84%20%EC%99%80%EC%9D%B8&position=0&from_view=search&track=ais"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                비주얼 이미지 (할인상품)
+                <i>
+                  <FontAwesomeIcon icon={faAngleRight} />
+                </i>
+              </a>
+            </li>
+            <li>
+              <a
                 href="https://kr.freepik.com/free-photo/top-view-wine-bottles-with-grapes_5151295.htm#page=2&query=wine&position=15&from_view=search&track=sph"
                 target="_blank"
                 rel="noopener noreferrer"

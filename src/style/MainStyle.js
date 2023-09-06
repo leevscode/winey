@@ -31,7 +31,7 @@ export const MainWrap = styled.div`
 // 비주얼 슬라이드
 export const VisualWrap = styled.div`
   position: relative;
-  height: 60vh;
+  height: 600px;
   border-radius: 0 0 0 100px;
   margin-top: -8rem;
   overflow: hidden;
@@ -42,12 +42,32 @@ export const VisualWrap = styled.div`
       background-size: cover;
       background-position: center center;
       background-repeat: no-repeat;
+      & > div {
+        & > div {
+          /* background: pink; */
+          transition:
+            transform 0.5s ease-in-out,
+            opacity 0.5s ease-in-out;
+          transition-delay: 0.3s;
+          transform: translateY(20px);
+          opacity: 0;
+        }
+      }
+    }
+    .swiper-slide-active {
+      & > div {
+        & > div {
+          transform: translateY(0);
+          opacity: 1;
+        }
+      }
     }
     .swiper-pagination {
       display: flex;
       justify-content: space-between;
       position: absolute;
       bottom: 48px;
+      left: auto;
       right: 5%;
       z-index: 1;
       width: 100%;
@@ -67,7 +87,9 @@ export const VisualWrap = styled.div`
       span {
         position: relative;
         width: auto;
+        height: auto;
         font-size: 1.4rem;
+        background: transparent;
         color: ${Maincolor.white};
       }
     }
@@ -82,10 +104,13 @@ export const VisualText = styled.div`
   & > div {
     color: ${Maincolor.white};
     font-size: 1.8rem;
+    span {
+      line-height: 1.2;
+    }
     p {
       font-size: 2.5em;
       font-weight: 900;
-      margin-top: 3px;
+      margin-top: 5px;
     }
     a {
       display: block;
