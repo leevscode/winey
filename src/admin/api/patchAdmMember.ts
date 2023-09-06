@@ -3,10 +3,7 @@
     노션 : https://hyemdev.notion.site/hyemdev/hyem-s-dev-STUDY-75ffe819c7534a049b59871e6fe17dd4
     깃허브 : https://github.com/hyemdev
 */
-import {
-  IMemControl,
-  IUserDetail,
-} from "../interface/MemberInterface";
+import { IMemControl, IUserDetail } from "../interface/MemberInterface";
 import { client } from "../../api/client";
 
 // 멤버리스트 get
@@ -23,10 +20,17 @@ export const getMemberList = async (
   sortSearch: string,
   textSearch: string,
 ) => {
+  console.log("paginate.row", paginate.row);
+  console.log("sortSearch", sortSearch);
+  console.log("textSearch", textSearch);
+  console.log("sortOption.type", sortOption.type);
   try {
     const res = await client.get(
-      `/api/admin/user/list?page=${paginate.page}&row=${paginate.row}&type=${sortSearch}&sort=${sortOption.sort}&str=${textSearch}`,
-      // `/api/admin/user/list?page=${paginate.page}&row=${paginate.row}&type=${sortOption.type}&sort=${sortOption.sort}`,
+      `/api/admin/user/list?page=${paginate.page}&row=${paginate.row}&type=${
+        sortOption.type
+      }&type2=${sortSearch ? sortSearch : 0}&sort=${
+        sortOption.sort ? sortOption.sort : ""
+      }&str=${textSearch}`,
     );
     console.log("res", res);
     const result: IMemControl = await res.data;

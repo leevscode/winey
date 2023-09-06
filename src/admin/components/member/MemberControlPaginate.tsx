@@ -33,18 +33,20 @@ const MemberControlPaginate = ({
 
   const getPage = async () => {
     // 페이지 정보를 보내고(paginate) , list 정보를 받는다
-    const data = await getMemberList(
+    const getdata = await getMemberList(
       paginate,
       setMemberList,
       sortOption,
       sortSearch,
       textSearch,
     );
+    return;
   };
+  console.log("memberList", memberList);
 
   useEffect(() => {
     getPage();
-  }, [paginate.page, sortOption]);
+  }, [paginate.page, sortOption, textSearch]);
   return (
     <PaginationWrap>
       {pageInfo && (

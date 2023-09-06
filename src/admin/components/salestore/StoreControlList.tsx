@@ -10,6 +10,7 @@ import {
 } from "../../style/AdminLayoutStyle";
 import { MemberDetailWrap } from "../../style/AdminMemberStyle";
 import { useOutletContext } from "react-router";
+import { deleteStore } from "../../api/patchAdmStore";
 
 const StoreControlList = ({
   regionConvert,
@@ -28,8 +29,8 @@ const StoreControlList = ({
   };
 
   // 매장삭제
-  const handleStoreDel = () => {
-    console.log("");
+  const handleStoreDel: React.MouseEventHandler<HTMLButtonElement> = e => {
+    deleteStore(e.currentTarget.value);
   };
   return (
     <MemberDetailWrap>
@@ -67,7 +68,9 @@ const StoreControlList = ({
                   <DetailBt onClick={handleStoreEdit}>수정</DetailBt>
                 </li>
                 <li>
-                  <MemberOutBt onClick={handleStoreDel}>삭제</MemberOutBt>
+                  <MemberOutBt value={item.storeId} onClick={handleStoreDel}>
+                    삭제
+                  </MemberOutBt>
                 </li>
               </TableLayoutContents>
             ))

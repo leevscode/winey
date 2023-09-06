@@ -26,6 +26,7 @@ export interface IStoreDetailList {
   address: string;
   storeId?: number;
   textRegion?: string;
+  statusText?: string;
 }
 export interface IStoreInfoState {
   storeInfomation: IStoreInfo;
