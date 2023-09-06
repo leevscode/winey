@@ -37,7 +37,7 @@ export const postNewStore = async (newStoreInfo: {
 }) => {
   console.log("newStoreInfo", newStoreInfo);
   try {
-    const res = await client.post("/api/admin/store/..", {
+    const res = await client.post("/api/admin/store", {
       regionNmId: newStoreInfo.regionNmId,
       nm: newStoreInfo.nm,
       tel: newStoreInfo.tel,

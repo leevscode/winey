@@ -79,11 +79,9 @@ const StoreAddAdm: React.FC = () => {
     },
 
     // 주소 선택 이벤트
-    selectAddress: (data: any) => {
+    selectAddress: async (data: any) => {
       console.log("data", data);
-
-      // if(data.userSelectedType)
-      setCalendarLocation(data.address);
+      const temp = await setCalendarLocation(data.address);
       setNewStoreInfo(prevState => ({
         ...prevState,
         address: data.address,
@@ -96,7 +94,7 @@ const StoreAddAdm: React.FC = () => {
     navigate(-1);
   };
   const onFinish = () => {
-     try {
+    try {
       Modal.confirm({
         okText: "예",
         cancelText: "아니오",
@@ -109,6 +107,7 @@ const StoreAddAdm: React.FC = () => {
         ),
         async onOk() {
           const complete: any | undefined = await postNewStore(newStoreInfo);
+          console.log("complete", complete);
           if (complete !== 0) {
             navigate("/admin/storecontrol");
             console.log("매장등록성공");
@@ -203,18 +202,17 @@ const StoreAddAdm: React.FC = () => {
               <Form.Item
                 className="storeAddressSt"
                 name="storeAddress"
-                rules={[
-                  {
-                    required: true,
-                    message: "매장주소를 입력해 주세요",
-                  },
-                ]}
+                // rules={[
+                //   {
+                //     required: true,
+                //     message: "매장주소를 입력해 주세요",
+                //   },
+                // ]}
               >
                 <Input
-                  placeholder="매장주소를 입력하세요."
-                  onChange={e => handleAddress.selectAddress(e)}
-                  readOnly
                   value={calendarlocation}
+                  placeholder="매장주소를 입력하세요."
+                  // readOnly
                   onClick={handleAddress.clickButton}
                 />
                 <DetailBt onClick={handleAddress.clickButton}>
