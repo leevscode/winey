@@ -7,72 +7,81 @@ import React from "react";
 import { ConfigProvider, Select } from "antd";
 import { SortSelectWrap } from "../../style/AdminMemberStyle";
 import { AdminColor } from "../../style/AdminLayoutStyle";
+import Search from "antd/es/input/Search";
 
 export interface ISort {
   setType: React.Dispatch<React.SetStateAction<string>>;
   setSort: React.Dispatch<React.SetStateAction<string>>;
+  setTextSearch: React.Dispatch<React.SetStateAction<string | null>>;
 }
 
-const ProductControlSort = ({ setType, setSort }: ISort) => {
+const ProductControlSort = ({ setType, setSort, setTextSearch }: ISort) => {
+  // 검색 입력
+  const onTextSearch = (
+    value: string,
+    e?: React.ChangeEvent<HTMLInputElement>,
+  ) => {
+    setTextSearch(value);
+  };
   const handleSortChange = (value: string) => {
     switch (value) {
       case "1":
-        console.log("상품번호 오름차순", value);
+        // console.log("상품번호 오름차순", value);
         setType("productId");
         setSort("asc");
         break;
       case "2":
-        console.log("상품번호 내림차순", value);
+        // console.log("상품번호 내림차순", value);
         setType("productId");
         setSort("desc");
         break;
       case "3":
-        console.log("판매가격 높은가격순", value);
+        // console.log("판매가격 높은가격순", value);
         setType("salePrice");
         setSort("desc");
         break;
       case "4":
-        console.log("판매가격 낮은가격순", value);
+        // console.log("판매가격 낮은가격순", value);
         setType("salePrice");
         setSort("asc");
         break;
       case "5":
-        console.log("높은할인율", value);
+        // console.log("높은할인율", value);
         setType("sale");
         setSort("desc");
         break;
       case "6":
-        console.log("낮은할인율", value);
+        // console.log("낮은할인율", value);
         setType("sale");
         setSort("asc");
         break;
       case "7":
-        console.log("정상가 높은가격순", value);
+        // console.log("정상가 높은가격순", value);
         setType("price");
         setSort("desc");
         break;
       case "8":
-        console.log("판매가격 낮은가격순", value);
+        // console.log("판매가격 낮은가격순", value);
         setType("price");
         setSort("asc");
         break;
       case "9":
-        console.log("재고수량 오름차순", value);
+        // console.log("재고수량 오름차순", value);
         setType("quantity");
         setSort("desc");
         break;
       case "10":
-        console.log("재고수량 내림차순", value);
+        // console.log("재고수량 내림차순", value);
         setType("quantity");
         setSort("asc");
         break;
       case "11":
-        console.log("품절여부 Y", value);
+        // console.log("품절여부 Y", value);
         setType("quantity");
         setSort("asc");
         break;
       case "12":
-        console.log("품절여부 N", value);
+        // console.log("품절여부 N", value);
         setType("quantity");
         setSort("desc");
         break;
@@ -87,6 +96,12 @@ const ProductControlSort = ({ setType, setSort }: ISort) => {
           },
         }}
       >
+        {/* 검색 */}
+        <Search
+          placeholder="상품명을 입력하세요."
+          allowClear
+          onSearch={e => onTextSearch(e)}
+        />
         {/* 정렬 */}
         <Select
           defaultValue="기본정렬"

@@ -35,6 +35,7 @@ export const AdmProductWrap = styled.div`
     justify-content: space-between;
     align-items: flex-end;
     margin-bottom: 5px;
+    padding-top: 5px;
     font-size: 1.25rem;
     .total-count {
       color: ${Maincolor.grayDeep};
@@ -55,7 +56,13 @@ export const AdmProductWrap = styled.div`
       border: 0.05rem solid ${opacity.grayLight};
     }
     & > div {
+      display: flex;
+      align-items: center;
       margin: 0;
+      .ant-input-search {
+        width: 200px;
+        margin-right: 5px;
+      }
       .ant-select {
         width: 180px;
       }

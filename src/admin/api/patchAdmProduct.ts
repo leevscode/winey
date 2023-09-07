@@ -19,14 +19,17 @@ export const getAdmProductList = async (
   _sort: string,
   _setAdmProductList: Dispatch<React.SetStateAction<IproductList[]>>,
   _setTotalPage: Dispatch<React.SetStateAction<number>>,
+  _textSearch: string | null,
 ) => {
   try {
     const res = await client.get(
-      `/api/admin/product/list?page=${_page}&row=10&type=${_type}&sort=${_sort}`,
+      `/api/admin/product/list?page=${_page}&size=10&sort=${_type}%2C${_sort}${
+        _textSearch !== "" ? `&str=${_textSearch}` : ""
+      }`,
     );
     const result = res.data;
-    const data = result.productList;
-    const pageData = result.page.totalRecordCount;
+    const data = result.content;
+    const pageData = result.pageableCustom.totalElements;
     _setAdmProductList(data);
     _setTotalPage(pageData);
     // console.log("등록된 상품 리스트 GET", result);
