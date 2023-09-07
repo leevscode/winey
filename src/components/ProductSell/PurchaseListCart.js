@@ -8,11 +8,13 @@ import { PurchaseListWrap, TotalPrice } from "../../style/ProductSellStyle";
 import { faMinus, faPlus } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import NoImage from "../../assets/no_image.jpg";
+import { patchItemQuatt } from "../../api/purchasepatch";
 
 const PurchaseListCart = ({
   productInfoArray,
   setTotalPrice,
   setEditProductCollect,
+  editProductCollect,
 }) => {
   // 이미지 없을 때 error처리
   const onImgError = e => {
@@ -30,6 +32,8 @@ const PurchaseListCart = ({
     setItemCount(prevCounts => {
       return prevCounts.map((count, index) => {
         if (productInfoArray[index].productId === option.productId) {
+          patchItemQuatt(productInfoArray[index]);
+
           setMaxItem("");
 
           // 값이 0보다 작으면 0으로 제한
@@ -45,6 +49,8 @@ const PurchaseListCart = ({
     setItemCount(prevCounts => {
       return prevCounts.map((count, index) => {
         if (productInfoArray[index].productId === option.productId) {
+          patchItemQuatt(productInfoArray[index]);
+
           if (count == 5) {
             setMaxItem("최대 구매수량은 5개입니다");
           }
@@ -67,7 +73,7 @@ const PurchaseListCart = ({
 
   useEffect(() => {
     setTotalPrice(calcTotalSum);
-  }, [calcTotalSum]);
+  }, [calcTotalSum, patchItemQuatt()]);
 
   useEffect(() => {
     const updatedProductCollect = productInfoArray.map((option, index) => ({

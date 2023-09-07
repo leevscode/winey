@@ -9,14 +9,18 @@ import { SearchFilterWrap } from "../../style/SearchStyle";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faBacon,
+  faDrumstickBite,
+  faFish,
   faFishFins,
   faFlag,
   faGuitar,
+  faLeaf,
   faWineGlass,
 } from "@fortawesome/free-solid-svg-icons";
 import { faMoneyBill1 } from "@fortawesome/free-regular-svg-icons";
 import { atom, useRecoilState, useSetRecoilState } from "recoil";
 import { v4 } from "uuid";
+import { Gradation, Maincolor } from "../../style/GlobalStyle";
 
 export const searchFilterRecoil = atom({
   key: `searchFilterRecoil/${v4()}`,
@@ -24,48 +28,156 @@ export const searchFilterRecoil = atom({
 });
 export const wineSearchOptions = {
   cate: [
-    { id: 1, value: "레드", icon: <FontAwesomeIcon icon={faWineGlass} /> },
-    { id: 2, value: "화이트", icon: <FontAwesomeIcon icon={faWineGlass} /> },
+    {
+      id: 1,
+      value: "레드",
+      icon: (
+        <i style={{ color: Gradation.wineB }}>
+          <FontAwesomeIcon icon={faWineGlass} />
+        </i>
+      ),
+    },
+    {
+      id: 2,
+      value: "화이트",
+      icon: (
+        <i style={{ color: Gradation.whiteA }}>
+          <FontAwesomeIcon icon={faWineGlass} />
+        </i>
+      ),
+    },
     {
       id: 3,
       value: "스파클링",
-      icon: <FontAwesomeIcon icon={faWineGlass} />,
+      icon: (
+        <i style={{ color: Gradation.sparkA }}>
+          <FontAwesomeIcon icon={faWineGlass} />
+        </i>
+      ),
     },
-    { id: 4, value: "기타", icon: <FontAwesomeIcon icon={faGuitar} /> },
+    {
+      id: 4,
+      value: "기타",
+      icon: (
+        <i style={{ color: Gradation.etcA }}>
+          <FontAwesomeIcon icon={faWineGlass} />
+        </i>
+      ),
+    },
   ],
   price: [
     {
       id: 1,
       value: "2만원미만",
-      icon: <FontAwesomeIcon icon={faMoneyBill1} />,
+      icon: (
+        <i style={{ color: Gradation.wineE }}>
+          <FontAwesomeIcon icon={faMoneyBill1} />
+        </i>
+      ),
     },
     {
       id: 2,
       value: "2~5만원",
-      icon: <FontAwesomeIcon icon={faMoneyBill1} />,
+      icon: (
+        <i style={{ color: Gradation.wineD }}>
+          <FontAwesomeIcon icon={faMoneyBill1} />
+        </i>
+      ),
     },
     {
       id: 3,
       value: "5~10만원",
-      icon: <FontAwesomeIcon icon={faMoneyBill1} />,
+      icon: (
+        <i style={{ color: Gradation.wineC }}>
+          <FontAwesomeIcon icon={faMoneyBill1} />
+        </i>
+      ),
     },
     {
       id: 4,
       value: "10만원이상",
-      icon: <FontAwesomeIcon icon={faMoneyBill1} />,
+      icon: (
+        <i style={{ color: Gradation.wineB }}>
+          <FontAwesomeIcon icon={faMoneyBill1} />
+        </i>
+      ),
     },
   ],
   bigCate: [
-    { id: 1, value: "육류", icon: <FontAwesomeIcon icon={faBacon} /> },
-    { id: 2, value: "해산물", icon: <FontAwesomeIcon icon={faFishFins} /> },
-    { id: 3, value: "기타", icon: <FontAwesomeIcon icon={faGuitar} /> },
+    {
+      id: 1,
+      value: "육류",
+      icon: (
+        <i>
+          <FontAwesomeIcon icon={faDrumstickBite} />
+        </i>
+      ),
+    },
+    {
+      id: 2,
+      value: "해산물",
+      icon: (
+        <i>
+          <FontAwesomeIcon icon={faFish} />
+        </i>
+      ),
+    },
+    {
+      id: 3,
+      value: "기타",
+      icon: (
+        <i>
+          <FontAwesomeIcon icon={faLeaf} />
+        </i>
+      ),
+    },
   ],
   country: [
-    { id: 1, value: "미국", icon: <FontAwesomeIcon icon={faFlag} /> },
-    { id: 3, value: "프랑스", icon: <FontAwesomeIcon icon={faFlag} /> },
-    { id: 4, value: "이탈리아", icon: <FontAwesomeIcon icon={faFlag} /> },
-    { id: 6, value: "칠레", icon: <FontAwesomeIcon icon={faFlag} /> },
-    { id: 2, value: "기타", icon: <FontAwesomeIcon icon={faFlag} /> },
+    {
+      id: 1,
+      value: "미국",
+      icon: (
+        <i style={{ color: Maincolor.redDeep }}>
+          <FontAwesomeIcon icon={faFlag} />
+        </i>
+      ),
+    },
+    {
+      id: 3,
+      value: "프랑스",
+      icon: (
+        <i style={{ color: Gradation.wineE }}>
+          <FontAwesomeIcon icon={faFlag} />
+        </i>
+      ),
+    },
+    {
+      id: 4,
+      value: "이탈리아",
+      icon: (
+        <i style={{ color: Gradation.wineB }}>
+          <FontAwesomeIcon icon={faFlag} />
+        </i>
+      ),
+    },
+    {
+      id: 6,
+      value: "칠레",
+      icon: (
+        <i style={{ color: Gradation.wineC }}>
+          <FontAwesomeIcon icon={faFlag} />
+        </i>
+      ),
+    },
+    {
+      id: 2,
+      value: "기타",
+      icon: (
+        <i style={{ color: Gradation.wineD }}>
+          <FontAwesomeIcon icon={faFlag} />
+        </i>
+      ),
+    },
   ],
 };
 

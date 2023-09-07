@@ -137,20 +137,34 @@ export const NavListWrap = styled.div`
   padding: ${WidthPd.padding};
   padding-top: 40px;
   padding-bottom: 40px;
-  & > ul {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0 6%;
-    & > li {
+  .swiper {
+    .swiper-wrapper {
       text-align: center;
-      /* margin: 0 20px; */
+      .swiper-slide {
+        width: calc(100% / 5);
+        min-width: 100px;
+      }
       a {
+        position: relative;
         display: block;
+        i {
+          position: absolute;
+          top: 4px;
+          right: 12px;
+          width: 1.8rem;
+          height: 1.8rem;
+          line-height: 1.8rem;
+          border-radius: 100%;
+          background: red;
+          font-size: 1.2rem;
+          font-weight: 700;
+          color: ${Maincolor.white};
+        }
         img {
           display: block;
           width: 70px;
           height: auto;
+          margin: 0 auto;
         }
         span {
           display: block;

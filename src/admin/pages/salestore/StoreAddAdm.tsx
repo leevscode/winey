@@ -1,4 +1,9 @@
-import { Button, Form, Input, Modal, Radio, RadioChangeEvent } from "antd";
+/*
+    작업자 : 최혜미
+    노션 : https://hyemdev.notion.site/hyemdev/hyem-s-dev-STUDY-75ffe819c7534a049b59871e6fe17dd4
+    깃허브 : https://github.com/hyemdev
+*/
+import { Form, Input, Modal, Radio, RadioChangeEvent } from "antd";
 import React, { useState } from "react";
 import { regionOptions } from "../member/MemberControlAdm";
 import { StoreAddWrap, StoreAddressModal } from "../../style/AdminStoreStyle";
@@ -178,26 +183,26 @@ const StoreAddAdm: React.FC = () => {
             </li>
           </ul>
           <ul>
-            <li>지점이름</li>
+            <li>매장 이름</li>
             <li>
               <Form.Item
                 name="storeNm"
                 rules={[
                   {
                     required: true,
-                    message: "매장이름을 입력해 주세요",
+                    message: "매장 이름을 입력해 주세요",
                   },
                 ]}
               >
                 <Input
-                  placeholder="지점명을 입력하세요."
+                  placeholder="매장 이름을 입력하세요."
                   onChange={data => handleStoreName(data)}
                 />
               </Form.Item>
             </li>
           </ul>
           <ul>
-            <li>매장주소</li>
+            <li>매장 주소</li>
             <li>
               <Form.Item
                 className="storeAddressSt"
@@ -211,7 +216,7 @@ const StoreAddAdm: React.FC = () => {
               >
                 <Input
                   value={calendarlocation}
-                  placeholder="매장주소를 입력하세요."
+                  placeholder="매장 주소를 입력하세요."
                   // readOnly
                   onClick={handleAddress.clickButton}
                 />

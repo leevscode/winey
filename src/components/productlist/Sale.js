@@ -9,38 +9,12 @@ import { ProductListItemWrap } from "../../style/ProductListStyle";
 import { Gradation, Maincolor } from "../../style/GlobalStyle";
 import { ContentsListItemWrap } from "../../style/GlobalComponents";
 import { useInView } from "react-intersection-observer";
-import {
-  getEtcWineCheap,
-  getEtcWineExpensive,
-  getEtcWineNew,
-} from "../../api/patchproduct";
+import { getSaleWine } from "../../api/patchproduct";
 import Item from "./Item";
 import ProductCartModal from "../product/ProductCartModal";
 import { FadeLoader } from "react-spinners";
 
-const Etc = () => {
-  // 상품 더미 데이터
-  /*
-  const foodItem = [
-    {
-      productId: 22,
-      categoryId: 2,
-      featureId: 110,
-      countryId: 2,
-      aromaId: 110,
-      nmKor: "슈샤르조프버거 리슬링 스패틀레스",
-      nmEng: "Scharzhofberger Riesling Spätlese",
-      price: 15600,
-      quantity: 30,
-      pic: "wine/22/NwRt7c2oQF6-mdBgs9gSLQ_pb_x960.png",
-      promotion: 0,
-      beginner: 0,
-      alcohol: 8,
-      sale: 10,
-      salePrice: 30644,
-    },
-  ];
-  */
+const Sale = () => {
   // 장바구니 완료 모달 state
   const [isModalOpen, setIsModalOpen] = useState(false);
   const handleOk = () => {
@@ -58,22 +32,11 @@ const Etc = () => {
   const [hasNextPage, setHasNextPage] = useState(true);
   // value 보관할 state
   const [optionValue, setOptionValue] = useState(1);
-  const page = useRef(1);
-  // value값에 따라 데이터 바뀜
-  const getListData = useCallback(async value => {
-    if (value === 1) {
-      await getEtcWineNew(setListScroll, setHasNextPage, page, setTotalCount);
-    } else if (value === 2) {
-      await getEtcWineExpensive(
-        setListScroll,
-        setHasNextPage,
-        page,
-        setTotalCount,
-      );
-    } else if (value === 3) {
-      await getEtcWineCheap(setListScroll, setHasNextPage, page, setTotalCount);
-    }
-  }, []);
+  // sort 보관할 state
+  const [sort, setSort] = useState("productid");
+  // type 보관할 state
+  const [type, setType] = useState("DESC");
+  const page = useRef(0);
   // 상품 정렬 옵션
   const options = [
     {
@@ -91,21 +54,26 @@ const Etc = () => {
   ];
   const handleChange = useCallback(
     value => {
-      // getListData(value);
       setOptionValue(value);
       setListScroll([]);
-      page.current = 1;
+      page.current = 0;
       // setListData(value);
       // console.log("value 출력합니다", value);
       switch (value) {
         case 1:
           // console.log("최신등록순 눌렀어요");
+          setSort("productid");
+          setType("DESC");
           break;
         case 2:
           // console.log("높은가격순 눌렀어요");
+          setSort("price");
+          setType("DESC");
           break;
         case 3:
           // console.log("낮은가격순 눌렀어요");
+          setSort("price");
+          setType("ASC");
           break;
       }
     },
@@ -115,9 +83,18 @@ const Etc = () => {
   useEffect(() => {
     if (inView && hasNextPage) {
       // console.log("value 출력", optionValue);
-      getListData(optionValue);
+      // getListData(optionValue);
+      getSaleWine(
+        setListScroll,
+        setHasNextPage,
+        page,
+        sort,
+        type,
+        setTotalCount,
+      );
     }
-  }, [getListData, hasNextPage, inView, setOptionValue]);
+    // console.log("inView", inView, "hasNextPage", hasNextPage);
+  }, [getSaleWine, hasNextPage, inView, setOptionValue]);
   return (
     <>
       <ProductListItemWrap>
@@ -152,7 +129,11 @@ const Etc = () => {
         </ul>
         <ContentsListItemWrap>
           {/* 상품 리스트 */}
-          <Item listScroll={listScroll} setIsModalOpen={setIsModalOpen} />
+          <Item
+            listScroll={listScroll}
+            setIsModalOpen={setIsModalOpen}
+            hasNextPage={hasNextPage}
+          />
         </ContentsListItemWrap>
         {/* 로딩 컴포넌트 */}
         {hasNextPage && (
@@ -180,4 +161,4 @@ const Etc = () => {
   );
 };
 
-export default Etc;
+export default Sale;

@@ -29,8 +29,8 @@ const NavList = ({ handleOpenNav, closeNav }) => {
         await getLogout("");
         dispatch(logoutUser({}));
         dispatch(totalItem(0));
-        removeCookie("accessToken");
-        removeCookie("refreshToken");
+        removeCookie("access_token");
+        removeCookie("refresh_token");
         // console.log("로그아웃 실행");
         navigate("/main");
         closeNav("/main");
@@ -66,6 +66,16 @@ const NavList = ({ handleOpenNav, closeNav }) => {
       </ul>
       <div className="middle">
         <ul>
+          <li className="focus">
+            <NavLink
+              to="/productlist/sale"
+              onClick={() => {
+                closeNav("/productlist/sale");
+              }}
+            >
+              🍷&nbsp;&nbsp;이달의 할인 상품&nbsp;&nbsp;🍷
+            </NavLink>
+          </li>
           <li>
             <NavLink
               to="/productlist/red"

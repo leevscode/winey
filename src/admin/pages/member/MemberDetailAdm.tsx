@@ -17,28 +17,21 @@ import MemberDetailUpper from "../../components/member/MemberDetailUpper";
 import MemberDetailPaginate from "../../components/member/MemberDetailPaginate";
 import { MemberDetailWrap } from "../../style/AdminMemberStyle";
 import MemberDetailSort from "../../components/member/MemberDetailSort";
-import { initialSortOption } from "../../components/member/MemberControlSort";
 
+export const detailInitialSortOption = { type: "0", sort: "0" };
 const MemberDetailAdm = () => {
   const location = useLocation();
 
   // 정렬 state
   const [sortOption, setSortOption] =
-    useState<IMemberSortOption>(initialSortOption);
+    useState<IMemberSortOption>(detailInitialSortOption);
 
   const [clickUserId, setClickUserId] = useState<number | undefined>(undefined);
   const [userInfomation, setUserInfomation] = useState<IUserDetail>({
     page: {
       page: 1,
       row: 1,
-      startIdx: 1,
       totalRecordCount: 1,
-      totalPage: 1,
-      pageSize: 1,
-      prev: false,
-      next: false,
-      startPage: 1,
-      endPage: 1,
     },
     userInfo: {
       userId: 0,
@@ -64,7 +57,10 @@ const MemberDetailAdm = () => {
       {userInfomation.userInfo && (
         <MemberDetailUpper userInfomation={userInfomation.userInfo} />
       )}
-      <MemberDetailSort userInfomation={userInfomation.page} setSortOption={setSortOption}/>
+      <MemberDetailSort
+        userInfomation={userInfomation.page}
+        setSortOption={setSortOption}
+      />
       {userInfomation.userOrderList && (
         <MemberDetailListItem userInfomation={userInfomation.userOrderList} />
       )}

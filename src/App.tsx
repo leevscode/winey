@@ -51,6 +51,7 @@ import SearchProduct from "./pages/search/SearchProduct";
 import StoreControlAdm from "./admin/pages/salestore/StoreControlAdm";
 import StoreAddAdm from "./admin/pages/salestore/StoreAddAdm";
 import KakaoLogin from "./pages/login/KakaoLogin";
+import Sale from "./components/productlist/Sale";
 
 function App() {
   // 페이지 이동 시 스크롤 최상단으로 올라가는 코드
@@ -136,6 +137,8 @@ function App() {
               <Route path="white" element={<White />} />
               <Route path="spakling" element={<Spakling />} />
               <Route path="etc" element={<Etc />} />
+              {/* 할인 상품 리스트 */}
+              <Route path="sale" element={<Sale />} />
               <Route index path="*" element={<NotFound />} />
             </Route>
             {/* 상품상세페이지 */}

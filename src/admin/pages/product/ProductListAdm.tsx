@@ -18,6 +18,7 @@ import { getAdmProductList } from "../../api/patchAdmProduct";
 import ProductControlPaginate from "../../components/product/ProductControlPaginate";
 import { AdmProductWrap } from "../../style/product/AdminProductStyle";
 import ProductControlSort from "../../components/product/ProductControlSort";
+import Search from "antd/es/input/Search";
 
 const ProductListAdm = () => {
   const navigate = useNavigate();
@@ -40,14 +41,24 @@ const ProductListAdm = () => {
   // 총 상품 갯수 보관할 state
   const [totalPage, setTotalPage] = useState<number>(0);
   // 상품 정렬 보관할 state
-  const [type, setType] = useState<string>("0");
+  const [type, setType] = useState<string>("productid");
   // 오름차순, 내림차순 보관할 state
-  const [sort, setSort] = useState<string>("0");
+  const [sort, setSort] = useState<string>("asc");
+  // 검색어 입력 state
+  const [textSearch, setTextSearch] = useState<string | null>("");
+  // console.log("textSearch", textSearch);
   // 수정 버튼 클릭 시 상품 정보 수정페이지 이동
   useEffect(() => {
     // console.log("화면 전환합니다");
-    getAdmProductList(page, type, sort, setAdmProductList, setTotalPage);
-  }, [page, type, sort]);
+    getAdmProductList(
+      page - 1,
+      type,
+      sort,
+      setAdmProductList,
+      setTotalPage,
+      textSearch,
+    );
+  }, [page, type, sort, textSearch]);
   return (
     <AdmProductWrap>
       {/* 상품 총 갯수 표시, 상품 등록 링크 */}
@@ -55,7 +66,11 @@ const ProductListAdm = () => {
         <p className="total-count">
           총 <span>{totalPage}</span>개
         </p>
-        <ProductControlSort setType={setType} setSort={setSort} />
+        <ProductControlSort
+          setType={setType}
+          setSort={setSort}
+          setTextSearch={setTextSearch}
+        />
       </div>
       <TableWrap>
         {/* 데이터 테이블 - 세로형 */}

@@ -3,6 +3,10 @@ import { css } from "@emotion/react";
 import { Maincolor, WidthPd, opacity } from "../../style/GlobalStyle";
 import { ItableLayoutColor } from "../interface/LayoutInterface";
 
+// 반응형
+const breakPoints = [1250];
+const mq = breakPoints?.map(bp => `@media screen and (max-width:${bp}px)`);
+
 // 관리자페이지 색상 설정
 export const AdminColor = {
   // 테이블 제목 컬러 설정
@@ -98,8 +102,10 @@ export const LayoutIntroWrap = styled.div`
   top: 40%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 85%;
+  width: 90%;
   height: 50% !important;
+  padding-right: 0 !important;
+  padding-bottom: 0 !important;
   margin: 0 auto;
   & > ul {
     height: 100%;
@@ -107,15 +113,20 @@ export const LayoutIntroWrap = styled.div`
       display: inline-flex;
       justify-content: center;
       align-items: center;
-      width: calc(100% / 4 - 1.5%);
+      width: calc(100% / 4 - 1rem);
       height: 100%;
       text-align: center;
-      margin-right: 2%;
+      margin: 0 0.5rem;
       padding: 2rem;
-      border: 1rem solid ${Maincolor.grayMedium};
+      border: 0.8rem solid ${Maincolor.grayMedium};
       border-radius: 2rem;
       font-size: 2rem;
       color: ${Maincolor.black};
+      ${mq[0]} {
+        width: calc(100% / 2 - 1rem);
+        height: auto;
+        margin: 0.5rem;
+      }
       &:last-of-type {
         margin-right: 0;
       }
@@ -158,6 +169,20 @@ export const LayoutIntroWrap = styled.div`
         &:hover {
           background: ${AdminColor.blueB};
         }
+      }
+    }
+  }
+  /* 반응형 */
+  ${mq[0]} {
+    position: static;
+    transform: none;
+    width: 95%;
+    height: auto !important;
+    & > ul {
+      & li {
+        width: calc(100% / 2 - 1rem);
+        height: auto;
+        margin: 0.5rem;
       }
     }
   }

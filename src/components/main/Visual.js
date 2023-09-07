@@ -36,7 +36,7 @@ const Visual = () => {
         pagination={pagination}
         modules={[Pagination, Autoplay]}
         speed={800}
-        autoplay={{ delay: 3500 }}
+        autoplay={{ delay: 3500, disableOnInteraction: false }}
       >
         <SwiperSlide
           style={{ backgroundImage: "url(/images/visual_img_1.jpg)" }}
@@ -65,7 +65,7 @@ const Visual = () => {
                 와인 한 잔과 함께 느껴보세요.
               </span>
               <p>9월의 할인 상품</p>
-              <Link to="/">
+              <Link to="/productlist/sale">
                 자세히 보기
                 <i>
                   <FontAwesomeIcon icon={faArrowRight} />

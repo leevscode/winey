@@ -11,9 +11,10 @@ import {
   TableVertical,
   TableWrap,
 } from "../../style/AdminLayoutStyle";
-import { MemberDetailWrap } from "../../style/AdminMemberStyle";
 import { useOutletContext } from "react-router";
 import StoreControlListItem from "./StoreControlListItem";
+import { EditStoreWrap } from "../../style/AdminStoreStyle";
+
 
 const StoreControlList = ({
   regionConvert,
@@ -22,12 +23,12 @@ const StoreControlList = ({
 }) => {
   const { listPathName } = useOutletContext() as { listPathName: string };
   const gridTemplateColumns = {
-    columns: "0.4fr 0.5fr 0.7fr 1.2fr 0.6fr 0.5fr 0.5fr",
+    columns: "0.4fr 0.6fr 0.6fr 1.2fr 0.5fr 0.4fr 0.4fr",
   };
   console.log("regionConvert", regionConvert);
-
+  // 수정 최종 저장하기
   return (
-    <MemberDetailWrap>
+    <EditStoreWrap>
       <TableWrap>
         <TableVertical>
           <TableLayoutTitle
@@ -44,26 +45,26 @@ const StoreControlList = ({
             <li></li>
             <li></li>
           </TableLayoutTitle>
-          <>
-            {regionConvert.length !== 0 ? (
-              regionConvert.map(item => (
-                <TableLayoutContents
-                  listPathName={listPathName}
-                  key={item.storeId}
-                  style={{
-                    gridTemplateColumns: gridTemplateColumns.columns,
-                  }}
-                >
+          {regionConvert.length !== 0 ? (
+            regionConvert.map(item => (
+              <TableLayoutContents
+                listPathName={listPathName}
+                key={item.storeId}
+                style={{
+                  gridTemplateColumns: gridTemplateColumns.columns,
+                }}
+              >
+                <>
                   <StoreControlListItem key={item.storeId} item={item} />
-                </TableLayoutContents>
-              ))
-            ) : (
-              <p className="noItem"> 등록된 매장이 없습니다</p>
-            )}
-          </>
+                </>
+              </TableLayoutContents>
+            ))
+          ) : (
+            <p className="noItem"> 등록된 매장이 없습니다</p>
+          )}
         </TableVertical>
       </TableWrap>
-    </MemberDetailWrap>
+    </EditStoreWrap>
   );
 };
 

@@ -53,6 +53,8 @@ export const MemberDetailWrap = styled.div`
 
 // 정렬 컴포넌트
 export const SortSelectWrap = styled.div`
+  display: sticky;
+  top: 0;
   .table-top {
     display: flex;
     justify-content: space-between;
