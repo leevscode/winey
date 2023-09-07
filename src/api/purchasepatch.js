@@ -70,29 +70,11 @@ export const postOneItemPurchase = async ({
 };
 
 // 장바구니에서 결제하기 post
-export const postSomeItemPurchase = async ({
-  // editProductCollect,
-  selectCollect,
-  // totalPrice,
-  navigate,
-}) => {
-  // const list = await editProductCollect.map(option => ({
-  //   cartId: option.cartId,
-  //   productId: option.productId,
-  //   pic: option.pic,
-  //   salePrice: option.salePrice,
-  //   price: option.price,
-  //   nmKor: option.nmKor,
-  //   nmEng: option.nmEng,
-  //   quantity: option.quantity,
-  // }));
-
+export const postSomeItemPurchase = async ({ selectCollect, navigate }) => {
   try {
     const res = await client.post("/api/payment/cartpayment", {
       storeId: selectCollect.pickUpSpot.storeId,
       pickupTime: selectCollect.changeDate,
-      // totalOrderPrice: totalPrice,
-      // list: list,
     });
     console.log(res);
     const data = await res.data;
@@ -109,5 +91,20 @@ export const postSomeItemPurchase = async ({
       ),
     });
     navigate("/cart");
+  }
+};
+
+// 장바구니에서 결제할때 수량변경 put
+export const patchItemQuatt = async productInfoArray => {
+  console.log("Patch editProductCollect", productInfoArray);
+  try {
+    const res = await client.put(
+      `/api/wine/productquantity?cartId=${productInfoArray.cartId}&quantity=${productInfoArray.quantity}`,
+    );
+    console.log(res);
+    const data = await res.data;
+    console.log("변경성공", data);
+  } catch (error) {
+    console.log("변경실패", error);
   }
 };

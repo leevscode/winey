@@ -15,7 +15,7 @@ export const client = axios.create({
 client.interceptors.request.use(
   config => {
     // cookie를 활용 한 경우
-    const token = getCookie("accessToken");
+    const token = getCookie("access_token");
     // const token = getCookie("refresh_token");
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
@@ -72,7 +72,7 @@ export const fetchLogin = async (userid, password) => {
       sameSite: "none",
       httpOnly: true,
     });
-    setCookie("accessToken", result.authResVo.accessToken, {
+    setCookie("access_token", result.authResVo.accessToken, {
       path: "/",
       secure: true,
       sameSite: "none",

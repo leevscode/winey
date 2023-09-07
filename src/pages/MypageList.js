@@ -42,8 +42,8 @@ const MypageList = () => {
         await getLogout("");
         dispatch(logoutUser({}));
         dispatch(totalItem(0));
-        removeCookie("accessToken");
-        removeCookie("refreshToken");
+        removeCookie("access_token");
+        removeCookie("refresh_token");
         // console.log("로그아웃 실행");
         navigate("/main");
         closeNav("/main");
