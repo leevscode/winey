@@ -9,6 +9,8 @@ import { motion } from "framer-motion";
 
 export const SearchPageWrap = styled.div`
   padding: ${WidthPd.padding};
+  padding-top: 1.5rem;
+  padding-bottom: 6rem;
   .noSearchItem {
     display: flex;
     justify-content: center;
@@ -32,26 +34,64 @@ export const SearchPageWrap = styled.div`
 `;
 
 export const SearchBarWrap = styled.div`
-  padding: ${WidthPd.padding};
+  /* padding: ${WidthPd.padding}; */
   display: flex;
   justify-content: center;
-  margin-bottom: 3rem;
-  /* height: 8rem; */
+  /* margin-bottom: 3rem; */
+  height: 4rem;
   & > span {
-    width: 400px;
+    /* width: 400px; */
   }
   .filterbutton {
     width: 10rem;
-    height: 4rem;
-    border: 0.2rem solid ${opacity.wine};
     border-radius: 0.5rem;
     padding: 0 1rem;
     font-size: 1.4rem;
-    font-weight: 600;
-    margin: 0 1rem;
-    & svg {
-      color: ${Gradation.wineA};
+    font-weight: 700;
+    color: ${Gradation.wineA};
+    border: 0.05rem solid ${opacity.grayLight};
+    border-right: 0;
+    border-radius: 0.5rem 0 0 0.5rem;
+    transition: all 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
+    /* margin: 0 1rem; */
+    i {
+      font-size: 0.8em;
       margin-right: 0.5rem;
+    }
+    &:hover {
+      background: ${Gradation.wineD};
+      color: ${Maincolor.white};
+    }
+  }
+  /* 검색바 */
+  .ant-input-search {
+    width: calc(100% - 10rem);
+    .ant-input-wrapper {
+      height: 100%;
+      .ant-input-affix-wrapper {
+        height: 100%;
+        border-start-start-radius: 0;
+        border-end-start-radius: 0;
+        box-shadow: none;
+        .ant-input {
+          &::placeholder {
+            color: ${opacity.grayDeep};
+          }
+        }
+      }
+      .ant-input-group-addon {
+        .ant-btn {
+          width: 6rem;
+          height: 100%;
+          border-radius: 0 0.5rem 0.5rem 0;
+          border-start-start-radius: 0;
+          border-end-start-radius: 0;
+          box-shadow: none;
+          & > div:first-of-type {
+            display: none;
+          }
+        }
+      }
     }
   }
 `;
@@ -60,7 +100,8 @@ export const SearchFilterWrap = styled.div`
   position: relative;
   width: 100%;
   height: 100%;
-  background: ${Maincolor.beige};
+  /* background: ${Maincolor.beige}; */
+  background: pink;
   .clickFilterItem {
     background: ${Maincolor.white};
     width: 100%;
@@ -94,13 +135,22 @@ export const SearchFilterWrap = styled.div`
     }
   }
   .selFilter {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
+    /* display: flex; */
+    /* justify-content: center; */
+    /* align-items: center; */
+    /* flex-direction: column; */
+    padding: ${WidthPd.padding};
     padding-top: 1rem;
+    padding-bottom: 2rem;
     & li {
       margin-bottom: 1rem;
+      h3 {
+        font-size: 1.6rem;
+        font-weight: 700;
+        i {
+          margin-right: 0.5rem;
+        }
+      }
       div {
         text-align: center;
         /* 체크박스 그룹 인라인 속성 추가 */

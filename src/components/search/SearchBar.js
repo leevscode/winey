@@ -20,6 +20,8 @@ import {
   faFilter,
 } from "@fortawesome/free-solid-svg-icons";
 import { v4 } from "uuid";
+import { Gradation, opacity } from "../../style/GlobalStyle";
+import { AnimatePresence } from "framer-motion";
 
 // recoil
 export const searchTextRecoil = atom({
@@ -99,39 +101,35 @@ const SearchBar = () => {
   };
 
   return (
-    <SearchBarWrap>
-      <button className="filterbutton" onClick={handleOpenfilter}>
-        <FontAwesomeIcon icon={faFilter} />
-        상세검색
-      </button>
-      <FilterButtonWrap
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        exit={{ opacity: 0 }}
-      >
-        <SearchFilter
-          setIsFilterActive={setIsFilterActive}
-          isFilterActive={isFilterActive}
-        />
-      </FilterButtonWrap>
-      <ConfigProvider
-        theme={{
-          token: {
-            colorPrimary: "#79213d",
-            fontFamily:
-              '"Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif',
-          },
-        }}
-      >
-        <Search
-          placeholder="검색할 단어를 입력해 주세요."
-          allowClear
-          value={exploreText}
-          onChange={handleTextSearch}
-          onSearch={onSearch}
-          size="large"
-        />
-      </ConfigProvider>
+    <>
+      <SearchBarWrap>
+        <button className="filterbutton" onClick={handleOpenfilter}>
+          <i>
+            <FontAwesomeIcon icon={faFilter} />
+          </i>
+          상세검색
+        </button>
+        <ConfigProvider
+          theme={{
+            token: {
+              colorPrimary: Gradation.wineD,
+              colorBorder: opacity.grayLight,
+              fontFamily:
+                '"Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif',
+            },
+          }}
+        >
+          <Search
+            placeholder="검색할 단어를 입력해 주세요."
+            allowClear
+            value={exploreText}
+            onChange={handleTextSearch}
+            onSearch={onSearch}
+            enterButton
+          />
+        </ConfigProvider>
+      </SearchBarWrap>
+      {/* 모달창 */}
       <NoticeModal
         open={isModalOpen}
         onOk={handleOk}
@@ -145,9 +143,22 @@ const SearchBar = () => {
           검색어를 입력해 주세요.
         </p>
       </NoticeModal>
-
-      <div className="SearchUnderbar"></div>
-    </SearchBarWrap>
+      {/* 상세검색 키워드 */}
+      <AnimatePresence>
+        {isFilterActive === true && (
+          <FilterButtonWrap
+            initial={{ opacity: 0, top: "0" }}
+            animate={{ opacity: 1, top: "12rem" }}
+            exit={{ opacity: 0, top: "0" }}
+          >
+            <SearchFilter
+              setIsFilterActive={setIsFilterActive}
+              isFilterActive={isFilterActive}
+            />
+          </FilterButtonWrap>
+        )}
+      </AnimatePresence>
+    </>
   );
 };
 

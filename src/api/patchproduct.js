@@ -8,7 +8,7 @@ import axios from "axios";
 // 와인 한글이름 GET
 export const getKorNm = async (_setKorNm, _productId) => {
   try {
-    const res = await axios.get(`/api/detail/korNm/${_productId}`);
+    const res = await axios.get(`/api/detail/kornm/${_productId}`);
     const result = res.data;
     _setKorNm(result);
     // console.log("와인 한글이름 axios", result);

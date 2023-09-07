@@ -249,18 +249,21 @@ const Header = ({ handleOpenNav, isActive }) => {
           {location.pathname === "/keywordselect" ? null : (
             <li>
               <ol>
-                <li>
-                  <button className="search" onClick={navigateSearch}>
-                    <img
-                      src={`${process.env.PUBLIC_URL}/images/icon_search_1.svg`}
-                      alt="검색"
-                    />
-                    <img
-                      src={`${process.env.PUBLIC_URL}/images/icon_search_2.svg`}
-                      alt="검색"
-                    />
-                  </button>
-                </li>
+                {location.pathname !== "/searchproduct" ? (
+                  <li>
+                    <button className="search" onClick={navigateSearch}>
+                      <img
+                        src={`${process.env.PUBLIC_URL}/images/icon_search_1.svg`}
+                        alt="검색"
+                      />
+                      <img
+                        src={`${process.env.PUBLIC_URL}/images/icon_search_2.svg`}
+                        alt="검색"
+                      />
+                    </button>
+                  </li>
+                ) : null}
+
                 <li>
                   <NavLink
                     to={userData.userId ? "/cart" : "/login"}

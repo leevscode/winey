@@ -70,18 +70,29 @@ export const LayoutHeaderWrap = styled.div`
   height: 100%;
   & div {
     display: flex;
+    justify-content: space-between;
     align-items: center;
     height: 100%;
     a {
       display: inline-block;
+      color: ${Maincolor.beige};
       h2 {
         font-size: 2rem;
         line-height: 1;
-        color: ${Maincolor.beige};
         img {
           width: 85px;
           height: auto;
         }
+      }
+      i {
+        margin-right: 5px;
+      }
+      &.main-btn {
+        background: ${opacity.whiteB};
+        height: 3.5rem;
+        line-height: 3.5rem;
+        padding: 0 10px;
+        border-radius: 5px;
       }
     }
   }

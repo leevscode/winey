@@ -64,7 +64,8 @@ const User = () => {
           location.pathname === `/selllistdetail/${iselllist}` ||
           location.pathname === "/ProductComplete" ||
           location.pathname === "/ProductCompleteCart" ||
-          location.pathname === "/opensource"
+          location.pathname === "/opensource" ||
+          location.pathname === "/searchproduct"
         }
       >
         <Outlet />

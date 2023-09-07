@@ -61,7 +61,7 @@ export const postUserKeyword = async (favoriteKeyword, navigator) => {
 // 기존 선호키워드 정보 get
 export const getUserKeyword = async setYourKeyword => {
   try {
-    const res = await client.get("/api/recommend/getrecommend");
+    const res = await client.get("/api/recommend/show-recommend");
     // console.log("res", res);
     const result = await res.data;
     // console.log("result", result);

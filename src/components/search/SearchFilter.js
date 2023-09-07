@@ -294,96 +294,106 @@ const SearchFilter = ({ setIsFilterActive, isFilterActive }) => {
     setExplorefilter("");
   };
   return (
-    <SearchFilterWrap>
-      {/* 선택값 띄우기 */}
-      <ul className="clickFilterItem">
-        {wineCate && <li>{wineCate}</li>}
-        {wineFood && <li>{wineFood}</li>}
-        {winePrice && <li>{winePrice}</li>}
-        {wineCountry && <li>{wineCountry}</li>}
-        {selectFilter !== "" ? (
-          <li className="clickFilterBtn">
-            <ConfigProvider
-              theme={{
-                token: {
-                  colorPrimary: "#79213d",
-                  fontFamily:
-                    '"Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif',
-                },
-              }}
-            >
+    <ConfigProvider
+      theme={{
+        token: {
+          colorPrimary: Maincolor.redBold,
+          fontFamily:
+            '"Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif',
+        },
+      }}
+    >
+      <SearchFilterWrap>
+        {/* 선택값 띄우기 */}
+        <ul className="clickFilterItem">
+          {wineCate && <li>{wineCate}</li>}
+          {wineFood && <li>{wineFood}</li>}
+          {winePrice && <li>{winePrice}</li>}
+          {wineCountry && <li>{wineCountry}</li>}
+          {selectFilter !== "" ? (
+            <li className="clickFilterBtn">
               <Button onClick={handleConfirm}>선택값 저장하기</Button>
               <Button onClick={handleReset}>선택값 초기화</Button>
-            </ConfigProvider>
-          </li>
-        ) : null}
-      </ul>
-
-      {isFilterActive ? (
-        <ul className="selFilter">
-          <li>
-            {/* 와인종류 */}
-            <Radio.Group value={wineTypeCheck} onChange={handleTypeChange}>
-              {wineSearchOptions.cate.map(option => (
-                <Radio key={option.id} value={option.id}>
-                  <b>{option.icon}</b>
-                  {option.value}
-                </Radio>
-              ))}
-            </Radio.Group>
-          </li>
-          <li>
-            {/* 페어링음식 */}
-            <Radio.Group value={wineFoodCheck} onChange={handleFoodChange}>
-              {wineSearchOptions.bigCate.map(option => (
-                <Radio key={option.id} value={option.id}>
-                  <b>{option.icon}</b> {option.value}
-                </Radio>
-              ))}
-            </Radio.Group>
-          </li>
-          <li>
-            {/* 가격대 */}
-            <Radio.Group value={winePriceCheck} onChange={handlePriceChange}>
-              {wineSearchOptions.price.map(option => (
-                <Radio key={option.id} value={option.id}>
-                  <b>{option.icon}</b>
-                  {option.value}
-                </Radio>
-              ))}
-            </Radio.Group>
-          </li>
-          <li>
-            {/* 나라종류 */}
-            <Radio.Group
-              value={wineCountryCheck}
-              onChange={handleCountryChange}
-            >
-              {wineSearchOptions.country.map(option => (
-                <Radio key={option.id} value={option.id}>
-                  <b>{option.icon}</b>
-                  {option.value}
-                </Radio>
-              ))}
-            </Radio.Group>
-          </li>
-          {/* <li>
-            <ConfigProvider
-              theme={{
-                token: {
-                  colorPrimary: "#79213d",
-                  fontFamily:
-                    '"Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif',
-                },
-              }}
-            >
-              <Button onClick={handleConfirm}>선택값 저장하기</Button>
-              <Button onClick={handleReset}>선택값 초기화</Button>
-            </ConfigProvider>
-          </li> */}
+            </li>
+          ) : null}
         </ul>
-      ) : null}
-    </SearchFilterWrap>
+
+        {isFilterActive ? (
+          <ul className="selFilter">
+            <li>
+              {/* 와인종류 */}
+              <h3>
+                <i>
+                  <FontAwesomeIcon icon={faWineGlass} />
+                </i>
+                와인종류
+              </h3>
+              <Radio.Group value={wineTypeCheck} onChange={handleTypeChange}>
+                {wineSearchOptions.cate.map(option => (
+                  <Radio key={option.id} value={option.id}>
+                    <b>{option.icon}</b>
+                    {option.value}
+                  </Radio>
+                ))}
+              </Radio.Group>
+            </li>
+            <li>
+              {/* 가격대 */}
+              <h3>
+                <i>
+                  <FontAwesomeIcon icon={faMoneyBill1} />
+                </i>
+                가격대
+              </h3>
+              <Radio.Group value={winePriceCheck} onChange={handlePriceChange}>
+                {wineSearchOptions.price.map(option => (
+                  <Radio key={option.id} value={option.id}>
+                    <b>{option.icon}</b>
+                    {option.value}
+                  </Radio>
+                ))}
+              </Radio.Group>
+            </li>
+            <li>
+              {/* 페어링음식 */}
+              <h3>
+                <i>
+                  <FontAwesomeIcon icon={faBacon} />
+                </i>
+                페어링음식
+              </h3>
+              <Radio.Group value={wineFoodCheck} onChange={handleFoodChange}>
+                {wineSearchOptions.bigCate.map(option => (
+                  <Radio key={option.id} value={option.id}>
+                    <b>{option.icon}</b> {option.value}
+                  </Radio>
+                ))}
+              </Radio.Group>
+            </li>
+            <li>
+              {/* 나라종류 */}
+              <h3>
+                <i>
+                  <FontAwesomeIcon icon={faFlag} />
+                </i>
+                원산지
+              </h3>
+              <Radio.Group
+                value={wineCountryCheck}
+                onChange={handleCountryChange}
+              >
+                {wineSearchOptions.country.map(option => (
+                  <Radio key={option.id} value={option.id}>
+                    <b>{option.icon}</b>
+                    {option.value}
+                  </Radio>
+                ))}
+              </Radio.Group>
+            </li>
+          </ul>
+        ) : null}
+      </SearchFilterWrap>
+    </ConfigProvider>
   );
 };
 

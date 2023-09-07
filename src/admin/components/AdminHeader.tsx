@@ -5,9 +5,11 @@
 */
 
 import React from "react";
-import { LayoutHeaderWrap } from "../style/AdminLayoutStyle";
-import { Layout } from "antd";
 import { Link, useNavigate } from "react-router-dom";
+import { LayoutHeaderWrap } from "../style/AdminLayoutStyle";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faHouseChimney } from "@fortawesome/free-solid-svg-icons";
+import { Layout } from "antd";
 import { Maincolor } from "../../style/GlobalStyle";
 const { Header } = Layout;
 
@@ -32,6 +34,12 @@ const AdminHeader: React.FC = () => {
                 />
                 Admin
               </h2>
+            </Link>
+            <Link to="/main" className="main-btn">
+              <i>
+                <FontAwesomeIcon icon={faHouseChimney} />
+              </i>
+              쇼핑몰 바로가기
             </Link>
           </div>
         </LayoutHeaderWrap>

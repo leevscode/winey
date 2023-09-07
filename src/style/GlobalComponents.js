@@ -113,9 +113,10 @@ export const HeaderWrap = styled.header`
               text-align: center;
             }
           }
-        }
-        li:first-of-type {
           margin-right: 10px;
+        }
+        li:last-of-type {
+          margin-right: 0;
         }
       }
     }
