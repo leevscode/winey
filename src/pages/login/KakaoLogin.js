@@ -9,7 +9,7 @@ const KakaoLogin = () => {
   // const [searchParams, setSearchParams] = useSearchParams();
   const accessToken = window.location.search.replace("?access_token=", ""); //searchParams.get("access_Token");
 
-  setCookie("access_Token", accessToken);
+  setCookie("access_token", accessToken);
 
   return <Navigate to="/main" />;
 };
