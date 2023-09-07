@@ -4,7 +4,7 @@
     깃허브 : https://github.com/hyemdev
 */
 import { client } from "../../api/client";
-import { IStoreDetailList, IStoreInfo } from "../interface/StoreInterface";
+import { IStoreInfo } from "../interface/StoreInterface";
 
 // 매장정보 불러오기
 export const getStoreList = async (
@@ -33,18 +33,34 @@ export const postNewStore = async (newStoreInfo: {
   regionNmId: number;
   nm: string;
   tel: string;
+  address: string;
 }) => {
   console.log("newStoreInfo", newStoreInfo);
   try {
     const res = await client.post("/api/admin/store", {
-      // regionNmId: newStoreInfo.regionNmId,
-      // nm: newStoreInfo.nm,
-      // tel: newStoreInfo.tel,
-      // address: newStoreInfo
+      regionNmId: newStoreInfo.regionNmId,
+      nm: newStoreInfo.nm,
+      tel: newStoreInfo.tel,
+      address: newStoreInfo.address,
     });
     console.log(res);
     const result = await res.data;
     console.log(result);
+    return result;
+  } catch (error) {
+    console.log(error);
+  }
+};
+// 신규매장 등록하기
+export const deleteStore = async (value: string) => {
+  try {
+    const res = await client.delete(
+      `/api/admin/store/{storeId}?storeId=${value}`,
+    );
+    console.log(res);
+    const result = await res.data;
+    console.log(result);
+    return result;
   } catch (error) {
     console.log(error);
   }

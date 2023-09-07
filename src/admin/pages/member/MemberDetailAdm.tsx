@@ -11,8 +11,6 @@ import MemberDetailListItem from "../../components/member/MemberDetailListItem";
 import {
   IMemberSortOption,
   IUserDetail,
-  IUserDetailState,
-  IUserIdState,
   IUserOrderList,
 } from "../../interface/MemberInterface";
 import MemberDetailUpper from "../../components/member/MemberDetailUpper";

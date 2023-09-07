@@ -1,41 +1,65 @@
+/*
+    작업자 : 최혜미
+    노션 : https://hyemdev.notion.site/hyemdev/hyem-s-dev-STUDY-75ffe819c7534a049b59871e6fe17dd4
+    깃허브 : https://github.com/hyemdev
+*/
 import styled from "@emotion/styled";
-import { WidthPd, opacity } from "../../style/GlobalStyle";
+import { WidthPd } from "../../style/GlobalStyle";
+import { AdminColor } from "./AdminLayoutStyle";
 
 export const StoreAddWrap = styled.div`
   padding: ${WidthPd.padding};
-  & > div {
+  margin: 0 auto;
+  .addButton {
     text-align: right;
-    margin-right: 5%;
+    margin-right: 4%;
     & > button {
       margin: 0 1rem;
     }
   }
-  margin: 0 auto;
-  & ul {
-    display: flex;
-    justify-content: center;
-    /* align-items: center; */
-    margin: 3rem;
-    li {
-      
+  .storeAddForm {
+    margin-top: 5rem;
+    & ul:first-of-type {
+      & > li:last-of-type {
+        padding: 2rem;
+      }
     }
-    & > li:first-of-type {
-      width: 20%;
-    }
-    & > li:last-of-type {
-      width: 70%;
-    }
-    .storeAddressSt {
-      div {
-        display: flex;
-        justify-content: center;
-        & > input {
-          width: 100%;
-          margin-right: 1rem;
+    & ul {
+      display: flex;
+      justify-content: center;
+      /* align-items: center; */
+      & li:first-of-type {
+        background: ${AdminColor.headColorD};
+        width: 20%;
+        height: 8rem;
+        line-height: 8rem;
+        text-align: center;
+      }
+      & li:last-of-type {
+        border: 1px soild ${AdminColor.headColorD};
+        padding: 2.5rem 2rem;
+        width: 75%;
+        height: 8rem;
+        & > div {
+          margin: 0;
         }
-        .css-1h3mxnl {
-          width: 12rem;
-          font-size: 1.4rem;
+      }
+      .errorString {
+        font-size: 1.4rem;
+        color: red;
+      }
+      .storeAddressSt {
+        div {
+          display: flex;
+          /* justify-content: center; */
+          & > input {
+            width: 100%;
+            margin-right: 1rem;
+          }
+          .css-1h3mxnl {
+            width: 12rem;
+            font-size: 1.4rem;
+          }
         }
       }
     }

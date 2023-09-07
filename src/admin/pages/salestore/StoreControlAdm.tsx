@@ -1,10 +1,14 @@
+/*
+    작업자 : 최혜미
+    노션 : https://hyemdev.notion.site/hyemdev/hyem-s-dev-STUDY-75ffe819c7534a049b59871e6fe17dd4
+    깃허브 : https://github.com/hyemdev
+*/
 import React, { useState } from "react";
 import StoreControlList from "../../components/salestore/StoreControlList";
 import StoreControlPaginate from "../../components/salestore/StoreControlPaginate";
 import {
   IStoreDetailList,
   IStoreInfo,
-  IStoreInfoState,
 } from "../../interface/StoreInterface";
 import { regionOptions } from "../member/MemberControlAdm";
 

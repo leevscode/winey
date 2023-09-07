@@ -41,7 +41,7 @@ const MemberControlAdm = () => {
     useState<IMemberSortOption>(initialSortOption);
   // 검색 state
   const [textSearch, setTextSearch] = useState<string>("");
-  const [sortSearch, setSortSearch] = useState<string>("serchUserName");
+  const [sortSearch, setSortSearch] = useState<string>("");
   console.log("sortSearch", sortSearch);
   // 회원정보state
   const [memberList, setMemberList] = useState<IMemControl>({

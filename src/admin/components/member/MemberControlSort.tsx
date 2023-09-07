@@ -3,7 +3,7 @@
     노션 : https://hyemdev.notion.site/hyemdev/hyem-s-dev-STUDY-75ffe819c7534a049b59871e6fe17dd4
     깃허브 : https://github.com/hyemdev
 */
-import { Input, Select, Space } from "antd";
+import { Select, Space } from "antd";
 import { IMemberSortOption } from "../../interface/MemberInterface";
 import { SortSelectWrap } from "../../style/AdminMemberStyle";
 import Search from "antd/es/input/Search";
@@ -24,11 +24,11 @@ const MemberControlSort = ({
   };
   const searchOptions = [
     {
-      value: "serchUserName",
+      value: "searchUserName",
       label: "회원이름",
     },
     {
-      value: "serchUserEmail",
+      value: "searchUserEmail",
       label: "회원아이디",
     },
   ];
@@ -48,8 +48,11 @@ const MemberControlSort = ({
     value: string,
     e?: React.ChangeEvent<HTMLInputElement>,
   ) => {
-    setTextSearch(e);
+    // console.log("e", e);
+    // console.log("value", value);
+    setTextSearch(value);
   };
+  console.log("sortSearch", sortSearch);
 
   return (
     <>
@@ -62,7 +65,8 @@ const MemberControlSort = ({
           <div className="searchSort">
             <Space.Compact>
               <Select
-                defaultValue={sortSearch}
+                // defaultValue={sortSearch}
+                defaultValue={"검색옵션"}
                 style={{ width: 120 }}
                 onChange={e => onChangOption(e)}
                 options={searchOptions}
