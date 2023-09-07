@@ -8,9 +8,11 @@ import { getStoreList } from "../../api/patchAdmStore";
 const StoreControlPaginate = ({
   storeInfomation,
   setStoreInfomation,
+  editZip,
 }: IStoreInfoState) => {
   const [paginate, setPaginate] = useState<IinitialPg>({ page: 1, row: 10 });
-  const pageInfo: IStoreInfo["page"] | null = storeInfomation.page;
+  const pageInfo: IStoreInfo["pageableCustom"] | null =
+    storeInfomation.pageableCustom;
 
   const onChange = async (page: number) => {
     setPaginate(prevPaginate => ({ ...prevPaginate, page }));
@@ -24,7 +26,7 @@ const StoreControlPaginate = ({
 
   useEffect(() => {
     getPage();
-  }, [paginate.page]);
+  }, [paginate.page, editZip]);
 
   return (
     <div>
@@ -34,7 +36,7 @@ const StoreControlPaginate = ({
             current={pageInfo.page}
             pageSize={paginate.row}
             onChange={page => onChange(page)}
-            total={pageInfo.totalRecordCount}
+            total={pageInfo.totalElements}
             // size="small"
           />
         )}

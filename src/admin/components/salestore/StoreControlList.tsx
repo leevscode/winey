@@ -3,7 +3,7 @@
     노션 : https://hyemdev.notion.site/hyemdev/hyem-s-dev-STUDY-75ffe819c7534a049b59871e6fe17dd4
     깃허브 : https://github.com/hyemdev
 */
-import React, { useState } from "react";
+import React, { useEffect } from "react";
 import { IStoreDetailList } from "../../interface/StoreInterface";
 import {
   TableLayoutContents,
@@ -15,18 +15,14 @@ import { useOutletContext } from "react-router";
 import StoreControlListItem from "./StoreControlListItem";
 import { EditStoreWrap } from "../../style/AdminStoreStyle";
 
-
-const StoreControlList = ({
-  regionConvert,
-}: {
-  regionConvert: IStoreDetailList[];
-}) => {
+const StoreControlList = ({ regionConvert, setEditZip }: any) => {
   const { listPathName } = useOutletContext() as { listPathName: string };
   const gridTemplateColumns = {
     columns: "0.4fr 0.6fr 0.6fr 1.2fr 0.5fr 0.4fr 0.4fr",
   };
   console.log("regionConvert", regionConvert);
   // 수정 최종 저장하기
+
   return (
     <EditStoreWrap>
       <TableWrap>
@@ -45,8 +41,8 @@ const StoreControlList = ({
             <li></li>
             <li></li>
           </TableLayoutTitle>
-          {regionConvert.length !== 0 ? (
-            regionConvert.map(item => (
+          {regionConvert?.length !== 0 ? (
+            regionConvert?.map((item: any) => (
               <TableLayoutContents
                 listPathName={listPathName}
                 key={item.storeId}
@@ -55,7 +51,11 @@ const StoreControlList = ({
                 }}
               >
                 <>
-                  <StoreControlListItem key={item.storeId} item={item} />
+                  <StoreControlListItem
+                    key={item.storeId}
+                    item={item}
+                    setEditZip={setEditZip}
+                  />
                 </>
               </TableLayoutContents>
             ))

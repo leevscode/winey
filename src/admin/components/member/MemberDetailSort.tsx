@@ -33,7 +33,7 @@ const MemberDetailSort = ({ setSortOption, userInfomation }: any) => {
       <SortSelectWrap>
         <div className="table-top">
           <p className="total-count">
-            총 <span>{userInfomation.totalRecordCount}</span>개
+            총 <span>{userInfomation?.totalElements}</span>개
           </p>
           <Select
             defaultValue="기본정렬"

@@ -56,7 +56,9 @@ export const getMemberDetail = async (
 ) => {
   try {
     const res = await client.get(
-      `/api/admin/${clickUserId}/order?page=${paginate.page}&row=${paginate.row}&type=${sortOption.type}&sort=${sortOption.sort}`,
+      `/api/admin/${clickUserId}/order?page=${paginate.page - 1}&size=${
+        paginate.row
+      }&sort=${sortOption.type},${sortOption.sort}`,
     );
     console.log("res", res);
     const result = await res.data;

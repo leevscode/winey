@@ -11,7 +11,7 @@ import { regionOptions } from "../../pages/member/MemberControlAdm";
 import { StoreAddressModal } from "../../style/AdminStoreStyle";
 import DaumPostcodeEmbed from "react-daum-postcode";
 
-const StoreControlListItem = ({ item }: any) => {
+const StoreControlListItem = ({ item, setEditZip }: any) => {
   // 수정관련 state
   const [edit, setEdit] = useState<boolean>(false);
   const [editStoreCity, setEditStoreCity] = useState<number>(item.regionNmId);
@@ -145,6 +145,12 @@ const StoreControlListItem = ({ item }: any) => {
       return;
     }
     try {
+      setEditZip({
+        editStoreCity,
+        editStoreNm,
+        editStoreAddress,
+        editStoreTel,
+      });
       const storeId: string = e.currentTarget.value;
       const putInfo = await putEditStore({
         storeId,

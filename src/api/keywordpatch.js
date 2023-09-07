@@ -13,7 +13,7 @@ import { faTriangleExclamation } from "@fortawesome/free-solid-svg-icons";
 // 선호키워드리스트 유무 확인
 export const getUserFavoriteKey = async () => {
   try {
-    const res = await client.get("/api/recommend/getUserInfo");
+    const res = await client.get("/api/recommend/show-user-wine");
     const result = await res.data;
     // console.log("result", result);
     return result;
@@ -61,7 +61,7 @@ export const postUserKeyword = async (favoriteKeyword, navigator) => {
 // 기존 선호키워드 정보 get
 export const getUserKeyword = async setYourKeyword => {
   try {
-    const res = await client.get("/api/recommend/getrecommend");
+    const res = await client.get("/api/recommend/show-recommend");
     // console.log("res", res);
     const result = await res.data;
     // console.log("result", result);
@@ -75,7 +75,7 @@ export const getUserKeyword = async setYourKeyword => {
 // 선호키워드 수정 put
 export const putUserKeyword = async (editFavoriteKeyword, navigator) => {
   try {
-    const res = await client.put("/api/recommend/updrecommend", {
+    const res = await client.put("/api/recommend/modify-recommend", {
       categoryId: editFavoriteKeyword.categoryId,
       countryId: editFavoriteKeyword.countryId,
       smallCategoryId: editFavoriteKeyword.smallCategoryId,

@@ -78,7 +78,6 @@ export const EditStoreWrap = styled.div`
     padding-right: 1rem;
   }
   .cityEditSty {
-    padding-left: 35%;
     & span {
       margin-right: 1rem;
     }

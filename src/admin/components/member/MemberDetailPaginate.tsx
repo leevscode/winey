@@ -24,7 +24,8 @@ const MemberDetailPaginate = ({
   // 페이지 정보(page / row: 페이지 당 개수)
   const [paginate, setPaginate] = useState<IinitialPg>({ page: 1, row: 10 });
 
-  const pageInfo: IUserDetail["page"] | null = userInfomation.page;
+  const pageInfo: IUserDetail["pageableCustom"] | null =
+    userInfomation.pageableCustom;
 
   const onChange = async (page: number) => {
     setPaginate(prevPaginate => ({ ...prevPaginate, page }));
@@ -52,7 +53,7 @@ const MemberDetailPaginate = ({
           current={pageInfo.page}
           pageSize={paginate.row}
           onChange={page => onChange(page)}
-          total={pageInfo.totalRecordCount}
+          total={pageInfo.totalElements}
           // size="small"
         />
       )}
