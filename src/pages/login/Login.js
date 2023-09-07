@@ -170,7 +170,7 @@ const Login = () => {
         </Link>
       </div>
       <div>
-        <a href="http://localhost:8080/oauth2/authorization/kakao?redirect_uri=http://localhost:8080/test.html">
+        <a href="http://192.168.0.144:5004/oauth2/authorization/kakao?redirect_uri=http://192.168.0.144:5004/oauth/kakaoLogin">
           <div className="socialLogin">
             <img
               src={`${process.env.PUBLIC_URL}/images/kakao_login_medium_narrow.png`}

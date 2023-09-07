@@ -50,6 +50,7 @@ import Price from "./components/productmain/Price";
 import SearchProduct from "./pages/search/SearchProduct";
 import StoreControlAdm from "./admin/pages/salestore/StoreControlAdm";
 import StoreAddAdm from "./admin/pages/salestore/StoreAddAdm";
+import KakaoLogin from "./pages/login/KakaoLogin";
 
 function App() {
   // 페이지 이동 시 스크롤 최상단으로 올라가는 코드
@@ -120,6 +121,8 @@ function App() {
           <Route path="/adultchk" element={<AdultChk />} />
           {/* 사용자 페이지 */}
           <Route element={<User />}>
+            {/* 카카오 로그인 */}
+            <Route path="/oauth/redirect" element={<KakaoLogin />} />
             {/* 메인 */}
             <Route path="/main" element={<Main />} />
             {/* 상품 메인 추천별 상품리스트  */}

@@ -38,6 +38,7 @@ export const ProudctTotalItem = styled.div`
     position: absolute;
     margin-top: -5px;
     margin-left: 4px;
+
   }
   img {
     position: relative;
@@ -45,19 +46,11 @@ export const ProudctTotalItem = styled.div`
     height: auto;
     margin-top: -5px;
   }
-  img:hover {
-   
+  button:hover {
+    transform: rotate(130deg);
+    transition: transform 0.7s ease;
   }
 `;
-
-
-export const CratRemove = styled.button`
- -ms-transform: rotate(60deg);
-    -webkit-transform: rotate(120deg);
-    transform: rotate(150deg);
-    transition: transform 0.7s ease;
-
-`
 
 export const ProductCartInfo = styled.div`
   padding: ${WidthPd.padding};
