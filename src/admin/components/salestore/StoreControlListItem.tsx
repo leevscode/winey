@@ -6,7 +6,7 @@
 import React, { useEffect, useState } from "react";
 import { deleteStore, putEditStore } from "../../api/patchAdmStore";
 import { DetailBt, MemberOutBt } from "../../style/AdminLayoutStyle";
-import { Form, Input, Modal, Radio } from "antd";
+import { Form, Input, Modal, Popover, Radio } from "antd";
 import { regionOptions } from "../../pages/member/MemberControlAdm";
 import { StoreAddressModal } from "../../style/AdminStoreStyle";
 import DaumPostcodeEmbed from "react-daum-postcode";
@@ -23,6 +23,9 @@ const StoreControlListItem = ({ item }: any) => {
     item.address,
   );
   const [editStoreTel, setEditStoreTel] = useState<string>(item.tel);
+
+  // 예외처리
+  const [error, setError] = useState("");
 
   // 지역선택모달 state
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -61,7 +64,6 @@ const StoreControlListItem = ({ item }: any) => {
   };
   // 매장주소 api
   const [openPostcode, setOpenPostcode] = useState<boolean>(false);
-
   const [calendarlocation, setCalendarLocation] = useState<string>("");
   console.log("calendarlocation", calendarlocation);
 
@@ -119,22 +121,52 @@ const StoreControlListItem = ({ item }: any) => {
   const handleEditSave: React.MouseEventHandler<
     HTMLButtonElement
   > = async e => {
-    const storeId: string = e.currentTarget.value;
-    const putInfo = await putEditStore({
-      storeId,
-      editStoreCity,
-      editStoreNm,
-      editStoreAddress,
-      editStoreTel,
-    });
-    setEdit(!edit);
-    return;
+    console.log("e save", e);
+
+    // 예외처리하기
+    const numberReg: any = /^\d{2,3}-\d{3,4}-\d{4}$/;
+    if (e != null) {
+      setError("");
+    }
+    if (editStoreNm === undefined || editStoreNm === "") {
+      setError("지점이름을 입력해 주세요.");
+      return;
+    }
+    if (editStoreAddress === undefined || editStoreAddress === "") {
+      setError("지점주소를 선택해 주세요.");
+      return;
+    }
+    if (editStoreTel === numberReg) {
+      setError("올바른 형식으로 입력하세요 (ex.000-000-0000)");
+      return;
+    }
+    if (editStoreTel === "") {
+      setError("지점 연락처를 입력하세요.");
+      return;
+    }
+    try {
+      const storeId: string = e.currentTarget.value;
+      const putInfo = await putEditStore({
+        storeId,
+        editStoreCity,
+        editStoreNm,
+        editStoreAddress,
+        editStoreTel,
+      });
+      setEdit(!edit);
+      return;
+    } catch (error) {
+      setError("네트워크 오류 입니다");
+      return;
+    }
   };
   // 수정 취소하기
   const handleEditCancel = () => {
     setEdit(!edit);
     console.log("cancel");
   };
+
+  const content = <div>{error ? error : ""}</div>;
 
   // 화면갱신
   useEffect(() => {
@@ -146,9 +178,9 @@ const StoreControlListItem = ({ item }: any) => {
     return (
       <>
         <li>{item.storeId}</li>
-        <li>
+        <li className="cityEditSty">
           <Form.Item
-            name="regionSelect"
+            name="editStoreCity"
             rules={[
               {
                 required: true,
@@ -156,7 +188,7 @@ const StoreControlListItem = ({ item }: any) => {
               },
             ]}
           >
-            {editStoreCityKor}
+            <span>{editStoreCityKor}</span>
             <DetailBt onClick={handleEditCityModal}>변경</DetailBt>
           </Form.Item>
         </li>
@@ -180,12 +212,18 @@ const StoreControlListItem = ({ item }: any) => {
           />
         </li>
         <li>
-          <Input value={editStoreTel} onChange={e => handleTelEditChange(e)} />
+          <Input
+            maxLength={13}
+            value={editStoreTel}
+            onChange={e => handleTelEditChange(e)}
+          />
         </li>
         <li>
-          <DetailBt value={item.storeId} onClick={e => handleEditSave(e)}>
-            저장
-          </DetailBt>
+          <Popover content={content} trigger="click">
+            <DetailBt value={item.storeId} onClick={e => handleEditSave(e)}>
+              저장
+            </DetailBt>
+          </Popover>
         </li>
         <li>
           <MemberOutBt onClick={handleEditCancel}>취소</MemberOutBt>

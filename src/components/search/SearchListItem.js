@@ -11,7 +11,7 @@ import { addCart, cartLengthData } from "../../api/patchcart";
 import { useDispatch, useSelector } from "react-redux";
 import ProductCartModal from "../product/ProductCartModal";
 
-const SearchListItem = ({ setIsModalOpen, hasNextPage, urlData }) => {
+const SearchListItem = ({ setIsModalOpen, urlData }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const userData = useSelector(state => state.user);

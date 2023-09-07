@@ -26,7 +26,7 @@ export const getMemberList = async (
   console.log("sortOption", sortOption);
   try {
     const res = await client.get(
-      `/api/admin/user/list?page=${paginate.page - 1}&row=${
+      `/api/admin/user/list?page=${paginate.page - 1}&size=${
         paginate.row
       }&sort=${sortOption.type},${sortOption.sort}${
         sortSearch ? `&searchType=${sortSearch}` : ""

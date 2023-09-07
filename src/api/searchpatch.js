@@ -25,7 +25,6 @@ export const getSearchItem = async ({
     console.log("서치res", res);
     const result = res.data;
     console.log("결과보여줘result", result);
-    // setExploreResult(result.wineList);
     setTotalCount(result);
     setExploreResult(prev => [...prev, ...result.wineList]);
     setHasNextPage(result.wineList.length === 9);

@@ -30,7 +30,6 @@ export const searchReadRecoil = selector({
     const filter = get(searchFilterRecoil);
     const text = get(searchTextRecoil);
     const sort = get(searchSortRecoil);
-    // const page = get(itemScrollRecoil);
     return { filter, text, sort };
   },
 });

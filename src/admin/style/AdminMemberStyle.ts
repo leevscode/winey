@@ -42,7 +42,6 @@ export const MemberDetailUpperWrap = styled.div`
 `;
 
 export const MemberDetailWrap = styled.div`
-
   & .noItem {
     font-size: 1.5rem;
     font-weight: 600;
@@ -54,6 +53,8 @@ export const MemberDetailWrap = styled.div`
 
 // 정렬 컴포넌트
 export const SortSelectWrap = styled.div`
+  display: sticky;
+  top: 0;
   .table-top {
     display: flex;
     justify-content: space-between;

@@ -77,6 +77,12 @@ export const EditStoreWrap = styled.div`
     height: 5rem;
     padding-right: 1rem;
   }
+  .cityEditSty {
+    padding-left: 35%;
+    & span {
+      margin-right: 1rem;
+    }
+  }
   & .noItem {
     font-size: 1.5rem;
     font-weight: 600;
