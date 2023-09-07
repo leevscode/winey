@@ -32,7 +32,7 @@ const MemberDetailUpper = ({
                 <th>총 구매건수 :</th> <td>{userInfomation.orderCount} 건</td>
               </tr>
               <tr>
-                <th>회원 이름 :</th> <td>{userInfomation.nm}</td>
+                <th>회원 이름 :</th> <td>{userInfomation.unm}</td>
                 <th>총 구매금액 :</th>{" "}
                 <td>{userInfomation.sumOrderPrice.toLocaleString()} 원</td>
               </tr>

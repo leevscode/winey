@@ -25,7 +25,8 @@ const MemberControlPaginate = ({
   // 페이지 정보(page / row: 페이지 당 개수)
   const [paginate, setPaginate] = useState<IinitialPg>({ page: 1, row: 10 });
 
-  const pageInfo: IMemControl["page"] | null = memberList.page;
+  const pageInfo: IMemControl["pageableCustom"] | null =
+    memberList.pageableCustom;
 
   const onChange = async (page: number) => {
     setPaginate(prevPaginate => ({ ...prevPaginate, page }));
@@ -54,7 +55,7 @@ const MemberControlPaginate = ({
           current={pageInfo.page}
           pageSize={paginate.row}
           onChange={page => onChange(page)}
-          total={pageInfo.totalRecordCount}
+          total={pageInfo.totalElements}
           // size="small"
         />
       )}

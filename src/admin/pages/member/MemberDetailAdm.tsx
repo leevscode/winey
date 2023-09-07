@@ -31,14 +31,7 @@ const MemberDetailAdm = () => {
     page: {
       page: 1,
       row: 1,
-      startIdx: 1,
       totalRecordCount: 1,
-      totalPage: 1,
-      pageSize: 1,
-      prev: false,
-      next: false,
-      startPage: 1,
-      endPage: 1,
     },
     userInfo: {
       userId: 0,
@@ -64,7 +57,10 @@ const MemberDetailAdm = () => {
       {userInfomation.userInfo && (
         <MemberDetailUpper userInfomation={userInfomation.userInfo} />
       )}
-      <MemberDetailSort userInfomation={userInfomation.page} setSortOption={setSortOption}/>
+      <MemberDetailSort
+        userInfomation={userInfomation.page}
+        setSortOption={setSortOption}
+      />
       {userInfomation.userOrderList && (
         <MemberDetailListItem userInfomation={userInfomation.userOrderList} />
       )}
