@@ -78,7 +78,7 @@ const MemberControlListItem = ({
             <li>회원삭제</li>
           </TableLayoutTitle>
           {regionConvert &&
-            regionConvert.map(item => (
+            regionConvert?.map(item => (
               <TableLayoutContents
                 listPathName={listPathName}
                 key={item.userId}

@@ -4,8 +4,9 @@
     깃허브 : https://github.com/hyemdev
 */
 import styled from "@emotion/styled";
-import { WidthPd } from "../../style/GlobalStyle";
+import { Maincolor, WidthPd } from "../../style/GlobalStyle";
 import { AdminColor } from "./AdminLayoutStyle";
+import exp from "constants";
 
 export const StoreAddWrap = styled.div`
   padding: ${WidthPd.padding};
@@ -69,4 +70,18 @@ export const StoreAddressModal = styled.div`
   /* width: 100%; */
   width: 48rem;
   font-size: 1rem;
+`;
+
+export const EditStoreWrap = styled.div`
+  & li {
+    height: 5rem;
+    padding-right: 1rem;
+  }
+  & .noItem {
+    font-size: 1.5rem;
+    font-weight: 600;
+    line-height: 7rem;
+    text-align: center;
+    color: ${Maincolor.grayBold};
+  }
 `;

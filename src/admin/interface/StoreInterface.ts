@@ -24,9 +24,16 @@ export interface IStoreDetailList {
   nm: string;
   tel: string;
   address: string;
-  storeId?: number;
+  storeId?: string;
   textRegion?: string;
   statusText?: string;
+}
+export interface IEditStore {
+  storeId: string;
+  editStoreCity: number;
+  editStoreNm: string;
+  editStoreAddress: string;
+  editStoreTel: string;
 }
 export interface IStoreInfoState {
   storeInfomation: IStoreInfo;

@@ -42,6 +42,7 @@ export const MemberDetailUpperWrap = styled.div`
 `;
 
 export const MemberDetailWrap = styled.div`
+
   & .noItem {
     font-size: 1.5rem;
     font-weight: 600;

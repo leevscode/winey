@@ -61,11 +61,11 @@ const MemberControlAdm = () => {
   });
 
   // 지역변환
-  const regionConvert: Array<IMemberListUser> = memberList.list.map(item => {
+  const regionConvert: Array<IMemberListUser> = memberList.list?.map(item => {
     const changeList: {
       regionNmId: number;
       value: string;
-    }[] = regionOptions.filter(option => item.regionNmId === option.regionNmId);
+    }[] = regionOptions?.filter(option => item.regionNmId === option.regionNmId);
     if (changeList.length > 0) {
       return { ...item, textRegion: changeList[0].value };
     }
