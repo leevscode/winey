@@ -122,9 +122,9 @@ function App() {
           {/* 사용자 페이지 */}
           <Route element={<User />}>
             {/* 카카오 로그인 */}
-            <Route path="/oauth/redirect" element={<KakaoLogin />} />
             {/* 메인 */}
             <Route path="/main" element={<Main />} />
+            <Route path="/oauth/redirect" element={<KakaoLogin />} />
             {/* 상품 메인 추천별 상품리스트  */}
             <Route path="/productmain" element={<ProductMain />}>
               <Route path="food" element={<Food />} />

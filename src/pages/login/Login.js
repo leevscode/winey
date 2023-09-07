@@ -23,6 +23,12 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 
 const Login = () => {
+  const REST_API_KEY = "63c2ccf48233929cf35206dbb6fcdb14";
+  const REDIRECT_URI = "http://192.168.0.144:5004/oauth/redirect";
+
+  const KakaoLogin = () =>
+    (window.location.href = `http://192.168.0.144:5004/oauth2/authorization/kakao?redirect_uri=${REDIRECT_URI}`);
+
   const dispatch = useDispatch();
   // 회원정보 불러오기
   const userData = useSelector(state => state.user);
@@ -170,7 +176,7 @@ const Login = () => {
         </Link>
       </div>
       <div>
-        <a href="http://192.168.0.144:5004/oauth2/authorization/kakao?redirect_uri=http://192.168.0.144:5004/oauth/kakaoLogin">
+        <a onClick={KakaoLogin}>
           <div className="socialLogin">
             <img
               src={`${process.env.PUBLIC_URL}/images/kakao_login_medium_narrow.png`}
