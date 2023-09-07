@@ -4,7 +4,7 @@
     깃허브 : https://github.com/hyemdev
 */
 import { client } from "../../api/client";
-import { IStoreDetailList, IStoreInfo } from "../interface/StoreInterface";
+import { IStoreInfo } from "../interface/StoreInterface";
 
 // 매장정보 불러오기
 export const getStoreList = async (
