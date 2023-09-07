@@ -23,14 +23,14 @@ export const getMemberList = async (
   console.log("paginate.row", paginate.row);
   console.log("sortSearch", sortSearch);
   console.log("textSearch", textSearch);
-  console.log("sortOption.type", sortOption.type);
+  console.log("sortOption", sortOption);
   try {
     const res = await client.get(
-      `/api/admin/user/list?page=${paginate.page}&row=${paginate.row}&type=${
-        sortOption.type
-      }&type2=${sortSearch ? sortSearch : 0}&sort=${
-        sortOption.sort ? sortOption.sort : ""
-      }&str=${textSearch}`,
+      `/api/admin/user/list?page=${paginate.page - 1}&size=${
+        paginate.row
+      }&sort=${sortOption.type},${sortOption.sort}${
+        sortSearch ? `&searchType=${sortSearch}` : ""
+      }${textSearch ? `&str=${textSearch}` : ""}`,
     );
     console.log("res", res);
     const result: IMemControl = await res.data;

@@ -19,25 +19,19 @@ export interface IMemberState {
 }
 
 export interface IMemControl {
-  page: {
+  pageableCustom: {
     page: number;
     row: number;
-    startIdx: number;
-    totalRecordCount: number;
-    totalPage: number;
-    pageSize: number;
-    prev: boolean;
-    next: boolean;
-    startPage: number;
-    endPage: number;
+    totalElements: number;
   };
-  list: IMemberListUser[];
+  content: IMemberListUser[];
 }
 
 export interface IMemberListUser {
   userId: number;
   email: string;
   nm: string;
+  unm?: string;
   regionNmId: number;
   createdAt: string;
   textRegion?: string;
@@ -60,19 +54,13 @@ export interface IUserDetail {
   page: {
     page: number;
     row: number;
-    startIdx: number;
     totalRecordCount: number;
-    totalPage: number;
-    pageSize: number;
-    prev: boolean;
-    next: boolean;
-    startPage: number;
-    endPage: number;
   };
   userInfo: {
     userId: number;
     email: string;
     nm: string;
+    unm?: string;
     sumOrderPrice: number;
     orderCount: number;
   };

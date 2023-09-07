@@ -133,6 +133,8 @@ const ProductSellCart = () => {
       ),
       onOk() {
         // 최종결제완료
+        // patchItemQuatt(editProductCollect);
+
         postSomeItemPurchase({
           editProductCollect,
           selectCollect,
@@ -177,6 +179,7 @@ const ProductSellCart = () => {
           totalPrice={totalPrice}
           setTotalPrice={setTotalPrice}
           setEditProductCollect={setEditProductCollect}
+          editProductCollect={editProductCollect}
           // 상품정보 보내기
           productInfoArray={productInfoArray}
         />

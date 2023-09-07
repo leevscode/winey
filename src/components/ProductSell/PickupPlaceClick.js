@@ -5,13 +5,13 @@ import "swiper/css/navigation";
 
 const PickupPlaceClick = ({ userStore, selectCollect, setSelectCollect }) => {
   const pickTime = [
-    "10:00:00",
-    "12:00:00",
-    "14:00:00",
-    "16:00:00",
-    "18:00:00",
-    "20:00:00",
-    "22:00:00",
+    "10:00",
+    "12:00",
+    "14:00",
+    "16:00",
+    "18:00",
+    "20:00",
+    "22:00",
   ];
 
   // 픽업날짜(오늘 이후 3일 간)

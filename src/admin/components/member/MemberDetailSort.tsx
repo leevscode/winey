@@ -6,7 +6,7 @@
 import { Select } from "antd";
 import { IMemberSortOption } from "../../interface/MemberInterface";
 import { SortSelectWrap } from "../../style/AdminMemberStyle";
-import { initialSortOption } from "./MemberControlSort";
+import { detailInitialSortOption } from "../../pages/member/MemberDetailAdm";
 
 const MemberDetailSort = ({ setSortOption, userInfomation }: any) => {
   const sortValue: Record<string, IMemberSortOption> = {
@@ -23,7 +23,7 @@ const MemberDetailSort = ({ setSortOption, userInfomation }: any) => {
       const { type, sort } = sortValue[value];
       setSortOption({ type, sort });
     } else {
-      setSortOption(initialSortOption);
+      setSortOption(detailInitialSortOption);
     }
   };
 

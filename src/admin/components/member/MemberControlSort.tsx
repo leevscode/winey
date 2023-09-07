@@ -8,7 +8,10 @@ import { IMemberSortOption } from "../../interface/MemberInterface";
 import { SortSelectWrap } from "../../style/AdminMemberStyle";
 import Search from "antd/es/input/Search";
 
-export const initialSortOption: IMemberSortOption = { type: "0", sort: "0" };
+export const initialSortOption: IMemberSortOption = {
+  type: "userId",
+  sort: "asc",
+};
 const MemberControlSort = ({
   setSortOption,
   memberList,
@@ -24,16 +27,18 @@ const MemberControlSort = ({
   };
   const searchOptions = [
     {
-      value: "searchUserName",
+      value: "unm",
       label: "회원이름",
     },
     {
-      value: "searchUserEmail",
+      value: "email",
       label: "회원아이디",
     },
   ];
 
   const handleSortChange = (value: string) => {
+    console.log("value", value);
+    console.log("value", value);
     if (sortValue[value]) {
       const { type, sort } = sortValue[value];
       setSortOption({ type, sort });
@@ -48,8 +53,6 @@ const MemberControlSort = ({
     value: string,
     e?: React.ChangeEvent<HTMLInputElement>,
   ) => {
-    // console.log("e", e);
-    // console.log("value", value);
     setTextSearch(value);
   };
   console.log("sortSearch", sortSearch);
@@ -60,7 +63,7 @@ const MemberControlSort = ({
       <SortSelectWrap>
         <div className="table-top">
           <p className="total-count">
-            총 <span>{memberList.totalRecordCount}</span>개
+            총 <span>{memberList.totalElements}</span>개
           </p>
           <div className="searchSort">
             <Space.Compact>

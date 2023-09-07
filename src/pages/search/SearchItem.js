@@ -6,7 +6,6 @@ const SearchItem = () => {
   return (
     <div>
       <SearchBar />
-      {/* <SearchFilter /> */}
     </div>
   );
 };

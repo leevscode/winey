@@ -45,32 +45,29 @@ const MemberControlAdm = () => {
   console.log("sortSearch", sortSearch);
   // 회원정보state
   const [memberList, setMemberList] = useState<IMemControl>({
-    page: {
+    pageableCustom: {
       page: 1,
       row: 1,
-      startIdx: 1,
-      totalRecordCount: 1,
-      totalPage: 1,
-      pageSize: 1,
-      prev: true,
-      next: true,
-      startPage: 1,
-      endPage: 1,
+      totalElements: 1,
     },
-    list: [] as IMemberListUser[],
+    content: [] as IMemberListUser[],
   });
 
   // 지역변환
-  const regionConvert: Array<IMemberListUser> = memberList.list.map(item => {
-    const changeList: {
-      regionNmId: number;
-      value: string;
-    }[] = regionOptions.filter(option => item.regionNmId === option.regionNmId);
-    if (changeList.length > 0) {
-      return { ...item, textRegion: changeList[0].value };
-    }
-    return item;
-  });
+  const regionConvert: Array<IMemberListUser> = memberList.content?.map(
+    item => {
+      const changeList: {
+        regionNmId: number;
+        value: string;
+      }[] = regionOptions?.filter(
+        option => item.regionNmId === option.regionNmId,
+      );
+      if (changeList.length > 0) {
+        return { ...item, textRegion: changeList[0].value };
+      }
+      return item;
+    },
+  );
 
   console.log("sortOption", sortOption);
   console.log("regionConvert", regionConvert);
@@ -82,7 +79,7 @@ const MemberControlAdm = () => {
   return (
     <MemberWrap>
       <MemberControlSort
-        memberList={memberList.page}
+        memberList={memberList.content}
         setSortOption={setSortOption}
         textSearch={textSearch}
         setTextSearch={setTextSearch}
