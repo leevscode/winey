@@ -20,7 +20,7 @@ import {
   Cratprice,
   ButtonDiv,
   CartMax,
-  CratRemove,
+  CartRemove,
 } from "../../style/ProductCartStyle";
 import { Link, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -218,7 +218,7 @@ const ProductCart = () => {
         <div>
           <ProudctTotalItem>
             장바구니에 총 {cartData?.length}개의 상품이 있습니다.
-            <CratRemove onClick={removeAllItems}>
+            <button onClick={removeAllItems}>
               <i>
                 <FontAwesomeIcon icon={faWineBottle} />
               </i>
@@ -226,7 +226,7 @@ const ProductCart = () => {
                 src={`${process.env.PUBLIC_URL}/images/icon_cart_1.svg`}
                 alt="장바구니"
               />
-            </CratRemove>
+            </button>
           </ProudctTotalItem>
           <ul>
             {cartData &&

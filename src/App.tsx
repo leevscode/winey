@@ -50,6 +50,7 @@ import Price from "./components/productmain/Price";
 import SearchProduct from "./pages/search/SearchProduct";
 import StoreControlAdm from "./admin/pages/salestore/StoreControlAdm";
 import StoreAddAdm from "./admin/pages/salestore/StoreAddAdm";
+import KakaoLogin from "./pages/login/KakaoLogin";
 import Sale from "./components/productlist/Sale";
 
 function App() {
@@ -189,6 +190,8 @@ function App() {
             <Route path="/opensource" element={<OpenSource />} />
             {/* 잘못된 경로 페이지 처리 */}
             <Route path="/*" element={<NotFound />} />
+            {/* 카카오 로그인 */}
+            <Route path="/oauth/redirect" element={<KakaoLogin />} />
           </Route>
         </Routes>
       </AnimatePresence>
