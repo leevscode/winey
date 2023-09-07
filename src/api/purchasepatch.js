@@ -46,8 +46,8 @@ export const postOneItemPurchase = async ({
     const res = await client.post("/api/payment/eachpayment", {
       productId: productCollect.wineDetailVo.productId, // 상품 pk
       storeId: selectCollect.pickUpSpot.storeId, //지점 pk
-      salePrice: totalPrice, //총 금액,
-      payment: isPayment, //카드결제 1번
+      // salePrice: totalPrice, //총 금액,
+      // payment: isPayment, //카드결제 1번
       pickupTime: selectCollect.changeDate,
       quantity: editQuantity.quantity, // 수량
     });
@@ -71,28 +71,28 @@ export const postOneItemPurchase = async ({
 
 // 장바구니에서 결제하기 post
 export const postSomeItemPurchase = async ({
-  editProductCollect,
+  // editProductCollect,
   selectCollect,
-  totalPrice,
+  // totalPrice,
   navigate,
 }) => {
-  const list = await editProductCollect.map(option => ({
-    cartId: option.cartId,
-    productId: option.productId,
-    pic: option.pic,
-    salePrice: option.salePrice,
-    price: option.price,
-    nmKor: option.nmKor,
-    nmEng: option.nmEng,
-    quantity: option.quantity,
-  }));
+  // const list = await editProductCollect.map(option => ({
+  //   cartId: option.cartId,
+  //   productId: option.productId,
+  //   pic: option.pic,
+  //   salePrice: option.salePrice,
+  //   price: option.price,
+  //   nmKor: option.nmKor,
+  //   nmEng: option.nmEng,
+  //   quantity: option.quantity,
+  // }));
 
   try {
     const res = await client.post("/api/payment/cartpayment", {
       storeId: selectCollect.pickUpSpot.storeId,
       pickupTime: selectCollect.changeDate,
-      totalOrderPrice: totalPrice,
-      list: list,
+      // totalOrderPrice: totalPrice,
+      // list: list,
     });
     console.log(res);
     const data = await res.data;
