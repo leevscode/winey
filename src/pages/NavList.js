@@ -66,6 +66,16 @@ const NavList = ({ handleOpenNav, closeNav }) => {
       </ul>
       <div className="middle">
         <ul>
+          <li className="focus">
+            <NavLink
+              to="/productlist/sale"
+              onClick={() => {
+                closeNav("/productlist/sale");
+              }}
+            >
+              🍷&nbsp;&nbsp;이달의 할인 상품&nbsp;&nbsp;🍷
+            </NavLink>
+          </li>
           <li>
             <NavLink
               to="/productlist/red"

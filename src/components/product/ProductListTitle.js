@@ -32,6 +32,11 @@ const ProductListTitle = () => {
       subText: "더욱 풍부한 와인 경험을 제공할",
       mainText: "기타 와인",
     },
+    {
+      listName: "sale",
+      subText: "가을의 매력을 와인 한 잔과 함께 느껴보세요.",
+      mainText: "9월의 할인 상품",
+    },
   ];
   // listPathName이 갱신될 때 마다 useEffect 실행
   useEffect(() => {

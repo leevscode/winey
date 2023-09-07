@@ -90,7 +90,7 @@ const Item = ({ listScroll, setIsModalOpen, hasNextPage }) => {
           </Link>
         </ProductListItem>
       ))}
-      {hasNextPage === false && (
+      {listScroll?.length === 0 && (
         <ProductNoItem>
           <div>
             <i>

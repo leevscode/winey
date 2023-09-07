@@ -74,6 +74,7 @@ const Price = () => {
           setHasNextPage,
           page,
           cateid,
+          setTotalCount,
         );
         setListScroll(prevPosts => [...prevPosts, ...result]);
       } else if (value === 2) {
@@ -82,6 +83,7 @@ const Price = () => {
           setHasNextPage,
           page,
           cateid,
+          setTotalCount,
         );
         setListScroll(prevPosts => [...prevPosts, ...result]);
       } else if (value === 3) {
@@ -90,6 +92,7 @@ const Price = () => {
           setHasNextPage,
           page,
           cateid,
+          setTotalCount,
         );
         setListScroll(prevPosts => [...prevPosts, ...result]);
       }
@@ -156,13 +159,6 @@ const Price = () => {
       title: "10만원 이상",
     },
   ];
-  // 상품 총 갯수 불러옴
-  useEffect(() => {
-    setTotalCount(listScroll.length);
-    // console.log("value 출력", optionValue);
-    // console.log("화면 그려내", listScroll);
-    // console.log("상품 총 갯수", totalCount);
-  }, [listScroll]);
   // 무한 스크롤 처리
   useEffect(() => {
     // console.log(inView, hasNextPage);

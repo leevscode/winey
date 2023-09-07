@@ -48,6 +48,11 @@ const gradientStyle = props => {
       );
       color: ${Maincolor.white};
     `;
+  } else if (props.listPathName === "sale") {
+    return css`
+      background: url(/images/sale_img.jpg) no-repeat center;
+      color: ${Maincolor.white};
+    `;
   }
 };
 // 상품리스트 타이틀

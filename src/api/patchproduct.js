@@ -37,12 +37,16 @@ export const getTotalFoodNew = async (
   _setHasNextPage,
   _page,
   _cate,
+  _setTotalCount,
 ) => {
   try {
     const res = await axios.get(
       `/api/main/food/new?bigCategoryId=${_cate}&page=${_page.current}&row=9`,
     );
-    const result = await res.data;
+    const result = res.data.wineList;
+    const count = res.data.count;
+    // console.log("상품 총 갯수", count);
+    _setTotalCount(count);
     // console.log("카테고리 id", _cate);
     // console.log("현재페이지", _page.current);
     // console.log("음식별 와인리스트 GET(최신등록순)", result);
@@ -62,13 +66,17 @@ export const getTotalFoodExpensive = async (
   _setHasNextPage,
   _page,
   _cate,
+  _setTotalCount,
 ) => {
   try {
     const res = await axios.get(
       `/api/main/food/expensive?bigCategoryId=${_cate}&page=${_page.current}&row=9`,
     );
-    const result = res.data;
-    console.log("음식별 와인리스트 GET(높은금액순)", result);
+    const result = res.data.wineList;
+    const count = res.data.count;
+    // console.log("상품 총 갯수", count);
+    _setTotalCount(count);
+    // console.log("음식별 와인리스트 GET(높은금액순)", result);
     // _setListScroll(prevPosts => [...prevPosts, ...result]);
     _setHasNextPage(result.length === 9);
     if (result.length) {
@@ -86,13 +94,17 @@ export const getTotalFoodCheap = async (
   _setHasNextPage,
   _page,
   _cate,
+  _setTotalCount,
 ) => {
   try {
     const res = await axios.get(
       `/api/main/food/cheap?bigCategoryId=${_cate}&page=${_page.current}&row=9`,
     );
-    const result = res.data;
-    console.log("음식별 와인리스트 GET(낮은금액순)", result);
+    const result = res.data.wineList;
+    const count = res.data.count;
+    // console.log("상품 총 갯수", count);
+    _setTotalCount(count);
+    // console.log("음식별 와인리스트 GET(낮은금액순)", result);
     // _setListScroll(prevPosts => [...prevPosts, ...result]);
     _setHasNextPage(result.length === 9);
     if (result.length) {
@@ -110,13 +122,17 @@ export const getTotalCountryNew = async (
   _setHasNextPage,
   _page,
   _cate,
+  _setTotalCount,
 ) => {
   try {
     const res = await axios.get(
       `/api/main/country/new/?countryId=${_cate}&page=${_page.current}&row=9`,
     );
-    const result = res.data;
-    console.log("국가별 와인리스트 GET(최신등록순)", result);
+    const result = res.data.wineList;
+    const count = res.data.count;
+    // console.log("상품 총 갯수", count);
+    _setTotalCount(count);
+    // console.log("국가별 와인리스트 GET(최신등록순)", result);
     // _setListScroll(prevPosts => [...prevPosts, ...result]);
     _setHasNextPage(result.length === 9);
     if (result.length) {
@@ -134,13 +150,17 @@ export const getTotalCountryExpensive = async (
   _setHasNextPage,
   _page,
   _cate,
+  _setTotalCount,
 ) => {
   try {
     const res = await axios.get(
       `/api/main/country/expensive?countryId=${_cate}&page=${_page.current}&row=9`,
     );
-    const result = res.data;
-    console.log("국가별 와인리스트 GET(높은금액순)", result);
+    const result = res.data.wineList;
+    const count = res.data.count;
+    // console.log("상품 총 갯수", count);
+    _setTotalCount(count);
+    // console.log("국가별 와인리스트 GET(높은금액순)", result);
     // _setListScroll(prevPosts => [...prevPosts, ...result]);
     _setHasNextPage(result.length === 9);
     if (result.length) {
@@ -158,13 +178,17 @@ export const getTotalCountryCheap = async (
   _setHasNextPage,
   _page,
   _cate,
+  _setTotalCount,
 ) => {
   try {
     const res = await axios.get(
       `/api/main/country/cheap?countryId=${_cate}&page=${_page.current}&row=9`,
     );
-    const result = res.data;
-    console.log("국가별 와인리스트 GET(낮은금액순)", result);
+    const result = res.data.wineList;
+    const count = res.data.count;
+    // console.log("상품 총 갯수", count);
+    _setTotalCount(count);
+    // console.log("국가별 와인리스트 GET(낮은금액순)", result);
     // _setListScroll(prevPosts => [...prevPosts, ...result]);
     _setHasNextPage(result.length === 9);
     if (result.length) {
@@ -182,12 +206,16 @@ export const getTotalMinusTwoNew = async (
   _setHasNextPage,
   _page,
   _cate,
+  _setTotalCount,
 ) => {
   try {
     const res = await axios.get(
       `/api/main/price${_cate}/new?page=${_page.current}&row=9`,
     );
-    const result = res.data;
+    const result = res.data.wineList;
+    const count = res.data.count;
+    // console.log("상품 총 갯수", count);
+    _setTotalCount(count);
     // console.log(`${_cate} 미만 와인리스트 GET(최신등록순)`, result);
     // _setListScroll(prevPosts => [...prevPosts, ...result]);
     _setHasNextPage(result.length === 9);
@@ -206,12 +234,16 @@ export const getTotalMinusTwoExpensive = async (
   _setHasNextPage,
   _page,
   _cate,
+  _setTotalCount,
 ) => {
   try {
     const res = await axios.get(
       `/api/main/price${_cate}/expencive?page=${_page.current}&row=9`,
     );
-    const result = res.data;
+    const result = res.data.wineList;
+    const count = res.data.count;
+    // console.log("상품 총 갯수", count);
+    _setTotalCount(count);
     // console.log("2만원 미만 와인리스트 GET(높은금액순)", result);
     // _setListScroll(prevPosts => [...prevPosts, ...result]);
     _setHasNextPage(result.length === 9);
@@ -230,12 +262,16 @@ export const getTotalMinusTwoCheap = async (
   _setHasNextPage,
   _page,
   _cate,
+  _setTotalCount,
 ) => {
   try {
     const res = await axios.get(
       `/api/main/price${_cate}/cheap?page=${_page.current}&row=9`,
     );
-    const result = res.data;
+    const result = res.data.wineList;
+    const count = res.data.count;
+    // console.log("상품 총 갯수", count);
+    _setTotalCount(count);
     // console.log("2만원 미만 와인리스트 GET(낮은금액순)", result);
     // _setListScroll(prevPosts => [...prevPosts, ...result]);
     _setHasNextPage(result.length === 9);
@@ -249,12 +285,20 @@ export const getTotalMinusTwoCheap = async (
 };
 
 // 상품리스트 - 레드와인 와인리스트 GET(최신금액순)
-export const getRedWineNew = async (_setListScroll, _setHasNextPage, _page) => {
+export const getRedWineNew = async (
+  _setListScroll,
+  _setHasNextPage,
+  _page,
+  _setTotalCount,
+) => {
   try {
     const res = await axios.get(
       `/api/main/redWine/new?page=${_page.current}&row=9`,
     );
-    const result = res.data;
+    const result = res.data.wineList;
+    const count = res.data.count;
+    // console.log("상품 총 갯수", count);
+    _setTotalCount(count);
     // console.log("레드와인 와인리스트 GET(최신등록순)", result);
     _setListScroll(prevPosts => [...prevPosts, ...result]);
     _setHasNextPage(result.length === 9);
@@ -272,12 +316,16 @@ export const getRedWineExpensive = async (
   _setListScroll,
   _setHasNextPage,
   _page,
+  _setTotalCount,
 ) => {
   try {
     const res = await axios.get(
       `/api/main/redWine/expencive?page=${_page.current}&row=9`,
     );
-    const result = res.data;
+    const result = res.data.wineList;
+    const count = res.data.count;
+    // console.log("상품 총 갯수", count);
+    _setTotalCount(count);
     // console.log("레드와인 와인리스트 GET(높은금액순)", result);
     _setListScroll(prevPosts => [...prevPosts, ...result]);
     _setHasNextPage(result.length === 9);
@@ -295,12 +343,16 @@ export const getRedWineCheap = async (
   _setListScroll,
   _setHasNextPage,
   _page,
+  _setTotalCount,
 ) => {
   try {
     const res = await axios.get(
       `/api/main/redWine/cheap?page=${_page.current}&row=9`,
     );
-    const result = res.data;
+    const result = res.data.wineList;
+    const count = res.data.count;
+    // console.log("상품 총 갯수", count);
+    _setTotalCount(count);
     // console.log("레드와인 와인리스트 GET(낮은금액순)", result);
     _setListScroll(prevPosts => [...prevPosts, ...result]);
     _setHasNextPage(result.length === 9);
@@ -318,12 +370,16 @@ export const getWhiteWineNew = async (
   _setListScroll,
   _setHasNextPage,
   _page,
+  _setTotalCount,
 ) => {
   try {
     const res = await axios.get(
       `/api/main/whiteWine/new?page=${_page.current}&row=9`,
     );
-    const result = res.data;
+    const result = res.data.wineList;
+    const count = res.data.count;
+    // console.log("상품 총 갯수", count);
+    _setTotalCount(count);
     // console.log("화이트와인 와인리스트 GET(최신등록순)", result);
     _setListScroll(prevPosts => [...prevPosts, ...result]);
     _setHasNextPage(result.length === 9);
@@ -341,12 +397,16 @@ export const getWhiteWineExpensive = async (
   _setListScroll,
   _setHasNextPage,
   _page,
+  _setTotalCount,
 ) => {
   try {
     const res = await axios.get(
       `/api/main/whiteWine/expencive?page=${_page.current}&row=9`,
     );
-    const result = res.data;
+    const result = res.data.wineList;
+    const count = res.data.count;
+    // console.log("상품 총 갯수", count);
+    _setTotalCount(count);
     // console.log("화이트와인 와인리스트 GET(높은금액순)", result);
     _setListScroll(prevPosts => [...prevPosts, ...result]);
     _setHasNextPage(result.length === 9);
@@ -364,12 +424,16 @@ export const getWhiteWineCheap = async (
   _setListScroll,
   _setHasNextPage,
   _page,
+  _setTotalCount,
 ) => {
   try {
     const res = await axios.get(
       `/api/main/whiteWine/cheap?page=${_page.current}&row=9`,
     );
-    const result = res.data;
+    const result = res.data.wineList;
+    const count = res.data.count;
+    // console.log("상품 총 갯수", count);
+    _setTotalCount(count);
     // console.log("화이트와인 와인리스트 GET(낮은금액순)", result);
     _setListScroll(prevPosts => [...prevPosts, ...result]);
     _setHasNextPage(result.length === 9);
@@ -387,12 +451,16 @@ export const getSpaklingWineNew = async (
   _setListScroll,
   _setHasNextPage,
   _page,
+  _setTotalCount,
 ) => {
   try {
     const res = await axios.get(
       `/api/main/sparklingWine/new?page=${_page.current}&row=9`,
     );
-    const result = res.data;
+    const result = res.data.wineList;
+    const count = res.data.count;
+    // console.log("상품 총 갯수", count);
+    _setTotalCount(count);
     // console.log("스파클링와인 와인리스트 GET(최신등록순)", result);
     _setListScroll(prevPosts => [...prevPosts, ...result]);
     _setHasNextPage(result.length === 9);
@@ -409,12 +477,16 @@ export const getSpaklingWineExpensive = async (
   _setListScroll,
   _setHasNextPage,
   _page,
+  _setTotalCount,
 ) => {
   try {
     const res = await axios.get(
       `/api/main/sparklingWine/expencive?page=${_page.current}&row=9`,
     );
-    const result = res.data;
+    const result = res.data.wineList;
+    const count = res.data.count;
+    // console.log("상품 총 갯수", count);
+    _setTotalCount(count);
     // console.log("스파클링와인 와인리스트 GET(높은금액순)", result);
     _setListScroll(prevPosts => [...prevPosts, ...result]);
     _setHasNextPage(result.length === 9);
@@ -431,12 +503,16 @@ export const getSpaklingWineCheap = async (
   _setListScroll,
   _setHasNextPage,
   _page,
+  _setTotalCount,
 ) => {
   try {
     const res = await axios.get(
       `/api/main/sparklingWine/cheap?page=${_page.current}&row=9`,
     );
-    const result = res.data;
+    const result = res.data.wineList;
+    const count = res.data.count;
+    // console.log("상품 총 갯수", count);
+    _setTotalCount(count);
     // console.log("스파클링와인 와인리스트 GET(낮은금액순)", result);
     _setListScroll(prevPosts => [...prevPosts, ...result]);
     _setHasNextPage(result.length === 9);
@@ -449,12 +525,20 @@ export const getSpaklingWineCheap = async (
   }
 };
 // 상품리스트 - 기타와인 와인리스트 GET(최신금액순)
-export const getEtcWineNew = async (_setListScroll, _setHasNextPage, _page) => {
+export const getEtcWineNew = async (
+  _setListScroll,
+  _setHasNextPage,
+  _page,
+  _setTotalCount,
+) => {
   try {
     const res = await axios.get(
       `/api/main/otherWine/new?page=${_page.current}&row=9`,
     );
-    const result = res.data;
+    const result = res.data.wineList;
+    const count = res.data.count;
+    // console.log("상품 총 갯수", count);
+    _setTotalCount(count);
     // console.log("기타와인 와인리스트 GET(최신등록순)", result);
     _setListScroll(prevPosts => [...prevPosts, ...result]);
     _setHasNextPage(result.length === 9);
@@ -471,12 +555,16 @@ export const getEtcWineExpensive = async (
   _setListScroll,
   _setHasNextPage,
   _page,
+  _setTotalCount,
 ) => {
   try {
     const res = await axios.get(
       `/api/main/otherWine/expencive?page=${_page.current}&row=9`,
     );
-    const result = res.data;
+    const result = res.data.wineList;
+    const count = res.data.count;
+    // console.log("상품 총 갯수", count);
+    _setTotalCount(count);
     // console.log("기타와인 와인리스트 GET(높은금액순)", result);
     _setListScroll(prevPosts => [...prevPosts, ...result]);
     _setHasNextPage(result.length === 9);
@@ -493,12 +581,16 @@ export const getEtcWineCheap = async (
   _setListScroll,
   _setHasNextPage,
   _page,
+  _setTotalCount,
 ) => {
   try {
     const res = await axios.get(
       `/api/main/otherWine/cheap?page=${_page.current}&row=9`,
     );
-    const result = res.data;
+    const result = res.data.wineList;
+    const count = res.data.count;
+    // console.log("상품 총 갯수", count);
+    _setTotalCount(count);
     // console.log("기타와인 와인리스트 GET(낮은금액순)", result);
     _setListScroll(prevPosts => [...prevPosts, ...result]);
     _setHasNextPage(result.length === 9);
@@ -508,5 +600,33 @@ export const getEtcWineCheap = async (
     return result;
   } catch (err) {
     console.log("기타와인 와인리스트 GET(낮은금액순) 에러 발생", err);
+  }
+};
+// 할인 상품
+export const getSaleWine = async (
+  _setListScroll,
+  _setHasNextPage,
+  _page,
+  _sort,
+  _type,
+  _setTotalCount,
+) => {
+  try {
+    const res = await axios.get(
+      `/api/main/monthSaleWine?page=${_page.current}&size=9&sort=${_sort}%2C${_type}`,
+    );
+    const result = res.data.list;
+    const count = res.data.count;
+    // console.log("상품 총 갯수", count);
+    _setTotalCount(count);
+    console.log("할인 상품 와인리스트 GET", result);
+    _setListScroll(prevPosts => [...prevPosts, ...result]);
+    _setHasNextPage(result.length === 9);
+    if (result.length) {
+      _page.current += 1;
+    }
+    return result;
+  } catch (err) {
+    console.log("할인 상품 와인리스트 GET 에러 발생", err);
   }
 };

@@ -56,7 +56,7 @@ const Food = () => {
   // react-intersection-observer state
   const [ref, inView] = useInView();
   // 상품 총 갯수 카운트 state
-  const [totalCount, setTotalCount] = useState("");
+  const [totalCount, setTotalCount] = useState(0);
   // 화면 데이터 보관할 state
   const [listScroll, setListScroll] = useState([]);
   const [hasNextPage, setHasNextPage] = useState(true);
@@ -74,6 +74,7 @@ const Food = () => {
           setHasNextPage,
           page,
           cateid,
+          setTotalCount,
         );
         setListScroll(prevPosts => [...prevPosts, ...result]);
         // console.log("결과", result);
@@ -83,6 +84,7 @@ const Food = () => {
           setHasNextPage,
           page,
           cateid,
+          setTotalCount,
         );
         setListScroll(prevPosts => [...prevPosts, ...result]);
       } else if (value === 3) {
@@ -91,6 +93,7 @@ const Food = () => {
           setHasNextPage,
           page,
           cateid,
+          setTotalCount,
         );
         setListScroll(prevPosts => [...prevPosts, ...result]);
       }
@@ -163,12 +166,12 @@ const Food = () => {
     },
   ];
   // 상품 총 갯수 불러옴
-  useEffect(() => {
-    setTotalCount(listScroll.length);
-    // console.log("value 출력", optionValue);
-    // console.log("화면 그려내", listScroll);
-    // console.log("상품 총 갯수", totalCount);
-  }, [listScroll]);
+  // useEffect(() => {
+  //   setTotalCount(listScroll.length);
+  //   // console.log("value 출력", optionValue);
+  //   // console.log("화면 그려내", listScroll);
+  //   // console.log("상품 총 갯수", totalCount);
+  // }, [listScroll]);
   // 무한 스크롤 처리
   useEffect(() => {
     // console.log("inView", inView, "hasNextPage", hasNextPage);

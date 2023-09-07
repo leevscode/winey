@@ -146,6 +146,10 @@ const Header = ({ handleOpenNav, isActive }) => {
       title: "기타 와인",
       path: "/productlist/etc",
     },
+    {
+      title: "이달의 할인 상품",
+      path: "/productlist/sale",
+    },
     // 와인 전체보기 카테고리
     {
       title: "음식별 추천 와인",

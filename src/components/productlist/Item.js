@@ -42,9 +42,6 @@ const Item = ({ listScroll, setIsModalOpen, hasNextPage }) => {
     },
     [setIsModalOpen],
   );
-  // useEffect(() => {
-
-  // }, []);
   return (
     <>
       {listScroll?.map((item, index) => (
@@ -94,7 +91,7 @@ const Item = ({ listScroll, setIsModalOpen, hasNextPage }) => {
           </Link>
         </ProductListItem>
       ))}
-      {hasNextPage === false && (
+      {listScroll?.length === 0 && (
         <ProductNoItem>
           <div>
             <i>

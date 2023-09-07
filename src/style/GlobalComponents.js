@@ -6,6 +6,7 @@
 import styled from "@emotion/styled";
 import { motion } from "framer-motion";
 import {
+  Gradation,
   Maincolor,
   ResultColor,
   WidthPd,
@@ -183,6 +184,9 @@ export const NavWrap = styled(motion.div)`
           &:hover {
             color: ${Maincolor.redBold};
           }
+        }
+        &.focus a {
+          color: ${Gradation.wineC};
         }
       }
     }

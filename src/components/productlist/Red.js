@@ -64,14 +64,19 @@ const Red = () => {
   // value값에 따라 데이터 바뀜
   const getListData = useCallback(async value => {
     if (value === 1) {
-      await getRedWineNew(setListScroll, setHasNextPage, page);
+      await getRedWineNew(setListScroll, setHasNextPage, page, setTotalCount);
     } else if (value === 2) {
-      await getRedWineExpensive(setListScroll, setHasNextPage, page);
+      await getRedWineExpensive(
+        setListScroll,
+        setHasNextPage,
+        page,
+        setTotalCount,
+      );
     } else if (value === 3) {
-      await getRedWineCheap(setListScroll, setHasNextPage, page);
+      await getRedWineCheap(setListScroll, setHasNextPage, page, setTotalCount);
     }
   }, []);
-  
+
   // 상품 정렬 옵션
   const options = [
     {
@@ -109,14 +114,6 @@ const Red = () => {
     },
     [setListScroll],
   );
-  // 상품 총 갯수 불러옴
-  useEffect(() => {
-    setTotalCount(listScroll.length);
-    // console.log("page", page.current);
-    // console.log("value 출력", optionValue);
-    // console.log("화면 그려내", listScroll);
-    // console.log("상품 총 갯수", totalCount);
-  }, [listScroll]);
   // 무한 스크롤 처리
   useEffect(() => {
     if (inView && hasNextPage) {
@@ -124,18 +121,6 @@ const Red = () => {
       getListData(optionValue);
     }
   }, [getListData, hasNextPage, inView, setOptionValue]);
-  // 화면 로딩 처리
-  // useEffect(() => {
-  //   // 0.3초 뒤에 로딩 화면 사라짐
-  //   const introTimeout = setTimeout(() => {
-  //     setIsLoading(false);
-  //   }, 300);
-  //   // 최초 실행 시 value 1 실행
-  //   // console.log("버튼 클릭했을때 딱 한번 실행", listScroll);
-  //   getListData(1);
-  //   return () => clearTimeout(introTimeout);
-  // }, []);
-
   return (
     <>
       <ProductListItemWrap>
@@ -177,18 +162,20 @@ const Red = () => {
           />
         </ContentsListItemWrap>
         {/* 로딩 컴포넌트 */}
-        <div ref={ref} className="loading-box">
-          <div>
-            <FadeLoader
-              color={Maincolor.redBold}
-              height={9}
-              margin={0}
-              radius={10}
-              speedMultiplier={1}
-              width={5}
-            />
+        {hasNextPage && (
+          <div ref={ref} className="loading-box">
+            <div>
+              <FadeLoader
+                color={Maincolor.redBold}
+                height={9}
+                margin={0}
+                radius={10}
+                speedMultiplier={1}
+                width={5}
+              />
+            </div>
           </div>
-        </div>
+        )}
       </ProductListItemWrap>
       {/* 장바구니 완료 모달창 */}
       <ProductCartModal
