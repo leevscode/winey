@@ -18,7 +18,6 @@ import {
   ReviewIcon,
   ReviewModalButton,
   ReviewModalbox,
-  SellListButton,
   SellListModal,
 } from "../../style/SellListReviewStyle";
 import { submitReview } from "../../api/patchselllist";
@@ -44,6 +43,7 @@ const ReviewModal = ({
 
       reviewSubmitUpdate(selectedReview);
 
+      // 리뷰 등록 모달
       Modal.warning({
         wrapClassName: "info-modal-wrap notice-modal",
         maskClosable: true,
@@ -53,7 +53,7 @@ const ReviewModal = ({
           </ul>
         ),
       });
-      
+
       hideModal();
     } else {
       setShowWarning(true);
@@ -75,7 +75,7 @@ const ReviewModal = ({
     hideModal();
   };
 
-  // 모달이 닫힐 때 상태를 평점 선택을 초기화
+  // 모달이 닫힐 때 상태를 평점 선택버튼을 초기화
   useEffect(() => {
     if (!reviewReset) {
       setSelectedReview(null);

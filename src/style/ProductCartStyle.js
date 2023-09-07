@@ -26,11 +26,38 @@ export const ProductCartNone = styled.div`
 `;
 
 export const ProudctTotalItem = styled.div`
+  display: flex;
+  justify-content: space-between;
   padding: ${WidthPd.padding};
   font-size: 1.5rem;
   color: #837575;
   margin-bottom: 10px;
+  i {
+    font-size: 1.8rem;
+    color: #7c1d34;
+    position: absolute;
+    margin-top: -5px;
+    margin-left: 4px;
+  }
+  img {
+    position: relative;
+    width: 22px;
+    height: auto;
+    margin-top: -5px;
+  }
+  img:hover {
+   
+  }
 `;
+
+
+export const CratRemove = styled.button`
+ -ms-transform: rotate(60deg);
+    -webkit-transform: rotate(120deg);
+    transform: rotate(150deg);
+    transition: transform 0.7s ease;
+
+`
 
 export const ProductCartInfo = styled.div`
   padding: ${WidthPd.padding};

@@ -40,18 +40,6 @@ const SellList = () => {
   const [CancelModal, setCancelModal] = useState([]);
   const navigate = useNavigate();
 
-  // 주문취소
-  const cancelSellList = async data => {
-    try {
-      await cancelSellListData(data);
-      const updatedItems = orderId.filter(item => item.orderId !== data);
-      setorderId(updatedItems);
-      hideCancelModal(data);
-      // console.log("주문취소 성공:", updatedItems);
-    } catch (error) {
-      // console.log("주문취소 실패:", error);
-    }
-  };
 
   // 주문내역 리스트 출력
   const filledSellListData = async () => {

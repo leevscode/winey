@@ -63,8 +63,8 @@ const OrderControlAdm = () => {
       console.log(data);
       setOrderControl(data.list);
       setOrderControl2(data.page);
-      console.log(data.list);
-      console.log(data.page);
+      // console.log(data.list);
+      // console.log(data.page);
       setTotalRecordCount(data.page.totalRecordCount);
       console.log(totalRecordCount);
     } catch (err) {

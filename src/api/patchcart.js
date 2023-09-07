@@ -22,6 +22,7 @@ export const fetchCartData = async () => {
     // return [];
   }
 };
+
 // 장바구니 갯수 출력
 export const cartLengthData = async dispatch => {
   try {
