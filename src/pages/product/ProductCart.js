@@ -28,6 +28,7 @@ import {
   faMinus,
   faPlus,
   faX,
+  faWineBottle,
 } from "@fortawesome/free-solid-svg-icons";
 import {
   cartLengthData,
@@ -89,7 +90,7 @@ const ProductCart = () => {
 
   const calcTotalSum = () => {
     let itemTotal = 0;
-    cartData?.map((item) => {
+    cartData?.map(item => {
       itemTotal += item.price * item.quantity;
     });
     return itemTotal;
@@ -125,6 +126,7 @@ const ProductCart = () => {
   // 장바구니에서 결제
   const buyGood = async () => {
     // 카트에 있는 상품 ID 중복 확인
+    // 장바구니 버그 방지용 코드
     const productIds = new Set();
     let hasDuplicate = false;
     for (const item of cartData) {
@@ -159,6 +161,34 @@ const ProductCart = () => {
     });
   };
 
+  // 장바구니 담긴 상품 모두 지우기
+  const removeAllItems = async () => {
+    Modal.confirm({
+      okText: "예",
+      cancelText: "아니오",
+      wrapClassName: "info-modal-wrap notice-modal",
+      maskClosable: true,
+      content: (
+        <ul>
+          <li>장바구니에 담긴 모든 상품을 삭제 하시겠습니까?</li>
+        </ul>
+      ),
+      async onOk() {
+        for (const item of cartData) {
+          await removeCarts(item.cartId);
+        }
+        // 장바구니에 담긴 모든 cartId 삭제
+        setCartData([]);
+        console.log(cartData, "장바구니 삭제 성공");
+        // 장바구니 데이터 다시 불러 오기
+        cartLengthData(dispatch);
+      },
+      onCancel() {
+        "";
+      },
+    });
+  };
+
   // 이미지 없을 때 error처리
   const onImgError = e => {
     e.target.src = NoImage;
@@ -187,6 +217,15 @@ const ProductCart = () => {
         <div>
           <ProudctTotalItem>
             장바구니에 총 {cartData?.length}개의 상품이 있습니다.
+            <button onClick={removeAllItems}>
+              <i>
+                <FontAwesomeIcon icon={faWineBottle} />
+              </i>
+              <img
+                src={`${process.env.PUBLIC_URL}/images/icon_cart_1.svg`}
+                alt="장바구니"
+              />
+            </button>
           </ProudctTotalItem>
           <ul>
             {cartData &&
