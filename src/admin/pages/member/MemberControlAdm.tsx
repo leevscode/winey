@@ -11,6 +11,7 @@ import {
   IMemControl,
   IMemberListUser,
   IMemberSortOption,
+  IinitialPg,
 } from "../../interface/MemberInterface";
 import MemberControlPaginate from "../../components/member/MemberControlPaginate";
 import MemberControlSort, {
@@ -79,7 +80,7 @@ const MemberControlAdm = () => {
   return (
     <MemberWrap>
       <MemberControlSort
-        memberList={memberList.content}
+        memberList={memberList}
         setSortOption={setSortOption}
         textSearch={textSearch}
         setTextSearch={setTextSearch}

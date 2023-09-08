@@ -21,11 +21,13 @@ import { faTriangleExclamation } from "@fortawesome/free-solid-svg-icons";
 
 const StoreAddAdm: React.FC = () => {
   const navigate = useNavigate();
+  const [addressErr, setAddressErr] = useState<string>("");
   const [newStoreInfo, setNewStoreInfo] = useState<IStoreDetailList>({
     regionNmId: 0,
     nm: "0",
     tel: "0",
     address: "0",
+    addressSub: "",
   });
 
   // 매장 도시
@@ -53,9 +55,9 @@ const StoreAddAdm: React.FC = () => {
 
   // 매장주소 api
   const [openPostcode, setOpenPostcode] = useState<boolean>(false);
-
   const [calendarlocation, setCalendarLocation] = useState<string>("");
-  console.log("calendarlocation", calendarlocation);
+  // 세부주소
+  const [subAddress, setSubAddress] = useState<string>("");
 
   const handleAddress = {
     // 버튼 클릭 이벤트
@@ -92,13 +94,29 @@ const StoreAddAdm: React.FC = () => {
         address: data.address,
       }));
       setOpenPostcode(false);
+      setAddressErr("");
+      Modal.destroyAll(); // 모든 모달 닫기
     },
+  };
+  // 상세주소
+  const handleAddressSub: React.ChangeEventHandler<HTMLInputElement> = e => {
+    console.log("eee", e.target.value);
+    setSubAddress(e.target.value);
+    setNewStoreInfo(prevState => ({
+      ...prevState,
+      addressSub: subAddress,
+    }));
   };
 
   const onCancel = () => {
     navigate(-1);
   };
   const onFinish = () => {
+    console.log("newStoreInfo.address", newStoreInfo.address);
+    if (newStoreInfo.address === "0") {
+      setAddressErr("주소를 입력해 주세요.");
+      return;
+    }
     try {
       Modal.confirm({
         okText: "예",
@@ -143,14 +161,14 @@ const StoreAddAdm: React.FC = () => {
     console.log("전송실패");
   };
   useEffect(() => {
-    console.log("화면랜더링")
+    console.log("화면랜더링");
   }, [calendarlocation]);
 
   return (
     <StoreAddWrap>
       <Form
         onFinish={onFinish}
-        onFinishFailed={onFinishFailed}
+        // onFinishFailed={onFinishFailed}
         layout="horizontal"
       >
         <div className="addButton">
@@ -207,26 +225,24 @@ const StoreAddAdm: React.FC = () => {
           <ul>
             <li>매장 주소</li>
             <li>
-              <Form.Item
-                className="storeAddressSt"
-                name="storeAddress"
-                // rules={[
-                //   {
-                //     required: true,
-                //     message: "매장주소를 입력해 주세요",
-                //   },
-                // ]}
-              >
+              <Form.Item className="storeAddressSt" name="storeAddress">
                 <Input
                   value={calendarlocation}
                   placeholder="매장 주소를 입력하세요."
                   // readOnly
                   onClick={handleAddress.clickButton}
                 />
+                <Input
+                  className="storeAddressSub"
+                  value={subAddress}
+                  placeholder="상세주소"
+                  onChange={handleAddressSub}
+                />
                 <DetailBt onClick={handleAddress.clickButton}>
                   주소검색
                 </DetailBt>
               </Form.Item>
+              {addressErr ? <p>{addressErr}</p> : <p></p>}
             </li>
           </ul>
           <ul>

@@ -3,7 +3,7 @@
     노션 : https://hyemdev.notion.site/hyemdev/hyem-s-dev-STUDY-75ffe819c7534a049b59871e6fe17dd4
     깃허브 : https://github.com/hyemdev
 */
-import { Select, Space } from "antd";
+import { Modal, Select, Space } from "antd";
 import { IMemberSortOption } from "../../interface/MemberInterface";
 import { SortSelectWrap } from "../../style/AdminMemberStyle";
 import Search from "antd/es/input/Search";
@@ -13,8 +13,8 @@ export const initialSortOption: IMemberSortOption = {
   sort: "asc",
 };
 const MemberControlSort = ({
-  setSortOption,
   memberList,
+  setSortOption,
   setTextSearch,
   sortSearch,
   setSortSearch,
@@ -46,13 +46,27 @@ const MemberControlSort = ({
       setSortOption(initialSortOption);
     }
   };
-  const onChangOption = (e: string) => {
+  const onChangOption = (e: any) => {
+    console.log("eeee", e);
     setSortSearch(e);
   };
   const onTextSearch = (
     value: string,
     e?: React.ChangeEvent<HTMLInputElement>,
   ) => {
+    if (value == "") {
+      Modal.error({
+        okText: "예",
+        wrapClassName: "info-modal-wrap notice-modal",
+        maskClosable: true,
+        content: (
+          <ul>
+            <li>검색할 단어를 입력해 주세요.</li>
+          </ul>
+        ),
+      });
+      return;
+    }
     setTextSearch(value);
   };
   console.log("sortSearch", sortSearch);
@@ -63,7 +77,7 @@ const MemberControlSort = ({
       <SortSelectWrap>
         <div className="table-top">
           <p className="total-count">
-            총 <span>{memberList.totalElements}</span>개
+            총 <span>{memberList?.pageableCustom?.totalElements}</span>개
           </p>
           <div className="searchSort">
             <Space.Compact>

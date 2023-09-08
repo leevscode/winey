@@ -4,11 +4,7 @@
     깃허브 : https://github.com/hyemdev
 */
 import { client } from "../../api/client";
-import {
-  IEditStore,
-  IStoreDetailList,
-  IStoreInfo,
-} from "../interface/StoreInterface";
+import { IEditStore, IStoreInfo } from "../interface/StoreInterface";
 
 // 매장정보 불러오기
 export const getStoreList = async (
@@ -38,6 +34,7 @@ export const postNewStore = async (newStoreInfo: {
   nm: string;
   tel: string;
   address: string;
+  addressSub?: string | undefined;
 }) => {
   console.log("newStoreInfo", newStoreInfo);
   try {
@@ -45,7 +42,7 @@ export const postNewStore = async (newStoreInfo: {
       regionNmId: newStoreInfo.regionNmId,
       nm: newStoreInfo.nm,
       tel: newStoreInfo.tel,
-      address: newStoreInfo.address,
+      address: newStoreInfo.address + newStoreInfo.addressSub,
     });
     console.log(res);
     const result = await res.data;

@@ -99,6 +99,7 @@ const StoreControlListItem = ({ item, setEditZip }: any) => {
       const temp = await setCalendarLocation(data.address);
       setEditStoreAddress(data.address);
       setOpenPostcode(false);
+      Modal.destroyAll(); // 모든 모달 닫기
     },
   };
 

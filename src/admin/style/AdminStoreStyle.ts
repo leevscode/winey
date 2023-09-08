@@ -41,6 +41,9 @@ export const StoreAddWrap = styled.div`
         padding: 2.5rem 2rem;
         width: 75%;
         height: 8rem;
+        & > p {
+          color: #ff4d4f;
+        }
         & > div {
           margin: 0;
         }
@@ -53,8 +56,12 @@ export const StoreAddWrap = styled.div`
         div {
           display: flex;
           /* justify-content: center; */
-          & > input {
-            width: 100%;
+          & > input:first-of-type {
+            width: 70%;
+            margin-right: 1rem;
+          }
+          .storeAddressSub {
+            width: 30%;
             margin-right: 1rem;
           }
           .css-1h3mxnl {
@@ -76,6 +83,7 @@ export const EditStoreWrap = styled.div`
   & li {
     height: 5rem;
     padding-right: 1rem;
+    line-height: 2rem;
   }
   .cityEditSty {
     & span {

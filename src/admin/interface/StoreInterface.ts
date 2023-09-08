@@ -17,6 +17,7 @@ export interface IStoreDetailList {
   nm: string;
   tel: string;
   address: string;
+  addressSub?: string | undefined;
   storeId?: string;
   textRegion?: string;
   statusText?: string;
@@ -26,6 +27,7 @@ export interface IEditStore {
   editStoreCity: number;
   editStoreNm: string;
   editStoreAddress: string;
+  editStoreAddressSub?: string;
   editStoreTel: string;
 }
 export interface IStoreInfoState {
