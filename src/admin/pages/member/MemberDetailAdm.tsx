@@ -17,7 +17,7 @@ import MemberDetailPaginate from "../../components/member/MemberDetailPaginate";
 import { MemberDetailWrap } from "../../style/AdminMemberStyle";
 import MemberDetailSort from "../../components/member/MemberDetailSort";
 
-export const detailInitialSortOption = { type: "0", sort: "0" };
+export const detailInitialSortOption = { type: "orderDate", sort: "desc" };
 const MemberDetailAdm = () => {
   const location = useLocation();
 

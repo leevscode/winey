@@ -26,7 +26,6 @@ const MemberDetailSort = ({ setSortOption, userInfomation }: any) => {
       setSortOption(detailInitialSortOption);
     }
   };
-  console.log("userInfomatio111111111n", userInfomation);
 
   return (
     <div>
