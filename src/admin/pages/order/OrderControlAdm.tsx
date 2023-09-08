@@ -61,12 +61,12 @@ const OrderControlAdm = () => {
     try {
       const data = await AdmOrderData(current, sortOption);
       console.log(data);
-      setOrderControl(data.list);
-      setOrderControl2(data.page);
+      setOrderControl(data.content);
+      setOrderControl2(data.pageableCustom);
       // console.log(data.list);
       // console.log(data.page);
-      setTotalRecordCount(data.page.totalRecordCount);
-      console.log(totalRecordCount);
+      setTotalRecordCount(data.pageableCustom.totalElements);
+      console.log(data.pageableCustom.totalElements);
     } catch (err) {
       console.error("데이터 로드 중 오류 발생", err);
     }
@@ -194,7 +194,7 @@ const OrderControlAdm = () => {
             <li>상세보기</li>
           </TableLayoutTitle>
           {/* 데이터 테이블 - 내용 */}
-          {orderControl.map(item => (
+          {orderControl?.map(item => (
             <TableLayoutContents
               key={item.orderId}
               listPathName={listPathName}
@@ -271,7 +271,7 @@ const OrderControlAdm = () => {
             current={current}
             pageSize={8}
             onChange={onChange}
-            total={orderControl2?.totalRecordCount || 0}
+            total={orderControl2?.totalElements || 0}
           />
         </PaginationWrap>
       </AdmProductWrap>

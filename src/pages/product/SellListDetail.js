@@ -116,9 +116,7 @@ const SellListDetail = () => {
                 <li>{item.nmEng}</li>
                 {/* salePrice가 있으면 먼저 출력, 없으면 Price 출력 */}
                 {item.salePrice ? (
-                  <li>
-                    {parseInt(item.salePrice).toLocaleString()}원
-                  </li>
+                  <li>{parseInt(item.salePrice).toLocaleString()}원</li>
                 ) : (
                   <li>{parseInt(item.price).toLocaleString()}원</li>
                 )}

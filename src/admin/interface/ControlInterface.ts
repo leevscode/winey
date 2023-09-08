@@ -16,19 +16,20 @@ export interface fetchData {
   Navigate: string;
   orderId: number;
   totalRecordCount: number;
+  content: number;
 }
 
 export interface fetchData2 {
   endPage: number;
   next: boolean;
-  page: number;
+  pageableCustom: number;
   pageSize: number;
   prev: boolean;
   row: number;
   startIdx: number;
   startPage: number;
   totalPage: number;
-  totalRecordCount: number;
+  totalElements: number;
 }
 
 export interface ControllSortOption {
