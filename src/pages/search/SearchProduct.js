@@ -15,7 +15,7 @@ import { searchFilterRecoil } from "../../components/search/SearchFilter";
 import { atom, selector, useRecoilValue, useRecoilState } from "recoil";
 import { SearchPageWrap } from "../../style/SearchStyle";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faWineGlassEmpty } from "@fortawesome/free-solid-svg-icons";
+import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import { v4 } from "uuid";
 
 // recoil
@@ -39,6 +39,8 @@ const SearchProduct = () => {
   const searchContent = useRecoilValue(searchReadRecoil);
   // recoil state
   const [urlState, setUrlState] = useRecoilState(queryUrlRecoil);
+  // filter component 열고닫는 state
+  const [isFilterActive, setIsFilterActive] = useState(false);
 
   console.log("searchContent", searchContent);
 
@@ -94,13 +96,18 @@ const SearchProduct = () => {
 
   return (
     <SearchPageWrap>
-      <SearchBar />
+      {/* 검색입력창 */}
+      <SearchBar
+        isFilterActive={isFilterActive}
+        setIsFilterActive={setIsFilterActive}
+      />
+      {/* 검색결과 */}
       {searchContent.filter.length === 0 && searchContent.text.length === 0 ? (
         <div className="noSearchItem">
           <i>
-            <FontAwesomeIcon icon={faWineGlassEmpty} />
+            <FontAwesomeIcon icon={faMagnifyingGlass} />
           </i>
-          <p>상품이 존재하지 않습니다.</p>
+          {/* <p>상품이 존재하지 않습니다.</p> */}
           <p>검색어를 입력해 주세요.</p>
         </div>
       ) : (

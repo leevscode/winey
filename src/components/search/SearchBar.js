@@ -18,6 +18,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faCircleExclamation,
   faFilter,
+  faXmark,
 } from "@fortawesome/free-solid-svg-icons";
 import { v4 } from "uuid";
 import { Gradation, opacity } from "../../style/GlobalStyle";
@@ -50,7 +51,7 @@ export const searchButtonActive = selector({
   },
 });
 
-const SearchBar = () => {
+const SearchBar = ({ isFilterActive, setIsFilterActive }) => {
   // recoil get을 저장하자
   const urlData = useRecoilValue(getQueryRecoil);
   const isButton = useRecoilValue(searchButtonActive);
@@ -62,7 +63,7 @@ const SearchBar = () => {
   const navigate = useNavigate();
 
   // filter component 열고닫는 state
-  const [isFilterActive, setIsFilterActive] = useState(false);
+  // const [isFilterActive, setIsFilterActive] = useState(false);
 
   // filters 버튼 핸들러
   const handleOpenfilter = e => {
@@ -105,9 +106,13 @@ const SearchBar = () => {
       <SearchBarWrap>
         <button className="filterbutton" onClick={handleOpenfilter}>
           <i>
-            <FontAwesomeIcon icon={faFilter} />
+            {isFilterActive === false ? (
+              <FontAwesomeIcon icon={faFilter} />
+            ) : (
+              <FontAwesomeIcon icon={faXmark} />
+            )}
           </i>
-          상세검색
+          {isFilterActive === false ? "상세검색" : "닫기"}
         </button>
         <ConfigProvider
           theme={{
@@ -147,9 +152,10 @@ const SearchBar = () => {
       <AnimatePresence>
         {isFilterActive === true && (
           <FilterButtonWrap
-            initial={{ opacity: 0, top: "0" }}
-            animate={{ opacity: 1, top: "12rem" }}
-            exit={{ opacity: 0, top: "0" }}
+            initial={{ opacity: 0, marginTop: "-327px" }}
+            animate={{ opacity: 1, marginTop: "0" }}
+            exit={{ opacity: 0, marginTop: "-327px" }}
+            transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
           >
             <SearchFilter
               setIsFilterActive={setIsFilterActive}

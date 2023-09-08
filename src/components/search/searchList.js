@@ -17,6 +17,7 @@ import { getSearchItem } from "../../api/searchpatch";
 import { FadeLoader } from "react-spinners";
 import { useInView } from "react-intersection-observer";
 import { v4 } from "uuid";
+import { SearchListWrap } from "../../style/SearchStyle";
 
 export const searchSortRecoil = atom({
   key: `searchSortRecoil/${v4()}`,
@@ -103,7 +104,7 @@ const SearchList = () => {
   console.log("exploreSort", exploreSort);
 
   return (
-    <div>
+    <SearchListWrap>
       <ProductListItemWrap>
         {/* 상품목록 */}
         <ul>
@@ -144,18 +145,20 @@ const SearchList = () => {
           />
         </ContentsListItemWrap>
         {/* 로딩 컴포넌트 */}
-        <div ref={ref} className="loading-box">
-          <div>
-            <FadeLoader
-              color={Maincolor.redBold}
-              height={9}
-              margin={0}
-              radius={10}
-              speedMultiplier={1}
-              width={5}
-            />
+        {hasNextPage && (
+          <div ref={ref} className="loading-box">
+            <div>
+              <FadeLoader
+                color={Maincolor.redBold}
+                height={9}
+                margin={0}
+                radius={10}
+                speedMultiplier={1}
+                width={5}
+              />
+            </div>
           </div>
-        </div>
+        )}
       </ProductListItemWrap>
       {/* 장바구니 완료 모달창 */}
       <ProductCartModal
@@ -163,7 +166,7 @@ const SearchList = () => {
         handleOk={handleOk}
         handleCancel={handleCancel}
       />
-    </div>
+    </SearchListWrap>
   );
 };
 
