@@ -12,7 +12,7 @@ export const AdmOrderData = async (
 ) => {
   try {
     const res = await client.get(
-      `/api/admin/order2?page=${page}&row=${8}&type=${sortOption.type}&sort=${
+      `/api/admin/order?page=${page - 1}&size=${8}&sort=${sortOption.type},${
         sortOption.sort
       }`,
     );

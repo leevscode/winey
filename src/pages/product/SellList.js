@@ -189,7 +189,7 @@ const SellList = () => {
                 </li>
                 <li>
                   <span>픽업 지점</span>
-                  {item.storeNm}
+                  {item.nm}
                 </li>
                 <li>
                   <span>픽업 시간</span>

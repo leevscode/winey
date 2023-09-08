@@ -2,6 +2,25 @@ import axios from "axios";
 import { getCookie, removeCookie, setCookie } from "./cookie";
 import { useNavigate } from "react-router";
 
+// Request 처리
+axios.interceptors.request.use(
+  config => {
+    // cookie를 활용 한 경우
+    const token = getCookie("access_token");
+
+    // const token = getCookie("refresh_token");
+    if (token) {
+      console.log(`token : ${token}`);
+      config["headers"] = config.headers ?? {};
+      config.headers["Authorization"] = `Bearer ${token}`;
+    }
+    return config;
+  },
+  error => {
+    console.log(error);
+  },
+);
+
 export const client = axios.create({
   // baseURL: "http://localhost:3000",
   // baseURL: "192.168.0.144:5004/",
@@ -10,20 +29,6 @@ export const client = axios.create({
     "Content-Type": "application/json;charset=UTF-8",
   },
 });
-
-// Request 처리
-client.interceptors.request.use(
-  config => {
-    // cookie를 활용 한 경우
-    const token = getCookie("access_token");
-    // const token = getCookie("refresh_token");
-    if (token) {
-      config.headers.Authorization = `Bearer ${token}`;
-    }
-    return config;
-  },
-  error => console.log(error),
-);
 
 // Response 처리
 // client.interceptors.response.use(
@@ -65,6 +70,35 @@ export const fetchLogin = async (userid, password) => {
       email: userid,
       upw: password,
     });
+    const result = res.data;
+    setCookie("refresh_token", result.authResVo.refreshToken, {
+      path: "/",
+      secure: true,
+      sameSite: "none",
+      httpOnly: true,
+    });
+    setCookie("access_token", result.authResVo.accessToken, {
+      path: "/",
+      secure: true,
+      sameSite: "none",
+      httpOnly: true,
+    });
+    console.log("res", res);
+    return result;
+  } catch (error) {
+    console.log("login error", error.response);
+    return error;
+  }
+};
+// 카카오 set 하기
+export const fetchKKOLogin = async accessToken => {
+  try {
+    const res = await client.post(`/sign-api/sign-in`, {
+      email: accessToken,
+      upw: "password",
+    });
+
+    // const res = await client.get(`/sign-api/sign-in`);
     const result = res.data;
     setCookie("refresh_token", result.authResVo.refreshToken, {
       path: "/",

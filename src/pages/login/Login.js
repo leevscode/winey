@@ -24,10 +24,12 @@ import {
 
 const Login = () => {
   const REST_API_KEY = "63c2ccf48233929cf35206dbb6fcdb14";
-  const REDIRECT_URI = "http://192.168.0.144:5004/oauth/redirect";
-
+  const HOST_URI = window.location.host;
+  // const HOST_URI = "localhost:3000";
+  const REDIRECT_URI = `http://${HOST_URI}/oauth/redirect`;
+  console.log(REDIRECT_URI);
   const KakaoLogin = () =>
-    (window.location.href = `http://192.168.0.144:5004/oauth2/authorization/kakao?redirect_uri=${REDIRECT_URI}`);
+    (window.location.href = `http://${HOST_URI}/oauth2/authorization/kakao?redirect_uri=${REDIRECT_URI}`);
 
   const dispatch = useDispatch();
   // 회원정보 불러오기
