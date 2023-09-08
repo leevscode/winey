@@ -11,18 +11,18 @@ import ProductCartModal from "../product/ProductCartModal";
 import { ProductListItemWrap } from "../../style/ProductListStyle";
 import { Gradation, Maincolor } from "../../style/GlobalStyle";
 import { atom, selector, useRecoilState, useRecoilValue } from "recoil";
-import { searchResultRecoil } from "./SearchBar";
 import { queryUrlRecoil } from "../../pages/search/SearchProduct";
 import { getSearchItem } from "../../api/searchpatch";
 import { FadeLoader } from "react-spinners";
 import { useInView } from "react-intersection-observer";
 import { v4 } from "uuid";
 import { SearchListWrap } from "../../style/SearchStyle";
+import { searchResultRecoil } from "./SearchBar";
 
 export const searchSortRecoil = atom({
   key: `searchSortRecoil/${v4()}`,
   default: {
-    value: 0,
+    value: 1,
     label: "최신등록순",
   },
 });
@@ -45,13 +45,13 @@ const SearchList = () => {
 
   const sortingOptions = [
     {
-      value: 0,
+      value: 1,
       label: "최신등록순",
     },
-    {
-      value: 1,
-      label: "오랜등록순",
-    },
+    // {
+    //   value: 1,
+    //   label: "오랜등록순",
+    // },
     {
       value: 2,
       label: "높은가격순",
@@ -109,7 +109,7 @@ const SearchList = () => {
         {/* 상품목록 */}
         <ul>
           <li>
-            검색 상품 총 <span>{totalCount.count}</span>개
+            총 <span>{totalCount.count}</span>개
           </li>
           <li>
             {/* 상품정렬 */}

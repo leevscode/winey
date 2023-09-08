@@ -13,8 +13,11 @@ import ProductCartModal from "../product/ProductCartModal";
 
 const SearchListItem = ({ setIsModalOpen, urlData }) => {
   const navigate = useNavigate();
+  // 사용자 정보를 불러옴
   const dispatch = useDispatch();
   const userData = useSelector(state => state.user);
+
+  console.log("urlData", urlData);
 
   // 회원 장바구니 버튼 클릭 이벤트
   const showModal = useCallback(

@@ -4,27 +4,22 @@
     깃허브 : https://github.com/hyemdev
 */
 import React, { useEffect, useState } from "react";
-import { Button, ConfigProvider, Radio } from "antd";
-import { SearchFilterWrap } from "../../style/SearchStyle";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faBacon,
-  faDrumstickBite,
-  faFish,
-  faFishFins,
-  faFlag,
-  faGuitar,
-  faLeaf,
-  faWineGlass,
-} from "@fortawesome/free-solid-svg-icons";
-import { faMoneyBill1 } from "@fortawesome/free-regular-svg-icons";
 import { atom, useRecoilState, useSetRecoilState } from "recoil";
 import { v4 } from "uuid";
-import { Gradation, Maincolor } from "../../style/GlobalStyle";
+import { Button, ConfigProvider, Radio } from "antd";
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
 // Import Swiper styles
 import "swiper/css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faBacon,
+  faFlag,
+  faWineGlass,
+} from "@fortawesome/free-solid-svg-icons";
+import { faMoneyBill1 } from "@fortawesome/free-regular-svg-icons";
+import { SearchFilterWrap } from "../../style/SearchStyle";
+import { Maincolor } from "../../style/GlobalStyle";
 
 export const searchFilterRecoil = atom({
   key: `searchFilterRecoil/${v4()}`,

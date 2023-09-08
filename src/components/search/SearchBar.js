@@ -3,7 +3,7 @@
     노션 : https://hyemdev.notion.site/hyemdev/hyem-s-dev-STUDY-75ffe819c7534a049b59871e6fe17dd4
     깃허브 : https://github.com/hyemdev
 */
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Search from "antd/es/input/Search";
 import { ConfigProvider } from "antd";
 import { FilterButtonWrap, SearchBarWrap } from "../../style/SearchStyle";
@@ -24,15 +24,18 @@ import { v4 } from "uuid";
 import { Gradation, opacity } from "../../style/GlobalStyle";
 import { AnimatePresence } from "framer-motion";
 
-// recoil
+// recoil =============================
+// 검색어 입력 atom
 export const searchTextRecoil = atom({
   key: `searchTextRecoil/${v4()}`,
   default: [],
 });
+// 검색 결과 atom
 export const searchResultRecoil = atom({
   key: `searchResultRecoil/${v4()}`,
   default: [],
 });
+// 검색 결과에 대한 쿼리를 불러옴
 const getQueryRecoil = selector({
   key: `getQueryRecoil/${v4()}`,
   // 값을 읽겠다
@@ -52,18 +55,16 @@ export const searchButtonActive = selector({
 });
 
 const SearchBar = ({ isFilterActive, setIsFilterActive }) => {
+  const navigate = useNavigate();
+
   // recoil get을 저장하자
+  // 검색 결과를 사용함
   const urlData = useRecoilValue(getQueryRecoil);
   const isButton = useRecoilValue(searchButtonActive);
   // recoil
   const [exploreSort, setExploreSort] = useRecoilState(searchSortRecoil);
   const [exploreText, setExploreText] = useRecoilState(searchTextRecoil);
   const [exploreResult, setExploreResult] = useRecoilState(searchResultRecoil);
-
-  const navigate = useNavigate();
-
-  // filter component 열고닫는 state
-  // const [isFilterActive, setIsFilterActive] = useState(false);
 
   // filters 버튼 핸들러
   const handleOpenfilter = e => {
@@ -74,31 +75,36 @@ const SearchBar = ({ isFilterActive, setIsFilterActive }) => {
     setIsFilterActive(false);
     // navigate();
   };
+  // 검색어 입력창 핸들러
   const handleTextSearch = e => {
     setExploreText(e.target.value);
   };
-  const [isModalOpen, setIsModalOpen] = useState(false);
-
-  const handleOk = () => {
-    setIsModalOpen(false);
-  };
-  const handleCancel = () => {
-    setIsModalOpen(false);
-  };
+  const page = useRef(1);
+  console.log("page", page);
+  // 검색 버튼 클릭 핸들러
   const onSearch = e => {
     if (isButton.filter.length === 0 && isButton.text.length === 0) {
       console.log("선택값없음");
       setIsModalOpen(true);
       return;
     } else {
-      getSearchItem({ urlData, exploreSort, setExploreResult });
+      // getSearchItem({ urlData, exploreSort, setExploreResult });
+      getSearchItem(urlData, page, exploreSort, setExploreResult);
       setIsFilterActive(false);
       setExploreSort({
-        value: 0,
+        value: 1,
         label: "최신등록순",
       });
       return;
     }
+  };
+  // 검색어 미입력시 출력되는 모달창
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const handleOk = () => {
+    setIsModalOpen(false);
+  };
+  const handleCancel = () => {
+    setIsModalOpen(false);
   };
 
   return (

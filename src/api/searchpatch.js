@@ -14,8 +14,8 @@ export const getSearchItem = async ({
   setHasNextPage,
   setTotalCount,
 }) => {
-  console.log("**page.current", page.current || 1);
-  console.log("**exploreSort.value", exploreSort.value || 0);
+  // console.log("**page.current", page.current || 1);
+  // console.log("**exploreSort.value", exploreSort.value || 0);
   try {
     const res = await client.get(
       `/api/search?page=${page.current || 1}&sort=${exploreSort.value || 0}&${

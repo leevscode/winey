@@ -35,12 +35,12 @@ export const searchReadRecoil = selector({
 });
 
 const SearchProduct = () => {
+  // filter component 열고닫는 state
+  const [isFilterActive, setIsFilterActive] = useState(false);
   // recoil read
   const searchContent = useRecoilValue(searchReadRecoil);
   // recoil state
   const [urlState, setUrlState] = useRecoilState(queryUrlRecoil);
-  // filter component 열고닫는 state
-  const [isFilterActive, setIsFilterActive] = useState(false);
 
   console.log("searchContent", searchContent);
 
@@ -102,12 +102,21 @@ const SearchProduct = () => {
         setIsFilterActive={setIsFilterActive}
       />
       {/* 검색결과 */}
-      {searchContent.filter.length === 0 && searchContent.text.length === 0 ? (
+      {/* {searchContent.filter.length === 0 && searchContent.text.length === 0 ? (
         <div className="noSearchItem">
           <i>
             <FontAwesomeIcon icon={faMagnifyingGlass} />
           </i>
-          {/* <p>상품이 존재하지 않습니다.</p> */}
+          <p>검색어를 입력해 주세요.</p>
+        </div>
+      ) : (
+        <SearchList />
+      )} */}
+      {searchContent.filter.length === 0 ? (
+        <div className="noSearchItem">
+          <i>
+            <FontAwesomeIcon icon={faMagnifyingGlass} />
+          </i>
           <p>검색어를 입력해 주세요.</p>
         </div>
       ) : (

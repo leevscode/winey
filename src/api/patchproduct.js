@@ -619,7 +619,7 @@ export const getSaleWine = async (
     const count = res.data.count;
     // console.log("상품 총 갯수", count);
     _setTotalCount(count);
-    console.log("할인 상품 와인리스트 GET", result);
+    // console.log("할인 상품 와인리스트 GET", result);
     _setListScroll(prevPosts => [...prevPosts, ...result]);
     _setHasNextPage(result.length === 9);
     if (result.length) {

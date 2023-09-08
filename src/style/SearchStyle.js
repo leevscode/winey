@@ -8,15 +8,7 @@ import { Gradation, Maincolor, WidthPd, opacity } from "./GlobalStyle";
 import { motion } from "framer-motion";
 
 export const SearchPageWrap = styled.div`
-  /* padding: ${WidthPd.padding}; */
-  /* padding-top: 1.5rem; */
-  /* padding-bottom: 6rem; */
   .noSearchItem {
-    /* display: flex;
-    justify-content: center;
-    flex-direction: column; */
-    /* height: 70rem; */
-    /* opacity: 0.7; */
     padding-top: 4rem;
     font-size: 1.6rem;
     text-align: center;
@@ -24,13 +16,10 @@ export const SearchPageWrap = styled.div`
       display: inline-block;
       margin-bottom: 1rem;
       font-size: 2em;
-      /* text-align: center; */
       color: ${opacity.grayDeep};
     }
     & p {
       font-weight: 700;
-      /* line-height: 2rem; */
-      /* text-align: center; */
       color: ${opacity.grayDeep};
     }
   }
@@ -41,12 +30,7 @@ export const SearchBarWrap = styled.div`
   justify-content: center;
   padding: ${WidthPd.padding};
   margin-top: 1rem;
-  /* margin-bottom: 1rem; */
-  /* margin-bottom: 3rem; */
   height: 4rem;
-  & > span {
-    /* width: 400px; */
-  }
   .filterbutton {
     width: 10rem;
     border-radius: 0.5rem;
@@ -58,7 +42,6 @@ export const SearchBarWrap = styled.div`
     border-right: 0;
     border-radius: 0.5rem 0 0 0.5rem;
     transition: all 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
-    /* margin: 0 1rem; */
     i {
       font-size: 0.8em;
       margin-right: 0.5rem;
@@ -170,9 +153,6 @@ export const SearchFilterWrap = styled.div`
       }
       .ant-radio-group {
         width: 100%;
-        /* display: flex;
-        flex-wrap: wrap;
-        align-items: center; */
         .swiper {
           .swiper-slide {
             width: auto;
@@ -237,20 +217,10 @@ export const SearchFilterWrap = styled.div`
 `;
 
 export const FilterButtonWrap = styled(motion.div)`
-  /* position: absolute;
-  top: 12rem;
-  left: 50%;
-  transform: translateX(-50%); */
-  z-index: 999;
-  max-width: 560px;
-  width: 100%;
+  /* width: 100%; */
 `;
 
 // 검색결과 감싸는 영역
 export const SearchListWrap = styled.div`
-  /* background: pink; */
   padding-top: 4rem;
-  transition: all 0.5s ease-in-out;
-  & > div {
-  }
 `;
