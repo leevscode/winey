@@ -61,6 +61,11 @@ export const putEditStore = async ({
   editStoreAddress,
   editStoreTel,
 }: IEditStore) => {
+  console.log("storeId", storeId);
+  console.log("editStoreCity", editStoreCity);
+  console.log("editStoreNm", editStoreNm);
+  console.log("editStoreAddress,", editStoreAddress);
+  console.log("editStoreTel,", editStoreTel);
   try {
     const res = await client.put(
       `/api/admin/store/{storeId}?storeId=${storeId}`,
@@ -71,7 +76,7 @@ export const putEditStore = async ({
         address: editStoreAddress,
       },
     );
-    console.log(res);
+    console.log("수정", res);
     const result = await res.data;
     console.log(result);
     return result;
@@ -80,11 +85,11 @@ export const putEditStore = async ({
   }
 };
 
-// 신규매장 삭제하기
-export const deleteStore = async (value: string) => {
+// 매장 삭제하기
+export const deleteStore = async (item: string) => {
   try {
     const res = await client.delete(
-      `/api/admin/store/{storeId}?storeId=${value}`,
+      `/api/admin/store/{storeId}?storeId=${item}`,
     );
     console.log(res);
     const result = await res.data;

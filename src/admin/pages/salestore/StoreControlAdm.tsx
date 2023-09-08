@@ -14,7 +14,9 @@ import {
 import { regionOptions } from "../member/MemberControlAdm";
 
 const StoreControlAdm = () => {
-  const [editZip, setEditZip] = useState<IEditStore | undefined>(undefined);
+  const [editZip, setEditZip] = useState<IEditStore | string>(
+    "수정된 데이터 모음",
+  );
 
   const [storeInfomation, setStoreInfomation] = useState<IStoreInfo>({
     pageableCustom: {

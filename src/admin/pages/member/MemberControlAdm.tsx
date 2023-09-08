@@ -72,7 +72,7 @@ const MemberControlAdm = () => {
 
   console.log("sortOption", sortOption);
   console.log("regionConvert", regionConvert);
-  console.log("memberList", memberList);
+  console.log("memberList111111", memberList);
   useEffect(() => {
     console.log("화면 리랜더링");
   }, [regionConvert]);
@@ -87,7 +87,7 @@ const MemberControlAdm = () => {
         sortSearch={sortSearch}
         setSortSearch={setSortSearch}
       />
-      <MemberControlListItem regionConvert={regionConvert} />
+      <MemberControlListItem regionConvert={regionConvert} memberList={memberList}/>
       <MemberControlPaginate
         memberList={memberList}
         setMemberList={setMemberList}
