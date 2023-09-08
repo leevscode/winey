@@ -6,7 +6,7 @@ import { setCookie } from "../../api/cookie";
 // const REDIRECT_URI = "http://192.168.0.144:5004/oauth/main";
 
 const KakaoLogin = () => {
-  // const [searchParams, setSearchParams] = useSearchParams();
+  // const [searchParams, setSearchParams] = useSearchParams()
   const accessToken = window.location.search.replace("?access_token=", ""); //searchParams.get("access_Token");
 
   setCookie("access_token", accessToken);
