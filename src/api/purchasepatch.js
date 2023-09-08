@@ -95,15 +95,18 @@ export const postSomeItemPurchase = async ({ selectCollect, navigate }) => {
 };
 
 // 장바구니에서 결제할때 수량변경 put
-export const patchItemQuatt = async productInfoArray => {
-  console.log("Patch editProductCollect", productInfoArray);
+export const patchItemQuatt = async ({ cartId, quantity }) => {
+  console.log("Patch cartId,", cartId);
+  console.log("Patch quantity,", quantity);
   try {
     const res = await client.put(
-      `/api/wine/productquantity?cartId=${productInfoArray.cartId}&quantity=${productInfoArray.quantity}`,
+      `/api/wine/productquantity?cartId=${cartId}&quantity=${quantity}`,
     );
-    console.log(res);
-    const data = await res.data;
-    console.log("변경성공", data);
+    console.log("res", res);
+    const result = res.data;
+    console.log("변경성공", result);
+    return result;
+    
   } catch (error) {
     console.log("변경실패", error);
   }

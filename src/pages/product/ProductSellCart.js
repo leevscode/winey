@@ -18,6 +18,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { Modal } from "antd";
 import {
   getUserStoreInfo,
+  patchItemQuatt,
   postSomeItemPurchase,
 } from "../../api/purchasepatch";
 import PurchaseListCart from "../../components/ProductSell/PurchaseListCart";
@@ -35,7 +36,9 @@ const ProductSellCart = () => {
 
   // 상품 정보 값 담기
   const [productCollect, setProductCollect] = useState(cartState);
-  const [editProductCollect, setEditProductCollect] = useState("");
+  const [editProductCollect, setEditProductCollect] = useState(
+    productCollect.cartData,
+  );
   console.log("editProductCollect", editProductCollect);
   // get한 아이템정보를 배열에 담자
   const productInfoArray = productCollect.cartData;
@@ -82,6 +85,21 @@ const ProductSellCart = () => {
     setIsPayment(1);
   };
 
+  // 수량변경
+  const editQuantity = async () => {
+    try {
+      const results = await editProductCollect.map(item => {
+        return patchItemQuatt({
+          cartId: item.cartId,
+          quantity: item.quantity,
+        });
+      });
+      return results;
+    } catch (error) {
+      console.error("수량 변경 실패:", error);
+    }
+    return;
+  };
   // 최종결제 버튼
   const handleFinalCharge = e => {
     // 에러처리
@@ -132,25 +150,29 @@ const ProductSellCart = () => {
         </ul>
       ),
       onOk() {
-        // 최종결제완료
-        // patchItemQuatt(editProductCollect);
-
-        postSomeItemPurchase({
-          editProductCollect,
-          selectCollect,
-          isPayment,
-          totalPrice,
-          navigate,
-        });
-        navigate("/ProductCompleteCart", {
-          state: {
-            editProductCollect,
-            selectCollect,
-            isPayment,
-            totalPrice,
-          },
-        });
-        console.log("결제완료");
+        try {
+          const itemEdit = editQuantity();
+          console.log("itemEdit", itemEdit);
+          if (itemEdit) {
+            postSomeItemPurchase({
+              selectCollect,
+              navigate,
+            });
+            navigate("/ProductCompleteCart", {
+              state: {
+                editProductCollect,
+                selectCollect,
+                isPayment,
+                totalPrice,
+              },
+            });
+            console.log("결제완료");
+          } else {
+            console.log("결제실패");
+          }
+        } catch (error) {
+          console.log("에러", error);
+        }
       },
       onCancel() {
         console.log("Cancel");
@@ -179,7 +201,6 @@ const ProductSellCart = () => {
           totalPrice={totalPrice}
           setTotalPrice={setTotalPrice}
           setEditProductCollect={setEditProductCollect}
-          editProductCollect={editProductCollect}
           // 상품정보 보내기
           productInfoArray={productInfoArray}
         />

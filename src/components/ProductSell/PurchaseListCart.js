@@ -14,7 +14,6 @@ const PurchaseListCart = ({
   productInfoArray,
   setTotalPrice,
   setEditProductCollect,
-  editProductCollect,
 }) => {
   // 이미지 없을 때 error처리
   const onImgError = e => {
@@ -32,10 +31,7 @@ const PurchaseListCart = ({
     setItemCount(prevCounts => {
       return prevCounts.map((count, index) => {
         if (productInfoArray[index].productId === option.productId) {
-          patchItemQuatt(productInfoArray[index]);
-
           setMaxItem("");
-
           // 값이 0보다 작으면 0으로 제한
           return Math.max(parseInt(count) - 1, 1);
         } else {
@@ -49,8 +45,6 @@ const PurchaseListCart = ({
     setItemCount(prevCounts => {
       return prevCounts.map((count, index) => {
         if (productInfoArray[index].productId === option.productId) {
-          patchItemQuatt(productInfoArray[index]);
-
           if (count == 5) {
             setMaxItem("최대 구매수량은 5개입니다");
           }
@@ -73,7 +67,7 @@ const PurchaseListCart = ({
 
   useEffect(() => {
     setTotalPrice(calcTotalSum);
-  }, [calcTotalSum, patchItemQuatt()]);
+  }, [calcTotalSum]);
 
   useEffect(() => {
     const updatedProductCollect = productInfoArray.map((option, index) => ({
