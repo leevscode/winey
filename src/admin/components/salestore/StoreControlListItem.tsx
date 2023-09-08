@@ -10,6 +10,7 @@ import { Form, Input, Modal, Popover, Radio } from "antd";
 import { regionOptions } from "../../pages/member/MemberControlAdm";
 import { StoreAddressModal } from "../../style/AdminStoreStyle";
 import DaumPostcodeEmbed from "react-daum-postcode";
+import { IStoreDetailList } from "../../interface/StoreInterface";
 
 const StoreControlListItem = ({ item, setEditZip }: any) => {
   // 수정관련 state
@@ -37,6 +38,7 @@ const StoreControlListItem = ({ item, setEditZip }: any) => {
   const handleCity = (e: any) => {
     const CityNum = e.target.value;
     console.log("CityNum", CityNum);
+    setEditZip(CityNum);
     setEditStoreCity(CityNum);
     const convert = regionOptions.map(item => {
       if (CityNum === item.regionNmId) {
@@ -55,12 +57,14 @@ const StoreControlListItem = ({ item, setEditZip }: any) => {
   //수정 (매장명)
   const handleNmEditChange: React.ChangeEventHandler<HTMLInputElement> = e => {
     setEditStoreNm(e.target.value);
+    setEditZip(e.target.value);
   };
   //수정 (매장주소)
   const handleAddressEditChange: React.ChangeEventHandler<
     HTMLInputElement
   > = e => {
     setEditStoreAddress(e.target.value);
+    setEditZip(e.target.value);
   };
   // 매장주소 api
   const [openPostcode, setOpenPostcode] = useState<boolean>(false);
@@ -99,17 +103,13 @@ const StoreControlListItem = ({ item, setEditZip }: any) => {
       const temp = await setCalendarLocation(data.address);
       setEditStoreAddress(data.address);
       setOpenPostcode(false);
+      Modal.destroyAll(); // 모든 모달 닫기
     },
   };
 
   // 수정 (매장연락처)
   const handleTelEditChange: React.ChangeEventHandler<HTMLInputElement> = e => {
     setEditStoreTel(e.target.value);
-  };
-
-  // 매장삭제
-  const handleStoreDel: React.MouseEventHandler<HTMLButtonElement> = e => {
-    deleteStore(e.currentTarget.value);
   };
 
   // 매장정보 수정창으로 전환
@@ -125,9 +125,9 @@ const StoreControlListItem = ({ item, setEditZip }: any) => {
 
     // 예외처리하기
     const numberReg: any = /^\d{2,3}-\d{3,4}-\d{4}$/;
-    if (e != null) {
-      setError("");
-    }
+    // if (e != null) {
+    //   setError("");
+    // }
     if (editStoreNm === undefined || editStoreNm === "") {
       setError("지점이름을 입력해 주세요.");
       return;
@@ -136,35 +136,53 @@ const StoreControlListItem = ({ item, setEditZip }: any) => {
       setError("지점주소를 선택해 주세요.");
       return;
     }
-    if (editStoreTel === numberReg) {
-      setError("올바른 형식으로 입력하세요 (ex.000-000-0000)");
-      return;
-    }
     if (editStoreTel === "") {
       setError("지점 연락처를 입력하세요.");
       return;
     }
-    try {
-      setEditZip({
-        editStoreCity,
-        editStoreNm,
-        editStoreAddress,
-        editStoreTel,
-      });
-      const storeId: string = e.currentTarget.value;
-      const putInfo = await putEditStore({
-        storeId,
-        editStoreCity,
-        editStoreNm,
-        editStoreAddress,
-        editStoreTel,
-      });
-      setEdit(!edit);
-      return;
-    } catch (error) {
-      setError("네트워크 오류 입니다");
+    if (!numberReg.test(editStoreTel)) {
+      setError("올바른 형식으로 입력하세요 (ex.000-000-0000)");
       return;
     }
+    Modal.confirm({
+      okText: "예",
+      cancelText: "아니오",
+      wrapClassName: "info-modal-wrap notice-modal store-address-modal ",
+      maskClosable: true,
+      content: (
+        <ul>
+          <li>매장정보를 수정하시겠습니까?</li>
+        </ul>
+      ),
+      async onOk() {
+        try {
+          setError("");
+          setEditZip({
+            editStoreCity,
+            editStoreNm,
+            editStoreAddress,
+            editStoreTel,
+          });
+          const storeId: string = e.currentTarget.value;
+          const putInfo = await putEditStore({
+            storeId,
+            editStoreCity,
+            editStoreNm,
+            editStoreAddress,
+            editStoreTel,
+          });
+          setEdit(!edit);
+          return;
+        }
+        catch (error) {
+          setError("네트워크 오류 입니다");
+          return;
+        }
+      },
+      onCancel() {
+        console.log("CANCEL");
+      },
+    });
   };
   // 수정 취소하기
   const handleEditCancel = () => {
@@ -172,13 +190,31 @@ const StoreControlListItem = ({ item, setEditZip }: any) => {
     console.log("cancel");
   };
 
-  const content = <div>{error ? error : ""}</div>;
-
-  // 화면갱신
-  useEffect(() => {
-    console.log("화면갱신");
-  }, [editStoreCityKor, editStoreNm, editStoreAddress, editStoreTel]);
-
+  // 매장삭제
+  const handleStoreDel = (item: any) => {
+    Modal.confirm({
+      okText: "예",
+      cancelText: "아니오",
+      wrapClassName: "info-modal-wrap notice-modal store-address-modal ",
+      maskClosable: true,
+      content: (
+        <ul>
+          <li>매장정보를 삭제하시겠습니까?</li>
+          <li>삭제된 정보는 복원이 불가능합니다.</li>
+        </ul>
+      ),
+      onOk() {
+        deleteStore(item.storeId);
+        setEditZip("");
+        console.log("OK");
+      },
+      onCancel() {
+        console.log("CANCEL");
+      },
+    });
+  };
+  const content = <div>{error}</div>;
+  console.log("error", error);
   if (edit) {
     // 수정중
     return (
@@ -225,11 +261,17 @@ const StoreControlListItem = ({ item, setEditZip }: any) => {
           />
         </li>
         <li>
-          <Popover content={content} trigger="click">
+          {error !== "" ? (
             <DetailBt value={item.storeId} onClick={e => handleEditSave(e)}>
               저장
             </DetailBt>
-          </Popover>
+          ) : (
+            <Popover content={content} trigger="click">
+              <DetailBt value={item.storeId} onClick={e => handleEditSave(e)}>
+                저장
+              </DetailBt>
+            </Popover>
+          )}
         </li>
         <li>
           <MemberOutBt onClick={handleEditCancel}>취소</MemberOutBt>
@@ -248,7 +290,10 @@ const StoreControlListItem = ({ item, setEditZip }: any) => {
           <DetailBt onClick={handleStoreEdit}>수정</DetailBt>
         </li>
         <li>
-          <MemberOutBt value={item.storeId} onClick={handleStoreDel}>
+          <MemberOutBt
+            // value={item.storeId}
+            onClick={() => handleStoreDel(item)}
+          >
             삭제
           </MemberOutBt>
         </li>

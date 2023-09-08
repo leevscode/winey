@@ -4,7 +4,7 @@
     깃허브 : https://github.com/hyemdev
 */
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   TableLayoutContents,
   TableLayoutTitle,
@@ -12,14 +12,20 @@ import {
   TableWrap,
 } from "../../style/AdminLayoutStyle";
 import { useNavigate, useOutletContext } from "react-router";
-import { IMemberListUser } from "../../interface/MemberInterface";
+import {
+  IMemControl,
+  IMemberListUser,
+  IUserDetail,
+} from "../../interface/MemberInterface";
 import { Modal } from "antd";
 import { putMemberOut } from "../../api/patchAdmMember";
 
 const MemberControlListItem = ({
   regionConvert,
+  memberList,
 }: {
   regionConvert: IMemberListUser[];
+  memberList: IMemControl;
 }) => {
   const navigate = useNavigate();
   const { listPathName } = useOutletContext() as { listPathName: string };
@@ -58,7 +64,9 @@ const MemberControlListItem = ({
       },
     });
   };
-
+  useEffect(() => {
+    console.log("화면갱신");
+  }, [memberList]);
   return (
     <>
       <TableWrap>

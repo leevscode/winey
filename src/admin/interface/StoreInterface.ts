@@ -17,7 +17,8 @@ export interface IStoreDetailList {
   nm: string;
   tel: string;
   address: string;
-  storeId?: string;
+  addressSub?: string | undefined;
+  storeId?: string | undefined;
   textRegion?: string;
   statusText?: string;
 }
@@ -26,12 +27,13 @@ export interface IEditStore {
   editStoreCity: number;
   editStoreNm: string;
   editStoreAddress: string;
+  editStoreAddressSub?: string;
   editStoreTel: string;
 }
 export interface IStoreInfoState {
   storeInfomation: IStoreInfo;
   setStoreInfomation: React.Dispatch<React.SetStateAction<IStoreInfo>>;
-  editZip?: IEditStore;
+  editZip?: IEditStore | string;
 }
 export interface INewStoreState {
   newStoreInfo: IStoreDetailList;

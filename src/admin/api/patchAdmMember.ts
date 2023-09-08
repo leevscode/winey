@@ -78,6 +78,9 @@ export const putMemberOut = async (item: number) => {
     console.log("res", res);
     const result = await res.data;
     console.log("result", result);
+    // if (res.status === 200) {
+    //   console.log("");
+    // }
     return result;
   } catch (error) {
     console.log(error);
