@@ -221,7 +221,7 @@ const Join = () => {
                 onChange={e => handleEmailValue(e)}
                 size="large"
                 // 글자수 제한
-                maxLength={20}
+                maxLength={40}
                 placeholder="아이디를 입력해 주세요."
               />
             </Form.Item>
