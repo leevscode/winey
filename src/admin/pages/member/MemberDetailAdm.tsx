@@ -11,8 +11,6 @@ import MemberDetailListItem from "../../components/member/MemberDetailListItem";
 import {
   IMemberSortOption,
   IUserDetail,
-  IUserOrderList,
-  IUserOrderListUpper,
 } from "../../interface/MemberInterface";
 import MemberDetailUpper from "../../components/member/MemberDetailUpper";
 import MemberDetailPaginate from "../../components/member/MemberDetailPaginate";
@@ -28,7 +26,7 @@ const MemberDetailAdm = () => {
     detailInitialSortOption,
   );
 
-  const [clickUserId, setClickUserId] = useState<number | undefined>(0);
+  const [clickUserId, setClickUserId] = useState<number | undefined>(undefined);
   const [userInfomation, setUserInfomation] = useState<IUserDetail>({
     pageableCustom: {
       page: 1,
@@ -60,7 +58,7 @@ const MemberDetailAdm = () => {
         <MemberDetailUpper userInfomation={userInfomation.userInfo} />
       )}
       <MemberDetailSort
-        userInfomation={userInfomation.pageableCustom}
+        userInfomation={userInfomation}
         setSortOption={setSortOption}
       />
       {userInfomation.userOrderList && (
