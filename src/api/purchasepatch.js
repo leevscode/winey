@@ -6,11 +6,12 @@
 
 import { Modal } from "antd";
 import { client } from "./client";
+import axios from "axios";
 
 // 유저 매장정보 get
 export const getUserStoreInfo = async setUserStore => {
   try {
-    const res = await client.get("/api/payment/pickregion");
+    const res = await axios.get("/api/payment/pickregion");
     const result = await res.data;
     setUserStore(result);
     console.log("result", result);
@@ -23,7 +24,7 @@ export const getUserStoreInfo = async setUserStore => {
 // 구입상품 디테일 정보 get
 export const getBuyProductDetail = async (setProductCollect, productId) => {
   try {
-    const res = await client.get(`/api/detail/${productId}`);
+    const res = await axios.get(`/api/detail/${productId}`);
     const result = res.data;
     console.log("result", result);
     setProductCollect(result);
@@ -43,7 +44,7 @@ export const postOneItemPurchase = async ({
   isell,
 }) => {
   try {
-    const res = await client.post("/api/payment/eachpayment", {
+    const res = await axios.post("/api/payment/eachpayment", {
       productId: productCollect.wineDetailVo.productId, // 상품 pk
       storeId: selectCollect.pickUpSpot.storeId, //지점 pk
       // salePrice: totalPrice, //총 금액,
@@ -72,7 +73,7 @@ export const postOneItemPurchase = async ({
 // 장바구니에서 결제하기 post
 export const postSomeItemPurchase = async ({ selectCollect, navigate }) => {
   try {
-    const res = await client.post("/api/payment/cartpayment", {
+    const res = await axios.post("/api/payment/cartpayment", {
       storeId: selectCollect.pickUpSpot.storeId,
       pickupTime: selectCollect.changeDate,
     });
@@ -99,7 +100,7 @@ export const patchItemQuatt = async ({ cartId, quantity }) => {
   console.log("Patch cartId,", cartId);
   console.log("Patch quantity,", quantity);
   try {
-    const res = await client.put(
+    const res = await axios.put(
       `/api/wine/productquantity?cartId=${cartId}&quantity=${quantity}`,
     );
     console.log("res", res);

@@ -3,11 +3,12 @@
     노션 : https://www.notion.so/leevscode/leevscode-5223e3d332604844a255a0c63113a284
     깃허브 : https://github.com/leevscode
 */
+import axios from "axios";
 import { client } from "./client";
 
 export const getSellListData = async () => {
   try {
-    const response = await client.get(`/api/orderlist/user`);
+    const response = await axios.get(`/api/orderlist/user`);
     const sellListData = response.data;
 
     // 데이터를 순서 정렬
@@ -25,7 +26,7 @@ export const getSellListData = async () => {
 // 주문 내역 취소
 export const cancelSellListData = async cancelSellListData => {
   try {
-    const res = await client.put(
+    const res = await axios.put(
       `/api/orderlist/cancel?orderId=${cancelSellListData}`,
     );
     // console.log("res", res);
@@ -40,7 +41,7 @@ export const cancelSellListData = async cancelSellListData => {
 // 주문 내역 픽업완료
 export const finishSellListData = async finishSellListData => {
   try {
-    const res = await client.put(
+    const res = await axios.put(
       `/api/orderlist/pickup-finish?orderId=${finishSellListData}`,
     );
     // console.log("res", res);
@@ -55,7 +56,7 @@ export const finishSellListData = async finishSellListData => {
 // 주문 상세 내역
 export const getdetailData = async numberValue => {
   try {
-    const response = await client.get(
+    const response = await axios.get(
       `/api/orderlist/detail?orderId=${numberValue}`,
     );
     const detailData = response.data;
@@ -69,7 +70,7 @@ export const getdetailData = async numberValue => {
 // 리뷰 등록
 export const submitReview = async (orderDetailId, reviewLevel, userId) => {
   try {
-    const res = await client.post(`/api/payment/userreview`, {
+    const res = await axios.post(`/api/payment/userreview`, {
       orderDetailId,
       reviewLevel,
       userId,

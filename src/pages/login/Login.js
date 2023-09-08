@@ -140,7 +140,7 @@ const Login = () => {
               <Input
                 prefix={<UserOutlined className="site-form-item-icon" />}
                 // 글자수 제한
-                maxLength={20}
+                maxLength={40}
                 size="large"
                 placeholder="아이디를 입력해 주세요. (ex. example@example.com)"
                 onChange={e => handleLoginID(e)}

@@ -6,11 +6,12 @@
 import { Modal } from "antd";
 import { totalItem } from "../reducers/cartSlice";
 import { client } from "./client";
+import axios from "axios";
 
 // 장바구니 출력
 export const fetchCartData = async () => {
   try {
-    const response = await client.get("/api/wine/filledcart");
+    const response = await axios.get("/api/wine/filledcart");
     const cartData = await response.data;
     // console.log(cartData);
     // const cartLength = await cartData.length;
@@ -26,7 +27,7 @@ export const fetchCartData = async () => {
 // 장바구니 갯수 출력
 export const cartLengthData = async dispatch => {
   try {
-    const res = await client.get("/api/wine/filledcart");
+    const res = await axios.get("/api/wine/filledcart");
     const result = await res.data;
     const cartLength = await result.length;
     // console.log("장바구니 갯수 출력", cartLength);
@@ -40,7 +41,7 @@ export const cartLengthData = async dispatch => {
 // 상품을 장바구니에서 삭제
 export const removeCarts = async _removeCart => {
   try {
-    const response = await client.delete("/api/wine/cartdelete", {
+    const response = await axios.delete("/api/wine/cartdelete", {
       data: {
         cartId: _removeCart,
       },
@@ -57,7 +58,7 @@ export const removeCarts = async _removeCart => {
 // 장바구니 추가 POST
 export const addCart = async _productId => {
   try {
-    const res = await client.post("/api/wine/cartadd", {
+    const res = await axios.post("/api/wine/cartadd", {
       quantity: 1,
       productId: _productId,
     });
