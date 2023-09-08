@@ -3,6 +3,7 @@
     노션 : https://hyemdev.notion.site/hyemdev/hyem-s-dev-STUDY-75ffe819c7534a049b59871e6fe17dd4
     깃허브 : https://github.com/hyemdev
 */
+import axios from "axios";
 import { client } from "../../api/client";
 import { IEditStore, IStoreInfo } from "../interface/StoreInterface";
 
@@ -38,7 +39,7 @@ export const postNewStore = async (newStoreInfo: {
 }) => {
   console.log("newStoreInfo", newStoreInfo);
   try {
-    const res = await client.post("/api/admin/store", {
+    const res = await axios.post("/api/admin/store", {
       regionNmId: newStoreInfo.regionNmId,
       nm: newStoreInfo.nm,
       tel: newStoreInfo.tel,
@@ -67,7 +68,7 @@ export const putEditStore = async ({
   console.log("editStoreAddress,", editStoreAddress);
   console.log("editStoreTel,", editStoreTel);
   try {
-    const res = await client.put(
+    const res = await axios.put(
       `/api/admin/store/{storeId}?storeId=${storeId}`,
       {
         regionNmId: editStoreCity,
@@ -88,7 +89,7 @@ export const putEditStore = async ({
 // 매장 삭제하기
 export const deleteStore = async (item: string) => {
   try {
-    const res = await client.delete(
+    const res = await axios.delete(
       `/api/admin/store/{storeId}?storeId=${item}`,
     );
     console.log(res);

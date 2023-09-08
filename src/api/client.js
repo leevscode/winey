@@ -84,12 +84,14 @@ export const fetchLogin = async (userid, password) => {
       httpOnly: true,
     });
     console.log("res", res);
+    console.log("result", result);
     return result;
   } catch (error) {
     console.log("login error", error.response);
     return error;
   }
 };
+
 // 카카오 set 하기
 export const fetchKKOLogin = async accessToken => {
   try {

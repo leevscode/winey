@@ -22,7 +22,7 @@ export const getAdmProductList = async (
   _textSearch: string | null,
 ) => {
   try {
-    const res = await client.get(
+    const res = await axios.get(
       `/api/admin/product/list?page=${_page}&size=10&sort=${_type}%2C${_sort}${
         _textSearch !== "" ? `&str=${_textSearch}` : ""
       }`,
@@ -120,7 +120,7 @@ export const getAdmProductDetail = async (
 // 상품 등록 PUT
 export const getAdmProductPut = async (_data: any) => {
   try {
-    const res = await client.put("/api/admin", _data, {
+    const res = await axios.put("/api/admin", _data, {
       headers: {
         "Content-Type": "multipart/form-data",
       },

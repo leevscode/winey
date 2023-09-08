@@ -8,25 +8,25 @@ import { getUser } from "../reducers/userSlice";
 import axios from "axios";
 
 // 로그인
-export const postLogin = async (userid, password) => {
-  try {
-    const res = await axios.post(`/sign-api/sign-in`, {
-      email: userid,
-      upw: password,
-    });
-    console.log("res", res);
-    const result = res.data;
-    console.log("Login Result", result);
-    return result;
-  } catch (error) {
-    console.log(error);
-    return error;
-  }
-};
+// export const postLogin = async (userid, password) => {
+//   try {
+//     const res = await axios.post(`/sign-api/sign-in`, {
+//       email: userid,
+//       upw: password,
+//     });
+//     console.log("res", res);
+//     const result = res.data;
+//     console.log("Login Result", result);
+//     return result;
+//   } catch (error) {
+//     console.log(error);
+//     return error;
+//   }
+// };
 // 회원가입
 export const postUserJoin = async userInfo => {
   try {
-    const res = await client.post("/sign-api/sign-up", {
+    const res = await axios.post("/sign-api/sign-up", {
       email: userInfo.email,
       upw: userInfo.password,
       // role: "USER",
@@ -46,7 +46,7 @@ export const postUserJoin = async userInfo => {
 export const getMemberInfo = () => async dispatch => {
   try {
     // const res = await client.get("/api/mypage/user-info");
-    const res = await client.get("/api/mypage/userinfo");
+    const res = await axios.get("/api/mypage/userinfo");
     const result = await res.data;
     console.log("회원정보 get result", result);
     dispatch(getUser(result));
@@ -60,7 +60,7 @@ export const getMemberInfo = () => async dispatch => {
 export const patchMemberInfo = async editUserInfo => {
   try {
     // const res = await client.patch("/api/mypage/user-correction", {
-    const res = await client.put("/api/mypage/upduser", {
+    const res = await axios.put("/api/mypage/upduser", {
       // pw: editUserInfo.editpassword,
       unm: editUserInfo.editUserName,
       tel: editUserInfo.editUserTel,
@@ -78,7 +78,7 @@ export const patchMemberInfo = async editUserInfo => {
 export const deleteMember = async () => {
   try {
     // const res = await client.delete("/api/mypage/user-secession");
-    const res = await client.put("/api/mypage/delUser");
+    const res = await axios.put("/api/mypage/delUser");
     console.log("res", res);
     const result = await res.data;
     console.log("회원삭제성공", result);
@@ -90,7 +90,7 @@ export const deleteMember = async () => {
 // 로그아웃
 export const getLogout = async () => {
   try {
-    const res = await client.get("/sign-api/logout");
+    const res = await axios.get("/sign-api/logout");
     // console.log(res);
     const result = await res.data;
     // console.log(result);
@@ -103,7 +103,7 @@ export const getLogout = async () => {
 // 인증메일발송
 export const postCertifyMail = async inputEmail => {
   try {
-    const res = await client.post(`/api/login/mailConfirm?email=${inputEmail}`);
+    const res = await axios.post(`/api/login/mailConfirm?email=${inputEmail}`);
     // console.log(res);
     const result = await res.data;
     // console.log(result);
@@ -115,7 +115,7 @@ export const postCertifyMail = async inputEmail => {
 // 인증번호 확인하기
 export const postConfirmCode = async inputCode => {
   try {
-    const res = await client.post(`/api/login/codeConfirm?key=${inputCode}`);
+    const res = await axios.post(`/api/login/codeConfirm?key=${inputCode}`);
     console.log(res);
     const result = await res.data;
     console.log(result);

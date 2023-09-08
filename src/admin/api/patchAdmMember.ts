@@ -5,6 +5,7 @@
 */
 import { IMemControl, IUserDetail } from "../interface/MemberInterface";
 import { client } from "../../api/client";
+import axios from "axios";
 
 // 멤버리스트 get
 export const getMemberList = async (
@@ -74,7 +75,7 @@ export const getMemberDetail = async (
 export const putMemberOut = async (item: number) => {
   console.log("patch item", item);
   try {
-    const res = await client.put(`/api/admin/withdrawal?userId=${item}`);
+    const res = await axios.put(`/api/admin/withdrawal?userId=${item}`);
     console.log("res", res);
     const result = await res.data;
     console.log("result", result);
