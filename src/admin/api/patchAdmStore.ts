@@ -4,7 +4,11 @@
     깃허브 : https://github.com/hyemdev
 */
 import { client } from "../../api/client";
-import { IEditStore, IStoreDetailList, IStoreInfo } from "../interface/StoreInterface";
+import {
+  IEditStore,
+  IStoreDetailList,
+  IStoreInfo,
+} from "../interface/StoreInterface";
 
 // 매장정보 불러오기
 export const getStoreList = async (
@@ -16,7 +20,7 @@ export const getStoreList = async (
 ) => {
   try {
     const res = await client.get(
-      `/api/admin/store?page=${paginate.page}&row=${paginate.row}`,
+      `/api/admin/store?page=${paginate.page - 1}&size=${paginate.row}`,
     );
     console.log("res", res);
     const result = await res.data;

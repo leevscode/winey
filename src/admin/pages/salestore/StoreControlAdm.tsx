@@ -7,30 +7,26 @@ import React, { useState } from "react";
 import StoreControlList from "../../components/salestore/StoreControlList";
 import StoreControlPaginate from "../../components/salestore/StoreControlPaginate";
 import {
+  IEditStore,
   IStoreDetailList,
   IStoreInfo,
 } from "../../interface/StoreInterface";
 import { regionOptions } from "../member/MemberControlAdm";
 
 const StoreControlAdm = () => {
+  const [editZip, setEditZip] = useState<IEditStore | undefined>(undefined);
+
   const [storeInfomation, setStoreInfomation] = useState<IStoreInfo>({
-    page: {
+    pageableCustom: {
       page: 1,
       row: 1,
-      startIdx: 1,
-      totalRecordCount: 1,
-      totalPage: 1,
-      pageSize: 1,
-      prev: false,
-      next: false,
-      startPage: 1,
-      endPage: 1,
+      totalElements: 1,
     },
-    list: [] as IStoreDetailList[],
+    content: [] as IStoreDetailList[],
   });
   console.log("storeInfomation", storeInfomation);
 
-  const regionConvert: Array<IStoreDetailList> = storeInfomation.list.map(
+  const regionConvert: Array<IStoreDetailList> = storeInfomation.content?.map(
     item => {
       const changeList: {
         regionNmId: number;
@@ -46,8 +42,9 @@ const StoreControlAdm = () => {
   );
   return (
     <div>
-      <StoreControlList regionConvert={regionConvert} />
+      <StoreControlList regionConvert={regionConvert} setEditZip={setEditZip} />
       <StoreControlPaginate
+        editZip={editZip}
         storeInfomation={storeInfomation}
         setStoreInfomation={setStoreInfomation}
       />

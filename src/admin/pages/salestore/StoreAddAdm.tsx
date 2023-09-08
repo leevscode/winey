@@ -4,7 +4,7 @@
     깃허브 : https://github.com/hyemdev
 */
 import { Form, Input, Modal, Radio, RadioChangeEvent } from "antd";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { regionOptions } from "../member/MemberControlAdm";
 import { StoreAddWrap, StoreAddressModal } from "../../style/AdminStoreStyle";
 import { postNewStore } from "../../api/patchAdmStore";
@@ -70,7 +70,7 @@ const StoreAddAdm: React.FC = () => {
           <StoreAddressModal>
             <DaumPostcode
               onComplete={handleAddress.selectAddress}
-              autoClose={false}
+              autoClose={true}
             />
           </StoreAddressModal>
         ),
@@ -142,6 +142,9 @@ const StoreAddAdm: React.FC = () => {
   const onFinishFailed = () => {
     console.log("전송실패");
   };
+  useEffect(() => {
+    console.log("화면랜더링")
+  }, [calendarlocation]);
 
   return (
     <StoreAddWrap>
@@ -195,7 +198,7 @@ const StoreAddAdm: React.FC = () => {
                 ]}
               >
                 <Input
-                  placeholder="매장 이름을 입력하세요."
+                  placeholder="매장 이름 입력하세요."
                   onChange={data => handleStoreName(data)}
                 />
               </Form.Item>

@@ -7,11 +7,13 @@ import { client } from "./client";
 
 export const getSellListData = async () => {
   try {
-    const response = await client.get(`/api/orderList/user`);
+    const response = await client.get(`/api/orderlist/user`);
     const sellListData = response.data;
 
     // 데이터를 순서 정렬
-    const sortedSellListData = sellListData.sort((a, b) => a.orderNumber - b.orderNumber);
+    const sortedSellListData = sellListData.sort(
+      (a, b) => a.orderNumber - b.orderNumber,
+    );
 
     return sortedSellListData;
   } catch (error) {
@@ -20,12 +22,11 @@ export const getSellListData = async () => {
   }
 };
 
-
 // 주문 내역 취소
 export const cancelSellListData = async cancelSellListData => {
   try {
     const res = await client.put(
-      `/api/orderList/cancel?orderId=${cancelSellListData}`,
+      `/api/orderlist/cancel?orderId=${cancelSellListData}`,
     );
     // console.log("res", res);
     const result = await res.data;
@@ -40,7 +41,7 @@ export const cancelSellListData = async cancelSellListData => {
 export const finishSellListData = async finishSellListData => {
   try {
     const res = await client.put(
-      `/api/orderList/pickupFinish?orderId=${finishSellListData}`,
+      `/api/orderlist/pickup-finish?orderId=${finishSellListData}`,
     );
     // console.log("res", res);
     const result = await res.data;
@@ -55,7 +56,7 @@ export const finishSellListData = async finishSellListData => {
 export const getdetailData = async numberValue => {
   try {
     const response = await client.get(
-      `/api/orderList/detail?orderId=${numberValue}`,
+      `/api/orderlist/detail?orderId=${numberValue}`,
     );
     const detailData = response.data;
     return detailData;

@@ -51,10 +51,10 @@ export interface IUserIdState {
 }
 
 export interface IUserDetail {
-  page: {
+  pageableCustom: {
     page: number;
     row: number;
-    totalRecordCount: number;
+    totalElements: number;
   };
   userInfo: {
     userId: number;
@@ -64,10 +64,24 @@ export interface IUserDetail {
     sumOrderPrice: number;
     orderCount: number;
   };
-  userOrderList: IUserOrderList[];
+  userOrderList?: IUserOrderListUpper;
   clickUserId?: number;
 }
-
+export interface IUserOrderListUpper {
+  content: [
+    {
+      orderId: number;
+      orderDate: string;
+      nmKor: string;
+      price: number;
+      storeNm: string;
+      count: number;
+      orderStatus: number;
+      textOrder?: string;
+      // content?: IUserOrderListUpper;
+    },
+  ];
+}
 export interface IUserOrderList {
   orderId: number;
   orderDate: string;
@@ -77,16 +91,10 @@ export interface IUserOrderList {
   count: number;
   orderStatus: number;
   textOrder?: string;
+  content?: IUserOrderListUpper;
 }
+
 export interface IMemberSortOption {
   type: string;
   sort: string;
 }
-// export interface ITextSearchState {
-//   textSearch: string;
-//   setTextSearch?: React.Dispatch<React.SetStateAction<string>>;
-// }
-// export interface ISortSearchState {
-//   sortSearch: string;
-//   setSortSearch?: React.Dispatch<React.SetStateAction<string>>;
-// }

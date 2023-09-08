@@ -5,19 +5,12 @@
 */
 
 export interface IStoreInfo {
-  page: {
+  pageableCustom: {
     page: number;
     row: number;
-    startIdx: number;
-    totalRecordCount: number;
-    totalPage: number;
-    pageSize: number;
-    prev: boolean;
-    next: boolean;
-    startPage: number;
-    endPage: number;
+    totalElements: number;
   };
-  list: IStoreDetailList[];
+  content: IStoreDetailList[];
 }
 export interface IStoreDetailList {
   regionNmId: number;
@@ -38,6 +31,7 @@ export interface IEditStore {
 export interface IStoreInfoState {
   storeInfomation: IStoreInfo;
   setStoreInfomation: React.Dispatch<React.SetStateAction<IStoreInfo>>;
+  editZip?: IEditStore;
 }
 export interface INewStoreState {
   newStoreInfo: IStoreDetailList;

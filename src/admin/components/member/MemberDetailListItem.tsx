@@ -11,7 +11,10 @@ import {
   TableVertical,
   TableWrap,
 } from "../../style/AdminLayoutStyle";
-import { IUserOrderList } from "../../interface/MemberInterface";
+import {
+  IUserOrderList,
+  IUserOrderListUpper,
+} from "../../interface/MemberInterface";
 import { MemberDetailWrap } from "../../style/AdminMemberStyle";
 import { useOutletContext } from "react-router";
 
@@ -32,18 +35,20 @@ const MemberDetailListItem = ({
     { value: 5, label: "픽업완료" },
     { value: 6, label: "주문취소" },
   ];
-  const orderConvert: Array<IUserOrderList> = userInfomation.map(item => {
-    const changeList: {
-      label: string;
-      value: number;
-    }[] = orderOption.filter(option => item.orderStatus === option.value);
-    if (changeList.length > 0) {
-      return { ...item, textOrder: changeList[0].label };
-    }
-    return item;
-  });
+  const orderConvert: IUserOrderList[] = userInfomation?.map(
+    (item: IUserOrderList) => {
+      const changeList: {
+        label: string;
+        value: number;
+      }[] = orderOption?.filter(option => item.orderStatus === option.value);
+      if (changeList.length > 0) {
+        return { ...item, textOrder: changeList[0].label };
+      }
+      return item;
+    },
+  );
 
-  console.log("userInfomation111", userInfomation);
+  console.log("userInfomationQQ", userInfomation);
   console.log("orderConvert", orderConvert);
   return (
     <MemberDetailWrap>
@@ -63,8 +68,8 @@ const MemberDetailListItem = ({
             <li>주문상태</li>
             <li>주문수량</li>
           </TableLayoutTitle>
-          {orderConvert.length !== 0 ? (
-            orderConvert.map(item => (
+          {orderConvert?.length !== 0 ? (
+            orderConvert?.map(item => (
               <TableLayoutContents
                 listPathName={listPathName}
                 key={item.orderId}
@@ -73,7 +78,7 @@ const MemberDetailListItem = ({
                 }}
               >
                 <li>{item.orderId}</li>
-                <li>{item.orderDate}</li>
+                <li>{item.orderDate?.slice(0, 10)}</li>
                 <li>{item.nmKor}건</li>
                 <li>{item.price.toLocaleString()} 원</li>
                 <li>이마트 {item.storeNm}</li>

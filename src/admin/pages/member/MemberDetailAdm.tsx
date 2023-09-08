@@ -11,7 +11,6 @@ import MemberDetailListItem from "../../components/member/MemberDetailListItem";
 import {
   IMemberSortOption,
   IUserDetail,
-  IUserOrderList,
 } from "../../interface/MemberInterface";
 import MemberDetailUpper from "../../components/member/MemberDetailUpper";
 import MemberDetailPaginate from "../../components/member/MemberDetailPaginate";
@@ -23,15 +22,16 @@ const MemberDetailAdm = () => {
   const location = useLocation();
 
   // 정렬 state
-  const [sortOption, setSortOption] =
-    useState<IMemberSortOption>(detailInitialSortOption);
+  const [sortOption, setSortOption] = useState<IMemberSortOption>(
+    detailInitialSortOption,
+  );
 
   const [clickUserId, setClickUserId] = useState<number | undefined>(undefined);
   const [userInfomation, setUserInfomation] = useState<IUserDetail>({
-    page: {
+    pageableCustom: {
       page: 1,
       row: 1,
-      totalRecordCount: 1,
+      totalElements: 1,
     },
     userInfo: {
       userId: 0,
@@ -41,7 +41,7 @@ const MemberDetailAdm = () => {
       orderCount: 0,
     },
     clickUserId: 1,
-    userOrderList: [] as IUserOrderList[],
+    // userOrderList: [] as IUserOrderListUpper[],
   });
 
   console.log("location.state", location.state);
@@ -58,11 +58,13 @@ const MemberDetailAdm = () => {
         <MemberDetailUpper userInfomation={userInfomation.userInfo} />
       )}
       <MemberDetailSort
-        userInfomation={userInfomation.page}
+        userInfomation={userInfomation}
         setSortOption={setSortOption}
       />
       {userInfomation.userOrderList && (
-        <MemberDetailListItem userInfomation={userInfomation.userOrderList} />
+        <MemberDetailListItem
+          userInfomation={userInfomation.userOrderList.content}
+        />
       )}
       {clickUserId && (
         <MemberDetailPaginate
