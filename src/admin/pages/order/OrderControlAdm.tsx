@@ -14,13 +14,13 @@ import {
   TableLayoutTitle,
   TableVertical,
 } from "../../style/AdminLayoutStyle";
-import { client } from "../../../api/client";
 import {
   ControllSortOption,
   fetchData,
   fetchData2,
 } from "../../interface/ControlInterface";
 import { AdmProductWrap } from "../../style/product/AdminProductStyle";
+import axios from "axios";
 
 const OrderControlAdm = () => {
   const [orderControl, setOrderControl] = useState<Array<fetchData>>([]);
@@ -112,9 +112,11 @@ const OrderControlAdm = () => {
         </ul>
       ),
       onOk: async () => {
+        console.log(item.orderId);
+        console.log(newStatusValue);
         try {
           // 데이터를 서버로 전송
-          await client.put(`/api/admin/order`, {
+          await axios.put(`/api/admin/order`, {
             orderId: item.orderId,
             orderStatus: newStatusValue,
           });

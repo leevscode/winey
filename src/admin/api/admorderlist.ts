@@ -4,7 +4,6 @@
     깃허브 : https://github.com/leevscode
 */
 import axios from "axios";
-import { client } from "../../api/client";
 
 // 주문 내역 출력
 export const AdmOrderData = async (

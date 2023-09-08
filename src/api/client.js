@@ -95,7 +95,7 @@ export const fetchLogin = async (userid, password) => {
 // 카카오 set 하기
 export const fetchKKOLogin = async accessToken => {
   try {
-    const res = await client.post(`/sign-api/sign-in`, {
+    const res = await client.get(`/sign-api/sign-in`, {
       email: accessToken,
       upw: "password",
     });
