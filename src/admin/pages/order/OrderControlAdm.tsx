@@ -143,7 +143,7 @@ const OrderControlAdm = () => {
 
   // 그리드 레이아웃
   const gridTemplateColumns = {
-    columns: "0.5fr 0.9fr 1.8fr 0.4fr 0.5fr 0.55fr 0.55fr 0.55fr 0.55fr",
+    columns: "0.5fr 0.9fr 1.8fr 0.4fr 0.5fr 0.55fr 0.55fr 110px 0.55fr",
   };
 
   return (
@@ -254,14 +254,12 @@ const OrderControlAdm = () => {
                 </li>
                 <li>
                   <MemberOutBt
-                    style={{ fontSize: "1.3rem" }}
+                    // style={{ fontSize: "1.3rem" }}
                     onClick={() => {
                       navigate(`/admin/orderdetail`, { state: item.orderId });
                     }}
                   >
-                    상세
-                    <br />
-                    내역
+                    상세내역
                   </MemberOutBt>
                 </li>
               </React.Fragment>
