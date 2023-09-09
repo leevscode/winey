@@ -88,17 +88,20 @@ const ProductSellCart = () => {
   // 수량변경
   const editQuantity = async () => {
     try {
-      const results = await editProductCollect.map(item => {
-        return patchItemQuatt({
-          cartId: item.cartId,
-          quantity: item.quantity,
-        });
-      });
+      const results = await Promise.allSettled(
+        editProductCollect.map(item => {
+          return patchItemQuatt({
+            cartId: item.cartId,
+            quantity: item.quantity,
+          });
+        }),
+      );
       return results;
     } catch (error) {
       console.error("수량 변경 실패:", error);
+      throw error;
     }
-    return;
+    // return;
   };
   // 최종결제 버튼
   const handleFinalCharge = e => {
@@ -151,31 +154,41 @@ const ProductSellCart = () => {
       ),
       onOk() {
         try {
-          const itemEdit = editQuantity();
-          console.log("itemEdit", itemEdit);
-          if (itemEdit) {
-            postSomeItemPurchase({
-              selectCollect,
-              navigate,
-            });
-            navigate("/ProductCompleteCart", {
-              state: {
-                editProductCollect,
+          Promise.allSettled(
+            editProductCollect.map(item => {
+              return patchItemQuatt({
+                cartId: item.cartId,
+                quantity: item.quantity,
+              });
+            }),
+          ).then(results => {
+            console.log("results", results);
+
+            // 모든 Promise가 성공적으로 완료되었는지 확인
+            const allPromisesFulfilled = results.every(
+              result => result.status === "fulfilled",
+            );
+            if (allPromisesFulfilled) {
+              postSomeItemPurchase({
                 selectCollect,
-                isPayment,
-                totalPrice,
-              },
-            });
-            console.log("결제완료");
-          } else {
-            console.log("결제실패");
-          }
+                navigate,
+              });
+              navigate("/ProductCompleteCart", {
+                state: {
+                  editProductCollect,
+                  selectCollect,
+                  isPayment,
+                  totalPrice,
+                },
+              });
+              console.log("결제완료");
+            } else {
+              console.log("결제실패");
+            }
+          });
         } catch (error) {
           console.log("에러", error);
         }
-      },
-      onCancel() {
-        console.log("Cancel");
       },
     });
   };

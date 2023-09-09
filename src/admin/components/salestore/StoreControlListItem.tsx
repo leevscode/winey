@@ -125,9 +125,7 @@ const StoreControlListItem = ({ item, setEditZip }: any) => {
 
     // 예외처리하기
     const numberReg: any = /^\d{2,3}-\d{3,4}-\d{4}$/;
-    // if (e != null) {
-    //   setError("");
-    // }
+
     if (editStoreNm === undefined || editStoreNm === "") {
       setError("지점이름을 입력해 주세요.");
       return;
@@ -144,6 +142,9 @@ const StoreControlListItem = ({ item, setEditZip }: any) => {
       setError("올바른 형식으로 입력하세요 (ex.000-000-0000)");
       return;
     }
+    if (e != null) {
+      setError("");
+    }
     Modal.confirm({
       okText: "예",
       cancelText: "아니오",
@@ -155,7 +156,9 @@ const StoreControlListItem = ({ item, setEditZip }: any) => {
         </ul>
       ),
       async onOk() {
+        console.log("ok");
         try {
+          console.log("try");
           setError("");
           setEditZip({
             editStoreCity,
@@ -163,7 +166,7 @@ const StoreControlListItem = ({ item, setEditZip }: any) => {
             editStoreAddress,
             editStoreTel,
           });
-          const storeId: string = e.currentTarget.value;
+          const storeId = e.currentTarget.value;
           const putInfo = await putEditStore({
             storeId,
             editStoreCity,
@@ -173,9 +176,9 @@ const StoreControlListItem = ({ item, setEditZip }: any) => {
           });
           setEdit(!edit);
           return;
-        }
-        catch (error) {
+        } catch (error) {
           setError("네트워크 오류 입니다");
+          console.log(error);
           return;
         }
       },
@@ -262,15 +265,15 @@ const StoreControlListItem = ({ item, setEditZip }: any) => {
         </li>
         <li>
           {error !== "" ? (
-            <DetailBt value={item.storeId} onClick={e => handleEditSave(e)}>
-              저장
-            </DetailBt>
-          ) : (
             <Popover content={content} trigger="click">
               <DetailBt value={item.storeId} onClick={e => handleEditSave(e)}>
                 저장
               </DetailBt>
             </Popover>
+          ) : (
+            <DetailBt value={item.storeId} onClick={e => handleEditSave(e)}>
+              저장
+            </DetailBt>
           )}
         </li>
         <li>
