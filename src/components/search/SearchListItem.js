@@ -3,21 +3,22 @@
     노션 : https://hyemdev.notion.site/hyemdev/hyem-s-dev-STUDY-75ffe819c7534a049b59871e6fe17dd4
     깃허브 : https://github.com/hyemdev
 */
-import React, { useCallback, useState } from "react";
+
+import React, { useCallback } from "react";
 import { ProductListItem } from "../../style/ProductStyle";
 import { Link, useNavigate } from "react-router-dom";
 import NoImage from "../../assets/no_image.jpg";
 import { addCart, cartLengthData } from "../../api/patchcart";
 import { useDispatch, useSelector } from "react-redux";
-import ProductCartModal from "../product/ProductCartModal";
 
-const SearchListItem = ({ setIsModalOpen, urlData }) => {
+const SearchListItem = ({ setIsModalOpen }) => {
+  //  임시변수
+  const urlDataResult = [];
+  
   const navigate = useNavigate();
   // 사용자 정보를 불러옴
   const dispatch = useDispatch();
   const userData = useSelector(state => state.user);
-
-  console.log("urlData", urlData);
 
   // 회원 장바구니 버튼 클릭 이벤트
   const showModal = useCallback(
@@ -47,7 +48,7 @@ const SearchListItem = ({ setIsModalOpen, urlData }) => {
   };
   return (
     <>
-      {urlData.result?.map((item, index) => (
+      {urlDataResult?.result?.map((item, index) => (
         <ProductListItem key={"uid" + index}>
           <Link to={`/productdetail/${item.productId}`}>
             <div className="img">
