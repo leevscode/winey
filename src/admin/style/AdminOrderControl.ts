@@ -15,20 +15,15 @@ import { AdminColor } from "./AdminLayoutStyle";
 
 // 테이블 감싸는 div
 export const OrderTableWrap = styled.div`
-  overflow: auto;
-  padding-bottom: 10px;
-  /* 스크롤바 커스텀 */
-  &::-webkit-scrollbar {
-    display: block;
-    width: 6px;
-    height: 6px;
-  }
-  &::-webkit-scrollbar-track {
-    background: transparent;
-  }
-  &::-webkit-scrollbar-thumb {
-    background: ${opacity.gray};
-    border-radius: 10px;
+  .order-status-wrap {
+    .ant-select-selector {
+      width: 9rem;
+      align-items: center;
+      padding-inline-end: 10px;
+      .ant-select-selection-search {
+        /* background: pink; */
+      }
+    }
   }
 `;
 
