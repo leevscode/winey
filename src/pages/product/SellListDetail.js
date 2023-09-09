@@ -149,7 +149,11 @@ const SellListDetail = () => {
           픽업 지점 <span> {productDes.storeNm}</span>
         </p>
         <p>
-          픽업 시간 <span> {productDes.pickupTime}</span>
+          픽업 시간
+          <span>
+            {productDes.pickupTime?.slice(0, 10)}
+            {productDes.pickupTime?.slice(11, 16)}
+          </span>
         </p>
         <p>
           주문 상태 <span>{orderStatus[`${productDes.orderStatus}`]}</span>

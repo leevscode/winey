@@ -40,7 +40,6 @@ const SellList = () => {
   const [CancelModal, setCancelModal] = useState([]);
   const navigate = useNavigate();
 
-
   // 주문내역 리스트 출력
   const filledSellListData = async () => {
     try {
@@ -193,7 +192,8 @@ const SellList = () => {
                 </li>
                 <li>
                   <span>픽업 시간</span>
-                  {item.pickupTime}
+                  {item.pickupTime.slice(0, 10)},{" "}
+                  {item.pickupTime.slice(11, 16)}
                 </li>
                 <li>
                   <span>주문 상태</span>
