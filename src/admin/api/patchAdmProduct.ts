@@ -43,7 +43,7 @@ export const getAdmProductList = async (
 // 상품 등록 POST
 export const getAdmProductPost = async (_data: any) => {
   try {
-    const res = await client.post("/api/admin", _data, {
+    const res = await axios.post("/api/admin", _data, {
       headers: {
         "Content-Type": "multipart/form-data",
       },
@@ -64,7 +64,7 @@ export const getAdmProductDetail = async (
   _setDateDisabled: React.Dispatch<React.SetStateAction<boolean>>,
 ) => {
   try {
-    const res = await client.get(
+    const res = await axios.get(
       `/api/admin/product/detail?productId=${_iproduct}`,
     );
     const result = res.data;
@@ -136,7 +136,7 @@ export const getAdmProductPut = async (_data: any) => {
 export const getProductImgDel = async (_iproduct: string | undefined) => {
   try {
     // const res = await client.delete("/api/admin", {
-    const res = await client.delete(
+    const res = await axios.delete(
       `/api/admin/product/pic?productId=${_iproduct}`,
       {
         data: _iproduct,
