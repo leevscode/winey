@@ -18,22 +18,17 @@ export const StoreAddWrap = styled.div`
     display: flex;
     justify-content: flex-end;
     gap: 0 5px;
+    min-width: 900px;
     background: ${Maincolor.white};
     border-bottom: 0.05rem solid ${opacity.white};
     padding-bottom: 10px;
-    & > button {
-      /* margin: 0 1rem; */
-    }
   }
   .storeAddForm {
-    /* margin-top: 5rem; */    
+    min-width: 900px;
     & > ul {
       display: flex;
       justify-content: center;
-      gap: 0 10px;
-      border-bottom: 0.05rem solid ${opacity.white};
-      /* align-items: center; */
-      & > li{
+      & > li {
         padding: 10px 0;
       }
       .title {
@@ -42,49 +37,74 @@ export const StoreAddWrap = styled.div`
         justify-content: center;
         align-items: center;
         background: ${AdminColor.headColorD};
+        color: ${Maincolor.black};
         font-weight: 700;
+        border-bottom: 0.05rem solid ${opacity.white};
       }
       .content {
-        width: calc(100% - 130px - 10px);
-      }  
-      /* & li:first-of-type {
-        /* width: 20%; */
-        /* height: 8rem; */
-        /* line-height: 8rem; */
-        text-align: center;
-      }
-      & li:last-of-type {
-        border: 1px soild ${AdminColor.headColorD};
-        /* padding: 2.5rem 2rem; */
-        /* width: 75%; */
-        /* height: 8rem; */
-        & > p {
-          color: #ff4d4f;
+        width: calc(100% - 130px);
+        border-bottom: 0.05rem solid ${opacity.white};
+        padding-left: 10px;
+        color: ${Maincolor.black};
+        .ant-form-item {
+          .ant-radio-group {
+            display: flex;
+            flex-wrap: wrap;
+            .ant-radio-wrapper {
+              color: ${Maincolor.black};
+            }
+          }
         }
-        & > div {
-          margin: 0;
-        }
-      } */
-      .errorString {
-        font-size: 1.4rem;
-        color: red;
       }
-      .storeAddressSt {
-        div {
-          display: flex;
-          /* justify-content: center; */
-          & > input:first-of-type {
-            width: 70%;
-            margin-right: 1rem;
+      &.store-name {
+        .content {
+          .ant-form-item {
+            max-width: 300px;
           }
-          .storeAddressSub {
-            width: 30%;
-            margin-right: 1rem;
+        }
+      }
+      &.store-address {
+        .content {
+          .ant-form-item {
+            max-width: 600px;
           }
-          .css-1h3mxnl {
-            width: 12rem;
-            font-size: 1.4rem;
+        }
+      }
+      &.store-tel {
+        .content {
+          .ant-form-item {
+            max-width: 600px;
           }
+        }
+      }
+    }
+    & li:last-of-type {
+      border: 1px soild ${AdminColor.headColorD};
+      & > p {
+        color: #ff4d4f;
+      }
+      & > div {
+        margin: 0;
+      }
+    }
+    .errorString {
+      font-size: 1.4rem;
+      color: red;
+    }
+    .storeAddressSt {
+      div {
+        display: flex;
+        & > input:first-of-type {
+          width: calc(100% - 150px - 100px);
+          margin-right: 5px;
+        }
+        .storeAddressSub {
+          width: 150px;
+          margin-right: 5px;
+        }
+        .css-1h3mxnl {
+          width: 100px;
+          font-size: 1.4rem;
         }
       }
     }

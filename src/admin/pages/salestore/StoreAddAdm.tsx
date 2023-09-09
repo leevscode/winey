@@ -68,13 +68,15 @@ const StoreAddAdm: React.FC = () => {
 
   const handleAddress = {
     // 버튼 클릭 이벤트
-    clickButton: () => {
+    clickButton: (e: any) => {
+      e.preventDefault();
       setOpenPostcode(current => !current);
       Modal.confirm({
-        okText: "예",
-        cancelText: "아니오",
+        // okText: "예",
+        // cancelText: "아니오",
         wrapClassName: "info-modal-wrap notice-modal store-address-modal ",
         maskClosable: true,
+        footer: null,
         content: (
           <StoreAddressModal>
             <DaumPostcode
@@ -83,19 +85,20 @@ const StoreAddAdm: React.FC = () => {
             />
           </StoreAddressModal>
         ),
-        onOk() {
-          console.log("OK");
-        },
-        onCancel() {
-          console.log("CANCEL");
-        },
+        // onOk() {
+        //   console.log("OK");
+        // },
+        // onCancel() {
+        //   console.log("CANCEL");
+        // },
       });
     },
 
     // 주소 선택 이벤트
     selectAddress: async (data: any) => {
-      console.log("data", data);
-      const temp = await setCalendarLocation(data.address);
+      // console.log("data", data);
+      // const temp = await setCalendarLocation(data.address);
+      await setCalendarLocation(data.address);
       setNewStoreInfo(prevState => ({
         ...prevState,
         address: data.address,
@@ -107,7 +110,7 @@ const StoreAddAdm: React.FC = () => {
   };
   // 상세주소
   const handleAddressSub: React.ChangeEventHandler<HTMLInputElement> = e => {
-    console.log("eee", e.target.value);
+    // console.log("eee", e.target.value);
     setSubAddress(e.target.value);
     setNewStoreInfo(prevState => ({
       ...prevState,
@@ -119,7 +122,7 @@ const StoreAddAdm: React.FC = () => {
     navigate(-1);
   };
   const onFinish = () => {
-    console.log("newStoreInfo.address", newStoreInfo.address);
+    // console.log("newStoreInfo.address", newStoreInfo.address);
     if (newStoreInfo.address === "0") {
       setAddressErr("주소를 입력해 주세요.");
       return;
@@ -137,10 +140,10 @@ const StoreAddAdm: React.FC = () => {
         ),
         async onOk() {
           const complete: any | undefined = await postNewStore(newStoreInfo);
-          console.log("complete", complete);
+          // console.log("complete", complete);
           if (complete !== 0) {
             navigate("/admin/storecontrol");
-            console.log("매장등록성공");
+            // console.log("매장등록성공");
           } else {
             Modal.error({
               icon: (
@@ -157,7 +160,7 @@ const StoreAddAdm: React.FC = () => {
           }
         },
         onCancel() {
-          console.log("매장등록취소");
+          // console.log("매장등록취소");
         },
       });
     } catch (error) {
@@ -165,10 +168,10 @@ const StoreAddAdm: React.FC = () => {
     }
   };
   const onFinishFailed = () => {
-    console.log("전송실패");
+    // console.log("전송실패");
   };
   useEffect(() => {
-    console.log("화면랜더링");
+    // console.log("화면랜더링");
   }, [calendarlocation]);
 
   return (
@@ -194,7 +197,7 @@ const StoreAddAdm: React.FC = () => {
             <AdmProductBtnCancel onClick={onCancel}>취소</AdmProductBtnCancel>
           </div>
           <div className="storeAddForm">
-            <ul>
+            <ul className="store-select">
               <li className="title">지역선택</li>
               <li className="content">
                 <Form.Item
@@ -216,7 +219,7 @@ const StoreAddAdm: React.FC = () => {
                 </Form.Item>
               </li>
             </ul>
-            <ul>
+            <ul className="store-name">
               <li className="title">매장 이름</li>
               <li className="content">
                 <Form.Item
@@ -229,13 +232,13 @@ const StoreAddAdm: React.FC = () => {
                   ]}
                 >
                   <Input
-                    placeholder="매장 이름 입력하세요."
+                    placeholder="매장 이름을 입력하세요."
                     onChange={data => handleStoreName(data)}
                   />
                 </Form.Item>
               </li>
             </ul>
-            <ul>
+            <ul className="store-address">
               <li className="title">매장 주소</li>
               <li className="content">
                 <Form.Item className="storeAddressSt" name="storeAddress">
@@ -243,7 +246,8 @@ const StoreAddAdm: React.FC = () => {
                     value={calendarlocation}
                     placeholder="매장 주소를 입력하세요."
                     // readOnly
-                    onClick={handleAddress.clickButton}
+                    readOnly={true}
+                    // onClick={handleAddress.clickButton}
                   />
                   <Input
                     className="storeAddressSub"
@@ -258,7 +262,7 @@ const StoreAddAdm: React.FC = () => {
                 {addressErr ? <p>{addressErr}</p> : <p></p>}
               </li>
             </ul>
-            <ul>
+            <ul className="store-tel">
               <li className="title">연락처</li>
               <li className="content">
                 <Form.Item
@@ -270,14 +274,14 @@ const StoreAddAdm: React.FC = () => {
                     },
                     {
                       required: true,
-                      message: "매장 연락처를 입력해 주세요",
+                      message: "매장 연락처를 입력해 주세요.",
                     },
                   ]}
                 >
                   <Input
                     // 글자수 제한
                     maxLength={13}
-                    placeholder="매장 연락처를 형식에 맞춰 입력해 주세요(ex. 000-000-0000)"
+                    placeholder="매장 연락처를 형식에 맞춰 입력해 주세요. (ex. 000-000-0000)"
                     onChange={e => handleStoreNumber(e)}
                   />
                 </Form.Item>

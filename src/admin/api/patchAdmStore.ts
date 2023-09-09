@@ -16,7 +16,7 @@ export const getStoreList = async (
   setUserInfomation: React.Dispatch<React.SetStateAction<IStoreInfo>>,
 ) => {
   try {
-    const res = await client.get(
+    const res = await axios.get(
       `/api/admin/store?page=${paginate.page - 1}&size=${paginate.row}`,
     );
     console.log("res", res);

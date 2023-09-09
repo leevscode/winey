@@ -26,7 +26,7 @@ export const getMemberList = async (
   console.log("textSearch", textSearch);
   console.log("sortOption", sortOption);
   try {
-    const res = await client.get(
+    const res = await axios.get(
       `/api/admin/user/list?page=${paginate.page - 1}&size=${
         paginate.row
       }&sort=${sortOption.type},${sortOption.sort}${
@@ -56,7 +56,7 @@ export const getMemberDetail = async (
   },
 ) => {
   try {
-    const res = await client.get(
+    const res = await axios.get(
       `/api/admin/${clickUserId}/order?page=${paginate.page - 1}&size=${
         paginate.row
       }&sort=${sortOption.type},${sortOption.sort}`,
