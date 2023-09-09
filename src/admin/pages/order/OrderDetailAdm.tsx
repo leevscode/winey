@@ -18,7 +18,7 @@ const OrderDetailAdm = () => {
   const orderId = useLocation();
   const { listPathName } = useOutletContext() as { listPathName: string };
   const [orderDetail, setOrderDetail] = useState<Array<OdData>>([]);
-  const [orderDetail2, setOrderDetail2] = useState<Array<OdData2>>([]);
+  const [orderDetail2, setOrderDetail2] = useState<OdData2>();
   const getOdDetailData = async () => {
     try {
       const data = await AdmOrderDetailData(parseInt(orderId.state));
@@ -26,11 +26,11 @@ const OrderDetailAdm = () => {
       setOrderDetail(data.list1);
       setOrderDetail2(data.list2);
       console.log(data.list1);
-      console.log(data.list2);
     } catch (err) {
       console.error("데이터 로드 중 오류 발생", err);
     }
   };
+  console.log("456546", orderDetail2);
 
   useEffect(() => {
     getOdDetailData();
@@ -90,7 +90,7 @@ const OrderDetailAdm = () => {
                     <li>{item.email}</li>
                     <li>{item.nmKor}</li>
                     <li>{item.salePrice.toLocaleString()}</li>
-                    <li>{item.quantity}</li>
+                    <li>{item.quantity}개</li>
                   </>
                 ) : (
                   <>
@@ -99,7 +99,7 @@ const OrderDetailAdm = () => {
                     <li>{""}</li>
                     <li>{item.nmKor}</li>
                     <li>{item.salePrice.toLocaleString()}</li>
-                    <li>{item.quantity}</li>
+                    <li>{item.quantity}개</li>
                   </>
                 )}
               </React.Fragment>
@@ -107,46 +107,44 @@ const OrderDetailAdm = () => {
           ))}
         </>
       </TableVertical>
+      <br />
       <TableHorizontal listPathName={listPathName}>
         {/* 데이터 테이블 - 타이틀 */}
         <table>
           <tbody>
             <>
-              {orderDetail2?.map(item => (
-                <React.Fragment key={item.orderId}>
-                  <tr>
-                    <th className="table-title">주문수량</th>
-                    <td className="table-content">{item.quantity}</td>
-                    <th className="table-title">픽업 장소</th>
-                    <td className="table-content">{item.storeNm}</td>
-                  </tr>
-                  <tr>
-                    <th className="table-title">총 결제 금액</th>
-                    <td className="table-content">
-                      {item.totalPrice.toLocaleString()}
-                    </td>
-                    <th className="table-title">픽업 날짜</th>
-                    <td className="table-content">{item.pickUpDate}</td>
-                  </tr>
-                  <tr>
-                    <th className="table-title">결제 수단</th>
-                    <td className="table-content">
-                      {" "}
-                      {item.payment === 0 || item.payment === 1
-                        ? "신용카드"
-                        : item.payment}
-                    </td>
-                    <th className="table-title">픽업 시간</th>
-                    <td className="table-content">{item.pickUpTime}</td>
-                  </tr>
-                  <tr>
-                    <th className="table-title">픽업 완료 여부</th>
-                    <td className="table-content">
-                      {orderSt[item.orderStatus]}
-                    </td>
-                  </tr>
-                </React.Fragment>
-              ))}
+              <tr>
+                <th className="table-title">총 주문수량</th>
+                <td className="table-content">{orderDetail2?.quantity}개</td>
+                <th className="table-title">픽업 장소</th>
+                <td className="table-content">{orderDetail2?.storeNm}</td>
+              </tr>
+              <tr>
+                <th className="table-title">총 결제 금액</th>
+                <td className="table-content">
+                  {orderDetail2?.totalPrice.toLocaleString()}
+                </td>
+                <th className="table-title">픽업 날짜</th>
+                <td className="table-content">{orderDetail2?.pickUpDate}</td>
+              </tr>
+              <tr>
+                <th className="table-title">결제 수단</th>
+                <td className="table-content">
+                  {" "}
+                  {orderDetail2?.payment === 0 || orderDetail2?.payment === 1
+                    ? "신용카드"
+                    : orderDetail2?.payment}
+                </td>
+                <th className="table-title">픽업 시간</th>
+                <td className="table-content">{orderDetail2?.pickUpTime}</td>
+              </tr>
+              <tr>
+                <th className="table-title">픽업 완료 여부</th>
+                <td className="table-content">
+                  {orderDetail2?.orderStatus !== undefined &&
+                    orderSt[orderDetail2.orderStatus]}
+                </td>
+              </tr>
             </>
           </tbody>
         </table>

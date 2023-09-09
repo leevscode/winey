@@ -29,9 +29,9 @@ export interface OdData2 {
   quantity: number;
   totalPrice: number;
   payment?: number;
-  pickUpStore: string;
-  storeNm: string;
+  storeNm?: string;
   pickUpDate: number;
   pickUpTime: number;
   orderStatus: number;
+  orderSt?: string;
 }

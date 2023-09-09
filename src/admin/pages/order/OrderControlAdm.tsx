@@ -234,7 +234,7 @@ const OrderControlAdm = () => {
                       <Select
                         style={{ width: "100px", textAlign: "center" }}
                         placeholder="배송상태를 지정해주세요"
-                        value={item.orderStatus.toString()} // 현재 상태로 지정합니다.
+                        value={item.orderStatus.toString()}
                         onChange={async newStatus => {
                           try {
                             orderModal(newStatus, item);
