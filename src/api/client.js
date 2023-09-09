@@ -10,7 +10,7 @@ axios.interceptors.request.use(
 
     // const token = getCookie("refresh_token");
     if (token) {
-      console.log(`token : ${token}`);
+      // console.log(`token : ${token}`);
       config["headers"] = config.headers ?? {};
       config.headers["Authorization"] = `Bearer ${token}`;
     }

@@ -18,9 +18,9 @@ import { EditStoreWrap } from "../../style/AdminStoreStyle";
 const StoreControlList = ({ regionConvert, setEditZip }: any) => {
   const { listPathName } = useOutletContext() as { listPathName: string };
   const gridTemplateColumns = {
-    columns: "0.4fr 0.6fr 0.6fr 1.2fr 0.5fr 0.4fr 0.4fr",
+    columns: "0.2fr 0.3fr 0.3fr 1.2fr 0.5fr 0.2fr 0.2fr",
   };
-  console.log("regionConvert", regionConvert);
+  // console.log("regionConvert", regionConvert);
   // 수정 최종 저장하기
 
   return (
@@ -38,8 +38,8 @@ const StoreControlList = ({ regionConvert, setEditZip }: any) => {
             <li>매장이름</li>
             <li>매장주소</li>
             <li>연락처</li>
-            <li></li>
-            <li></li>
+            <li>수정</li>
+            <li>삭제</li>
           </TableLayoutTitle>
           {regionConvert?.length !== 0 ? (
             regionConvert?.map((item: any) => (

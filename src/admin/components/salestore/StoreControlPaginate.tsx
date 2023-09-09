@@ -3,7 +3,7 @@ import { IinitialPg } from "../../interface/MemberInterface";
 import { PaginationWrap } from "../../style/AdminLayoutStyle";
 import { Pagination } from "antd";
 import { IStoreInfo, IStoreInfoState } from "../../interface/StoreInterface";
-import { getStoreList } from "../../api/patchAdmStore";
+import { deleteStore, getStoreList } from "../../api/patchAdmStore";
 
 const StoreControlPaginate = ({
   storeInfomation,
@@ -26,7 +26,7 @@ const StoreControlPaginate = ({
 
   useEffect(() => {
     getPage();
-  }, [paginate.page, editZip]);
+  }, [paginate.page, editZip, deleteStore]);
 
   return (
     <div>

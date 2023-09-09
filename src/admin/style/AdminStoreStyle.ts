@@ -111,20 +111,23 @@ export const StoreAddWrap = styled.div`
   }
 `;
 export const StoreAddressModal = styled.div`
-  /* width: 100%; */
-  width: 48rem;
+  width: 100%;
+  /* width: 48rem; */
   font-size: 1rem;
 `;
 
 export const EditStoreWrap = styled.div`
   & li {
-    height: 5rem;
+    min-height: 5.3rem;
     padding-right: 1rem;
     line-height: 2rem;
   }
   .cityEditSty {
+    .ant-form-item {
+      margin-bottom: 0;
+    }
     & span {
-      margin-right: 1rem;
+      margin-right: 0.5rem;
     }
   }
   & .noItem {

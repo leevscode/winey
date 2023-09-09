@@ -26,7 +26,7 @@ const StoreControlAdm = () => {
     },
     content: [] as IStoreDetailList[],
   });
-  console.log("storeInfomation", storeInfomation);
+  // console.log("storeInfomation", storeInfomation);
 
   const regionConvert: Array<IStoreDetailList> = storeInfomation.content?.map(
     item => {
@@ -42,6 +42,7 @@ const StoreControlAdm = () => {
       return item;
     },
   );
+  console.log("테스트", editZip);
   return (
     <div>
       <StoreControlList regionConvert={regionConvert} setEditZip={setEditZip} />

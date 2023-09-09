@@ -206,12 +206,63 @@
 }
 
 /* 주소입력 모달커스텀 */
+.store-address-modal {
+  top: 25vh;
+}
 .store-address-modal .ant-modal .ant-modal-content {
-  display: flex;
-  justify-content: center;
-  align-items: center;
   width: 500px;
+  /* max-width: 500px; */
   height: auto;
   margin: 0 auto;
-  padding: 30px 15px 40px;
+  padding: 20px 15px;
+}
+/* 지역변경 모달커스텀 */
+.store-control-modal {
+  top: 25vh;
+}
+.store-control-modal .ant-modal-content {
+  width: 100%;
+  max-width: 460px;
+  margin: 0 auto;
+  padding: 35px 15px 40px;
+}
+.store-control-modal .ant-modal-content .ant-modal-header {
+  margin-bottom: 1rem;
+}
+.store-control-modal .ant-modal-content .ant-modal-header .ant-modal-title {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #3c2323;
+  text-align: center;
+}
+.store-control-modal .ant-modal-content .ant-modal-body {
+}
+.store-control-modal .ant-modal-content .ant-modal-body .ant-radio-group {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 5px;
+}
+.store-control-modal
+  .ant-modal-content
+  .ant-modal-body
+  .ant-radio-group
+  .ant-radio-wrapper {
+  margin-inline-end: 0;
+}
+.store-control-modal .ant-modal-content .ant-modal-footer {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: center;
+  margin-top: 25px;
+}
+.store-control-modal .ant-modal-content .ant-modal-footer .ant-btn {
+  width: calc(100% / 2);
+  height: 50px;
+  font-size: 1.6rem;
+}
+.store-control-modal .ant-modal-content .ant-modal-footer .ant-btn-primary {
+  margin-inline-start: 0;
+  box-shadow: none;
+  margin-right: 5px;
 }
