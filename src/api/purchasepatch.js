@@ -5,7 +5,7 @@
 */
 
 import { Modal } from "antd";
-import { client } from "./client";
+// import { client } from "./client";
 import axios from "axios";
 
 // 유저 매장정보 get
