@@ -138,8 +138,8 @@ const ProductAddSale = ({
     if (dates) {
       // console.log("From: ", dates[0], ", to: ", dates[1]);
       // console.log("From: ", dateStrings[0], ", to: ", dateStrings[1]);
-      console.log("할인시작날짜:", dateStrings[0] + "-01");
-      console.log("할인종료날짜:", dateStrings[1] + "-01");
+      // console.log("할인시작날짜:", dateStrings[0] + "-01");
+      // console.log("할인종료날짜:", dateStrings[1] + "-01");
       setPostProductData(prevState => {
         return {
           ...prevState,

@@ -21,7 +21,7 @@ export const getStoreList = async (
     );
     // console.log("res", res);
     const result = await res.data;
-    console.log("매장정보 불러옵니다", result);
+    // console.log("매장정보 불러옵니다", result);
     setUserInfomation(result);
     return result;
   } catch (error) {
@@ -72,14 +72,14 @@ export const putEditStore = async ({
         address: editStoreAddress,
       },
     );
-    console.log("1. storeId", storeId);
-    console.log("2. editStoreCity", editStoreCity);
-    console.log("3. editStoreNm", editStoreNm);
-    console.log("4. editStoreAddress,", editStoreAddress);
-    console.log("5. editStoreTel,", editStoreTel);
-    console.log("수정합니다.", res);
+    // console.log("1. storeId", storeId);
+    // console.log("2. editStoreCity", editStoreCity);
+    // console.log("3. editStoreNm", editStoreNm);
+    // console.log("4. editStoreAddress,", editStoreAddress);
+    // console.log("5. editStoreTel,", editStoreTel);
+    // console.log("수정합니다.", res);
     const result = await res.data;
-    console.log("수정 결과", result);
+    // console.log("수정 결과", result);
     return result;
   } catch (error) {
     console.log(error);

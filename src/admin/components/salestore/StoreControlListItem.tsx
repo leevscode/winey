@@ -105,7 +105,7 @@ const StoreControlListItem = ({ item, setEditZip }: any) => {
     },
     // 주소 선택 이벤트
     selectAddress: async (data: any) => {
-      console.log("data", data);
+      // console.log("data", data);
       const temp = await setCalendarLocation(data.address);
       setEditStoreAddress(data.address);
       setOpenPostcode(false);
@@ -191,14 +191,14 @@ const StoreControlListItem = ({ item, setEditZip }: any) => {
         }
       },
       onCancel() {
-        console.log("CANCEL");
+        // console.log("CANCEL");
       },
     });
   };
   // 수정 취소하기
   const handleEditCancel = () => {
     setEdit(!edit);
-    console.log("cancel");
+    // console.log("cancel");
   };
 
   // 매장삭제

@@ -26,7 +26,6 @@ import ProductAddAlcohol from "../../components/productedit/ProductAddAlcohol";
 import { Iproduct } from "../../interface/ProductInterface";
 import {
   getAdmProductDetail,
-  getAdmProductPost,
   getAdmProductPut,
 } from "../../api/patchAdmProduct";
 
@@ -87,10 +86,10 @@ const ProductEditAdm = () => {
       },
     ]);
   }, []);
-  console.log("데이터", postProductData);
+  // console.log("데이터", postProductData);
   // 상품 등록 성공
   const onFinish = () => {
-    console.log("productParam 보냅니다. ", postProductData);
+    // console.log("productParam 보냅니다. ", postProductData);
     // 상품명 미입력에 대한 예외처리
     if (postProductData.nmKor?.length === 0) {
       setNameNoKr(true);

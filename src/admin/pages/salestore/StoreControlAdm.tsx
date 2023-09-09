@@ -42,7 +42,7 @@ const StoreControlAdm = () => {
       return item;
     },
   );
-  console.log("테스트", editZip);
+  // console.log("테스트", editZip);
   return (
     <div>
       <StoreControlList regionConvert={regionConvert} setEditZip={setEditZip} />
