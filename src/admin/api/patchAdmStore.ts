@@ -19,9 +19,9 @@ export const getStoreList = async (
     const res = await axios.get(
       `/api/admin/store?page=${paginate.page - 1}&size=${paginate.row}`,
     );
-    console.log("res", res);
+    // console.log("res", res);
     const result = await res.data;
-    console.log("result", result);
+    // console.log("매장정보 불러옵니다", result);
     setUserInfomation(result);
     return result;
   } catch (error) {
@@ -37,7 +37,7 @@ export const postNewStore = async (newStoreInfo: {
   address: string;
   addressSub?: string | undefined;
 }) => {
-  console.log("newStoreInfo", newStoreInfo);
+  // console.log("newStoreInfo", newStoreInfo);
   try {
     const res = await axios.post("/api/admin/store", {
       regionNmId: newStoreInfo.regionNmId,
@@ -45,9 +45,9 @@ export const postNewStore = async (newStoreInfo: {
       tel: newStoreInfo.tel,
       address: newStoreInfo.address + newStoreInfo.addressSub,
     });
-    console.log(res);
+    // console.log(res);
     const result = await res.data;
-    console.log(result);
+    // console.log(result);
     return result;
   } catch (error) {
     console.log(error);
@@ -62,11 +62,6 @@ export const putEditStore = async ({
   editStoreAddress,
   editStoreTel,
 }: IEditStore) => {
-  console.log("storeId", storeId);
-  console.log("editStoreCity", editStoreCity);
-  console.log("editStoreNm", editStoreNm);
-  console.log("editStoreAddress,", editStoreAddress);
-  console.log("editStoreTel,", editStoreTel);
   try {
     const res = await axios.put(
       `/api/admin/store/{storeId}?storeId=${storeId}`,
@@ -77,9 +72,14 @@ export const putEditStore = async ({
         address: editStoreAddress,
       },
     );
-    console.log("수정", res);
+    // console.log("1. storeId", storeId);
+    // console.log("2. editStoreCity", editStoreCity);
+    // console.log("3. editStoreNm", editStoreNm);
+    // console.log("4. editStoreAddress,", editStoreAddress);
+    // console.log("5. editStoreTel,", editStoreTel);
+    // console.log("수정합니다.", res);
     const result = await res.data;
-    console.log(result);
+    // console.log("수정 결과", result);
     return result;
   } catch (error) {
     console.log(error);
@@ -92,9 +92,9 @@ export const deleteStore = async (item: string) => {
     const res = await axios.delete(
       `/api/admin/store/{storeId}?storeId=${item}`,
     );
-    console.log(res);
+    // console.log(res);
     const result = await res.data;
-    console.log(result);
+    console.log("삭제 성공했습니다.", result);
     return result;
   } catch (error) {
     console.log(error);

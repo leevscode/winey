@@ -12,7 +12,7 @@ export const AdmOrderData = async (
 ) => {
   try {
     const res = await axios.get(
-      `/api/admin/order?page=${page - 1}&size=${8}&type=orderdate&sort=${sortOption.type},${
+      `/api/admin/order?page=${page - 1}&size=${9}&sort=${sortOption.type},${
         sortOption.sort
       }`,
     );

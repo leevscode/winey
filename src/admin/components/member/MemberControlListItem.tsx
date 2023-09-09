@@ -97,7 +97,7 @@ const MemberControlListItem = ({
                 <li>{item.userId}</li>
                 <li>{item.email}</li>
                 <li>{item.nm}</li>
-                <li>{item.createdAt?.slice(2, 10)}</li>
+                <li>{item.createdAt}</li>
                 <li>{item.textRegion}</li>
                 <li>
                   <button

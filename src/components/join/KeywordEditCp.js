@@ -185,7 +185,7 @@ const KeywordEditCp = ({ yourKeyword }) => {
       aromaCategoryId,
     };
   };
-  console.log("editFavoriteKeyword", editFavoriteKeyword);
+  // console.log("editFavoriteKeyword", editFavoriteKeyword);
   // 이벤트핸들러 (저장하기)
   const handleEditKeywordChoice = () => {
     try {

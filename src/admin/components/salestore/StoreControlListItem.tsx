@@ -4,15 +4,21 @@
     깃허브 : https://github.com/hyemdev
 */
 import React, { useEffect, useState } from "react";
-import { deleteStore, putEditStore } from "../../api/patchAdmStore";
+import {
+  deleteStore,
+  getStoreList,
+  putEditStore,
+} from "../../api/patchAdmStore";
 import { DetailBt, MemberOutBt } from "../../style/AdminLayoutStyle";
 import { Form, Input, Modal, Popover, Radio } from "antd";
 import { regionOptions } from "../../pages/member/MemberControlAdm";
 import { StoreAddressModal } from "../../style/AdminStoreStyle";
 import DaumPostcodeEmbed from "react-daum-postcode";
 import { IStoreDetailList } from "../../interface/StoreInterface";
+import { useNavigate } from "react-router-dom";
 
 const StoreControlListItem = ({ item, setEditZip }: any) => {
+  const navigate = useNavigate();
   // 수정관련 state
   const [edit, setEdit] = useState<boolean>(false);
   const [editStoreCity, setEditStoreCity] = useState<number>(item.regionNmId);
@@ -48,8 +54,8 @@ const StoreControlListItem = ({ item, setEditZip }: any) => {
     });
     setIsModalOpen(false);
   };
-  console.log("editStoreCityKor", editStoreCityKor);
-  console.log("editStoreCity", editStoreCity);
+  // console.log("editStoreCityKor", editStoreCityKor);
+  // console.log("editStoreCity", editStoreCity);
 
   const handleCancel = () => {
     setIsModalOpen(false);
@@ -69,17 +75,18 @@ const StoreControlListItem = ({ item, setEditZip }: any) => {
   // 매장주소 api
   const [openPostcode, setOpenPostcode] = useState<boolean>(false);
   const [calendarlocation, setCalendarLocation] = useState<string>("");
-  console.log("calendarlocation", calendarlocation);
+  // console.log("calendarlocation", calendarlocation);
 
   const handleAddress = {
     // 버튼 클릭 이벤트
     clickButton: () => {
       setOpenPostcode(current => !current);
       Modal.confirm({
-        okText: "예",
-        cancelText: "아니오",
+        // okText: "예",
+        // cancelText: "아니오",
         wrapClassName: "info-modal-wrap notice-modal store-address-modal ",
         maskClosable: true,
+        footer: null,
         content: (
           <StoreAddressModal>
             <DaumPostcodeEmbed
@@ -88,18 +95,17 @@ const StoreControlListItem = ({ item, setEditZip }: any) => {
             />
           </StoreAddressModal>
         ),
-        onOk() {
-          console.log("OK");
-        },
-        onCancel() {
-          console.log("CANCEL");
-        },
+        // onOk() {
+        //   console.log("OK");
+        // },
+        // onCancel() {
+        //   console.log("CANCEL");
+        // },
       });
     },
-
     // 주소 선택 이벤트
     selectAddress: async (data: any) => {
-      console.log("data", data);
+      // console.log("data", data);
       const temp = await setCalendarLocation(data.address);
       setEditStoreAddress(data.address);
       setOpenPostcode(false);
@@ -121,8 +127,8 @@ const StoreControlListItem = ({ item, setEditZip }: any) => {
   const handleEditSave: React.MouseEventHandler<
     HTMLButtonElement
   > = async e => {
-    console.log("e save", e);
-
+    // console.log("e save", e);
+    // console.log("최종 수정 합니다.");
     // 예외처리하기
     const numberReg: any = /^\d{2,3}-\d{3,4}-\d{4}$/;
 
@@ -148,7 +154,7 @@ const StoreControlListItem = ({ item, setEditZip }: any) => {
     Modal.confirm({
       okText: "예",
       cancelText: "아니오",
-      wrapClassName: "info-modal-wrap notice-modal store-address-modal ",
+      wrapClassName: "info-modal-wrap notice-modal store-control-modal",
       maskClosable: true,
       content: (
         <ul>
@@ -156,9 +162,12 @@ const StoreControlListItem = ({ item, setEditZip }: any) => {
         </ul>
       ),
       async onOk() {
-        console.log("ok");
+        // console.log("ok");
         try {
-          console.log("try");
+          // const storeId = e.currentTarget.value;
+          const storeId = item.storeId;
+          // console.log("아이디", storeId);
+          // console.log("ok버튼 눌렀습니다");
           setError("");
           setEditZip({
             editStoreCity,
@@ -166,8 +175,7 @@ const StoreControlListItem = ({ item, setEditZip }: any) => {
             editStoreAddress,
             editStoreTel,
           });
-          const storeId = e.currentTarget.value;
-          const putInfo = await putEditStore({
+          await putEditStore({
             storeId,
             editStoreCity,
             editStoreNm,
@@ -183,14 +191,14 @@ const StoreControlListItem = ({ item, setEditZip }: any) => {
         }
       },
       onCancel() {
-        console.log("CANCEL");
+        // console.log("CANCEL");
       },
     });
   };
   // 수정 취소하기
   const handleEditCancel = () => {
     setEdit(!edit);
-    console.log("cancel");
+    // console.log("cancel");
   };
 
   // 매장삭제
@@ -198,26 +206,29 @@ const StoreControlListItem = ({ item, setEditZip }: any) => {
     Modal.confirm({
       okText: "예",
       cancelText: "아니오",
-      wrapClassName: "info-modal-wrap notice-modal store-address-modal ",
+      wrapClassName: "info-modal-wrap notice-modal store-control-modal ",
       maskClosable: true,
       content: (
         <ul>
-          <li>매장정보를 삭제하시겠습니까?</li>
-          <li>삭제된 정보는 복원이 불가능합니다.</li>
+          <li>
+            매장정보를 삭제하시겠습니까?
+            <br />
+            삭제된 정보는 복원이 불가능합니다.
+          </li>
         </ul>
       ),
       onOk() {
         deleteStore(item.storeId);
-        setEditZip("");
+        setEditZip("123");
         console.log("OK");
       },
       onCancel() {
-        console.log("CANCEL");
+        // console.log("CANCEL");
       },
     });
   };
   const content = <div>{error}</div>;
-  console.log("error", error);
+  // console.log("error", error);
   if (edit) {
     // 수정중
     return (
@@ -237,7 +248,14 @@ const StoreControlListItem = ({ item, setEditZip }: any) => {
             <DetailBt onClick={handleEditCityModal}>변경</DetailBt>
           </Form.Item>
         </li>
-        <Modal title="지역선택 변경" open={isModalOpen} onCancel={handleCancel}>
+        <Modal
+          className="store-control-modal"
+          closeIcon={false}
+          title="지역 변경"
+          open={isModalOpen}
+          onCancel={handleCancel}
+          footer={false}
+        >
           <Radio.Group onChange={e => handleCity(e)}>
             {regionOptions.map(item => (
               <Radio key={item.regionNmId} value={item.regionNmId}>
@@ -287,7 +305,7 @@ const StoreControlListItem = ({ item, setEditZip }: any) => {
         <li>{item.storeId}</li>
         <li>{item.textRegion}</li>
         <li>{item.nm}</li>
-        <li>{item.address}</li>
+        <li className="tal">{item.address}</li>
         <li>{item.tel}</li>
         <li>
           <DetailBt onClick={handleStoreEdit}>수정</DetailBt>

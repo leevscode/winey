@@ -4,11 +4,7 @@
   깃허브 : https://github.com/kimaydev
 */
 import axios from "axios";
-import {
-  Iproduct,
-  IproductList,
-  IproductListPage,
-} from "../interface/ProductInterface";
+import { Iproduct, IproductList } from "../interface/ProductInterface";
 import { Dispatch } from "react";
 import { client } from "../../api/client";
 
@@ -49,7 +45,7 @@ export const getAdmProductPost = async (_data: any) => {
       },
     });
     const result = res.data;
-    console.log("전송되는 데이터", result);
+    // console.log("전송되는 데이터", result);
     return result;
   } catch (err) {
     console.log("상품 등록 실패", err);
@@ -126,7 +122,7 @@ export const getAdmProductPut = async (_data: any) => {
       },
     });
     const result = res.data;
-    console.log("데이터 수정합니다.", result);
+    // console.log("데이터 수정합니다.", result);
     return result;
   } catch (err) {
     console.log("상품 수정 실패", err);
@@ -143,7 +139,7 @@ export const getProductImgDel = async (_iproduct: string | undefined) => {
       },
     );
     const result = res.data;
-    console.log("이미지 DELETE", result);
+    // console.log("이미지 DELETE", result);
     return result;
   } catch (err) {
     console.log("이미지 DELETE 실패", err);

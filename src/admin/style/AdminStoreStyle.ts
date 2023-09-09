@@ -4,90 +4,130 @@
     깃허브 : https://github.com/hyemdev
 */
 import styled from "@emotion/styled";
-import { Maincolor, WidthPd } from "../../style/GlobalStyle";
+import { Maincolor, WidthPd, opacity } from "../../style/GlobalStyle";
 import { AdminColor } from "./AdminLayoutStyle";
 import exp from "constants";
 
 export const StoreAddWrap = styled.div`
-  padding: ${WidthPd.padding};
+  /* padding: ${WidthPd.padding}; */
   margin: 0 auto;
   .addButton {
-    text-align: right;
-    margin-right: 4%;
-    & > button {
-      margin: 0 1rem;
-    }
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: flex-end;
+    gap: 0 5px;
+    min-width: 900px;
+    background: ${Maincolor.white};
+    border-bottom: 0.05rem solid ${opacity.white};
+    padding-bottom: 10px;
   }
   .storeAddForm {
-    margin-top: 5rem;
-    & ul:first-of-type {
-      & > li:last-of-type {
-        padding: 2rem;
-      }
-    }
-    & ul {
+    min-width: 900px;
+    & > ul {
       display: flex;
       justify-content: center;
-      /* align-items: center; */
-      & li:first-of-type {
+      & > li {
+        padding: 10px 0;
+      }
+      .title {
+        width: 130px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
         background: ${AdminColor.headColorD};
-        width: 20%;
-        height: 8rem;
-        line-height: 8rem;
-        text-align: center;
+        color: ${Maincolor.black};
+        font-weight: 700;
+        border-bottom: 0.05rem solid ${opacity.white};
       }
-      & li:last-of-type {
-        border: 1px soild ${AdminColor.headColorD};
-        padding: 2.5rem 2rem;
-        width: 75%;
-        height: 8rem;
-        & > p {
-          color: #ff4d4f;
+      .content {
+        width: calc(100% - 130px);
+        border-bottom: 0.05rem solid ${opacity.white};
+        padding-left: 10px;
+        color: ${Maincolor.black};
+        .ant-form-item {
+          .ant-radio-group {
+            display: flex;
+            flex-wrap: wrap;
+            .ant-radio-wrapper {
+              color: ${Maincolor.black};
+            }
+          }
         }
-        & > div {
-          margin: 0;
+      }
+      &.store-name {
+        .content {
+          .ant-form-item {
+            max-width: 300px;
+          }
         }
       }
-      .errorString {
-        font-size: 1.4rem;
-        color: red;
+      &.store-address {
+        .content {
+          .ant-form-item {
+            max-width: 600px;
+          }
+        }
       }
-      .storeAddressSt {
-        div {
-          display: flex;
-          /* justify-content: center; */
-          & > input:first-of-type {
-            width: 70%;
-            margin-right: 1rem;
+      &.store-tel {
+        .content {
+          .ant-form-item {
+            max-width: 600px;
           }
-          .storeAddressSub {
-            width: 30%;
-            margin-right: 1rem;
-          }
-          .css-1h3mxnl {
-            width: 12rem;
-            font-size: 1.4rem;
-          }
+        }
+      }
+    }
+    & li:last-of-type {
+      border: 1px soild ${AdminColor.headColorD};
+      & > p {
+        color: #ff4d4f;
+      }
+      & > div {
+        margin: 0;
+      }
+    }
+    .errorString {
+      font-size: 1.4rem;
+      color: red;
+    }
+    .storeAddressSt {
+      div {
+        display: flex;
+        & > input:first-of-type {
+          width: calc(100% - 150px - 100px);
+          margin-right: 5px;
+        }
+        .storeAddressSub {
+          width: 150px;
+          margin-right: 5px;
+        }
+        .css-1h3mxnl {
+          width: 100px;
+          font-size: 1.4rem;
         }
       }
     }
   }
 `;
 export const StoreAddressModal = styled.div`
-  /* width: 100%; */
-  width: 48rem;
+  width: 100%;
+  /* width: 48rem; */
   font-size: 1rem;
 `;
 
 export const EditStoreWrap = styled.div`
   & li {
-    height: 5rem;
+    min-height: 5.3rem;
     padding-right: 1rem;
     line-height: 2rem;
   }
   .cityEditSty {
+    .ant-form-item {
+      margin-bottom: 0;
+    }
     & span {
-      margin-right: 1rem;
+      margin-right: 0.5rem;
     }
   }
   & .noItem {
