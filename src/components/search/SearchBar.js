@@ -4,7 +4,7 @@
     깃허브 : https://github.com/hyemdev
 */
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FilterButtonWrap, SearchBarWrap } from "../../style/SearchStyle";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -18,13 +18,20 @@ import { NoticeModal } from "../../style/GlobalComponents";
 import { Gradation, opacity } from "../../style/GlobalStyle";
 import { AnimatePresence } from "framer-motion";
 import SearchFilter, {
+  itemSortRecoil,
   makeUrlRecoil,
+  readSortRecoil,
   searchFilterRecoil,
 } from "./SearchFilter";
 import { v4 } from "uuid";
-import { atom, selector, useRecoilState, useRecoilValue } from "recoil";
+import {
+  atom,
+  selector,
+  useRecoilState,
+  useRecoilValue,
+  useSetRecoilState,
+} from "recoil";
 import { getSearchPatch } from "../../api/searchpatch";
-import { sortRecoil } from "./SearchList";
 import { pageRecoil } from "./SearchPaginate";
 
 // 텍스트 저장 recoil
@@ -32,9 +39,14 @@ export const searchTextRecoil = atom({
   key: `searchTextRecoil/${v4()}`,
   default: [],
 });
+// 검색결과 저장
+export const searchResultRecoil = atom({
+  key: `searchResultRecoil/${v4()}`,
+  default: [],
+});
 // 선택된 필터정보 읽는 recoil
-export const filterClickItems = selector({
-  key: `filterClickItems/${v4()}`,
+export const readfilterClickItems = selector({
+  key: `readfilterClickItems/${v4()}`,
   // 값을 읽겠다
   get: ({ get }) => {
     const result = get(searchFilterRecoil);
@@ -43,22 +55,24 @@ export const filterClickItems = selector({
 });
 
 const SearchBar = () => {
-  // url Make
-  const [urlData, setUrlData] = useRecoilState(makeUrlRecoil);
   // recoil
-  const [sortList, setSortList] = useRecoilState(sortRecoil);
+  const sortList = useRecoilValue(readSortRecoil);
+  // 선택된 필터를 불러오자
+  const filters = useRecoilValue(readfilterClickItems);
+  console.log("filters", filters);
+  // 페이지 recoil
+  const clickPage = useRecoilValue(pageRecoil);
   // 텍스트 저장하는 recoil
   const [inputText, setInputText] = useRecoilState(searchTextRecoil);
-  // 선택된 필터를 불러오자
-  const filters = useRecoilValue(filterClickItems);
-  console.log("filters", filters);
+  // url Make
+  const [urlData, setUrlData] = useRecoilState(makeUrlRecoil);
+  // 검색결과 받아오는 recoil
+  const setResultData = useSetRecoilState(searchResultRecoil);
 
   // 필터창 열고닫는 state
   const [isFilterActive, setIsFilterActive] = useState(false);
   // 검색어 미입력시 출력되는 모달창
   const [isModalOpen, setIsModalOpen] = useState(false);
-  // 페이지 recoil
-  const [clickPage, setClickPage] = useRecoilState(pageRecoil);
 
   // filters 오픈 버튼 핸들러
   const handleOpenfilter = e => {
@@ -90,37 +104,47 @@ const SearchBar = () => {
     // 페이지당 개수
     query += `row=6&`;
     // 와인종류
-    if (filters.cate !== undefined) {
+    if (filters.cate && filters.cate !== "") {
       query += `cate=${filters.cate}&`;
     }
     // 가격대
-    if (filters.price !== undefined) {
+    if (filters.price && filters.price !== "") {
       query += `price=${filters.price}&`;
     }
     // 음식
-    if (filters.food !== undefined) {
+    if (filters.food && filters.food !== "") {
       query += `bigCate=${filters.food}&`;
     }
     // 나라
-    if (filters.country !== undefined) {
+    if (filters.country && filters.country !== "") {
       query += `country=${filters.country}&`;
     }
     // 마지막에는 & 제외하기
     if (query.endsWith("&")) {
       query = query.slice(0, -1);
     }
-    return setUrlData(query);
+    // return setUrlData(query);
+    return query;
   };
 
   // 텍스트 검색버튼
-  const onSearch = e => {
-    console.log("검색버튼:makeUrl()", makeUrl());
+  const onSearch = async e => {
     try {
-      getSearchPatch(urlData, sortList, clickPage);
+      const result = await getSearchPatch({
+        urlData,
+        sortList,
+        clickPage,
+      });
+      return setResultData(result);
     } catch (error) {
       console.log("error", error);
     }
   };
+
+  useEffect(() => {
+    const temp = makeUrl();
+    setUrlData(temp);
+  }, [filters, inputText]);
 
   return (
     <>

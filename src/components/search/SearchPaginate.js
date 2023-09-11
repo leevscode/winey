@@ -7,9 +7,17 @@
 import React, { useEffect } from "react";
 import { PaginationWrap } from "../../admin/style/AdminLayoutStyle";
 import { Pagination } from "antd";
-import { atom, useRecoilState } from "recoil";
+import {
+  atom,
+  useRecoilState,
+  useRecoilValue,
+  useSetRecoilState,
+} from "recoil";
 import { v4 } from "uuid";
 import { getSearchPatch } from "../../api/searchpatch";
+import { readSortRecoil } from "./SearchFilter";
+import { readUrlRecoil } from "./SearchList";
+import { searchResultRecoil } from "./SearchBar";
 
 // 페이지값 저장 recoil
 export const pageRecoil = atom({
@@ -21,23 +29,39 @@ const SearchPaginate = () => {
   // 페이지 recoil
   const [clickPage, setClickPage] = useRecoilState(pageRecoil);
   console.log("clickPage", clickPage);
+  // url Make
+  const urlData = useRecoilValue(readUrlRecoil);
+  // recoil sort
+  const sortList = useRecoilValue(readSortRecoil);
+  // 검색결과 받아오는 recoil
+  const [resultData, setResultData] = useRecoilState(searchResultRecoil);
 
-  const pageOnChange = page => {
+  const pageOnChange = async page => {
     setClickPage(page);
     console.log("페이지 onchange", page);
+    try {
+      const result = await getSearchPatch({
+        urlData,
+        sortList,
+        clickPage,
+      });
+      return setResultData(result);
+    } catch (error) {
+      console.log("error", error);
+    }
   };
 
   useEffect(() => {
     getSearchPatch(clickPage);
   }, [clickPage]);
   return (
-    <div>
+    <div style={{ marginBottom: "100px" }}>
       <PaginationWrap>
         <Pagination
           current={clickPage}
           pageSize={6}
           onChange={page => pageOnChange(page)}
-          total={10}
+          total={resultData?.count}
           // current={pageInfo.page}
           // pageSize={paginate.row}
           // onChange={page => pageOnChange(page)}

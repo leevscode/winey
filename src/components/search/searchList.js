@@ -5,9 +5,15 @@
 */
 
 import React, { useState } from "react";
-import { atom, selector, useRecoilState, useRecoilValue } from "recoil";
+import {
+  atom,
+  selector,
+  useRecoilState,
+  useRecoilValue,
+  useSetRecoilState,
+} from "recoil";
 import { v4 } from "uuid";
-import { makeUrlRecoil, searchFilterRecoil } from "./SearchFilter";
+import { makeUrlRecoil } from "./SearchFilter";
 import { SearchListWrap } from "../../style/SearchStyle";
 import { ConfigProvider, Select } from "antd";
 import { ContentsListItemWrap } from "../../style/GlobalComponents";
@@ -18,23 +24,44 @@ import { Gradation } from "../../style/GlobalStyle";
 import { sortingOptions } from "./SearchCateExport";
 import { getSearchPatch } from "../../api/searchpatch";
 import { pageRecoil } from "./SearchPaginate";
+import { searchResultRecoil } from "./SearchBar";
 
 // 정렬 recoil
 export const sortRecoil = atom({
   key: `sortRecoil/${v4()}`,
   default: {
-    value: 1,
-    label: "최신등록순",
+    value: 0,
+    label: "오랜등록순",
+  },
+});
+// 페이지정보 읽기
+export const readpageRecoil = selector({
+  key: `readpageRecoil/${v4()}`,
+  // 값을 읽겠다
+  get: ({ get }) => {
+    const result = get(pageRecoil);
+    return result;
+  },
+});
+// url정보 읽기
+export const readUrlRecoil = selector({
+  key: `readUrlRecoil/${v4()}`,
+  // 값을 읽겠다
+  get: ({ get }) => {
+    const result = get(makeUrlRecoil);
+    return result;
   },
 });
 
 const SearchList = () => {
   // 페이지 recoil
-  const [clickPage, setClickPage] = useRecoilState(pageRecoil);
+  const clickPage = useRecoilValue(readpageRecoil);
   // url Make
-  const [urlData, setUrlData] = useRecoilState(makeUrlRecoil);
+  const urlData = useRecoilValue(readUrlRecoil);
   // recoil
   const [sortList, setSortList] = useRecoilState(sortRecoil);
+  // 검색결과 받아오는 recoil
+  const setResultData = useSetRecoilState(searchResultRecoil);
 
   // 검색어 없음 모달
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -45,9 +72,18 @@ const SearchList = () => {
     setIsModalOpen(false);
   };
 
-  const handleSortChange = e => {
+  const handleSortChange = async e => {
     setSortList(e);
-    getSearchPatch(clickPage, urlData, sortList);
+    try {
+      const result = await getSearchPatch({
+        urlData,
+        sortList,
+        clickPage,
+      });
+      return setResultData(result);
+    } catch (error) {
+      console.log("error", error);
+    }
   };
 
   return (

@@ -4,7 +4,7 @@
     깃허브 : https://github.com/hyemdev
 */
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button, ConfigProvider, Radio } from "antd";
 import { v4 } from "uuid";
 import { SearchFilterWrap } from "../../style/SearchStyle";
@@ -24,8 +24,14 @@ import {
   getPrice,
   wineSearchOptions,
 } from "./SearchCateExport";
-import { atom, selector, useRecoilState, useRecoilValue } from "recoil";
-import { searchTextRecoil } from "./SearchBar";
+import {
+  atom,
+  selector,
+  useRecoilState,
+  useRecoilValue,
+  useSetRecoilState,
+} from "recoil";
+import { searchResultRecoil, searchTextRecoil } from "./SearchBar";
 import { getSearchPatch } from "../../api/searchpatch";
 import { sortRecoil } from "./SearchList";
 import { pageRecoil } from "./SearchPaginate";
@@ -50,19 +56,30 @@ export const textStringRecoil = selector({
     return result;
   },
 });
+export const readSortRecoil = selector({
+  key: `readSortRecoil/${v4()}`,
+  // 값을 읽겠다
+  get: ({ get }) => {
+    const result = get(sortRecoil);
+    return result;
+  },
+});
 const SearchFilter = ({ isFilterActive }) => {
   // url Make
   const [urlData, setUrlData] = useRecoilState(makeUrlRecoil);
-  // recoil sort
-  const [sortList, setSortList] = useRecoilState(sortRecoil);
-  // 페이지 recoil
-  const [clickPage, setClickPage] = useRecoilState(pageRecoil);
-
   // 필터링 recoil
   const [clickfilter, setClickfilter] = useRecoilState(searchFilterRecoil);
   // 입력 text를 읽자
   const textRead = useRecoilValue(textStringRecoil);
+  // recoil sort
+  const sortList = useRecoilValue(readSortRecoil);
+  // 페이지 recoil
+  const clickPage = useRecoilValue(pageRecoil);
+  // 검색결과 받아오는 recoil
+  const setResultData = useSetRecoilState(searchResultRecoil);
+
   console.log("textRead", textRead);
+  console.log("clickfilter", clickfilter);
 
   // 필터링 카테고리 선택 state
   const [wineTypeCheck, setWineTypeCheck] = useState("");
@@ -122,14 +139,22 @@ const SearchFilter = ({ isFilterActive }) => {
     if (query.endsWith("&")) {
       query = query.slice(0, -1);
     }
-    return setUrlData(query);
+    return query;
   };
 
-  const handleConfirm = () => {
+  const handleConfirm = async () => {
     console.log("최종확인버튼 selectFilter", selectFilter);
     setClickfilter(selectFilter);
     try {
-      getSearchPatch(urlData, sortList, clickPage);
+      const temp = makeUrl();
+      setUrlData(temp);
+
+      const result = await getSearchPatch({
+        urlData: temp,
+        sortList,
+        clickPage,
+      });
+      setResultData(result);
     } catch (error) {
       console.log("error", error);
     }
@@ -142,8 +167,13 @@ const SearchFilter = ({ isFilterActive }) => {
     setWinePriceCheck("");
     setWineCountryCheck("");
     setSelectFilter("");
-    setUrlData("");
+    // setUrlData("");
   };
+
+  useEffect(() => {
+    const temp = makeUrl();
+    setUrlData(temp);
+  }, [clickfilter, textRead, selectFilter]);
 
   return (
     <div>
