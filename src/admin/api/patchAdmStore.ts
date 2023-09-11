@@ -13,16 +13,24 @@ export const getStoreList = async (
     page: number;
     row: number;
   },
-  setUserInfomation: React.Dispatch<React.SetStateAction<IStoreInfo>>,
+  sortOption: {
+    type: string;
+    sort: string;
+  },
+  sortSearch: string,
+  textSearch: string,
 ) => {
   try {
     const res = await axios.get(
-      `/api/admin/store?page=${paginate.page - 1}&size=${paginate.row}`,
+      `/api/admin/store?page=${paginate.page - 1}&size=${paginate.row}&sort=${
+        sortOption.type
+      },${sortOption.sort}${sortSearch ? `&searchType=${sortSearch}` : ""}${
+        textSearch ? `&str=${textSearch}` : ""
+      }`,
     );
-    // console.log("res", res);
+    console.log("res", res.config.data);
     const result = await res.data;
     // console.log("매장정보 불러옵니다", result);
-    setUserInfomation(result);
     return result;
   } catch (error) {
     console.log(error);

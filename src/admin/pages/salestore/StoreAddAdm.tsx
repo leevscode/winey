@@ -118,8 +118,8 @@ const StoreAddAdm: React.FC = () => {
     }));
   };
 
-  const onCancel = () => {
-    navigate(-1);
+  const onAddCancel = () => {
+    navigate("/admin/storecontrol");
   };
   const onFinish = () => {
     // console.log("newStoreInfo.address", newStoreInfo.address);
@@ -194,7 +194,10 @@ const StoreAddAdm: React.FC = () => {
             >
               매장 등록
             </AdmProductBtnOk>
-            <AdmProductBtnCancel onClick={onCancel}>취소</AdmProductBtnCancel>
+            <AdmProductBtnCancel
+              onClick={() => navigate("/admin/storecontrol")}>
+              취소
+            </AdmProductBtnCancel>
           </div>
           <div className="storeAddForm">
             <ul className="store-select">

@@ -9,10 +9,15 @@ const StoreControlPaginate = ({
   storeInfomation,
   setStoreInfomation,
   editZip,
+  sortOption,
+  sortSearch,
+  textSearch,
+  paginate,
+  setPaginate,
 }: IStoreInfoState) => {
-  const [paginate, setPaginate] = useState<IinitialPg>({ page: 1, row: 10 });
+  // const [paginate, setPaginate] = useState<IinitialPg>({ page: 1, row: 10 });
   const pageInfo: IStoreInfo["pageableCustom"] | null =
-    storeInfomation.pageableCustom;
+    storeInfomation?.pageableCustom;
 
   const onChange = async (page: number) => {
     setPaginate(prevPaginate => ({ ...prevPaginate, page }));
@@ -20,13 +25,22 @@ const StoreControlPaginate = ({
 
   const getPage = async () => {
     // 페이지 정보를 보내고(paginate) , list 정보를 받는다
-    const data = await getStoreList(paginate, setStoreInfomation);
-    return data;
+    try {
+      const getdata: any = await getStoreList(
+        paginate,
+        sortOption,
+        sortSearch,
+        textSearch,
+      );
+      setStoreInfomation(getdata);
+    } catch (error) {
+      console.error("Error", error);
+    }
   };
 
   useEffect(() => {
     getPage();
-  }, [paginate.page, editZip, deleteStore]);
+  }, [paginate.page, editZip, deleteStore, sortOption, textSearch]);
 
   return (
     <div>

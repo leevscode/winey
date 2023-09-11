@@ -129,7 +129,7 @@ const SearchBar = () => {
 
   // 텍스트 검색버튼
   const onSearch = async e => {
-    setClickPage("1");
+    setClickPage(1);
     try {
       const result = await getSearchPatch({
         urlData,

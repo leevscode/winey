@@ -12,8 +12,19 @@ import {
   IStoreInfo,
 } from "../../interface/StoreInterface";
 import { regionOptions } from "../member/MemberControlAdm";
+import StoreControlSort, { initialSortOption } from "../../components/salestore/StoreControlSort";
+import { IMemberSortOption, IinitialPg } from "../../interface/MemberInterface";
 
 const StoreControlAdm = () => {
+  // 정렬 state
+  const [sortOption, setSortOption] =
+    useState<IMemberSortOption>(initialSortOption);
+  const [paginate, setPaginate] = useState<IinitialPg>({ page: 1, row: 10 });
+
+  // 검색 state
+  const [textSearch, setTextSearch] = useState<string>("");
+  const [sortSearch, setSortSearch] = useState<string>("");
+  console.log("sortSearch", sortSearch);
   const [editZip, setEditZip] = useState<IEditStore | string>(
     "수정된 데이터 모음",
   );
@@ -28,7 +39,7 @@ const StoreControlAdm = () => {
   });
   // console.log("storeInfomation", storeInfomation);
 
-  const regionConvert: Array<IStoreDetailList> = storeInfomation.content?.map(
+  const regionConvert: Array<IStoreDetailList> = storeInfomation?.content?.map(
     item => {
       const changeList: {
         regionNmId: number;
@@ -45,11 +56,26 @@ const StoreControlAdm = () => {
   // console.log("테스트", editZip);
   return (
     <div>
+      <StoreControlSort
+        storeInfomation={storeInfomation}
+        setSortOption={setSortOption}
+        textSearch={textSearch}
+        setTextSearch={setTextSearch}
+        sortSearch={sortSearch}
+        setSortSearch={setSortSearch}
+        paginate={paginate}
+        setPaginate={setPaginate}
+      />
       <StoreControlList regionConvert={regionConvert} setEditZip={setEditZip} />
       <StoreControlPaginate
         editZip={editZip}
         storeInfomation={storeInfomation}
         setStoreInfomation={setStoreInfomation}
+        sortOption={sortOption}
+        sortSearch={sortSearch}
+        textSearch={textSearch}
+        paginate={paginate}
+        setPaginate={setPaginate}
       />
     </div>
   );

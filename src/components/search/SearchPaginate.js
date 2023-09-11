@@ -50,6 +50,7 @@ const SearchPaginate = () => {
       console.log("error", error);
     }
   };
+  console.log("-----page clickPage", clickPage);
 
   useEffect(() => {
     console.log("-----page re-render");
@@ -71,6 +72,7 @@ const SearchPaginate = () => {
             pageSize={6}
             onChange={page => pageOnChange(page)}
             total={resultData?.count}
+            // defaultCurrent={clickPage}
           />
         </ConfigProvider>
       </SearchPaginationWrap>

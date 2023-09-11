@@ -4,6 +4,8 @@
     깃허브 : https://github.com/hyemdev
 */
 
+import { IMemberSortOption, IinitialPg } from "./MemberInterface";
+
 export interface IStoreInfo {
   pageableCustom: {
     page: number;
@@ -34,6 +36,11 @@ export interface IStoreInfoState {
   storeInfomation: IStoreInfo;
   setStoreInfomation: React.Dispatch<React.SetStateAction<IStoreInfo>>;
   editZip?: IEditStore | string;
+  sortOption: IMemberSortOption;
+  sortSearch: string;
+  textSearch: string;
+  paginate: IinitialPg;
+  setPaginate: React.Dispatch<React.SetStateAction<IinitialPg>>;
 }
 export interface INewStoreState {
   newStoreInfo: IStoreDetailList;

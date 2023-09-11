@@ -4,19 +4,20 @@
     깃허브 : https://github.com/hyemdev
 */
 
-// 페이지네이션
+// 페이지네이션 인터페이스
 export interface IinitialPg {
   page: number;
   row: number;
 }
 
+// 회원정보 state 인터페이스
 export interface IMemberState {
   memberList: IMemControl;
-  setMemberList: React.Dispatch<React.SetStateAction<IMemControl>>;
   sortOption: IMemberSortOption;
   sortSearch: string;
   textSearch: string;
   paginate: IinitialPg;
+  setMemberList: React.Dispatch<React.SetStateAction<IMemControl>>;
   setPaginate: React.Dispatch<React.SetStateAction<IinitialPg>>;
 }
 

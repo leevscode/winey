@@ -42,14 +42,13 @@ export const regionOptions = [
 
 const MemberControlAdm = () => {
   // 정렬 state
-  const [sortOption, setSortOption] =
-    useState<IMemberSortOption>(initialSortOption);
+  const [sortOption, setSortOption] = useState<IMemberSortOption>(initialSortOption);
   const [paginate, setPaginate] = useState<IinitialPg>({ page: 1, row: 10 });
 
   // 검색 state
   const [textSearch, setTextSearch] = useState<string>("");
   const [sortSearch, setSortSearch] = useState<string>("");
-  console.log("sortSearch", sortSearch);
+
   // 회원정보state
   const [memberList, setMemberList] = useState<IMemControl>({
     pageableCustom: {
