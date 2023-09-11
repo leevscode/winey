@@ -24,13 +24,13 @@ import {
 
 const Login = () => {
   // 카카오 로그인
-  // const REST_API_KEY = "63c2ccf48233929cf35206dbb6fcdb14";
-  // const HOST_URI = window.location.host;
+  const REST_API_KEY = "63c2ccf48233929cf35206dbb6fcdb14";
+  const HOST_URI = window.location.host;
   // const HOST_URI = "localhost:3000";
-  // const REDIRECT_URI = `http://${HOST_URI}/oauth/redirect`;
-  // console.log(REDIRECT_URI);
-  // const KakaoLogin = () =>
-  //   (window.location.href = `http://${HOST_URI}/oauth2/authorization/kakao?redirect_uri=${REDIRECT_URI}`);
+  const REDIRECT_URI = `http://${HOST_URI}/oauth/redirect`;
+  console.log(REDIRECT_URI);
+  const KakaoLogin = () =>
+    (window.location.href = `http://${HOST_URI}/oauth2/authorization/kakao?redirect_uri=${REDIRECT_URI}`);
 
   const dispatch = useDispatch();
   // 회원정보 불러오기
@@ -57,20 +57,20 @@ const Login = () => {
     };
   };
 
-  const noService = () => {
-    Modal.warning({
-      wrapClassName: "info-modal-wrap notice-modal",
-      maskClosable: true,
-      content: (
-        <ul>
-          <li>
-            서비스 준비중입니다 <br />
-            이용에 불편을 드려 죄송합니다
-          </li>
-        </ul>
-      ),
-    });
-  };
+  // const noService = () => {
+  //   Modal.warning({
+  //     wrapClassName: "info-modal-wrap notice-modal",
+  //     maskClosable: true,
+  //     content: (
+  //       <ul>
+  //         <li>
+  //           서비스 준비중입니다 <br />
+  //           이용에 불편을 드려 죄송합니다
+  //         </li>
+  //       </ul>
+  //     ),
+  //   });
+  // };
 
   const navigate = useNavigate();
 
@@ -194,7 +194,7 @@ const Login = () => {
         </Link>
       </div>
       <div>
-        <a onClick={noService}>
+        <a onClick={KakaoLogin}>
           <div className="socialLogin">
             <img
               src={`${process.env.PUBLIC_URL}/images/kakao_login_medium_narrow.png`}
