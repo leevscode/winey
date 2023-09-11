@@ -74,9 +74,6 @@ const MemberControlAdm = () => {
     },
   );
 
-  console.log("sortOption", sortOption);
-  console.log("regionConvert", regionConvert);
-  console.log("memberList111111", memberList);
   useEffect(() => {
     console.log("화면 리랜더링");
   }, []);

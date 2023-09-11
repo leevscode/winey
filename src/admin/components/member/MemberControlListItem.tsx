@@ -61,8 +61,6 @@ const MemberControlListItem = ({
         try {
           await putMemberOut(item.userId);
           console.log("회원탈퇴");
-
-          setMemberList({ ...memberList });
         } catch (error) {
           console.log("회원탈퇴실패", error);
         }
