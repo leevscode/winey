@@ -39,8 +39,6 @@ const MemberControlSort = ({
   ];
 
   const handleSortChange = (value: string) => {
-    console.log("value", value);
-    console.log("value", value);
     if (sortValue[value]) {
       const { type, sort } = sortValue[value];
       setSortOption({ type, sort });
@@ -49,7 +47,6 @@ const MemberControlSort = ({
     }
   };
   const onChangOption = (e: any) => {
-    console.log("eeee", e);
     setSortSearch(e);
   };
   const onTextSearch = (
@@ -72,7 +69,6 @@ const MemberControlSort = ({
     }
     setTextSearch(value);
   };
-  console.log("sortSearch", sortSearch);
 
   return (
     <>

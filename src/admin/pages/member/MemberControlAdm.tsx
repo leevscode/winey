@@ -42,7 +42,8 @@ export const regionOptions = [
 
 const MemberControlAdm = () => {
   // 정렬 state
-  const [sortOption, setSortOption] = useState<IMemberSortOption>(initialSortOption);
+  const [sortOption, setSortOption] =
+    useState<IMemberSortOption>(initialSortOption);
   const [paginate, setPaginate] = useState<IinitialPg>({ page: 1, row: 10 });
 
   // 검색 state
@@ -58,6 +59,7 @@ const MemberControlAdm = () => {
     },
     content: [] as IMemberListUser[],
   });
+  const [render, setRender] = useState<string>("1");
 
   // 지역변환
   const regionConvert: Array<IMemberListUser> = memberList?.content?.map(
@@ -75,10 +77,6 @@ const MemberControlAdm = () => {
     },
   );
 
-  useEffect(() => {
-    console.log("화면 리랜더링");
-  }, []);
-
   return (
     <MemberWrap>
       <MemberControlSort
@@ -95,6 +93,7 @@ const MemberControlAdm = () => {
         regionConvert={regionConvert}
         setMemberList={setMemberList}
         memberList={memberList}
+        setRender={setRender}
       />
       <MemberControlPaginate
         memberList={memberList}
@@ -104,6 +103,7 @@ const MemberControlAdm = () => {
         textSearch={textSearch}
         paginate={paginate}
         setPaginate={setPaginate}
+        render={render}
       />
     </MemberWrap>
   );

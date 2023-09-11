@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from "react";
-import { IinitialPg } from "../../interface/MemberInterface";
+import React, { useEffect } from "react";
 import { PaginationWrap } from "../../style/AdminLayoutStyle";
 import { Pagination } from "antd";
 import { IStoreInfo, IStoreInfoState } from "../../interface/StoreInterface";
@@ -9,13 +8,13 @@ const StoreControlPaginate = ({
   storeInfomation,
   setStoreInfomation,
   editZip,
+  setEditZip,
   sortOption,
   sortSearch,
   textSearch,
   paginate,
   setPaginate,
 }: IStoreInfoState) => {
-  // const [paginate, setPaginate] = useState<IinitialPg>({ page: 1, row: 10 });
   const pageInfo: IStoreInfo["pageableCustom"] | null =
     storeInfomation?.pageableCustom;
 
@@ -32,15 +31,16 @@ const StoreControlPaginate = ({
         sortSearch,
         textSearch,
       );
-      setStoreInfomation(getdata);
+      return setStoreInfomation(getdata);
     } catch (error) {
       console.error("Error", error);
     }
   };
 
   useEffect(() => {
+    console.log("아아아아아아아아-화면갱신이이이이아아아아");
     getPage();
-  }, [paginate.page, editZip, deleteStore, sortOption, textSearch]);
+  }, [paginate.page, editZip, sortOption, textSearch]);
 
   return (
     <div>

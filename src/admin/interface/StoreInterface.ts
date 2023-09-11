@@ -36,6 +36,7 @@ export interface IStoreInfoState {
   storeInfomation: IStoreInfo;
   setStoreInfomation: React.Dispatch<React.SetStateAction<IStoreInfo>>;
   editZip?: IEditStore | string;
+  setEditZip?: React.Dispatch<React.SetStateAction<IEditStore | string>>;
   sortOption: IMemberSortOption;
   sortSearch: string;
   textSearch: string;

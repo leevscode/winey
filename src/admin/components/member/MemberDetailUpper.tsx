@@ -28,7 +28,18 @@ const MemberDetailUpper = ({
                 <th></th> <td></td>
               </tr>
               <tr>
-                <th>회원 아이디 :</th> <td>{userInfomation.email}</td>
+                <th>회원 아이디 :</th>
+                {userInfomation.email ? (
+                  <td>{userInfomation.email}</td>
+                ) : (
+                  <td>
+                    <img
+                      style={{ width: "20px", marginRight: "3px" }}
+                      src={`${process.env.PUBLIC_URL}/images/kakaologo.jpg`}
+                    />
+                    카카오 로그인 회원
+                  </td>
+                )}
                 <th>총 구매건수 :</th> <td>{userInfomation.orderCount} 건</td>
               </tr>
               <tr>

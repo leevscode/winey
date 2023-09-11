@@ -3,7 +3,7 @@
     노션 : https://hyemdev.notion.site/hyemdev/hyem-s-dev-STUDY-75ffe819c7534a049b59871e6fe17dd4
     깃허브 : https://github.com/hyemdev
 */
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import StoreControlList from "../../components/salestore/StoreControlList";
 import StoreControlPaginate from "../../components/salestore/StoreControlPaginate";
 import {
@@ -12,8 +12,11 @@ import {
   IStoreInfo,
 } from "../../interface/StoreInterface";
 import { regionOptions } from "../member/MemberControlAdm";
-import StoreControlSort, { initialSortOption } from "../../components/salestore/StoreControlSort";
+import StoreControlSort, {
+  initialSortOption,
+} from "../../components/salestore/StoreControlSort";
 import { IMemberSortOption, IinitialPg } from "../../interface/MemberInterface";
+import { RecoilState, selector, useRecoilValue } from "recoil";
 
 const StoreControlAdm = () => {
   // 정렬 state
@@ -24,7 +27,6 @@ const StoreControlAdm = () => {
   // 검색 state
   const [textSearch, setTextSearch] = useState<string>("");
   const [sortSearch, setSortSearch] = useState<string>("");
-  console.log("sortSearch", sortSearch);
   const [editZip, setEditZip] = useState<IEditStore | string>(
     "수정된 데이터 모음",
   );
@@ -53,7 +55,7 @@ const StoreControlAdm = () => {
       return item;
     },
   );
-  // console.log("테스트", editZip);
+
   return (
     <div>
       <StoreControlSort
@@ -66,9 +68,14 @@ const StoreControlAdm = () => {
         paginate={paginate}
         setPaginate={setPaginate}
       />
-      <StoreControlList regionConvert={regionConvert} setEditZip={setEditZip} />
+      <StoreControlList
+        regionConvert={regionConvert}
+        setEditZip={setEditZip}
+        editZip={editZip}
+      />
       <StoreControlPaginate
         editZip={editZip}
+        setEditZip={setEditZip}
         storeInfomation={storeInfomation}
         setStoreInfomation={setStoreInfomation}
         sortOption={sortOption}

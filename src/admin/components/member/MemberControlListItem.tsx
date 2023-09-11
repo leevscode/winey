@@ -24,10 +24,12 @@ const MemberControlListItem = ({
   regionConvert,
   setMemberList,
   memberList,
+  setRender,
 }: {
   regionConvert: IMemberListUser[];
   setMemberList: React.Dispatch<React.SetStateAction<IMemControl>>;
   memberList: IMemControl;
+  setRender: React.Dispatch<React.SetStateAction<string>>;
 }) => {
   const navigate = useNavigate();
   const { listPathName } = useOutletContext() as { listPathName: string };
@@ -36,16 +38,9 @@ const MemberControlListItem = ({
   };
 
   const handleMemberOrder = (item: IMemberListUser) => {
-    console.log("item.userId", item.userId);
     navigate("/admin/memberdetail", { state: item.userId });
   };
-  const handleMemberOut = (
-    item: IMemberListUser,
-    // event: React.MouseEvent<HTMLButtonElement>
-  ) => {
-    console.log("item.userId", item.userId);
-
-    // event.preventDefault();
+  const handleMemberOut = (item: IMemberListUser) => {
     Modal.confirm({
       okText: "예",
       cancelText: "아니오",
@@ -60,9 +55,12 @@ const MemberControlListItem = ({
       async onOk() {
         try {
           await putMemberOut(item.userId);
+          setRender("랜더링");
           console.log("회원탈퇴");
+          return;
         } catch (error) {
           console.log("회원탈퇴실패", error);
+          return;
         }
       },
       onCancel() {
@@ -70,9 +68,6 @@ const MemberControlListItem = ({
       },
     });
   };
-  useEffect(() => {
-    console.log("화면갱신");
-  }, [memberList]);
   return (
     <>
       <TableWrap>
@@ -101,7 +96,17 @@ const MemberControlListItem = ({
                 }}
               >
                 <li>{item.userId}</li>
-                <li>{item.email}</li>
+                {item.email ? (
+                  <li>{item.email}</li>
+                ) : (
+                  <li>
+                    <img
+                      style={{ width: "20px", marginRight: "3px" }}
+                      src={`${process.env.PUBLIC_URL}/images/kakaologo.jpg`}
+                    />
+                    카카오 로그인 회원
+                  </li>
+                )}
                 <li>{item.nm}</li>
                 <li>{item.createdAt}</li>
                 <li>{item.textRegion}</li>

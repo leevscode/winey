@@ -14,10 +14,9 @@ import { Form, Input, Modal, Popover, Radio } from "antd";
 import { regionOptions } from "../../pages/member/MemberControlAdm";
 import { StoreAddressModal } from "../../style/AdminStoreStyle";
 import DaumPostcodeEmbed from "react-daum-postcode";
-import { IStoreDetailList } from "../../interface/StoreInterface";
 import { useNavigate } from "react-router-dom";
 
-const StoreControlListItem = ({ item, setEditZip }: any) => {
+const StoreControlListItem = ({ item, setEditZip, editZip }: any) => {
   const navigate = useNavigate();
   // 수정관련 state
   const [edit, setEdit] = useState<boolean>(false);
@@ -95,12 +94,6 @@ const StoreControlListItem = ({ item, setEditZip }: any) => {
             />
           </StoreAddressModal>
         ),
-        // onOk() {
-        //   console.log("OK");
-        // },
-        // onCancel() {
-        //   console.log("CANCEL");
-        // },
       });
     },
     // 주소 선택 이벤트
@@ -127,9 +120,6 @@ const StoreControlListItem = ({ item, setEditZip }: any) => {
   const handleEditSave: React.MouseEventHandler<
     HTMLButtonElement
   > = async e => {
-    // console.log("e save", e);
-    // console.log("최종 수정 합니다.");
-    // 예외처리하기
     const numberReg: any = /^\d{2,3}-\d{3,4}-\d{4}$/;
 
     if (editStoreNm === undefined || editStoreNm === "") {
@@ -162,12 +152,8 @@ const StoreControlListItem = ({ item, setEditZip }: any) => {
         </ul>
       ),
       async onOk() {
-        // console.log("ok");
         try {
-          // const storeId = e.currentTarget.value;
           const storeId = item.storeId;
-          // console.log("아이디", storeId);
-          // console.log("ok버튼 눌렀습니다");
           setError("");
           setEditZip({
             editStoreCity,
@@ -217,18 +203,28 @@ const StoreControlListItem = ({ item, setEditZip }: any) => {
           </li>
         </ul>
       ),
-      onOk() {
-        deleteStore(item.storeId);
-        setEditZip("123");
-        console.log("OK");
+      async onOk() {
+        try {
+          console.log("item.storeId", item.storeId);
+          await deleteStore(item.storeId);
+          setEditZip(item.storeId);
+          console.log("OK");
+          return;
+        } catch (error) {
+          console.log("CANCEL");
+          return;
+        }
       },
       onCancel() {
-        // console.log("CANCEL");
+        console.log("CANCEL");
       },
     });
   };
   const content = <div>{error}</div>;
-  // console.log("error", error);
+
+  useEffect(() => {
+    console.log("화면갱신", editZip);
+  }, [editZip]);
   if (edit) {
     // 수정중
     return (
@@ -257,7 +253,7 @@ const StoreControlListItem = ({ item, setEditZip }: any) => {
           footer={false}
         >
           <Radio.Group onChange={e => handleCity(e)}>
-            {regionOptions.map(item => (
+            {regionOptions?.map(item => (
               <Radio key={item.regionNmId} value={item.regionNmId}>
                 {item.value}
               </Radio>

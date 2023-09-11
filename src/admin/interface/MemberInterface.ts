@@ -19,6 +19,7 @@ export interface IMemberState {
   paginate: IinitialPg;
   setMemberList: React.Dispatch<React.SetStateAction<IMemControl>>;
   setPaginate: React.Dispatch<React.SetStateAction<IinitialPg>>;
+  render:string
 }
 
 export interface IMemControl {

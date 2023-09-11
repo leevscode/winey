@@ -10,7 +10,6 @@ import {
   selector,
   useRecoilState,
   useRecoilValue,
-  useSetRecoilState,
 } from "recoil";
 import { v4 } from "uuid";
 import { makeUrlRecoil } from "./SearchFilter";

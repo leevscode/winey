@@ -10,7 +10,7 @@ import Search from "antd/es/input/Search";
 
 export const initialSortOption: IMemberSortOption = {
   type: "storeid",
-  sort: "ASC",
+  sort: "DESC",
 };
 const StoreControlSort = ({
   storeInfomation,
@@ -51,7 +51,6 @@ const StoreControlSort = ({
     }
   };
   const onChangOption = (e: any) => {
-    console.log("eeee", e);
     setSortSearch(e);
   };
   const onTextSearch = (
@@ -74,7 +73,6 @@ const StoreControlSort = ({
     }
     setTextSearch(value);
   };
-  console.log("sortSearch", sortSearch);
 
   return (
     <>
