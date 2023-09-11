@@ -31,7 +31,7 @@ const OrderControlAdm = () => {
   const navigate = useNavigate();
 
   // 정렬 state
-  const initialSortOption: ControllSortOption = { type: "0", sort: "0" };
+  const initialSortOption = { type: 'orderdate', sort: 'desc' };
   const [sortOption, setSortOption] =
     useState<ControllSortOption>(initialSortOption);
   const sortValue: Record<string, ControllSortOption> = {
@@ -41,15 +41,15 @@ const OrderControlAdm = () => {
     4: { type: "orderStatus", sort: "desc" },
   };
 
-  // 정렬
-  const handleSortChange = (value: string) => {
-    if (sortValue[value]) {
-      const { type, sort } = sortValue[value];
-      setSortOption({ type, sort });
-    } else {
-      setSortOption(initialSortOption);
-    }
-  };
+// 정렬 옵션 설정 함수
+const handleSortChange = (value: string) => {
+  if (sortValue[value]) {
+    const { type, sort } = sortValue[value];
+    setSortOption({ type, sort });
+  } else {
+    setSortOption(initialSortOption);
+  }
+};
 
   const onChange: PaginationProps["onChange"] = page => {
     console.log(page);
@@ -271,7 +271,7 @@ const OrderControlAdm = () => {
         <PaginationWrap>
           <Pagination
             current={current}
-            pageSize={8}
+            pageSize={9}
             onChange={onChange}
             total={orderControl2?.totalElements || 0}
           />
