@@ -36,12 +36,26 @@ const KakaoLogin = () => {
       content: error ? <p>{error}</p> : <p>네트워크 오류입니다.</p>,
     };
   };
+  console.log("(1) access_token");
 
   setCookie("access_token", accessToken);
   const startKKO = async () => {
+    dispatch(getMemberInfo());
+    cartLengthData(dispatch);
+
+    // 선호키워드 정보 유무를 받아오자
+    console.log("(2) getUserFavoriteKey");
+    const favoriteKeyInfo = await getUserFavoriteKey();
+    // 키워드 정보가 있으면 바로 메인으로, 없으면 키워드 선택 페이지로 가자
+    if (favoriteKeyInfo.length > 0) {
+      navigate("/main");
+    } else {
+      navigate("/keywordselect");
+    }
+    /*
     try {
       // 카카오 로그인 후 정보 요청하기
-      const login = await fetchKKOLogin(accessToken);
+      //const login = await fetchKKOLogin(accessToken);
       if (login.roleType == "USER") {
         // 로그인성공 후 cookie에 있는 accessToken을 확인하자
         // 회원 정보 저장
@@ -67,14 +81,12 @@ const KakaoLogin = () => {
     } catch (error) {
       return;
     }
+    */
   };
 
-  useEffect(() => {
-    startKKO();
-  }, []);
+  startKKO();
 
   return <></>;
-  // <Navigate to="/main" />;
 };
 
 export default KakaoLogin;
