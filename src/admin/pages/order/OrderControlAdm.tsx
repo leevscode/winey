@@ -271,7 +271,7 @@ const OrderControlAdm = () => {
         <PaginationWrap>
           <Pagination
             current={current}
-            pageSize={8}
+            pageSize={9}
             onChange={onChange}
             total={orderControl2?.totalElements || 0}
           />
