@@ -25,6 +25,8 @@ import { sortingOptions } from "./SearchCateExport";
 import { getSearchPatch } from "../../api/searchpatch";
 import SearchPaginate, { pageRecoil } from "./SearchPaginate";
 import { searchResultRecoil } from "./SearchBar";
+import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 // 정렬 recoil
 export const sortRecoil = atom({
@@ -92,42 +94,50 @@ const SearchList = () => {
   return (
     <div>
       <SearchListWrap>
-        <ProductListItemWrap>
-          {/* 상품목록 */}
-          <ul>
-            <li>
-              총 <span>{resultData?.count}</span>개
-            </li>
-            <li>
-              {/* 상품정렬 */}
-              <ConfigProvider
-                theme={{
-                  token: {
-                    colorPrimary: Gradation.wineD,
-                    borderRadius: 4,
-                    fontSize: 12,
-                    controlHeight: 24,
-                    colorBorder: "transparent",
-                    colorPrimaryHover: "transparent",
-                    fontFamily:
-                      '"Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif',
-                  },
-                }}
-              >
-                <Select
-                  value={sortList}
-                  onChange={e => handleSortChange(e)}
-                  options={sortingOptions}
-                />
-              </ConfigProvider>
-            </li>
-          </ul>
-          <ContentsListItemWrap>
-            {/* 상품 리스트 */}
-            <SearchListItem />
-          </ContentsListItemWrap>
-          <SearchPaginate />
-        </ProductListItemWrap>
+        {resultData?.wineList?.length !== 0 ? (
+          <ProductListItemWrap>
+            {/* 상품목록 */}
+            <ul>
+              <li>
+                총 <span>{resultData?.count}</span>개
+              </li>
+              <li>
+                {/* 상품정렬 */}
+                <ConfigProvider
+                  theme={{
+                    token: {
+                      colorPrimary: Gradation.wineD,
+                      borderRadius: 4,
+                      fontSize: 12,
+                      controlHeight: 24,
+                      colorBorder: "transparent",
+                      colorPrimaryHover: "transparent",
+                      fontFamily:
+                        '"Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif',
+                    },
+                  }}
+                >
+                  <Select
+                    value={sortList}
+                    onChange={e => handleSortChange({ value: e })}
+                    options={sortingOptions}
+                  />
+                </ConfigProvider>
+              </li>
+            </ul>
+            <ContentsListItemWrap>
+              <SearchListItem />
+            </ContentsListItemWrap>
+            <SearchPaginate />
+          </ProductListItemWrap>
+        ) : (
+          <div className="noSearchItem">
+            <i>
+              <FontAwesomeIcon icon={faMagnifyingGlass} />
+            </i>
+            <p>해당 상품이 없습니다. 다시 검색 해주세요.</p>
+          </div>
+        )}
         {/* 장바구니 완료 모달창 */}
         <ProductCartModal
           isModalOpen={isModalOpen}

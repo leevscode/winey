@@ -12,7 +12,7 @@ export const getSearchPatch = async ({ clickPage, urlData, sortList }) => {
   console.log("sortList", sortList);
   try {
     const res = await axios.get(
-      `/api/search?page=${clickPage}&sort=${sortList}&${urlData}`,
+      `/api/search?page=${clickPage}&sort=${sortList.value}&${urlData}`,
     );
     console.log("서치res", res.config.url);
     const result = res.data;

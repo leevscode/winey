@@ -9,7 +9,7 @@ import { motion } from "framer-motion";
 
 export const SearchPageWrap = styled.div`
   .noSearchItem {
-    padding-top: 4rem;
+    padding-top: 8rem;
     font-size: 1.6rem;
     text-align: center;
     & i {
