@@ -9,7 +9,7 @@ import { motion } from "framer-motion";
 
 export const SearchPageWrap = styled.div`
   .noSearchItem {
-    padding-top: 4rem;
+    padding-top: 8rem;
     font-size: 1.6rem;
     text-align: center;
     & i {
@@ -223,4 +223,19 @@ export const FilterButtonWrap = styled(motion.div)`
 // 검색결과 감싸는 영역
 export const SearchListWrap = styled.div`
   padding-top: 4rem;
+`;
+
+// 서치 페이지네이션
+export const SearchPaginationWrap = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: center !important;
+  margin-top: 2rem;
+
+  & .ant-select-selector {
+    display: none;
+  }
+  & .ant-pagination-options {
+    display: none;
+  }
 `;

@@ -10,8 +10,23 @@ import { Link, useNavigate } from "react-router-dom";
 import NoImage from "../../assets/no_image.jpg";
 import { addCart, cartLengthData } from "../../api/patchcart";
 import { useDispatch, useSelector } from "react-redux";
+import { selector, useRecoilValue } from "recoil";
+import { v4 } from "uuid";
+import { searchResultRecoil } from "./SearchBar";
+
+// 검색결과 읽는 recoil
+export const readResultData = selector({
+  key: `readResultData/${v4()}`,
+  // 값을 읽겠다
+  get: ({ get }) => {
+    const result = get(searchResultRecoil);
+    return result;
+  },
+});
 
 const SearchListItem = ({ setIsModalOpen }) => {
+  const listData = useRecoilValue(readResultData);
+  console.log("listData", listData);
   //  임시변수
   const urlDataResult = [];
   
@@ -48,7 +63,7 @@ const SearchListItem = ({ setIsModalOpen }) => {
   };
   return (
     <>
-      {urlDataResult?.result?.map((item, index) => (
+      {listData?.wineList?.map((item, index) => (
         <ProductListItem key={"uid" + index}>
           <Link to={`/productdetail/${item.productId}`}>
             <div className="img">
