@@ -44,6 +44,8 @@ const MemberControlAdm = () => {
   // 정렬 state
   const [sortOption, setSortOption] =
     useState<IMemberSortOption>(initialSortOption);
+  const [paginate, setPaginate] = useState<IinitialPg>({ page: 1, row: 10 });
+
   // 검색 state
   const [textSearch, setTextSearch] = useState<string>("");
   const [sortSearch, setSortSearch] = useState<string>("");
@@ -87,6 +89,8 @@ const MemberControlAdm = () => {
         setTextSearch={setTextSearch}
         sortSearch={sortSearch}
         setSortSearch={setSortSearch}
+        paginate={paginate}
+        setPaginate={setPaginate}
       />
       <MemberControlListItem
         regionConvert={regionConvert}
@@ -99,6 +103,8 @@ const MemberControlAdm = () => {
         sortOption={sortOption}
         sortSearch={sortSearch}
         textSearch={textSearch}
+        paginate={paginate}
+        setPaginate={setPaginate}
       />
     </MemberWrap>
   );

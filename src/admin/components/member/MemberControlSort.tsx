@@ -18,6 +18,8 @@ const MemberControlSort = ({
   setTextSearch,
   sortSearch,
   setSortSearch,
+  paginate,
+  setPaginate,
 }: any) => {
   const sortValue: Record<string, IMemberSortOption> = {
     1: { type: "userId", sort: "ASC" },
@@ -54,6 +56,7 @@ const MemberControlSort = ({
     value: string,
     e?: React.ChangeEvent<HTMLInputElement>,
   ) => {
+    setPaginate({ page: 1, row: 10 });
     if (value == "") {
       Modal.error({
         okText: "예",

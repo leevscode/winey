@@ -4,19 +4,27 @@
     깃허브 : https://github.com/hyemdev
 */
 
-import React, { useState } from "react";
-import SearchBar from "../../components/search/SearchBar";
+import React, { useEffect } from "react";
+import SearchBar, { searchTextRecoil } from "../../components/search/SearchBar";
 import SearchList from "../../components/search/SearchList";
-import SearchPaginate from "../../components/search/SearchPaginate";
 import { SearchPageWrap } from "../../style/SearchStyle";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import { readResultData } from "../../components/search/SearchListItem";
-import { useRecoilValue } from "recoil";
+import { useRecoilValue, useSetRecoilState } from "recoil";
+import { searchFilterRecoil } from "../../components/search/SearchFilter";
+
 const SearchProduct = () => {
+  const setInputText = useSetRecoilState(searchTextRecoil);
+  const setClickfilter = useSetRecoilState(searchFilterRecoil);
+
   const listData = useRecoilValue(readResultData);
   console.log("listData length", listData?.length);
 
+  useEffect(() => {
+    setInputText("");
+    setClickfilter("");
+  }, []);
   return (
     <SearchPageWrap>
       {/* 검색 키워드*/}

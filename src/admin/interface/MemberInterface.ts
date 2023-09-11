@@ -16,6 +16,8 @@ export interface IMemberState {
   sortOption: IMemberSortOption;
   sortSearch: string;
   textSearch: string;
+  paginate: IinitialPg;
+  setPaginate: React.Dispatch<React.SetStateAction<IinitialPg>>;
 }
 
 export interface IMemControl {

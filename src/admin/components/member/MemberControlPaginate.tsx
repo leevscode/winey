@@ -21,9 +21,11 @@ const MemberControlPaginate = ({
   sortOption,
   sortSearch,
   textSearch,
+  paginate,
+  setPaginate,
 }: IMemberState) => {
   // 페이지 정보(page / row: 페이지 당 개수)
-  const [paginate, setPaginate] = useState<IinitialPg>({ page: 1, row: 10 });
+  // const [paginate, setPaginate] = useState<IinitialPg>({ page: 1, row: 10 });
 
   const pageInfo: IMemControl["pageableCustom"] | null =
     memberList?.pageableCustom;
