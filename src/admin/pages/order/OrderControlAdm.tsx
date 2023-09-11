@@ -81,22 +81,22 @@ const OrderControlAdm = () => {
 
   const option = [
     { value: "1", label: "결제완료" },
-    { value: "2", label: "배송완료" },
-    { value: "3", label: "배송중" },
+    { value: "2", label: "배송중" },
+    { value: "3", label: "배송완료" },
     { value: "4", label: "픽업대기" },
     { value: "5", label: "픽업완료" },
     { value: "6", label: "주문취소" },
   ];
 
-  // 배송상태 변경 모달
-  const getStatusLabel = (value: string) => {
+  // 배송상태 변경모달
+  const statusModal = (value: string) => {
     const statusOption = option.find(opt => opt.value === value);
     return statusOption ? statusOption.label : "";
   };
 
   // 주문상태 변경 모달
   const orderModal = (newStatusValue: string, item: any) => {
-    const newStatusLabel = getStatusLabel(newStatusValue);
+    const newStatusLabel = statusModal(newStatusValue);
     Modal.confirm({
       okText: "예",
       cancelText: "아니오",
@@ -105,9 +105,8 @@ const OrderControlAdm = () => {
       content: (
         <ul>
           <li>
-            배송 상태를 {newStatusLabel}(으)로
-            <br />
-            바꾸시겠습니까?
+            <p style={{ color: "#7c1d34" }}>{item.nmKor}</p>
+            {newStatusLabel}(으)로 바꾸시겠습니까?
           </li>
         </ul>
       ),
@@ -205,73 +204,79 @@ const OrderControlAdm = () => {
               }}
             >
               <React.Fragment>
-                {item.email ? (
-                  <>
-                    <li>{item.orderDate}</li>
+                <>
+                  <li>{item.orderDate}</li>
+                  {item.email ? (
                     <li>{item.email}</li>
-                    <li>{item.nmKor}</li>
-                    <li>{item.quantity}</li>
+                  ) : (
                     <li>
-                      {item.totalPrice.toLocaleString(undefined, {
-                        maximumFractionDigits: 0,
-                      })}
+                      <img
+                        style={{ width: "20px", marginRight: "3px" }}
+                        src={`${process.env.PUBLIC_URL}/images/kakaologo.jpg`}
+                      />
+                      카카오 로그인 회원
                     </li>
-                    <li>
-                      {item.payment === 0 || item.payment === 1
-                        ? "신용카드"
-                        : item.payment}
-                    </li>
-                    <li>{item.pickUpStore}</li>
-                    <li>
-                      <Form style={{ width: "100px" }}>
-                        <Form.Item
-                          style={{
-                            display: "flex",
-                            justifyContent: "center",
-                            width: "80%",
-                            margin: "0",
-                          }}
-                        >
-                          {/* 주문상태 변경 셀렉트 버튼 */}
-                          <Select
-                            style={{ width: "100px", textAlign: "center" }}
-                            placeholder="배송상태를 지정해주세요"
-                            value={item.orderStatus.toString()}
-                            onChange={async newStatus => {
-                              try {
-                                orderModal(newStatus, item);
-                              } catch (error) {
-                                console.error("상태변경 실패:", error);
-                              }
-                            }}
-                          >
-                            {option.map(option => (
-                              <Option key={option.value} value={option.value}>
-                                {option.label}
-                              </Option>
-                            ))}
-                          </Select>
-                        </Form.Item>
-                      </Form>
-                    </li>
-                    <li>
-                      <MemberOutBt
-                        style={{ fontSize: "1.3rem" }}
-                        onClick={() => {
-                          navigate(`/admin/orderdetail`, {
-                            state: item.orderId,
-                          });
+                  )}
+                  <li>{item.nmKor}</li>
+                  <li>{item.quantity}</li>
+                  <li>
+                    {item.totalPrice.toLocaleString(undefined, {
+                      maximumFractionDigits: 0,
+                    })}
+                  </li>
+                  <li>
+                    {item.payment === 0 || item.payment === 1
+                      ? "신용카드"
+                      : item.payment}
+                  </li>
+                  <li>{item.pickUpStore}</li>
+                  <li>
+                    <Form style={{ width: "100px" }}>
+                      <Form.Item
+                        style={{
+                          display: "flex",
+                          justifyContent: "center",
+                          width: "80%",
+                          margin: "0",
                         }}
                       >
-                        상세
-                        <br />
-                        내역
-                      </MemberOutBt>
-                    </li>
-                  </>
-                ) : (
-                  <li>탈퇴한 회원입니다</li>
-                )}
+                        {/* 주문상태 변경 셀렉트 버튼 */}
+                        <Select
+                          style={{ width: "100px", textAlign: "center" }}
+                          placeholder="배송상태를 지정해주세요"
+                          value={item.orderStatus.toString()}
+                          onChange={async newStatus => {
+                            try {
+                              orderModal(newStatus, item);
+                            } catch (error) {
+                              console.error("상태변경 실패:", error);
+                            }
+                          }}
+                        >
+                          {option.map(option => (
+                            <Option key={option.value} value={option.value}>
+                              {option.label}
+                            </Option>
+                          ))}
+                        </Select>
+                      </Form.Item>
+                    </Form>
+                  </li>
+                  <li>
+                    <MemberOutBt
+                      style={{ fontSize: "1.3rem" }}
+                      onClick={() => {
+                        navigate(`/admin/orderdetail`, {
+                          state: item.orderId,
+                        });
+                      }}
+                    >
+                      상세
+                      <br />
+                      내역
+                    </MemberOutBt>
+                  </li>
+                </>
               </React.Fragment>
             </TableLayoutContents>
           ))}
@@ -279,7 +284,7 @@ const OrderControlAdm = () => {
         <PaginationWrap>
           <Pagination
             current={current}
-            pageSize={9}
+            pageSize={8}
             onChange={onChange}
             total={orderControl2?.totalElements || 0}
           />

@@ -4,7 +4,6 @@
     깃허브 : https://github.com/leevscode
 */
 import axios from "axios";
-import { client } from "./client";
 
 export const getSellListData = async () => {
   try {
