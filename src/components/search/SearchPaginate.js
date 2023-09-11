@@ -6,7 +6,7 @@
 
 import React, { useEffect } from "react";
 import { PaginationWrap } from "../../admin/style/AdminLayoutStyle";
-import { Pagination } from "antd";
+import { ConfigProvider, Pagination } from "antd";
 import {
   atom,
   useRecoilState,
@@ -18,6 +18,7 @@ import { getSearchPatch } from "../../api/searchpatch";
 import { readSortRecoil } from "./SearchFilter";
 import { readUrlRecoil } from "./SearchList";
 import { searchResultRecoil } from "./SearchBar";
+import { SearchPaginationWrap } from "../../style/SearchStyle";
 
 // 페이지값 저장 recoil
 export const pageRecoil = atom({
@@ -28,7 +29,6 @@ export const pageRecoil = atom({
 const SearchPaginate = () => {
   // 페이지 recoil
   const [clickPage, setClickPage] = useRecoilState(pageRecoil);
-  console.log("clickPage", clickPage);
   // url Make
   const urlData = useRecoilValue(readUrlRecoil);
   // recoil sort
@@ -37,13 +37,13 @@ const SearchPaginate = () => {
   const [resultData, setResultData] = useRecoilState(searchResultRecoil);
 
   const pageOnChange = async page => {
-    setClickPage(page);
+    const temp = await setClickPage(page);
     console.log("페이지 onchange", page);
     try {
       const result = await getSearchPatch({
         urlData,
         sortList,
-        clickPage,
+        clickPage: page,
       });
       return setResultData(result);
     } catch (error) {
@@ -52,22 +52,28 @@ const SearchPaginate = () => {
   };
 
   useEffect(() => {
-    getSearchPatch(clickPage);
+    console.log("-----page re-render");
   }, [clickPage]);
   return (
-    <div style={{ marginBottom: "100px" }}>
-      <PaginationWrap>
-        <Pagination
-          current={clickPage}
-          pageSize={6}
-          onChange={page => pageOnChange(page)}
-          total={resultData?.count}
-          // current={pageInfo.page}
-          // pageSize={paginate.row}
-          // onChange={page => pageOnChange(page)}
-          // total={pageInfo.totalElements}
-        />
-      </PaginationWrap>
+    <div>
+      <SearchPaginationWrap>
+        <ConfigProvider
+          theme={{
+            token: {
+              colorPrimary: "#79213d",
+              fontFamily:
+                '"Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif',
+            },
+          }}
+        >
+          <Pagination
+            current={clickPage}
+            pageSize={6}
+            onChange={page => pageOnChange(page)}
+            total={resultData?.count}
+          />
+        </ConfigProvider>
+      </SearchPaginationWrap>
     </div>
   );
 };

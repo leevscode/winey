@@ -8,15 +8,31 @@ import React, { useState } from "react";
 import SearchBar from "../../components/search/SearchBar";
 import SearchList from "../../components/search/SearchList";
 import SearchPaginate from "../../components/search/SearchPaginate";
+import { SearchPageWrap } from "../../style/SearchStyle";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
+import { readResultData } from "../../components/search/SearchListItem";
+import { useRecoilValue } from "recoil";
 const SearchProduct = () => {
+  const listData = useRecoilValue(readResultData);
+  console.log("listData length", listData?.length);
 
   return (
-    <div>
+    <SearchPageWrap>
       {/* 검색 키워드*/}
       <SearchBar />
-      <SearchList />
-      <SearchPaginate />
-    </div>
+      {listData?.length === 0 ? (
+        <div className="noSearchItem">
+          <i>
+            <FontAwesomeIcon icon={faMagnifyingGlass} />
+          </i>
+          <p>검색어를 입력해 주세요.</p>
+        </div>
+      ) : (
+        <SearchList />
+      )}
+      {/* <SearchPaginate /> */}
+    </SearchPageWrap>
   );
 };
 

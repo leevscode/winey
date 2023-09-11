@@ -224,3 +224,18 @@ export const FilterButtonWrap = styled(motion.div)`
 export const SearchListWrap = styled.div`
   padding-top: 4rem;
 `;
+
+// 서치 페이지네이션
+export const SearchPaginationWrap = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: center !important;
+  margin-top: 2rem;
+
+  & .ant-select-selector {
+    display: none;
+  }
+  & .ant-pagination-options {
+    display: none;
+  }
+`;

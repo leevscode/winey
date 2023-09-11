@@ -137,13 +137,13 @@ export const wineSearchOptions = {
 // 정렬 옵션
 export const sortingOptions = [
   {
+    value: 0,
+    label: "오랜등록순",
+  },
+  {
     value: 1,
     label: "최신등록순",
   },
-  // {
-  //   value: 1,
-  //   label: "오랜등록순",
-  // },
   {
     value: 2,
     label: "높은가격순",

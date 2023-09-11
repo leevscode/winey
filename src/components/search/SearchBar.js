@@ -59,9 +59,10 @@ const SearchBar = () => {
   const sortList = useRecoilValue(readSortRecoil);
   // 선택된 필터를 불러오자
   const filters = useRecoilValue(readfilterClickItems);
-  console.log("filters", filters);
   // 페이지 recoil
-  const clickPage = useRecoilValue(pageRecoil);
+  // const clickPage = useRecoilValue(pageRecoil);
+  const [clickPage, setClickPage] = useRecoilState(pageRecoil);
+
   // 텍스트 저장하는 recoil
   const [inputText, setInputText] = useRecoilState(searchTextRecoil);
   // url Make
@@ -82,7 +83,6 @@ const SearchBar = () => {
 
   // 검색어 입력창 핸들러
   const handleTextSearch = e => {
-    console.log("텍스트 서치 onChange", e);
     setInputText(e.target.value);
   };
 
@@ -129,6 +129,7 @@ const SearchBar = () => {
 
   // 텍스트 검색버튼
   const onSearch = async e => {
+    setClickPage("1");
     try {
       const result = await getSearchPatch({
         urlData,

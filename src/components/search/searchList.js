@@ -4,7 +4,7 @@
     깃허브 : https://github.com/hyemdev
 */
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   atom,
   selector,
@@ -23,7 +23,7 @@ import { ProductListItemWrap } from "../../style/ProductListStyle";
 import { Gradation } from "../../style/GlobalStyle";
 import { sortingOptions } from "./SearchCateExport";
 import { getSearchPatch } from "../../api/searchpatch";
-import { pageRecoil } from "./SearchPaginate";
+import SearchPaginate, { pageRecoil } from "./SearchPaginate";
 import { searchResultRecoil } from "./SearchBar";
 
 // 정렬 recoil
@@ -61,8 +61,8 @@ const SearchList = () => {
   // recoil
   const [sortList, setSortList] = useRecoilState(sortRecoil);
   // 검색결과 받아오는 recoil
-  const setResultData = useSetRecoilState(searchResultRecoil);
-
+  const [resultData, setResultData] = useRecoilState(searchResultRecoil);
+  console.log("resultData", resultData);
   // 검색어 없음 모달
   const [isModalOpen, setIsModalOpen] = useState(false);
   const handleOk = () => {
@@ -73,11 +73,12 @@ const SearchList = () => {
   };
 
   const handleSortChange = async e => {
-    setSortList(e);
+    console.log("sort e", e);
     try {
+      setSortList(e);
       const result = await getSearchPatch({
         urlData,
-        sortList,
+        sortList: e,
         clickPage,
       });
       return setResultData(result);
@@ -85,14 +86,18 @@ const SearchList = () => {
       console.log("error", error);
     }
   };
-
+  useEffect(() => {
+    console.log("-----sort re-render", sortList);
+  }, [sortList]);
   return (
     <div>
       <SearchListWrap>
         <ProductListItemWrap>
           {/* 상품목록 */}
           <ul>
-            <li>{/* 총 <span>{totalCount}</span>개 */}</li>
+            <li>
+              총 <span>{resultData?.count}</span>개
+            </li>
             <li>
               {/* 상품정렬 */}
               <ConfigProvider
@@ -121,6 +126,7 @@ const SearchList = () => {
             {/* 상품 리스트 */}
             <SearchListItem />
           </ContentsListItemWrap>
+          <SearchPaginate />
         </ProductListItemWrap>
         {/* 장바구니 완료 모달창 */}
         <ProductCartModal

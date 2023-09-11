@@ -74,12 +74,11 @@ const SearchFilter = ({ isFilterActive }) => {
   // recoil sort
   const sortList = useRecoilValue(readSortRecoil);
   // 페이지 recoil
-  const clickPage = useRecoilValue(pageRecoil);
+  const [clickPage, setClickPage] = useRecoilState(pageRecoil);
   // 검색결과 받아오는 recoil
   const setResultData = useSetRecoilState(searchResultRecoil);
 
-  console.log("textRead", textRead);
-  console.log("clickfilter", clickfilter);
+  console.log("urlData", urlData);
 
   // 필터링 카테고리 선택 state
   const [wineTypeCheck, setWineTypeCheck] = useState("");
@@ -144,13 +143,14 @@ const SearchFilter = ({ isFilterActive }) => {
 
   const handleConfirm = async () => {
     console.log("최종확인버튼 selectFilter", selectFilter);
-    setClickfilter(selectFilter);
+    // setClickfilter(selectFilter);
+    setClickPage("1");
     try {
       const temp = makeUrl();
       setUrlData(temp);
 
       const result = await getSearchPatch({
-        urlData: temp,
+        urlData,
         sortList,
         clickPage,
       });
@@ -167,13 +167,13 @@ const SearchFilter = ({ isFilterActive }) => {
     setWinePriceCheck("");
     setWineCountryCheck("");
     setSelectFilter("");
-    // setUrlData("");
+    setUrlData("");
   };
 
   useEffect(() => {
-    const temp = makeUrl();
-    setUrlData(temp);
-  }, [clickfilter, textRead, selectFilter]);
+    setClickfilter(selectFilter);
+    console.log("-----useEffect");
+  }, [clickfilter, textRead, selectFilter, urlData]);
 
   return (
     <div>
