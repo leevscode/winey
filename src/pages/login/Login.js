@@ -23,6 +23,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 
 const Login = () => {
+  // 카카오 로그인
   const REST_API_KEY = "63c2ccf48233929cf35206dbb6fcdb14";
   const HOST_URI = window.location.host;
   // const HOST_URI = "localhost:3000";
@@ -55,6 +56,21 @@ const Login = () => {
       content: error ? <p>{error}</p> : <p>네트워크 오류입니다.</p>,
     };
   };
+
+  // const noService = () => {
+  //   Modal.warning({
+  //     wrapClassName: "info-modal-wrap notice-modal",
+  //     maskClosable: true,
+  //     content: (
+  //       <ul>
+  //         <li>
+  //           서비스 준비중입니다 <br />
+  //           이용에 불편을 드려 죄송합니다
+  //         </li>
+  //       </ul>
+  //     ),
+  //   });
+  // };
 
   const navigate = useNavigate();
 

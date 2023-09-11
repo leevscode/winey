@@ -193,7 +193,7 @@ const SellList = () => {
                 <li>
                   <span>픽업 시간</span>
                   {item.pickupTime.slice(0, 10)}
-                  -
+                  &nbsp;
                   {item.pickupTime.slice(11, 16)}
                 </li>
                 <li>

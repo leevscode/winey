@@ -31,7 +31,7 @@ const OrderControlAdm = () => {
   const navigate = useNavigate();
 
   // 정렬 state
-  const initialSortOption: ControllSortOption = { type: "0", sort: "0" };
+  const initialSortOption = { type: "orderdate", sort: "desc" };
   const [sortOption, setSortOption] =
     useState<ControllSortOption>(initialSortOption);
   const sortValue: Record<string, ControllSortOption> = {
@@ -41,7 +41,7 @@ const OrderControlAdm = () => {
     4: { type: "orderStatus", sort: "desc" },
   };
 
-  // 정렬
+  // 정렬 옵션 설정 함수
   const handleSortChange = (value: string) => {
     if (sortValue[value]) {
       const { type, sort } = sortValue[value];
@@ -143,7 +143,7 @@ const OrderControlAdm = () => {
 
   // 그리드 레이아웃
   const gridTemplateColumns = {
-    columns: "0.5fr 0.9fr 1.8fr 0.4fr 0.5fr 0.55fr 0.55fr 0.55fr 0.55fr",
+    columns: "0.6fr 0.9fr 1.8fr 0.4fr 0.5fr 0.55fr 0.55fr 0.55fr 0.55fr",
   };
 
   return (
@@ -205,65 +205,73 @@ const OrderControlAdm = () => {
               }}
             >
               <React.Fragment>
-                <li>{item.orderDate}</li>
-                <li>{item.email}</li>
-                <li>{item.nmKor}</li>
-                <li>{item.quantity}</li>
-                <li>
-                  {item.totalPrice.toLocaleString(undefined, {
-                    maximumFractionDigits: 0,
-                  })}
-                </li>
-                <li>
-                  {item.payment === 0 || item.payment === 1
-                    ? "신용카드"
-                    : item.payment}
-                </li>
-                <li>{item.pickUpStore}</li>
-                <li>
-                  <Form style={{ width: "100px" }}>
-                    <Form.Item
-                      style={{
-                        display: "flex",
-                        justifyContent: "center",
-                        width: "80%",
-                        margin: "0",
-                      }}
-                    >
-                      {/* 주문상태 변경 셀렉트 버튼 */}
-                      <Select
-                        style={{ width: "100px", textAlign: "center" }}
-                        placeholder="배송상태를 지정해주세요"
-                        value={item.orderStatus.toString()}
-                        onChange={async newStatus => {
-                          try {
-                            orderModal(newStatus, item);
-                          } catch (error) {
-                            console.error("상태변경 실패:", error);
-                          }
+                {item.email ? (
+                  <>
+                    <li>{item.orderDate}</li>
+                    <li>{item.email}</li>
+                    <li>{item.nmKor}</li>
+                    <li>{item.quantity}</li>
+                    <li>
+                      {item.totalPrice.toLocaleString(undefined, {
+                        maximumFractionDigits: 0,
+                      })}
+                    </li>
+                    <li>
+                      {item.payment === 0 || item.payment === 1
+                        ? "신용카드"
+                        : item.payment}
+                    </li>
+                    <li>{item.pickUpStore}</li>
+                    <li>
+                      <Form style={{ width: "100px" }}>
+                        <Form.Item
+                          style={{
+                            display: "flex",
+                            justifyContent: "center",
+                            width: "80%",
+                            margin: "0",
+                          }}
+                        >
+                          {/* 주문상태 변경 셀렉트 버튼 */}
+                          <Select
+                            style={{ width: "100px", textAlign: "center" }}
+                            placeholder="배송상태를 지정해주세요"
+                            value={item.orderStatus.toString()}
+                            onChange={async newStatus => {
+                              try {
+                                orderModal(newStatus, item);
+                              } catch (error) {
+                                console.error("상태변경 실패:", error);
+                              }
+                            }}
+                          >
+                            {option.map(option => (
+                              <Option key={option.value} value={option.value}>
+                                {option.label}
+                              </Option>
+                            ))}
+                          </Select>
+                        </Form.Item>
+                      </Form>
+                    </li>
+                    <li>
+                      <MemberOutBt
+                        style={{ fontSize: "1.3rem" }}
+                        onClick={() => {
+                          navigate(`/admin/orderdetail`, {
+                            state: item.orderId,
+                          });
                         }}
                       >
-                        {option.map(option => (
-                          <Option key={option.value} value={option.value}>
-                            {option.label}
-                          </Option>
-                        ))}
-                      </Select>
-                    </Form.Item>
-                  </Form>
-                </li>
-                <li>
-                  <MemberOutBt
-                    style={{ fontSize: "1.3rem" }}
-                    onClick={() => {
-                      navigate(`/admin/orderdetail`, { state: item.orderId });
-                    }}
-                  >
-                    상세
-                    <br />
-                    내역
-                  </MemberOutBt>
-                </li>
+                        상세
+                        <br />
+                        내역
+                      </MemberOutBt>
+                    </li>
+                  </>
+                ) : (
+                  <li>탈퇴한 회원입니다</li>
+                )}
               </React.Fragment>
             </TableLayoutContents>
           ))}

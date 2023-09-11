@@ -152,7 +152,7 @@ const SellListDetail = () => {
           픽업 시간
           <span>
             {productDes.pickupTime?.slice(0, 10)}
-            -
+            &nbsp;
             {productDes.pickupTime?.slice(11, 16)}
           </span>
         </p>

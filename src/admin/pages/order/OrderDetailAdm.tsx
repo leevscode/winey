@@ -30,7 +30,6 @@ const OrderDetailAdm = () => {
       console.error("데이터 로드 중 오류 발생", err);
     }
   };
-  console.log("456546", orderDetail2);
 
   useEffect(() => {
     getOdDetailData();

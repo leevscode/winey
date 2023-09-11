@@ -73,7 +73,8 @@ const KakaoLogin = () => {
     startKKO();
   }, []);
 
-  return <Navigate to="/main" />;
+  return <></>;
+  // <Navigate to="/main" />;
 };
 
 export default KakaoLogin;
