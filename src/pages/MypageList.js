@@ -88,6 +88,21 @@ const MypageList = () => {
         </div>
         <SectionLine />
         <ul>
+          {userData.roleType === "ADMIN" ? (
+            <li>
+              <NavLink
+                to="/admin"
+                onClick={() => {
+                  closeNav("/admin");
+                }}
+              >
+                관리자 페이지
+                <i>
+                  <FontAwesomeIcon icon={faAngleRight} />
+                </i>
+              </NavLink>
+            </li>
+          ) : null}
           <li>
             <NavLink to={userData.userId ? "/cart" : "/login"}>
               장바구니

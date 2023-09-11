@@ -20,12 +20,14 @@ const userSlice = createSlice({
       state.unm = action.payload.unm;
       state.tel = action.payload.tel;
       state.regionNmId = action.payload.regionNmId;
+      state.roleType = action.payload.roleType;
     },
     logoutUser: state => {
       state.userId = null;
       state.email = "";
       state.unm = "";
       state.tel = "";
+      state.roleType = "";
       state.regionNmId = null;
     },
   },

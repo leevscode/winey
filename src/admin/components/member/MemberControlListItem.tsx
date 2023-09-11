@@ -22,9 +22,11 @@ import { putMemberOut } from "../../api/patchAdmMember";
 
 const MemberControlListItem = ({
   regionConvert,
+  setMemberList,
   memberList,
 }: {
   regionConvert: IMemberListUser[];
+  setMemberList: React.Dispatch<React.SetStateAction<IMemControl>>;
   memberList: IMemControl;
 }) => {
   const navigate = useNavigate();
@@ -55,9 +57,15 @@ const MemberControlListItem = ({
           <li>삭제된 회원은 복구가 불가능 합니다.</li>
         </ul>
       ),
-      onOk() {
-        putMemberOut(item.userId);
-        console.log("회원탈퇴");
+      async onOk() {
+        try {
+          await putMemberOut(item.userId);
+          console.log("회원탈퇴");
+
+          setMemberList({ ...memberList });
+        } catch (error) {
+          console.log("회원탈퇴실패", error);
+        }
       },
       onCancel() {
         console.log("회원탈퇴실패");

@@ -134,6 +134,18 @@ const NavList = ({ handleOpenNav, closeNav }) => {
                 마이페이지
               </NavLink>
             </li>
+            {userData.roleType === "ADMIN" ? (
+              <li>
+                <NavLink
+                  to="/admin"
+                  onClick={() => {
+                    closeNav("/admin");
+                  }}
+                >
+                  관리자 페이지
+                </NavLink>
+              </li>
+            ) : null}
           </>
         ) : (
           <>

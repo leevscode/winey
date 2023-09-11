@@ -17,6 +17,9 @@ import MemberControlPaginate from "../../components/member/MemberControlPaginate
 import MemberControlSort, {
   initialSortOption,
 } from "../../components/member/MemberControlSort";
+import { atom, useRecoilState } from "recoil";
+// import { v4 } from "uuid";
+
 export const regionOptions = [
   { regionNmId: 1, value: "서울" },
   { regionNmId: 2, value: "부산" },
@@ -36,6 +39,7 @@ export const regionOptions = [
   { regionNmId: 16, value: "경남" },
   { regionNmId: 17, value: "제주" },
 ];
+
 const MemberControlAdm = () => {
   // 정렬 state
   const [sortOption, setSortOption] =
@@ -55,7 +59,7 @@ const MemberControlAdm = () => {
   });
 
   // 지역변환
-  const regionConvert: Array<IMemberListUser> = memberList.content?.map(
+  const regionConvert: Array<IMemberListUser> = memberList?.content?.map(
     item => {
       const changeList: {
         regionNmId: number;
@@ -75,7 +79,7 @@ const MemberControlAdm = () => {
   console.log("memberList111111", memberList);
   useEffect(() => {
     console.log("화면 리랜더링");
-  }, [regionConvert]);
+  }, []);
 
   return (
     <MemberWrap>
@@ -87,7 +91,11 @@ const MemberControlAdm = () => {
         sortSearch={sortSearch}
         setSortSearch={setSortSearch}
       />
-      <MemberControlListItem regionConvert={regionConvert} memberList={memberList}/>
+      <MemberControlListItem
+        regionConvert={regionConvert}
+        setMemberList={setMemberList}
+        memberList={memberList}
+      />
       <MemberControlPaginate
         memberList={memberList}
         setMemberList={setMemberList}

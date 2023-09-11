@@ -7,29 +7,12 @@ import { client } from "./client";
 import { getUser } from "../reducers/userSlice";
 import axios from "axios";
 
-// 로그인
-// export const postLogin = async (userid, password) => {
-//   try {
-//     const res = await axios.post(`/sign-api/sign-in`, {
-//       email: userid,
-//       upw: password,
-//     });
-//     console.log("res", res);
-//     const result = res.data;
-//     console.log("Login Result", result);
-//     return result;
-//   } catch (error) {
-//     console.log(error);
-//     return error;
-//   }
-// };
 // 회원가입
 export const postUserJoin = async userInfo => {
   try {
     const res = await axios.post("/sign-api/sign-up", {
       email: userInfo.email,
       upw: userInfo.password,
-      // role: "USER",
       unm: userInfo.nm,
       tel: userInfo.tel,
       regionNmId: userInfo.regionNmId,

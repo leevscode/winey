@@ -13,7 +13,7 @@ export const getMemberList = async (
     page: number;
     row: number;
   },
-  setMemberList: React.Dispatch<React.SetStateAction<IMemControl>>,
+  // setMemberList: React.Dispatch<React.SetStateAction<IMemControl>>,
   sortOption: {
     type: string;
     sort: string;
@@ -35,7 +35,7 @@ export const getMemberList = async (
     );
     console.log("res", res);
     const result: IMemControl = await res.data;
-    setMemberList(result);
+    // setMemberList(result);
     return result;
   } catch (error) {
     console.log(error);
@@ -79,9 +79,6 @@ export const putMemberOut = async (item: number) => {
     console.log("res", res);
     const result = await res.data;
     console.log("result", result);
-    // if (res.status === 200) {
-    //   console.log("");
-    // }
     return result;
   } catch (error) {
     console.log(error);

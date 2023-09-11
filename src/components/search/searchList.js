@@ -126,7 +126,7 @@ const SearchList = () => {
               </li>
             </ul>
             <ContentsListItemWrap>
-              <SearchListItem />
+              <SearchListItem setIsModalOpen={setIsModalOpen}/>
             </ContentsListItemWrap>
             <SearchPaginate />
           </ProductListItemWrap>

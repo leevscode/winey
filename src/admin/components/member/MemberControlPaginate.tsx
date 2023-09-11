@@ -26,7 +26,7 @@ const MemberControlPaginate = ({
   const [paginate, setPaginate] = useState<IinitialPg>({ page: 1, row: 10 });
 
   const pageInfo: IMemControl["pageableCustom"] | null =
-    memberList.pageableCustom;
+    memberList?.pageableCustom;
 
   const onChange = async (page: number) => {
     setPaginate(prevPaginate => ({ ...prevPaginate, page }));
@@ -34,16 +34,18 @@ const MemberControlPaginate = ({
 
   const getPage = async () => {
     // 페이지 정보를 보내고(paginate) , list 정보를 받는다
-    const getdata = await getMemberList(
-      paginate,
-      setMemberList,
-      sortOption,
-      sortSearch,
-      textSearch,
-    );
-    return;
+    try {
+      const getdata: any = await getMemberList(
+        paginate,
+        sortOption,
+        sortSearch,
+        textSearch,
+      );
+      setMemberList(getdata);
+    } catch (error) {
+      console.error("Error", error);
+    }
   };
-  console.log("memberList", memberList);
 
   useEffect(() => {
     getPage();
