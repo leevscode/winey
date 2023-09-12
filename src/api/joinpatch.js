@@ -82,6 +82,19 @@ export const getLogout = async () => {
     console.log(error);
   }
 };
+// 중복메일 체크
+export const getDuplicateID = async inputEmail => {
+  console.log("patch mail", inputEmail);
+  try {
+    const res = await axios.get(`/api/mypage/emails/${inputEmail}/exists`);
+    console.log(res);
+    const result = res.data;
+    console.log("중복체크결과", result);
+    return result;
+  } catch (error) {
+    console.log(error);
+  }
+};
 
 // 인증메일발송
 export const postCertifyMail = async inputEmail => {
