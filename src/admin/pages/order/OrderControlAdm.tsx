@@ -5,9 +5,17 @@
 */
 import React, { useEffect, useState } from "react";
 import { AdmOrderData } from "../../api/admorderlist";
-import { Form, Modal, Pagination, PaginationProps, Select } from "antd";
+import {
+  ConfigProvider,
+  Form,
+  Modal,
+  Pagination,
+  PaginationProps,
+  Select,
+} from "antd";
 import { useNavigate, useOutletContext } from "react-router";
 import {
+  AdminColor,
   MemberOutBt,
   PaginationWrap,
   TableLayoutContents,
@@ -21,6 +29,8 @@ import {
 } from "../../interface/ControlInterface";
 import { AdmProductWrap } from "../../style/product/AdminProductStyle";
 import axios from "axios";
+import { OrderTableWrap } from "../../style/AdminOrderControl";
+import { Maincolor } from "../../../style/GlobalStyle";
 
 const OrderControlAdm = () => {
   const [orderControl, setOrderControl] = useState<Array<fetchData>>([]);
@@ -105,7 +115,7 @@ const OrderControlAdm = () => {
       content: (
         <ul>
           <li>
-            <p style={{ color: "#7c1d34" }}>{item.nmKor}</p>
+            <p style={{ color: Maincolor.redBold }}>{item.nmKor}</p>
             {newStatusLabel}(으)로 바꾸시겠습니까?
           </li>
         </ul>
@@ -142,145 +152,149 @@ const OrderControlAdm = () => {
 
   // 그리드 레이아웃
   const gridTemplateColumns = {
-    columns: "0.6fr 0.9fr 1.8fr 0.4fr 0.5fr 0.55fr 0.55fr 0.55fr 0.55fr",
+    columns: "0.5fr 1fr 1.8fr 0.4fr 0.65fr 0.55fr 0.55fr 110px 0.45fr",
   };
 
   return (
-    <>
+    <OrderTableWrap>
       <AdmProductWrap>
-        <div className="table-top">
-          <p className="total-count">
-            총 <span>{totalRecordCount}</span>건
-          </p>
-          <Select
-            defaultValue="기본정렬"
-            style={{
-              width: 100,
-            }}
-            onChange={handleSortChange}
-            options={[
-              {
-                label: "픽업장소",
-                options: [
-                  { label: "오름차순", value: "1" },
-                  { label: "내림차순", value: "2" },
-                ],
-              },
-              {
-                label: "픽업배송상태",
-                options: [
-                  { label: "오름차순", value: "3" },
-                  { label: "내림차순", value: "4" },
-                ],
-              },
-            ]}
-          />
-        </div>
-
-        <TableVertical>
-          <TableLayoutTitle
-            listPathName={listPathName}
-            style={{
-              gridTemplateColumns: gridTemplateColumns.columns,
-            }}
-          >
-            <li>주문날짜</li>
-            <li>아이디</li>
-            <li>주문상품</li>
-            <li>주문수량</li>
-            <li>결제금액</li>
-            <li>결제수단</li>
-            <li>픽업장소</li>
-            <li>픽업배송상태</li>
-            <li>상세보기</li>
-          </TableLayoutTitle>
-          {/* 데이터 테이블 - 내용 */}
-          {orderControl?.map(item => (
-            <TableLayoutContents
-              key={item.orderId}
+        <ConfigProvider
+          theme={{
+            token: {
+              colorPrimary: AdminColor.headColorB,
+            },
+          }}
+        >
+          <div className="table-top">
+            <p className="total-count">
+              총 <span>{totalRecordCount}</span>건
+            </p>
+            <Select
+              defaultValue="기본정렬"
+              style={{
+                width: 120,
+              }}
+              onChange={handleSortChange}
+              options={[
+                {
+                  label: "픽업장소",
+                  options: [
+                    { label: "픽업장소 ↑", value: "1" },
+                    { label: "픽업장소 ↓", value: "2" },
+                  ],
+                },
+                {
+                  label: "픽업배송상태",
+                  options: [
+                    { label: "배송상태 ↑", value: "3" },
+                    { label: "배송상태 ↓", value: "4" },
+                  ],
+                },
+              ]}
+            />
+          </div>
+          <TableVertical>
+            <TableLayoutTitle
               listPathName={listPathName}
               style={{
                 gridTemplateColumns: gridTemplateColumns.columns,
               }}
             >
-              <React.Fragment>
-                <>
-                  <li>{item.orderDate}</li>
-                  {item.email ? (
-                    <li>{item.email}</li>
-                  ) : (
+              <li>주문날짜</li>
+              <li>아이디</li>
+              <li>주문상품</li>
+              <li>주문수량</li>
+              <li>결제금액</li>
+              <li>결제수단</li>
+              <li>픽업장소</li>
+              <li>픽업배송상태</li>
+              <li>상세보기</li>
+            </TableLayoutTitle>
+            {/* 데이터 테이블 - 내용 */}
+            {orderControl?.map(item => (
+              <TableLayoutContents
+                key={item.orderId}
+                listPathName={listPathName}
+                style={{
+                  gridTemplateColumns: gridTemplateColumns.columns,
+                }}
+              >
+                <React.Fragment>
+                  <>
+                    <li>{item.orderDate}</li>
+                    {item.email ? (
+                      <li>{item.email}</li>
+                    ) : (
+                      <li>
+                        <img
+                          style={{ width: "20px", marginRight: "3px" }}
+                          src={`${process.env.PUBLIC_URL}/images/kakaologo.jpg`}
+                        />
+                        카카오 로그인 회원
+                      </li>
+                    )}
+                    <li className="tal">{item.nmKor}</li>
+                    <li>{item.quantity}</li>
                     <li>
-                      <img
-                        style={{ width: "20px", marginRight: "3px" }}
-                        src={`${process.env.PUBLIC_URL}/images/kakaologo.jpg`}
-                      />
-                      카카오 로그인 회원
+                      {item.totalPrice.toLocaleString(undefined, {
+                        maximumFractionDigits: 0,
+                      })}
+                      원
                     </li>
-                  )}
-                  <li>{item.nmKor}</li>
-                  <li>{item.quantity}</li>
-                  <li>
-                    {item.totalPrice.toLocaleString(undefined, {
-                      maximumFractionDigits: 0,
-                    })}
-                  </li>
-                  <li>
-                    {item.payment === 0 || item.payment === 1
-                      ? "신용카드"
-                      : item.payment}
-                  </li>
-                  <li>{item.pickUpStore}</li>
-                  <li>
-                    <Form style={{ width: "100px" }}>
-                      <Form.Item
-                        style={{
-                          display: "flex",
-                          justifyContent: "center",
-                          width: "80%",
-                          margin: "0",
-                        }}
-                      >
-                        {/* 주문상태 변경 셀렉트 버튼 */}
-                        <Select
-                          style={{ width: "100px", textAlign: "center" }}
-                          placeholder="배송상태를 지정해주세요"
-                          value={item.orderStatus.toString()}
-                          onChange={async newStatus => {
-                            try {
-                              orderModal(newStatus, item);
-                            } catch (error) {
-                              console.error("상태변경 실패:", error);
-                            }
+                    <li>
+                      {item.payment === 0 || item.payment === 1
+                        ? "신용카드"
+                        : item.payment}
+                    </li>
+                    <li>{item.pickUpStore}</li>
+                    <li className="order-status-wrap">
+                      <Form>
+                        <Form.Item
+                          style={{
+                            display: "flex",
+                            justifyContent: "center",
+                            margin: "0",
                           }}
                         >
-                          {option.map(option => (
-                            <Option key={option.value} value={option.value}>
-                              {option.label}
-                            </Option>
-                          ))}
-                        </Select>
-                      </Form.Item>
-                    </Form>
-                  </li>
-                  <li>
-                    <MemberOutBt
-                      style={{ fontSize: "1.3rem" }}
-                      onClick={() => {
-                        navigate(`/admin/orderdetail`, {
-                          state: item.orderId,
-                        });
-                      }}
-                    >
-                      상세
-                      <br />
-                      내역
-                    </MemberOutBt>
-                  </li>
-                </>
-              </React.Fragment>
-            </TableLayoutContents>
-          ))}
-        </TableVertical>
+                          {/* 주문상태 변경 셀렉트 버튼 */}
+                          <Select
+                            placeholder="배송상태를 지정해주세요."
+                            value={item.orderStatus.toString()}
+                            onChange={async newStatus => {
+                              try {
+                                orderModal(newStatus, item);
+                              } catch (error) {
+                                console.error("상태변경 실패:", error);
+                              }
+                            }}
+                          >
+                            {option.map(option => (
+                              <Option key={option.value} value={option.value}>
+                                {option.label}
+                              </Option>
+                            ))}
+                          </Select>
+                        </Form.Item>
+                      </Form>
+                    </li>
+                    <li>
+                      <MemberOutBt
+                        style={{ padding: "0.5rem 0.6rem" }}
+                        onClick={() => {
+                          navigate(`/admin/orderdetail`, {
+                            state: item.orderId,
+                          });
+                        }}
+                      >
+                        상세내역
+                      </MemberOutBt>
+                    </li>
+                  </>
+                </React.Fragment>
+              </TableLayoutContents>
+            ))}
+          </TableVertical>
+        </ConfigProvider>
         <PaginationWrap>
           <Pagination
             current={current}
@@ -290,7 +304,7 @@ const OrderControlAdm = () => {
           />
         </PaginationWrap>
       </AdmProductWrap>
-    </>
+    </OrderTableWrap>
   );
 };
 

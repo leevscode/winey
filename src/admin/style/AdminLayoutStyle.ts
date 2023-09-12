@@ -448,6 +448,7 @@ export const TableVertical = styled.div`
     & > li {
       border-right: 0.05rem solid ${opacity.white};
       text-align: center;
+      word-break: break-word;
       &:last-of-type {
         border-right: 0;
       }
