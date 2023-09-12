@@ -65,6 +65,8 @@ const Price = () => {
   const page = useRef(1);
   // cate 보관할 state
   const [cateid, setCateid] = useState(2);
+  // 상품이 없을 때 출력되는 컴포넌트 출력여부 설정 state
+  const [noProduct, setNoProduct] = useState(false);
   // value값에 따라 데이터 바뀜
   const getListData = useCallback(
     async value => {
@@ -75,6 +77,7 @@ const Price = () => {
           page,
           cateid,
           setTotalCount,
+          setNoProduct,
         );
         setListScroll(prevPosts => [...prevPosts, ...result]);
       } else if (value === 2) {
@@ -84,6 +87,7 @@ const Price = () => {
           page,
           cateid,
           setTotalCount,
+          setNoProduct,
         );
         setListScroll(prevPosts => [...prevPosts, ...result]);
       } else if (value === 3) {
@@ -93,6 +97,7 @@ const Price = () => {
           page,
           cateid,
           setTotalCount,
+          setNoProduct,
         );
         setListScroll(prevPosts => [...prevPosts, ...result]);
       }
@@ -170,7 +175,7 @@ const Price = () => {
   }, [getListData, hasNextPage, inView, setOptionValue]);
   // 화면 카테고리 버튼 처리
   useEffect(() => {
-    console.log("cateid값 확인", cateid);
+    // console.log("cateid값 확인", cateid);
     // 화면 데이터 초기화
     setListScroll([]);
     // 카테고리 버튼 클릭하면 hasNextPage 값을 true로 되돌림
@@ -224,6 +229,7 @@ const Price = () => {
               listScroll={listScroll}
               setIsModalOpen={setIsModalOpen}
               hasNextPage={hasNextPage}
+              noProduct={noProduct}
             />
           </ContentsListItemWrap>
           {/* 로딩 컴포넌트 */}

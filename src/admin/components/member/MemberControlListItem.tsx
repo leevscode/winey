@@ -6,6 +6,8 @@
 
 import React, { useEffect, useState } from "react";
 import {
+  DetailBt,
+  MemberOutBt,
   TableLayoutContents,
   TableLayoutTitle,
   TableVertical,
@@ -30,7 +32,7 @@ const MemberControlListItem = ({
   const navigate = useNavigate();
   const { listPathName } = useOutletContext() as { listPathName: string };
   const gridTemplateColumns = {
-    columns: "0.4fr 1.2fr 0.8fr 0.6fr 0.6fr 0.6fr 0.6fr",
+    columns: "0.4fr 1.2fr 0.5fr 0.5fr 0.5fr 0.5fr 0.5fr",
   };
 
   const handleMemberOrder = (item: IMemberListUser) => {
@@ -107,20 +109,20 @@ const MemberControlListItem = ({
                 <li>{item.createdAt}</li>
                 <li>{item.textRegion}</li>
                 <li>
-                  <button
+                  <DetailBt
                     onClick={() => handleMemberOrder(item)}
-                    className="detailBt"
+                    // className="detailBt"
                   >
                     주문상세보기
-                  </button>
+                  </DetailBt>
                 </li>
                 <li>
-                  <button
+                  <MemberOutBt
                     onClick={() => handleMemberOut(item)}
-                    className="memberOutBt"
+                    // className="memberOutBt"
                   >
                     탈퇴
-                  </button>
+                  </MemberOutBt>
                 </li>
               </TableLayoutContents>
             ))}

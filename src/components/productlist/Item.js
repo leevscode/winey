@@ -13,7 +13,7 @@ import { ProductNoItem } from "../../style/ProductListStyle";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faWineGlassEmpty } from "@fortawesome/free-solid-svg-icons";
 
-const Item = ({ listScroll, setIsModalOpen, hasNextPage }) => {
+const Item = ({ listScroll, setIsModalOpen, hasNextPage, noProduct }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const userData = useSelector(state => state.user);
@@ -91,7 +91,7 @@ const Item = ({ listScroll, setIsModalOpen, hasNextPage }) => {
           </Link>
         </ProductListItem>
       ))}
-      {listScroll?.length === 0 && (
+      {noProduct && (
         <ProductNoItem>
           <div>
             <i>

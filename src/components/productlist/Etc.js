@@ -59,19 +59,34 @@ const Etc = () => {
   // value 보관할 state
   const [optionValue, setOptionValue] = useState(1);
   const page = useRef(1);
+  // 상품이 없을 때 출력되는 컴포넌트 출력여부 설정 state
+  const [noProduct, setNoProduct] = useState(false);
   // value값에 따라 데이터 바뀜
   const getListData = useCallback(async value => {
     if (value === 1) {
-      await getEtcWineNew(setListScroll, setHasNextPage, page, setTotalCount);
+      await getEtcWineNew(
+        setListScroll,
+        setHasNextPage,
+        page,
+        setTotalCount,
+        setNoProduct,
+      );
     } else if (value === 2) {
       await getEtcWineExpensive(
         setListScroll,
         setHasNextPage,
         page,
         setTotalCount,
+        setNoProduct,
       );
     } else if (value === 3) {
-      await getEtcWineCheap(setListScroll, setHasNextPage, page, setTotalCount);
+      await getEtcWineCheap(
+        setListScroll,
+        setHasNextPage,
+        page,
+        setTotalCount,
+        setNoProduct,
+      );
     }
   }, []);
   // 상품 정렬 옵션
@@ -152,7 +167,11 @@ const Etc = () => {
         </ul>
         <ContentsListItemWrap>
           {/* 상품 리스트 */}
-          <Item listScroll={listScroll} setIsModalOpen={setIsModalOpen} />
+          <Item
+            listScroll={listScroll}
+            setIsModalOpen={setIsModalOpen}
+            noProduct={noProduct}
+          />
         </ContentsListItemWrap>
         {/* 로딩 컴포넌트 */}
         {hasNextPage && (

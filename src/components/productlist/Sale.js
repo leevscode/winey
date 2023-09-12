@@ -37,6 +37,8 @@ const Sale = () => {
   // type 보관할 state
   const [type, setType] = useState("DESC");
   const page = useRef(0);
+  // 상품이 없을 때 출력되는 컴포넌트 출력여부 설정 state
+  const [noProduct, setNoProduct] = useState(false);
   // 상품 정렬 옵션
   const options = [
     {
@@ -91,6 +93,7 @@ const Sale = () => {
         sort,
         type,
         setTotalCount,
+        setNoProduct,
       );
     }
     // console.log("inView", inView, "hasNextPage", hasNextPage);
@@ -133,6 +136,7 @@ const Sale = () => {
             listScroll={listScroll}
             setIsModalOpen={setIsModalOpen}
             hasNextPage={hasNextPage}
+            noProduct={noProduct}
           />
         </ContentsListItemWrap>
         {/* 로딩 컴포넌트 */}

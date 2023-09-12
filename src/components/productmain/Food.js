@@ -65,6 +65,8 @@ const Food = () => {
   const page = useRef(1);
   // cate 보관할 state
   const [cateid, setCateid] = useState(1);
+  // 상품이 없을 때 출력되는 컴포넌트 출력여부 설정 state
+  const [noProduct, setNoProduct] = useState(false);
   // value값에 따라 데이터 바뀜
   const getListData = useCallback(
     async value => {
@@ -75,6 +77,7 @@ const Food = () => {
           page,
           cateid,
           setTotalCount,
+          setNoProduct,
         );
         setListScroll(prevPosts => [...prevPosts, ...result]);
         // console.log("결과", result);
@@ -85,6 +88,7 @@ const Food = () => {
           page,
           cateid,
           setTotalCount,
+          setNoProduct,
         );
         setListScroll(prevPosts => [...prevPosts, ...result]);
       } else if (value === 3) {
@@ -94,6 +98,7 @@ const Food = () => {
           page,
           cateid,
           setTotalCount,
+          setNoProduct,
         );
         setListScroll(prevPosts => [...prevPosts, ...result]);
       }
@@ -191,6 +196,7 @@ const Food = () => {
     // getListData(1);
     // console.log("현재 데이터는?", listScroll);
   }, [cateid]);
+  // console.log("상품있니", noProduct);
   return (
     <>
       <ProductListWrap>
@@ -238,6 +244,7 @@ const Food = () => {
               listScroll={listScroll}
               setIsModalOpen={setIsModalOpen}
               hasNextPage={hasNextPage}
+              noProduct={noProduct}
             />
           </ContentsListItemWrap>
           {/* 로딩 컴포넌트 */}

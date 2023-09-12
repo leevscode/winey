@@ -36,7 +36,7 @@ const OrderDetailAdm = () => {
   }, []);
 
   const gridTemplateColumns = {
-    columns: "0.4fr 0.8fr 0.6fr 1.8fr 0.8fr 0.55fr",
+    columns: "0.3fr 0.5fr 0.8fr 1.6fr 0.6fr 0.4fr",
   };
 
   interface OrderSt {
@@ -87,8 +87,8 @@ const OrderDetailAdm = () => {
                     <li>{item.orderId}</li>
                     <li>{item.orderDate}</li>
                     <li>{item.email}</li>
-                    <li>{item.nmKor}</li>
-                    <li>{item.salePrice.toLocaleString()}</li>
+                    <li className="tal">{item.nmKor}</li>
+                    <li>{item.salePrice.toLocaleString()}원</li>
                     <li>{item.quantity}개</li>
                   </>
                 ) : (
@@ -96,8 +96,8 @@ const OrderDetailAdm = () => {
                     <li>{""}</li>
                     <li>{""}</li>
                     <li>{""}</li>
-                    <li>{item.nmKor}</li>
-                    <li>{item.salePrice.toLocaleString()}</li>
+                    <li className="tal">{item.nmKor}</li>
+                    <li>{item.salePrice.toLocaleString()}원</li>
                     <li>{item.quantity}개</li>
                   </>
                 )}

@@ -61,16 +61,25 @@ const White = () => {
   // value 보관할 state
   const [optionValue, setOptionValue] = useState(1);
   const page = useRef(1);
+  // 상품이 없을 때 출력되는 컴포넌트 출력여부 설정 state
+  const [noProduct, setNoProduct] = useState(false);
   // value값에 따라 데이터 바뀜
   const getListData = useCallback(async value => {
     if (value === 1) {
-      await getWhiteWineNew(setListScroll, setHasNextPage, page, setTotalCount);
+      await getWhiteWineNew(
+        setListScroll,
+        setHasNextPage,
+        page,
+        setTotalCount,
+        setNoProduct,
+      );
     } else if (value === 2) {
       await getWhiteWineExpensive(
         setListScroll,
         setHasNextPage,
         page,
         setTotalCount,
+        setNoProduct,
       );
     } else if (value === 3) {
       await getWhiteWineCheap(
@@ -78,6 +87,7 @@ const White = () => {
         setHasNextPage,
         page,
         setTotalCount,
+        setNoProduct,
       );
     }
   }, []);
@@ -163,6 +173,7 @@ const White = () => {
             listScroll={listScroll}
             setIsModalOpen={setIsModalOpen}
             hasNextPage={hasNextPage}
+            noProduct={noProduct}
           />
           <div ref={ref}></div>
         </ContentsListItemWrap>

@@ -234,7 +234,7 @@ const OrderControlAdm = () => {
                       </li>
                     )}
                     <li className="tal">{item.nmKor}</li>
-                    <li>{item.quantity}</li>
+                    <li>{item.quantity}개</li>
                     <li>
                       {item.totalPrice.toLocaleString(undefined, {
                         maximumFractionDigits: 0,
