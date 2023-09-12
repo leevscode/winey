@@ -155,14 +155,14 @@ const StoreControlListItem = ({ item, setEditZip, editZip }: any) => {
         try {
           const storeId = item.storeId;
           setError("");
-          setEditZip({
+          await putEditStore({
+            storeId,
             editStoreCity,
             editStoreNm,
             editStoreAddress,
             editStoreTel,
           });
-          await putEditStore({
-            storeId,
+          setEditZip({
             editStoreCity,
             editStoreNm,
             editStoreAddress,
