@@ -3,10 +3,11 @@
     노션 : https://hyemdev.notion.site/hyemdev/hyem-s-dev-STUDY-75ffe819c7534a049b59871e6fe17dd4
     깃허브 : https://github.com/hyemdev
 */
-import { Modal, Select, Space } from "antd";
+import { ConfigProvider, Modal, Select, Space } from "antd";
 import { IMemberSortOption } from "../../interface/MemberInterface";
 import { SortSelectWrap } from "../../style/AdminMemberStyle";
 import Search from "antd/es/input/Search";
+import { AdminColor } from "../../style/AdminLayoutStyle";
 
 export const initialSortOption: IMemberSortOption = {
   type: "storeid",
@@ -42,7 +43,7 @@ const StoreControlSort = ({
   ];
 
   const handleSortChange = (value: string) => {
-    console.log("value", value);
+    // console.log("value", value);
     if (sortValue[value]) {
       const { type, sort } = sortValue[value];
       setSortOption({ type, sort });
@@ -83,49 +84,57 @@ const StoreControlSort = ({
             총 <span>{storeInfomation?.pageableCustom?.totalElements}</span>개
           </p>
           <div className="searchSort">
-            <Space.Compact>
+            <ConfigProvider
+              theme={{
+                token: {
+                  colorPrimary: AdminColor.yellowC,
+                },
+              }}
+            >
+              <Space.Compact>
+                <Select
+                  // defaultValue={sortSearch}
+                  defaultValue={"검색옵션"}
+                  style={{ width: 120 }}
+                  onChange={e => onChangOption(e)}
+                  options={searchOptions}
+                />
+                <Search
+                  placeholder="검색어를 입력하세요."
+                  allowClear
+                  onSearch={e => onTextSearch(e)}
+                  style={{ width: 200 }}
+                />
+              </Space.Compact>
               <Select
-                // defaultValue={sortSearch}
-                defaultValue={"검색옵션"}
+                defaultValue="기본정렬"
                 style={{ width: 120 }}
-                onChange={e => onChangOption(e)}
-                options={searchOptions}
+                onChange={handleSortChange}
+                options={[
+                  {
+                    label: "매장이름",
+                    options: [
+                      { label: "매장이름↑", value: "1" },
+                      { label: "매장이름↓", value: "2" },
+                    ],
+                  },
+                  {
+                    label: "매장주소",
+                    options: [
+                      { label: "매장주소↑", value: "3" },
+                      { label: "매장주소↓", value: "4" },
+                    ],
+                  },
+                  {
+                    label: "매장번호",
+                    options: [
+                      { label: "매장번호↑", value: "5" },
+                      { label: "매장번호↓", value: "6" },
+                    ],
+                  },
+                ]}
               />
-              <Search
-                placeholder="검색어를 입력하세요."
-                allowClear
-                onSearch={e => onTextSearch(e)}
-                style={{ width: 200 }}
-              />
-            </Space.Compact>
-            <Select
-              defaultValue="기본정렬"
-              style={{ width: 120 }}
-              onChange={handleSortChange}
-              options={[
-                {
-                  label: "매장이름",
-                  options: [
-                    { label: "매장이름↑", value: "1" },
-                    { label: "매장이름↓", value: "2" },
-                  ],
-                },
-                {
-                  label: "매장주소",
-                  options: [
-                    { label: "매장주소↑", value: "3" },
-                    { label: "매장주소↓", value: "4" },
-                  ],
-                },
-                {
-                  label: "매장번호",
-                  options: [
-                    { label: "매장번호↑", value: "5" },
-                    { label: "매장번호↓", value: "6" },
-                  ],
-                },
-              ]}
-            />
+            </ConfigProvider>
           </div>
         </div>
       </SortSelectWrap>

@@ -117,6 +117,12 @@ export const StoreAddressModal = styled.div`
 `;
 
 export const EditStoreWrap = styled.div`
+  .store-thead {
+    & > li {
+      min-height: auto;
+      line-height: 1;
+    }
+  }
   & li {
     min-height: 5.3rem;
     padding-right: 1rem;

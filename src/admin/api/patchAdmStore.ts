@@ -28,7 +28,7 @@ export const getStoreList = async (
         textSearch ? `&str=${textSearch}` : ""
       }`,
     );
-    console.log("res", res.config.data);
+    // console.log("res", res.config.data);
     const result = await res.data;
     // console.log("매장정보 불러옵니다", result);
     return result;
@@ -70,8 +70,8 @@ export const putEditStore = async ({
   editStoreAddress,
   editStoreTel,
 }: IEditStore) => {
-  console.log("editStoreNm", editStoreNm);
-  console.log("storeId", storeId);
+  // console.log("editStoreNm", editStoreNm);
+  // console.log("storeId", storeId);
   try {
     const res = await axios.put(
       `/api/admin/store/{storeId}?storeId=${storeId}`,
@@ -83,7 +83,7 @@ export const putEditStore = async ({
       },
     );
     const result = res.data;
-    console.log("res", res);
+    // console.log("res", res);
     return result;
   } catch (error) {
     console.log(error);
@@ -97,7 +97,7 @@ export const deleteStore = async (item: string) => {
       `/api/admin/store/{storeId}?storeId=${item}`,
     );
     const result = await res.data;
-    console.log("삭제 성공했습니다.", result);
+    // console.log("삭제 성공했습니다.", result);
     return result;
   } catch (error) {
     console.log(error);

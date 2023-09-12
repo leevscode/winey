@@ -34,6 +34,7 @@ export const AdminColor = {
   blueB: "#a2c3c5",
   yellowA: "#f2ddc2",
   yellowB: "#e8cdaf",
+  yellowC: "#ccb295",
 };
 // 테이블 버튼 스타일 설정
 // (button 태그에만 사용 가능합니다!! Link 컴포넌트 사용 X!!)

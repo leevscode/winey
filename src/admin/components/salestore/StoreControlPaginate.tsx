@@ -33,12 +33,12 @@ const StoreControlPaginate = ({
       );
       return setStoreInfomation(getdata);
     } catch (error) {
-      console.error("Error", error);
+      // console.error("Error", error);
     }
   };
 
   useEffect(() => {
-    console.log("아아아아아아아아-화면갱신이이이이아아아아");
+    // console.log("아아아아아아아아-화면갱신이이이이아아아아");
     getPage();
   }, [paginate.page, editZip, sortOption, textSearch]);
 

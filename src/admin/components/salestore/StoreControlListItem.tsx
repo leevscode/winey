@@ -9,8 +9,12 @@ import {
   getStoreList,
   putEditStore,
 } from "../../api/patchAdmStore";
-import { DetailBt, MemberOutBt } from "../../style/AdminLayoutStyle";
-import { Form, Input, Modal, Popover, Radio } from "antd";
+import {
+  AdminColor,
+  DetailBt,
+  MemberOutBt,
+} from "../../style/AdminLayoutStyle";
+import { ConfigProvider, Form, Input, Modal, Popover, Radio } from "antd";
 import { regionOptions } from "../../pages/member/MemberControlAdm";
 import { StoreAddressModal } from "../../style/AdminStoreStyle";
 import DaumPostcodeEmbed from "react-daum-postcode";
@@ -42,7 +46,7 @@ const StoreControlListItem = ({ item, setEditZip, editZip }: any) => {
   // 변경지역선택 후 ok
   const handleCity = (e: any) => {
     const CityNum = e.target.value;
-    console.log("CityNum", CityNum);
+    // console.log("CityNum", CityNum);
     setEditZip(CityNum);
     setEditStoreCity(CityNum);
     const convert = regionOptions.map(item => {
@@ -172,7 +176,7 @@ const StoreControlListItem = ({ item, setEditZip, editZip }: any) => {
           return;
         } catch (error) {
           setError("네트워크 오류 입니다");
-          console.log(error);
+          // console.log(error);
           return;
         }
       },
@@ -205,30 +209,36 @@ const StoreControlListItem = ({ item, setEditZip, editZip }: any) => {
       ),
       async onOk() {
         try {
-          console.log("item.storeId", item.storeId);
+          // console.log("item.storeId", item.storeId);
           await deleteStore(item.storeId);
           setEditZip(item.storeId);
-          console.log("OK");
+          // console.log("OK");
           return;
         } catch (error) {
-          console.log("CANCEL");
+          // console.log("CANCEL");
           return;
         }
       },
       onCancel() {
-        console.log("CANCEL");
+        // console.log("CANCEL");
       },
     });
   };
   const content = <div>{error}</div>;
 
   useEffect(() => {
-    console.log("화면갱신", editZip);
+    // console.log("화면갱신", editZip);
   }, [editZip]);
   if (edit) {
     // 수정중
     return (
-      <>
+      <ConfigProvider
+        theme={{
+          token: {
+            colorPrimary: AdminColor.yellowC,
+          },
+        }}
+      >
         <li>{item.storeId}</li>
         <li className="cityEditSty">
           <Form.Item
@@ -293,7 +303,7 @@ const StoreControlListItem = ({ item, setEditZip, editZip }: any) => {
         <li>
           <MemberOutBt onClick={handleEditCancel}>취소</MemberOutBt>
         </li>
-      </>
+      </ConfigProvider>
     );
   } else {
     return (

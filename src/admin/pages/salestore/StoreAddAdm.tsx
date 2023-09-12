@@ -179,7 +179,7 @@ const StoreAddAdm: React.FC = () => {
       <ConfigProvider
         theme={{
           token: {
-            colorPrimary: AdminColor.yellowB,
+            colorPrimary: AdminColor.yellowC,
           },
         }}
       >
@@ -195,7 +195,8 @@ const StoreAddAdm: React.FC = () => {
               매장 등록
             </AdmProductBtnOk>
             <AdmProductBtnCancel
-              onClick={() => navigate("/admin/storecontrol")}>
+              onClick={() => navigate("/admin/storecontrol")}
+            >
               취소
             </AdmProductBtnCancel>
           </div>

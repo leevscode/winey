@@ -26,6 +26,7 @@ const StoreControlList = ({ regionConvert, setEditZip, editZip }: any) => {
         <TableVertical>
           <TableLayoutTitle
             listPathName={listPathName}
+            className="store-thead"
             style={{
               gridTemplateColumns: gridTemplateColumns.columns,
             }}

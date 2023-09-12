@@ -61,6 +61,7 @@ export const SortSelectWrap = styled.div`
     align-items: flex-end;
     margin-bottom: 5px;
     font-size: 1.25rem;
+    padding-top: 5px;
     .total-count {
       color: ${Maincolor.grayDeep};
       span {
