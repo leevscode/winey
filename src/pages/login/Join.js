@@ -4,7 +4,7 @@
     깃허브 : https://github.com/hyemdev
 */
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Radio, Form, Input, ConfigProvider, Modal, Button } from "antd";
 
 import {
@@ -17,7 +17,11 @@ import { ButtonOk } from "../../style/GlobalStyle";
 import { Terms } from "../../components/join/Terms";
 import { useNavigate } from "react-router-dom";
 import CertifyEmail from "../../components/join/CertifyEmail";
-import { postCertifyMail, postUserJoin } from "../../api/joinpatch";
+import {
+  getDuplicateID,
+  postCertifyMail,
+  postUserJoin,
+} from "../../api/joinpatch";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faCircleCheck,
@@ -72,14 +76,38 @@ const Join = () => {
   const handleEmailValue = e => {
     setInputEmail(e.target.value);
   };
+
   // 이메일 인증 모달
   const showModalEmail = async e => {
+    const reg = /naver.com/;
     e.preventDefault();
-    console.log("inputEmail", inputEmail);
-    const temp = await postCertifyMail(inputEmail);
-    // 메일 인증 post
-    setIsModalOpen(true);
+    const check = reg.test(inputEmail);
+    if (check === true) {
+      const dupID = await getDuplicateID(inputEmail);
+      if (dupID === true) {
+        Modal.warning({
+          title: "중복아이디",
+          content: <p>이미 가입된 회원입니다.</p>,
+        });
+        return;
+      }
+      if (dupID === false) {
+        const temp = await postCertifyMail(inputEmail);
+
+        // 메일 인증 post
+        setIsModalOpen(true);
+      }
+    }
+    if (check === false) {
+      Modal.warning({
+        title: "가입불가안내",
+        content: <p>네이버 메일만 이용가능합니다.</p>,
+      });
+      return;
+    }
+    return;
   };
+
   const handleOk = () => {
     setIsModalOpen(false);
   };
@@ -179,6 +207,9 @@ const Join = () => {
     console.log("Failed:", errorInfo);
   };
 
+  useEffect(() => {
+    console.log("화면갱신", inputEmail);
+  }, [inputEmail]);
   return (
     <JoinWrap>
       <ConfigProvider
@@ -201,19 +232,26 @@ const Join = () => {
           <span>
             아이디(Email)<b>*</b>
           </span>
-          <p>사용하실 아이디를 이메일 형식으로 입력해 주세요.</p>
+          <p>
+            사용하실 아이디를 이메일 형식으로 입력해 주세요. <b>네이버 메일</b>
+            만 이용 가능합니다.
+          </p>
           <ConfirmArray>
             <Form.Item
               name="email"
               rules={[
                 {
                   required: true,
-                  message: "이메일을 입력해주세요",
+                  message: "이메일을 입력해주세요.",
                 },
                 {
                   type: "email",
                   message: "이메일을 입력해주세요",
                 },
+                // {
+                //   pattern: /\.naver\.com$/,
+                //   message: "네이버 메일만 사용가능 합니다.",
+                // },
               ]}
             >
               <Input

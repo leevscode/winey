@@ -36,6 +36,9 @@ export const JoinWrap = styled.div`
     line-height: 2rem;
     margin-left: 0.2rem;
     padding-bottom: 0.5rem;
+    & > b {
+      color: red;
+    }
   }
   div > .ant-input-lg {
     font-size: 1.4rem;
