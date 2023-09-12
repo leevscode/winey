@@ -70,6 +70,8 @@ export const putEditStore = async ({
   editStoreAddress,
   editStoreTel,
 }: IEditStore) => {
+  console.log("editStoreNm", editStoreNm);
+  console.log("storeId", storeId);
   try {
     const res = await axios.put(
       `/api/admin/store/{storeId}?storeId=${storeId}`,
@@ -80,7 +82,8 @@ export const putEditStore = async ({
         address: editStoreAddress,
       },
     );
-    const result = await res.data;
+    const result = res.data;
+    console.log("res", res);
     return result;
   } catch (error) {
     console.log(error);

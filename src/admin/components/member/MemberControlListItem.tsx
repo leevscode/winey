@@ -15,7 +15,6 @@ import { useNavigate, useOutletContext } from "react-router";
 import {
   IMemControl,
   IMemberListUser,
-  IUserDetail,
 } from "../../interface/MemberInterface";
 import { Modal } from "antd";
 import { putMemberOut } from "../../api/patchAdmMember";
