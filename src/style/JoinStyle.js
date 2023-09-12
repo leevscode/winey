@@ -237,16 +237,75 @@ export const TermsFlex = styled.div`
 `;
 
 export const TermsInfoScroll = styled.div`
+  font-family:
+    "Pretendard Variable",
+    Pretendard,
+    -apple-system,
+    BlinkMacSystemFont,
+    system-ui,
+    Roboto,
+    "Helvetica Neue",
+    "Segoe UI",
+    "Apple SD Gothic Neo",
+    "Noto Sans KR",
+    "Malgun Gothic",
+    "Apple Color Emoji",
+    "Segoe UI Emoji",
+    "Segoe UI Symbol",
+    sans-serif;
   font-size: 1.1rem;
-  width: 30rem;
-  height: 50rem;
+  /* width: 30rem; */
+  /* height: 50rem; */
   overflow-y: scroll;
-  & h2 {
+  height: 100%;
+  /* & h2 {
     font-size: 1.4rem;
   }
   & > p {
     font-size: 1.2rem;
     font-weight: 900;
+  } */
+  & > div {
+    margin-bottom: 10px;
+    &:last-of-type {
+      margin-bottom: 0;
+    }
+    h3 {
+      font-size: 1.4rem;
+      font-weight: 700;
+      margin-bottom: 5px;
+      color: ${Maincolor.black};
+    }
+    ul {
+      font-size: 1.4rem !important;
+      & > li {
+        font-size: 0.9em;
+        font-weight: 500 !important;
+        text-align: left;
+        margin-bottom: 5px;
+        &:first-of-type {
+          margin-bottom: 5px !important;
+        }
+        &:last-of-type {
+          margin-bottom: 0;
+        }
+        ol {
+          margin-top: 5px;
+          margin-left: 10px;
+          opacity: 0.7;
+          & > li {
+            margin-bottom: 3px !important;
+            font-weight: 500 !important;
+            &:first-of-type {
+              margin-bottom: 3px !important;
+            }
+            &:last-of-type {
+              margin-bottom: 0;
+            }
+          }
+        }
+      }
+    }
   }
 `;
 
