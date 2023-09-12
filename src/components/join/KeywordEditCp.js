@@ -197,7 +197,7 @@ const KeywordEditCp = ({ yourKeyword }) => {
         // title: "선호 키워드",
         content: (
           <ul>
-            <li>선택한 내용을 저장하시겠습니까?</li>
+            <li>수정된 내용을 저장하시겠습니까?</li>
           </ul>
         ),
         onOk() {

@@ -28,7 +28,7 @@ const Login = () => {
   const HOST_URI = window.location.host;
   // const HOST_URI = "localhost:3000";
   const REDIRECT_URI = `http://${HOST_URI}/oauth/redirect`;
-  console.log(REDIRECT_URI);
+  // console.log(REDIRECT_URI);
   const KakaoLogin = () =>
     (window.location.href = `http://${HOST_URI}/oauth2/authorization/kakao?redirect_uri=${REDIRECT_URI}`);
 
@@ -94,6 +94,7 @@ const Login = () => {
 
         // 선호키워드 정보 유무를 받아오자
         const favoriteKeyInfo = await getUserFavoriteKey();
+        console.log("favoriteKeyInfo", favoriteKeyInfo);
         // 키워드 정보가 있으면 바로 메인으로, 없으면 키워드 선택 페이지로 가자
         if (favoriteKeyInfo.length > 0) {
           navigate("/main");

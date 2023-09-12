@@ -21,10 +21,10 @@ const MemberControlPaginate = ({
   sortOption,
   sortSearch,
   textSearch,
+  paginate,
+  setPaginate,
+  render,
 }: IMemberState) => {
-  // 페이지 정보(page / row: 페이지 당 개수)
-  const [paginate, setPaginate] = useState<IinitialPg>({ page: 1, row: 10 });
-
   const pageInfo: IMemControl["pageableCustom"] | null =
     memberList?.pageableCustom;
 
@@ -42,14 +42,17 @@ const MemberControlPaginate = ({
         textSearch,
       );
       setMemberList(getdata);
+      // return;
     } catch (error) {
-      console.error("Error", error);
+      console.log("Error", error);
+      return;
     }
   };
 
   useEffect(() => {
+    console.log("화면갱신----으으ㅓ어으아으으아");
     getPage();
-  }, [paginate.page, sortOption, textSearch]);
+  }, [paginate.page, sortOption, textSearch, render]);
   return (
     <PaginationWrap>
       {pageInfo && (

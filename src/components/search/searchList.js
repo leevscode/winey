@@ -10,7 +10,6 @@ import {
   selector,
   useRecoilState,
   useRecoilValue,
-  useSetRecoilState,
 } from "recoil";
 import { v4 } from "uuid";
 import { makeUrlRecoil } from "./SearchFilter";
@@ -57,7 +56,9 @@ export const readUrlRecoil = selector({
 
 const SearchList = () => {
   // 페이지 recoil
-  const clickPage = useRecoilValue(readpageRecoil);
+  // const clickPage = useRecoilValue(readpageRecoil);
+  const [clickPage, setClickPage] = useRecoilState(pageRecoil);
+
   // url Make
   const urlData = useRecoilValue(readUrlRecoil);
   // recoil
@@ -76,12 +77,13 @@ const SearchList = () => {
 
   const handleSortChange = async e => {
     console.log("sort e", e);
+    setClickPage(1);
     try {
       setSortList(e);
       const result = await getSearchPatch({
         urlData,
         sortList: e,
-        clickPage,
+        clickPage: 1,
       });
       return setResultData(result);
     } catch (error) {
@@ -126,7 +128,7 @@ const SearchList = () => {
               </li>
             </ul>
             <ContentsListItemWrap>
-              <SearchListItem setIsModalOpen={setIsModalOpen}/>
+              <SearchListItem setIsModalOpen={setIsModalOpen} />
             </ContentsListItemWrap>
             <SearchPaginate />
           </ProductListItemWrap>

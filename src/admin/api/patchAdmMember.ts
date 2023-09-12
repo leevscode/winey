@@ -13,18 +13,14 @@ export const getMemberList = async (
     page: number;
     row: number;
   },
-  // setMemberList: React.Dispatch<React.SetStateAction<IMemControl>>,
   sortOption: {
     type: string;
     sort: string;
   },
   sortSearch: string,
   textSearch: string,
+  // setMemberList: React.Dispatch<React.SetStateAction<IMemControl>>,
 ) => {
-  console.log("paginate.row", paginate.row);
-  console.log("sortSearch", sortSearch);
-  console.log("textSearch", textSearch);
-  console.log("sortOption", sortOption);
   try {
     const res = await axios.get(
       `/api/admin/user/list?page=${paginate.page - 1}&size=${
@@ -34,8 +30,7 @@ export const getMemberList = async (
       }${textSearch ? `&str=${textSearch}` : ""}`,
     );
     console.log("res", res);
-    const result: IMemControl = await res.data;
-    // setMemberList(result);
+    const result: IMemControl = res.data;
     return result;
   } catch (error) {
     console.log(error);

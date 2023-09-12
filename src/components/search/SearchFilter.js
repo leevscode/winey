@@ -144,7 +144,7 @@ const SearchFilter = ({ isFilterActive }) => {
   const handleConfirm = async () => {
     console.log("최종확인버튼 selectFilter", selectFilter);
     // setClickfilter(selectFilter);
-    setClickPage("1");
+    setClickPage(1);
     try {
       const temp = makeUrl();
       setUrlData(temp);

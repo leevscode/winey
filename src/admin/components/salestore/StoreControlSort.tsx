@@ -9,12 +9,13 @@ import { SortSelectWrap } from "../../style/AdminMemberStyle";
 import Search from "antd/es/input/Search";
 
 export const initialSortOption: IMemberSortOption = {
-  type: "userId",
-  sort: "ASC",
+  type: "storeid",
+  sort: "DESC",
 };
-const MemberControlSort = ({
-  memberList,
+const StoreControlSort = ({
+  storeInfomation,
   setSortOption,
+  textSearch,
   setTextSearch,
   sortSearch,
   setSortSearch,
@@ -22,23 +23,26 @@ const MemberControlSort = ({
   setPaginate,
 }: any) => {
   const sortValue: Record<string, IMemberSortOption> = {
-    1: { type: "userId", sort: "ASC" },
-    2: { type: "userId", sort: "DESC" },
-    3: { type: "pickUp", sort: "ASC" },
-    4: { type: "pickUp", sort: "DESC" },
+    1: { type: "storenm", sort: "ASC" },
+    2: { type: "storenm", sort: "DESC" },
+    3: { type: "address", sort: "ASC" },
+    4: { type: "address", sort: "DESC" },
+    5: { type: "storeid", sort: "ASC" },
+    6: { type: "storeid", sort: "DESC" },
   };
   const searchOptions = [
     {
-      value: "unm",
-      label: "회원이름",
+      value: "storename",
+      label: "매장명",
     },
     {
-      value: "email",
-      label: "회원아이디",
+      value: "storeaddress",
+      label: "매장주소",
     },
   ];
 
   const handleSortChange = (value: string) => {
+    console.log("value", value);
     if (sortValue[value]) {
       const { type, sort } = sortValue[value];
       setSortOption({ type, sort });
@@ -76,7 +80,7 @@ const MemberControlSort = ({
       <SortSelectWrap>
         <div className="table-top">
           <p className="total-count">
-            총 <span>{memberList?.pageableCustom?.totalElements}</span>개
+            총 <span>{storeInfomation?.pageableCustom?.totalElements}</span>개
           </p>
           <div className="searchSort">
             <Space.Compact>
@@ -100,17 +104,24 @@ const MemberControlSort = ({
               onChange={handleSortChange}
               options={[
                 {
-                  label: "회원번호",
+                  label: "매장이름",
                   options: [
-                    { label: "회원번호↑", value: "1" },
-                    { label: "회원번호↓", value: "2" },
+                    { label: "매장이름↑", value: "1" },
+                    { label: "매장이름↓", value: "2" },
                   ],
                 },
                 {
-                  label: "픽업지역",
+                  label: "매장주소",
                   options: [
-                    { label: "픽업지역↑", value: "3" },
-                    { label: "픽업지역↓", value: "4" },
+                    { label: "매장주소↑", value: "3" },
+                    { label: "매장주소↓", value: "4" },
+                  ],
+                },
+                {
+                  label: "매장번호",
+                  options: [
+                    { label: "매장번호↑", value: "5" },
+                    { label: "매장번호↓", value: "6" },
                   ],
                 },
               ]}
@@ -122,4 +133,4 @@ const MemberControlSort = ({
   );
 };
 
-export default MemberControlSort;
+export default StoreControlSort;

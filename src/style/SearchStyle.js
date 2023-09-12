@@ -222,7 +222,7 @@ export const FilterButtonWrap = styled(motion.div)`
 
 // 검색결과 감싸는 영역
 export const SearchListWrap = styled.div`
-  padding-top: 4rem;
+  /* padding-top: 4rem; */
 `;
 
 // 서치 페이지네이션

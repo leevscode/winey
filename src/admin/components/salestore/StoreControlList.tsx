@@ -4,7 +4,6 @@
     깃허브 : https://github.com/hyemdev
 */
 import React, { useEffect } from "react";
-import { IStoreDetailList } from "../../interface/StoreInterface";
 import {
   TableLayoutContents,
   TableLayoutTitle,
@@ -15,13 +14,11 @@ import { useOutletContext } from "react-router";
 import StoreControlListItem from "./StoreControlListItem";
 import { EditStoreWrap } from "../../style/AdminStoreStyle";
 
-const StoreControlList = ({ regionConvert, setEditZip }: any) => {
+const StoreControlList = ({ regionConvert, setEditZip, editZip }: any) => {
   const { listPathName } = useOutletContext() as { listPathName: string };
   const gridTemplateColumns = {
     columns: "0.2fr 0.3fr 0.3fr 1.2fr 0.5fr 0.2fr 0.2fr",
   };
-  // console.log("regionConvert", regionConvert);
-  // 수정 최종 저장하기
 
   return (
     <EditStoreWrap>
@@ -55,6 +52,7 @@ const StoreControlList = ({ regionConvert, setEditZip }: any) => {
                     key={item.storeId}
                     item={item}
                     setEditZip={setEditZip}
+                    editZip={editZip}
                   />
                 </>
               </TableLayoutContents>

@@ -44,10 +44,12 @@ const MemberControlAdm = () => {
   // 정렬 state
   const [sortOption, setSortOption] =
     useState<IMemberSortOption>(initialSortOption);
+  const [paginate, setPaginate] = useState<IinitialPg>({ page: 1, row: 10 });
+
   // 검색 state
   const [textSearch, setTextSearch] = useState<string>("");
   const [sortSearch, setSortSearch] = useState<string>("");
-  console.log("sortSearch", sortSearch);
+
   // 회원정보state
   const [memberList, setMemberList] = useState<IMemControl>({
     pageableCustom: {
@@ -57,6 +59,7 @@ const MemberControlAdm = () => {
     },
     content: [] as IMemberListUser[],
   });
+  const [render, setRender] = useState<string>("1");
 
   // 지역변환
   const regionConvert: Array<IMemberListUser> = memberList?.content?.map(
@@ -74,10 +77,6 @@ const MemberControlAdm = () => {
     },
   );
 
-  useEffect(() => {
-    console.log("화면 리랜더링");
-  }, []);
-
   return (
     <MemberWrap>
       <MemberControlSort
@@ -87,11 +86,14 @@ const MemberControlAdm = () => {
         setTextSearch={setTextSearch}
         sortSearch={sortSearch}
         setSortSearch={setSortSearch}
+        paginate={paginate}
+        setPaginate={setPaginate}
       />
       <MemberControlListItem
         regionConvert={regionConvert}
         setMemberList={setMemberList}
         memberList={memberList}
+        setRender={setRender}
       />
       <MemberControlPaginate
         memberList={memberList}
@@ -99,6 +101,9 @@ const MemberControlAdm = () => {
         sortOption={sortOption}
         sortSearch={sortSearch}
         textSearch={textSearch}
+        paginate={paginate}
+        setPaginate={setPaginate}
+        render={render}
       />
     </MemberWrap>
   );

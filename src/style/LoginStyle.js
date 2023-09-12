@@ -18,9 +18,10 @@ export const LoginWrap = styled.div`
     background: #fee500;
     border-radius: 6px;
     margin-top: 2rem;
+    text-align: center;
+    cursor: pointer;
     & > img {
-      transform: translateX(100%);
-      margin: 0 auto;
+      /* transform: translateX(100%); */
       height: 45px;
     }
   }
