@@ -22,10 +22,10 @@ const OrderDetailAdm = () => {
   const getOdDetailData = async () => {
     try {
       const data = await AdmOrderDetailData(parseInt(orderId.state));
-      console.log(data);
+      // console.log(data);
       setOrderDetail(data.list1);
       setOrderDetail2(data.list2);
-      console.log(data.list1);
+      // console.log(data.list1);
     } catch (err) {
       console.error("데이터 로드 중 오류 발생", err);
     }
