@@ -67,17 +67,16 @@ export const getdetailData = async numberValue => {
 };
 
 // 리뷰 등록
-export const submitReview = async (orderDetailId, reviewLevel, userId) => {
+export const submitReview = async (orderDetailId, reviewLevel) => {
   try {
     const res = await axios.post(`/api/payment/userreview`, {
       orderDetailId,
       reviewLevel,
-      userId,
     });
-    // console.log("리뷰가 성공적으로 제출되었습니다:");
+    console.log("리뷰가 성공적으로 제출되었습니다:", res);
     const result = await res.data;
     return result;
   } catch (error) {
-    // console.log("리뷰 제출 중 에러 발생:", error);
+    console.log("리뷰 제출 중 에러 발생:", error);
   }
 };

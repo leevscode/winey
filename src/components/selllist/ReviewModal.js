@@ -39,7 +39,7 @@ const ReviewModal = ({
     if (selectedReview) {
       // console.log("평점이 등록될 orderDetailId :", reviewId);
       // console.log("평점이 등록되었습니다 평점 레벨 :", selectedReview);
-      await submitReview(reviewId, selectedReview, userData.userId);
+      await submitReview(reviewId, selectedReview);
 
       reviewSubmitUpdate(selectedReview);
 
