@@ -44,13 +44,13 @@ const MemberDetailAdm = () => {
     // userOrderList: [] as IUserOrderListUpper[],
   });
 
-  console.log("location.state", location.state);
-  console.log("clickUserId", clickUserId);
+  // console.log("location.state", location.state);
+  // console.log("clickUserId", clickUserId);
 
   useEffect(() => {
     setClickUserId(location.state);
   }, []);
-  console.log("userInfomation", userInfomation);
+  // console.log("userInfomation", userInfomation);
 
   return (
     <MemberDetailWrap>

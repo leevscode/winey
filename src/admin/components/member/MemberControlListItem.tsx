@@ -12,10 +12,7 @@ import {
   TableWrap,
 } from "../../style/AdminLayoutStyle";
 import { useNavigate, useOutletContext } from "react-router";
-import {
-  IMemControl,
-  IMemberListUser,
-} from "../../interface/MemberInterface";
+import { IMemControl, IMemberListUser } from "../../interface/MemberInterface";
 import { Modal } from "antd";
 import { putMemberOut } from "../../api/patchAdmMember";
 
@@ -55,15 +52,15 @@ const MemberControlListItem = ({
         try {
           await putMemberOut(item.userId);
           setRender("랜더링");
-          console.log("회원탈퇴");
+          // console.log("회원탈퇴");
           return;
         } catch (error) {
-          console.log("회원탈퇴실패", error);
+          // console.log("회원탈퇴실패", error);
           return;
         }
       },
       onCancel() {
-        console.log("회원탈퇴실패");
+        // console.log("회원탈퇴실패");
       },
     });
   };

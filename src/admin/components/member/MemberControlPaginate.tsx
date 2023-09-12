@@ -50,7 +50,7 @@ const MemberControlPaginate = ({
   };
 
   useEffect(() => {
-    console.log("화면갱신----으으ㅓ어으아으으아");
+    // console.log("화면갱신----으으ㅓ어으아으으아");
     getPage();
   }, [paginate.page, sortOption, textSearch, render]);
   return (

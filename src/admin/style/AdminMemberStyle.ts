@@ -5,6 +5,7 @@
 */
 import styled from "@emotion/styled";
 import { Gradation, Maincolor, opacity } from "../../style/GlobalStyle";
+import { AdminColor } from "./AdminLayoutStyle";
 
 export const MemberWrap = styled.div`
   margin: 0 auto;
@@ -39,6 +40,15 @@ export const MemberWrap = styled.div`
 `;
 export const MemberDetailUpperWrap = styled.div`
   margin-bottom: 2rem;
+  table {
+    tr {
+      th {
+        background: ${AdminColor.headColorA};
+        color: ${Maincolor.white};
+        font-weight: 700;
+      }
+    }
+  }
 `;
 
 export const MemberDetailWrap = styled.div`

@@ -48,8 +48,8 @@ const MemberDetailListItem = ({
     },
   );
 
-  console.log("userInfomationQQ", userInfomation);
-  console.log("orderConvert", orderConvert);
+  // console.log("userInfomationQQ", userInfomation);
+  // console.log("orderConvert", orderConvert);
   return (
     <MemberDetailWrap>
       <TableWrap>

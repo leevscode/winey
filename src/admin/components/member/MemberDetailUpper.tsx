@@ -24,11 +24,11 @@ const MemberDetailUpper = ({
             <caption>데이터테이블</caption>
             <tbody>
               <tr>
-                <th>회원 번호 :</th> <td>{userInfomation.userId}</td>
+                <th>회원 번호</th> <td>{userInfomation.userId}</td>
                 <th></th> <td></td>
               </tr>
               <tr>
-                <th>회원 아이디 :</th>
+                <th>회원 아이디</th>
                 {userInfomation.email ? (
                   <td>{userInfomation.email}</td>
                 ) : (
@@ -40,11 +40,11 @@ const MemberDetailUpper = ({
                     카카오 로그인 회원
                   </td>
                 )}
-                <th>총 구매건수 :</th> <td>{userInfomation.orderCount} 건</td>
+                <th>총 구매건수</th> <td>{userInfomation.orderCount} 건</td>
               </tr>
               <tr>
-                <th>회원 이름 :</th> <td>{userInfomation.unm}</td>
-                <th>총 구매금액 :</th>{" "}
+                <th>회원 이름</th> <td>{userInfomation.unm}</td>
+                <th>총 구매금액</th>
                 <td>{userInfomation.sumOrderPrice.toLocaleString()} 원</td>
               </tr>
             </tbody>

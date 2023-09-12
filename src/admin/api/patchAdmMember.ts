@@ -29,7 +29,7 @@ export const getMemberList = async (
         sortSearch ? `&searchType=${sortSearch}` : ""
       }${textSearch ? `&str=${textSearch}` : ""}`,
     );
-    console.log("res", res);
+    // console.log("res", res);
     const result: IMemControl = res.data;
     return result;
   } catch (error) {
@@ -56,7 +56,7 @@ export const getMemberDetail = async (
         paginate.row
       }&sort=${sortOption.type},${sortOption.sort}`,
     );
-    console.log("res", res);
+    // console.log("res", res);
     const result = await res.data;
     console.log("result", result);
     setUserInfomation(result);
@@ -68,12 +68,12 @@ export const getMemberDetail = async (
 
 // 회원삭제
 export const putMemberOut = async (item: number) => {
-  console.log("patch item", item);
+  // console.log("patch item", item);
   try {
     const res = await axios.put(`/api/admin/withdrawal?userId=${item}`);
-    console.log("res", res);
+    // console.log("res", res);
     const result = await res.data;
-    console.log("result", result);
+    // console.log("result", result);
     return result;
   } catch (error) {
     console.log(error);
