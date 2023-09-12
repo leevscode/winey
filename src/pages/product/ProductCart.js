@@ -171,7 +171,10 @@ const ProductCart = () => {
       maskClosable: true,
       content: (
         <ul>
-          <li>장바구니에 담긴 모든 상품을 삭제 하시겠습니까?</li>
+          <li>
+            장바구니에 담긴 모든 상품을 <br />
+            삭제 하시겠습니까?
+          </li>
         </ul>
       ),
       async onOk() {
