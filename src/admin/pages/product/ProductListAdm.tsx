@@ -42,7 +42,7 @@ const ProductListAdm = () => {
   // 상품 정렬 보관할 state
   const [type, setType] = useState<string>("productid");
   // 오름차순, 내림차순 보관할 state
-  const [sort, setSort] = useState<string>("asc");
+  const [sort, setSort] = useState<string>("desc");
   // 검색어 입력 state
   const [textSearch, setTextSearch] = useState<string | null>("");
   // console.log("textSearch", textSearch);
