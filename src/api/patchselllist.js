@@ -73,7 +73,7 @@ export const submitReview = async (orderDetailId, reviewLevel) => {
       orderDetailId,
       reviewLevel,
     });
-    console.log("리뷰가 성공적으로 제출되었습니다:", res);
+    // console.log("리뷰가 성공적으로 제출되었습니다:", res);
     const result = await res.data;
     return result;
   } catch (error) {
