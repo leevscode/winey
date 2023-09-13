@@ -87,8 +87,20 @@ const Join = () => {
       const dupID = await getDuplicateID(inputEmail);
       if (dupID === true) {
         Modal.warning({
-          title: "중복 아이디",
-          content: <p>이미 가입된 회원입니다.</p>,
+          wrapClassName: "info-modal-wrap notice-modal",
+          maskClosable: true,
+          okText: "확인",
+          // title: "중복아이디",
+          content: (
+            <ul>
+              <li>
+                <i>
+                  <FontAwesomeIcon icon={faTriangleExclamation} />
+                </i>
+                이미 가입된 회원입니다.
+              </li>
+            </ul>
+          ),
         });
         return;
       }
@@ -102,8 +114,20 @@ const Join = () => {
     }
     if (check === false) {
       Modal.warning({
-        title: "가입불가안내",
-        content: <p>네이버 메일만 이용가능합니다.</p>,
+        wrapClassName: "info-modal-wrap notice-modal",
+        maskClosable: true,
+        okText: "확인",
+        // title: "가입불가안내",
+        content: (
+          <ul>
+            <li>
+              <i>
+                <FontAwesomeIcon icon={faTriangleExclamation} />
+              </i>
+              네이버 메일만 이용가능합니다.
+            </li>
+          </ul>
+        ),
       });
       return;
     }
