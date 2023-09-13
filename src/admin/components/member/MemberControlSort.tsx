@@ -10,7 +10,7 @@ import Search from "antd/es/input/Search";
 
 export const initialSortOption: IMemberSortOption = {
   type: "userId",
-  sort: "ASC",
+  sort: "DESC",
 };
 const MemberControlSort = ({
   memberList,
