@@ -57,21 +57,6 @@ const Login = () => {
     };
   };
 
-  // const noService = () => {
-  //   Modal.warning({
-  //     wrapClassName: "info-modal-wrap notice-modal",
-  //     maskClosable: true,
-  //     content: (
-  //       <ul>
-  //         <li>
-  //           서비스 준비중입니다 <br />
-  //           이용에 불편을 드려 죄송합니다
-  //         </li>
-  //       </ul>
-  //     ),
-  //   });
-  // };
-
   const navigate = useNavigate();
 
   const handleLoginID = e => {
