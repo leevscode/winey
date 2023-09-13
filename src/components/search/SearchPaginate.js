@@ -11,7 +11,6 @@ import {
   atom,
   useRecoilState,
   useRecoilValue,
-  useSetRecoilState,
 } from "recoil";
 import { v4 } from "uuid";
 import { getSearchPatch } from "../../api/searchpatch";
@@ -38,7 +37,7 @@ const SearchPaginate = () => {
 
   const pageOnChange = async page => {
     const temp = await setClickPage(page);
-    console.log("페이지 onchange", page);
+    // console.log("페이지 onchange", page);
     try {
       const result = await getSearchPatch({
         urlData,
@@ -50,10 +49,10 @@ const SearchPaginate = () => {
       console.log("error", error);
     }
   };
-  console.log("-----page clickPage", clickPage);
+  // console.log("-----page clickPage", clickPage);
 
   useEffect(() => {
-    console.log("-----page re-render");
+    // console.log("-----page re-render");
   }, [clickPage]);
   return (
     <div>

@@ -26,7 +26,7 @@ export const readResultData = selector({
 
 const SearchListItem = ({ setIsModalOpen }) => {
   const listData = useRecoilValue(readResultData);
-  console.log("listData", listData);
+  // console.log("listData", listData);
   //  임시변수
   const urlDataResult = [];
   

@@ -21,7 +21,7 @@ const CertifyEmail = ({ setEmailCertifyOk, setIsModalOpen }) => {
   };
   const onFinish = async values => {
     const result = await postConfirmCode(inputCode);
-    console.log("result", result);
+    // console.log("result", result);
     if (result === 1) {
       Modal.success({
         icon: (

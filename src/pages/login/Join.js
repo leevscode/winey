@@ -36,7 +36,7 @@ const Join = () => {
   // 이메일 인증 모달
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [emailCertifyOk, setEmailCertifyOk] = useState(false);
-  console.log("emailCertifyOk", emailCertifyOk);
+  // console.log("emailCertifyOk", emailCertifyOk);
   // 이메일 저장 state
   const [inputEmail, setInputEmail] = useState("");
   //password 유효성 검증 state
@@ -83,18 +83,20 @@ const Join = () => {
     e.preventDefault();
     const check = reg.test(inputEmail);
     if (check === true) {
+      // 이메일 중복 체크(중복아이디면 경고창띄우자)
       const dupID = await getDuplicateID(inputEmail);
       if (dupID === true) {
         Modal.warning({
-          title: "중복아이디",
+          title: "중복 아이디",
           content: <p>이미 가입된 회원입니다.</p>,
         });
         return;
       }
+      // 중복이 아닐경우에 메일인증번호를 보냄.
       if (dupID === false) {
+        // 메일 인증 post
         const temp = await postCertifyMail(inputEmail);
 
-        // 메일 인증 post
         setIsModalOpen(true);
       }
     }
@@ -159,7 +161,7 @@ const Join = () => {
 
   // 회원 가입 핸들러
   const onFinish = async values => {
-    console.log("join values", values);
+    // console.log("join values", values);
     // 인증메일 3차 때 진행 예정
     if (emailCertifyOk === false) {
       Modal.warning({
@@ -173,7 +175,7 @@ const Join = () => {
       return;
     }
     if (password !== passwordConfirm) {
-      console.log("비밀번호 불일치");
+      // console.log("비밀번호 불일치");
       return;
     }
     if (checkAll === true) {
@@ -208,7 +210,7 @@ const Join = () => {
   };
 
   useEffect(() => {
-    console.log("화면갱신", inputEmail);
+    // console.log("화면갱신", inputEmail);
   }, [inputEmail]);
   return (
     <JoinWrap>

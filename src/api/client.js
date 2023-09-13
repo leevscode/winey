@@ -83,8 +83,8 @@ export const fetchLogin = async (userid, password) => {
       sameSite: "none",
       httpOnly: true,
     });
-    console.log("res", res);
-    console.log("result", result);
+    // console.log("res", res);
+    // console.log("result", result);
     return result;
   } catch (error) {
     console.log("login error", error.response);
@@ -115,7 +115,7 @@ export const fetchKKOLogin = async accessToken => {
       sameSite: "none",
       httpOnly: true,
     });
-    console.log("res", res);
+    // console.log("res", res);
     return result;
   } catch (error) {
     console.log("login error", error.response);

@@ -17,9 +17,9 @@ export const postUserJoin = async userInfo => {
       tel: userInfo.tel,
       regionNmId: userInfo.regionNmId,
     });
-    console.log(res);
+    // console.log(res);
     const data = await res.data;
-    console.log(data);
+    // console.log(data);
   } catch (error) {
     console.log(error);
   }
@@ -31,7 +31,7 @@ export const getMemberInfo = () => async dispatch => {
     // const res = await client.get("/api/mypage/user-info");
     const res = await axios.get("/api/mypage/userinfo");
     const result = await res.data;
-    console.log("회원정보 get result", result);
+    // console.log("회원정보 get result", result);
     dispatch(getUser(result));
     return result;
   } catch (error) {
@@ -49,9 +49,9 @@ export const patchMemberInfo = async editUserInfo => {
       tel: editUserInfo.editUserTel,
       regionNmId: editUserInfo.editUserCity,
     });
-    console.log("res", res);
+    // console.log("res", res);
     const result = await res.data;
-    console.log(result);
+    // console.log(result);
   } catch (error) {
     console.log(error);
   }
@@ -62,9 +62,9 @@ export const deleteMember = async () => {
   try {
     // const res = await client.delete("/api/mypage/user-secession");
     const res = await axios.put("/api/mypage/delUser");
-    console.log("res", res);
+    // console.log("res", res);
     const result = await res.data;
-    console.log("회원삭제성공", result);
+    // console.log("회원삭제성공", result);
   } catch (error) {
     console.log("del, Err", error);
   }
@@ -84,12 +84,12 @@ export const getLogout = async () => {
 };
 // 중복메일 체크
 export const getDuplicateID = async inputEmail => {
-  console.log("patch mail", inputEmail);
+  // console.log("patch mail", inputEmail);
   try {
     const res = await axios.get(`/api/mypage/emails/${inputEmail}/exists`);
-    console.log(res);
+    // console.log(res);
     const result = res.data;
-    console.log("중복체크결과", result);
+    // console.log("중복체크결과", result);
     return result;
   } catch (error) {
     console.log(error);
@@ -112,9 +112,9 @@ export const postCertifyMail = async inputEmail => {
 export const postConfirmCode = async inputCode => {
   try {
     const res = await axios.post(`/api/login/codeConfirm?key=${inputCode}`);
-    console.log(res);
+    // console.log(res);
     const result = await res.data;
-    console.log(result);
+    // console.log(result);
     return result;
   } catch (error) {
     console.log(error);

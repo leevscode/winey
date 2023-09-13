@@ -15,7 +15,7 @@ const ProductComplete = () => {
   // const { state } = useLocation();
   const location = useLocation();
   const state = [location.state];
-  console.log("state", state);
+  // console.log("state", state);
   // 이미지 없을 때 error처리
   const onImgError = e => {
     e.target.src = NoImage;

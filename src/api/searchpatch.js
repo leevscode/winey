@@ -7,16 +7,16 @@ import axios from "axios";
 
 // 검색결과 get
 export const getSearchPatch = async ({ clickPage, urlData, sortList }) => {
-  console.log("clickPage", clickPage);
-  console.log("urlData", urlData);
-  console.log("sortList", sortList);
+  // console.log("clickPage", clickPage);
+  // console.log("urlData", urlData);
+  // console.log("sortList", sortList);
   try {
     const res = await axios.get(
       `/api/search?page=${clickPage}&sort=${sortList.value}&${urlData}`,
     );
-    console.log("서치res", res.config.url);
+    // console.log("서치res", res.config.url);
     const result = res.data;
-    console.log("결과보여줘result", result);
+    // console.log("결과보여줘result", result);
     return result;
   } catch (error) {
     console.log(error);
