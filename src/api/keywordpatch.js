@@ -34,28 +34,52 @@ export const postUserKeyword = async (favoriteKeyword, navigator) => {
       aromaCategoryId: favoriteKeyword.aromaCategoryId,
     });
     const result = await res.data;
-    navigator("/main");
-    return result;
+    if (result.length === 0) {
+      Modal.error({
+        icon: (
+          <i className="color_r">
+            <FontAwesomeIcon icon={faTriangleExclamation} />
+          </i>
+        ),
+        okText: "확인",
+        wrapClassName: "info-modal-wrap error-modal",
+        maskClosable: true,
+        title: "키워드 재선택",
+        content: (
+          <p>
+            선택 키워드에 대한 와인리스트가 없습니다. <br />
+            키워드를 다시 선택해주세요.
+          </p>
+        ),
+      });
+      navigator("/keywordselect");
+      return;
+    }
+    if (result.length !== 0) {
+      navigator("/main");
+      return result;
+    }
   } catch (error) {
     console.log(error);
-    Modal.error({
-      icon: (
-        <i className="color_r">
-          <FontAwesomeIcon icon={faTriangleExclamation} />
-        </i>
-      ),
-      okText: "확인",
-      wrapClassName: "info-modal-wrap error-modal",
-      maskClosable: true,
-      title: "키워드 재선택",
-      content: (
-        <p>
-          선택 키워드에 대한 와인리스트가 없습니다. <br />
-          키워드를 다시 선택해주세요.
-        </p>
-      ),
-    });
-    navigator("/keywordselect");
+    //   Modal.error({
+    //     icon: (
+    //       <i className="color_r">
+    //         <FontAwesomeIcon icon={faTriangleExclamation} />
+    //       </i>
+    //     ),
+    //     okText: "확인",
+    //     wrapClassName: "info-modal-wrap error-modal",
+    //     maskClosable: true,
+    //     title: "키워드 재선택",
+    //     content: (
+    //       <p>
+    //         선택 키워드에 대한 와인리스트가 없습니다. <br />
+    //         키워드를 다시 선택해주세요.
+    //       </p>
+    //     ),
+    //   });
+    //   navigator("/keywordselect");
+    // }
   }
 };
 
@@ -84,27 +108,52 @@ export const putUserKeyword = async (editFavoriteKeyword, navigator) => {
       aromaCategoryId: editFavoriteKeyword.aromaCategoryId,
     });
     const result = await res.data;
-    navigator("/main");
-    return result;
+    console.log("result", result);
+    if (result.length === 0) {
+      Modal.error({
+        icon: (
+          <i className="color_r">
+            <FontAwesomeIcon icon={faTriangleExclamation} />
+          </i>
+        ),
+        okText: "확인",
+        wrapClassName: "info-modal-wrap error-modal",
+        maskClosable: true,
+        title: "키워드 재선택",
+        content: (
+          <p>
+            선택 키워드에 대한 와인리스트가 없습니다. <br />
+            키워드를 다시 선택해주세요.
+          </p>
+        ),
+      });
+      navigator("/keywordselect");
+      return;
+    }
+    if (result.length !== 0) {
+      navigator("/main");
+      return result;
+    }
   } catch (error) {
     console.log(error);
-    Modal.error({
-      icon: (
-        <i className="color_r">
-          <FontAwesomeIcon icon={faTriangleExclamation} />
-        </i>
-      ),
-      okText: "확인",
-      wrapClassName: "info-modal-wrap error-modal",
-      maskClosable: true,
-      title: "키워드 재선택",
-      content: (
-        <p>
-          선택 키워드에 대한 와인리스트가 없습니다. <br />
-          키워드를 다시 선택해주세요.
-        </p>
-      ),
-    });
-    navigator("/keywordselectedit");
+    //   Modal.error({
+    //     icon: (
+    //       <i className="color_r">
+    //         <FontAwesomeIcon icon={faTriangleExclamation} />
+    //       </i>
+    //     ),
+    //     okText: "확인",
+    //     wrapClassName: "info-modal-wrap error-modal",
+    //     maskClosable: true,
+    //     title: "키워드 재선택",
+    //     content: (
+    //       <p>
+    //         선택 키워드에 대한 와인리스트가 없습니다. <br />
+    //         키워드를 다시 선택해주세요.
+    //       </p>
+    //     ),
+    //   });
+    //   navigator("/keywordselectedit");
+    // }
   }
 };
