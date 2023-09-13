@@ -78,7 +78,7 @@ const SearchFilter = ({ isFilterActive }) => {
   // 검색결과 받아오는 recoil
   const setResultData = useSetRecoilState(searchResultRecoil);
 
-  console.log("urlData", urlData);
+  // console.log("urlData", urlData);
 
   // 필터링 카테고리 선택 state
   const [wineTypeCheck, setWineTypeCheck] = useState("");
@@ -142,7 +142,7 @@ const SearchFilter = ({ isFilterActive }) => {
   };
 
   const handleConfirm = async () => {
-    console.log("최종확인버튼 selectFilter", selectFilter);
+    // console.log("최종확인버튼 selectFilter", selectFilter);
     // setClickfilter(selectFilter);
     setClickPage(1);
     try {
@@ -172,7 +172,7 @@ const SearchFilter = ({ isFilterActive }) => {
 
   useEffect(() => {
     setClickfilter(selectFilter);
-    console.log("-----useEffect");
+    // console.log("-----useEffect");
   }, [clickfilter, textRead, selectFilter, urlData]);
 
   return (

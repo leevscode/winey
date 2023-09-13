@@ -85,7 +85,7 @@ const Login = () => {
     try {
       // const login = await fetchLogin(userid, password);
       const login = await fetchLogin(userid, password);
-      console.log("login.roleType", login.roleType);
+      // console.log("login.roleType", login.roleType);
       if (login.roleType == "USER") {
         // 로그인성공 후 cookie에 있는 accessToken을 확인하자
         // 회원 정보 저장
@@ -94,7 +94,7 @@ const Login = () => {
 
         // 선호키워드 정보 유무를 받아오자
         const favoriteKeyInfo = await getUserFavoriteKey();
-        console.log("favoriteKeyInfo", favoriteKeyInfo);
+        // console.log("favoriteKeyInfo", favoriteKeyInfo);
         // 키워드 정보가 있으면 바로 메인으로, 없으면 키워드 선택 페이지로 가자
         if (favoriteKeyInfo.length > 0) {
           navigate("/main");
@@ -105,7 +105,7 @@ const Login = () => {
       if (login.roleType == "ADMIN") {
         navigate("/admin");
       } else {
-        console.log("로그인에러메세지else", login.response.data.message);
+        // console.log("로그인에러메세지else", login.response.data.message);
         const errorConfig = viewErrorModal(login.response.data.message);
         Modal.warning(errorConfig);
       }

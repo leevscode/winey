@@ -155,7 +155,7 @@ const ProductSell = () => {
           },
         });
         // navigate("/ProductComplete");
-        console.log("결제완료");
+        // console.log("결제완료");
       },
       onCancel() {
         console.log("Cancel");

@@ -39,7 +39,7 @@ const ProductSellCart = () => {
   const [editProductCollect, setEditProductCollect] = useState(
     productCollect.cartData,
   );
-  console.log("editProductCollect", editProductCollect);
+  // console.log("editProductCollect", editProductCollect);
   // get한 아이템정보를 배열에 담자
   const productInfoArray = productCollect.cartData;
 
@@ -162,7 +162,7 @@ const ProductSellCart = () => {
               });
             }),
           ).then(results => {
-            console.log("results", results);
+            // console.log("results", results);
 
             // 모든 Promise가 성공적으로 완료되었는지 확인
             const allPromisesFulfilled = results.every(
@@ -181,7 +181,7 @@ const ProductSellCart = () => {
                   totalPrice,
                 },
               });
-              console.log("결제완료");
+              // console.log("결제완료");
             } else {
               console.log("결제실패");
             }

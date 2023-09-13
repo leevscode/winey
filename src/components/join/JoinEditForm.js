@@ -129,7 +129,7 @@ const JoinEditForm = () => {
           title: "비밀번호 확인",
           content: <p>비밀번호를 다시 확인해 주세요.</p>,
         });
-        console.log("비밀번호확인");
+        // console.log("비밀번호확인");
       } else {
         Modal.confirm({
           okText: "예",
@@ -146,7 +146,7 @@ const JoinEditForm = () => {
             patchMemberInfo(update);
             dispatch(getMemberInfo());
             navigate("/main");
-            console.log("정보수정");
+            // console.log("정보수정");
           },
           onCancel() {
             console.log("Cancel");

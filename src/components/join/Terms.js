@@ -992,7 +992,7 @@ export const Terms = ({ checkAll, setCheckAll }) => {
   };
 
   const onCheckAllChange = e => {
-    console.log("onCheckAllChange", e);
+    // console.log("onCheckAllChange", e);
     setCheckedList(e.target.checked ? plainOptions : []);
     setIndeterminate(false);
     setCheckAll(e.target.checked);
