@@ -229,6 +229,7 @@ const JoinEditForm = () => {
             //     message: "이메일을 입력해주세요",
             //   },
             // ]}
+            //
           >
             <Input
               size="large"
