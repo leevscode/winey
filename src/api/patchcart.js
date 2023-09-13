@@ -5,7 +5,6 @@
 */
 import { Modal } from "antd";
 import { totalItem } from "../reducers/cartSlice";
-import { client } from "./client";
 import axios from "axios";
 
 // 장바구니 출력
@@ -63,7 +62,7 @@ export const addCart = async _productId => {
       productId: _productId,
     });
     const result = res.data;
-    console.log("장바구니 추가 POST 성공", result);
+    // console.log("장바구니 추가 POST 성공", result);
     return result;
   } catch (error) {
     console.error("API 요청 중 오류 발생:", error);
