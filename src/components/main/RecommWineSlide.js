@@ -99,7 +99,12 @@ const RecommWineSlide = ({ isLoading, randomWines, setIsModalOpen }) => {
                       <div className="title">{item.nmKor}</div>
                       <ul className="price">
                         <li className="top">
-                          <span>{item.salePrice.toLocaleString()}</span>원
+                          <span>
+                            {item.saleYn === 1
+                              ? item.salePrice.toLocaleString()
+                              : item.price.toLocaleString()}
+                          </span>
+                          원
                         </li>
                         {item.saleYn === 1 ? (
                           <li className="bottom">
