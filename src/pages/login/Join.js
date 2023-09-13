@@ -189,8 +189,20 @@ const Join = () => {
     // 인증메일 3차 때 진행 예정
     if (emailCertifyOk === false) {
       Modal.warning({
-        title: "메일인증확인",
-        content: <p>메일인증을 진행해 주세요.</p>,
+        // title: "메일인증확인",
+        okText: "확인",
+        wrapClassName: "info-modal-wrap notice-modal",
+        maskClosable: true,
+        content: (
+          <ul>
+            <li>
+              <i>
+                <FontAwesomeIcon icon={faTriangleExclamation} />
+              </i>
+              메일인증을 진행해 주세요.
+            </li>
+          </ul>
+        ),
       });
       return;
     }
