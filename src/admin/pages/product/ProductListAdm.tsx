@@ -57,7 +57,7 @@ const ProductListAdm = () => {
       setTotalPage,
       textSearch,
     );
-  }, [page, type, sort, textSearch]);
+  }, [page, type, sort, textSearch, admProductList]);
   return (
     <AdmProductWrap>
       {/* 상품 총 갯수 표시, 상품 등록 링크 */}
