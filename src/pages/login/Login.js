@@ -91,7 +91,6 @@ const Login = () => {
         dispatch(getMemberInfo());
         navigate("/admin");
       } else {
-        // console.log("로그인에러메세지else", login.response.data.message);
         const errorConfig = viewErrorModal(login.response.data.message);
         Modal.warning(errorConfig);
       }
