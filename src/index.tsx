@@ -24,7 +24,7 @@ root.render(
         <BrowserRouter>
           <App />
         </BrowserRouter>
-        </RecoilRoot>
+      </RecoilRoot>
       </PersistGate>
     </Provider>
   </HelmetProvider>,

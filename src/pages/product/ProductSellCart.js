@@ -162,13 +162,11 @@ const ProductSellCart = () => {
               });
             }),
           ).then(results => {
-            // console.log("results", results);
-
             // 모든 Promise가 성공적으로 완료되었는지 확인
-            const allPromisesFulfilled = results.every(
+            const Fulfilled = results.every(
               result => result.status === "fulfilled",
             );
-            if (allPromisesFulfilled) {
+            if (Fulfilled) {
               postSomeItemPurchase({
                 selectCollect,
                 navigate,
