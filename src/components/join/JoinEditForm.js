@@ -223,12 +223,13 @@ const JoinEditForm = () => {
           <p>사용하실 아이디를 입력해 주세요.</p>
           <Form.Item
             name="userId"
-            rules={[
-              {
-                required: true,
-                message: "이메일을 입력해주세요",
-              },
-            ]}
+            // rules={[
+            //   {
+            //     required: true,
+            //     message: "이메일을 입력해주세요",
+            //   },
+            // ]}
+            //
           >
             <Input
               size="large"
