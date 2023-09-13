@@ -88,6 +88,7 @@ const Login = () => {
         }
       }
       if (login.roleType == "ADMIN") {
+        dispatch(getMemberInfo());
         navigate("/admin");
       } else {
         // console.log("로그인에러메세지else", login.response.data.message);
