@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="https://capsule-render.vercel.app/api?type=Waving&color=0:690A21,100:C1305D&height=200&section=header&text=Second%20Project&fontSize=60&fontColor=fff" alt="Second Project" />
+  <img src="https://capsule-render.vercel.app/api?type=Waving&color=0:690A21,100:C1305D&height=200&section=header&text=Team%20PODOJect&fontSize=60&fontColor=fff" alt="Second Project" />
 </div>
 <div align="center">  
   <p>프론트엔드&백엔드 협업 프로젝트</p>
@@ -17,7 +17,23 @@
     Introduce<br/>
   </h2>
   <h3>
-    프로젝트 개요
+    기획의도
+  </h3>
+</div>
+<div>
+  <p>
+    ✔ 와인을 전혀 모르는 사람들이 <b>와인 구매를 하기엔 진입 장벽이 높다.</b>
+  </p>
+  <p>
+    ✔ 시중에 파는 와인들은 전문적인 용어 위주여서 <b>내게 맞는 취향은 어떤 것 인지 파악하기가 어렵다.</b>
+  </p>
+  <p>
+    ✔ 보통 음식에 곁들여 마시는 경우가 많으나 <b>어떤 음식에 어떤 와인이 어울리는지 알기 어렵다.</b>
+  </p>
+</div>
+<div>
+  <h3>
+    개요
   </h3>
 </div>
 <div>
@@ -39,6 +55,10 @@
   </p>
 </div>
 <br/>
+<div align="center">
+  <h3>💡 "구매자의 선호 키워드에 따른 와인 추천, 구체적인 검색 기능, 간단하고 직관적인 와인 정보를 제공" 💡</h3>
+</div>
+<br/>
 <div>  
   <h2>
     :calendar:<br/>
@@ -48,10 +68,14 @@
     프로젝트 기간
   </h3>
 </div>
-<div>  
-  23-07-13 ~ 23-08-18
+<div> 
+  <p>
+    🔸 프로젝트 기획 및 사용자 페이지 작업 (2차) : 23-07-13 ~ 23-08-18  
+  </p>
+  <p>
+    🔸 사용자 페이지 고도화 및 관리자 페이지 작업 (3차) : 23-08-21 ~ 23-09-14  
+  </p>
 </div>
-<br/>
 <div>  
   <h2>
     :file_folder:<br/>
@@ -66,7 +90,7 @@
     <a href="https://github.com/kimaydev/winey" target="_blank">
         <img src="https://img.shields.io/badge/GitHub-181717?style=flat&logo=github&logoColor=fff"/>
       </a>
-    <a href="https://www.notion.so/2-Winey-bfa2d8c9817742a99513764b16c13760" target="_blank">
+    <a href="https://hyemdev.notion.site/2-3-Winey-3c2cf23dabeb4d1da4bfbca232b3a113?pvs=4" target="_blank">
         <img src="https://img.shields.io/badge/Notion-fff?style=flat&logo=Notion&logoColor=000"/>
       </a>
     <a href="https://www.figma.com/file/ttkCdDz7qJxCNRDU346Bbn/%EC%99%80%EC%9D%B8-%ED%94%BD%EC%97%85-%EC%84%9C%EB%B9%84%EC%8A%A4?type=design&node-id=0%3A1&mode=design&t=nfcnkoYEwuhCLl5q-1" target="_blank">
@@ -74,7 +98,6 @@
       </a>
   </div>
 </div>
-<br/>
 <div>  
   <h2>
     :clapper:<br/>
@@ -84,10 +107,16 @@
     시연 영상    
   </h3>
 </div>
-<div>  
-  <a href="https://youtu.be/Nv6UKaLxZB0" target="_blank">시연 영상 바로가기</a>
+<div> 
+  <p>
+    🔹
+    <a href="https://youtu.be/MECLHZJnXxQ?si=dw5oCqd7BWAqzLMY" target="_blank">사용자 페이지 시연 영상 바로가기</a>  
+  </p>
+  <p>
+    🔹
+    <a href="https://youtu.be/AF_5gZDaF3k?si=87km-j0ePFCuTdvm" target="_blank">관리자 페이지 시연 영상 바로가기</a>  
+  </p>
 </div>
-<br/>
 <div>  
   <h2>
     :running:<br/>
@@ -110,14 +139,15 @@
       <a href="https://kimaydev.notion.site/kimaydev/FE-7a53f9f631f146c88c39413cd175a9d0" target="_blank">
        <img src="https://img.shields.io/badge/Notion-fff?style=flat&logo=Notion&logoColor=000"/>
       </a>
+      <br />
     </span>
     <br />
-    <p><b>[사용자 페이지] 담당파트 : </b></p>
+    <p><b>✔ [사용자 페이지] 담당파트 : </b></p>
     <p>
       - 로고 제작 및 사용자 페이지 디자인 작업
     </p>
     <p>
-      - 전반적인 프로젝트 기본 셋팅
+      - 사용자 페이지 기본 셋팅
     </p>
     <p>
       - 인트로, 성인인증 페이지
@@ -143,6 +173,37 @@
     <p>
       - Not found 페이지
     </p>
+    <p>
+      - 모달창 디자인 획일화
+    </p>
+    <p>
+      - 이달의 와인 페이지
+    </p>
+    <p>
+      - 선호키워드 페이지 UI/UX 개선
+    </p>
+    <p>
+      - 상품 검색 페이지 UI/UX 작업
+    </p>
+    <p>
+      - 오픈소스 페이지
+    </p>
+    <p><b>✔ [관리자 페이지] 담당파트 : </b></p>
+    <p>
+      - 전반적인 관리자 페이지 UI/UX 작업
+    </p>
+    <p>
+      - 리스트 테이블 컴포넌트
+    </p>
+    <p>
+      - 등록된 상품 리스트 페이지
+    </p>
+    <p>
+      - 상품 등록하기 페이지
+    </p>
+    <p>
+      - 상품 수정하기 페이지
+    </p>
     <br/>
     <span>
       <b>최혜미</b>
@@ -153,11 +214,12 @@
       <a href="https://www.notion.so/hyemdev/hyem-s-dev-STUDY-75ffe819c7534a049b59871e6fe17dd4" target="_blank">
        <img src="https://img.shields.io/badge/Notion-fff?style=flat&logo=Notion&logoColor=000"/>
       </a>
+      <br />
     </span>
     <br />
-    <p><b>[사용자 페이지] 담당파트 : </b></p>
+    <p><b>✔ [사용자 페이지] 담당파트 : </b></p>
     <p>
-        - 로그인 페이지
+     - 로그인 페이지
     </p>
     <p>
      - 회원가입 페이지
@@ -169,10 +231,35 @@
      - 선호키워드 선택 페이지
     </p>
     <p>
+     - 선호키워드 수정 페이지
+    </p>
+    <p>
      - 결제 페이지
     </p>
     <p>
      - 결제완료 페이지
+    </p>
+    <p>
+     - 상품검색 페이지
+    </p>
+    <p>
+     - 회원가입 시 메일인증기능
+    </p>
+    <p><b>✔ [관리자 페이지] 담당파트 : </b></p>
+    <p>
+     - 관리자 페이지 라우터 설정 및 레이아웃 구성
+    </p>
+    <p>
+     - 가입회원 리스트 페이지
+    </p>
+    <p>
+     - 회원별 상세 페이지
+    </p>
+    <p>
+     - 매장 리스트 페이지
+    </p>
+    <p>
+     - 매장 신규등록 및 수정
     </p>
     <br/>
     <span>
@@ -184,9 +271,10 @@
       <a href="https://www.notion.so/leevscode-5223e3d332604844a255a0c63113a284">
         <img src="https://img.shields.io/badge/Notion-fff?style=flat&logo=Notion&logoColor=000"/>
       </a>
+      <br />
     </span>
     <br />
-    <p><b>[사용자 페이지] 담당파트 : </b></p>
+    <p><b>✔ [사용자 페이지] 담당파트 : </b></p>
     <p>
       - 주문내역 페이지
     </p>
@@ -197,7 +285,26 @@
       - 장바구니 페이지
     </p>
     <p>
+      - 장바구니 예외 처리
+    </p>
+    <p>
       - 리뷰등록 페이지
+    </p>
+    <p>
+      - 리뷰 평점 반영 작업
+    </p>
+    <p>
+      - 카카오 로그인
+    </p>
+    <p><b>✔ [관리자 페이지] 담당파트 : </b></p>
+    <p>
+      - 주문내역관리
+    </p>
+    <p>
+      - 주문상세리스트
+    </p>
+    <p>
+      - 배송상태 설정
     </p>
   <h4>
       <b>[Back-end]</b>
@@ -211,9 +318,13 @@
       <a href="https://www.notion.so/40559df6ba0f462ba721584d4ec536ac?pvs=4">
        <img src="https://img.shields.io/badge/Notion-fff?style=flat&logo=Notion&logoColor=000"/>
       </a>
+      <br />
     </span>
     <br />
-    <p><b>[사용자 페이지] 담당파트 : </b></p>
+    <p><b>✔ [2차] 담당파트 : </b></p>
+    <p>
+      - 회원가입
+    </p>
     <p>
       - 로그인, 로그아웃
     </p>
@@ -226,6 +337,22 @@
     <p>
       - 시큐리티, Token, 유효성 검사
     </p>
+    <p><b>✔ [3차] 담당파트 : </b></p>
+    <p>
+      - 회원 맞춤 상품 추천, 수정
+    </p>
+    <p>
+      - 상품 상세 페이지
+    </p>
+    <p>
+      - 회원 맞춤 상품 추천
+    </p>
+    <p>
+      - 주문 내역, 주문 상세 내역 
+    </p>
+    <p>
+      - 픽업 완료 처리, 주문 취소 처리
+    </p>
     <br/>
     <span>
       <b>김원희</b>
@@ -236,9 +363,10 @@
       <a href="https://www.notion.so/43f51685062a442294fb1bf79c66dc21?pvs=4">
        <img src="https://img.shields.io/badge/Notion-fff?style=flat&logo=Notion&logoColor=000"/>
       </a>
+      <br />
     </span>
     <br />
-    <p><b>[사용자 페이지] 담당파트 : </b></p>
+    <p><b>✔ [2차] 담당파트 : </b></p>
     <p>
       - 메인페이지 list
     </p>
@@ -247,6 +375,16 @@
     </p>
     <p>
      - url 이미지 다운로드
+    </p>
+    <p><b>✔ [3차] 담당파트 : </b></p>
+    <p>
+      - 메인페이지 list
+    </p>
+    <p>
+     - 월별 할인 목록
+    </p>
+    <p>
+     - 검색
     </p>
     <br/>
     <span>
@@ -258,9 +396,10 @@
       <a href="https://www.notion.so/bd559f487c284b4490031935a2dc31cf?pvs=4">
        <img src="https://img.shields.io/badge/Notion-fff?style=flat&logo=Notion&logoColor=000"/>
       </a>
+      <br />
     </span>
     <br />
-    <p><b>[사용자 페이지] 담당파트 : </b></p>
+    <p><b>✔ [2차] 담당파트 : </b></p>
     <p>
       - 상품 상세 페이지
     </p>
@@ -270,6 +409,16 @@
     <p>
       - 픽업 완료 처리, 주문 취소 처리
     </p>
+    <p><b>✔ [3차] 담당파트 : </b></p>
+    <p>
+      - 로그인, 소셜로그인, 시큐리티
+    </p>
+    <p>
+      - 이메일 인증
+    </p>
+    <p>
+      - 마이페이지
+    </p>
   <br/>
     <span>
       <b>최우기</b>
@@ -277,12 +426,10 @@
       <a href="https://github.com/wwwgggx3">
         <img src="https://img.shields.io/badge/GitHub-181717?style=flat&logo=github&logoColor=fff"/>
       </a>
+      <br />
     </span>
     <br />
-    <p><b>[사용자 페이지] 담당파트 : </b></p>
-    <p>
-      - 상품 상세 페이지
-    </p>
+    <p><b>✔ [2, 3차] 담당파트 : </b></p>
     <p>
       - 관리자 페이지
     </p>
@@ -317,11 +464,15 @@
   <img src="https://img.shields.io/badge/HTML5-E34F26?style=flat&logo=html5&logoColor=fff"/>
   <img src="https://img.shields.io/badge/CSS3-1572B6?style=flat&logo=css3&logoColor=fff"/>
   <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=flat&logo=javascript&logoColor=fff"/>
+  <img src="https://img.shields.io/badge/TypeScript-3178C6?style=flat&logo=typescript&logoColor=fff"/>
   <br/>
   <img src="https://img.shields.io/badge/React-61DAFB?style=flat&logo=react&logoColor=fff"/>
   <img src="https://img.shields.io/badge/Redux-764ABC?style=flat&logo=redux&logoColor=fff"/>
+  <img src="https://img.shields.io/badge/Redux with Persistent-764ABC?style=flat&logo=redux&logoColor=fff"/>
+  <img src="https://img.shields.io/badge/Recoil-3578E5?style=flat&logo=recoil&logoColor=fff"/>
   <img src="https://img.shields.io/badge/styledcomponents-DB7093?style=flat&logo=styledcomponents&logoColor=fff"/>  
   <br/>
+  <img src="https://img.shields.io/badge/Framer Motion-ee009b?style=flat"/>
   <img src="https://img.shields.io/badge/Swiper-528DD7?style=flat&logo=swiper&logoColor=fff"/>
   <img src="https://img.shields.io/badge/Prettier-F7B93E?style=flat&logo=prettier&logoColor=fff"/>
   <img src="https://img.shields.io/badge/Axios-5A29E4?style=flat&logo=axios&logoColor=fff"/>
