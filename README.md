@@ -10,6 +10,28 @@
     Winey 와이니
   </h1>
 </div>
+<div>  
+  <h2>
+    :clapper:<br/>
+    Project demo video
+  </h2>
+  <h3>
+    시연 영상    
+  </h3>
+</div>
+<div align="center">
+  ![winey_thum](https://github.com/kimaydev/winey/assets/130676442/fa1c4c8a-e1a2-4737-b7c4-8400bdfba5a8)
+</div>
+<div align="center"> 
+  <span>
+    🔹
+    <a href="https://youtu.be/MECLHZJnXxQ?si=dw5oCqd7BWAqzLMY" target="_blank">사용자 페이지 시연 영상 바로가기</a>  
+  </span>
+  <span>
+    🔹
+    <a href="https://youtu.be/AF_5gZDaF3k?si=87km-j0ePFCuTdvm" target="_blank">관리자 페이지 시연 영상 바로가기</a>  
+  </span>
+</div>
 <br/><br/>
 <div>  
   <h2>
@@ -101,25 +123,6 @@
         <img src="https://img.shields.io/badge/Figma-F24E1E?style=flat&logo=figma&logoColor=fff"/>
       </a>
   </div>
-</div>
-<div>  
-  <h2>
-    :clapper:<br/>
-    Project demo video
-  </h2>
-  <h3>
-    시연 영상    
-  </h3>
-</div>
-<div> 
-  <p>
-    🔹
-    <a href="https://youtu.be/MECLHZJnXxQ?si=dw5oCqd7BWAqzLMY" target="_blank">사용자 페이지 시연 영상 바로가기</a>  
-  </p>
-  <p>
-    🔹
-    <a href="https://youtu.be/AF_5gZDaF3k?si=87km-j0ePFCuTdvm" target="_blank">관리자 페이지 시연 영상 바로가기</a>  
-  </p>
 </div>
 <div>  
   <h2>
