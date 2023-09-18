@@ -20,7 +20,7 @@
   </h3>
 </div>
 <div align="center">
-  ![winey_thum](https://github.com/kimaydev/winey/assets/130676442/fa1c4c8a-e1a2-4737-b7c4-8400bdfba5a8)
+  
 </div>
 <div align="center"> 
   <span>
