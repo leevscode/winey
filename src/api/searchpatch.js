@@ -4,6 +4,7 @@
     깃허브 : https://github.com/hyemdev */
 
 import axios from "axios";
+import { client } from "./client";
 
 // 검색결과 get
 export const getSearchPatch = async ({ clickPage, urlData, sortList }) => {
@@ -11,7 +12,7 @@ export const getSearchPatch = async ({ clickPage, urlData, sortList }) => {
   // console.log("urlData", urlData);
   // console.log("sortList", sortList);
   try {
-    const res = await axios.get(
+    const res = await client.get(
       `/api/search?page=${clickPage}&sort=${sortList.value}&${urlData}`,
     );
     // console.log("서치res", res.config.url);
@@ -42,7 +43,7 @@ export const getSearchPatch = async ({ clickPage, urlData, sortList }) => {
 //   console.log("*exploreSort api", exploreSort);
 //   // console.log("**exploreSort.value", exploreSort.value || 0);
 //   try {
-//     const res = await axios.get(
+//     const res = await client.get(
 //       `/api/search?page=${pageState || 1}&sort=${exploreSort.value || 0}&${
 //         urlAdd.url
 //       }`,

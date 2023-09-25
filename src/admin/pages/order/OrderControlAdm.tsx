@@ -31,6 +31,7 @@ import { AdmProductWrap } from "../../style/product/AdminProductStyle";
 import axios from "axios";
 import { OrderTableWrap } from "../../style/AdminOrderControl";
 import { Maincolor } from "../../../style/GlobalStyle";
+import { client } from "../../../api/client";
 
 const OrderControlAdm = () => {
   const [orderControl, setOrderControl] = useState<Array<fetchData>>([]);
@@ -125,7 +126,7 @@ const OrderControlAdm = () => {
         console.log(newStatusValue);
         try {
           // 데이터를 서버로 전송
-          await axios.put(`/api/admin/order`, {
+          await client.put(`/api/admin/order`, {
             orderId: item.orderId,
             orderStatus: newStatusValue,
           });

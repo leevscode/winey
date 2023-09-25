@@ -22,7 +22,7 @@ export const getMemberList = async (
   // setMemberList: React.Dispatch<React.SetStateAction<IMemControl>>,
 ) => {
   try {
-    const res = await axios.get(
+    const res = await client.get(
       `/api/admin/user/list?page=${paginate.page - 1}&size=${
         paginate.row
       }&sort=${sortOption.type},${sortOption.sort}${
@@ -51,7 +51,7 @@ export const getMemberDetail = async (
   },
 ) => {
   try {
-    const res = await axios.get(
+    const res = await client.get(
       `/api/admin/${clickUserId}/order?page=${paginate.page - 1}&size=${
         paginate.row
       }&sort=${sortOption.type},${sortOption.sort}`,
@@ -70,7 +70,7 @@ export const getMemberDetail = async (
 export const putMemberOut = async (item: number) => {
   // console.log("patch item", item);
   try {
-    const res = await axios.put(`/api/admin/withdrawal?userId=${item}`);
+    const res = await client.put(`/api/admin/withdrawal?userId=${item}`);
     // console.log("res", res);
     const result = await res.data;
     // console.log("result", result);

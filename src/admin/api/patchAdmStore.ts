@@ -21,7 +21,7 @@ export const getStoreList = async (
   textSearch: string,
 ) => {
   try {
-    const res = await axios.get(
+    const res = await client.get(
       `/api/admin/store?page=${paginate.page - 1}&size=${paginate.row}&sort=${
         sortOption.type
       },${sortOption.sort}${sortSearch ? `&searchType=${sortSearch}` : ""}${
@@ -47,7 +47,7 @@ export const postNewStore = async (newStoreInfo: {
 }) => {
   // console.log("newStoreInfo", newStoreInfo);
   try {
-    const res = await axios.post("/api/admin/store", {
+    const res = await client.post("/api/admin/store", {
       regionNmId: newStoreInfo.regionNmId,
       nm: newStoreInfo.nm,
       tel: newStoreInfo.tel,
@@ -73,7 +73,7 @@ export const putEditStore = async ({
   // console.log("editStoreNm", editStoreNm);
   // console.log("storeId", storeId);
   try {
-    const res = await axios.put(
+    const res = await client.put(
       `/api/admin/store/{storeId}?storeId=${storeId}`,
       {
         regionNmId: editStoreCity,
@@ -93,7 +93,7 @@ export const putEditStore = async ({
 // 매장 삭제하기
 export const deleteStore = async (item: string) => {
   try {
-    const res = await axios.delete(
+    const res = await client.delete(
       `/api/admin/store/{storeId}?storeId=${item}`,
     );
     const result = await res.data;

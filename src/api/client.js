@@ -2,8 +2,17 @@ import axios from "axios";
 import { getCookie, removeCookie, setCookie } from "./cookie";
 import { useNavigate } from "react-router";
 
+export const client = axios.create({
+  baseURL: `${process.env.REACT_APP_API_URL}`,
+  // baseURL: "192.168.0.144:5004/",
+  // timeout: 50000,
+  headers: {
+    "Content-Type": "application/json;charset=UTF-8",
+  },
+});
+
 // Request 처리
-axios.interceptors.request.use(
+client.interceptors.request.use(
   config => {
     // cookie를 활용 한 경우
     const token = getCookie("access_token");
@@ -20,16 +29,6 @@ axios.interceptors.request.use(
     console.log(error);
   },
 );
-
-export const client = axios.create({
-  // baseURL: "http://localhost:3000",
-  // baseURL: "192.168.0.144:5004/",
-  // timeout: 50000,
-  headers: {
-    "Content-Type": "application/json;charset=UTF-8",
-  },
-});
-
 // Response 처리
 // client.interceptors.response.use(
 //   response => {
@@ -95,7 +94,6 @@ export const fetchLogin = async (userid, password) => {
 // 카카오 set 하기
 export const fetchKKOLogin = async accessToken => {
   try {
-
     const res = await client.get(`/sign-api/sign-in`, {
       email: accessToken,
       upw: "password",
@@ -127,7 +125,7 @@ export const fetchKKOLogin = async accessToken => {
 // export const fetchRefreshToken = async () => {
 //   console.log("리프레쉬토큰 호출");
 //   try {
-//     const res = await axios.post(`/sign-api/refresh-token`, {
+//     const res = await client.post(`/sign-api/refresh-token`, {
 //       refreshToken: getCookie("refreshToken"),
 //     });
 //     const result = res.data;

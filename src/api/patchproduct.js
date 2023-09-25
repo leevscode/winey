@@ -4,11 +4,12 @@
   깃허브 : https://github.com/kimaydev
 */
 import axios from "axios";
+import { client } from "./client";
 
 // 와인 한글이름 GET
 export const getKorNm = async (_setKorNm, _productId) => {
   try {
-    const res = await axios.get(`/api/detail/kornm/${_productId}`);
+    const res = await client.get(`/api/detail/kornm/${_productId}`);
     const result = res.data;
     _setKorNm(result);
     // console.log("와인 한글이름 axios", result);
@@ -21,7 +22,7 @@ export const getKorNm = async (_setKorNm, _productId) => {
 // 와인 상세페이지 GET
 export const getProductDetail = async (_setProductDetail, _productId) => {
   try {
-    const res = await axios.get(`/api/detail/${_productId}`);
+    const res = await client.get(`/api/detail/${_productId}`);
     const result = res.data;
     _setProductDetail(result);
     // console.log("와인 상세페이지 axios", result);
@@ -41,7 +42,7 @@ export const getTotalFoodNew = async (
   _setNoProduct,
 ) => {
   try {
-    const res = await axios.get(
+    const res = await client.get(
       `/api/main/food/new?bigCategoryId=${_cate}&page=${_page.current}&row=9`,
     );
     const result = res.data.wineList;
@@ -76,7 +77,7 @@ export const getTotalFoodExpensive = async (
   _setNoProduct,
 ) => {
   try {
-    const res = await axios.get(
+    const res = await client.get(
       `/api/main/food/expensive?bigCategoryId=${_cate}&page=${_page.current}&row=9`,
     );
     const result = res.data.wineList;
@@ -110,7 +111,7 @@ export const getTotalFoodCheap = async (
   _setNoProduct,
 ) => {
   try {
-    const res = await axios.get(
+    const res = await client.get(
       `/api/main/food/cheap?bigCategoryId=${_cate}&page=${_page.current}&row=9`,
     );
     const result = res.data.wineList;
@@ -144,7 +145,7 @@ export const getTotalCountryNew = async (
   _setNoProduct,
 ) => {
   try {
-    const res = await axios.get(
+    const res = await client.get(
       `/api/main/country/new/?countryId=${_cate}&page=${_page.current}&row=9`,
     );
     const result = res.data.wineList;
@@ -178,7 +179,7 @@ export const getTotalCountryExpensive = async (
   _setNoProduct,
 ) => {
   try {
-    const res = await axios.get(
+    const res = await client.get(
       `/api/main/country/expensive?countryId=${_cate}&page=${_page.current}&row=9`,
     );
     const result = res.data.wineList;
@@ -212,7 +213,7 @@ export const getTotalCountryCheap = async (
   _setNoProduct,
 ) => {
   try {
-    const res = await axios.get(
+    const res = await client.get(
       `/api/main/country/cheap?countryId=${_cate}&page=${_page.current}&row=9`,
     );
     const result = res.data.wineList;
@@ -246,7 +247,7 @@ export const getTotalMinusTwoNew = async (
   _setNoProduct,
 ) => {
   try {
-    const res = await axios.get(
+    const res = await client.get(
       `/api/main/price${_cate}/new?page=${_page.current}&row=9`,
     );
     const result = res.data.wineList;
@@ -280,7 +281,7 @@ export const getTotalMinusTwoExpensive = async (
   _setNoProduct,
 ) => {
   try {
-    const res = await axios.get(
+    const res = await client.get(
       `/api/main/price${_cate}/expencive?page=${_page.current}&row=9`,
     );
     const result = res.data.wineList;
@@ -314,7 +315,7 @@ export const getTotalMinusTwoCheap = async (
   _setNoProduct,
 ) => {
   try {
-    const res = await axios.get(
+    const res = await client.get(
       `/api/main/price${_cate}/cheap?page=${_page.current}&row=9`,
     );
     const result = res.data.wineList;
@@ -347,7 +348,7 @@ export const getRedWineNew = async (
   _setNoProduct,
 ) => {
   try {
-    const res = await axios.get(
+    const res = await client.get(
       `/api/main/redWine/new?page=${_page.current}&row=9`,
     );
     const result = res.data.wineList;
@@ -380,7 +381,7 @@ export const getRedWineExpensive = async (
   _setNoProduct,
 ) => {
   try {
-    const res = await axios.get(
+    const res = await client.get(
       `/api/main/redWine/expencive?page=${_page.current}&row=9`,
     );
     const result = res.data.wineList;
@@ -413,7 +414,7 @@ export const getRedWineCheap = async (
   _setNoProduct,
 ) => {
   try {
-    const res = await axios.get(
+    const res = await client.get(
       `/api/main/redWine/cheap?page=${_page.current}&row=9`,
     );
     const result = res.data.wineList;
@@ -446,7 +447,7 @@ export const getWhiteWineNew = async (
   _setNoProduct,
 ) => {
   try {
-    const res = await axios.get(
+    const res = await client.get(
       `/api/main/whiteWine/new?page=${_page.current}&row=9`,
     );
     const result = res.data.wineList;
@@ -479,7 +480,7 @@ export const getWhiteWineExpensive = async (
   _setNoProduct,
 ) => {
   try {
-    const res = await axios.get(
+    const res = await client.get(
       `/api/main/whiteWine/expencive?page=${_page.current}&row=9`,
     );
     const result = res.data.wineList;
@@ -512,7 +513,7 @@ export const getWhiteWineCheap = async (
   _setNoProduct,
 ) => {
   try {
-    const res = await axios.get(
+    const res = await client.get(
       `/api/main/whiteWine/cheap?page=${_page.current}&row=9`,
     );
     const result = res.data.wineList;
@@ -545,7 +546,7 @@ export const getSpaklingWineNew = async (
   _setNoProduct,
 ) => {
   try {
-    const res = await axios.get(
+    const res = await client.get(
       `/api/main/sparklingWine/new?page=${_page.current}&row=9`,
     );
     const result = res.data.wineList;
@@ -577,7 +578,7 @@ export const getSpaklingWineExpensive = async (
   _setNoProduct,
 ) => {
   try {
-    const res = await axios.get(
+    const res = await client.get(
       `/api/main/sparklingWine/expencive?page=${_page.current}&row=9`,
     );
     const result = res.data.wineList;
@@ -609,7 +610,7 @@ export const getSpaklingWineCheap = async (
   _setNoProduct,
 ) => {
   try {
-    const res = await axios.get(
+    const res = await client.get(
       `/api/main/sparklingWine/cheap?page=${_page.current}&row=9`,
     );
     const result = res.data.wineList;
@@ -641,7 +642,7 @@ export const getEtcWineNew = async (
   _setNoProduct,
 ) => {
   try {
-    const res = await axios.get(
+    const res = await client.get(
       `/api/main/otherWine/new?page=${_page.current}&row=9`,
     );
     const result = res.data.wineList;
@@ -673,7 +674,7 @@ export const getEtcWineExpensive = async (
   _setNoProduct,
 ) => {
   try {
-    const res = await axios.get(
+    const res = await client.get(
       `/api/main/otherWine/expencive?page=${_page.current}&row=9`,
     );
     const result = res.data.wineList;
@@ -705,7 +706,7 @@ export const getEtcWineCheap = async (
   _setNoProduct,
 ) => {
   try {
-    const res = await axios.get(
+    const res = await client.get(
       `/api/main/otherWine/cheap?page=${_page.current}&row=9`,
     );
     const result = res.data.wineList;
@@ -739,7 +740,7 @@ export const getSaleWine = async (
   _setNoProduct,
 ) => {
   try {
-    const res = await axios.get(
+    const res = await client.get(
       `/api/main/monthSaleWine?page=${_page.current}&size=9&sort=${_sort}%2C${_type}`,
     );
     const result = res.data.list;

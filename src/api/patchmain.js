@@ -5,8 +5,8 @@ import { client } from "./client";
 export const getRandomWines = async (_setRandomWines, _loading) => {
   _loading(true);
   try {
-    const res = await axios.get("/api/main/6/random-wines");
-    // const res = await axios.get("test");
+    const res = await client.get("/api/main/6/random-wines");
+    // const res = await client.get("test");
     const result = res.data;
     // console.log("입문용 와인 데이터", result);
     _setRandomWines(result);
@@ -21,10 +21,10 @@ export const getRandomWines = async (_setRandomWines, _loading) => {
 export const getFoodWines = async (_bigCategoryId, _setFoodWines, _loading) => {
   _loading(true);
   try {
-    const res = await axios.get(
+    const res = await client.get(
       `/api/main/6/food?bigCategoryId=${_bigCategoryId}`,
     );
-    // const res = await axios.get("test");
+    // const res = await client.get("test");
     const result = res.data;
     // console.log("음식별 와인 데이터", result);
     _setFoodWines(result);
@@ -43,8 +43,8 @@ export const getContryWines = async (
 ) => {
   _loading(true);
   try {
-    const res = await axios.get(`/api/main/6/country?countryId=${_countryId}`);
-    // const res = await axios.get("test");
+    const res = await client.get(`/api/main/6/country?countryId=${_countryId}`);
+    // const res = await client.get("test");
     const result = res.data;
     // console.log("국가별 와인 데이터", result);
     _setCountryWines(result);
@@ -59,8 +59,8 @@ export const getContryWines = async (
 export const getPriceMinusTwo = async (_setPriceMinusTwo, _loading) => {
   _loading(true);
   try {
-    const res = await axios.get("/api/main/6/price2");
-    // const res = await axios.get("test");
+    const res = await client.get("/api/main/6/price2");
+    // const res = await client.get("test");
     const result = res.data;
     // console.log("1. 2만원 미만 와인 데이터", result);
     _setPriceMinusTwo(result);
@@ -74,8 +74,8 @@ export const getPriceMinusTwo = async (_setPriceMinusTwo, _loading) => {
 export const getPriceOverTwo = async (_setPriceOverTwo, _loading) => {
   _loading(true);
   try {
-    const res = await axios.get("/api/main/6/price25");
-    // const res = await axios.get("test");
+    const res = await client.get("/api/main/6/price25");
+    // const res = await client.get("test");
     const result = res.data;
     // console.log("2. 2만원 이상 5만원 미만 와인 데이터", result);
     _setPriceOverTwo(result);
@@ -89,8 +89,8 @@ export const getPriceOverTwo = async (_setPriceOverTwo, _loading) => {
 export const getPriceOverFive = async (_setPriceOverFive, _loading) => {
   _loading(true);
   try {
-    const res = await axios.get("/api/main/6/price510");
-    // const res = await axios.get("test");
+    const res = await client.get("/api/main/6/price510");
+    // const res = await client.get("test");
     const result = res.data;
     // console.log("3. 5만원 이상 10만원 미만 와인 데이터", result);
     _setPriceOverFive(result);
@@ -104,8 +104,8 @@ export const getPriceOverFive = async (_setPriceOverFive, _loading) => {
 export const getPricePlusTen = async (_setPricePlusTen, _loading) => {
   _loading(true);
   try {
-    const res = await axios.get("/api/main/6/price10");
-    // const res = await axios.get("test");
+    const res = await client.get("/api/main/6/price10");
+    // const res = await client.get("test");
     const result = res.data;
     // console.log("4. 10만원 이상 와인 데이터", result);
     _setPricePlusTen(result);

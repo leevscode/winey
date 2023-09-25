@@ -5,10 +5,11 @@
 */
 
 import axios from "axios";
+import { client } from "../../api/client";
 
 export const AdmOrderDetailData = async (orderId: number) => {
   try {
-    const res = await axios.get(
+    const res = await client.get(
       `/api/admin/order/${orderId}?page=0&size=20&sort=orderid%2CASC`,
     );
     const orderDetailData = await res.data;

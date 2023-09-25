@@ -14,7 +14,7 @@ import axios from "axios";
 // 선호키워드리스트 유무 확인
 export const getUserFavoriteKey = async () => {
   try {
-    const res = await axios.get("/api/recommend/show-user-wine");
+    const res = await client.get("/api/recommend/show-user-wine");
     const result = await res.data;
     // console.log("result", result);
     return result;
@@ -26,7 +26,7 @@ export const getUserFavoriteKey = async () => {
 // 선호키워드 선택 post
 export const postUserKeyword = async (favoriteKeyword, navigator) => {
   try {
-    const res = await axios.post("/api/recommend/wine", {
+    const res = await client.post("/api/recommend/wine", {
       categoryId: favoriteKeyword.categoryId,
       countryId: favoriteKeyword.countryId,
       smallCategoryId: favoriteKeyword.smallCategoryId,
@@ -86,7 +86,7 @@ export const postUserKeyword = async (favoriteKeyword, navigator) => {
 // 기존 선호키워드 정보 get
 export const getUserKeyword = async setYourKeyword => {
   try {
-    const res = await axios.get("/api/recommend/show-recommend");
+    const res = await client.get("/api/recommend/show-recommend");
     // console.log("res", res);
     const result = await res.data;
     // console.log("result", result);
@@ -100,7 +100,7 @@ export const getUserKeyword = async setYourKeyword => {
 // 선호키워드 수정 put
 export const putUserKeyword = async (editFavoriteKeyword, navigator) => {
   try {
-    const res = await axios.put("/api/recommend/modify-recommend", {
+    const res = await client.put("/api/recommend/modify-recommend", {
       categoryId: editFavoriteKeyword.categoryId,
       countryId: editFavoriteKeyword.countryId,
       smallCategoryId: editFavoriteKeyword.smallCategoryId,
