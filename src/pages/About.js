@@ -82,7 +82,7 @@ const About = () => {
             <span>한마디</span> : 🐸 버.튼.싫.어 🐸
           </li>
           <li>
-            <Link to="https://www.notion.so/leevscode/leevscode-5223e3d332604844a255a0c63113a284">
+            <Link to="https://leevscode.notion.site/leevscode/leevscode-105a8fbbc74e446fa6e87b0418508fdb">
               <img src="https://img.shields.io/badge/notion-ffffff?style=for-the-badge&logo=notion&logoColor=000000" />
             </Link>
             <Link to="https://github.com/leevscode">

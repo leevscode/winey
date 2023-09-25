@@ -1,6 +1,6 @@
 /*
     작업자 : 이동은
-    노션 : https://www.notion.so/leevscode/leevscode-5223e3d332604844a255a0c63113a284
+    노션 : https://leevscode.notion.site/leevscode/leevscode-105a8fbbc74e446fa6e87b0418508fdb
     깃허브 : https://github.com/leevscode
 */
 import styled from "@emotion/styled";
