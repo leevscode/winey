@@ -277,7 +277,7 @@
       <a href="https://github.com/leevscode">
         <img src="https://img.shields.io/badge/GitHub-181717?style=flat&logo=github&logoColor=fff"/>
       </a>
-      <a href="https://www.notion.so/leevscode-5223e3d332604844a255a0c63113a284">
+      <a href="https://www.notion.so/leevscode/leevscode-105a8fbbc74e446fa6e87b0418508fdb">
         <img src="https://img.shields.io/badge/Notion-fff?style=flat&logo=Notion&logoColor=000"/>
       </a>
       <br />
